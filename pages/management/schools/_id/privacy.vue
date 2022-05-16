@@ -4,11 +4,7 @@
 
 <script>
 export default {
-  name: 'Info',
+  name: 'SchoolPrivacyPage',
   layout: 'admin',
 }
 </script>
-
-<style scoped>
-
-</style>

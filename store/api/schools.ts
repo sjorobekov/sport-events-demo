@@ -26,7 +26,7 @@ export const actions: ActionTree<RootState, RootState> = {
     })
   },
 
-  save (_, payload: School) {
+  save (_, payload: School): Promise<School> {
     const data = {
       name: payload.name,
       street: payload.street,
@@ -35,12 +35,16 @@ export const actions: ActionTree<RootState, RootState> = {
       state: payload.state,
       zip: payload.zip,
       portal: payload.portal,
-      portalAddress: payload.portalAddress,
+      portalAddress: payload.portal ? payload.portalAddress : null,
     }
     if (payload.id) {
       return this.$axios.$put(`/api/v1/schools/${payload.id}`, data)
     }
 
     return this.$axios.$post('/api/v1/schools', data)
+  },
+
+  get (_, id): Promise<School> {
+    return this.$axios.$get(`api/v1/schools/${id}`)
   },
 }

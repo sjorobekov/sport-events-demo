@@ -25,6 +25,7 @@ declare module 'vue/types/vue' {
       minLength: Function,
       equal: Function,
       alphaNumeric: Function,
+      isSubdomainAvailable: Function,
     }
     validateAsync: Function,
   }
@@ -77,6 +78,13 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
           return true
         }
         return val1 === val || 'Fields are not equal'
+      }
+    },
+
+    isSubdomainAvailable (id: string) {
+      return async (v: string): AsyncReturnType => {
+        const { available } = await $axios.$post('/api/v1/validation/check_portal', { portalAddress: v, id })
+        return available || 'Address is unavailable'
       }
     },
   }

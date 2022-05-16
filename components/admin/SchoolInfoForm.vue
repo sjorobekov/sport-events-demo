@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { getData } from 'country-list'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'SchoolInfoForm',
@@ -68,10 +68,11 @@ export default {
     },
   },
 
-  data: () => ({
-    countries: getData(),
-  }),
   computed: {
+    ...mapGetters({
+      countries: 'countries/list',
+    }),
+
     formData: {
       get () {
         return this.value

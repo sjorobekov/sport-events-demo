@@ -26,7 +26,6 @@
           :items="items"
           class="elevation-0"
           :server-items-length="meta.total"
-          :loading="loading"
           hide-default-footer
           :sort-by.sync="query.orderBy"
           :sort-desc.sync="query.orderDesc"
@@ -34,7 +33,7 @@
           must-sort
         >
           <template #item.city_country="{ item }">
-            <span>{{ item.city }}, <FxCountryName :code="item.country" /></span>
+            <no-ssr><span>{{ item.city }}<span v-if="item.city && item.country">,</span> <FxCountryName :code="item.country" /></span></no-ssr>
           </template>
           <template #item.status="{ item }">
             <FxSchoolStatus :last-active="item.lastActive" :portal="item.portal" />
@@ -57,14 +56,11 @@
   </v-row>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { reduce } from 'lodash'
+<script>
 import FxSchoolStatus from '~/components/admin/FxSchoolStatus.vue'
 import FxCountryName from '~/components/FxCountryName.vue'
-import { Dictionary, Primitive } from '~/types'
 
-export default Vue.extend({
+export default {
   name: 'SchoolListPage',
   components: {
     FxSchoolStatus,
@@ -115,12 +111,7 @@ export default Vue.extend({
   watch: {
     query: {
       async handler () {
-        const query: Dictionary<string> = reduce(this.query, (result: Dictionary<string>, val: Primitive, key: string) => {
-          result[key] = String(val)
-          return result
-        }, {} as Dictionary<string>)
-
-        await this.$router.push({ query })
+        await this.$router.push({ query: this.query })
         this.$fetch()
       },
       deep: true,
@@ -129,10 +120,10 @@ export default Vue.extend({
 
   created () {
     this.query = {
-      page: parseInt(this.$route.query.page as string) || 1,
-      orderDesc: this.$route.query.orderDesc === 'true',
-      orderBy: (this.$route.query.orderBy as string) || 'name',
+      ...this.$route.query,
+      page: parseInt(this.$route.query.page) || 1,
+      orderDesc: this.$route.query.orderDesc !== 'false',
     }
   },
-})
+}
 </script>

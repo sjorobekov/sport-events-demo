@@ -1,9 +1,9 @@
 <template>
-  <span>{{ name }}</span>
+  <span>{{ name(code) }}</span>
 </template>
 
 <script>
-import { getName } from 'country-list'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'FxCountryName',
@@ -15,9 +15,9 @@ export default {
   },
 
   computed: {
-    name () {
-      return this.code ? getName(this.code) : ''
-    },
+    ...mapGetters({
+      name: 'countries/name',
+    }),
   },
 }
 </script>

@@ -4,11 +4,7 @@
 
 <script>
 export default {
-  name: 'Index',
+  name: 'AdminEventsPage',
   layout: 'admin',
 }
 </script>
-
-<style scoped>
-
-</style>

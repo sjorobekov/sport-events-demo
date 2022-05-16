@@ -23,6 +23,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/vuetify-async-validate.ts',
+    '~/plugins/vuetify-toasts.ts',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -48,8 +49,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    proxy: true,
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -62,13 +62,15 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
-    treeShake: true,
+    treeShake: {
+      components: ['VSnackbar'],
+    },
     optionsPath: './vuetify.config.js',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ['luxon'],
+    transpile: ['luxon', 'vuetify-toast-snackbar-ng'],
     hotMiddleware: {
       reload: false,
       client: {

@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'Info',
+  name: 'SchoolEventsPage',
   layout: 'admin',
 }
 </script>

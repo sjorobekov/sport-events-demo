@@ -14,5 +14,8 @@ module.exports = {
   rules: {
     semi: ['error', 'never'],
     'comma-dangle': ['error', 'always-multiline'],
+    'vue/valid-v-slot': ['error', {
+      allowModifiers: true,
+    }],
   },
 }

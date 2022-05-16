@@ -9,17 +9,19 @@
       </v-col>
     </v-row>
 
-    <label class="caption" for="portal_address">Fixturr Portal Address</label>
-    <v-text-field
-      id="portal_address"
-      v-model="formData.portalAddress"
-      :v-async-validate="formData.portal"
-      :disabled="!formData.portal"
-      :async-rules="[$rule.required, $rule.alphaNumeric]"
-      dense
-      outlined
-      suffix=".fixturr.com"
-    />
+    <div v-if="formData.portal">
+      <label class="caption" for="portal_address">Fixturr Portal Address</label>
+      <v-text-field
+        id="portal_address"
+        v-model="formData.portalAddress"
+        v-async-validate
+        :disabled="!formData.portal"
+        :async-rules="[$rule.required, $rule.alphaNumeric, $rule.isSubdomainAvailable(formData.id)]"
+        dense
+        outlined
+        suffix=".fixturr.com"
+      />
+    </div>
   </v-form>
 </template>
 

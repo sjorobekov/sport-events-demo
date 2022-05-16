@@ -23,6 +23,12 @@ export const getters = {
   },
 }
 
+export const mutations = {
+  me (state, val) {
+    state.me = val
+  },
+}
+
 // actions
 export const actions = {
   async signIn ({ dispatch }, { email, password }) {
@@ -41,10 +47,10 @@ export const actions = {
 
   async fetchContext ({ commit }) {
     const { user } = await this.$axios.$get('/api/v1/context')
-    commit('setMe', user)
+    commit('me', user)
   },
 
   cleanup ({ commit }) {
-    commit('setMe', null)
+    commit('me', null)
   },
 }

@@ -31,6 +31,7 @@
 
 <script>
 export default {
+  name: 'LoginPage',
   data: () => ({
     formData: {
       email: '',
@@ -52,7 +53,7 @@ export default {
         await this.$router.push({ name: 'management' })
       } catch (e) {
         this.loading = false
-        console.log('error', e)
+        this.$toast.error('Unknown Error')
       }
     },
   },

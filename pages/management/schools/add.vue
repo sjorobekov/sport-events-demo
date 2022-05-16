@@ -112,6 +112,7 @@ import SchoolInfoForm from '~/components/admin/SchoolInfoForm'
 import SchoolPortalForm from '~/components/admin/SchoolPortalForm'
 
 export default {
+  name: 'SchoolAddPage',
   components: { SchoolInfoForm, SchoolPortalForm },
   layout: 'admin',
   data: () => ({

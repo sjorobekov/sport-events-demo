@@ -1,41 +1,71 @@
 <template>
-  <v-row>
-    <v-col style="max-width: 270px">
-      <v-card
-        class="mx-auto"
-        flat
-        outlined
-      >
-        <v-list dense>
-          <v-list-item
-            v-for="(item, i) in items"
-            :key="i"
-            link
-            :to="item.to"
-            :exact="item.exact"
-          >
-            <v-list-item-icon>
-              <v-icon color="info lighten-1" v-text="item.icon" />
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title class="text--info text--darken-1" v-text="item.text" />
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-card>
-    </v-col>
-    <v-col>
-      <NuxtChild />
-    </v-col>
-  </v-row>
+  <div>
+    <v-row>
+      <v-col>
+        <h3>{{ school.name }}</h3>
+        <div class="subtitle-1">
+          {{ location }}
+        </div>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col style="max-width: 270px">
+        <v-card
+          class="mx-auto"
+          flat
+          outlined
+        >
+          <v-list dense>
+            <v-list-item
+              v-for="(item, i) in items"
+              :key="i"
+              link
+              :to="item.to"
+              :exact="item.exact"
+            >
+              <v-list-item-icon>
+                <v-icon color="info lighten-1" v-text="item.icon" />
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title class="text--info text--darken-1" v-text="item.text" />
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-card>
+      </v-col>
+      <v-col>
+        <NuxtChild />
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   layout: 'admin',
+
+  async asyncData ({ store, route }) {
+    await store.dispatch('admin/page/school/fetch', route.params.id)
+  },
+
   data: () => ({}),
 
+  head () {
+    return {
+      title: this.school.name,
+    }
+  },
+
   computed: {
+    ...mapGetters({
+      school: 'admin/page/school/school',
+      country: 'countries/name',
+    }),
+    location () {
+      return [this.school.city, this.country(this.school.country)].join(', ')
+    },
     items () {
       return [
         { text: 'School Information', icon: '$vuetify.icons.info', exact: true, to: { name: 'management-schools-id', params: { id: this.$route.params.id } } },

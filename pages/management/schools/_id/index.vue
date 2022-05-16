@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card flat outlined>
     <v-card-title>
       School Information
     </v-card-title>
@@ -66,10 +66,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import SchoolInfoForm from '~/components/admin/SchoolInfoForm'
 import SchoolPortalForm from '~/components/admin/SchoolPortalForm'
 
 export default {
+  name: 'SchoolIndexPage',
   components: {
     SchoolInfoForm,
     SchoolPortalForm,
@@ -77,5 +79,43 @@ export default {
   data: () => ({
     formData: {},
   }),
+
+  computed: {
+    ...mapGetters({
+      school: 'admin/page/school/school',
+    }),
+  },
+
+  created () {
+    this.formData = {
+      ...this.school,
+    }
+  },
+
+  methods: {
+    async save () {
+      this.loading = true
+      const isValid = await Promise.all([this.$refs.form1.validateAsync(), this.$refs.form2.validateAsync()])
+
+      if (isValid.some(item => !item)) {
+        this.loading = false
+        return
+      }
+
+      this.$store.dispatch('api/schools/save', this.formData).then((res) => {
+        this.$store.commit('admin/page/school/school', res)
+        this.formData = {
+          ...res,
+        }
+        this.$toast.success('Saved!')
+      })
+        .catch(() => {
+          this.$toast.error('Unknown Error')
+        })
+        .finally(() => {
+          this.loading = false
+        })
+    },
+  },
 }
 </script>
