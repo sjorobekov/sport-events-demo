@@ -1,0 +1,19 @@
+/*@import url("https://hello.myfonts.net/count/496482");*/
+
+@font-face {
+  font-family: "ProximaNova";
+  src: url('./fonts/ProximaNovaRegular/font.woff2') format('woff2'), url('./fonts/ProximaNovaRegular/font.woff') format('woff');
+}
+
+@font-face {
+  font-family: "ProximaNova-Semibold";
+  src: url('./fonts/ProximaNovaSemibold/font.woff2') format('woff2'), url('./fonts/ProximaNovaSemibold/font.woff') format('woff');
+}
+
+.v-btn {
+  text-transform:none !important;
+}
+
+body {
+  font-size: 20px;
+}
