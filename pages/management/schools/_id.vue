@@ -8,8 +8,58 @@
         </div>
       </v-col>
     </v-row>
+    <v-row class="d-md-none">
+      <v-col>
+        <v-tabs icons-and-text centered fixed-tabs>
+          <v-tab
+            v-for="(item, i) in tabItems"
+            :key="i"
+            link
+            :to="item.to"
+            :exact="item.exact"
+          >
+            {{ item.text }}
+            <v-icon color="info lighten-1" v-text="item.icon" />
+          </v-tab>
+
+          <v-menu
+            bottom
+            left
+          >
+            <template #activator="{ on, attrs }">
+              <v-tab
+                v-bind="attrs"
+                role="button"
+                v-on="on"
+              >
+                More
+                <v-icon color="info lighten-1">
+                  $vuetify.icons.chevronDown
+                </v-icon>
+              </v-tab>
+            </template>
+
+            <v-list class="grey lighten-3">
+              <v-list-item
+                v-for="(item, i) in menuItems"
+                :key="i"
+                link
+                :to="item.to"
+              >
+                <v-list-item-icon>
+                  <v-icon color="info lighten-1" v-text="item.icon" />
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title class="text--info text--darken-1" v-text="item.text" />
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-tabs>
+      </v-col>
+    </v-row>
     <v-row>
-      <v-col style="max-width: 270px">
+      <v-col class="d-none d-sm-none d-md-block" md="4" lg="3">
         <v-card
           class="mx-auto"
           flat
@@ -33,7 +83,7 @@
           </v-list>
         </v-card>
       </v-col>
-      <v-col>
+      <v-col md="8" lg="9">
         <NuxtChild />
       </v-col>
     </v-row>
@@ -81,6 +131,21 @@ export default {
         { text: 'Subscription', icon: '$vuetify.icons.repeat', to: { name: 'management-schools-id-subscription', params: { id: this.$route.params.id } } },
       ]
     },
+
+    tabItems () {
+      return this.items.slice(0, 4)
+    },
+
+    menuItems () {
+      return this.items.slice(4)
+    },
   },
 }
 </script>
+<!--<style>-->
+
+<!--.v-tabs-slider-wrapper {-->
+<!--  left: auto !important;-->
+<!--  right: 0;-->
+<!--}-->
+<!--</style>-->

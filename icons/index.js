@@ -8,6 +8,7 @@ export default [
   'edit',
   'ellipse',
   'plus',
+  'plusOutline',
   'save',
   'info',
   'team',
@@ -20,4 +21,6 @@ export default [
   'announcement-outline',
   'settings',
   'repeat',
+  'chevronDown',
+  'threeDots',
 ]
