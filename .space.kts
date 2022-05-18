@@ -17,7 +17,7 @@ job("Build and push Docker") {
       file = "./Dockerfile"
     }
 
-    push("fixturr.registry.jetbrains.space/p/software-development/registry/core") {
+    push("fixturr.registry.jetbrains.space/p/software-development/registry/ui") {
       tags("V\$BRANCH")
     }
   }
