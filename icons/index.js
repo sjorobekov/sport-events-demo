@@ -23,4 +23,5 @@ export default [
   'repeat',
   'chevronDown',
   'threeDots',
+  'upload',
 ]

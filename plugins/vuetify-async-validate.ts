@@ -37,22 +37,19 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
       return !!v || 'Required'
     },
 
-    isEmailAvailable (currentEmail: string) {
-      return async (v: string): AsyncReturnType => {
-        if (currentEmail === v) {
-          return true
-        }
-        const { available } = await $axios.$post('/api/v1/validation/check_email', { value: v })
+    isEmailAvailable (id: string) {
+      return async (email: string): AsyncReturnType => {
+        const { available } = await $axios.$post('/api/v1/validation/check_email', { email, id })
         return available || 'Email is unavailable'
       }
     },
 
     email (v: string): ReturnType {
-      return (!!v && isEmail(v)) || 'Invalid email'
+      return (!v || isEmail(v)) || 'Invalid email'
     },
 
     phone (v: string): ReturnType {
-      return (!!v && isMobilePhone(v)) || 'Invalid phone number'
+      return (!v || isMobilePhone(v)) || 'Invalid phone number'
     },
 
     url (v: string): ReturnType {
@@ -60,7 +57,7 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
     },
 
     alphaNumeric (v: string): ReturnType {
-      return (!!v && isAlphanumeric(v)) || 'Must contain only letters and numbers'
+      return (!v || isAlphanumeric(v)) || 'Must contain only letters and numbers'
     },
 
     minLength (len: number) {
@@ -82,8 +79,8 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
     },
 
     isSubdomainAvailable (id: string) {
-      return async (v: string): AsyncReturnType => {
-        const { available } = await $axios.$post('/api/v1/validation/check_portal', { portalAddress: v, id })
+      return async (portalAddress: string): AsyncReturnType => {
+        const { available } = await $axios.$post('/api/v1/validation/check_portal', { portalAddress, id })
         return available || 'Address is unavailable'
       }
     },

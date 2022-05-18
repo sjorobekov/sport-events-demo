@@ -14,7 +14,7 @@
 
           <v-list-item-action>
             <v-btn color="secondary" depressed :to="{ name: 'management-schools-add' }">
-              <v-icon>$vuetify.icons.plus</v-icon>Add School
+              <v-icon>$vuetify.icons.plusOutline</v-icon>Add School
             </v-btn>
           </v-list-item-action>
         </v-list-item>
@@ -49,6 +49,7 @@
       </v-card>
 
       <v-pagination
+        v-if="meta.total > 20"
         v-model.lazy="query.page"
         :length="meta.lastPage"
       />

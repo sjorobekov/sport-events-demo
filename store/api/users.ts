@@ -33,9 +33,17 @@ export const actions: ActionTree<RootState, RootState> = {
 
   save (_, payload: User): Promise<User> {
     const { id, schoolId } = payload
-    const data = {
 
+    const data = {
+      email: payload.email,
+      firstname: payload.firstname,
+      lastname: payload.lastname,
+      displayName: payload.displayName,
+      phone: payload.phone,
+      jobRole: payload.jobRole,
+      userRole: payload.userRole,
     }
+
     if (payload.id) {
       return this.$axios.$put(`/api/v1/schools/${schoolId}/users/${id}`, data)
     }
@@ -43,7 +51,15 @@ export const actions: ActionTree<RootState, RootState> = {
     return this.$axios.$post(`/api/v1/schools/${schoolId}/users`, data)
   },
 
+  updateStatus (_, { id, schoolId, enabled }): Promise<User> {
+    return this.$axios.$patch(`/api/v1/schools/${schoolId}/users/${id}/status`, { enabled })
+  },
+
   get (_, { schoolId, id }): Promise<User> {
     return this.$axios.$get(`api/v1/schools/${schoolId}/users/${id}`)
+  },
+
+  remove (_, { schoolId, id }): Promise<void> {
+    return this.$axios.$delete(`api/v1/schools/${schoolId}/users/${id}`)
   },
 }

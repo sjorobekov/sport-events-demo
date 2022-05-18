@@ -1,5 +1,5 @@
 <template>
-  <v-avatar>
+  <v-avatar :size="size" :color="color">
     <v-img
       :src="avatar"
       alt="John"
@@ -17,6 +17,14 @@ export default {
       type: String,
       default: undefined,
     },
+    size: {
+      type: [String, Number],
+      default: undefined,
+    },
+    color: {
+      type: String,
+      default: undefined,
+    },
   },
 
   computed: {
@@ -30,7 +38,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-
-</style>
