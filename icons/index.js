@@ -22,6 +22,8 @@ export default [
   'settings',
   'repeat',
   'chevronDown',
+  'tick',
+  'tickFilled',
   'threeDots',
   'upload',
 ]

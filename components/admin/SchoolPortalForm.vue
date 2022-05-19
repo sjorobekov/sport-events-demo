@@ -5,7 +5,14 @@
         <label for="portal">Fixturr Portal is <strong>{{ formData.portal ? 'Enabled' : 'Disabled' }}</strong></label>
       </v-col>
       <v-col>
-        <v-switch id="portal" v-model="formData.portal" class="float-right" color="success" inset />
+        <v-switch
+          id="portal"
+          :value="formData.portal"
+          class="float-right"
+          color="success"
+          inset
+          @input="update('portal', $event)"
+        />
       </v-col>
     </v-row>
 
@@ -13,13 +20,14 @@
       <label class="caption" for="portal_address">Fixturr Portal Address</label>
       <v-text-field
         id="portal_address"
-        v-model="formData.portalAddress"
         v-async-validate
+        :value="formData.portalAddress"
         :disabled="!formData.portal"
         :async-rules="[$rule.required, $rule.alphaNumeric, $rule.isSubdomainAvailable(formData.id)]"
         dense
         outlined
         suffix=".fixturr.com"
+        @input="update('portalAddress', $event)"
       />
     </div>
   </v-form>
@@ -40,19 +48,17 @@ export default {
   },
 
   computed: {
-    formData: {
-      get () {
-        return this.value
-      },
-      set (val) {
-        this.$emit('input', { ...val })
-      },
+    formData () {
+      return this.value || { portal: false }
     },
   },
 
   methods: {
     validateAsync () {
       return this.$refs.form.validateAsync()
+    },
+    update (key, value) {
+      this.$emit('input', { ...this.formData, [key]: value })
     },
   },
 }

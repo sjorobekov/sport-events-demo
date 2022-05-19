@@ -7,47 +7,78 @@
     <label for="school_name">School Name</label>
     <v-text-field
       id="school_name"
-      v-model="formData.name"
       v-async-validate
+      :value="formData.name"
       :async-rules="[$rule.required]"
       dense
       outlined
       maxlength="120"
+      @input="update('name', $event)"
     />
 
     <label for="street">Street</label>
-    <v-text-field id="street" v-model="formData.street" dense outlined maxlength="120" />
+    <v-text-field
+      id="street"
+      :value="formData.street"
+      dense
+      outlined
+      maxlength="120"
+      @input="update('street', $event)"
+    />
 
     <label for="zip">Zip</label>
-    <v-text-field id="zip" v-model="formData.zip" dense outlined maxlength="15" />
+    <v-text-field
+      id="zip"
+      :value="formData.zip"
+      dense
+      outlined
+      maxlength="15"
+      @input="update('zip', $event)"
+    />
 
     <label for="city">City</label>
-    <v-text-field id="city" v-model="formData.city" dense outlined maxlength="50" />
+    <v-text-field
+      id="city"
+      :value="formData.city"
+      dense
+      outlined
+      maxlength="50"
+      @input="update('city', $event)"
+    />
 
     <label for="state">State/Province</label>
-    <v-text-field id="state" v-model="formData.state" dense outlined maxlength="50" />
+    <v-text-field
+      id="state"
+      :value="formData.state"
+      dense
+      outlined
+      maxlength="50"
+      @input="update('state', $event)"
+    />
 
     <label for="country">Country</label>
     <v-select
       id="country"
-      v-model="formData.country"
+      :value="formData.country"
       dense
       :items="countries"
       outlined
       item-value="code"
       item-text="name"
+      @input="update('country', $event)"
     />
 
     <label for="website">School Website</label>
     <v-text-field
       id="website"
-      v-model="formData.website"
       v-async-validate
+      :value="formData.website"
       dense
       :async-rules="[$rule.url]"
       placeholder="https://website.com"
       outlined
       maxlength="120"
+      @input="update('website', $event)"
     />
   </v-form>
 </template>
@@ -73,19 +104,17 @@ export default {
       countries: 'countries/list',
     }),
 
-    formData: {
-      get () {
-        return this.value
-      },
-      set (val) {
-        this.$emit('input', { ...val })
-      },
+    formData () {
+      return this.value || {}
     },
   },
 
   methods: {
     validateAsync () {
       return this.$refs.form.validateAsync()
+    },
+    update (key, value) {
+      this.$emit('input', { ...this.formData, [key]: value })
     },
   },
 }

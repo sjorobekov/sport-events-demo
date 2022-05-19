@@ -9,63 +9,75 @@
         <label for="firstname">First Name</label>
         <v-text-field
           id="firstname"
-          v-model="formData.firstname"
           v-async-validate
+          :value="formData.firstname"
           :async-rules="[$rule.required]"
           dense
           outlined
           maxlength="120"
+          @input="update('firstname', $event)"
         />
       </v-col>
       <v-col>
         <label for="lastname">Last Name</label>
         <v-text-field
           id="lastname"
-          v-model="formData.lastname"
           v-async-validate
+          :value="formData.lastname"
           :async-rules="[$rule.required]"
           dense
           outlined
           maxlength="120"
+          @input="update('lastname', $event)"
         />
       </v-col>
     </v-row>
 
     <label for="displayName">Display Name</label>
-    <v-text-field id="displayName" v-model="formData.displayName" dense outlined maxlength="120" />
+    <v-text-field
+      id="displayName"
+      :value="formData.displayName"
+      dense
+      outlined
+      maxlength="120"
+      @input="update('displayName', $event)"
+    />
 
     <label for="email">Email Address</label>
     <v-text-field
       id="email"
-      v-model="formData.email"
       v-async-validate
+      :value="formData.email"
       :async-rules="[$rule.required, $rule.email, $rule.isEmailAvailable(formData.id)]"
       dense
       outlined
       maxlength="50"
+      @input="update('email', $event)"
     />
 
     <label for="phone">Phone Number</label>
     <v-text-field
       id="phone"
-      v-model="formData.phone"
       v-async-validate
+      :value="formData.phone"
       :async-rules="[$rule.phone]"
       dense
       outlined
       maxlength="15"
+      @input="update('phone', $event)"
     />
 
     <label for="jobRole">Job Role</label>
-    <v-text-field id="jobRole" v-model="formData.jobRole" dense outlined maxlength="120" />
+    <v-text-field id="jobRole" :value="formData.jobRole" dense outlined maxlength="120" />
 
     <label for="userRole">User Role</label>
     <v-select
       id="userRole"
-      v-model="formData.userRole"
+      :value="formData.userRole"
       dense
       :items="userRoleOptions"
       outlined
+      @input="update('userRole', $event)"
     />
   </v-form>
 </template>
@@ -95,19 +107,17 @@ export default {
       ]
     },
 
-    formData: {
-      get () {
-        return this.value
-      },
-      set (val) {
-        this.$emit('input', { ...val })
-      },
+    formData () {
+      return this.value ? this.value : { userRole: ADMIN }
     },
   },
 
   methods: {
     validateAsync () {
       return this.$refs.form.validateAsync()
+    },
+    update (key, value) {
+      this.$emit('input', { ...this.formData, [key]: value })
     },
   },
 }
