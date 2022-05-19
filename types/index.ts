@@ -19,6 +19,24 @@ export type School = {
   plan?: Plan,
 }
 
+export type User = {
+  id: string,
+  email: string,
+  firstname: string,
+  lastname: string,
+  displayName: string,
+  phone: string,
+  jobRole: string,
+  userRole: string,
+  enabled: boolean,
+  displaySportsContact: boolean,
+  mainSportsContact: boolean,
+  lastActive: string,
+  schoolId: string,
+  createdAt: string,
+  updatedAt: string,
+}
+
 export type Dictionary<T> = { [key: string]: T }
 
 export type Primitive = number|string|boolean

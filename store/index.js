@@ -3,6 +3,7 @@ export const actions = {
     try {
       await dispatch('context/fetchContext')
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('error', e)
     }
   },
