@@ -83,8 +83,6 @@
 </template>
 
 <script>
-import { ADMIN, SPORTS_USER, VIEW_ONLY } from '@/enum/UserRole'
-
 export default {
   name: 'FxProfileForm',
   props: {
@@ -99,16 +97,8 @@ export default {
   },
 
   computed: {
-    userRoleOptions () {
-      return [
-        { value: ADMIN, text: 'Admin' },
-        { value: SPORTS_USER, text: 'Sports User' },
-        { value: VIEW_ONLY, text: 'View Only' },
-      ]
-    },
-
     formData () {
-      return this.value ? this.value : { userRole: ADMIN }
+      return this.value ? this.value : { color: '#a95f5f' }
     },
   },
 

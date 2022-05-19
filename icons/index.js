@@ -26,4 +26,5 @@ export default [
   'tickFilled',
   'threeDots',
   'upload',
+  'colorPicker',
 ]

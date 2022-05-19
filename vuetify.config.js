@@ -15,6 +15,7 @@ export default {
   defaultAssets: false,
   theme: {
     light: true,
+    options: { customProperties: true },
     themes: {
       light: {
         brand: '#193F66',

@@ -22,8 +22,8 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col class="pt-0 text-center text--info text--darken-2">
-                  <span>{{ item.text }}</span>
+                <v-col class="pt-0 text-center">
+                  <span class="label">{{ item.text }}</span>
                 </v-col>
               </v-row>
             </v-container>
@@ -76,16 +76,17 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.base {
-  height: 107px;
-}
-.border {
-  border-radius: 4px;
-  border: 1px #CBD5E1 solid;
+<style lang="sass" scoped>
+.base
+  height: 107px
 
-  &.active {
-    border: 3px #193F66 solid;
-  }
-}
+.border
+  border-radius: 4px
+  border: 1px var(--v-info-lighten2) solid
+
+  &.active
+    border: 3px var(--v-brand-base) solid
+
+  .label
+    color: var(--v-info-darken2)
 </style>

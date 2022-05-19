@@ -17,3 +17,9 @@
 body {
   font-size: 20px;
 }
+
+.fx-card-border-top-brand2 {
+  border-top-width: 4px!important;
+  border-top-style: solid;
+  border-top-color: var(--v-brand2-base) !important;
+}

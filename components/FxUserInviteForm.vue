@@ -1,6 +1,6 @@
 <template>
   <v-form ref="form" v-async-form :disabled="disabled">
-    <v-card>
+    <v-card class="fx-card-border-top-brand2">
       <v-card-text>
         <v-container>
           <v-row>
@@ -79,7 +79,7 @@
       </v-card-text>
     </v-card>
 
-    <v-card class="mt-4">
+    <v-card class="mt-4 fx-card-border-top-brand2">
       <v-card-text>
         <v-container>
           <v-row>
@@ -130,7 +130,7 @@
       </v-card-text>
     </v-card>
 
-    <v-card class="mt-4">
+    <v-card class="mt-4 fx-card-border-top-brand2">
       <v-card-text>
         <v-container>
           <v-row>

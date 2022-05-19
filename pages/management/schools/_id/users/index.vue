@@ -6,7 +6,7 @@
         <v-list-item-subtitle>{{ meta.total }} Users</v-list-item-subtitle>
       </v-list-item-content>
       <v-list-item-action>
-        <v-btn outlined color="brand">
+        <v-btn outlined color="brand" :to="{ name: 'management-schools-id-users-invite' }" link>
           <v-icon>$vuetify.icons.plusOutline</v-icon>Invite User
         </v-btn>
       </v-list-item-action>

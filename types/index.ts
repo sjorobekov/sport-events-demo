@@ -19,6 +19,13 @@ export type School = {
   plan?: Plan,
 }
 
+export type Sport = {
+  id: string,
+  name: string,
+  color: string,
+  icon: string,
+}
+
 export type User = {
   id: string,
   email: string,
