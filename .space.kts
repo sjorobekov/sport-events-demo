@@ -2,7 +2,7 @@ job("Build and push Docker") {
   docker {
     beforeBuildScript {
       content = """
-          export BRANCH=${'$'}(echo ${'$'}JB_SPACE_GIT_BRANCH | cut -d'-' -f 2)
+        export BRANCH=${'$'}(echo ${'$'}JB_SPACE_GIT_BRANCH | cut -d'/' -f 3)
       """
     }
     build {
@@ -23,7 +23,7 @@ job("Deploy to dev") {
     shellScript {
       interpreter = "/bin/bash"
       content = """
-        export TAG=${'$'}(echo ${'$'}JB_SPACE_GIT_BRANCH | cut -d'-' -f 2)
+        export BRANCH=${'$'}(echo ${'$'}JB_SPACE_GIT_BRANCH | cut -d'/' -f 3)
         cd /home/runner/fixturr-compose/ui
         echo ${'$'}TAG && docker compose pull ui
         docker compose up -d --force-recreate ui
