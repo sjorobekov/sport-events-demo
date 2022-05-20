@@ -76,6 +76,7 @@ export default {
     loading: false,
     formData: {},
   }),
+  head: () => ({ title: 'Add Sport' }),
   methods: {
     async  save () {
       this.loading = true

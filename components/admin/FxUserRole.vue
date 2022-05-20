@@ -16,7 +16,7 @@ export default Vue.extend({
   props: {
     role: {
       type: String,
-      required: true,
+      default: '',
     },
   },
 

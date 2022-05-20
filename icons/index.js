@@ -27,4 +27,5 @@ export default [
   'threeDots',
   'upload',
   'colorPicker',
+  'image',
 ]

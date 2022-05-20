@@ -77,6 +77,7 @@ export default {
   async fetch () {
     this.sports = await this.$store.dispatch('api/sports/list')
   },
+  head: () => ({ title: 'Sports' }),
 
   methods: {
     remove (id) {

@@ -17,7 +17,7 @@ export default {
   props: {
     value: {
       type: Boolean,
-      required: true,
+      default: true,
     },
     disabled: {
       type: Boolean,

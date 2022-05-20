@@ -68,7 +68,14 @@
     />
 
     <label for="jobRole">Job Role</label>
-    <v-text-field id="jobRole" :value="formData.jobRole" dense outlined maxlength="120" />
+    <v-text-field
+      id="jobRole"
+      :value="formData.jobRole"
+      dense
+      outlined
+      maxlength="120"
+      @input="update('jobRole', $event)"
+    />
 
     <label for="userRole">User Role</label>
     <v-select
@@ -83,6 +90,8 @@
 </template>
 
 <script>
+import { ADMIN, SPORTS_USER, VIEW_ONLY } from '@/enum/UserRole'
+
 export default {
   name: 'FxProfileForm',
   props: {
@@ -97,8 +106,16 @@ export default {
   },
 
   computed: {
+    userRoleOptions () {
+      return [
+        { value: ADMIN, text: 'Admin' },
+        { value: SPORTS_USER, text: 'Sports User' },
+        { value: VIEW_ONLY, text: 'View Only' },
+      ]
+    },
+
     formData () {
-      return this.value ? this.value : { color: '#a95f5f' }
+      return this.value ? this.value : { userRole: ADMIN }
     },
   },
 

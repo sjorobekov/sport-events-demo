@@ -80,6 +80,11 @@ export default {
   async fetch () {
     this.formData = await this.$store.dispatch('api/sports/get', this.$route.params.id)
   },
+  head () {
+    return {
+      title: this.formData.name,
+    }
+  },
   methods: {
     async  save () {
       this.loading = true

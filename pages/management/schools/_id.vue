@@ -142,10 +142,3 @@ export default {
   },
 }
 </script>
-<!--<style>-->
-
-<!--.v-tabs-slider-wrapper {-->
-<!--  left: auto !important;-->
-<!--  right: 0;-->
-<!--}-->
-<!--</style>-->

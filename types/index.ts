@@ -24,6 +24,7 @@ export type Sport = {
   name: string,
   color: string,
   icon: string,
+  file?: File,
 }
 
 export type User = {
