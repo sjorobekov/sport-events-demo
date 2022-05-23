@@ -26,16 +26,6 @@
       @input="update('street', $event)"
     />
 
-    <label for="zip">Zip</label>
-    <v-text-field
-      id="zip"
-      :value="formData.zip"
-      dense
-      outlined
-      maxlength="15"
-      @input="update('zip', $event)"
-    />
-
     <label for="city">City</label>
     <v-text-field
       id="city"
@@ -56,8 +46,18 @@
       @input="update('state', $event)"
     />
 
+    <label for="zip">Zip</label>
+    <v-text-field
+      id="zip"
+      :value="formData.zip"
+      dense
+      outlined
+      maxlength="15"
+      @input="update('zip', $event)"
+    />
+
     <label for="country">Country</label>
-    <v-select
+    <v-autocomplete
       id="country"
       :value="formData.country"
       dense

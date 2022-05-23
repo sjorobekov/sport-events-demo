@@ -129,7 +129,7 @@
               md="7"
               class="text-right"
             >
-              <v-btn color="info darken-1" outlined>
+              <v-btn color="info darken-1" outlined @click="reset()">
                 <v-icon color="info darken-3">
                   $vuetify.icons.shield
                 </v-icon> Send Reset Password
@@ -244,6 +244,20 @@ export default {
         .then(() => {
           this.$toast.info('User has been removed')
           this.$router.push({ name: 'management-schools-id-users' })
+        })
+        .catch(() => {
+          this.$toast.error('Unknown Error')
+        })
+    },
+
+    reset () {
+      if (!confirm('Are you sure?')) {
+        return
+      }
+
+      this.$store.dispatch('api/users/sendResetPasswordEmail', this.user)
+        .then(() => {
+          this.$toast.info('Email has been sent')
         })
         .catch(() => {
           this.$toast.error('Unknown Error')

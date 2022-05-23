@@ -2,6 +2,10 @@
   "name": "fixturr-ui",
   "version": "1.0.0",
   "private": true,
+  "maintainers": [
+    "Samat Jorobekov <samat@mavix.io>",
+    "Zhashtilek Orozov <zhashtilek.orozov@mavix.io>"
+  ],
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
