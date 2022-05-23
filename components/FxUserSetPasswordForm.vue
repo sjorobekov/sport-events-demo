@@ -1,8 +1,8 @@
 <template>
   <v-form ref="form" v-async-form :disabled="disabled">
-    <label class="caption" for="portal_address">New Password</label>
+    <label class="caption" for="password">New Password</label>
     <v-text-field
-      id="portal_address"
+      id="password"
       v-async-validate
       :value="formData.password"
       :async-rules="[$rule.required, $rule.minLength(4)]"
@@ -15,9 +15,9 @@
     />
 
     <div v-if="!showPass">
-      <label class="caption" for="portal_address">Confirm New Password</label>
+      <label class="caption" for="password_confirm">Confirm New Password</label>
       <v-text-field
-        id="portal_address"
+        id="password_confirm"
         v-model="formData.confirm"
         v-async-validate
         :async-rules="[$rule.required, $rule.equal(formData.password)]"
