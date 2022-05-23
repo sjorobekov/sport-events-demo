@@ -36,16 +36,6 @@
       @input="update('city', $event)"
     />
 
-    <label for="state">State/Province</label>
-    <v-text-field
-      id="state"
-      :value="formData.state"
-      dense
-      outlined
-      maxlength="50"
-      @input="update('state', $event)"
-    />
-
     <label for="zip">Zip</label>
     <v-text-field
       id="zip"
