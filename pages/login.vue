@@ -1,44 +1,49 @@
 <template>
-  <v-card flat outlined>
-    <v-form ref="form" v-async-form :disabled="loading" @submit.prevent="submit">
-      <v-card-title>Sign In</v-card-title>
-      <v-card-text>
-        <v-text-field
-          v-model="formData.email"
-          v-async-validate
-          label="Email"
-          outlined
-          :async-rules="[$rule.required, $rule.email]"
-        />
-        <v-text-field
-          v-model="formData.password"
-          v-async-validate
-          label="Password"
-          outlined
-          :async-rules="[$rule.required]"
-          type="password"
-        />
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer />
-        <v-btn
-          type="submit"
-          depressed
-          color="brand"
-          dark
-          :loading="loading"
-          @click="submit"
-        >
-          Sign In
-        </v-btn>
-      </v-card-actions>
-    </v-form>
-  </v-card>
+  <v-row align="center" justify="center">
+    <v-col cols="12" sm="6" md="4" lg="3">
+      <v-card flat outlined>
+        <v-form ref="form" v-async-form :disabled="loading" @submit.prevent="submit">
+          <v-card-title>Sign In</v-card-title>
+          <v-card-text>
+            <v-text-field
+              v-model="formData.email"
+              v-async-validate
+              label="Email"
+              outlined
+              :async-rules="[$rule.required, $rule.email]"
+            />
+            <v-text-field
+              v-model="formData.password"
+              v-async-validate
+              label="Password"
+              outlined
+              :async-rules="[$rule.required]"
+              type="password"
+            />
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn
+              type="submit"
+              depressed
+              color="brand"
+              dark
+              :loading="loading"
+              @click="submit"
+            >
+              Sign In
+            </v-btn>
+          </v-card-actions>
+        </v-form>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
 export default {
   name: 'LoginPage',
+  layout: 'empty',
   data: () => ({
     formData: {
       email: '',

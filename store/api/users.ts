@@ -55,6 +55,10 @@ export const actions: ActionTree<RootState, RootState> = {
     return this.$axios.$patch(`/api/v1/schools/${schoolId}/users/${id}/status`, { enabled })
   },
 
+  sendResetPasswordEmail (_, { id, schoolId }): Promise<User> {
+    return this.$axios.$post(`/api/v1/schools/${schoolId}/users/${id}/resetPassword`)
+  },
+
   get (_, { schoolId, id }): Promise<User> {
     return this.$axios.$get(`api/v1/schools/${schoolId}/users/${id}`)
   },

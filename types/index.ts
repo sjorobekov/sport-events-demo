@@ -45,6 +45,15 @@ export type User = {
   updatedAt: string,
 }
 
+export type House = {
+  id: string,
+  name: string,
+  schoolId: string,
+  color: string,
+  createdAt: string,
+  updatedAt: string,
+}
+
 export type Dictionary<T> = { [key: string]: T }
 
 export type Primitive = number|string|boolean
