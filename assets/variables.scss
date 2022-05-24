@@ -1,7 +1,211 @@
+@import '~vuetify/src/styles/tools/_functions.sass';
+@import "sass-rem";
+
 $color-pack: false;
 $body-font-family: 'ProximaNova';
 $title-font: 'ProximaNova-Semibold';
 
 $material-light: (
   'background': #F1F5F9
+);
+
+$heading-font-family: $body-font-family !default;
+
+$headings: () !default;
+$headings: map-deep-merge(
+    (
+      'h1': (
+        'size': rem(48px),
+        'weight': 600,
+        'line-height': rem(56px),
+        'letter-spacing': -0.04em,
+        'font-family': $heading-font-family,
+        'text-transform': false
+      ),
+      'h1s': (
+        'size': rem(34px),
+        'weight': 600,
+        'line-height': rem(40px),
+        'letter-spacing': -0.04em,
+        'font-family': $heading-font-family,
+        'text-transform': false
+      ),
+      'h2': (
+        'size': rem(39px),
+        'weight': 300,
+        'line-height': rem(47px),
+        'letter-spacing': -0.02em,
+        'font-family': $heading-font-family,
+        'text-transform': false
+      ),
+      'h2s': (
+        'size': rem(33px),
+        'weight': 300,
+        'line-height': rem(40px),
+        'letter-spacing': -0.02em,
+        'font-family': $heading-font-family,
+        'text-transform': false
+      ),
+      'h3': (
+        'size': rem(33px),
+        'weight': 600,
+        'line-height': rem(40px),
+        'letter-spacing': -0.02em,
+        'font-family': $heading-font-family,
+        'text-transform': false
+      ),
+      'h3s': (
+        'size': rem(28px),
+        'weight': 600,
+        'line-height': rem(34px),
+        'letter-spacing': -0.02em,
+        'font-family': $heading-font-family,
+        'text-transform': false
+      ),
+      'h4': (
+        'size': rem(28px),
+        'weight': 600,
+        'line-height': rem(34px),
+        'letter-spacing': -0.02em,
+        'font-family': $heading-font-family,
+        'text-transform': false
+      ),
+      'h4s': (
+        'size': rem(23px),
+        'weight': 600,
+        'line-height': rem(28px),
+        'letter-spacing': -0.02em,
+        'font-family': $heading-font-family,
+        'text-transform': false
+      ),
+      'h5': (
+        'size': rem(23px),
+        'weight': 600,
+        'line-height': rem(28px),
+        'letter-spacing': -0.02em,
+        'font-family': $heading-font-family,
+        'text-transform': false
+      ),
+      'h5s': (
+        'size': rem(19px),
+        'weight': 600,
+        'line-height': rem(23px),
+        'letter-spacing': -0.02em,
+        'font-family': $heading-font-family,
+        'text-transform': false
+      ),
+      'h6': (
+        'size': rem(19px),
+        'weight': 600,
+        'line-height': rem(23px),
+        'letter-spacing': -0.02em,
+        'font-family': $heading-font-family,
+        'text-transform': false
+      ),
+      'h6s': (
+        'size': rem(14px),
+        'weight': 600,
+        'line-height': rem(20px),
+        'letter-spacing': -0.02em,
+        'font-family': $heading-font-family,
+        'text-transform': false
+      ),
+      'subheading': (
+        'size': rem(20px),
+        'weight': 400,
+        'line-height': rem(28px),
+        'font-family': $heading-font-family,
+        'letter-spacing': 0.02em,
+        'text-transform': false
+      ),
+      'p1': (
+        'size': rem(14px),
+        'weight': 400,
+        'line-height': rem(17px),
+        'letter-spacing': -0.02em,
+        'font-family': $heading-font-family,
+        'text-transform': false
+      ),
+      'p2': (
+        'size': rem(16px),
+        'weight': 400,
+        'line-height': rem(24px),
+        'font-family': $heading-font-family,
+        'letter-spacing': 0.02em,
+        'text-transform': false
+      ),
+      'p3': (
+        'size': rem(18px),
+        'weight': 400,
+        'line-height': rem(22px),
+        'font-family': $heading-font-family,
+        'letter-spacing': 0.02em,
+        'text-transform': false
+      ),
+      'caption': (
+        'size': rem(12px),
+        'weight': 400,
+        'line-height': rem(18px),
+        'letter-spacing': 0.02em,
+        'font-family': $heading-font-family,
+        'text-transform': false
+      ),
+      'footer': (
+        'size': rem(10px),
+        'weight': 400,
+        'line-height': rem(14px),
+        'font-family': $heading-font-family,
+        'letter-spacing': 0.02em,
+        'text-transform': false
+      ),
+      'subtitle-1': (
+        'size': 1rem,
+        'weight': normal,
+        'line-height': 1.75rem,
+        'letter-spacing': .009375em,
+        'font-family': $body-font-family,
+        'text-transform': false
+      ),
+      'subtitle-2': (
+        'size': .875rem,
+        'weight': 500,
+        'line-height': 1.375rem,
+        'letter-spacing': .0071428571em,
+        'font-family': $body-font-family,
+        'text-transform': false
+      ),
+      'body-1': (
+        'size': 1rem,
+        'weight': 400,
+        'line-height': 1.5rem,
+        'letter-spacing': .03125em,
+        'font-family': $body-font-family,
+        'text-transform': false
+      ),
+      'body-2': (
+        'size': .875rem,
+        'weight': 400,
+        'line-height': 1.25rem,
+        'letter-spacing': .0178571429em,
+        'font-family': $body-font-family,
+        'text-transform': false
+      ),
+      'button': (
+        'size': .875rem,
+        'weight': 600,
+        'line-height': 2.25rem,
+        'letter-spacing': .0892857143em,
+        'font-family': $body-font-family,
+        'text-transform': false
+      ),
+      'overline': (
+        'size': .75rem,
+        'weight': 500,
+        'line-height': 2rem,
+        'letter-spacing': .1666666667em,
+        'font-family': $body-font-family,
+        'text-transform': uppercase
+      )
+    ),
+    $headings
 );

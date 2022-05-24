@@ -45,7 +45,7 @@ export type User = {
   updatedAt: string,
 }
 
-export type House = {
+export type InHouseTeam = {
   id: string,
   name: string,
   schoolId: string,

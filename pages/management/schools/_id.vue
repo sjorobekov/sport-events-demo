@@ -123,7 +123,7 @@ export default {
         { text: 'Teams', icon: '$vuetify.icons.tshirt', to: { name: 'management-schools-id-teams', params: { id: this.$route.params.id } } },
         { text: 'Events', icon: '$vuetify.icons.calendar', to: { name: 'management-schools-id-events', params: { id: this.$route.params.id } } },
         { text: 'Privacy', icon: '$vuetify.icons.shield', to: { name: 'management-schools-id-privacy', params: { id: this.$route.params.id } } },
-        { text: 'In-House Sport', icon: '$vuetify.icons.trophy', to: { name: 'management-schools-id-in-house-sports', params: { id: this.$route.params.id } } },
+        { text: 'In-House Sport', icon: '$vuetify.icons.trophy', to: { name: 'management-schools-id-in-house-teams', params: { id: this.$route.params.id } } },
         { text: 'Students', icon: '$vuetify.icons.student', to: { name: 'management-schools-id-students', params: { id: this.$route.params.id } } },
         { text: 'Sports Records', icon: '$vuetify.icons.stopwatch', to: { name: 'management-schools-id-records', params: { id: this.$route.params.id } } },
         { text: 'Customisation', icon: '$vuetify.icons.settings', to: { name: 'management-schools-id-customisation', params: { id: this.$route.params.id } } },
