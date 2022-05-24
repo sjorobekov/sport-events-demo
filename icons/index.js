@@ -28,4 +28,5 @@ export default [
   'upload',
   'colorPicker',
   'image',
+  'teams',
 ]

@@ -1,3 +1,5 @@
+@import "sass-rem";
+
 /*@import url("https://hello.myfonts.net/count/496482");*/
 
 @font-face {
@@ -23,3 +25,16 @@ body {
   border-top-style: solid;
   border-top-color: var(--v-brand2-base) !important;
 }
+
+.fx-card-border-top-primary {
+  border-top-width: 4px!important;
+  border-top-style: solid;
+  border-top-color: var(--v-primary-base) !important;
+}
+
+label {
+  font-size: .875rem;
+  line-height: 1.063rem;
+  color: var(--v-info-darken1);
+}
+
