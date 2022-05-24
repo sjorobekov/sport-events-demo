@@ -1,47 +1,36 @@
 <template>
   <v-row>
     <v-col>
-      <h4 class="mb-6 text-h4">
+      <h3 class="mb-6 text-h3 mb-8">
         Edit Sport
-      </h4>
+      </h3>
       <v-card class="fx-card-border-top-brand2">
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col
-                cols="12"
-                md="5"
-              >
-                <v-list>
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-avatar color="brand">
-                        <span class="white--text text-h5">1</span>
-                      </v-avatar>
-                    </v-list-item-avatar>
-
-                    <v-list-item-content>
-                      <v-list-item-title>School Information</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-
-                  <v-list-item>
-                    <v-list-item-avatar />
-                    <v-list-item-content class="text--disabled">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list>
-              </v-col>
-              <v-col
-                cols="12"
-                md="5"
-              >
-                <FxSportForm ref="form" v-model="formData" :disabled="loading" />
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card-text>
+        <v-container>
+          <v-row>
+            <v-col
+              cols="12"
+              md="5"
+            >
+              <FxInstructionItem>
+                <template #number>
+                  1
+                </template>
+                <template #title>
+                  Sport Information
+                </template>
+                <template #content>
+                  Select name of the sport and icon. Only svg files allowed
+                </template>
+              </FxInstructionItem>
+            </v-col>
+            <v-col
+              cols="12"
+              md="7"
+            >
+              <FxSportForm ref="form" v-model="formData" :disabled="loading" @remove-icon="removeIcon" />
+            </v-col>
+          </v-row>
+        </v-container>
       </v-card>
 
       <v-container class="mt-4 mb-8">
@@ -98,11 +87,25 @@ export default {
       this.$store.dispatch('api/sports/save', this.formData)
         .then((data) => {
           this.formData = data
+          this.$toast('Updated Successfully!')
         }).catch(() => {
           this.$toast.error('Unknown Error')
         }).finally(() => {
           this.loading = false
         })
+    },
+
+    removeIcon () {
+      if (!confirm('Are you sure?')) {
+        return
+      }
+
+      this.$store.dispatch('api/sports/removeIcon', this.formData.id).then(() => {
+        this.formData.icon = null
+        this.formData.iconId = null
+      }).catch(() => {
+        this.$toast.error('Unknown Error')
+      })
     },
   },
 }

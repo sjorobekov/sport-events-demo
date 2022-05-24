@@ -81,11 +81,6 @@ export default {
   },
 
   methods: {
-    select () {
-      this.$emit('input', this.color)
-      this.dialog = false
-    },
-
     crop () {
       const { canvas } = this.$refs.cropper.getResult()
       canvas.toBlob(async (blob) => {

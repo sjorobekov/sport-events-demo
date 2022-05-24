@@ -4,10 +4,10 @@
       <v-list color="info lighten-4" class="mb-2">
         <v-list-item class="pa-0">
           <v-list-item-content>
-            <v-list-item-title class="text-h4">
+            <v-list-item-title class="text-h3">
               Sports
             </v-list-item-title>
-            <v-list-item-subtitle class="subtitle-1 text--info text--darken-2">
+            <v-list-item-subtitle class="text-p2 text--info text--darken-2">
               {{ sports.length }} Sports
             </v-list-item-subtitle>
           </v-list-item-content>

@@ -15,26 +15,20 @@ export const actions: ActionTree<RootState, RootState> = {
   },
 
   save ({ getters }, payload: Sport): Promise<Sport> {
-    const data = {
-      name: payload.name,
-      color: payload.color,
-      icon: payload.icon,
-    }
-
     const formData = new FormData()
 
     formData.append('name', payload.name)
     formData.append('color', payload.color)
 
     if (payload.file) {
-      formData.append('file', payload.file)
+      formData.append('file', payload.file, 'icon.svg')
     }
 
     if (payload.id) {
-      return this.$axios.$put(`/api/v1/sports/${payload.id}`, data, { headers: getters.multipartHeaders })
+      return this.$axios.$put(`/api/v1/sports/${payload.id}`, formData, { headers: getters.multipartHeaders })
     }
 
-    return this.$axios.$post('/api/v1/sports', data, { headers: getters.multipartHeaders })
+    return this.$axios.$post('/api/v1/sports', formData, { headers: getters.multipartHeaders })
   },
 
   get (_, id): Promise<Sport> {
@@ -43,5 +37,15 @@ export const actions: ActionTree<RootState, RootState> = {
 
   remove (_, id): Promise<void> {
     return this.$axios.$delete(`api/v1/sports/${id}`)
+  },
+
+  uploadIcon ({ getters }, { id, file }) : Promise<Sport> {
+    const formData = new FormData()
+    formData.append('file', file)
+    return this.$axios.$post(`/api/v1/sports/${id}/icon`, formData, { headers: getters.multipartHeaders })
+  },
+
+  removeIcon (_, id): Promise<Sport> {
+    return this.$axios.$delete(`/api/v1/sports/${id}/icon`)
   },
 }

@@ -95,5 +95,8 @@ export default {
     '/api/v1': {
       target: process.env.API_URL || 'http://127.0.0.1:3333',
     },
+    '/upload': {
+      target: process.env.API_URL || 'http://127.0.0.1:3333',
+    },
   },
 }
