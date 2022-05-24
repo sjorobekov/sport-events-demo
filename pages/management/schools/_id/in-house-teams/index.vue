@@ -18,6 +18,7 @@
         :headers="headers"
         :items="items"
         hide-default-footer
+        disable-pagination
       >
         <template #item.action="{ item }">
           <v-menu>

@@ -24,6 +24,7 @@
         :items="sports"
         item-key="id"
         hide-default-footer
+        disable-pagination
       >
         <template #default="{ items }">
           <v-row>
