@@ -5,15 +5,8 @@ export const state = () => ({})
 
 export type RootState = ReturnType<typeof state>
 
-type QueryParams = {
-  page: number,
-  sortBy: string,
-  sortDesc: boolean,
-}
-
 type ListPayload = {
   schoolId: string
-  params: QueryParams
 }
 
 export const actions: ActionTree<RootState, RootState> = {

@@ -54,6 +54,20 @@ export type InHouseTeam = {
   updatedAt: string,
 }
 
+export type Student = {
+  id: string,
+  firstname: string,
+  lastname: string,
+  birthday: string,
+  yearGroup: number,
+  gender: string,
+  inHouseTeamId: string,
+  inHouseTeam?: InHouseTeam,
+  schoolId: string,
+  createdAt: string,
+  updatedAt: string,
+}
+
 export type Dictionary<T> = { [key: string]: T }
 
 export type Primitive = number|string|boolean

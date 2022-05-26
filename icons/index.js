@@ -1,5 +1,6 @@
 export default [
   'calendar',
+  'calendarOutline',
   'dashboard',
   'school',
   'whistle',
