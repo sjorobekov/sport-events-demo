@@ -50,7 +50,7 @@
               <v-list class="py-0">
                 <v-list-item>
                   <v-list-item-content class="text--disabled py-0">
-                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+                    Select profile picture for the user. Supported formats: jpeg, png, webp.
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
@@ -59,7 +59,16 @@
               cols="12"
               md="7"
             >
-              <FxProfilePictureForm v-model="formData" />
+              <FxImageUploadForm :value="formData" :loading="uploading" @input="uploadAvatar">
+                <template #icon>
+                  <FxAvatar class="mr-2" size="80" :value="user.avatar" />
+                </template>
+                <template #actions>
+                  <v-btn depressed outlined :disabled="uploading" @input="removeAvatar">
+                    Remove
+                  </v-btn>
+                </template>
+              </FxImageUploadForm>
             </v-col>
           </v-row>
         </v-container>
@@ -174,18 +183,20 @@
 
 <script>
 import FxAccountStatusForm from '@/components/admin/FxAccountStatusForm'
-import FxProfilePictureForm from '@/components/FxProfilePictureForm'
 import FxProfileForm from '@/components/FxProfileForm'
 import FxUserRole from '@/components/admin/FxUserRole'
 import { ADMIN } from '@/enum/UserRole'
+import FxAvatar from '@/components/FxAvatar'
+import FxImageUploadForm from '@/components/FxImageUploadForm'
 
 export default {
   name: 'UserEditPage',
   components: {
     FxUserRole,
     FxAccountStatusForm,
-    FxProfilePictureForm,
+    FxImageUploadForm,
     FxProfileForm,
+    FxAvatar,
   },
   data: () => ({
     formData: {
@@ -194,6 +205,7 @@ export default {
     },
     user: {},
     loading: false,
+    uploading: false,
   }),
   async fetch () {
     this.user = await this.$store.dispatch('api/users/get', {
@@ -221,6 +233,32 @@ export default {
         .finally(() => {
           this.loading = false
         })
+    },
+
+    uploadAvatar (file) {
+      this.uploading = true
+      this.$store.dispatch('api/users/uploadAvatar', {
+        id: this.$route.params.userId,
+        schoolId: this.$route.params.id,
+        file,
+      }).then((res) => {
+        this.user = res
+        this.$toast('Profile picture has been updated!')
+      }).catch(() => {
+        this.$toast.error('Unknown Error')
+      }).finally(() => {
+        this.uploading = false
+      })
+    },
+
+    removeAvatar () {
+      this.$store.dispatch('api/users/uploadAvatar', {
+        id: this.$route.params.userId,
+        schoolId: this.$route.params.id,
+        file,
+      }).then((res) => {
+        this.user = res
+      })
     },
 
     updateStatus () {

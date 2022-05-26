@@ -1,4 +1,4 @@
-import { ActionTree } from 'vuex'
+import { ActionTree, GetterTree } from 'vuex'
 import { User } from '~/types'
 
 export const state = () => ({})
@@ -22,6 +22,10 @@ type UserListResponse = {
 type ListPayload = {
   schoolId: string
   params: QueryParams
+}
+
+export const getters: GetterTree<RootState, RootState> = {
+  multipartHeaders: () => ({ 'Content-Type': 'multipart/form-data' }),
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -65,5 +69,17 @@ export const actions: ActionTree<RootState, RootState> = {
 
   remove (_, { schoolId, id }): Promise<void> {
     return this.$axios.$delete(`api/v1/schools/${schoolId}/users/${id}`)
+  },
+
+  uploadAvatar (_, { schoolId, id, file }): Promise<User> {
+    const formData = new FormData()
+
+    formData.append('file', file, 'avatar.webp')
+
+    return this.$axios.$post(`/api/v1/schools/${schoolId}/users/${id}/avatar`, formData, { headers: getters.multipartHeaders })
+  },
+
+  removeAvatar (_, { schoolId, id }): Promise<User> {
+    return this.$axios.$delete(`/api/v1/schools/${schoolId}/users/${id}/avatar`)
   },
 }
