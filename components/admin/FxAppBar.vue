@@ -1,11 +1,11 @@
 <template>
-  <v-app-bar app fixed elevation="1" color="white">
+  <v-app-bar height="56" app fixed elevation="1" color="white">
     <v-container>
       <v-row align="center">
         <v-spacer />
 
         <v-btn icon class="mr-2">
-          <v-icon large color="secondary">
+          <v-icon size="32" color="secondary">
             $vuetify.icons.bell
           </v-icon>
         </v-btn>
@@ -17,7 +17,7 @@
           <template #activator="{ on, attrs }">
             <v-avatar
               color="primary"
-              size="38"
+              size="32"
               v-bind="attrs"
               v-on="on"
             >

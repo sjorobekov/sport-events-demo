@@ -12,8 +12,8 @@
 
 <script>
 import { SUPER_ADMIN } from '@/enum/UserRole'
-import AdminNavigationDrawer from '@/components/admin/NavigationDrawer'
-import AdminAppBar from '@/components/admin/AppBar'
+import AdminNavigationDrawer from '@/components/admin/FxNavigationDrawer'
+import AdminAppBar from '@/components/admin/FxAppBar'
 
 export default {
   name: 'AdminLayout',

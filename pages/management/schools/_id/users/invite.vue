@@ -10,7 +10,7 @@
           </v-btn>
           <v-btn
             depressed
-            color="brand2"
+            color="brand"
             dark
             class="ml-2"
             :loading="loading"

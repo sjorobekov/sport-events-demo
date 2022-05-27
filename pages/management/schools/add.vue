@@ -93,7 +93,7 @@
           </v-btn>
           <v-btn
             depressed
-            color="brand2"
+            color="brand"
             dark
             class="ml-2"
             :loading="loading"
@@ -108,8 +108,8 @@
 </template>
 
 <script>
-import SchoolInfoForm from '~/components/admin/SchoolInfoForm'
-import SchoolPortalForm from '~/components/admin/SchoolPortalForm'
+import SchoolInfoForm from '@/components/admin/FxSchoolInfoForm'
+import SchoolPortalForm from '@/components/admin/FxSchoolPortalForm'
 
 export default {
   name: 'SchoolAddPage',
