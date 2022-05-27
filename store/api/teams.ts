@@ -1,6 +1,7 @@
 import { ActionTree, GetterTree } from 'vuex'
 import { Team } from '~/types'
 import { FEMALE, MALE } from '~/enum/Gender'
+import { EVENTS, RESULTS, RESULTS_SCORES } from '~/enum/PublishResult'
 
 export const state = () => ({})
 
@@ -26,44 +27,41 @@ export const getters: GetterTree<RootState, RootState> = {
     { text: 'No, Team will only be visible to logged in staff', value: false },
   ]),
   publishResultsOptions: () => ([
-    { text: 'Yes, Publish results and match scores to Sports Portal', value: 'RESULTS_SCORES' },
-    { text: 'Yes, Publish results only (Win, Draw, Loss)', value: 'RESULTS' },
-    { text: 'No, Publish events only', value: 'EVENTS' },
+    { text: 'Yes, Publish results and match scores to Sports Portal', value: RESULTS_SCORES },
+    { text: 'Yes, Publish results only (Win, Draw, Loss)', value: RESULTS },
+    { text: 'No, Publish events only', value: EVENTS },
   ]),
+  multipartHeaders: () => ({ 'Content-Type': 'multipart/form-data' }),
 }
 
 type ListPayload = {
-  schoolId: string
+  schoolId: string,
+  params: {
+    seasonId: string,
+  },
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  list (_, { schoolId }: ListPayload): Promise<Array<Team>> {
-    return this.$axios.$get(`/api/v1/schools/${schoolId}/teams`)
+  list (_, { schoolId, params }: ListPayload): Promise<Array<Team>> {
+    return this.$axios.$get(`/api/v1/schools/${schoolId}/teams`, { params })
   },
 
   save (_, payload: Team): Promise<Team> {
     const { id, schoolId } = payload
 
-    const data = {
-      sportId: payload.sportId,
-      seasonId: payload.seasonId,
-      gender: payload.gender,
-      ageLevel: payload.ageLevel,
-      abilityLevel: payload.abilityLevel,
-      name: payload.name,
-      coachId: payload.coachId,
-      publishTeam: payload.publishTeam,
-      publishResults: payload.publishResults,
-    }
-
     const formData = new FormData()
 
     formData.append('sportId', payload.sportId)
     formData.append('seasonId', payload.seasonId)
-    formData.append('ageLevel', payload.ageLevel)
-    formData.append('abilityLevel', payload.abilityLevel)
+    formData.append('age', payload.age)
+    formData.append('gender', payload.gender)
+    formData.append('ability', payload.ability)
     formData.append('name', payload.name)
-    formData.append('coachId', payload.coachId)
+
+    if (payload.coachId) {
+      formData.append('coachId', payload.coachId)
+    }
+
     formData.append('publishTeam', payload.publishTeam.toString())
     formData.append('publishResults', payload.publishResults.toString())
 
@@ -72,10 +70,10 @@ export const actions: ActionTree<RootState, RootState> = {
     }
 
     if (payload.id) {
-      return this.$axios.$put(`/api/v1/schools/${schoolId}/teams/${id}`, data)
+      return this.$axios.$put(`/api/v1/schools/${schoolId}/teams/${id}`, formData, { headers: getters.multipartHeaders })
     }
 
-    return this.$axios.$post(`/api/v1/schools/${schoolId}/teams`, data)
+    return this.$axios.$post(`/api/v1/schools/${schoolId}/teams`, formData, { headers: getters.multipartHeaders })
   },
 
   get (_, { schoolId, id }): Promise<Team> {

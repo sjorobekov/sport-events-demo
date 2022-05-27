@@ -71,18 +71,30 @@ export type Student = {
 export type Team = {
   id: string,
   sportId: string,
+  sport: Sport,
   seasonId: string,
   gender: string,
-  ageLevel: string,
-  abilityLevel: string,
+  age: string,
+  ability: string,
   name: string,
   coachId: string,
+  coach: User,
   schoolId: string,
   publishTeam: boolean,
-  publishResults: boolean,
+  publishResults: string,
   createdAt: string,
   updatedAt: string,
   file?: File,
+  photo?: string,
+}
+
+export type Season = {
+  id: string,
+  start: string,
+  end: string,
+  status: 'CURRENT' | 'UPCOMING' | 'PAST',
+  createdAt: string,
+  updatedAt: string,
 }
 
 export type Dictionary<T> = { [key: string]: T }

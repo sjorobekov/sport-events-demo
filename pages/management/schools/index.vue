@@ -33,7 +33,9 @@
           must-sort
         >
           <template #item.name="{ item }">
-            <nuxt-link :to="{ name: 'management-schools-id', params: { id: item.id }}">{{ item.name }}</nuxt-link>
+            <nuxt-link :to="{ name: 'management-schools-id', params: { id: item.id }}">
+              {{ item.name }}
+            </nuxt-link>
           </template>
           <template #item.city_country="{ item }">
             <no-ssr><span>{{ item.city }}<span v-if="item.city && item.country">,</span> <FxCountryName :code="item.country" /></span></no-ssr>

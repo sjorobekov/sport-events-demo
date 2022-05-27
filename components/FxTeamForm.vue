@@ -31,6 +31,8 @@
                 <label for="sport">Sport</label>
                 <v-autocomplete
                   id="sport"
+                  v-async-validate
+                  :async-rules="[$rule.required]"
                   outlined
                   dense
                   :value="formData.sportId"
@@ -45,6 +47,8 @@
                 <label for="season">Season</label>
                 <v-autocomplete
                   id="season"
+                  v-async-validate
+                  :async-rules="[$rule.required]"
                   outlined
                   dense
                   :value="formData.seasonId"
@@ -105,31 +109,31 @@
                 />
               </v-col>
               <v-col cols="12" md="12" lg="4" class="my-0 py-0">
-                <label for="ageLevel">Age Level</label>
+                <label for="age">Age Level</label>
                 <v-select
-                  id="ageLevel"
+                  id="age"
                   v-async-validate
                   outlined
                   dense
-                  :value="formData.ageLevel"
+                  :value="formData.age"
                   :items="ageLevelOptions"
                   placeholder="Select Age"
                   :async-rules="[$rule.required]"
-                  @input="update('ageLevel', $event)"
+                  @input="update('age', $event)"
                 />
               </v-col>
               <v-col cols="12" md="12" lg="4" class="my-0 py-0">
-                <label for="abilityLevel">Ability Level</label>
+                <label for="ability">Ability Level</label>
                 <v-select
-                  id="abilityLevel"
+                  id="ability"
                   v-async-validate
                   outlined
                   dense
-                  :value="formData.abilityLevel"
+                  :value="formData.ability"
                   :items="abilityLevel"
                   placeholder="Select Ability"
                   :async-rules="[$rule.required]"
-                  @input="update('ageLevel', $event)"
+                  @input="update('ability', $event)"
                 />
               </v-col>
             </v-row>
@@ -220,11 +224,18 @@
             <v-row>
               <v-col cols="12" md="12" lg="6" class="mt-0 pt-0">
                 <label>Upload Image</label>
-                <v-file-input outlined dense :prepend-icon="null" prepend-inner-icon="mdi-camera" />
+                <v-file-input
+                  accept="image/*"
+                  outlined
+                  dense
+                  :prepend-icon="null"
+                  prepend-inner-icon="mdi-camera"
+                  @change="uploadHandler"
+                />
                 <v-img
-                  lazy-src="https://picsum.photos/id/11/10/6"
+                  v-if="image"
                   max-height="200"
-                  src="https://picsum.photos/id/11/500/300"
+                  :src="image"
                 />
               </v-col>
             </v-row>
@@ -266,7 +277,7 @@
                   :value="formData.publishTeam"
                   mandatory
                   class="mt-0"
-                  @input="update('publishTeam', $event)"
+                  @change="update('publishTeam', $event)"
                 >
                   <v-radio
                     v-for="opt in publishTeamOptions"
@@ -282,7 +293,7 @@
                   :value="formData.publishResults"
                   mandatory
                   class="mt-0"
-                  @input="update('publishResults', $event)"
+                  @change="update('publishResults', $event)"
                 >
                   <v-radio
                     v-for="opt in publishResultsOptions"
@@ -301,7 +312,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import imageCompression from 'browser-image-compression'
 
 export default {
   name: 'FxTeamForm',
@@ -319,15 +331,15 @@ export default {
       type: Array,
       default: () => [],
     },
-    seasons: {
-      type: Array,
-      default: () => [],
-    },
     schoolId: {
       type: String,
       required: true,
     },
   },
+
+  data: () => ({
+    preview: null,
+  }),
 
   computed: {
     ...mapGetters({
@@ -336,20 +348,43 @@ export default {
       abilityLevel: 'api/teams/abilityLevel',
       publishResultsOptions: 'api/teams/publishResultsOptions',
       publishTeamOptions: 'api/teams/publishTeamOptions',
+      seasons: 'seasons/all',
     }),
     formData () {
       return {
+        publishResults: 'RESULTS_SCORES',
+        publishTeam: true,
         ...(this.value || {}),
       }
+    },
+    compressionOptions: () => ({
+      maxSizeMB: 2,
+      maxWidthOrHeight: 4032,
+      useWebWorker: true,
+    }),
+
+    image () {
+      return this.preview || this.formData.photo
     },
   },
 
   methods: {
+    ...mapActions({
+      readBlob: 'helper/readBlob',
+    }),
     validateAsync () {
       return this.$refs.form.validateAsync()
     },
     update (key, value) {
       this.$emit('input', { ...this.formData, [key]: value })
+    },
+
+    uploadHandler (file) {
+      imageCompression(file, this.compressionOptions)
+        .then(async (compressedFile) => {
+          this.update('file', compressedFile)
+          this.preview = await this.readBlob(compressedFile)
+        })
     },
   },
 }

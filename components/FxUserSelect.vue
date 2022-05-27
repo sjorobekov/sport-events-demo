@@ -65,17 +65,22 @@ export default {
   },
 
   async created () {
+    await this.query()
+
     if (!this.value) {
       return
     }
 
+    if (this.items.some(item => item.id === this.value)) {
+      return
+    }
     this.loading = true
     try {
       const user = await this.$store.dispatch('api/users/get', {
         schoolId: this.schoolId,
         id: this.value,
       })
-      this.items = [user]
+      this.items.push(user)
     } catch (e) {
       this.$toast.error('Unable to fetch data')
     } finally {

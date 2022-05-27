@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 class="text-h3 mb-6">
-      Create New Team
+      {{ team.name }}
     </h3>
 
     <FxTeamForm ref="form" v-model="formData" :disabled="loading" :sports="sports" :school-id="schoolId" />
@@ -40,7 +40,18 @@ export default {
     formData: { },
     loading: false,
     sports: [],
+    team: {},
   }),
+
+  async fetch () {
+    this.team = await this.$store.dispatch('api/teams/get', {
+      schoolId: this.$route.params.id,
+      id: this.$route.params.teamId,
+    })
+    this.formData = {
+      ...this.team,
+    }
+  },
   head: () => ({
     title: 'Create New Team',
   }),
@@ -68,9 +79,12 @@ export default {
       this.$store.dispatch('api/teams/save', {
         schoolId: this.schoolId,
         ...this.formData,
-      }).then(() => {
-        this.$router.push({ name: 'management-schools-id-teams' })
-        this.$toast('Team has been created!')
+      }).then((res) => {
+        this.$toast('Team has been updated!')
+        this.team = res
+        this.formData = {
+          ...res,
+        }
       }).finally(() => {
         this.loading = false
       })
