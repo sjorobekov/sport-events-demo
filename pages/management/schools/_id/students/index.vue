@@ -82,7 +82,6 @@ export default {
   name: 'SchoolStudents',
   components: { FxGender, FxAge },
   layout: 'admin',
-
   data: () => ({
     headers: [
       { text: 'First Name', value: 'firstname' },
@@ -116,6 +115,7 @@ export default {
       this.loading = false
     }
   },
+  head: () => ({ title: 'Students' }),
 
   watch: {
     query: {

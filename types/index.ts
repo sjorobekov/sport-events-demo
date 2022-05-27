@@ -68,6 +68,23 @@ export type Student = {
   updatedAt: string,
 }
 
+export type Team = {
+  id: string,
+  sportId: string,
+  seasonId: string,
+  gender: string,
+  ageLevel: string,
+  abilityLevel: string,
+  name: string,
+  coachId: string,
+  schoolId: string,
+  publishTeam: boolean,
+  publishResults: boolean,
+  createdAt: string,
+  updatedAt: string,
+  file?: File,
+}
+
 export type Dictionary<T> = { [key: string]: T }
 
 export type Primitive = number|string|boolean

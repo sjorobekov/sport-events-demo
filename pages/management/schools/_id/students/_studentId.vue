@@ -97,6 +97,7 @@ export default {
       ...this.student,
     }
   },
+  head: () => ({ title: 'Edit Student' }),
   methods: {
     save () {
       this.loading = true

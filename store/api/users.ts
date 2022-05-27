@@ -7,8 +7,9 @@ export type RootState = ReturnType<typeof state>
 
 type QueryParams = {
   page: number,
-  sortBy: string,
+  sortBy: 'firstname' | 'userRole' | 'status' | 'lastActive',
   sortDesc: boolean,
+  search?: string,
 }
 
 type UserListResponse = {
