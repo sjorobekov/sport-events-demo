@@ -32,18 +32,14 @@
           :page="query.page"
           must-sort
         >
+          <template #item.name="{ item }">
+            <nuxt-link :to="{ name: 'management-schools-id', params: { id: item.id }}">{{ item.name }}</nuxt-link>
+          </template>
           <template #item.city_country="{ item }">
             <no-ssr><span>{{ item.city }}<span v-if="item.city && item.country">,</span> <FxCountryName :code="item.country" /></span></no-ssr>
           </template>
           <template #item.status="{ item }">
             <FxSchoolStatus :last-active="item.lastActive" :portal="item.portal" />
-          </template>
-          <template #item.action="{ item }">
-            <v-btn icon link :to="{ name: 'management-schools-id', params: { id: item.id }}">
-              <v-icon color="info lighten-1">
-                $vuetify.icons.edit
-              </v-icon>
-            </v-btn>
           </template>
         </v-data-table>
       </v-card>
@@ -80,7 +76,6 @@ export default {
       { text: 'Number of Users', value: 'usersCount', sortable: false },
       { text: 'Status', value: 'status' },
       { text: 'Plan', value: 'plan.name', sortable: false },
-      { text: 'Action', value: 'action', sortable: false },
     ],
     items: [],
     query: {

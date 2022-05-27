@@ -58,7 +58,7 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer />
-      <v-btn depressed color="brand2" dark class="ml-2" @click="save">
+      <v-btn depressed color="brand" dark class="ml-2" @click="save">
         <v-icon>$vuetify.icons.save</v-icon>Save
       </v-btn>
     </v-card-actions>
@@ -67,8 +67,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import SchoolInfoForm from '~/components/admin/SchoolInfoForm'
-import SchoolPortalForm from '~/components/admin/SchoolPortalForm'
+import SchoolInfoForm from '@/components/admin/FxSchoolInfoForm'
+import SchoolPortalForm from '@/components/admin/FxSchoolPortalForm'
 
 export default {
   name: 'SchoolIndexPage',

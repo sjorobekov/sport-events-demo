@@ -65,7 +65,7 @@
           flat
           outlined
         >
-          <v-list dense>
+          <v-list dense class="py-0">
             <v-list-item
               v-for="(item, i) in items"
               :key="i"
@@ -73,7 +73,7 @@
               :to="item.to"
               :exact="item.exact"
             >
-              <v-list-item-icon>
+              <v-list-item-icon class="mr-4">
                 <v-icon color="info lighten-1" v-text="item.icon" />
               </v-list-item-icon>
               <v-list-item-content>

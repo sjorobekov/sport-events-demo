@@ -10,6 +10,7 @@
       v-async-validate
       :value="formData.name"
       :async-rules="[$rule.required]"
+      placeholder="Enter School Name"
       dense
       outlined
       maxlength="120"
@@ -20,6 +21,7 @@
     <v-text-field
       id="street"
       :value="formData.street"
+      placeholder="Street"
       dense
       outlined
       maxlength="120"
@@ -30,6 +32,7 @@
     <v-text-field
       id="city"
       :value="formData.city"
+      placeholder="City"
       dense
       outlined
       maxlength="50"
@@ -39,6 +42,7 @@
     <label for="zip">Zip</label>
     <v-text-field
       id="zip"
+      placeholder="Zip Code"
       :value="formData.zip"
       dense
       outlined
@@ -54,6 +58,7 @@
       :items="countries"
       outlined
       item-value="code"
+      placeholder="Select Country"
       item-text="name"
       @input="update('country', $event)"
     />

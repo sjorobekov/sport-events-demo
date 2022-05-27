@@ -16,6 +16,10 @@
   text-transform:none !important;
 }
 
+.v-btn {
+  font-weight: 600!important;
+}
+
 body {
   font-size: 20px;
 }
@@ -38,3 +42,4 @@ label {
   color: var(--v-info-darken1);
 }
 
+tr:hover{ background-color: var(--v-info-lighten5)!important; }
