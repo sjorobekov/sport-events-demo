@@ -7,11 +7,11 @@
       <v-col>
         <v-switch
           id="portal"
-          :value="formData.portal"
+          :input-value="formData.portal"
           class="float-right"
           color="success"
           inset
-          @input="update('portal', $event)"
+          @change="update('portal', $event)"
         />
       </v-col>
     </v-row>

@@ -44,7 +44,22 @@ export const actions: ActionTree<RootState, RootState> = {
     return this.$axios.$post('/api/v1/schools', data)
   },
 
+  savePrivacy (_, { id, ...payload }): Promise<School> {
+    return this.$axios.$patch(`/api/v1/schools/${id}/privacy`, {
+      portalProtected: payload.portalProtected,
+      teamSheetsProtected: payload.teamSheetsProtected,
+      announcementsProtected: payload.announcementsProtected,
+      email: payload.email,
+      password: payload.password,
+    })
+  },
+
   get (_, id): Promise<School> {
     return this.$axios.$get(`api/v1/schools/${id}`)
+  },
+
+  async getPassword (_, id): Promise<String> {
+    const res = await this.$axios.$get(`api/v1/schools/${id}/password`)
+    return String(res)
   },
 }
