@@ -11,10 +11,23 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="5" class="text-p2 info--text">
-          Image should be 100 x 100px. <br>
-          Transparent PNG or SVG recommended. JPG and GIF are also supported
+          JPEG, PNG and WEBP are recommended. SVG and GIF are also supported
         </v-col>
-        <v-col cols="12" md="7" />
+        <v-col cols="12" md="7">
+          <label>Upload Image</label>
+          <v-file-input
+            v-model="imageFile"
+            accept="image/*"
+            outlined
+            dense
+            :prepend-icon="null"
+            :loading="imageUploading"
+            prepend-inner-icon="mdi-camera"
+            :disabled="images.length >= 5"
+            @change="uploadImageHandler"
+          />
+          <FxCustomizationSchoolHomePageImagesList :items="images" @remove="removeImageHandler" />
+        </v-col>
       </v-row>
     </v-container>
     <v-card-title class="text-p3 font-weight-bold">
@@ -24,10 +37,24 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="5" class="text-p2 info--text">
-          Image should be 100 x 100px. <br>
-          Transparent PNG or SVG recommended. JPG and GIF are also supported
+          Square images recommended <br>
+          Transparent WEBP, PNG or SVG recommended. JPEG and GIF are also supported
         </v-col>
-        <v-col cols="12" md="7" />
+        <v-col cols="12" md="7">
+          <FxImageUploadForm :value="logoFile" :loading="uploadingLogo" :stencil-props="stencil" :compression="compression" @input="uploadLogo">
+            <template #icon>
+              <v-avatar class="mr-6 school-logo" size="120">
+                <v-img v-if="school.logo" :src="school.logo" />
+                <span v-else class="info--text lighten-2">No Logo</span>
+              </v-avatar>
+            </template>
+            <template #actions>
+              <v-btn text color="info darken-1" :disabled="uploadingLogo" @click="removeLogo">
+                Delete Logo
+              </v-btn>
+            </template>
+          </FxImageUploadForm>
+        </v-col>
       </v-row>
     </v-container>
     <v-card-title class="text-p3 font-weight-bold">
@@ -56,23 +83,36 @@
 <script>
 import { mapGetters } from 'vuex'
 import FxCustomizationSchoolColorForm from '@/components/FxCustomization/FxCustomizationSchoolColorForm'
+import FxCustomizationSchoolHomePageImagesList from '@/components/FxCustomization/FxCustomizationHomePageImagesList'
 
 export default {
   name: 'SchoolCustomisationPage',
   components: {
     FxCustomizationSchoolColorForm,
+    FxCustomizationSchoolHomePageImagesList,
   },
   layout: 'admin',
 
   data: () => ({
     colorForm: {},
     colorFormLoading: false,
+    uploadingLogo: false,
+    logoFile: null,
+    imageUploading: false,
+    images: [],
+    imageFile: null,
   }),
+
+  async fetch () {
+    this.images = await this.$store.dispatch('api/schools/getImages', this.school.id)
+  },
 
   computed: {
     ...mapGetters({
       school: 'admin/page/school/school',
     }),
+    compression: () => ({ maxSizeMB: 1 }),
+    stencil: () => ({ component: 'rectangle-stencil' }),
   },
 
   created () {
@@ -85,6 +125,10 @@ export default {
     saveColor () {
       this.colorFormLoading = true
       this.$store.dispatch('api/schools/saveColor', this.colorForm)
+        .then((res) => {
+          this.$store.commit('admin/page/school/school', res)
+          this.$toast.success('Saved!')
+        })
         .catch(() => {
           this.$toast.error('Unknown error')
         })
@@ -92,6 +136,67 @@ export default {
           this.colorFormLoading = false
         })
     },
+
+    uploadLogo (file) {
+      this.uploadingLogo = true
+      this.$store.dispatch('api/schools/saveLogo', {
+        id: this.school.id,
+        file,
+      }).then((res) => {
+        this.$store.commit('admin/page/school/school', res)
+        this.$toast('School Logo has been updated!')
+      }).catch(() => {
+        this.$toast.error('Unknown Error')
+      }).finally(() => {
+        this.uploadingLogo = false
+      })
+    },
+
+    removeLogo () {
+      if (!confirm('Are you sure?')) {
+        return
+      }
+      this.$store.dispatch('api/schools/removeLogo', this.school.id).then((res) => {
+        this.$store.commit('admin/page/school/school', res)
+        this.$toast('School Logo has been removed')
+      })
+    },
+
+    uploadImageHandler (file) {
+      this.imageUploading = true
+      this.$store.dispatch('api/schools/uploadImage', { id: this.school.id, file })
+        .then((res) => {
+          this.images = res
+        })
+        .catch(() => {
+          this.$toast.error('Unknown error')
+        })
+        .finally(() => {
+          this.imageFile = null
+          this.imageUploading = false
+        })
+    },
+
+    removeImageHandler (imageId) {
+      if (!confirm('Are you sure?')) {
+        return
+      }
+      this.$store.dispatch('api/schools/removeImage', {
+        id: this.school.id,
+        imageId,
+      }).then((res) => {
+        this.images = res
+      }).catch(() => {
+        this.$toast.error('Unknown error')
+      })
+    },
   },
 }
 </script>
+
+<style lang="scss">
+.school-logo {
+  border: #CBD5E1 1px solid;
+  border-radius: 4px;
+}
+</style>

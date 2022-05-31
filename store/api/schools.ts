@@ -1,9 +1,13 @@
-import { ActionTree } from 'vuex'
-import { School } from '~/types'
+import { ActionTree, GetterTree } from 'vuex'
+import { School, User } from '~/types'
 
 export const state = () => ({})
 
 export type RootState = ReturnType<typeof state>
+
+export const getters: GetterTree<RootState, RootState> = {
+  multipartHeaders: () => ({ 'Content-Type': 'multipart/form-data' }),
+}
 
 type QueryParams = {
   page: number,
@@ -67,5 +71,31 @@ export const actions: ActionTree<RootState, RootState> = {
     return this.$axios.$patch(`/api/v1/schools/${id}/color`, {
       color,
     })
+  },
+
+  saveLogo ({ rootGetters, getters }, { id, file }): Promise<School> {
+    const formData = new FormData()
+    const extension = rootGetters['helper/extension'](file.type)
+    formData.append('file', file, `file.${extension}`)
+    return this.$axios.$post(`/api/v1/schools/${id}/logo`, formData, { headers: getters.multipartHeaders })
+  },
+
+  removeLogo (_, id): Promise<User> {
+    return this.$axios.$delete(`/api/v1/schools/${id}/logo`)
+  },
+
+  getImages (_, id) {
+    return this.$axios.$get(`/api/v1/schools/${id}/images`)
+  },
+
+  async uploadImage ({ getters, dispatch }, { id, file }) {
+    const formData = new FormData()
+    const compressedFile = await dispatch('helper/compressImage', { file, fileType: 'image/webp' }, { root: true })
+    formData.append('file', compressedFile, 'image.webp')
+    return this.$axios.$post(`/api/v1/schools/${id}/images`, formData, { headers: getters.multipartHeaders })
+  },
+
+  removeImage (_, { id, imageId }) {
+    return this.$axios.$delete(`/api/v1/schools/${id}/images/${imageId}`)
   },
 }

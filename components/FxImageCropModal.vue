@@ -17,7 +17,8 @@
           image-restriction="stencil"
           :min-height="limitations.minHeight"
           :min-width="limitations.minWidth"
-          stencil-component="circle-stencil"
+          :stencil-component="stencilComponent"
+          background-class="white-background"
         />
       </v-card-text>
       <v-card-actions>
@@ -33,7 +34,6 @@
 <script>
 import { Cropper } from 'vue-advanced-cropper'
 import 'vue-advanced-cropper/dist/style.css'
-import imageCompression from 'browser-image-compression'
 
 export default {
   name: 'FxImageCropModal',
@@ -41,9 +41,9 @@ export default {
     Cropper,
   },
   props: {
-    compression: {
+    stencil: {
       type: Object,
-      default: () => ({}),
+      default: () => {},
     },
   },
 
@@ -61,31 +61,29 @@ export default {
       minWidth: 300,
       minHeight: 300,
     },
-    stencilProps: {
-      handlers: {},
-      movable: false,
-      resizable: false,
-      aspectRatio: 1,
-    },
   }),
 
   computed: {
-    compressionOptions () {
+    stencilProps () {
       return {
-        maxSizeMB: 5,
-        maxWidthOrHeight: 4032,
-        useWebWorker: true,
-        ...this.compression,
+        handlers: {},
+        movable: false,
+        resizable: false,
+        aspectRatio: 1,
+        ...this.stencil,
       }
+    },
+
+    stencilComponent () {
+      return this.stencil?.component || 'circle-stencil'
     },
   },
 
   methods: {
     crop () {
       const { canvas } = this.$refs.cropper.getResult()
-      canvas.toBlob(async (blob) => {
-        const compressedFile = await imageCompression(blob, this.compressionOptions)
-        this.resolve(compressedFile)
+      canvas.toBlob((blob) => {
+        this.resolve(blob)
         this.close()
       }, 'image/webp')
     },
@@ -110,3 +108,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.white-background {
+  background: white;
+}
+</style>

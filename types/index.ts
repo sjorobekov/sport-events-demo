@@ -17,6 +17,7 @@ export type School = {
   readonly lastActive?: string,
   planId?: string,
   plan?: Plan,
+  logo?: string,
 }
 
 export type Sport = {

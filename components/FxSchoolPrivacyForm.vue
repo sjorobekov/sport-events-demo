@@ -20,7 +20,7 @@
             <v-container class="my-0 py-0">
               <v-row class="py-0 pt-3">
                 <v-col cols="9" class="py-0">
-                  <label for="portalProtected" class="text-p2 info-text text--darken-3">Sports Portal is <strong>{{ formData.portalProtected ? 'Private' : 'Public' }}</strong>
+                  <label for="portalProtected" class="text-p2 info--text text--darken-3">Sports Portal is <strong>{{ formData.portalProtected ? 'Private' : 'Public' }}</strong>
                   </label>
                 </v-col>
                 <v-col cols="3" class="py-0">
@@ -37,7 +37,7 @@
               </v-row>
               <v-row class="py-0 pt-3">
                 <v-col cols="9" class="py-0">
-                  <label for="teamSheetsProtected" class="text-p2 info-text text--darken-3">Teams Sheets are <strong>{{ formData.teamSheetsProtected ? 'Password Protected' : 'Public' }}</strong></label>
+                  <label for="teamSheetsProtected" class="text-p2 info--text text--darken-3">Teams Sheets are <strong>{{ formData.teamSheetsProtected ? 'Password Protected' : 'Public' }}</strong></label>
                 </v-col>
                 <v-col cols="3" class="py-0">
                   <v-switch
@@ -53,7 +53,7 @@
               </v-row>
               <v-row class="py-3">
                 <v-col cols="9" class="py-0">
-                  <label for="announcementsProtected" class="text-p2 info-text text--darken-3">Announcements are <strong>{{ formData.announcementsProtected ? 'Password Protected' : 'Public' }}</strong></label>
+                  <label for="announcementsProtected" class="text-p2 info--text text--darken-3">Announcements are <strong>{{ formData.announcementsProtected ? 'Password Protected' : 'Public' }}</strong></label>
                 </v-col>
                 <v-col cols="3" class="py-0">
                   <v-switch

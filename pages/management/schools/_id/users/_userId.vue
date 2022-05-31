@@ -64,7 +64,7 @@
                   <FxAvatar class="mr-2" size="80" :value="user.avatar" />
                 </template>
                 <template #actions>
-                  <v-btn depressed outlined :disabled="uploading" @input="removeAvatar">
+                  <v-btn depressed outlined :disabled="uploading" @click="removeAvatar">
                     Remove
                   </v-btn>
                 </template>
@@ -252,10 +252,13 @@ export default {
     },
 
     removeAvatar () {
-      this.$store.dispatch('api/users/uploadAvatar', {
+      if (!confirm('Are you sure?')) {
+        return
+      }
+
+      this.$store.dispatch('api/users/removeAvatar', {
         id: this.$route.params.userId,
         schoolId: this.$route.params.id,
-        file,
       }).then((res) => {
         this.user = res
       })

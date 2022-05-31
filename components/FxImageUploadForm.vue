@@ -4,6 +4,7 @@
       <slot name="icon" />
       <v-file-input
         ref="file"
+        v-model="selectedFile"
         style="display: none"
         accept="image/*"
         @change="selected"
@@ -12,7 +13,7 @@
         <v-icon>$vuetify.icons.upload</v-icon>Upload
       </v-btn>
       <slot name="actions" />
-      <FxImageCropModal ref="cropper" :compression="compression" />
+      <FxImageCropModal ref="cropper" :compression="compression" :stencil="stencilProps" />
     </v-col>
   </v-row>
 </template>
@@ -41,6 +42,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    stencilProps: {
+      type: Object,
+      default: () => {},
+    },
+    compression: {
+      type: Object,
+      default: () => {},
+    },
   },
 
   data: () => ({
@@ -52,16 +61,7 @@ export default {
       minWidth: 300,
       minHeight: 300,
     },
-    stencilProps: {
-      handlers: {},
-      movable: false,
-      resizable: false,
-      aspectRatio: 1,
-    },
-    compression: {
-      maxSizeMB: 2,
-      maxWidthOrHeight: 300,
-    },
+    selectedFile: null,
   }),
 
   computed: {
@@ -76,11 +76,19 @@ export default {
   },
 
   methods: {
-    ...mapActions({ readBlob: 'helper/readBlob' }),
+    ...mapActions({ readBlob: 'helper/readBlob', compressImage: 'helper/compressImage' }),
 
     async selected (file) {
+      if (file.type === 'image/svg+xml') {
+        this.file = file
+        return
+      }
       const base64Image = await this.readBlob(file)
-      this.file = await this.$refs.cropper.open(base64Image)
+      const croppedImage = await this.$refs.cropper.open(base64Image)
+      if (croppedImage) {
+        this.file = await this.compressImage({ file: croppedImage, ...this.compression })
+      }
+      this.selectedFile = null
     },
 
     reselect () {
