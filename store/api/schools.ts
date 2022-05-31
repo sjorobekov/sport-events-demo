@@ -62,4 +62,10 @@ export const actions: ActionTree<RootState, RootState> = {
     const res = await this.$axios.$get(`api/v1/schools/${id}/password`)
     return String(res)
   },
+
+  saveColor (_, { id, color }): Promise<School> {
+    return this.$axios.$patch(`/api/v1/schools/${id}/color`, {
+      color,
+    })
+  },
 }

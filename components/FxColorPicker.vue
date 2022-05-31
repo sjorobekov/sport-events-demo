@@ -56,7 +56,11 @@ export default {
   },
   methods: {
     select () {
-      this.$emit('input', this.color)
+      if (typeof this.color === 'object') {
+        this.$emit('input', this.color.hex)
+      } else {
+        this.$emit('input', this.color)
+      }
       this.dialog = false
     },
   },
