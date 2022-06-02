@@ -121,6 +121,7 @@ export default {
         { text: 'School Information', icon: '$vuetify.icons.info', exact: true, to: { name: 'management-schools-id', params: { id: this.$route.params.id } } },
         { text: 'Users', icon: '$vuetify.icons.team', to: { name: 'management-schools-id-users', params: { id: this.$route.params.id } } },
         { text: 'Teams', icon: '$vuetify.icons.tshirt', to: { name: 'management-schools-id-teams', params: { id: this.$route.params.id } } },
+        { text: 'Locations', icon: 'mdi-map-marker', to: { name: 'management-schools-id-locations', params: { id: this.$route.params.id } } },
         { text: 'Events', icon: '$vuetify.icons.calendar', to: { name: 'management-schools-id-events', params: { id: this.$route.params.id } } },
         { text: 'Privacy', icon: '$vuetify.icons.shield', to: { name: 'management-schools-id-privacy', params: { id: this.$route.params.id } } },
         { text: 'In-House Sport', icon: '$vuetify.icons.trophy', to: { name: 'management-schools-id-in-house-teams', params: { id: this.$route.params.id } } },

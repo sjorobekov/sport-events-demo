@@ -15,9 +15,15 @@ export type School = {
   portal?: boolean,
   portalAddress?: string,
   readonly lastActive?: string,
+  website?: string,
   planId?: string,
   plan?: Plan,
   logo?: string,
+  portalProtected?: boolean,
+  teamSheetsProtected?: boolean,
+  announcementsProtected?: boolean,
+  email?: string,
+  password?: string,
 }
 
 export type Sport = {
@@ -87,6 +93,19 @@ export type Team = {
   updatedAt: string,
   file?: File,
   photo?: string,
+}
+
+export type Location = {
+  id: string,
+  name: string,
+  address: string,
+  schoolId: string,
+  coordinates: {
+    lng: number,
+    lat: number,
+  },
+  createdAt: string,
+  updatedAt: string,
 }
 
 export type Season = {

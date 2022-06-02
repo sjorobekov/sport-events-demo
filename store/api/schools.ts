@@ -39,6 +39,7 @@ export const actions: ActionTree<RootState, RootState> = {
       state: payload.state,
       zip: payload.zip,
       portal: payload.portal,
+      website: payload.website,
       portalAddress: payload.portal ? payload.portalAddress : null,
     }
     if (payload.id) {

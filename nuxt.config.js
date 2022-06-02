@@ -1,4 +1,7 @@
 export default {
+  env: {
+    GMAPS_KEY: process.env.GMAPS_KEY,
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - Fixturr',
@@ -24,6 +27,7 @@ export default {
   plugins: [
     '~/plugins/vuetify-async-validate.ts',
     '~/plugins/vuetify-toasts.ts',
+    '~/plugins/gmap-vue.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
