@@ -1,0 +1,5 @@
+export const FIXTURE = 'FIXTURE'
+export const TOURNAMENT = 'TOURNAMENT'
+export const MULTI_EVENT = 'MULTI_EVENT'
+export const BLOCK_FIXTURE = 'BLOCK_FIXTURE'
+export const TRAINING = 'TRAINING'

@@ -1,0 +1,60 @@
+<template>
+  <v-item
+    v-slot="{ active, toggle }"
+    class="d-inline-block mr-3 mb-3"
+  >
+    <v-sheet v-ripple width="142px" height="107" :class="active ? 'border active' : 'border'" @click="toggle">
+      <v-container class="fill-height">
+        <v-row
+          align="center"
+          justify="center"
+        >
+          <v-col class="pb-0 text-center">
+            <v-img class="mx-auto text--primary" width="50" :src="src" />
+            <div class="label1">
+              {{ text }}
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
+      <v-btn class="float-right" icon style="position: relative; bottom: 40px;">
+        <v-icon v-if="active" dark color="brand">
+          $vuetify.icons.tickFilled
+        </v-icon>
+      </v-btn>
+    </v-sheet>
+  </v-item>
+</template>
+
+<script>
+export default {
+  name: 'FxSheetOption',
+  props: {
+    src: {
+      type: String,
+      required: true,
+    },
+    text: {
+      type: String,
+      default: '',
+    },
+  },
+}
+</script>
+
+<style lang="sass" scoped>
+
+.border
+  border-radius: 4px
+  box-shadow: 0 0 0 1px var(--v-info-lighten2)
+  &.active
+    box-shadow: 0 0 0 3px var(--v-brand-base)
+  .label1
+    font-size: 1rem
+    line-height: 1rem
+    color: var(--v-info-darken1)
+    height: 2rem
+    display: flex
+    justify-content: center
+    align-items: center
+</style>

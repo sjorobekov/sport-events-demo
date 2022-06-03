@@ -82,10 +82,10 @@ export default {
 
 .border
   border-radius: 4px
-  border: 1px var(--v-info-lighten2) solid
+  box-shadow: 0 0 0 1px var(--v-info-lighten2)
 
   &.active
-    border: 3px var(--v-brand-base) solid
+    box-shadow: 0 0 0 3px var(--v-brand-base)
 
   .label
     color: var(--v-info-darken2)

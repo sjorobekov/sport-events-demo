@@ -144,7 +144,6 @@
 </template>
 
 <script>
-import { getGoogleMapsAPI } from 'gmap-vue'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -172,16 +171,16 @@ export default {
         ...(this.value || { name: '', address: '' }),
       }
     },
+
     componentRestrictions () {
       return {
         country: this.school.country,
       }
     },
+
     setFieldsTo () {
       return ['formatted_address', 'name', 'geometry.location']
     },
-
-    google: getGoogleMapsAPI,
 
     zoom () {
       if (this.value.coordinates?.lat && this.value.coordinates?.lng) {
@@ -190,6 +189,7 @@ export default {
 
       return 1
     },
+
     mapOptions () {
       return {
         zoomControl: true,

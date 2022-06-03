@@ -1,40 +1,37 @@
 <template>
-  <div>
-    <label v-if="label" :for="id" v-text="label" />
-    <v-autocomplete
-      :id="id"
-      outlined
-      dense
-      :value="value"
-      :items="items"
-      :search-input.sync="search"
-      item-text="firstname"
-      item-value="id"
-      :placeholder="placeholder"
-      :loading="loading"
-      @input="$emit('input', $event)"
-    >
-      <template #selection="{ item }">
-        <span>{{ item.firstname }} {{ item.lastname }}</span>
-      </template>
-      <template #item="{ item }">
-        <FxUserItem :item="item" />
-      </template>
-    </v-autocomplete>
-  </div>
+  <v-autocomplete
+    :id="id"
+    outlined
+    dense
+    :value="value"
+    :items="items"
+    :search-input.sync="search"
+    item-text="firstname"
+    item-value="id"
+    :placeholder="placeholder"
+    :loading="loading"
+    @input="$emit('input', $event)"
+  >
+    <template #selection="{ item }">
+      <span>{{ item.firstname }} {{ item.lastname }}</span>
+    </template>
+    <template #item="{ item }">
+      <FxUserItem :item="item" />
+    </template>
+  </v-autocomplete>
 </template>
 
 <script>
 export default {
   name: 'FxUserSelect',
   props: {
+    id: {
+      type: String,
+      default: undefined,
+    },
     value: {
       type: String,
       default: '',
-    },
-    label: {
-      type: String,
-      default: undefined,
     },
     schoolId: {
       type: String,
@@ -50,14 +47,6 @@ export default {
     search: null,
     loading: false,
   }),
-  computed: {
-    id () {
-      if (!this.label) {
-        return null
-      }
-      return 'fx_user_select_' + this.label.toLowerCase().replace(' ', '_')
-    },
-  },
   watch: {
     search (val) {
       this.query(val)
