@@ -163,6 +163,9 @@ export default {
     },
 
     uploadImageHandler (file) {
+      if (!file) {
+        return
+      }
       this.imageUploading = true
       this.$store.dispatch('api/schools/uploadImage', { id: this.school.id, file })
         .then((res) => {

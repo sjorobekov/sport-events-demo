@@ -1,5 +1,5 @@
 export default {
-  env: {
+  publicRuntimeConfig: {
     GMAPS_KEY: process.env.GMAPS_KEY,
   },
   // Global page headers: https://go.nuxtjs.dev/config-head

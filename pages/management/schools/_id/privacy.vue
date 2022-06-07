@@ -68,7 +68,7 @@ export default {
         }
 
         this.original = {
-          ...this.original,
+          ...this.formData,
         }
 
         this.$toast.success('Saved!')

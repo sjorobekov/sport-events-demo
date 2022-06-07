@@ -13,7 +13,7 @@
           </v-list-item-content>
 
           <v-list-item-action>
-            <v-btn color="secondary" depressed :to="{ name: 'management-schools-add' }">
+            <v-btn dark color="brand" depressed :to="{ name: 'management-schools-add' }">
               <v-icon>$vuetify.icons.plusOutline</v-icon>Add School
             </v-btn>
           </v-list-item-action>
