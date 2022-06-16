@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { MALE } from '@/enum/Gender'
+import { Gender } from '@/enum'
 
 export default {
   name: 'FxGender',
@@ -20,7 +20,7 @@ export default {
         return ''
       }
 
-      return this.value === MALE ? 'Male' : 'Female'
+      return this.value === Gender.MALE ? 'Male' : 'Female'
     },
   },
 }

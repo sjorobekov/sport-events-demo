@@ -1,7 +1,6 @@
 <template>
   <v-item-group
     v-model="selected"
-    mandatory
   >
     <v-row>
       <v-col
@@ -43,7 +42,7 @@
 import admin from './admin.svg'
 import view from './view.svg'
 import whistle from './whistle.svg'
-import { ADMIN, SPORTS_USER, VIEW_ONLY } from '@/enum/UserRole'
+import { UserRole } from '@/enum'
 
 export default {
   name: 'FxUserRoleSelect',
@@ -56,9 +55,9 @@ export default {
     items: {
       type: Array,
       default: () => [
-        { value: ADMIN, text: 'Admin', img: admin },
-        { value: SPORTS_USER, text: 'Sports User', img: whistle },
-        { value: VIEW_ONLY, text: 'View Only', img: view },
+        { value: UserRole.ADMIN, text: 'Admin', img: admin },
+        { value: UserRole.SPORTS_USER, text: 'Sports User', img: whistle },
+        { value: UserRole.VIEW_ONLY, text: 'View Only', img: view },
       ],
     },
   },

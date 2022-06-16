@@ -1,3 +1,0 @@
-export const SPORTS_LOCATIONS = 'SPORTS_LOCATIONS'
-export const OPPONENT_CONFIRMS = 'OPPONENT_CONFIRMS'
-export const OTHER = 'OTHER'

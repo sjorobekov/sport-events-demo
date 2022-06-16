@@ -174,7 +174,7 @@
 </template>
 
 <script>
-import { ADMIN } from '@/enum/UserRole'
+import { UserRole } from '@/enum'
 import FxUserRoleSelect from '@/components/FxUserRoleSelect'
 
 export default {
@@ -196,7 +196,7 @@ export default {
 
   computed: {
     formData () {
-      return this.value ? this.value : { userRole: ADMIN }
+      return this.value ? this.value : { userRole: UserRole.ADMIN }
     },
   },
 

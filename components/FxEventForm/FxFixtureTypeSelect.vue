@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { FRIENDLY, ON_TOUR, CUP, LEAGUE, PRE_SEASON } from '@/enum/FixtureType'
+import { FixtureType } from '@/enum'
 
 export default {
   name: 'FxGenderSelect',
@@ -39,11 +39,11 @@ export default {
   computed: {
     options () {
       return [
-        { text: 'Friendly', value: FRIENDLY },
-        { text: 'On Tour', value: ON_TOUR },
-        { text: 'Pre-Season', value: PRE_SEASON },
-        { text: 'League', value: LEAGUE },
-        { text: 'Cup', value: CUP },
+        { text: 'Friendly', value: FixtureType.FRIENDLY },
+        { text: 'On Tour', value: FixtureType.ON_TOUR },
+        { text: 'Pre-Season', value: FixtureType.PRE_SEASON },
+        { text: 'League', value: FixtureType.LEAGUE },
+        { text: 'Cup', value: FixtureType.CUP },
       ]
     },
   },

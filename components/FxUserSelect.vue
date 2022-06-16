@@ -43,38 +43,31 @@ export default {
     },
   },
   data: () => ({
-    items: [],
+    users: {},
     search: null,
     loading: false,
   }),
+
+  computed: {
+    items () {
+      return Object.values(this.users)
+    },
+  },
   watch: {
     search (val) {
       this.query(val)
     },
+    value () {
+      this.getUser()
+    },
   },
 
-  async created () {
-    await this.query()
+  created () {
+    this.query()
+  },
 
-    if (!this.value) {
-      return
-    }
-
-    if (this.items.some(item => item.id === this.value)) {
-      return
-    }
-    this.loading = true
-    try {
-      const user = await this.$store.dispatch('api/users/get', {
-        schoolId: this.schoolId,
-        id: this.value,
-      })
-      this.items.push(user)
-    } catch (e) {
-      this.$toast.error('Unable to fetch data')
-    } finally {
-      this.loading = false
-    }
+  async beforeMount () {
+    await this.getUser()
   },
 
   methods: {
@@ -85,7 +78,9 @@ export default {
         params: { search },
       })
         .then(({ data }) => {
-          this.items = data
+          data.forEach((user) => {
+            this.$set(this.users, user.id, user)
+          })
         })
         .catch(() => {
           this.$toast.error('Unable to fetch data')
@@ -93,6 +88,23 @@ export default {
         .finally(() => {
           this.loading = false
         })
+    },
+
+    async getUser () {
+      if (!this.value || this.users[this.value]) {
+        return
+      }
+
+      try {
+        const user = await this.$store.dispatch('api/users/get', {
+          schoolId: this.schoolId,
+          id: this.value,
+        })
+
+        this.$set(this.users, user.id, user)
+      } catch (e) {
+        this.$toast.error('Unable to fetch data')
+      }
     },
   },
 }

@@ -1,7 +1,9 @@
-import { ActionTree, GetterTree } from 'vuex'
-import { School, User } from '~/types'
+import { ActionTree, GetterTree, MutationTree } from 'vuex'
+import { Dictionary, PaginatedList, School, User } from '~/types'
 
-export const state = () => ({})
+export const state = () => ({
+  indexed: {} as Dictionary<School>,
+})
 
 export type RootState = ReturnType<typeof state>
 
@@ -9,22 +11,21 @@ export const getters: GetterTree<RootState, RootState> = {
   multipartHeaders: () => ({ 'Content-Type': 'multipart/form-data' }),
 }
 
+export const mutations: MutationTree<RootState> = {
+  cache (state, item: School): void {
+    state.indexed[item.id] = item
+  },
+}
+
 type QueryParams = {
   page: number,
   sortBy: string,
   sortDesc: boolean,
-}
-
-type SchoolListResponse = {
-  data: Array<School>,
-  meta: {
-    lastPage: number|string,
-    total: number,
-  }
+  search?: string,
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  list (_, params: QueryParams): Promise<SchoolListResponse> {
+  list (_, params: QueryParams): Promise<PaginatedList<School>> {
     return this.$axios.$get('/api/v1/schools', {
       params,
     })
@@ -61,6 +62,15 @@ export const actions: ActionTree<RootState, RootState> = {
 
   get (_, id): Promise<School> {
     return this.$axios.$get(`api/v1/schools/${id}`)
+  },
+
+  async fetch ({ state, commit, dispatch }, id): Promise<School> {
+    if (!state.indexed[id]) {
+      const data = await dispatch('get', id)
+      commit('cache', data)
+    }
+
+    return state.indexed[id]
   },
 
   async getPassword (_, id): Promise<String> {

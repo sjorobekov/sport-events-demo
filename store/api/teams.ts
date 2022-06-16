@@ -1,11 +1,18 @@
-import { ActionTree, GetterTree } from 'vuex'
-import { Team } from '~/types'
-import { FEMALE, MALE } from '~/enum/Gender'
-import { EVENTS, RESULTS, RESULTS_SCORES } from '~/enum/PublishResult'
+import { ActionTree, GetterTree, MutationTree } from 'vuex'
+import { Dictionary, Team } from '~/types'
+import { Gender, PublishResult } from '~/enum'
 
-export const state = () => ({})
+export const state = () => ({
+  indexed: {} as Dictionary<Team>,
+})
 
 export type RootState = ReturnType<typeof state>
+
+export const mutations: MutationTree<RootState> = {
+  cache (state, item: Team): void {
+    state.indexed[item.id] = item
+  },
+}
 
 export const getters: GetterTree<RootState, RootState> = {
   ageLevel () {
@@ -19,17 +26,17 @@ export const getters: GetterTree<RootState, RootState> = {
     return ['A', 'B', 'C', 'D', 'E', 'F', 'G']
   },
   genderOptions: () => ([
-    { text: 'Male', value: MALE },
-    { text: 'Female', value: FEMALE },
+    { text: 'Male', value: Gender.MALE },
+    { text: 'Female', value: Gender.FEMALE },
   ]),
   publishTeamOptions: () => ([
     { text: 'Yes, team will be made public on Sports Portal', value: true },
     { text: 'No, Team will only be visible to logged in staff', value: false },
   ]),
   publishResultsOptions: () => ([
-    { text: 'Yes, Publish results and match scores to Sports Portal', value: RESULTS_SCORES },
-    { text: 'Yes, Publish results only (Win, Draw, Loss)', value: RESULTS },
-    { text: 'No, Publish events only', value: EVENTS },
+    { text: 'Yes, Publish results and match scores to Sports Portal', value: PublishResult.RESULTS_SCORES },
+    { text: 'Yes, Publish results only (Win, Draw, Loss)', value: PublishResult.RESULTS },
+    { text: 'No, Publish events only', value: PublishResult.EVENTS },
   ]),
   multipartHeaders: () => ({ 'Content-Type': 'multipart/form-data' }),
 }
@@ -42,8 +49,12 @@ type ListPayload = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  list (_, { schoolId, params }: ListPayload): Promise<Array<Team>> {
-    return this.$axios.$get(`/api/v1/schools/${schoolId}/teams`, { params })
+  async list ({ commit }, { schoolId, params }: ListPayload): Promise<Array<Team>> {
+    const items: Team[] = await this.$axios.$get(`/api/v1/schools/${schoolId}/teams`, { params })
+    items.forEach((item) => {
+      commit('cache', item)
+    })
+    return items
   },
 
   save (_, payload: Team): Promise<Team> {
@@ -78,6 +89,15 @@ export const actions: ActionTree<RootState, RootState> = {
 
   get (_, { schoolId, id }): Promise<Team> {
     return this.$axios.$get(`api/v1/schools/${schoolId}/teams/${id}`)
+  },
+
+  async fetch ({ commit, state, dispatch }, { schoolId, id }): Promise<Team> {
+    if (!state.indexed[id]) {
+      const data = await dispatch('get', { schoolId, id })
+      commit('cache', data)
+    }
+
+    return state.indexed[id]
   },
 
   remove (_, { schoolId, id }): Promise<void> {

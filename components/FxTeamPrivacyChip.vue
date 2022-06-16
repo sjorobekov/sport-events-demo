@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { EVENTS, RESULTS, RESULTS_SCORES } from '~/enum/PublishResult'
+import { PublishResult } from '~/enum'
 
 export default Vue.extend({
   name: 'FxUserStatus',
@@ -35,7 +35,7 @@ export default Vue.extend({
         return 'error'
       }
 
-      if (this.publishResults === RESULTS_SCORES) {
+      if (this.publishResults === PublishResult.RESULTS_SCORES) {
         return 'success'
       }
 
@@ -47,15 +47,15 @@ export default Vue.extend({
         return 'Not Visible'
       }
 
-      if (this.publishResults === RESULTS_SCORES) {
+      if (this.publishResults === PublishResult.RESULTS_SCORES) {
         return 'Results & Scores'
       }
 
-      if (this.publishResults === RESULTS) {
+      if (this.publishResults === PublishResult.RESULTS) {
         return 'Results Only'
       }
 
-      if (this.publishResults === EVENTS) {
+      if (this.publishResults === PublishResult.EVENTS) {
         return 'Events Only'
       }
 

@@ -185,7 +185,7 @@
 import FxAccountStatusForm from '@/components/admin/FxAccountStatusForm'
 import FxProfileForm from '@/components/FxProfileForm'
 import FxUserRole from '@/components/admin/FxUserRole'
-import { ADMIN } from '@/enum/UserRole'
+import { UserRole } from '@/enum'
 import FxAvatar from '@/components/FxAvatar'
 import FxImageUploadForm from '@/components/FxImageUploadForm'
 
@@ -201,7 +201,7 @@ export default {
   data: () => ({
     formData: {
       enabled: true,
-      userRole: ADMIN,
+      userRole: UserRole.ADMIN,
     },
     user: {},
     loading: false,

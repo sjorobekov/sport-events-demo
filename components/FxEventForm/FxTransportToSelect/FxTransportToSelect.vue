@@ -13,14 +13,14 @@
 </template>
 
 <script>
-import home from './home.svg'
-import away from './away.svg'
-import neutral from './neutral.svg'
+import bus from './bus.svg'
+import venue from './venue.svg'
+import other from './other.svg'
 
-import { HOME, AWAY, NEUTRAL } from '@/enum/EventLocation'
+import { TransportType } from '@/enum'
 
 export default {
-  name: 'FxEventLocationSelect',
+  name: 'FxTransportToSelect',
   props: {
     value: {
       type: String,
@@ -30,9 +30,9 @@ export default {
     items: {
       type: Array,
       default: () => [
-        { value: HOME, text: 'Home', img: home },
-        { value: NEUTRAL, text: 'Neutral', img: neutral },
-        { value: AWAY, text: 'Away', img: away },
+        { value: TransportType.VENUE, text: 'Meet at Venue', img: venue },
+        { value: TransportType.BUS, text: 'Bus', img: bus },
+        { value: TransportType.OTHER, text: 'Other', img: other },
       ],
     },
   },
@@ -49,3 +49,16 @@ export default {
   },
 }
 </script>
+
+<style lang="sass" scoped>
+.base
+  height: 107px
+
+.border
+  border-radius: 4px
+  box-shadow: 0 0 0 1px var(--v-info-lighten2)
+  &.active
+    box-shadow: 0 0 0 3px var(--v-brand-base)
+  .label
+    color: var(--v-info-darken2)
+</style>

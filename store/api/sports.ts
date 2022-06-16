@@ -1,12 +1,20 @@
-import { ActionTree, GetterTree } from 'vuex'
-import { Sport } from '~/types'
+import { ActionTree, GetterTree, MutationTree } from 'vuex'
+import { Dictionary, Sport } from '~/types'
 
-export const state = () => ({})
+export const state = () => ({
+  indexed: {} as Dictionary<Sport>,
+})
 
 export type RootState = ReturnType<typeof state>
 
 export const getters: GetterTree<RootState, RootState> = {
   multipartHeaders: () => ({ 'Content-Type': 'multipart/form-data' }),
+}
+
+export const mutations: MutationTree<RootState> = {
+  cache (state, item: Sport): void {
+    state.indexed[item.id] = item
+  },
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -33,6 +41,15 @@ export const actions: ActionTree<RootState, RootState> = {
 
   get (_, id): Promise<Sport> {
     return this.$axios.$get(`api/v1/sports/${id}`)
+  },
+
+  async fetch ({ commit, state, dispatch }, id): Promise<Sport> {
+    if (!state.indexed[id]) {
+      const data = await dispatch('get', id)
+      commit('cache', data)
+    }
+
+    return state.indexed[id]
   },
 
   remove (_, id): Promise<void> {

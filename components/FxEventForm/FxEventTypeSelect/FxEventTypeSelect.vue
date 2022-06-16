@@ -13,13 +13,12 @@
 </template>
 
 <script>
-import blockFixture from './blockFixture.svg'
 import fixture from './fixture.svg'
 import multiEvent from './multiEvent.svg'
 import tournament from './tournament.svg'
 import training from './training.svg'
 
-import { FIXTURE, BLOCK_FIXTURE, MULTI_EVENT, TRAINING, TOURNAMENT } from '@/enum/EventType'
+import { EventType } from '@/enum'
 
 export default {
   name: 'FxEventTypeSelect',
@@ -32,11 +31,10 @@ export default {
     items: {
       type: Array,
       default: () => [
-        { value: FIXTURE, text: 'Fixture', img: fixture },
-        { value: TOURNAMENT, text: 'Tournament', img: tournament },
-        { value: MULTI_EVENT, text: 'Multi-Event', img: multiEvent },
-        { value: BLOCK_FIXTURE, text: 'Block Fixture', img: blockFixture },
-        { value: TRAINING, text: 'Training', img: training },
+        { value: EventType.FIXTURE, text: 'Fixture', img: fixture },
+        { value: EventType.TOURNAMENT, text: 'Tournament', img: tournament },
+        { value: EventType.MULTI_EVENT, text: 'Multi-Event', img: multiEvent },
+        { value: EventType.TRAINING, text: 'Training', img: training },
       ],
     },
   },
@@ -44,7 +42,7 @@ export default {
   computed: {
     selected: {
       set (val) {
-        this.$emit('input', this.items[val].value)
+        this.$emit('input', this.items[val]?.value)
       },
       get () {
         return this.items.findIndex(item => item.value === this.value)
@@ -53,16 +51,3 @@ export default {
   },
 }
 </script>
-
-<style lang="sass" scoped>
-.base
-  height: 107px
-
-.border
-  border-radius: 4px
-  box-shadow: 0 0 0 1px var(--v-info-lighten2)
-  &.active
-    box-shadow: 0 0 0 3px var(--v-brand-base)
-  .label
-    color: var(--v-info-darken2)
-</style>

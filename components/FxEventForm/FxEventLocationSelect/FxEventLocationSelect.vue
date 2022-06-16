@@ -13,14 +13,14 @@
 </template>
 
 <script>
-import sportsLocation from './sportsLocation.svg'
-import opponentConfirms from './opponentConfirms.svg'
-import other from './other.svg'
+import home from './home.svg'
+import away from './away.svg'
+import neutral from './neutral.svg'
 
-import { SPORTS_LOCATIONS, OPPONENT_CONFIRMS, OTHER } from '@/enum/EventLocationType'
+import { EventLocation } from '@/enum'
 
 export default {
-  name: 'FxEventLocationTypeSelect',
+  name: 'FxEventLocationSelect',
   props: {
     value: {
       type: String,
@@ -30,9 +30,9 @@ export default {
     items: {
       type: Array,
       default: () => [
-        { value: SPORTS_LOCATIONS, text: 'Sports Locations', img: sportsLocation },
-        { value: OPPONENT_CONFIRMS, text: 'Opponent Confirms', img: opponentConfirms },
-        { value: OTHER, text: 'Other', img: other },
+        { value: EventLocation.HOME, text: 'Home', img: home },
+        { value: EventLocation.NEUTRAL, text: 'Neutral', img: neutral },
+        { value: EventLocation.AWAY, text: 'Away', img: away },
       ],
     },
   },
