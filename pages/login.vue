@@ -29,7 +29,6 @@
               color="brand"
               dark
               :loading="loading"
-              @click="submit"
             >
               Sign In
             </v-btn>
@@ -61,7 +60,7 @@ export default {
           this.loading = false
           return
         }
-        await this.$store.dispatch('context/signIn', this.formData)
+        await this.$store.dispatch('context/signInAsSuperAdmin', this.formData)
         await this.$router.push({ name: 'management' })
       } catch (e) {
         this.loading = false
