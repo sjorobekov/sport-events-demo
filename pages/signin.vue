@@ -103,6 +103,12 @@ export default {
   name: 'LoginPage',
   components: { FxSchoolLogo },
   layout: 'empty',
+
+  middleware: ({ store, redirect }) => {
+    if (store.getters['context/isSuperAdminSite']) {
+      return redirect({ name: 'login' })
+    }
+  },
   data: () => ({
     formData: {
       email: '',

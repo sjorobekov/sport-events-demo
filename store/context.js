@@ -1,6 +1,6 @@
 export const state = () => ({
   me: null,
-  portalAddress: null,
+  subdomain: null,
   school: null,
 })
 
@@ -24,8 +24,12 @@ export const getters = {
     return 'GUEST'
   },
 
-  portalAddress (state) {
-    return state.portalAddress
+  subdomain (state) {
+    return state.subdomain
+  },
+
+  isSuperAdminSite (state) {
+    return state.subdomain === 'admin'
   },
 
   school (state) {
@@ -38,8 +42,8 @@ export const mutations = {
     state.me = val
   },
 
-  portalAddress (state, val) {
-    state.portalAddress = val
+  subdomain (state, val) {
+    state.subdomain = val
   },
 
   school (state, val) {
@@ -49,8 +53,8 @@ export const mutations = {
 
 // actions
 export const actions = {
-  async fetchSchoolByPortalAddress ({ commit }, portalAddress) {
-    const school = await this.$axios.$get(`/api/v1/portalAddress/${portalAddress}`)
+  async fetchSchoolByPortalAddress ({ commit, getters }) {
+    const school = await this.$axios.$get(`/api/v1/portalAddress/${getters.subdomain}`)
     commit('portalAddress', school.portalAddress)
     commit('school', {
       id: school.id,

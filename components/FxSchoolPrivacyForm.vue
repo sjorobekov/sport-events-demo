@@ -47,6 +47,7 @@
                     color="success"
                     inset
                     hide-details
+                    :disabled="formData.portalProtected"
                     @change="update('teamSheetsProtected', $event)"
                   />
                 </v-col>
@@ -63,6 +64,7 @@
                     color="success"
                     inset
                     hide-details
+                    :disabled="formData.portalProtected"
                     @change="update('announcementsProtected', $event)"
                   />
                 </v-col>
@@ -185,6 +187,30 @@ export default {
       return this.$refs.form.validateAsync()
     },
     update (key, value) {
+      if ((key === 'teamSheetsProtected' && this.formData.announcementsProtected) ||
+        (key === 'announcementsProtected' && value && this.formData.teamSheetsProtected)
+      ) {
+        this.$emit('input', {
+          ...this.formData,
+          portalProtected: true,
+          teamSheetsProtected: true,
+          announcementsProtected: true,
+        })
+
+        return
+      }
+
+      if (key === 'portalProtected') {
+        this.$emit('input', {
+          ...this.formData,
+          portalProtected: value,
+          teamSheetsProtected: value,
+          announcementsProtected: value,
+        })
+
+        return
+      }
+
       this.$emit('input', { ...this.formData, [key]: value })
     },
   },

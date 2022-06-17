@@ -43,6 +43,12 @@
 export default {
   name: 'LoginPage',
   layout: 'empty',
+
+  middleware: ({ redirect, store }) => {
+    if (!store.getters['context/isSuperAdminSite']) {
+      return redirect({ name: 'signin' })
+    }
+  },
   data: () => ({
     formData: {
       email: '',

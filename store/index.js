@@ -1,9 +1,9 @@
 export const actions = {
-  async nuxtServerInit ({ dispatch }, { req }) {
+  async nuxtServerInit ({ dispatch, commit, getters }, { req }) {
     const hostname = req.headers.host
     const subdomain = hostname.split('.')[0]
-
-    if (subdomain !== 'admin') {
+    commit('context/subdomain', subdomain)
+    if (!getters['context/isSuperAdminSite']) {
       await dispatch('context/fetchSchoolByPortalAddress', subdomain)
     }
 
