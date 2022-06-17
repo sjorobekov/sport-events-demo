@@ -58,7 +58,9 @@
             outlined
             placeholder="********************"
             :async-rules="[$rule.required]"
-            type="password"
+            :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="showPass ? 'text' : 'password'"
+            @click:append="showPass = !showPass"
           />
 
           <v-row no-gutters>
@@ -107,6 +109,7 @@ export default {
       password: '',
     },
     loading: false,
+    showPass: false,
   }),
 
   computed: {
