@@ -10,6 +10,10 @@
 
 <script>
 export default {
-  name: 'DefaultLayout',
+  name: 'AdminLayout',
+
+  components: {
+
+  },
 }
 </script>
