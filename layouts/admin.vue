@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { SUPER_ADMIN } from '@/enum/UserRole'
+import { UserRole } from '@/enum'
 import AdminNavigationDrawer from '@/components/admin/FxNavigationDrawer'
 import AdminAppBar from '@/components/admin/FxAppBar'
 
@@ -34,7 +34,7 @@ export default {
       return redirect({ name: 'login' })
     }
 
-    if (store.getters['context/role'] !== SUPER_ADMIN) {
+    if (store.getters['context/role'] !== UserRole.SUPER_ADMIN) {
       error({ statusCode: 403, message: 'Access Denied' })
     }
   },

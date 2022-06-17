@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import { ADMIN, SPORTS_USER, VIEW_ONLY } from '@/enum/UserRole'
+import { UserRole } from '@/enum'
 
 export default {
   name: 'FxProfileForm',
@@ -108,14 +108,14 @@ export default {
   computed: {
     userRoleOptions () {
       return [
-        { value: ADMIN, text: 'Admin' },
-        { value: SPORTS_USER, text: 'Sports User' },
-        { value: VIEW_ONLY, text: 'View Only' },
+        { value: UserRole.ADMIN, text: 'Admin' },
+        { value: UserRole.SPORTS_USER, text: 'Sports User' },
+        { value: UserRole.VIEW_ONLY, text: 'View Only' },
       ]
     },
 
     formData () {
-      return this.value ? this.value : { userRole: ADMIN }
+      return this.value ? this.value : { userRole: UserRole.ADMIN }
     },
   },
 

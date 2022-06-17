@@ -1,6 +1,6 @@
 import { ActionTree, GetterTree } from 'vuex'
-import { Student } from '~/types'
-import { FEMALE, MALE } from '~/enum/Gender'
+import { PaginatedList, Student } from '~/types'
+import { Gender } from '@/enum'
 
 export const state = () => ({})
 
@@ -15,8 +15,8 @@ export const getters: GetterTree<RootState, RootState> = {
     return options
   },
   genderOptions: () => ([
-    { text: 'Male', value: MALE },
-    { text: 'Female', value: FEMALE },
+    { text: 'Male', value: Gender.MALE },
+    { text: 'Female', value: Gender.FEMALE },
   ]),
 }
 
@@ -31,16 +31,8 @@ type ListPayload = {
   params: QueryParams
 }
 
-type StudentsListResponse = {
-  data: Array<Student>,
-  meta: {
-    lastPage: number|string,
-    total: number,
-  }
-}
-
 export const actions: ActionTree<RootState, RootState> = {
-  list (_, { schoolId, params }: ListPayload): Promise<StudentsListResponse> {
+  list (_, { schoolId, params }: ListPayload): Promise<PaginatedList<Student>> {
     return this.$axios.$get(`/api/v1/schools/${schoolId}/students`, { params })
   },
 

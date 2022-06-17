@@ -1,40 +1,37 @@
 <template>
-  <div>
-    <label v-if="label" :for="id" v-text="label" />
-    <v-autocomplete
-      :id="id"
-      outlined
-      dense
-      :value="value"
-      :items="items"
-      :search-input.sync="search"
-      item-text="firstname"
-      item-value="id"
-      :placeholder="placeholder"
-      :loading="loading"
-      @input="$emit('input', $event)"
-    >
-      <template #selection="{ item }">
-        <span>{{ item.firstname }} {{ item.lastname }}</span>
-      </template>
-      <template #item="{ item }">
-        <FxUserItem :item="item" />
-      </template>
-    </v-autocomplete>
-  </div>
+  <v-autocomplete
+    :id="id"
+    outlined
+    dense
+    :value="value"
+    :items="items"
+    :search-input.sync="search"
+    item-text="firstname"
+    item-value="id"
+    :placeholder="placeholder"
+    :loading="loading"
+    @input="$emit('input', $event)"
+  >
+    <template #selection="{ item }">
+      <span>{{ item.firstname }} {{ item.lastname }}</span>
+    </template>
+    <template #item="{ item }">
+      <FxUserItem :item="item" />
+    </template>
+  </v-autocomplete>
 </template>
 
 <script>
 export default {
   name: 'FxUserSelect',
   props: {
+    id: {
+      type: String,
+      default: undefined,
+    },
     value: {
       type: String,
       default: '',
-    },
-    label: {
-      type: String,
-      default: undefined,
     },
     schoolId: {
       type: String,
@@ -46,46 +43,31 @@ export default {
     },
   },
   data: () => ({
-    items: [],
+    users: {},
     search: null,
     loading: false,
   }),
+
   computed: {
-    id () {
-      if (!this.label) {
-        return null
-      }
-      return 'fx_user_select_' + this.label.toLowerCase().replace(' ', '_')
+    items () {
+      return Object.values(this.users)
     },
   },
   watch: {
     search (val) {
       this.query(val)
     },
+    value () {
+      this.getUser()
+    },
   },
 
-  async created () {
-    await this.query()
+  created () {
+    this.query()
+  },
 
-    if (!this.value) {
-      return
-    }
-
-    if (this.items.some(item => item.id === this.value)) {
-      return
-    }
-    this.loading = true
-    try {
-      const user = await this.$store.dispatch('api/users/get', {
-        schoolId: this.schoolId,
-        id: this.value,
-      })
-      this.items.push(user)
-    } catch (e) {
-      this.$toast.error('Unable to fetch data')
-    } finally {
-      this.loading = false
-    }
+  async beforeMount () {
+    await this.getUser()
   },
 
   methods: {
@@ -96,7 +78,9 @@ export default {
         params: { search },
       })
         .then(({ data }) => {
-          this.items = data
+          data.forEach((user) => {
+            this.$set(this.users, user.id, user)
+          })
         })
         .catch(() => {
           this.$toast.error('Unable to fetch data')
@@ -104,6 +88,23 @@ export default {
         .finally(() => {
           this.loading = false
         })
+    },
+
+    async getUser () {
+      if (!this.value || this.users[this.value]) {
+        return
+      }
+
+      try {
+        const user = await this.$store.dispatch('api/users/get', {
+          schoolId: this.schoolId,
+          id: this.value,
+        })
+
+        this.$set(this.users, user.id, user)
+      } catch (e) {
+        this.$toast.error('Unable to fetch data')
+      }
     },
   },
 }

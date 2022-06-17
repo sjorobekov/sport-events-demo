@@ -96,42 +96,27 @@
             <v-row>
               <v-col cols="12" md="12" lg="4" class="my-0 py-0">
                 <label for="gender">Gender</label>
-                <v-select
+                <FxGenderSelect
                   id="gender"
-                  v-async-validate
-                  outlined
-                  dense
-                  :value="formData.gender"
-                  :items="genderOptions"
                   :async-rules="[$rule.required]"
-                  placeholder="Select Gender"
+                  :value="formData.gender"
                   @input="update('gender', $event)"
                 />
               </v-col>
               <v-col cols="12" md="12" lg="4" class="my-0 py-0">
                 <label for="age">Age Level</label>
-                <v-select
+                <FxAgeLevelSelect
                   id="age"
-                  v-async-validate
-                  outlined
-                  dense
                   :value="formData.age"
-                  :items="ageLevelOptions"
-                  placeholder="Select Age"
                   :async-rules="[$rule.required]"
                   @input="update('age', $event)"
                 />
               </v-col>
               <v-col cols="12" md="12" lg="4" class="my-0 py-0">
                 <label for="ability">Ability Level</label>
-                <v-select
+                <FxAbilityLevelSelect
                   id="ability"
-                  v-async-validate
-                  outlined
-                  dense
                   :value="formData.ability"
-                  :items="abilityLevel"
-                  placeholder="Select Ability"
                   :async-rules="[$rule.required]"
                   @input="update('ability', $event)"
                 />
@@ -187,7 +172,8 @@
           >
             <v-row>
               <v-col cols="12" md="12" lg="6" class="mt-0 pt-0">
-                <FxUserSelect label="Team Coach" :school-id="schoolId" :value="formData.coachId" @input="update('coachId', $event)" />
+                <label for="coach">Team Coach</label>
+                <FxUserSelect id="coach" placeholder="Select Coach" :school-id="schoolId" :value="formData.coachId" @input="update('coachId', $event)" />
               </v-col>
             </v-row>
           </v-col>
@@ -343,9 +329,6 @@ export default {
 
   computed: {
     ...mapGetters({
-      ageLevelOptions: 'api/teams/ageLevel',
-      genderOptions: 'api/teams/genderOptions',
-      abilityLevel: 'api/teams/abilityLevel',
       publishResultsOptions: 'api/teams/publishResultsOptions',
       publishTeamOptions: 'api/teams/publishTeamOptions',
       seasons: 'seasons/all',
