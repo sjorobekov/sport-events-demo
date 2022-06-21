@@ -35,6 +35,10 @@ export const getters = {
   school (state) {
     return state.school
   },
+
+  schoolId (state) {
+    return state.school?.id
+  },
 }
 
 export const mutations = {
@@ -55,7 +59,6 @@ export const mutations = {
 export const actions = {
   async fetchSchoolByPortalAddress ({ commit, getters }) {
     const school = await this.$axios.$get(`/api/v1/portalAddress/${getters.subdomain}`)
-    commit('portalAddress', school.portalAddress)
     commit('school', {
       id: school.id,
       name: school.name,

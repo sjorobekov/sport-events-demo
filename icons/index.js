@@ -1,6 +1,9 @@
 export default [
   'calendar',
   'calendarOutline',
+  'cup',
+  'list',
+  'ibook',
   'dashboard',
   'direction',
   'arrowLeft',

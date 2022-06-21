@@ -72,6 +72,10 @@ export default {
     optionsPath: './vuetify.config.js',
   },
 
+  router: {
+    middleware: 'permissions',
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ['luxon', 'vuetify-toast-snackbar-ng'],

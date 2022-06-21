@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <FxNavigationDrawer />
     <v-main>
       <v-container>
         <nuxt />
@@ -9,11 +10,26 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import FxNavigationDrawer from '@/components/FxNavigationDrawer'
+
 export default {
-  name: 'AdminLayout',
+  name: 'DefaultLayout',
 
   components: {
+    FxNavigationDrawer,
+  },
 
+  head () {
+    return {
+      title: this.contextSchool?.name,
+    }
+  },
+
+  computed: {
+    ...mapGetters({
+      contextSchool: 'context/school',
+    }),
   },
 }
 </script>
