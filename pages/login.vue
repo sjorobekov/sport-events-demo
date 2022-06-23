@@ -45,7 +45,7 @@ export default {
   layout: 'empty',
 
   middleware: ({ redirect, store }) => {
-    if (!store.getters['context/isSuperAdminSite']) {
+    if (store.getters['context/isPortalSite']) {
       return redirect({ name: 'signin' })
     }
   },

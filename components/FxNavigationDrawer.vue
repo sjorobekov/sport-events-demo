@@ -1,7 +1,7 @@
 <template>
-  <v-navigation-drawer width="224" permanent app :color="contextSchool.color" dark>
+  <v-navigation-drawer width="224" permanent app color="primary" dark>
     <v-avatar size="144" color="white" class="mt-10 mb-6 mx-auto d-block">
-      <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" />
+      <FxSchoolLogo :value="contextSchool.logo" color="primary" />
     </v-avatar>
 
     <h1 class="text-p3 font-weight-bold white--text text-center">

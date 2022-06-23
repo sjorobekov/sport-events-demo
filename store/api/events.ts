@@ -24,11 +24,17 @@ type QueryParams = {
   page: number,
   sortBy: 'firstname' | 'lastname' | 'birthday' | 'gender' | 'yearGroup',
   sortDesc: boolean,
+  teamId?: string,
 }
 
 type ListPayload = {
   schoolId: string
   params: QueryParams
+}
+
+type ListByTeamPayload = {
+  schoolId: string
+  teamId: string
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -49,6 +55,22 @@ export const actions: ActionTree<RootState, RootState> = {
       data,
       meta,
     }
+  },
+
+  async getByTeam (_, { schoolId, teamId }: ListByTeamPayload): Promise<Event[]> {
+    const data: Event[] = await this.$axios.$get(`/api/v1/schools/${schoolId}/teams/${teamId}/events`)
+
+    data.forEach((event) => {
+      event.participants.forEach((participant) => {
+        if (participant?.schoolId === schoolId) {
+          event.me = participant
+        } else {
+          event.opponent = participant
+        }
+      })
+    })
+
+    return data
   },
 
   create (_, { me, opponent, event, schoolId }: CreateEventPayload): Promise<Event> {

@@ -1,11 +1,13 @@
 <template>
-  <v-list-item v-bind="$props">
+  <v-list-item v-bind="$props" class="px-0">
     <v-list-item-avatar>
       <FxAvatar :value="item.avatar" />
     </v-list-item-avatar>
     <v-list-item-content>
       <v-list-item-title>{{ item.firstname }} {{ item.lastname }}</v-list-item-title>
-      <v-list-item-subtitle>{{ item.email }}</v-list-item-subtitle>
+      <v-list-item-subtitle v-if="subtitle">
+        {{ subtitle }}
+      </v-list-item-subtitle>
     </v-list-item-content>
   </v-list-item>
 </template>
@@ -34,6 +36,10 @@ export default {
     },
     to: {
       type: Object,
+      default: undefined,
+    },
+    subtitle: {
+      type: String,
       default: undefined,
     },
   },

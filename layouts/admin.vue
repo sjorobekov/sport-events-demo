@@ -13,7 +13,7 @@
 <script>
 import { UserRole } from '@/enum'
 import AdminNavigationDrawer from '@/components/admin/FxNavigationDrawer'
-import AdminAppBar from '@/components/admin/FxAppBar'
+import AdminAppBar from '@/components/FxAppBar'
 
 export default {
   name: 'AdminLayout',

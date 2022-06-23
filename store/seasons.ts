@@ -10,6 +10,7 @@ export type RootState = ReturnType<typeof state>
 export const getters: GetterTree<RootState, RootState> = {
   current: state => state.list.find(item => item.status === 'CURRENT'),
   all: state => state.list,
+  byId: state => (id: string) => state.list.find(season => season.id === id),
 }
 
 export const mutations: MutationTree<RootState> = {

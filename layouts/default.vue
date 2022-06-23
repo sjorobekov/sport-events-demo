@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <FxNavigationDrawer />
+    <AppBar />
     <v-main>
       <v-container>
         <nuxt />
@@ -12,12 +13,14 @@
 <script>
 import { mapGetters } from 'vuex'
 import FxNavigationDrawer from '@/components/FxNavigationDrawer'
+import AppBar from '@/components/FxAppBar'
 
 export default {
   name: 'DefaultLayout',
 
   components: {
     FxNavigationDrawer,
+    AppBar,
   },
 
   head () {

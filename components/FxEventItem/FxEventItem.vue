@@ -26,7 +26,19 @@
         <FxTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" :icon-on-right="!compact" />
       </v-col>
       <v-col cols="12" md="6" class="border-bottom">
-        <FxTeamListItem class="pl-0" :participant="opponent" :context-school-id="contextSchoolId" />
+        <FxTeamListItem v-if="opponent" class="pl-0" :participant="opponent" :context-school-id="contextSchoolId" />
+        <template v-if="event.eventType === 'TRAINING'">
+          <v-list-item class="pl-0">
+            <v-list-item-avatar class="mx-3">
+              <v-icon>$vuetify.icons.tactic</v-icon>
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title class="text-p2 font-weight-bold">
+                Training
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
       </v-col>
     </v-row>
     <v-row v-if="compact">
@@ -192,10 +204,6 @@ export default {
     opponent: {
       type: Object,
       default: () => {},
-    },
-    participants: {
-      type: Array,
-      default: () => [],
     },
     contextSchoolId: {
       type: String,

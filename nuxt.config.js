@@ -28,6 +28,10 @@ export default {
     '~/plugins/vuetify-async-validate.ts',
     '~/plugins/vuetify-toasts.ts',
     '~/plugins/gmap-vue.js',
+    {
+      src: '~/plugins/nuxt-client-init',
+      mode: 'client',
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

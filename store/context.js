@@ -32,6 +32,10 @@ export const getters = {
     return state.subdomain === 'admin'
   },
 
+  isPortalSite (state) {
+    return state.subdomain !== 'admin'
+  },
+
   school (state) {
     return state.school
   },

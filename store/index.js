@@ -3,7 +3,7 @@ export const actions = {
     const hostname = req.headers.host
     const subdomain = hostname.split('.')[0]
     commit('context/subdomain', subdomain)
-    if (!getters['context/isSuperAdminSite']) {
+    if (getters['context/isPortalSite']) {
       await dispatch('context/fetchSchoolByPortalAddress', subdomain)
     }
 
@@ -18,5 +18,12 @@ export const actions = {
       // eslint-disable-next-line no-console
       console.log('error', e)
     })
+  },
+
+  nuxtClientInit ({ getters }) {
+    if (getters['context/isPortalSite']) {
+      const root = document.documentElement
+      root.style.setProperty('--v-primary-base', getters['context/school'].color)
+    }
   },
 }

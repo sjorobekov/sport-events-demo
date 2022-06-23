@@ -4,6 +4,8 @@ export default [
   'cup',
   'list',
   'ibook',
+  'public',
+  'tactic',
   'dashboard',
   'direction',
   'arrowLeft',

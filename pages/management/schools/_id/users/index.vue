@@ -24,7 +24,7 @@
         must-sort
       >
         <template #item.firstname="{ item }">
-          <FxUserItem class="px-0" :item="item" link :to="{ name: 'management-schools-id-users-userId', params: { userId: item.id } }" />
+          <FxUserItem :item="item" link :to="{ name: 'management-schools-id-users-userId', params: { userId: item.id } }" :subtitle="item.email" />
         </template>
         <template #item.userRole="{ item }">
           <client-only><FxUserRole :role="item.userRole" /></client-only>
