@@ -18,7 +18,7 @@
                 </v-list-item-subtitle>
               </v-list-item-content>
               <v-list-item-action>
-                <FxTeamPrivacyChipBig :publish-team="team.publishTeam" :publish-results="team.publishResults" />
+                <FxTeamPrivacyChipBig v-if="!$fetchState.pending" :publish-team="team.publishTeam" :publish-results="team.publishResults" />
               </v-list-item-action>
             </v-list-item>
           </v-img>

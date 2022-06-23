@@ -18,7 +18,7 @@
         </v-row>
       </v-container>
       <v-btn class="float-right" icon style="position: relative; bottom: 40px;">
-        <v-icon v-if="active" dark color="brand">
+        <v-icon v-if="active" dark color="primary">
           $vuetify.icons.tickFilled
         </v-icon>
       </v-btn>
@@ -48,7 +48,7 @@ export default {
   border-radius: 4px
   box-shadow: 0 0 0 1px var(--v-info-lighten2)
   &.active
-    box-shadow: 0 0 0 3px var(--v-brand-base)
+    box-shadow: 0 0 0 3px var(--v-primary-base)
   .label1
     font-size: 1rem
     line-height: 1rem

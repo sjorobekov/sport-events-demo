@@ -2,7 +2,7 @@
   <v-list class="my-0">
     <v-list-item class="my-0">
       <v-list-item-avatar class="my-0">
-        <v-avatar color="brand">
+        <v-avatar color="primary">
           <span class="white--text text-h5">
             <slot name="number" />
           </span>
