@@ -53,7 +53,13 @@
             <v-btn outlined>
               <v-icon>$vuetify.icons.edit</v-icon>Edit Team
             </v-btn>
-            <v-btn depressed color="primary">
+            <v-btn
+              v-if="canCreateEvent"
+              depressed
+              color="primary"
+              link
+              :to="{ name: 'events-add', query: { teamId: teamId, sportId: team.sportId, leadId: team.coachId }}"
+            >
               <v-icon>$vuetify.icons.plusOutline</v-icon>Add Event
             </v-btn>
           </v-col>
@@ -97,7 +103,7 @@
           <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
             Fixtures
           </h2>
-          <v-card v-for="event in fixtures" :key="`fixture-${event.id}`">
+          <v-card v-for="event in fixtures" :key="`fixture-${event.id}`" class="mb-2">
             <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" :context-school-id="contextSchoolId" />
           </v-card>
         </template>
@@ -106,7 +112,7 @@
           <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
             Results
           </h2>
-          <v-card v-for="event in results" :key="`result-${event.id}`">
+          <v-card v-for="event in results" :key="`result-${event.id}`" class="mb-2">
             <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" :context-school-id="contextSchoolId" />
           </v-card>
         </template>
@@ -115,7 +121,7 @@
           <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
             Training
           </h2>
-          <v-card v-for="event in training" :key="`training-${event.id}`">
+          <v-card v-for="event in training" :key="`training-${event.id}`" class="mb-2">
             <FxEventItem :event="event" :me="event.me" :context-school-id="contextSchoolId" />
           </v-card>
         </template>
@@ -130,12 +136,14 @@ import { DateTime } from 'luxon'
 import FxEventItem from '@/components/FxEventItem/FxEventItem'
 import { EventType } from '@/enum'
 import FxTeamPrivacyChipBig from '@/components/FxTeamPrivacyChipBig'
+import FxWinRateBar from '@/components/FxWinRateBar'
 
 export default {
   name: 'TeamPage',
   components: {
     FxEventItem,
     FxTeamPrivacyChipBig,
+    FxWinRateBar,
   },
   data: () => ({
     filter: null,
@@ -180,6 +188,7 @@ export default {
   computed: {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
+      canCreateEvent: 'user/acl/canCreateEvent',
     }),
     teamId () {
       return this.$route.params.id

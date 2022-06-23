@@ -26,19 +26,8 @@
         <FxTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" :icon-on-right="!compact" />
       </v-col>
       <v-col cols="12" md="6" class="border-bottom">
-        <FxTeamListItem v-if="opponent" class="pl-0" :participant="opponent" :context-school-id="contextSchoolId" />
-        <template v-if="event.eventType === 'TRAINING'">
-          <v-list-item class="pl-0">
-            <v-list-item-avatar class="mx-3">
-              <v-icon>$vuetify.icons.tactic</v-icon>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title class="text-p2 font-weight-bold">
-                Training
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </template>
+        <FxTeamListItem v-if="event.eventType === EventType.FIXTURE" class="pl-0" :participant="opponent" :context-school-id="contextSchoolId" />
+        <FxNonFixtureItem v-else :event-type="event.eventType" :name="event.name" />
       </v-col>
     </v-row>
     <v-row v-if="compact">
@@ -168,7 +157,7 @@
 </template>
 
 <script>
-import { TransportType } from '@/enum'
+import { TransportType, EventType } from '@/enum'
 import FxAvatar from '@/components/FxAvatar/FxAvatar'
 import ListItem from '@/components/FxEventItem/ListItem'
 import FxLocationLabel from '@/components/FxEventItem/FxLocationLabel'
@@ -215,6 +204,7 @@ export default {
     sport: {},
     team: {},
     user: {},
+    EventType,
   }),
 
   computed: {

@@ -24,6 +24,8 @@ export default [
   'tshirt',
   'shield',
   'trophy',
+  'sports',
+  'tournament',
   'student',
   'stopwatch',
   'announcement',
