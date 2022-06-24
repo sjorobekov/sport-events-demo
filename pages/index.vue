@@ -9,5 +9,13 @@
 <script>
 export default {
   name: 'IndexPage',
+  layout: 'empty',
+  middleware: ({ redirect, store }) => {
+    if (store.getters['context/isPortalSite']) {
+      return redirect({ name: 'dashboard' })
+    }
+
+    return redirect({ name: 'management' })
+  },
 }
 </script>

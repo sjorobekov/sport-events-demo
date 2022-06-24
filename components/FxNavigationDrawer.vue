@@ -81,7 +81,7 @@ export default {
   components: { FxSchoolLogo },
   data: () => ({
     items: [
-      { title: 'Sports Dashboard', icon: '$vuetify.icons.dashboard', exact: true, to: { name: 'index' } },
+      { title: 'Sports Dashboard', icon: '$vuetify.icons.dashboard', exact: true, to: { name: 'dashboard' } },
       { title: 'Calendar', icon: '$vuetify.icons.calendar', to: { name: 'calendar' } },
       { title: 'Announcements', icon: '$vuetify.icons.whistle', to: { name: 'announcements' } },
       {
