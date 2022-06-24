@@ -37,6 +37,30 @@ type ListByTeamPayload = {
   teamId: string
 }
 
+type CheckEventConflictPayload = {
+  schoolId: string,
+  date: string,
+  startTime: string,
+  sportLocationId: string,
+  teamId: string,
+  leadId: string,
+  returnTime: string,
+}
+
+type EventConflictResponse = {
+  status: 'OK' | 'CONFLICT',
+  message: string,
+  events: Array<{
+    eventId: string,
+    eventType: string,
+    startTime: string,
+    name?: string
+    sportLocation?: object,
+    team?: object,
+    lead?: object,
+  }>
+}
+
 export const actions: ActionTree<RootState, RootState> = {
   async getBySchool (_, { schoolId, params }: ListPayload): Promise<PaginatedList<Event>> {
     const { data, meta }: PaginatedList<Event> = await this.$axios.$get(`/api/v1/schools/${schoolId}/events`, { params })
@@ -82,36 +106,20 @@ export const actions: ActionTree<RootState, RootState> = {
   },
 
   createBatch (_, { events, schoolId }: CreateEventBatchPayload): Promise<void> {
+    const payload = events.map((item) => {
+      return {
+        event: item.event,
+        me: item.me,
+        opponent: item.opponent,
+      }
+    })
     return this.$axios.$post(`/api/v1/schools/${schoolId}/events/batch`, {
-      events,
+      events: payload,
     })
   },
 
-  save (_, payload: Event): Promise<Event> {
-    const { id } = payload
-
-    const data = {
-      name: payload.name,
-      eventType: payload.eventType,
-      sportId: payload.sportId,
-      fixtureType: payload.fixtureType,
-      date: payload.date,
-      startTime: payload.startTime,
-      repeats: payload.repeats,
-      repeatPeriod: payload.repeatPeriod,
-      repeatDays: payload.repeatDays,
-      startDate: payload.startDate,
-      endDate: payload.endDate,
-      location: payload.location,
-      sportLocationId: payload.sportLocationId,
-      otherLocation: payload.otherLocation,
-    }
-
-    if (payload.id) {
-      return this.$axios.$put(`/api/v1/events/${id}`, data)
-    }
-
-    return this.$axios.$post('/api/v1/events', data)
+  checkConflict (_, { schoolId, ...payload }: CheckEventConflictPayload): Promise<EventConflictResponse> {
+    return this.$axios.$post(`/api/v1/schools/${schoolId}/events/check_conflict`, payload)
   },
 
   get (_, { schoolId, id }): Promise<Event> {

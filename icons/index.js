@@ -27,6 +27,7 @@ export default [
   'sports',
   'tournament',
   'student',
+  'paper',
   'stopwatch',
   'announcement',
   'announcement-outline',
