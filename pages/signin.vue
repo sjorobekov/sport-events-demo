@@ -77,7 +77,7 @@
           <v-btn
             type="submit"
             depressed
-            color="brand"
+            color="primary"
             dark
             :loading="loading"
             block

@@ -53,6 +53,7 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/i18n',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -110,5 +111,17 @@ export default {
     '/upload': {
       target: process.env.API_URL || 'http://127.0.0.1:3333',
     },
+  },
+
+  i18n: {
+    strategy: 'no_prefix',
+    locales: [
+      { code: 'en', file: 'en.js' },
+    ],
+    defaultLocale: 'en',
+    vueI18n: {
+      fallbackLocale: 'en',
+    },
+    langDir: 'lang/',
   },
 }

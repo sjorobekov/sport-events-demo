@@ -2,6 +2,8 @@ export const state = () => ({
   me: null,
   subdomain: null,
   school: null,
+  sportLocations: [],
+  sportLocationsIndexed: {},
 })
 
 export const getters = {
@@ -43,6 +45,10 @@ export const getters = {
   schoolId (state) {
     return state.school?.id
   },
+
+  sportLocations (state) {
+    return state.sportLocations
+  },
 }
 
 export const mutations = {
@@ -57,6 +63,13 @@ export const mutations = {
   school (state, val) {
     state.school = val
   },
+
+  sportLocations (state, locations) {
+    state.sportLocations = locations
+    locations.forEach((item) => {
+      state.sportLocationsIndexed[item.id] = item
+    })
+  },
 }
 
 // actions
@@ -69,6 +82,14 @@ export const actions = {
       logo: school.logo,
       color: school.color ?? 'var(--v-brand-base)',
     })
+  },
+
+  async fetchSportLocations ({ commit, getters, dispatch }) {
+    const items = await dispatch('api/locations/list', {
+      schoolId: getters.schoolId,
+    }, { root: true })
+
+    commit('sportLocations', items)
   },
 
   async signInAsSuperAdmin ({ dispatch }, { email, password }) {

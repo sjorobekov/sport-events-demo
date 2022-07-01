@@ -43,3 +43,28 @@ label {
 }
 
 tr:hover{ background-color: var(--v-info-lighten5)!important; }
+
+// Reversed input variant
+.v-input--reverse .v-input__slot {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  .v-application--is-ltr & {
+    .v-input--selection-controls__input {
+      margin-right: 0;
+      margin-left: 8px;
+    }
+  }
+  .v-application--is-rtl & {
+    .v-input--selection-controls__input {
+      margin-left: 0;
+      margin-right: 8px;
+    }
+  }
+}
+
+.border-bottom {
+  border-bottom: 1px var(--v-info-lighten4) solid;
+}
+.border-right {
+  border-right: 1px var(--v-info-lighten4) solid;
+}

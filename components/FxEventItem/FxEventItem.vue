@@ -162,18 +162,6 @@ import FxAvatar from '@/components/FxAvatar/FxAvatar'
 import ListItem from '@/components/FxEventItem/ListItem'
 import FxLocationLabel from '@/components/FxEventItem/FxLocationLabel'
 
-const transportTo = {
-  [TransportType.BUS]: 'Bus',
-  [TransportType.VENUE]: 'Meet at Venue',
-  [TransportType.OTHER]: 'Other',
-}
-
-const transportFrom = {
-  [TransportType.BUS]: 'Bus',
-  [TransportType.VENUE]: 'Collect from Venue',
-  [TransportType.OTHER]: 'Other',
-}
-
 export default {
   name: 'FxEventConfirmationItem',
   components: {
@@ -221,7 +209,7 @@ export default {
         return this.me.transportToOther
       }
 
-      return transportTo[this.me.transportTo]
+      return this.$t(`TRANSPORT_TO.${this.me.transportTo}`)
     },
 
     transportFrom () {
@@ -229,7 +217,7 @@ export default {
         return this.me.transportFromOther
       }
 
-      return transportFrom[this.me.transportFrom]
+      return this.$t(`TRANSPORT_FROM.${this.me.transportTo}`)
     },
   },
 
@@ -243,12 +231,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.border-bottom {
-  border-bottom: 1px #F1F5F9 solid;
-}
-.border-right {
-  border-right: 1px #F1F5F9 solid;
-}
-</style>

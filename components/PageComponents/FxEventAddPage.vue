@@ -1,55 +1,21 @@
 <template>
   <div>
     <h3 class="text-h3 mb-6" v-text="title" />
-
-    <v-card
-      v-for="(item, index) in items"
-      :key="index"
-      class="mb-3"
-    >
-      <FxEventItem
-        :event="item.event"
-        :context-school-id="contextSchoolId"
-        :me="item.me"
-        :opponent="item.opponent"
+    <v-form ref="confirmForm" lazy-validation>
+      <v-card
+        v-for="(item, index) in items"
+        :key="index"
+        class="mb-3"
       >
-        <template #actions>
-          <v-alert dense class="mb-0 float-right">
-            <v-icon color="success darken-2">
-              mdi-checkbox-marked-circle-outline
-            </v-icon>
-            <span class="success--text text--darken-2 text-p1">No Event Conflict</span>
-          </v-alert>
-        </template>
-        <template #bottom>
-          <template v-if="item.me.info">
-            <v-row>
-              <v-col class="py-0">
-                <ListItem>
-                  <template #icon>
-                    <v-icon>mdi-information-outline</v-icon>
-                  </template>
-                  <template #content>
-                    <v-list-item-title class="text-p1 info--text">
-                      Further Information
-                    </v-list-item-title>
-                    <span class="text-p2 info--text text--darken-2">{{ item.me.info }}</span>
-                  </template>
-                </ListItem>
-              </v-col>
-            </v-row>
-          </template>
-          <template v-if="item.conflicts">
-            <FxEventConflictItem
-              v-for="conflict in item.conflicts"
-              :key="conflict.eventId"
-              v-model="override"
-              :item="conflict"
-            />
-          </template>
-        </template>
-      </FxEventItem>
-    </v-card>
+        <FxEventWithConflictItem
+          ref="eventItem"
+          :context-school-id="contextSchoolId"
+          :me="item.me"
+          :opponent="item.opponent"
+          :event="item.event"
+        />
+      </v-card>
+    </v-form>
 
     <FxEventForm
       v-if="formVisible"
@@ -96,9 +62,7 @@
 import { DateTime } from 'luxon'
 import FxEventForm from '@/components/FxEventForm/FxEventForm'
 import { EventLocation, EventLocationType, EventType, FixtureType, TransportType } from '@/enum'
-import ListItem from '@/components/FxEventItem/ListItem'
-import FxEventItem from '@/components/FxEventItem/FxEventItem'
-import FxEventConflictItem from '@/components/FxEventForm/FxEventConflictItem'
+import FxEventWithConflictItem from '@/components/FxEventItem/FxEventWithConflictItem'
 
 const CONFIRM_TITLE = {
   [EventType.FIXTURE]: 'Confirm Fixture',
@@ -110,10 +74,8 @@ const CONFIRM_TITLE = {
 export default {
   name: 'FxEventAddPage',
   components: {
-    FxEventConflictItem,
-    ListItem,
+    FxEventWithConflictItem,
     FxEventForm,
-    FxEventItem,
   },
   props: {
     contextSchoolId: {
@@ -184,6 +146,9 @@ export default {
         transportFrom: TransportType.VENUE,
         teamId: this.$route.query.teamId,
         leadId: this.$route.query.leadId,
+        gender: this.$route.query.gender,
+        ability: this.$route.query.ability,
+        age: this.$route.query.age,
       },
       opponent: {},
       event: {
@@ -198,9 +163,11 @@ export default {
     setSession (key, val) {
       window.sessionStorage.setItem(key, JSON.stringify(val))
     },
+
     getSession (key) {
       return JSON.parse(window.sessionStorage.getItem(key))
     },
+
     async save () {
       this.loading = true
 
@@ -211,19 +178,9 @@ export default {
           return
         }
 
-        const { status, events } = await this.$store.dispatch('api/events/checkConflict', {
-          schoolId: this.contextSchoolId,
-          date: this.formData.event.date,
-          startTime: this.formData.event.startTime,
-          sportLocationId: this.formData.event.sportLocationId,
-          teamId: this.formData.me.teamId,
-          leadId: this.formData.me.leadId,
-        })
-
         this.formVisible = false
         this.items.push({
           ...this.formData,
-          conflicts: status === 'CONFLICT' ? events : null,
         })
       } catch (e) {
         this.$toast.error('Unknown Error')
@@ -255,17 +212,13 @@ export default {
       this.formVisible = true
     },
 
-    overrideEvents () {
-      const uniqueIds = [...new Set(this.override)]
-      return Promise.all(uniqueIds.map((id) => {
-        return this.$store.dispatch('api/events/remove', {
-          schoolId: this.contextSchoolId,
-          id,
-        })
-      }))
-    },
-
     confirm () {
+      const isValid = this.$refs.confirmForm.validate()
+      if (!isValid) {
+        this.$toast.error('You need to resolve or override conflict')
+        return
+      }
+
       this.loading = true
 
       this.$store.dispatch('api/events/createBatch', {
@@ -274,12 +227,8 @@ export default {
       }).then(() => {
         this.setSession('eventForm', null)
         this.setSession('eventItems', [])
-
-        this.overrideEvents()
-
         this.$emit('saved', this.formData.me.teamId)
-      }).catch((e) => {
-        console.log('err', e)
+      }).catch(() => {
         this.$toast.error('Something went wrong')
       }).finally(() => {
         this.loading = false

@@ -509,7 +509,6 @@ export default {
   data: () => ({
     teams: [],
     sports: [],
-    locations: [],
     TransportType,
     EventLocationType,
     EventType,
@@ -520,6 +519,7 @@ export default {
     ...mapGetters({
       school: 'admin/page/school/school',
       currentSeason: 'seasons/current',
+      locations: 'context/sportLocations',
     }),
     eventForm () {
       return this.event || {}
@@ -541,10 +541,6 @@ export default {
     this.teams = await this.$store.dispatch('api/teams/list', {
       schoolId: this.schoolId,
       params: { seasonId: this.currentSeason.id },
-    })
-
-    this.locations = await this.$store.dispatch('api/locations/list', {
-      schoolId: this.schoolId,
     })
 
     const sports = this.teams.map(team => team.sport)

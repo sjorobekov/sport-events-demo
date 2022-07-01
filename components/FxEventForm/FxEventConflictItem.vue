@@ -1,64 +1,85 @@
 <template>
-  <v-alert color="error lighten-5 pa-0">
-    <v-list-item>
-      <v-list-item-icon class="mr-2">
-        <v-icon color="error darken-1">
-          mdi-alert-circle-outline
-        </v-icon>
-      </v-list-item-icon>
-      <v-list-item-content>
-        <v-list-item-title class="text-p1 font-weight-bold error--text darken-1">
-          Event Conflict
-        </v-list-item-title>
-      </v-list-item-content>
-      <v-list-item-icon class="mr-2">
-        <v-icon color="error darken-1">
-          $vuetify.icons.paper
-        </v-icon>
-      </v-list-item-icon>
-      <v-list-item-content>
-        <v-list-item-title>{{ title }}</v-list-item-title>
-        <v-list-item-subtitle>Event</v-list-item-subtitle>
-      </v-list-item-content>
-      <template v-if="item.lead">
+  <v-card color="error lighten-5" elevation="0">
+    <div class="d-flex flex-column flex-md-row">
+      <v-list-item>
+        <v-list-item-icon class="mr-2">
+          <v-icon color="error darken-1">
+            mdi-alert-circle-outline
+          </v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title class="text-p1 font-weight-bold error--text darken-1">
+            Conflict
+          </v-list-item-title>
+        </v-list-item-content>
+        <v-list-item-action class="hidden-md-and-up">
+          <slot name="actions" />
+        </v-list-item-action>
+      </v-list-item>
+      <v-list-item>
         <v-list-item-icon class="mr-2">
           <v-icon color="error darken-1">
             $vuetify.icons.paper
           </v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title>{{ item.lead.firstname }} {{ item.lead.lastname }}</v-list-item-title>
-          <v-list-item-subtitle>Staff</v-list-item-subtitle>
+          <v-list-item-title>{{ title }}</v-list-item-title>
+          <v-list-item-subtitle>Event</v-list-item-subtitle>
         </v-list-item-content>
-      </template>
-      <template v-if="item.sportLocation">
-        <v-list-item-icon class="mr-2">
-          <v-icon color="error darken-1">
-            mdi-map-marker
-          </v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title>{{ item.sportLocation.name }}</v-list-item-title>
-          <v-list-item-subtitle>Location</v-list-item-subtitle>
-        </v-list-item-content>
+      </v-list-item>
+      <template v-if="item.lead">
+        <v-list-item>
+          <v-list-item-icon class="mr-2">
+            <v-icon color="error darken-1">
+              $vuetify.icons.paper
+            </v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.lead.firstname }} {{ item.lead.lastname }}</v-list-item-title>
+            <v-list-item-subtitle>Staff</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
       </template>
 
-      <v-list-item-content class="text-right">
-        <label>Override Conflict?</label>
-      </v-list-item-content>
-      <v-list-item-action>
-        <v-checkbox :value="item.eventId" :input-value="value" @change="$emit('input', $event)" />
-      </v-list-item-action>
-    </v-list-item>
-  </v-alert>
+      <v-list-item>
+        <v-list-item-action>
+          <v-checkbox
+            :rules="[v => !!v || 'required']"
+            class="v-input--reverse"
+            label="Override Conflict?"
+            required
+          />
+        </v-list-item-action>
+      </v-list-item>
+      <v-list-item class="hidden-sm-and-down">
+        <v-list-item-content />
+        <v-list-item-action>
+          <v-btn rounded outlined @click="isOpen = !isOpen">
+            {{ isOpen ? 'Hide' : 'View' }}
+          </v-btn>
+        </v-list-item-action>
+      </v-list-item>
+    </div>
+
+    <FxEventConflictResolveForm
+      v-if="isOpen"
+      :context-school-id="contextSchoolId"
+      :event-id="item.eventId"
+      @updated="$emit('updated')"
+    />
+  </v-card>
 </template>
 
 <script>
 import { EventType } from '@/enum'
+import FxEventConflictResolveForm from '@/components/FxEventForm/FxEventConflictResolveForm'
 
 export default {
   name: 'FxEventConflictItem',
-  events: ['input'],
+  events: ['updated'],
+  components: {
+    FxEventConflictResolveForm,
+  },
   props: {
     item: {
       type: Object,
@@ -68,7 +89,15 @@ export default {
       type: Array,
       default: () => [],
     },
+    contextSchoolId: {
+      type: String,
+      required: true,
+    },
   },
+
+  data: () => ({
+    isOpen: false,
+  }),
 
   computed: {
     title () {

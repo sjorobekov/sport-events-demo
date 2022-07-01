@@ -58,7 +58,7 @@
               depressed
               color="primary"
               link
-              :to="{ name: 'events-add', query: { teamId: teamId, sportId: team.sportId, leadId: team.coachId }}"
+              :to="{ name: 'events-add', query: { teamId: teamId, sportId: team.sportId, leadId: team.coachId, gender: team.gender, ability: team.ability, age: team.age }}"
             >
               <v-icon>$vuetify.icons.plusOutline</v-icon>Add Event
             </v-btn>

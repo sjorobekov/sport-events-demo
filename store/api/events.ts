@@ -1,6 +1,6 @@
 import { ActionTree, GetterTree } from 'vuex'
 import { PaginatedList, Event, CreateEventPayload, CreateEventBatchPayload } from '~/types'
-import { Gender } from '@/enum'
+import { EventStatus, Gender } from '@/enum'
 
 export const state = () => ({})
 
@@ -59,6 +59,17 @@ type EventConflictResponse = {
     team?: object,
     lead?: object,
   }>
+}
+
+type EventConfirmationPayload = {
+  status?: EventStatus,
+  leadId?: string,
+  teamId?: string,
+  meetTime?: string,
+  returnTime?: string,
+  sportLocationId?: string,
+  eventId: string,
+  schoolId: string,
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -122,8 +133,22 @@ export const actions: ActionTree<RootState, RootState> = {
     return this.$axios.$post(`/api/v1/schools/${schoolId}/events/check_conflict`, payload)
   },
 
-  get (_, { schoolId, id }): Promise<Event> {
-    return this.$axios.$get(`api/v1/schools/${schoolId}/events/${id}`)
+  confirm (_, { schoolId, eventId, ...payload }: EventConfirmationPayload): Promise<Event> {
+    return this.$axios.$patch(`/api/v1/schools/${schoolId}/events/${eventId}/confirmation`, payload)
+  },
+
+  async get (_, { schoolId, id }): Promise<Event> {
+    const event: Event = await this.$axios.$get(`api/v1/schools/${schoolId}/events/${id}`)
+
+    event.participants.forEach((participant) => {
+      if (participant?.schoolId === schoolId) {
+        event.me = participant
+      } else {
+        event.opponent = participant
+      }
+    })
+
+    return event
   },
 
   remove (_, { schoolId, id }): Promise<void> {
