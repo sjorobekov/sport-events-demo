@@ -27,6 +27,8 @@ export const actions: ActionTree<RootState, RootState> = {
     commit('id', id)
     const school = await dispatch('api/schools/get', id, { root: true })
     commit('school', school)
+    // TODO: temporary solution
+    commit('context/school', school, { root: true })
 
     await dispatch('context/fetchSportLocations', null, { root: true })
   },
