@@ -47,6 +47,8 @@ export const actions: ActionTree<RootState, RootState> = {
       phone: payload.phone,
       jobRole: payload.jobRole,
       userRole: payload.userRole,
+      displaySportsContact: payload.displaySportsContact,
+      mainSportsContact: payload.mainSportsContact,
     }
 
     if (payload.id) {
