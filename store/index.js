@@ -21,10 +21,9 @@ export const actions = {
     })
   },
 
-  nuxtClientInit ({ getters }) {
+  nuxtClientInit ({ getters, dispatch }) {
     if (getters['context/isPortalSite']) {
-      const root = document.documentElement
-      root.style.setProperty('--v-primary-base', getters['context/school'].color)
+      dispatch('context/applyPrimaryColor')
     }
   },
 }
