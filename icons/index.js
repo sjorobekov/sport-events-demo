@@ -41,4 +41,5 @@ export default [
   'colorPicker',
   'image',
   'teams',
+  'signin',
 ]

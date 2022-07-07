@@ -11,161 +11,111 @@
     </div>
 
     <v-card v-else flat outlined class="pb-8 px-6 pt-6">
-      <v-card-title>Account Status</v-card-title>
+      <v-card-title class="px-0 text-p3 font-weight-bold pb-1">
+        Profile Picture
+      </v-card-title>
       <v-divider />
+      <v-container>
+        <v-row>
+          <v-col
+            cols="12"
+            md="5"
+            class="text-p2 info--text px-0"
+          >
+            Select profile picture for the user. Supported formats: jpeg, png, webp.
+          </v-col>
+          <v-col
+            cols="12"
+            md="7"
+          >
+            <FxImageUploadForm :value="formData" :loading="uploading" @input="uploadAvatar">
+              <template #icon>
+                <FxAvatar class="mr-2" size="80" :value="user.avatar" />
+              </template>
+              <template #actions>
+                <v-btn depressed outlined :disabled="uploading" @click="removeAvatar">
+                  Remove
+                </v-btn>
+              </template>
+            </FxImageUploadForm>
+          </v-col>
+        </v-row>
+      </v-container>
 
-      <v-card-text class="pa-0">
-        <v-container>
-          <v-row>
-            <v-col
-              cols="12"
-              md="5"
-            >
-              <v-list class="py-0">
-                <v-list-item>
-                  <v-list-item-content class="text--disabled py-0">
-                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-col>
-            <v-col
-              cols="12"
-              md="7"
-            >
-              <FxAccountStatusForm v-model="user.enabled" :disabled="loading" @input="updateStatus" />
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-card-text>
-
-      <v-card-title>Profile Picture</v-card-title>
+      <v-card-title class="px-0 text-p3 font-weight-bold pb-1">
+        General Information
+      </v-card-title>
       <v-divider />
+      <v-container>
+        <v-row>
+          <v-col
+            cols="12"
+            md="5"
+            class="text-p2 info--text px-0"
+          >
+            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+          </v-col>
+          <v-col
+            cols="12"
+            md="7"
+            class="pr-0"
+          >
+            <FxProfileForm v-model="formData" :disabled="loading" />
+          </v-col>
+        </v-row>
+      </v-container>
 
-      <v-card-text class="pa-0">
-        <v-container>
-          <v-row>
-            <v-col
-              cols="12"
-              md="5"
-            >
-              <v-list class="py-0">
-                <v-list-item>
-                  <v-list-item-content class="text--disabled py-0">
-                    Select profile picture for the user. Supported formats: jpeg, png, webp.
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-col>
-            <v-col
-              cols="12"
-              md="7"
-            >
-              <FxImageUploadForm :value="formData" :loading="uploading" @input="uploadAvatar">
-                <template #icon>
-                  <FxAvatar class="mr-2" size="80" :value="user.avatar" />
-                </template>
-                <template #actions>
-                  <v-btn depressed outlined :disabled="uploading" @click="removeAvatar">
-                    Remove
-                  </v-btn>
-                </template>
-              </FxImageUploadForm>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-card-text>
-
-      <v-card-title>General Information</v-card-title>
+      <v-card-title class="px-0 text-p3 font-weight-bold pb-1">
+        Display at Sports Contact
+      </v-card-title>
       <v-divider />
-      <v-card-text class="pa-0">
-        <v-container>
-          <v-row>
-            <v-col
-              cols="12"
-              md="5"
-              class="pb-0"
-            >
-              <v-list class="py-0">
-                <v-list-item>
-                  <v-list-item-content class="text--disabled py-0">
-                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-col>
-            <v-col
-              cols="12"
-              md="7"
-              class="pb-0"
-            >
-              <FxProfileForm v-model="formData" :disabled="loading" />
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-card-text>
+      <v-container>
+        <v-row>
+          <v-col
+            cols="12"
+            md="5"
+            class="text-p2 info--text px-0"
+          >
+            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+          </v-col>
+          <v-col
+            cols="12"
+            md="7"
+            class="pr-0"
+          >
+            <FxAccountSportContactForm v-model="formData" :disabled="loading" />
+          </v-col>
+        </v-row>
+      </v-container>
 
-      <v-card-title>Display at Sports Contact</v-card-title>
+      <v-card-title class="px-0 text-p3 font-weight-bold pb-1">
+        Account Security
+      </v-card-title>
       <v-divider />
+      <v-container>
+        <v-row>
+          <v-col
+            cols="12"
+            md="5"
+            class="text-p2 info--text px-0"
+          >
+            Short descriptive text to go here
+          </v-col>
+          <v-col
+            cols="12"
+            md="7"
+            class="text-right pr-0"
+          >
+            <v-btn color="info darken-1" outlined @click="reset()">
+              <v-icon color="info darken-3">
+                $vuetify.icons.shield
+              </v-icon> Send Reset Password
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
 
-      <v-card-text class="pa-0">
-        <v-container>
-          <v-row>
-            <v-col
-              cols="12"
-              md="5"
-            >
-              <v-list class="py-0">
-                <v-list-item>
-                  <v-list-item-content class="text--disabled py-0">
-                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-col>
-            <v-col
-              cols="12"
-              md="7"
-            >
-              <FxAccountSportContactForm v-model="formData" :disabled="loading" />
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-card-text>
-
-      <v-card-title>Account Security</v-card-title>
-      <v-divider />
-      <v-card-text class="pa-0">
-        <v-container>
-          <v-row>
-            <v-col
-              cols="12"
-              md="5"
-            >
-              <v-list class="py-0">
-                <v-list-item>
-                  <v-list-item-content class="text--disabled py-0">
-                    Short descriptive text to go here
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-col>
-            <v-col
-              cols="12"
-              md="7"
-              class="text-right"
-            >
-              <v-btn color="info darken-1" outlined @click="reset()">
-                <v-icon color="info darken-3">
-                  $vuetify.icons.shield
-                </v-icon> Send Reset Password
-              </v-btn>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-card-text>
-
-      <v-card-actions class="pt-0 mt-8">
+      <v-card-actions class="pt-0 pr-0 mt-8">
         <v-spacer />
         <v-btn
           depressed
@@ -199,7 +149,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import FxAccountStatusForm from '@/components/admin/FxAccountStatusForm'
 import FxProfileForm from '@/components/FxProfileForm'
 import { UserRole } from '@/enum'
 import FxAvatar from '@/components/FxAvatar'
@@ -208,7 +157,6 @@ import FxImageUploadForm from '@/components/FxImageUploadForm'
 export default {
   name: 'UserEditPage',
   components: {
-    FxAccountStatusForm,
     FxImageUploadForm,
     FxProfileForm,
     FxAvatar,
@@ -225,7 +173,7 @@ export default {
 
   async fetch () {
     this.user = await this.$store.dispatch('api/users/get', {
-      id: this.$route.params.userId,
+      id: this.userId,
       schoolId: this.schoolId,
     })
 
@@ -238,6 +186,9 @@ export default {
     ...mapGetters({
       schoolId: 'context/schoolId',
     }),
+    userId () {
+      return this.$route.params.userId
+    },
   },
 
   methods: {
@@ -261,7 +212,7 @@ export default {
     uploadAvatar (file) {
       this.uploading = true
       this.$store.dispatch('api/users/uploadAvatar', {
-        id: this.$route.params.userId,
+        id: this.userId,
         schoolId: this.schoolId,
         file,
       }).then((res) => {
@@ -280,23 +231,11 @@ export default {
       }
 
       this.$store.dispatch('api/users/removeAvatar', {
-        id: this.$route.params.userId,
+        id: this.userId,
         schoolId: this.schoolId,
       }).then((res) => {
         this.user = res
       })
-    },
-
-    updateStatus () {
-      this.loading = true
-
-      this.$store.dispatch('api/users/updateStatus', this.user)
-        .catch(() => {
-          this.$toast.error('Unknown Error')
-        })
-        .finally(() => {
-          this.loading = false
-        })
     },
 
     remove () {

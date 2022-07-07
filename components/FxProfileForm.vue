@@ -52,6 +52,7 @@
       dense
       outlined
       maxlength="50"
+      :disabled="disableEmail"
       @input="update('email', $event)"
     />
 
@@ -84,6 +85,7 @@
       dense
       :items="userRoleOptions"
       outlined
+      :disabled="disableUserRole"
       @input="update('userRole', $event)"
     />
   </v-form>
@@ -100,6 +102,14 @@ export default {
       default: () => {},
     },
     disabled: {
+      type: Boolean,
+      default: false,
+    },
+    disableUserRole: {
+      type: Boolean,
+      default: false,
+    },
+    disableEmail: {
       type: Boolean,
       default: false,
     },

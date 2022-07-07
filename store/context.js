@@ -116,7 +116,7 @@ export const actions = {
   },
 
   async logOut ({ dispatch }) {
-    await this.$axios.$get('/api/v1/logout')
+    await this.$axios.$post('/api/v1/logout')
     dispatch('cleanup')
   },
 

@@ -1,5 +1,5 @@
 <template>
-  <v-avatar :size="size" :color="color">
+  <v-avatar :size="size" :color="color" @click="$emit('click', $event)">
     <v-img
       :src="avatar"
       alt="John"
