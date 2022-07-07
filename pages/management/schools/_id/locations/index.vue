@@ -115,7 +115,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      school: 'admin/page/school/school',
+      school: 'context/school',
     }),
     mapOptions () {
       return {

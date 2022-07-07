@@ -18,13 +18,13 @@ export default {
 
   computed: {
     ...mapGetters({
-      school: 'admin/page/school/school',
+      school: 'context/school',
     }),
   },
 
   methods: {
     onUpdateHandler (res) {
-      this.$store.commit('admin/page/school/school', res)
+      this.$store.commit('context/school', res)
     },
   },
 }

@@ -97,7 +97,7 @@ export default {
   layout: 'admin',
 
   async asyncData ({ store, route }) {
-    await store.dispatch('admin/page/school/fetch', route.params.id)
+    await store.dispatch('context/fetchSchool', route.params.id)
   },
 
   data: () => ({}),
@@ -110,7 +110,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      school: 'admin/page/school/school',
+      school: 'context/school',
       country: 'countries/name',
     }),
     location () {

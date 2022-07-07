@@ -82,7 +82,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      school: 'admin/page/school/school',
+      school: 'context/school',
     }),
   },
 
@@ -103,7 +103,7 @@ export default {
       }
 
       this.$store.dispatch('api/schools/save', this.formData).then((res) => {
-        this.$store.commit('admin/page/school/school', res)
+        this.$store.commit('context/school', res)
         this.formData = {
           ...res,
         }

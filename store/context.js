@@ -84,6 +84,12 @@ export const actions = {
     })
   },
 
+  async fetchSchool ({ commit, dispatch }, id) {
+    const school = await dispatch('api/schools/get', id, { root: true })
+    commit('school', school)
+    await dispatch('fetchSportLocations')
+  },
+
   applyPrimaryColor ({ getters }) {
     const root = document.documentElement
     root.style.setProperty('--v-primary-base', getters.school.color)

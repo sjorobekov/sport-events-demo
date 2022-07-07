@@ -11,7 +11,6 @@ export default {
   components: {
     FxStudentAddPage,
   },
-  layout: 'admin',
   head: () => ({
     title: 'Add Student',
   }),
@@ -22,8 +21,8 @@ export default {
   },
 
   methods: {
-    onCreatedHandler (res) {
-      this.$router.push({ name: 'management-schools-id-students', params: { id: res.schoolId } })
+    onCreatedHandler () {
+      this.$router.push({ name: 'settings-students' })
     },
   },
 }

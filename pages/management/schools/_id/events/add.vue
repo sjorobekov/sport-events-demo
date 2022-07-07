@@ -19,7 +19,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      schoolId: 'admin/page/school/id',
+      schoolId: 'context/schoolId',
     }),
   },
 

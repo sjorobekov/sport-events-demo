@@ -1,5 +1,5 @@
 <template>
-  <FxStudentEditPage :school-id="schoolId" @remove="onRemoveHandler" />
+  <FxStudentEditPage :school-id="schoolId" @updated="onUpdatedHandler" />
 </template>
 
 <script>
@@ -7,9 +7,8 @@ import { mapGetters } from 'vuex'
 import FxStudentEditPage from '@/components/PageComponents/FxStudentEditPage'
 
 export default {
-  name: 'SuperAdminStudentEditPage',
+  name: 'SettingsStudentEditPage',
   components: { FxStudentEditPage },
-  layout: 'admin',
   head: () => ({ title: 'Edit Student' }),
   computed: {
     ...mapGetters({
@@ -18,8 +17,8 @@ export default {
   },
 
   methods: {
-    onRemoveHandler () {
-      this.$router.push({ name: 'management-schools-id-students' })
+    onUpdatedHandler () {
+      this.$router.push({ name: 'settings-students' })
     },
   },
 }
