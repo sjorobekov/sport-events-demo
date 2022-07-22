@@ -6,7 +6,7 @@ import {
   SeasonStatus,
   RepeatPeriod,
   FixtureType,
-  Gender, UserRole, EventStatus,
+  Gender, UserRole, EventStatus, EventResult,
 } from '@/enum'
 
 export type Plan = {
@@ -139,6 +139,13 @@ export interface Opponent {
   readonly updatedAt: string
 }
 
+export interface EventParticipantResult {
+  score: number
+  result: EventResult
+  opponentScore: number
+  opponentSchool: string
+}
+
 export interface EventParticipant {
   readonly id: string
   gender: Gender
@@ -160,6 +167,8 @@ export interface EventParticipant {
   status: EventStatus
   eventLocation: EventLocation
   creator: boolean
+  overallResult: EventResult,
+  results?: Array<EventParticipantResult>
 }
 
 export interface Event {

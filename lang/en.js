@@ -1,10 +1,18 @@
-import { EventResult, TransportType } from '~/enum'
+import { EventResult, FixtureType, TransportType } from '~/enum'
 
 export default {
+  FIXTURE_TYPE: {
+    [FixtureType.CUP]: 'Cup',
+    [FixtureType.LEAGUE]: 'League',
+    [FixtureType.FRIENDLY]: 'Friendly',
+    [FixtureType.ON_TOUR]: 'On Tour',
+    [FixtureType.PRE_SEASON]: 'Pre-Season',
+  },
   EVENT_RESULT: {
     [EventResult.WIN]: 'Won',
     [EventResult.DRAW]: 'Draw',
     [EventResult.LOST]: 'Lost',
+    [EventResult.LIVE]: 'Live',
     [EventResult.SEE_MATCH_NOTES]: 'See Match Notes',
     [EventResult.TO_BE_PLAYED]: 'To Be Played',
     [EventResult.SEE_EVENT_RESULTS]: 'See Event Results',

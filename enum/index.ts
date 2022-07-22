@@ -73,6 +73,7 @@ export enum EventResult {
   WIN = 'WIN',
   DRAW = 'DRAW',
   LOST = 'LOST',
+  LIVE = 'LIVE',
   SEE_MATCH_NOTES = 'SEE_MATCH_NOTES',
   SEE_EVENT_RESULTS = 'SEE_EVENT_RESULTS',
   TO_BE_PLAYED = 'TO_BE_PLAYED',

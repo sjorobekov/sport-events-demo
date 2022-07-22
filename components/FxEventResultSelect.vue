@@ -7,6 +7,8 @@
     dense
     :value="value"
     :items="items"
+    :height="height"
+    :hide-details="hideDetails"
     placeholder="Select Status"
     @input="$emit('input', $event)"
   />
@@ -41,6 +43,14 @@ export default {
           }
         })
       },
+    },
+    height: {
+      type: [String, Number],
+      default: 52,
+    },
+    hideDetails: {
+      type: Boolean,
+      default: false,
     },
   },
 }

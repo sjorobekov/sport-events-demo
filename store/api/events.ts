@@ -1,6 +1,6 @@
 import { ActionTree, GetterTree } from 'vuex'
 import { PaginatedList, Event, CreateEventPayload, CreateEventBatchPayload } from '~/types'
-import { EventStatus, Gender } from '@/enum'
+import { EventResult, EventStatus, Gender } from '@/enum'
 
 export const state = () => ({})
 
@@ -72,6 +72,20 @@ type EventConfirmationPayload = {
   schoolId: string,
 }
 
+type StoreResultItem = {
+  result: EventResult,
+  score: number,
+  opponentScore?: number,
+  opponentId?: number,
+  opponentSchoolId?: number,
+  round?: string,
+  notes?: string,
+}
+
+type StoreResultPayload = {
+  results: Array<StoreResultItem>
+}
+
 export const actions: ActionTree<RootState, RootState> = {
   async getBySchool (_, { schoolId, params }: ListPayload): Promise<PaginatedList<Event>> {
     const { data, meta }: PaginatedList<Event> = await this.$axios.$get(`/api/v1/schools/${schoolId}/events`, { params })
@@ -138,7 +152,7 @@ export const actions: ActionTree<RootState, RootState> = {
   },
 
   async get (_, { schoolId, id }): Promise<Event> {
-    const event: Event = await this.$axios.$get(`api/v1/schools/${schoolId}/events/${id}`)
+    const event: Event = await this.$axios.$get(`/api/v1/schools/${schoolId}/events/${id}`)
 
     event.participants.forEach((participant) => {
       if (participant?.schoolId === schoolId) {
@@ -152,6 +166,20 @@ export const actions: ActionTree<RootState, RootState> = {
   },
 
   remove (_, { schoolId, id }): Promise<void> {
-    return this.$axios.$delete(`api/v1/schools/${schoolId}/events/${id}`)
+    return this.$axios.$delete(`/api/v1/schools/${schoolId}/events/${id}`)
+  },
+
+  async storeResult (_, { schoolId, id, formData }: { schoolId: string, id: string, formData: StoreResultPayload }): Promise<Event> {
+    const event: Event = await this.$axios.$post(`/api/v1/schools/${schoolId}/events/${id}/results`, formData)
+
+    event.participants.forEach((participant) => {
+      if (participant?.schoolId === schoolId) {
+        event.me = participant
+      } else {
+        event.opponent = participant
+      }
+    })
+
+    return event
   },
 }

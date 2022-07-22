@@ -50,7 +50,7 @@
             </v-chip-group>
           </v-col>
           <v-col cols="6" sm="7" md="6" class="text-right">
-            <v-btn outlined>
+            <v-btn v-if="canEditTeam" outlined>
               <v-icon>$vuetify.icons.edit</v-icon>Edit Team
             </v-btn>
             <v-btn
@@ -189,6 +189,7 @@ export default {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
       canCreateEvent: 'user/acl/canCreateEvent',
+      canEditTeam: 'user/acl/canCreateTeam',
     }),
     teamId () {
       return this.$route.params.id
