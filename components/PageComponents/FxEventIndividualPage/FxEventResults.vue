@@ -13,8 +13,6 @@
             :right-name="opponentTeam.name"
             @submit="storeResult($event)"
           />
-
-          {{ formData }}
         </v-col>
       </v-row>
     </v-container>
