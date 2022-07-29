@@ -31,8 +31,14 @@
       </v-card>
       <FxEventScoreBoardCard />
       <v-row>
-        <v-col cols="12" sm="12" md="12" lg="8" class="pr-4">
-          <FxEventExistingResult v-if="hasResult" />
+        <v-col
+          cols="12"
+          sm="12"
+          md="12"
+          lg="8"
+          class="pr-4 d-flex"
+          :class="hasResult ? 'flex-column-reverse': 'flex-column'"
+        >
           <FxEventDetails />
           <FxEventResults id="results" />
         </v-col>
@@ -51,14 +57,12 @@ import { EventType, EventResult } from '@/enum'
 import FxEventDetails from '@/components/PageComponents/FxEventIndividualPage/FxEventDetails'
 import FxEventResults from '@/components/PageComponents/FxEventIndividualPage/FxEventResults'
 import FxEventTeamSheet from '@/components/PageComponents/FxEventIndividualPage/FxEventTeamSheet'
-import FxEventExistingResult from '@/components/PageComponents/FxEventIndividualPage/FxEventExistingResult'
 import FxEventScoreBoardCard from '@/components/PageComponents/FxEventIndividualPage/FxEventScoreBoardCard'
 
 export default {
   name: 'FxEventIndividualPage',
   components: {
     FxEventScoreBoardCard,
-    FxEventExistingResult,
     FxEventTeamSheet,
     FxEventResults,
     FxEventDetails,
@@ -93,8 +97,8 @@ export default {
       opponentTeam: 'page/event/opponentTeam',
       result: 'page/event/result',
       hasResult: 'page/event/hasResult',
+      isPendingResult: 'page/event/isPendingResult',
     }),
   },
-
 }
 </script>

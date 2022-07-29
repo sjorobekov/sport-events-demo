@@ -1,40 +1,42 @@
 <template>
-  <v-form ref="form" v-async-form :disabled="disabled" @submit.prevent="$emit('submit', formData)">
+  <div>
     <v-row>
       <v-col cols="12">
         <label class="text-p1">Overall Result</label>
-        <FxEventResultSelect height="52" hide-details :value="formData.result" @input="update('result', $event)" />
+        <FxEventResultSelect height="52" hide-details :value="formData.overallResult" @input="update('overallResult', $event)" />
       </v-col>
     </v-row>
 
+    <FxEventTournamentItem
+      v-for="(item, i) in formData.results"
+      :key="i"
+      :value="item"
+      :left-name="leftName"
+      @input="update(`results[${i}]`, $event)"
+    />
+
+    <v-btn text block @click="add()">
+      Add Another Match
+    </v-btn>
     <v-row>
       <v-col>
         <label>Notes</label>
-        <v-textarea outlined placeholder="Tournament Notes" />
+        <v-textarea outlined placeholder="Tournament Notes" :value="formData.resultNotes" @input="update('resultNotes', $event)" />
       </v-col>
     </v-row>
-
-    <v-list-item class="px-0">
-      <v-spacer />
-      <v-list-item-action>
-        <div>
-          <v-btn outlined class="mr-2">
-            Cancel
-          </v-btn>
-          <v-btn depressed color="primary" type="submit">
-            Confirm
-          </v-btn>
-        </div>
-      </v-list-item-action>
-    </v-list-item>
-  </v-form>
+  </div>
 </template>
 
 <script>
+import tap from 'lodash/tap'
+import cloneDeep from 'lodash/cloneDeep'
+import set from 'lodash/set'
+import FxEventTournamentItem from '@/components/FxEventResultForm/components/FxEventTournamentItem'
 import { EventResult } from '@/enum'
 
 export default {
   name: 'FxEventFixtureResultForm',
+  components: { FxEventTournamentItem },
   props: {
     value: {
       type: Object,
@@ -61,27 +63,35 @@ export default {
   computed: {
     formData () {
       return {
-        score: 0,
-        opponentScore: 0,
-        ...(this.value || {}),
+        ...this.value,
+        results: this.value.results || [
+          {
+            score: 0,
+            opponentScore: 0,
+          },
+        ],
       }
     },
   },
 
   methods: {
-    validateAsync () {
-      return this.$refs.form.validateAsync()
-    },
     update (key, value) {
-      this.$emit('input', { ...this.formData, [key]: value })
+      this.$emit('input', tap(cloneDeep(this.formData), v => set(v, key, value)))
     },
 
     increaseScore () {
-      this.$emit('input', { ...this.formData, score: (this.formData.score + 1) })
+      this.update('results[0].score', this.formData.results[0]?.score + 1)
     },
 
     increaseOpponentScore () {
-      this.$emit('input', { ...this.formData, opponentScore: (this.formData.opponentScore + 1) })
+      this.update('results[0].opponentScore', this.formData.results[0]?.opponentScore + 1)
+    },
+
+    add () {
+      this.$emit('input', tap(cloneDeep(this.formData), v => v.results.push({
+        score: 0,
+        opponentScore: 0,
+      })))
     },
   },
 }

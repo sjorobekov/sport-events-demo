@@ -88,6 +88,7 @@
 
       <label for="opponent">Opponent</label>
       <FxOpponentSelect
+        dense
         :school-id="schoolId"
         :opponent-id="opponentForm.listedAsOpponentId"
         :opponent-school-id="opponentForm.schoolId"

@@ -1,11 +1,11 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex'
 import { Event, EventParticipant, EventParticipantResult, School, Sport, Team, User } from '~/types'
-import { EventResult } from '~/enum'
+import { EventResult, EventType, UserRole } from '~/enum'
 
 type ResultData = {
   overallResult?: EventResult,
   results: Array<EventParticipantResult>,
-  matchNotes: string,
+  resultNotes: string,
 }
 
 export const state = () => ({
@@ -90,25 +90,20 @@ export const getters: GetterTree<RootState, RootState> = {
     return state.result
   },
 
-  isPlayed (_state, getters) {
-    return [
-      EventResult.WIN,
-      EventResult.LOST,
-      EventResult.DRAW,
-      EventResult['1ST'],
-      EventResult['2ND'],
-      EventResult['3RD'],
-      EventResult['4TH'],
-      EventResult.SEE_EVENT_RESULTS,
-    ].includes(getters.result.overallResult)
+  hasResult (_state, getters) {
+    return !!getters.result.overallResult
   },
 
   isLive (_state, getters) {
     return getters.result.overallResult === EventResult.LIVE
   },
 
-  hasResult (_state, getters) {
-    return getters.isPlayed || getters.isLive
+  hasScore (_state, getters) {
+    return getters.event.eventType === EventType.FIXTURE && [
+      EventResult.WIN,
+      EventResult.LOST,
+      EventResult.DRAW,
+    ].includes(getters.result.overallResult)
   },
 
   isCancelled (_state, getters) {
@@ -121,6 +116,14 @@ export const getters: GetterTree<RootState, RootState> = {
 
   isPendingResult (_state, getters) {
     return !getters.result.overallResult
+  },
+
+  canAddOrEditResult (_state, getters) {
+    return getters.role === UserRole.ADMIN
+  },
+
+  role (_, _getters, _rootState, rootGetters) {
+    return rootGetters['context/role']
   },
 }
 
@@ -139,7 +142,7 @@ export const actions: ActionTree<RootState, RootState> = {
     commit('result', {
       overallResult: me.overallResult,
       results: me.results,
-      matchNotes: me.matchNotes,
+      resultNotes: me.resultNotes,
     })
 
     const promises = [
@@ -214,7 +217,7 @@ export const actions: ActionTree<RootState, RootState> = {
     commit('result', {
       overallResult: me.overallResult,
       results: me.results,
-      matchNotes: me.matchNotes,
+      resultNotes: me.resultNotes,
     })
   },
 }

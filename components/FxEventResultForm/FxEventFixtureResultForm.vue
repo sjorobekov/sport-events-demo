@@ -1,9 +1,15 @@
 <template>
-  <v-form ref="form" v-async-form :disabled="disabled" @submit.prevent="$emit('submit', formData)">
+  <div>
     <v-row>
       <v-col cols="12" sm="12" md="6">
         <label class="text-p1">Result</label>
-        <FxEventResultSelect height="52" hide-details :value="formData.overallResult" @input="update('overallResult', $event)" />
+        <FxEventResultSelect
+          height="52"
+          hide-details
+          :value="formData.overallResult"
+          :async-rules="[$rule.required]"
+          @input="update('overallResult', $event)"
+        />
       </v-col>
 
       <v-col cols="12" sm="12" md="6">
@@ -51,33 +57,18 @@
     <v-row>
       <v-col>
         <label>Notes</label>
-        <v-textarea outlined placeholder="Match Notes" :value="formData.matchNotes" @input="update('matchNotes', $event)" />
+        <v-textarea outlined placeholder="Match Notes" :value="formData.resultNotes" @input="update('resultNotes', $event)" />
       </v-col>
     </v-row>
-
-    <v-list-item class="px-0">
-      <v-spacer />
-      <v-list-item-action>
-        <div>
-          <v-btn outlined class="mr-2">
-            Cancel
-          </v-btn>
-          <v-btn depressed color="primary" type="submit">
-            Confirm
-          </v-btn>
-        </div>
-      </v-list-item-action>
-    </v-list-item>
-  </v-form>
+  </div>
 </template>
 
 <script>
-import merge from 'lodash/merge'
 import tap from 'lodash/tap'
 import cloneDeep from 'lodash/cloneDeep'
 import set from 'lodash/set'
 import { EventResult } from '@/enum'
-import FxResultRadio from '@/components/FxEventResultForm/FxResultRadio'
+import FxResultRadio from '@/components/FxEventResultForm/components/FxResultRadio'
 
 export default {
   name: 'FxEventFixtureResultForm',
@@ -107,22 +98,19 @@ export default {
 
   computed: {
     formData () {
-      return merge({
-        overallResult: '',
-        results: [
+      return {
+        ...this.value,
+        results: this.value.results || [
           {
             score: 0,
             opponentScore: 0,
           },
         ],
-      }, this.value || {})
+      }
     },
   },
 
   methods: {
-    validateAsync () {
-      return this.$refs.form.validateAsync()
-    },
     update (key, value) {
       this.$emit('input', tap(cloneDeep(this.formData), v => set(v, key, value)))
     },

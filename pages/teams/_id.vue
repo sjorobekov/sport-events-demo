@@ -95,7 +95,9 @@
           </h2>
 
           <v-card>
-            <FxEventItem :event="nextEvent" :me="nextEvent.me" :opponent="nextEvent.opponent" :context-school-id="contextSchoolId" />
+            <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: nextEvent.id } }">
+              <FxEventItem :event="nextEvent" :me="nextEvent.me" :opponent="nextEvent.opponent" :context-school-id="contextSchoolId" />
+            </nuxt-link>
           </v-card>
         </template>
 
@@ -104,7 +106,9 @@
             Fixtures
           </h2>
           <v-card v-for="event in fixtures" :key="`fixture-${event.id}`" class="mb-2">
-            <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" :context-school-id="contextSchoolId" />
+            <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
+              <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" :context-school-id="contextSchoolId" />
+            </nuxt-link>
           </v-card>
         </template>
 
@@ -113,7 +117,9 @@
             Results
           </h2>
           <v-card v-for="event in results" :key="`result-${event.id}`" class="mb-2">
-            <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" :context-school-id="contextSchoolId" />
+            <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
+              <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" :context-school-id="contextSchoolId" />
+            </nuxt-link>
           </v-card>
         </template>
 

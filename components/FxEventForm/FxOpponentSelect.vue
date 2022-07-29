@@ -3,7 +3,7 @@
     :id="id"
     :prepend-inner-icon="prependInnerIcon"
     outlined
-    dense
+    :dense="dense"
     :placeholder="placeholder"
     :items="items"
     :search-input.sync="search"
@@ -57,6 +57,11 @@ export default {
     opponentSchoolId: {
       type: String,
       default: undefined,
+    },
+
+    dense: {
+      type: Boolean,
+      default: false,
     },
   },
 

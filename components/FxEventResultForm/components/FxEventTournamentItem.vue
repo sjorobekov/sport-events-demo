@@ -7,8 +7,8 @@
           :school-id="contextSchoolId"
           :opponent-id="formData.opponentId"
           :opponent-school-id="formData.opponentSchoolId"
-          @update:opponentId="updateOpponent('listedAsOpponentId', $event)"
-          @update:opponentSchoolId="updateOpponent('schoolId', $event)"
+          @update:opponentId="updateOpponent('opponentId', $event)"
+          @update:opponentSchoolId="updateOpponent('opponentSchoolId', $event)"
         />
       </v-col>
     </v-row>
@@ -31,7 +31,7 @@
       </v-col>
 
       <v-col>
-        <label />
+        <label>{{ opponentSchool ? opponentSchool.name : '&nbsp;' }}</label>
         <v-text-field
           height="52"
           class="centered-input mb-2"
@@ -72,11 +72,11 @@
 <script>
 import { mapGetters } from 'vuex'
 import { EventResult } from '@/enum'
-import FxResultRadio from '@/components/FxEventResultForm/FxResultRadio'
+import FxResultRadio from '@/components/FxEventResultForm/components/FxResultRadio'
 import FxOpponentSelect from '@/components/FxEventForm/FxOpponentSelect'
 
 export default {
-  name: 'FxEventFixtureResultForm',
+  name: 'FxEventTournamentItem',
   components: { FxOpponentSelect, FxResultRadio },
   props: {
     value: {
@@ -95,7 +95,12 @@ export default {
 
   data: () => ({
     EventResult,
+    opponentSchool: null,
   }),
+
+  async fetch () {
+    await this.fetchOpponentSchool(this.formData.opponentSchoolId)
+  },
 
   computed: {
     ...mapGetters({
@@ -105,6 +110,7 @@ export default {
       return {
         score: 0,
         opponentScore: 0,
+        opponentSchoolId: null,
         ...(this.value || {}),
       }
     },
@@ -127,13 +133,14 @@ export default {
     },
 
     updateOpponent (key, value) {
-      this.$emit('update:opponent', { ...this.opponentForm, [key]: value })
-
-      if (key === 'schoolId' && value) {
-        this.$store.dispatch('api/schools/fetch', value).then((school) => {
-          this.opponentSchool = school
-        })
+      this.$emit('input', { ...this.formData, [key]: value })
+      if (key === 'opponentSchoolId') {
+        this.fetchOpponentSchool(value)
       }
+    },
+
+    async fetchOpponentSchool (id) {
+      this.opponentSchool = await this.$store.dispatch('api/schools/fetch', id)
     },
   },
 }

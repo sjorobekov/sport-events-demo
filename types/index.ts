@@ -143,7 +143,9 @@ export interface EventParticipantResult {
   score: number
   result: EventResult
   opponentScore: number
-  opponentSchool: string
+  opponentSchoolId?: string
+  opponentId?: string
+  round?: string
 }
 
 export interface EventParticipant {

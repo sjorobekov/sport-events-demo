@@ -3,16 +3,27 @@
     <template #title>
       Results
     </template>
+    <template #actions>
+      <v-btn v-if="!formVisible && canAddOrEditResult" outlined @click="formVisible = true">
+        <v-icon small>
+          mdi-pencil-outline
+        </v-icon>Edit Result
+      </v-btn>
+    </template>
     <v-container>
       <v-row>
-        <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
+        <v-col cols="12" class="pt-1 pb-0 px-0">
           <FxEventResultForm
+            v-if="formVisible"
             v-model="formData"
+            class="px-6"
             :event-type="event.eventType"
             :left-name="myTeam.name"
             :right-name="opponentTeam.name"
-            @submit="storeResult($event)"
+            @submit="save"
+            @cancel="formVisible = false"
           />
+          <FxEventExistingResult v-else />
         </v-col>
       </v-row>
     </v-container>
@@ -24,11 +35,14 @@ import { mapActions, mapGetters } from 'vuex'
 import cloneDeep from 'lodash/cloneDeep'
 import FxEventResultForm from '@/components/FxEventResultForm/FxEventResultForm'
 import FxEventItemCard from '@/components/PageComponents/FxEventIndividualPage/FxEventItemCard'
+import FxEventExistingResult
+  from '@/components/PageComponents/FxEventIndividualPage/FxEventExistingResult/FxEventExistingResult'
 
 export default {
   name: 'FxEventFResults',
-  components: { FxEventItemCard, FxEventResultForm },
+  components: { FxEventExistingResult, FxEventItemCard, FxEventResultForm },
   data: () => ({
+    formVisible: false,
     formData: {
       results: [
         {},
@@ -46,17 +60,30 @@ export default {
       sport: 'page/event/sport',
       lead: 'page/event/lead',
       result: 'page/event/result',
+      hasResult: 'page/event/hasResult',
+      canAddOrEditResult: 'page/event/canAddOrEditResult',
     }),
   },
 
   created () {
     this.formData = cloneDeep(this.result)
+    this.formVisible = !this.hasResult
   },
 
   methods: {
     ...mapActions({
       storeResult: 'page/event/saveResult',
     }),
+
+    save () {
+      this.$store.dispatch('page/event/saveResult', this.formData)
+        .then(() => {
+          this.formVisible = false
+        })
+        .catch(() => {
+          this.$toast.error('Unknown Error')
+        })
+    },
   },
 
 }
