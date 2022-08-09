@@ -8,6 +8,7 @@
           hide-details
           :value="formData.overallResult"
           :async-rules="[$rule.required]"
+          :items="resultOptions"
           @input="update('overallResult', $event)"
         />
       </v-col>
@@ -69,6 +70,7 @@ import cloneDeep from 'lodash/cloneDeep'
 import set from 'lodash/set'
 import { EventResult } from '@/enum'
 import FxResultRadio from '@/components/FxEventResultForm/components/FxResultRadio'
+const EXCLUDE_OPTIONS = [EventResult['1ST'], EventResult['2ND'], EventResult['3RD'], EventResult['4TH']]
 
 export default {
   name: 'FxEventFixtureResultForm',
@@ -107,6 +109,11 @@ export default {
           },
         ],
       }
+    },
+    resultOptions () {
+      return Object.values(EventResult)
+        .filter(value => !EXCLUDE_OPTIONS.includes(value))
+        .map(value => ({ value, text: this.$t(`EVENT_RESULT.${value}`) }))
     },
   },
 
