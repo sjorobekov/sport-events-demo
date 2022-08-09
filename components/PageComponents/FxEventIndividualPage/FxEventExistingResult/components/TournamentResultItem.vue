@@ -6,7 +6,7 @@
           {{ item.round }}
         </v-list-item-content>
         <v-list-item-action>
-          <span class="text-caption result-box">{{ $t(`EVENT_RESULT.${item.result}`) }}</span>
+          <span class="text-caption result-box" :class="item.result.toLowerCase()">{{ $t(`EVENT_RESULT.${item.result}`) }}</span>
         </v-list-item-action>
       </v-list-item>
     </div>
@@ -73,11 +73,24 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .result-box {
   border-radius: 6px;
   padding: 2px 8px 2px 8px;
-  color: var(--v-info-darken1);
-  box-shadow: 0 0 0 1px var(--v-info-lighten1);
+
+  &.win {
+    color: var(--v-success-darken2);
+    box-shadow: 0 0 0 1px var(--v-success-base);
+  }
+
+  &.draw {
+    color: var(--v-info-darken1);
+    box-shadow: 0 0 0 1px var(--v-info-lighten1);
+  }
+
+  &.lost {
+    color: var(--v-error-darken2);
+    box-shadow: 0 0 0 1px var(--v-error-base);
+  }
 }
 </style>
