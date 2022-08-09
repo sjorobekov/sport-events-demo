@@ -81,7 +81,7 @@
             </template>
           </ListItem>
         </v-col>
-        <v-col cols="12" class="border-bottom pt-1 pb-0">
+        <v-col cols="12" class="pt-1 pb-0">
           <ListItem v-if="!me.noNeedTransport">
             <template #icon>
               <v-icon>$vuetify.icons.direction</v-icon>
