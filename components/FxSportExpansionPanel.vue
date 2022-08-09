@@ -1,6 +1,6 @@
 <template>
   <v-expansion-panels>
-    <v-expansion-panel :style="style">
+    <v-expansion-panel :style="style" class="fx-box-shadow">
       <v-expansion-panel-header class="py-0 pl-2">
         <v-list-item class="px-0 ">
           <v-list-item-avatar>

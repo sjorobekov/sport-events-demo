@@ -2,6 +2,8 @@
 
 /*@import url("https://hello.myfonts.net/count/496482");*/
 
+$box-shadow: 0 1px 4px 0 rgb(0 0 0 / 15%);
+
 @font-face {
   font-family: "ProximaNova";
   src: url('./fonts/ProximaNovaRegular/font.woff2') format('woff2'), url('./fonts/ProximaNovaRegular/font.woff') format('woff');
@@ -71,4 +73,13 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 
 .v-text-field--outlined fieldset {
   border-color: var(--v-info-lighten2)!important;
+}
+
+.v-sheet.v-card:not(.v-sheet--outlined) {
+  box-shadow: $box-shadow!important;
+}
+.fx-box-shadow {
+  &.v-expansion-panel::before{
+    box-shadow: $box-shadow;
+  }
 }

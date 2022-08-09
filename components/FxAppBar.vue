@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar height="56" app fixed elevation="1" color="white">
+  <v-app-bar height="56" app fixed class="shadow" color="white">
     <v-container>
       <v-row align="center">
         <v-spacer />
@@ -75,3 +75,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.shadow {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25)!important;
+}
+</style>
