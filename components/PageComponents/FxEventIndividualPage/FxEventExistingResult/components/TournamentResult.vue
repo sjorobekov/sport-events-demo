@@ -6,11 +6,9 @@
           Tournament Notes
         </v-list-item-content>
       </v-list-item>
-      <v-list-item class="border-bottom ">
-        <v-list-item-content>
-          <v-list-item-title class="text-p2">
-            {{ result.resultNotes }}
-          </v-list-item-title>
+      <v-list-item class="border-bottom">
+        <v-list-item-content class="text-p2">
+          {{ result.resultNotes }}
         </v-list-item-content>
       </v-list-item>
     </v-list>
