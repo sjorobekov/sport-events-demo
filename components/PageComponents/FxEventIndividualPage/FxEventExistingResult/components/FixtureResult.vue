@@ -1,7 +1,7 @@
 <template>
-  <v-list class="py-0 px-3">
-    <div v-for="(item, i) in result.results" :key="i">
-      <v-list-item class="team-item pr-1">
+  <v-list class="py-0">
+    <div v-for="(item, i) in result.results" :key="i" class="pl-3 pr-4">
+      <v-list-item class="team-item">
         <v-list-item-avatar>
           <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" :alt="myTeam.name" />
         </v-list-item-avatar>
@@ -16,7 +16,7 @@
           </v-avatar>
         </v-list-item-action>
       </v-list-item>
-      <v-list-item class="team-item pr-1">
+      <v-list-item class="team-item">
         <v-list-item-avatar>
           <FxSchoolLogo :value="opponentTeam.logo" :color="opponentTeam.color" :alt="opponentTeam.name" />
         </v-list-item-avatar>
@@ -32,6 +32,18 @@
         </v-list-item-action>
       </v-list-item>
     </div>
+    <template v-if="result.resultNotes">
+      <v-list-item class="border-top pt-4" style="height: 24px; min-height: initial">
+        <v-list-item-content class="text-caption pa-0">
+          Notes
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item>
+        <v-list-item-content class="text-p2">
+          {{ result.resultNotes }}
+        </v-list-item-content>
+      </v-list-item>
+    </template>
   </v-list>
 </template>
 
