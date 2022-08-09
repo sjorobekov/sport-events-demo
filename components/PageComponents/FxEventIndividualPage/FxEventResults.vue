@@ -1,7 +1,7 @@
 <template>
   <FxEventItemCard>
     <template #title>
-      Results
+      {{ title }}
     </template>
     <template #actions>
       <v-btn v-if="!formVisible && canAddOrEditResult" outlined @click="formVisible = true">
@@ -37,6 +37,13 @@ import FxEventResultForm from '@/components/FxEventResultForm/FxEventResultForm'
 import FxEventItemCard from '@/components/PageComponents/FxEventIndividualPage/FxEventItemCard'
 import FxEventExistingResult
   from '@/components/PageComponents/FxEventIndividualPage/FxEventExistingResult/FxEventExistingResult'
+import { EventType } from '@/enum'
+
+const TITLE = {
+  [EventType.FIXTURE]: 'Result',
+  [EventType.TOURNAMENT]: 'Results',
+  [EventType.MULTI_EVENT]: 'Results',
+}
 
 export default {
   name: 'FxEventFResults',
@@ -63,6 +70,9 @@ export default {
       hasResult: 'page/event/hasResult',
       canAddOrEditResult: 'page/event/canAddOrEditResult',
     }),
+    title () {
+      return TITLE[this.event.eventType] || 'Results'
+    },
   },
 
   created () {

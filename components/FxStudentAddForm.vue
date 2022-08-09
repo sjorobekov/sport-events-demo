@@ -129,12 +129,10 @@
                 <label for="gender">Gender</label>
                 <v-select
                   id="gender"
-                  v-async-validate
                   outlined
                   dense
                   :value="formData.gender"
                   :items="genderOptions"
-                  :async-rules="[$rule.required]"
                   placeholder="Select Gender"
                   @input="update('gender', $event)"
                 />
