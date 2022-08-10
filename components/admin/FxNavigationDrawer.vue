@@ -33,7 +33,7 @@ export default {
   data: () => ({
     items: [
       { title: 'Dashboard', icon: '$vuetify.icons.dashboard', exact: true, to: { name: 'management' } },
-      { title: 'Schools', icon: '$vuetify.icons.school', to: { name: 'management-schools' } },
+      { title: 'Schools', icon: '$vuetify.icons.schools', to: { name: 'management-schools' } },
       { title: 'Events', icon: '$vuetify.icons.calendar', to: { name: 'management-events' } },
       { title: 'Sports', icon: '$vuetify.icons.whistle', to: { name: 'management-sports' } },
     ],

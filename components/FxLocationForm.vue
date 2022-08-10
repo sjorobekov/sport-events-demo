@@ -165,7 +165,7 @@ export default {
   }),
 
   computed: {
-    ...mapGetters({ school: 'admin/page/school/school' }),
+    ...mapGetters({ school: 'admin/page/schools/schools' }),
     formData () {
       return {
         ...(this.value || { name: '', address: '' }),

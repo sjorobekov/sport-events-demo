@@ -518,7 +518,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      school: 'admin/page/school/school',
+      school: 'admin/page/schools/schools',
       currentSeason: 'seasons/current',
       locations: 'context/sportLocations',
     }),

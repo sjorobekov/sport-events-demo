@@ -1,6 +1,7 @@
 export default {
   publicRuntimeConfig: {
     GMAPS_KEY: process.env.GMAPS_KEY,
+    PORTAL_WILDCARD: process.env.PORTAL_WILDCARD,
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -32,6 +33,7 @@ export default {
       src: '~/plugins/nuxt-client-init',
       mode: 'client',
     },
+    '~/plugins/wrapped-component.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -83,7 +85,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ['luxon', 'vuetify-toast-snackbar-ng'],
+    transpile: ['luxon', 'vuetify-toast-snackbar-ng', 'vue-wrapped-component'],
     hotMiddleware: {
       reload: false,
       client: {
