@@ -13,8 +13,8 @@
       </v-col>
     </v-row>
 
-    <template v-for="(item, i) in formData.results">
-      <div :key="i" class="d-flex mt-6">
+    <div v-for="(item, i) in formData.results" :key="i" >
+      <div class="d-flex mt-6">
         <div class="text-p1 info--text pr-3 line-height">
           {{ matchLabel(i) }}
         </div>
@@ -22,12 +22,11 @@
       </div>
 
       <FxEventTournamentItem
-        :key="i"
         :value="item"
         :left-name="leftName"
         @input="update(`results[${i}]`, $event)"
       />
-    </template>
+    </div>
 
     <v-divider class="my-4" />
 
