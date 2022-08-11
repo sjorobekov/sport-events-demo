@@ -2,7 +2,7 @@
   <v-autocomplete
     :id="id"
     v-async-validate
-    :async-rules="[asyncRules]"
+    :async-rules="asyncRules"
     outlined
     dense
     :value="value"

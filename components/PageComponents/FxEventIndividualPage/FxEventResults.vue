@@ -15,11 +15,13 @@
         <v-col cols="12" class="pt-1 pb-0 px-0">
           <FxEventResultForm
             v-if="formVisible"
+            ref="form"
             v-model="formData"
             class="px-6"
             :event-type="event.eventType"
             :left-name="myTeam.name"
             :right-name="opponentTeam.name"
+            :disabled="loading"
             @submit="save"
             @cancel="formVisible = false"
           />
@@ -55,6 +57,7 @@ export default {
         {},
       ],
     },
+    loading: false,
   }),
 
   computed: {
@@ -85,13 +88,22 @@ export default {
       storeResult: 'page/event/saveResult',
     }),
 
-    save () {
+    async save () {
+      this.loading = true
+      const isValid = await this.$refs.form.validateAsync()
+      if (!isValid) {
+        this.loading = false
+        return
+      }
       this.$store.dispatch('page/event/saveResult', this.formData)
         .then(() => {
           this.formVisible = false
         })
         .catch(() => {
           this.$toast.error('Unknown Error')
+        })
+        .finally(() => {
+          this.loading = false
         })
     },
   },

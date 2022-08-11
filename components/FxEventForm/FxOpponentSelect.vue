@@ -1,7 +1,9 @@
 <template>
   <v-autocomplete
     :id="id"
+    v-async-validate
     :prepend-inner-icon="prependInnerIcon"
+    :async-rules="asyncRules"
     outlined
     :dense="dense"
     :placeholder="placeholder"
@@ -62,6 +64,11 @@ export default {
     dense: {
       type: Boolean,
       default: false,
+    },
+
+    asyncRules: {
+      type: Array,
+      default: () => [],
     },
   },
 

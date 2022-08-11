@@ -1,6 +1,10 @@
 <template>
   <v-form ref="form" v-async-form :disabled="disabled" @submit.prevent="$emit('submit', value)">
-    <component :is="form[eventType]" v-bind="$props" @input="$emit('input', $event)" @submit="$emit('submit', $event)" />
+    <component
+      :is="form[eventType]"
+      v-bind="$props"
+      @input="$emit('input', $event)"
+    />
 
     <v-list-item class="px-0">
       <v-spacer />

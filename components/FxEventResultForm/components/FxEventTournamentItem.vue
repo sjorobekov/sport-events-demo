@@ -4,6 +4,7 @@
       <v-col>
         <label>Opponent</label>
         <FxOpponentSelect
+          :async-rules="[$rule.required]"
           :school-id="contextSchoolId"
           :opponent-id="formData.opponentId"
           :opponent-school-id="formData.opponentSchoolId"
@@ -99,7 +100,9 @@ export default {
   }),
 
   async fetch () {
-    await this.fetchOpponentSchool(this.formData.opponentSchoolId)
+    if (this.formData.opponentSchoolId) {
+      await this.fetchOpponentSchool(this.formData.opponentSchoolId)
+    }
   },
 
   computed: {

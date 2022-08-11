@@ -3,20 +3,36 @@
     <v-row>
       <v-col cols="12">
         <label class="text-p1">Overall Result</label>
-        <FxEventResultSelect height="52" hide-details :value="formData.overallResult" @input="update('overallResult', $event)" />
+        <FxEventResultSelect
+          height="52"
+          hide-details
+          :value="formData.overallResult"
+          :async-rules="[$rule.required]"
+          @input="update('overallResult', $event)"
+        />
       </v-col>
     </v-row>
 
-    <FxEventTournamentItem
-      v-for="(item, i) in formData.results"
-      :key="i"
-      :value="item"
-      :left-name="leftName"
-      @input="update(`results[${i}]`, $event)"
-    />
+    <template v-for="(item, i) in formData.results">
+      <div :key="i" class="d-flex mt-6">
+        <div class="text-p1 info--text pr-3 line-height">
+          {{ matchLabel(i) }}
+        </div>
+        <v-divider class="my-4" />
+      </div>
 
-    <v-btn text block @click="add()">
-      Add Another Match
+      <FxEventTournamentItem
+        :key="i"
+        :value="item"
+        :left-name="leftName"
+        @input="update(`results[${i}]`, $event)"
+      />
+    </template>
+
+    <v-divider class="my-4" />
+
+    <v-btn text block color="info" @click="add()">
+      <v-icon>mdi-plus-circle</v-icon> Add Another Match
     </v-btn>
     <v-row>
       <v-col>
@@ -58,6 +74,7 @@ export default {
 
   data: () => ({
     EventResult,
+    units: ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'],
   }),
 
   computed: {
@@ -72,19 +89,21 @@ export default {
         ],
       }
     },
+
+    matchLabel () {
+      return (i) => {
+        if (i > 10) {
+          return `Match ${i}`
+        }
+
+        return `Match ${this.units[i]}`
+      }
+    },
   },
 
   methods: {
     update (key, value) {
       this.$emit('input', tap(cloneDeep(this.formData), v => set(v, key, value)))
-    },
-
-    increaseScore () {
-      this.update('results[0].score', this.formData.results[0]?.score + 1)
-    },
-
-    increaseOpponentScore () {
-      this.update('results[0].opponentScore', this.formData.results[0]?.opponentScore + 1)
     },
 
     add () {
@@ -100,5 +119,8 @@ export default {
 <style scoped>
 /deep/ .centered-input input {
   text-align: center;
+}
+.line-height {
+  line-height: 31px;
 }
 </style>

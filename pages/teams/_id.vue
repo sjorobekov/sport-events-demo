@@ -212,14 +212,10 @@ export default {
       })
     },
     fixtures () {
-      return this.events.filter((event) => {
-        return event.eventType === EventType.FIXTURE
-      })
+      return this.events
     },
     results () {
-      return this.events.filter((event) => {
-        return event.eventType === EventType.FIXTURE
-      })
+      return this.events
     },
     training () {
       return this.events.filter((event) => {
