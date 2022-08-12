@@ -15,7 +15,7 @@
 
       <v-col cols="12" sm="12" md="6">
         <label class="text-p1">&nbsp;</label>
-        <FxResultRadio :value="formData.results[0].result" @input="update('results[0].result', $event)" />
+        <FxResultRadio :value="formData.results[0].result" @input="update('overallResult', $event)" />
       </v-col>
     </v-row>
 
@@ -30,7 +30,7 @@
           dense
           placeholder="0"
           :value="formData.results[0].score"
-          @input="update('score', $event)"
+          @input="update('results[0].score', $event)"
         />
         <v-btn height="52" block depressed @click="increaseScore">
           +1
@@ -47,7 +47,7 @@
           dense
           placeholder="0"
           :value="formData.results[0].opponentScore"
-          @input="update('opponentScore', $event)"
+          @input="update('results[0].opponentScore', $event)"
         />
         <v-btn height="52" block depressed @click="increaseOpponentScore">
           +1
@@ -61,6 +61,8 @@
         <v-textarea outlined placeholder="Match Notes" :value="formData.resultNotes" @input="update('resultNotes', $event)" />
       </v-col>
     </v-row>
+
+    {{ formData }}
   </div>
 </template>
 
@@ -119,7 +121,11 @@ export default {
 
   methods: {
     update (key, value) {
-      this.$emit('input', tap(cloneDeep(this.formData), v => set(v, key, value)))
+      const data = cloneDeep(this.formData)
+      if (key === 'overallResult') {
+        data.results[0].result = value
+      }
+      this.$emit('input', tap(data, v => set(v, key, value)))
     },
 
     increaseScore () {

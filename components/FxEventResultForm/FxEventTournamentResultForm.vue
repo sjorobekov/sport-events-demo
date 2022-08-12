@@ -13,7 +13,7 @@
       </v-col>
     </v-row>
 
-    <div v-for="(item, i) in formData.results" :key="i" >
+    <div v-for="(item, i) in formData.results" :key="i">
       <div class="d-flex mt-6">
         <div class="text-p1 info--text pr-3 line-height">
           {{ matchLabel(i) }}
