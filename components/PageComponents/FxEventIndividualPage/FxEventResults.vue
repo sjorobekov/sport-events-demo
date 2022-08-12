@@ -25,7 +25,7 @@
             @submit="save"
             @cancel="formVisible = false"
           />
-          <FxEventExistingResult v-else />
+          <FxEventExistingResult v-else class="rounded" />
         </v-col>
       </v-row>
     </v-container>
