@@ -83,10 +83,6 @@ export default {
       required: true,
     },
   },
-  onBeforeUnmount () {
-    this.setSession('eventForm', null)
-    this.setSession('eventItems', [])
-  },
   data: () => ({
     DateTime,
     formData: {
@@ -157,6 +153,13 @@ export default {
         sportId: this.$route.query.sportId,
       },
     }
+
+    this.$router.push({ query: {} })
+  },
+
+  beforeDestroy () {
+    this.setSession('eventForm', null)
+    this.setSession('eventItems', [])
   },
 
   methods: {
