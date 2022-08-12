@@ -61,8 +61,6 @@
         <v-textarea outlined placeholder="Match Notes" :value="formData.resultNotes" @input="update('resultNotes', $event)" />
       </v-col>
     </v-row>
-
-    {{ formData }}
   </div>
 </template>
 
