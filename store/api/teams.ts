@@ -1,5 +1,5 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex'
-import { Dictionary, Team } from '~/types'
+import { Dictionary, Student, Team } from '~/types'
 import { Gender, PublishResult } from '~/enum'
 
 export const state = () => ({
@@ -98,6 +98,10 @@ export const actions: ActionTree<RootState, RootState> = {
     }
 
     return state.indexed[id]
+  },
+
+  getLastSheet (_, { schoolId, id }): Promise<Student[]> {
+    return this.$axios.$get(`api/v1/schools/${schoolId}/teams/${id}/sheets`)
   },
 
   remove (_, { schoolId, id }): Promise<void> {

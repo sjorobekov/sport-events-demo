@@ -30,22 +30,7 @@
         </v-list-item>
       </v-card>
       <FxEventScoreBoardCard />
-      <v-row>
-        <v-col
-          cols="12"
-          sm="12"
-          md="12"
-          lg="8"
-          class="pr-4 d-flex"
-          :class="hasResult ? 'flex-column-reverse': 'flex-column'"
-        >
-          <FxEventDetails />
-          <FxEventResults id="results" />
-        </v-col>
-        <v-col cols="12" sm="12" md="12" lg="4">
-          <FxEventTeamSheet />
-        </v-col>
-      </v-row>
+      <NuxtChild />
     </template>
   </div>
 </template>
@@ -54,18 +39,12 @@
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
 import { EventType, EventResult } from '@/enum'
-import FxEventDetails from '@/components/PageComponents/FxEventIndividualPage/FxEventDetails'
-import FxEventResults from '@/components/PageComponents/FxEventIndividualPage/FxEventResults'
-import FxEventTeamSheet from '@/components/PageComponents/FxEventIndividualPage/FxEventTeamSheet'
 import FxEventScoreBoardCard from '@/components/PageComponents/FxEventIndividualPage/FxEventScoreBoardCard'
 
 export default {
   name: 'FxEventIndividualPage',
   components: {
     FxEventScoreBoardCard,
-    FxEventTeamSheet,
-    FxEventResults,
-    FxEventDetails,
   },
   props: {
     eventId: {

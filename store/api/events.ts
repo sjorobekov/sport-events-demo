@@ -1,5 +1,5 @@
 import { ActionTree, GetterTree } from 'vuex'
-import { PaginatedList, Event, CreateEventPayload, CreateEventBatchPayload } from '~/types'
+import { PaginatedList, Event, CreateEventPayload, CreateEventBatchPayload, Student } from '~/types'
 import { EventResult, EventStatus, Gender } from '@/enum'
 
 export const state = () => ({})
@@ -163,6 +163,16 @@ export const actions: ActionTree<RootState, RootState> = {
     })
 
     return event
+  },
+
+  getTeamSheet (_, { schoolId, id }): Promise<Student[]> {
+    return this.$axios.$get(`/api/v1/schools/${schoolId}/events/${id}/team_sheets`)
+  },
+
+  saveTeamSheet (_, { schoolId, id, sheet }: { schoolId: string, id: string, sheet: String[]}) {
+    return this.$axios.$post(`/api/v1/schools/${schoolId}/events/${id}/team_sheets`, {
+      sheet,
+    })
   },
 
   remove (_, { schoolId, id }): Promise<void> {

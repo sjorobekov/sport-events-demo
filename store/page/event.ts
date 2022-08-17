@@ -19,6 +19,7 @@ export const state = () => ({
   result: {
     results: [] as Array<EventParticipantResult>,
   } as ResultData,
+  teamSheet: [],
 })
 
 export type RootState = ReturnType<typeof state>
@@ -54,6 +55,10 @@ export const mutations: MutationTree<RootState> = {
 
   result (state, result: ResultData) {
     state.result = result
+  },
+
+  teamSheet (state, teamSheet) {
+    state.teamSheet = teamSheet
   },
 }
 
@@ -122,6 +127,14 @@ export const getters: GetterTree<RootState, RootState> = {
     return getters.role === UserRole.ADMIN
   },
 
+  canManageTeamSheet (_state, getters) {
+    return getters.role === UserRole.ADMIN
+  },
+
+  teamSheet (state) {
+    return state.teamSheet
+  },
+
   role (_, _getters, _rootState, rootGetters) {
     return rootGetters['context/role']
   },
@@ -157,6 +170,8 @@ export const actions: ActionTree<RootState, RootState> = {
         schoolId: opponent.schoolId,
       }))
     }
+
+    promises.push(dispatch('fetchTeamSheet', eventId))
 
     await Promise.all(promises)
   },
@@ -203,6 +218,17 @@ export const actions: ActionTree<RootState, RootState> = {
     }, { root: true })
 
     commit('lead', lead)
+  },
+
+  async fetchTeamSheet ({ dispatch, commit, rootGetters }, eventId: string) {
+    const contextSchoolId = rootGetters['context/schoolId']
+
+    const teamSheet = await dispatch('api/events/getTeamSheet', {
+      schoolId: contextSchoolId,
+      id: eventId,
+    }, { root: true })
+
+    commit('teamSheet', teamSheet)
   },
 
   async saveResult ({ commit, dispatch, rootGetters, getters }, payload) {

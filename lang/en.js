@@ -39,4 +39,10 @@ export default {
     [TransportType.VENUE]: 'Collect from Venue',
     [TransportType.OTHER]: 'Other',
   },
+
+  page: {
+    FxTeamSheetEditPage: {
+      STUDENTS_SELECTED: 'No Students Selected | One Student Selected | {count} Students Selected',
+    },
+  },
 }
