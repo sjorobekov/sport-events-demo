@@ -225,3 +225,21 @@ export interface PaginatedList <T> {
     total: number,
   }
 }
+
+export interface inHouseCompetitions {
+  readonly id: string,
+  schoolId: string
+  readonly school?: School
+  sportId: string
+  readonly sport?: Sport
+  seasonId: string
+  readonly season: Season
+  name: string
+  leadId: string
+  readonly lead: User
+  photoId: string
+  publishCompetition: boolean
+  publishResults: string
+  readonly createdAt: string,
+  readonly updatedAt: string,
+}
