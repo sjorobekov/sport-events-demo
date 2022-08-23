@@ -1,14 +1,14 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex'
-import { Dictionary, inHouseCompetitions } from '~/types'
+import { Dictionary, InHouseCompetition } from '~/types'
 
 export const state = () => ({
-  indexed: {} as Dictionary<inHouseCompetitions>,
+  indexed: {} as Dictionary<InHouseCompetition>,
 })
 
 export type RootState = ReturnType<typeof state>
 
 export const mutations: MutationTree<RootState> = {
-  cache (state, item: inHouseCompetitions): void {
+  cache (state, item: InHouseCompetition): void {
     state.indexed[item.id] = item
   },
 }
@@ -24,19 +24,19 @@ type ListPayload = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  async list ({ commit }, { schoolId, params }: ListPayload): Promise<Array<inHouseCompetitions>> {
-    const items: inHouseCompetitions[] = await this.$axios.$get(`/api/v1/schools/${schoolId}/in_house_competitions`, { params })
+  async list ({ commit }, { schoolId, params }: ListPayload): Promise<Array<InHouseCompetition>> {
+    const items: InHouseCompetition[] = await this.$axios.$get(`/api/v1/schools/${schoolId}/in_house_competitions`, { params })
     items.forEach((item) => {
       commit('cache', item)
     })
     return items
   },
 
-  get (_, { schoolId, id }): Promise<inHouseCompetitions> {
+  get (_, { schoolId, id }): Promise<InHouseCompetition> {
     return this.$axios.$get(`api/v1/schools/${schoolId}/in_house_competitions/${id}`)
   },
 
-  async fetch ({ commit, state, dispatch }, { schoolId, id }): Promise<inHouseCompetitions> {
+  async fetch ({ commit, state, dispatch }, { schoolId, id }): Promise<InHouseCompetition> {
     if (!state.indexed[id]) {
       const data = await dispatch('get', { schoolId, id })
       commit('cache', data)

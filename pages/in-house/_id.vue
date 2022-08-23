@@ -43,7 +43,7 @@
             </v-chip-group>
           </v-col>
           <v-col cols="6" sm="7" md="6" class="text-right">
-            <v-btn v-if="canEditTeam" outlined>
+            <v-btn v-if="canEditCompetition" outlined>
               <v-icon>$vuetify.icons.edit</v-icon>Edit Comp
             </v-btn>
             <v-btn
@@ -51,7 +51,7 @@
               depressed
               color="primary"
               link
-              :to="{ name: 'events-add', query: { teamId: teamId, sportId: inHouseCompetition.sportId, leadId: inHouseCompetition.leadId, gender: inHouseCompetition.gender, ability: inHouseCompetition.ability, age: inHouseCompetition.age }}"
+              :to="{ name: 'matches-add', query: { inHouseCompetitionId: inHouseCompetitionId, sportId: inHouseCompetition.sportId, leadId: inHouseCompetition.leadId, gender: inHouseCompetition.gender, ability: inHouseCompetition.ability, age: inHouseCompetition.age }}"
             >
               <v-icon>$vuetify.icons.plusOutline</v-icon>Add Event
             </v-btn>
@@ -76,14 +76,14 @@
     </v-row>
     <v-row>
       <v-col md="9">
-        <template v-if="showNextEvent">
+        <template v-if="showNextMatch">
           <h2 class="text-p2 font-weight-bold mb-2 info--text text--darken-3">
             Next Event
           </h2>
 
           <v-card>
-            <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: nextEvent.id } }">
-              <FxEventItem :event="nextEvent" :me="nextEvent.me" :opponent="nextEvent.opponent" :context-school-id="contextSchoolId" />
+            <nuxt-link class="text-decoration-none" :to="{ name: 'matches-matchId', params: { matchId: nextMatch.id } }">
+              <FxInHouseEventItem :match="nextMatch" :me="nextMatch.team" :opponent="nextMatch.opponentTeam" :context-school-id="contextSchoolId" />
             </nuxt-link>
           </v-card>
         </template>
@@ -92,9 +92,9 @@
           <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
             Fixtures
           </h2>
-          <v-card v-for="event in fixtures" :key="`fixture-${event.id}`" class="mb-2">
-            <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
-              <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" :context-school-id="contextSchoolId" />
+          <v-card v-for="match in fixtures" :key="`fixture-${match.id}`" class="mb-2">
+            <nuxt-link class="text-decoration-none" :to="{ name: 'matches-matchId', params: { matchId: match.id } }">
+              <FxInHouseEventItem :match="match" :me="match.team" :opponent="match.opponentTeam" :context-school-id="contextSchoolId" />
             </nuxt-link>
           </v-card>
         </template>
@@ -103,19 +103,10 @@
           <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
             Results
           </h2>
-          <v-card v-for="event in results" :key="`result-${event.id}`" class="mb-2">
-            <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
-              <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" :context-school-id="contextSchoolId" />
+          <v-card v-for="match in results" :key="`result-${match.id}`" class="mb-2">
+            <nuxt-link class="text-decoration-none" :to="{ name: 'matches-matchId', params: { matchId: match.id } }">
+              <FxInHouseEventItem :match="match" :me="match.team" :opponent="match.opponentTeam" :context-school-id="contextSchoolId" />
             </nuxt-link>
-          </v-card>
-        </template>
-
-        <template v-if="showTraining">
-          <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
-            Training
-          </h2>
-          <v-card v-for="event in training" :key="`training-${event.id}`" class="mb-2">
-            <FxEventItem :event="event" :me="event.me" :context-school-id="contextSchoolId" />
           </v-card>
         </template>
       </v-col>
@@ -126,13 +117,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
-import FxEventItem from '@/components/FxEventItem/FxEventItem'
-import { EventType } from '@/enum'
+import FxInHouseEventItem from '@/components/FxInHouseEventItem/FxInHouseEventItem'
 
 export default {
   name: 'InHouseCompetitionPage',
   components: {
-    FxEventItem,
+    FxInHouseEventItem,
   },
   data: () => ({
     filter: null,
@@ -140,32 +130,32 @@ export default {
     sport: {},
     season: {},
     lead: {},
-    events: [],
+    matches: [],
   }),
 
   async fetch () {
     this.inHouseCompetition = await this.$store.dispatch('api/inHouseCompetitions/get', {
-      id: this.teamId,
+      id: this.inHouseCompetitionId,
       schoolId: this.contextSchoolId,
     })
 
-    const [sport, season, lead, events] = await Promise.all([
+    const [sport, season, lead, matches] = await Promise.all([
       this.$store.dispatch('api/sports/fetch', this.inHouseCompetition.sportId),
       this.$store.getters['seasons/byId'](this.inHouseCompetition.seasonId),
       this.$store.dispatch('api/users/fetch', {
         id: this.inHouseCompetition.leadId,
         schoolId: this.contextSchoolId,
       }),
-      this.$store.dispatch('api/events/getByTeam', {
+      this.$store.dispatch('api/inHouseMatches/getByCompetition', {
         schoolId: this.contextSchoolId,
-        teamId: this.teamId,
+        inHouseCompetitionId: this.inHouseCompetitionId,
       }),
     ])
 
     this.sport = sport
     this.season = season
     this.lead = lead
-    this.events = events
+    this.matches = matches
   },
 
   head () {
@@ -178,9 +168,9 @@ export default {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
       canCreateEvent: 'user/acl/canCreateEvent',
-      canEditTeam: 'user/acl/canCreateTeam',
+      canEditCompetition: 'user/acl/canCreateTeam',
     }),
-    teamId () {
+    inHouseCompetitionId () {
       return this.$route.params.id
     },
     today () {
@@ -189,25 +179,20 @@ export default {
     timeNow () {
       return DateTime.now().toFormat('HH:mm')
     },
-    nextEvent () {
-      return this.events.find((event) => {
-        return (event.date > this.today) || (event.date > this.today && event.startTime >= this.timeNow)
+    nextMatch () {
+      return this.matches.find((match) => {
+        return (match.date > this.today) || (match.date > this.today && match.startTime >= this.timeNow)
       })
     },
     fixtures () {
-      return this.events
+      return this.matches
     },
     results () {
-      return this.events
-    },
-    training () {
-      return this.events.filter((event) => {
-        return event.eventType === EventType.TRAINING
-      })
+      return this.matches
     },
 
-    showNextEvent () {
-      return this.filter === null && this.nextEvent
+    showNextMatch () {
+      return this.filter === null && this.nextMatch
     },
 
     showFixtures () {
@@ -216,10 +201,6 @@ export default {
 
     showResults () {
       return (this.filter === 'results' || !this.filter) && this.results.length
-    },
-
-    showTraining () {
-      return (this.filter === 'training' || !this.filter) && this.training.length
     },
   },
 }
