@@ -30,7 +30,7 @@
       </v-list-item-action>
     </v-list-item>
 
-    <FxSportExpansionPanel v-for="sport in sports" :key="sport.id" class="mb-4" :item="sport" :subtitle="subtitle(competitionBySport[sport.id].length)">
+    <FxSportExpansionPanel v-for="sport in sports" :key="sport.id" class="mb-4" :item="sport" :subtitle="$tc('page.InHouse.COMPETITIONS', competitionBySport[sport.id].length)">
       <v-list class="py-0">
         <v-list-item v-for="competition in competitionBySport[sport.id]" :key="competition.id" style="border-bottom: 1px solid #F1F5F9">
           <v-list-item-content>
@@ -68,17 +68,6 @@ export default {
       currentSeason: 'seasons/current',
       canCreateTeam: 'user/acl/canCreateTeam',
     }),
-
-    subtitle: () => (number) => {
-      if (number === 1) {
-        return '1 Competition'
-      }
-      if (number > 1) {
-        return `${number} Competitions`
-      }
-
-      return 'No Competitions'
-    },
   },
 
   async created () {
