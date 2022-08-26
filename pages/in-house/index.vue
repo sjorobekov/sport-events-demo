@@ -39,7 +39,7 @@
             </v-list-item-title>
           </v-list-item-content>
           <v-list-item-action>
-            <v-btn outlined link :to="{ name: 'in-house-id', params: { id: competition.id } }">
+            <v-btn outlined link :to="{ name: 'in-house-competitionId', params: { id: competition.id } }">
               View Competition
             </v-btn>
           </v-list-item-action>

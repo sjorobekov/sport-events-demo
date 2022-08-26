@@ -47,11 +47,11 @@
               <v-icon>$vuetify.icons.edit</v-icon>Edit Comp
             </v-btn>
             <v-btn
-              v-if="canCreateEvent"
+              v-if="canCreateInHouseEvent"
               depressed
               color="primary"
               link
-              :to="{ name: 'matches-add', query: { inHouseCompetitionId: inHouseCompetitionId, sportId: inHouseCompetition.sportId, leadId: inHouseCompetition.leadId, gender: inHouseCompetition.gender, ability: inHouseCompetition.ability, age: inHouseCompetition.age }}"
+              :to="{ name: 'in-house-event-add', query: { inHouseCompetitionId: inHouseCompetitionId, sportId: inHouseCompetition.sportId, leadId: inHouseCompetition.leadId }}"
             >
               <v-icon>$vuetify.icons.plusOutline</v-icon>Add Event
             </v-btn>
@@ -82,7 +82,13 @@
           </h2>
 
           <v-card>
-            <nuxt-link class="text-decoration-none" :to="{ name: 'matches-matchId', params: { matchId: nextMatch.id } }">
+            <nuxt-link
+              class="text-decoration-none"
+              :to="{ name: 'in-house-events-inHouseEventId', params: {
+                inHouseCompetitionId: nextMatch.inHouseEvent.inHouseCompetitionId,
+                inHouseEventId: nextMatch.inHouseEvent.id
+              }}"
+            >
               <FxInHouseEventItem :match="nextMatch" :me="nextMatch.team" :opponent="nextMatch.opponentTeam" :context-school-id="contextSchoolId" />
             </nuxt-link>
           </v-card>
@@ -93,7 +99,13 @@
             Fixtures
           </h2>
           <v-card v-for="match in fixtures" :key="`fixture-${match.id}`" class="mb-2">
-            <nuxt-link class="text-decoration-none" :to="{ name: 'matches-matchId', params: { matchId: match.id } }">
+            <nuxt-link
+              class="text-decoration-none"
+              :to="{ name: 'in-house-inHouseEventId', params: {
+                inHouseCompetitionId: nextMatch.inHouseEvent.inHouseCompetitionId,
+                inHouseEventId: nextMatch.inHouseEvent.id
+              }}"
+            >
               <FxInHouseEventItem :match="match" :me="match.team" :opponent="match.opponentTeam" :context-school-id="contextSchoolId" />
             </nuxt-link>
           </v-card>
@@ -104,7 +116,13 @@
             Results
           </h2>
           <v-card v-for="match in results" :key="`result-${match.id}`" class="mb-2">
-            <nuxt-link class="text-decoration-none" :to="{ name: 'matches-matchId', params: { matchId: match.id } }">
+            <nuxt-link
+              class="text-decoration-none"
+              :to="{ name: 'in-house-events-inHouseEventId', params: {
+                inHouseCompetitionId: nextMatch.inHouseEvent.inHouseCompetitionId,
+                inHouseEventId: nextMatch.inHouseEvent.id
+              }}"
+            >
               <FxInHouseEventItem :match="match" :me="match.team" :opponent="match.opponentTeam" :context-school-id="contextSchoolId" />
             </nuxt-link>
           </v-card>
@@ -167,8 +185,8 @@ export default {
   computed: {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
-      canCreateEvent: 'user/acl/canCreateEvent',
-      canEditCompetition: 'user/acl/canCreateTeam',
+      canCreateInHouseEvent: 'user/acl/canCreateInHouseEvent',
+      canEditCompetition: 'user/acl/canCreateCompetition',
     }),
     inHouseCompetitionId () {
       return this.$route.params.id

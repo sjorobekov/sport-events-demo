@@ -88,3 +88,8 @@ export enum EventResult {
   '3RD' = '3RD',
   '4TH' = '4TH',
 }
+
+export enum InHouseEventType {
+  HOUSE_VS_HOUSE = 'HOUSE_VS_HOUSE',
+  ALL_HOUSES = 'ALL_HOUSES',
+}

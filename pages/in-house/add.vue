@@ -73,8 +73,8 @@ export default {
         schoolId: this.schoolId,
         ...this.formData,
       }).then((data) => {
-        this.$router.push({ name: 'teams-id', params: { id: data.id } })
-        this.$toast('Team has been created!')
+        this.$router.push({ name: 'in-house-competitionId', params: { id: data.id } })
+        this.$toast('Competition has been created!')
       }).finally(() => {
         this.loading = false
       })
