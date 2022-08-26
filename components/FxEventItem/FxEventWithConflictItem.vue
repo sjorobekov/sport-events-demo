@@ -124,16 +124,16 @@ export default {
 
   methods: {
     async checkConflict () {
-      // const { status, events } = await this.$store.dispatch('api/events/checkConflict', {
-      //   schoolId: this.contextSchoolId,
-      //   date: this.event.date,
-      //   startTime: this.event.startTime,
-      //   sportLocationId: this.event.sportLocationId,
-      //   teamId: this.me.teamId,
-      //   leadId: this.me.leadId,
-      // })
-      //
-      // this.conflicts = status === 'CONFLICT' ? events : []
+      const { status, events } = await this.$store.dispatch('api/events/checkConflict', {
+        schoolId: this.contextSchoolId,
+        date: this.event.date,
+        startTime: this.event.startTime,
+        sportLocationId: this.event.sportLocationId,
+        teamId: this.me.teamId,
+        leadId: this.me.leadId,
+      })
+
+      this.conflicts = status === 'CONFLICT' ? events : []
     },
 
     openForm () {
