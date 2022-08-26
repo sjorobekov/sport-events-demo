@@ -6,11 +6,17 @@
     :opponent="opponent"
   >
     <template #actions>
-      <v-alert v-if="conflictsExist" dense class="mb-0 float-right">
+      <v-alert v-if="!conflictsExist" dense elevation="0" class="mb-0 float-right">
         <v-icon color="success darken-2">
           mdi-checkbox-marked-circle-outline
         </v-icon>
         <span class="success--text text--darken-2 text-p1">No Event Conflict</span>
+      </v-alert>
+      <v-alert v-else dense class="mb-0 float-right">
+        <v-icon color="error">
+          mdi-alert-circle-outline
+        </v-icon>
+        <span class="error--text text--darken-1 text-p1 font-weight-bold">Event Conflict</span>
       </v-alert>
     </template>
     <template #bottom>
@@ -118,16 +124,16 @@ export default {
 
   methods: {
     async checkConflict () {
-      const { status, events } = await this.$store.dispatch('api/events/checkConflict', {
-        schoolId: this.contextSchoolId,
-        date: this.event.date,
-        startTime: this.event.startTime,
-        sportLocationId: this.event.sportLocationId,
-        teamId: this.me.teamId,
-        leadId: this.me.leadId,
-      })
-
-      this.conflicts = status === 'CONFLICT' ? events : []
+      // const { status, events } = await this.$store.dispatch('api/events/checkConflict', {
+      //   schoolId: this.contextSchoolId,
+      //   date: this.event.date,
+      //   startTime: this.event.startTime,
+      //   sportLocationId: this.event.sportLocationId,
+      //   teamId: this.me.teamId,
+      //   leadId: this.me.leadId,
+      // })
+      //
+      // this.conflicts = status === 'CONFLICT' ? events : []
     },
 
     openForm () {

@@ -10,6 +10,7 @@
     item-value="id"
     :placeholder="placeholder"
     :loading="loading"
+    :hide-details="hideDetails"
     @input="$emit('input', $event)"
   >
     <template #selection="{ item }">
@@ -40,6 +41,10 @@ export default {
     placeholder: {
       type: String,
       default: undefined,
+    },
+    hideDetails: {
+      type: Boolean,
+      default: false,
     },
   },
   data: () => ({

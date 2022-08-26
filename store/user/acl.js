@@ -17,6 +17,14 @@ export const getters = {
     return [UserRole.ADMIN].includes(getters.role)
   },
 
+  canConfirmFixtures (_, getters) {
+    return [UserRole.ADMIN].includes(getters.role)
+  },
+
+  canAddMissingResults (_, getters) {
+    return [UserRole.ADMIN].includes(getters.role)
+  },
+
   role (_, _getters, _rootState, rootGetters) {
     return rootGetters['context/role']
   },

@@ -224,10 +224,12 @@ export default {
   async created () {
     this.sport = await this.$store.dispatch('api/sports/fetch', this.event.sportId)
 
-    this.user = await this.$store.dispatch('api/users/fetch', {
-      schoolId: this.contextSchoolId,
-      id: this.me.leadId,
-    })
+    if (this.me.leadId) {
+      this.user = await this.$store.dispatch('api/users/fetch', {
+        schoolId: this.contextSchoolId,
+        id: this.me.leadId,
+      })
+    }
   },
 }
 </script>

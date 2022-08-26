@@ -25,6 +25,7 @@ type QueryParams = {
   sortBy: 'firstname' | 'lastname' | 'birthday' | 'gender' | 'yearGroup',
   sortDesc: boolean,
   teamId?: string,
+  status?: EventStatus,
 }
 
 type ListPayload = {

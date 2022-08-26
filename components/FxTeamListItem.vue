@@ -55,7 +55,7 @@ export default {
       this.school = await this.fetchSchool(this.participant.schoolId || this.contextSchoolId)
     }
 
-    if (this.participant.teamId) {
+    if (this.contextSchoolId === this.participant.schoolId && this.participant.teamId) {
       this.team = await this.fetchTeam({
         schoolId: this.contextSchoolId,
         id: this.participant.teamId,
