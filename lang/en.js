@@ -44,5 +44,8 @@ export default {
     FxTeamSheetEditPage: {
       STUDENTS_SELECTED: 'No Students Selected | One Student Selected | {count} Students Selected',
     },
+    InHouse: {
+      COMPETITIONS: 'No Competitions | 1 Competition | {count} Competitions',
+    },
   },
 }

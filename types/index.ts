@@ -225,3 +225,52 @@ export interface PaginatedList <T> {
     total: number,
   }
 }
+
+export interface InHouseCompetition {
+  readonly id: string
+  schoolId: string
+  readonly school?: School
+  sportId: string
+  readonly sport?: Sport
+  seasonId: string
+  readonly season: Season
+  name: string
+  leadId: string
+  readonly lead: User
+  photoId: string
+  publishCompetition: boolean
+  publishResults: string
+  readonly createdAt: string
+  readonly updatedAt: string
+}
+
+export interface InHouseEventResult {
+  result: EventResult
+  score: string
+  opponentScore: string
+  notes: string
+}
+export interface InHouseEvent {
+  readonly id: string
+  eventType: string
+  noNeedTransport: boolean
+  schoolId: string
+  readonly school?: School
+  inHouseCompetitionId: string
+  readonly inHouseCompetition?: InHouseCompetition
+  leadId: string
+  readonly lead: User
+  info: string
+  results: Array<InHouseEventResult>
+  publishResults: string
+  readonly createdAt: string
+  readonly updatedAt: string
+}
+export interface InHouseMatch {
+  readonly id: string
+  number: number
+  inHouseEventId: string
+  readonly inHouseEvent?: InHouseEvent
+  teamId: string
+  readonly team?: InHouseTeam
+}

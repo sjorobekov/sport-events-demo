@@ -163,7 +163,7 @@ import ListItem from '@/components/FxEventItem/ListItem'
 import FxLocationLabel from '@/components/FxEventItem/FxLocationLabel'
 
 export default {
-  name: 'FxEventConfirmationItem',
+  name: 'FxEventItem',
   components: {
     FxLocationLabel,
     ListItem,

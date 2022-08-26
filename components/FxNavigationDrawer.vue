@@ -95,7 +95,7 @@ export default {
         ],
       },
       { title: 'Teams', icon: '$vuetify.icons.tshirt', to: { name: 'teams' } },
-      { title: 'In-House Sport', icon: '$vuetify.icons.cup', to: { name: 'in-house-sport' } },
+      { title: 'In-House Sport', icon: '$vuetify.icons.cup', to: { name: 'in-house' } },
       { title: 'Sports Records', icon: '$vuetify.icons.stopwatch', to: { name: 'records' } },
       {
         title: 'Directory',
