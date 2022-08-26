@@ -22,7 +22,7 @@
       </v-list-item-content>
       <v-spacer />
       <v-list-item-action>
-        <v-btn v-if="canCreateTeam" depressed color="primary" link :to="{ name: 'teams-add' }">
+        <v-btn v-if="canCreateTeam" depressed color="primary" link :to="{ name: 'in-house-add' }">
           <v-icon>$vuetify.icons.plusOutline</v-icon>
           Add Competition
         </v-btn>
