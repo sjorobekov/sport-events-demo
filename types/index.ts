@@ -237,7 +237,8 @@ export interface InHouseCompetition {
   name: string
   leadId: string
   readonly lead: User
-  photoId: string
+  file?: File,
+  photo?: string,
   publishCompetition: boolean
   publishResults: string
   readonly createdAt: string

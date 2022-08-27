@@ -28,4 +28,8 @@ export const getters = {
   role (_, _getters, _rootState, rootGetters) {
     return rootGetters['context/role']
   },
+
+  canCreateCompetition (_, getters) {
+    return [UserRole.ADMIN].includes(getters.role)
+  },
 }
