@@ -32,4 +32,8 @@ export const getters = {
   canCreateInHouseEvent (_, getters) {
     return [UserRole.ADMIN].includes(getters.role)
   },
+
+  canCreateCompetition (_, getters) {
+    return [UserRole.ADMIN].includes(getters.role)
+  },
 }

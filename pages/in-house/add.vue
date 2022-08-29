@@ -4,7 +4,7 @@
       Create In-House Competition
     </h3>
 
-    <FxTeamForm ref="form" v-model="formData" :disabled="loading" :sports="sports" :school-id="schoolId" />
+    <FxInHouseCompetitionForm ref="form" v-model="formData" :disabled="loading" :sports="sports" :school-id="schoolId" />
 
     <v-container class="mt-4 mb-8">
       <v-row>
@@ -29,12 +29,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import FxTeamForm from '@/components/FxTeamForm'
+import FxInHouseCompetitionForm from '@/components/FxInHouseCompetitionForm'
 
 export default {
   name: 'InHouseCompetitionAddPage',
   components: {
-    FxTeamForm,
+    FxInHouseCompetitionForm,
   },
   data: () => ({
     formData: { },
@@ -46,7 +46,7 @@ export default {
   }),
 
   meta: {
-    isAllowed: ({ getters }) => getters['user/acl/canCreateTeam'],
+    isAllowed: ({ getters }) => getters['user/acl/canCreateCompetition'],
   },
 
   computed: {
@@ -69,7 +69,7 @@ export default {
         return
       }
 
-      this.$store.dispatch('api/teams/save', {
+      this.$store.dispatch('api/inHouseCompetitions/save', {
         schoolId: this.schoolId,
         ...this.formData,
       }).then((data) => {
