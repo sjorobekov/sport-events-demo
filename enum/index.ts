@@ -93,3 +93,8 @@ export enum InHouseEventType {
   HOUSE_VS_HOUSE = 'HOUSE_VS_HOUSE',
   ALL_HOUSES = 'ALL_HOUSES',
 }
+
+export enum InHouseEventLocationType {
+  SPORTS_LOCATIONS = 'SPORTS_LOCATIONS',
+  OTHER = 'OTHER',
+}

@@ -1,5 +1,6 @@
 import { ActionTree, GetterTree } from 'vuex'
-import { InHouseEvent } from '~/types'
+import { EventResult } from '~/enum'
+import { InHouseEvent, InHouseEventResult } from '~/types'
 
 export const state = () => ({})
 
@@ -11,6 +12,12 @@ export const getters: GetterTree<RootState, RootState> = {
 type ListByTeamPayload = {
   schoolId: string
   inHouseCompetitionId: string
+}
+
+type StoreResultPayload = {
+  results: Array<InHouseEventResult>
+  overallResult: EventResult
+  resultNotes: string
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -27,5 +34,11 @@ export const actions: ActionTree<RootState, RootState> = {
 
   remove (_, { schoolId, inHouseCompetitionId, id }): Promise<void> {
     return this.$axios.$delete(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_events/${id}`)
+  },
+
+  async storeResult (_, { schoolId, inHouseCompetitionId, id, formData }: { schoolId: string, inHouseCompetitionId: string, id: string, formData: StoreResultPayload }): Promise<Event> {
+    const event: Event = await this.$axios.$post(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_events/${id}/results`, formData)
+
+    return event
   },
 }

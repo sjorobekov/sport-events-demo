@@ -18,13 +18,13 @@
         </wrapped-component>
       </v-col>
     </v-row>
-    <v-row v-else no-gutters class="pa-6">
-      <v-col v-for="team in teams" :key="team.id" cols="4">
+    <v-row v-else no-gutters class="pa-6 d-flex justify-center">
+      <v-col v-for="team in teams" :key="team.id" cols="2">
         <wrapped-component :wrap="!!opponentLink">
           <template #wrapper>
             <a :href="opponentLink" class="text-decoration-none" />
           </template>
-          <FxTeam class="pl-0" :name="opponentTeam.name" :color="opponentTeam.color" :logo="opponentTeam.logo" />
+          <FxTeam class="pl-0" :name="team.name" :color="team.color" :logo="team.logo" />
         </wrapped-component>
       </v-col>
     </v-row>

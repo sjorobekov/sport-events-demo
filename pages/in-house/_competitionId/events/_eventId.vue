@@ -1,5 +1,5 @@
 <template>
-  <FxInHouseEventIndividualPage :in-house-event-id="inHouseEventId" />
+  <FxInHouseEventIndividualPage :competition-id="competitionId" :event-id="eventId" />
 </template>
 
 <script>
@@ -17,8 +17,12 @@ export default {
       contextSchoolId: 'context/schoolId',
     }),
 
-    inHouseEventId () {
-      return this.$route.params.inHouseEventId
+    competitionId () {
+      return this.$route.params.competitionId
+    },
+
+    eventId () {
+      return this.$route.params.eventId
     },
   },
 }

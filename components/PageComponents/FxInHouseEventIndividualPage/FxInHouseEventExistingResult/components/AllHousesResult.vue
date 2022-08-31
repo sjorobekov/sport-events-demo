@@ -8,10 +8,10 @@ import { mapGetters } from 'vuex'
 import xss from 'xss'
 
 export default {
-  name: 'FixtureResult',
+  name: 'AllHousesResult',
   computed: {
     ...mapGetters({
-      result: 'page/event/result',
+      result: 'page/inHouseEvent/result',
     }),
     notes () {
       return xss(this.result.resultNotes)

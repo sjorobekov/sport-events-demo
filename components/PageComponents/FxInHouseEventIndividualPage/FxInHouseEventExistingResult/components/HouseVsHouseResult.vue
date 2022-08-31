@@ -52,17 +52,17 @@ import { mapGetters } from 'vuex'
 import FxSchoolLogo from '@/components/FxSchoolLogo/FxSchoolLogo'
 
 export default {
-  name: 'FixtureResult',
+  name: 'HouseVsHouseResult',
   components: {
     FxSchoolLogo,
   },
   computed: {
     ...mapGetters({
       contextSchool: 'context/school',
-      myTeam: 'page/event/myTeam',
-      opponentTeam: 'page/event/opponentTeam',
-      result: 'page/event/result',
-      hasResult: 'page/event/hasResult',
+      myTeam: 'page/inHouseEvent/myTeam',
+      opponentTeam: 'page/inHouseEvent/opponentTeam',
+      result: 'page/inHouseEvent/result',
+      hasResult: 'page/inHouseEvent/hasResult',
     }),
   },
 }

@@ -38,13 +38,13 @@ export default {
 
   computed: {
     ...mapGetters({
-      result: 'page/event/result',
-      isPlayed: 'page/event/isPlayed',
-      isCancelled: 'page/event/isCancelled',
-      isPostponed: 'page/event/isPostponed',
-      hasResult: 'page/event/hasResult',
-      hasScore: 'page/event/hasScore',
-      canAddOrEditResult: 'page/event/canAddOrEditResult',
+      result: 'page/inHouseEvent/result',
+      isPlayed: 'page/inHouseEvent/isPlayed',
+      isCancelled: 'page/inHouseEvent/isCancelled',
+      isPostponed: 'page/inHouseEvent/isPostponed',
+      hasResult: 'page/inHouseEvent/hasResult',
+      hasScore: 'page/inHouseEvent/hasScore',
+      canAddOrEditResult: 'page/inHouseEvent/canAddOrEditResult',
     }),
 
     target () {

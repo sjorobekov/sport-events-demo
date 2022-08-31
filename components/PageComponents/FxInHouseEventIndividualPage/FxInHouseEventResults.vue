@@ -1,7 +1,7 @@
 <template>
-  <FxEventItemCard>
+  <FxInHouseEventItemCard>
     <template #title>
-      {{ title }}
+      Results
     </template>
     <template #actions>
       <v-btn v-if="!formVisible && canAddOrEditResult" outlined @click="formVisible = true">
@@ -13,43 +13,36 @@
     <v-container>
       <v-row>
         <v-col cols="12" class="pt-1 pb-0 px-0">
-          <FxEventResultForm
+          <FxInHouseEventResultForm
             v-if="formVisible"
             ref="form"
             v-model="formData"
             class="px-6"
-            :event-type="event.eventType"
+            :event-type="inHouseEvent.eventType"
             :left-name="myTeam.name"
             :right-name="opponentTeam.name"
             :disabled="loading"
             @submit="save"
             @cancel="formVisible = false"
           />
-          <FxEventExistingResult v-else class="rounded" />
+          <FxInHouseEventExistingResult v-else class="rounded" />
         </v-col>
       </v-row>
     </v-container>
-  </FxEventItemCard>
+  </FxInHouseEventItemCard>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import cloneDeep from 'lodash/cloneDeep'
-import FxEventResultForm from '@/components/FxEventResultForm/FxEventResultForm'
-import FxEventItemCard from '@/components/PageComponents/FxEventIndividualPage/FxEventItemCard'
-import FxEventExistingResult
-  from '@/components/PageComponents/FxEventIndividualPage/FxEventExistingResult/FxEventExistingResult'
-import { EventType } from '@/enum'
-
-const TITLE = {
-  [EventType.FIXTURE]: 'Result',
-  [EventType.TOURNAMENT]: 'Results',
-  [EventType.MULTI_EVENT]: 'Results',
-}
+import FxInHouseEventResultForm from '@/components/FxInHouseEventResultForm/FxInHouseEventResultForm'
+import FxInHouseEventItemCard from '@/components/PageComponents/FxInHouseEventIndividualPage/FxInHouseEventItemCard'
+import FxInHouseEventExistingResult
+  from '@/components/PageComponents/FxInHouseEventIndividualPage/FxInHouseEventExistingResult/FxInHouseEventExistingResult'
 
 export default {
   name: 'FxInHouseEventFResults',
-  components: { FxEventExistingResult, FxEventItemCard, FxEventResultForm },
+  components: { FxInHouseEventExistingResult, FxInHouseEventItemCard, FxInHouseEventResultForm },
   data: () => ({
     formVisible: false,
     formData: {
@@ -62,30 +55,27 @@ export default {
 
   computed: {
     ...mapGetters({
-      event: 'page/event/event',
-      me: 'page/event/me',
-      myTeam: 'page/event/myTeam',
-      opponentTeam: 'page/event/opponentTeam',
-      opponent: 'page/event/opponent',
-      sport: 'page/event/sport',
-      lead: 'page/event/lead',
-      result: 'page/event/result',
-      hasResult: 'page/event/hasResult',
-      canAddOrEditResult: 'page/event/canAddOrEditResult',
+      inHouseEvent: 'page/inHouseEvent/inHouseEvent',
+      me: 'page/inHouseEvent/me',
+      myTeam: 'page/inHouseEvent/myTeam',
+      opponentTeam: 'page/inHouseEvent/opponentTeam',
+      opponent: 'page/inHouseEvent/opponent',
+      sport: 'page/inHouseEvent/sport',
+      lead: 'page/inHouseEvent/lead',
+      hasResult: 'page/inHouseEvent/hasResult',
+      canAddOrEditResult: 'page/inHouseEvent/canAddOrEditResult',
+      result: 'page/inHouseEvent/result',
     }),
-    title () {
-      return TITLE[this.event.eventType] || 'Results'
-    },
   },
 
   created () {
-    this.formData = cloneDeep(this.result)
+    this.formData = cloneDeep(this.results)
     this.formVisible = !this.hasResult
   },
 
   methods: {
     ...mapActions({
-      storeResult: 'page/event/saveResult',
+      storeResult: 'page/inHouseEvent/saveResult',
     }),
 
     async save () {
@@ -95,7 +85,7 @@ export default {
         this.loading = false
         return
       }
-      this.$store.dispatch('page/event/saveResult', this.formData)
+      this.$store.dispatch('page/inHouseEvent/saveResult', this.formData)
         .then(() => {
           this.formVisible = false
         })

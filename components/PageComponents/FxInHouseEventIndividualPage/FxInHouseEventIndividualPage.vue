@@ -10,7 +10,7 @@
         <v-list-item>
           <v-list-item-content class="text-center pl-14 pt-5">
             <v-list-item-title class="text-subheading mb-1">
-              <FxDateFormat :date="inHouseEvent.matches[0].date" :output-format="DATE_HUGE" />
+              <FxDateFormat :date="firstMatch.date" :output-format="DATE_HUGE" />
             </v-list-item-title>
             <v-list-item-subtitle class="text-p2 white--text">
               {{ sport.name }} &#x2022; In-House Sport
@@ -37,6 +37,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { DateTime } from 'luxon'
 import FxInHouseEventScoreBoardCard from '@/components/PageComponents/FxInHouseEventIndividualPage/FxInHouseEventScoreBoardCard'
 
 export default {
@@ -45,20 +46,24 @@ export default {
     FxInHouseEventScoreBoardCard,
   },
   props: {
-    inHouseCompetitionId: {
+    competitionId: {
       type: String,
       default: undefined,
     },
-    inHouseEventId: {
+    eventId: {
       type: String,
       default: undefined,
     },
   },
 
+  data: () => ({
+    DATE_HUGE: DateTime.DATE_HUGE,
+  }),
+
   async fetch () {
     await this.$store.dispatch('page/inHouseEvent/fetchData', {
-      inHouseCompetitionId: this.inHouseCompetitionId,
-      inHouseEventId: this.inHouseEventId,
+      inHouseCompetitionId: this.competitionId,
+      inHouseEventId: this.eventId,
     })
   },
 
@@ -66,6 +71,7 @@ export default {
     ...mapGetters({
       inHouseEvent: 'page/inHouseEvent/inHouseEvent',
       sport: 'page/inHouseEvent/sport',
+      firstMatch: 'page/inHouseEvent/firstMatch',
     }),
   },
 }

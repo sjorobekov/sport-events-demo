@@ -84,9 +84,9 @@
           <v-card>
             <nuxt-link
               class="text-decoration-none"
-              :to="{ name: 'in-house-events-inHouseEventId', params: {
-                inHouseCompetitionId: nextMatch.inHouseEvent.inHouseCompetitionId,
-                inHouseEventId: nextMatch.inHouseEvent.id
+              :to="{ name: 'in-house-competitionId-events-eventId', params: {
+                competitionId: nextMatch.inHouseEvent.inHouseCompetitionId,
+                eventId: nextMatch.inHouseEvent.id
               }}"
             >
               <FxInHouseEventItem :match="nextMatch" :me="nextMatch.team" :opponent="nextMatch.opponentTeam" :context-school-id="contextSchoolId" />
@@ -101,9 +101,9 @@
           <v-card v-for="match in fixtures" :key="`fixture-${match.id}`" class="mb-2">
             <nuxt-link
               class="text-decoration-none"
-              :to="{ name: 'in-house-inHouseEventId', params: {
-                inHouseCompetitionId: nextMatch.inHouseEvent.inHouseCompetitionId,
-                inHouseEventId: nextMatch.inHouseEvent.id
+              :to="{ name: 'in-house-competitionId-events-eventId', params: {
+                competitionId: nextMatch.inHouseEvent.inHouseCompetitionId,
+                eventId: nextMatch.inHouseEvent.id
               }}"
             >
               <FxInHouseEventItem :match="match" :me="match.team" :opponent="match.opponentTeam" :context-school-id="contextSchoolId" />
@@ -118,9 +118,9 @@
           <v-card v-for="match in results" :key="`result-${match.id}`" class="mb-2">
             <nuxt-link
               class="text-decoration-none"
-              :to="{ name: 'in-house-events-inHouseEventId', params: {
-                inHouseCompetitionId: nextMatch.inHouseEvent.inHouseCompetitionId,
-                inHouseEventId: nextMatch.inHouseEvent.id
+              :to="{ name: 'in-house-competitionId-events-eventId', params: {
+                competitionId: nextMatch.inHouseEvent.inHouseCompetitionId,
+                eventId: nextMatch.inHouseEvent.id
               }}"
             >
               <FxInHouseEventItem :match="match" :me="match.team" :opponent="match.opponentTeam" :context-school-id="contextSchoolId" />
@@ -189,7 +189,7 @@ export default {
       canEditCompetition: 'user/acl/canCreateCompetition',
     }),
     inHouseCompetitionId () {
-      return this.$route.params.id
+      return this.$route.params.competitionId
     },
     today () {
       return DateTime.now().toFormat('yyyy-MM-dd')
