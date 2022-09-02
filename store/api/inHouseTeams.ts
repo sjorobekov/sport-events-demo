@@ -33,6 +33,10 @@ export const actions: ActionTree<RootState, RootState> = {
     return this.$axios.$get(`api/v1/schools/${schoolId}/in_house_teams/${id}`)
   },
 
+  getLastSheet (_, { schoolId, id, inHouseEventId }: { schoolId: string, inHouseEventId: string, id: string }): Promise<any[]> {
+    return this.$axios.$get(`api/v1/schools/${schoolId}/in_house_teams/${id}/sheets`, { params: { inHouseEventId } })
+  },
+
   remove (_, { schoolId, id }): Promise<void> {
     return this.$axios.$delete(`api/v1/schools/${schoolId}/in_house_teams/${id}`)
   },

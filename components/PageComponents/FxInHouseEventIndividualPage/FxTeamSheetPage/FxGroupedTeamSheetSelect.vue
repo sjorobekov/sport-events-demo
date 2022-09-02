@@ -100,7 +100,7 @@ export default {
     items: {
       handler () {
         this.grouped = groupBy(this.items, 'yearGroup')
-        this.groups = Object.keys(this.grouped).sort()
+        this.groups = Object.keys(this.grouped).sort((a, b) => a - b)
         this.grouped.recent = this.recent
         this.groups.unshift('recent')
       },

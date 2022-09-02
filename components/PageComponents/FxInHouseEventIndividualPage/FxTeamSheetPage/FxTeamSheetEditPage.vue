@@ -7,7 +7,7 @@
       lg="7"
       class="pr-4"
     >
-      <FxEventItemCard>
+      <FxInHouseEventItemCard>
         <template #title>
           Search & Add
         </template>
@@ -25,21 +25,21 @@
           </v-row>
           <v-row>
             <v-col>
-              <FxGroupedTeamSheetSelect v-model="sheet" :items="students" :recent="recentTeamSheet" :team-name="myTeam.name" />
+              <FxGroupedTeamSheetSelect v-model="sheet" :items="students" :recent="recentTeamSheet" :team-name="team.name" />
             </v-col>
           </v-row>
         </v-container>
-      </FxEventItemCard>
+      </FxInHouseEventItemCard>
     </v-col>
     <v-col cols="12" sm="12" md="12" lg="5">
-      <FxEventItemCard>
+      <FxInHouseEventItemCard>
         <template #title>
           Team Sheet
         </template>
 
         <template #actions>
           <div>
-            <v-btn outlined link :to="{ name: 'events-eventId', params: { eventId: event.id } }" exact>
+            <v-btn outlined link :to="{ name: 'events-eventId', params: { eventId: inHouseEvent.id } }" exact>
               Cancel
             </v-btn>
             <v-btn depressed color="primary" @click="save()">
@@ -104,7 +104,7 @@
             </v-col>
           </v-row>
         </v-container>
-      </FxEventItemCard>
+      </FxInHouseEventItemCard>
     </v-col>
   </v-row>
 </template>
@@ -112,13 +112,13 @@
 <script>
 import draggable from 'vuedraggable'
 import { mapGetters } from 'vuex'
-import FxEventItemCard from '@/components/PageComponents/FxEventIndividualPage/FxEventItemCard'
+import FxInHouseEventItemCard from '@/components/PageComponents/FxInHouseEventIndividualPage/FxInHouseEventItemCard'
 import FxGroupedTeamSheetSelect
-  from '@/components/PageComponents/FxEventIndividualPage/FxTeamSheetPage/FxGroupedTeamSheetSelect'
+  from '@/components/PageComponents/FxInHouseEventIndividualPage/FxTeamSheetPage/FxGroupedTeamSheetSelect'
 
 export default {
   name: 'FxTeamSheetEditPage',
-  components: { FxGroupedTeamSheetSelect, FxEventItemCard, draggable },
+  components: { FxGroupedTeamSheetSelect, FxInHouseEventItemCard, draggable },
 
   data: () => ({
     sheet: [],
@@ -126,14 +126,15 @@ export default {
     selectedStudent: null,
     students: [],
     recentTeamSheet: [],
+    team: {},
   }),
 
   computed: {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
-      event: 'page/event/event',
-      teamSheet: 'page/event/teamSheet',
-      myTeam: 'page/event/myTeam',
+      inHouseEvent: 'page/inHouseEvent/inHouseEvent',
+      teamSheets: 'page/inHouseEvent/teamSheets',
+      teams: 'page/inHouseEvent/teams',
     }),
   },
 
@@ -142,10 +143,12 @@ export default {
       schoolId: this.contextSchoolId,
       params: { limit: -1 },
     })
+    this.team = this.teams.find(item => item.id === this.$route.params.teamId)
 
-    this.recentTeamSheet = await this.$store.dispatch('api/teams/getLastSheet', {
+    this.recentTeamSheet = await this.$store.dispatch('api/inHouseTeams/getLastSheet', {
       schoolId: this.contextSchoolId,
-      id: this.myTeam.id,
+      inHouseEventId: this.inHouseEvent.id,
+      id: this.team.id,
     })
 
     this.students = data
@@ -159,16 +162,18 @@ export default {
     save () {
       this.loading = true
 
-      this.$store.dispatch('api/events/saveTeamSheet', {
+      this.$store.dispatch('api/inHouseEvents/saveTeamSheet', {
         schoolId: this.contextSchoolId,
-        id: this.event.id,
+        inHouseCompetitionId: this.inHouseEvent.inHouseCompetitionId,
+        inHouseTeamId: this.team.id,
+        id: this.inHouseEvent.id,
         sheet: this.sheet,
       })
         .then(() => {
-          this.$store.dispatch('page/event/fetchTeamSheet', this.event.id)
+          this.$store.dispatch('page/inHouseEvent/fetchTeamSheets', { inHouseCompetitionId: this.inHouseEvent.inHouseCompetitionId, eventId: this.inHouseEvent.id })
           this.$router.push({
-            name: 'events-eventId',
-            params: { eventId: this.event.id },
+            name: 'in-house-competitionId-events-eventId',
+            params: { competitionId: this.inHouseEvent.inHouseCompetitionId, eventId: this.inHouseEvent.id },
           })
         })
         .catch(() => {
@@ -187,9 +192,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.list-item-border:first-child {
-
-}
 .list-item-border {
   border: 1px var(--v-info-lighten3) solid;
 }

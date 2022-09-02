@@ -275,3 +275,15 @@ export interface InHouseMatch {
   teamId: string
   readonly team?: InHouseTeam
 }
+
+export interface InHouseTeamSheet {
+  readonly id: string
+  inHouseEventId: string
+  readonly inHouseEvent?: InHouseEvent
+  inHouseTeamId: string
+  readonly inHouseTeam?: InHouseTeam
+  sheet: string[]
+  readonly students?: Student[]
+  readonly createdAt: string
+  readonly updatedAt: string
+}

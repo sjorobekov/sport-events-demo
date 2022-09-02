@@ -1,14 +1,22 @@
 <template>
   <FxInHouseEventItemCard>
     <template #title>
-      Team Sheet <FxTeamPublishChip v-if="canManageTeamSheet" :publish-team="myTeam.publishTeam" />
+      {{ name }} Team Sheet
     </template>
-    <template v-if="canManageTeamSheet && teamSheet.length" #actions>
-      <v-btn outlined link :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }">
+    <template v-if="canManageTeamSheet && sheet.length" #actions>
+      <v-btn
+        outlined
+        link
+        :to="{ name: 'in-house-competitionId-events-eventId-teams-teamId-sheet', params: {
+          competitionId: inHouseEvent.inHouseCompetitionId,
+          eventId: inHouseEvent.id,
+          teamId: team.id,
+        }}"
+      >
         <v-icon>mdi-pencil</v-icon>Edit Team
       </v-btn>
     </template>
-    <v-container v-if="!teamSheet.length">
+    <v-container v-if="!sheet.length">
       <v-row>
         <v-col cols="12" class="pt-6">
           <v-sheet height="216" color="info lighten-5">
@@ -29,7 +37,17 @@
                 <div class="text-p2 info--text text--darken-2 font-weight-bold mb-2">
                   No Students Selected
                 </div>
-                <v-btn v-if="canManageTeamSheet" depressed color="primary" link :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }">
+                <v-btn
+                  v-if="canManageTeamSheet"
+                  depressed
+                  color="primary"
+                  link
+                  :to="{ name: 'in-house-competitionId-events-eventId-teams-teamId-sheet', params: {
+                    competitionId: inHouseEvent.inHouseCompetitionId,
+                    eventId: inHouseEvent.id,
+                    teamId: team.id,
+                  }}"
+                >
                   <v-icon>mdi-plus-circle-outline</v-icon>Add Students
                 </v-btn>
               </v-col>
@@ -53,7 +71,7 @@
       </thead>
       <tbody>
         <tr
-          v-for="(item, i) in teamSheet"
+          v-for="(item, i) in sheet"
           :key="item.id"
         >
           <td class="text-right text-p2 info--text text--darken-1">
@@ -73,22 +91,29 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import FxInHouseEventItemCard from '@/components/PageComponents/FxEventIndividualPage/FxInHouseEventItemCard'
+import FxInHouseEventItemCard from '@/components/PageComponents/FxInHouseEventIndividualPage/FxInHouseEventItemCard'
 
 export default {
   name: 'FxInHouseEventTeamSheet',
   components: { FxInHouseEventItemCard },
+  props: {
+    team: {
+      type: Object,
+      default: undefined,
+    },
+  },
   computed: {
     ...mapGetters({
-      event: 'page/inHouseEvent/inHouseEvent',
-      me: 'page/inHouseEvent/me',
-      opponent: 'page/inHouseEvent/opponent',
-      sport: 'page/inHouseEvent/sport',
-      lead: 'page/inHouseEvent/lead',
-      teamSheet: 'page/inHouseEvent/teamSheet',
+      inHouseEvent: 'page/inHouseEvent/inHouseEvent',
       canManageTeamSheet: 'page/inHouseEvent/canManageTeamSheet',
-      myTeam: 'page/inHouseEvent/myTeam',
+      getTeamSheetByTeamId: 'page/inHouseEvent/getTeamSheetByTeamId',
     }),
+    name () {
+      return this.team.name
+    },
+    sheet () {
+      return this.getTeamSheetByTeamId(this.team.id)
+    },
   },
 }
 </script>

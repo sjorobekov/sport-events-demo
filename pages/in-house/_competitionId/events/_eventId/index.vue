@@ -11,8 +11,15 @@
       <FxInHouseEventDetails v-for="match in matches" :key="match.id" :match="match" />
       <FxInHouseEventResults id="results" />
     </v-col>
-    <v-col cols="12" sm="12" md="12" lg="5">
-      <FxInHouseEventTeamSheet />
+    <v-col
+      v-for="team in teams"
+      :key="team.id"
+      cols="12"
+      sm="12"
+      md="12"
+      lg="5"
+    >
+      <FxInHouseEventTeamSheet :team="team" />
     </v-col>
   </v-row>
 </template>
@@ -24,16 +31,21 @@ import FxInHouseEventResults from '@/components/PageComponents/FxInHouseEventInd
 import FxInHouseEventDetails from '@/components/PageComponents/FxInHouseEventIndividualPage/FxInHouseEventDetails'
 
 export default {
-  name: 'EventIndexPage',
+  name: 'InHouseEventIndexPage',
   components: {
     FxInHouseEventTeamSheet,
     FxInHouseEventResults,
     FxInHouseEventDetails,
   },
+  data: () => ({
+    sheets: [],
+  }),
   computed: {
     ...mapGetters({
+      inHouseEvent: 'page/inHouseEvent/inHouseEvent',
       hasResult: 'page/inHouseEvent/hasResult',
       matches: 'page/inHouseEvent/matches',
+      teams: 'page/inHouseEvent/teams',
     }),
   },
 }

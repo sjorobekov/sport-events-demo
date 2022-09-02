@@ -1,6 +1,6 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex'
 import { EventResult, InHouseEventType, UserRole } from '~/enum'
-import { InHouseEvent, Sport, User, InHouseMatch, InHouseEventResult, InHouseTeam, InHouseCompetition } from '~/types'
+import { InHouseEvent, Sport, User, InHouseMatch, InHouseEventResult, InHouseTeam, InHouseCompetition, InHouseTeamSheet } from '~/types'
 
 type ResultData = {
   overallResult?: EventResult,
@@ -16,7 +16,7 @@ export const state = () => ({
   result: {
     results: [] as Array<InHouseEventResult>,
   } as ResultData,
-  teamSheet: [],
+  teamSheets: [] as Array<InHouseTeamSheet>,
   myTeam: {} as InHouseTeam,
   opponentTeam: {} as InHouseTeam,
   teams: [] as InHouseTeam[],
@@ -51,8 +51,8 @@ export const mutations: MutationTree<RootState> = {
     state.result = result
   },
 
-  teamSheet (state, teamSheet) {
-    state.teamSheet = teamSheet
+  teamSheets (state, teamSheets) {
+    state.teamSheets = teamSheets
   },
 
   myTeam (state, myTeam: InHouseTeam) {
@@ -133,8 +133,14 @@ export const getters: GetterTree<RootState, RootState> = {
     return getters.role === UserRole.ADMIN
   },
 
-  teamSheet (state) {
-    return state.teamSheet
+  teamSheets (state) {
+    return state.teamSheets
+  },
+
+  getTeamSheetByTeamId (state) {
+    return (teamId: string) => {
+      return state.teamSheets.find(sheet => sheet.inHouseTeamId === teamId)?.students || []
+    }
   },
 
   myTeam (state) {
@@ -166,6 +172,7 @@ export const actions: ActionTree<RootState, RootState> = {
     if (inHouseEvent.eventType === InHouseEventType.HOUSE_VS_HOUSE) {
       commit('myTeam', inHouseEvent.matches[0]?.team)
       commit('opponentTeam', inHouseEvent.matches[0]?.opponentTeam)
+      commit('teams', [inHouseEvent.matches[0]?.team, inHouseEvent.matches[0]?.opponentTeam])
     } else {
       dispatch('fetchTeams', inHouseEvent.schoolId)
     }
@@ -184,6 +191,7 @@ export const actions: ActionTree<RootState, RootState> = {
     const promises = [
       dispatch('fetchSport', inHouseEvent.inHouseCompetition.sportId),
       dispatch('fetchLead', inHouseEvent.leadId),
+      dispatch('fetchTeamSheets', { inHouseCompetitionId: inHouseEvent.inHouseCompetitionId, eventId: inHouseEvent.id }),
     ]
 
     await Promise.all(promises)
@@ -203,6 +211,18 @@ export const actions: ActionTree<RootState, RootState> = {
     }, { root: true })
 
     commit('lead', lead)
+  },
+
+  async fetchTeamSheets ({ dispatch, commit, rootGetters }, { inHouseCompetitionId, eventId }) {
+    const contextSchoolId = rootGetters['context/schoolId']
+
+    const teamSheets = await dispatch('api/inHouseEvents/getTeamSheet', {
+      schoolId: contextSchoolId,
+      inHouseCompetitionId,
+      id: eventId,
+    }, { root: true })
+
+    commit('teamSheets', teamSheets)
   },
 
   async fetchTeams ({ dispatch, commit }, schoolId: string) {
