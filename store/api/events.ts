@@ -22,10 +22,13 @@ export const getters: GetterTree<RootState, RootState> = {
 
 type QueryParams = {
   page: number,
-  sortBy: 'firstname' | 'lastname' | 'birthday' | 'gender' | 'yearGroup',
-  sortDesc: boolean,
+  limit?: number,
+  orderBy?: 'date',
+  orderDesc?: boolean,
   teamId?: string,
   status?: EventStatus,
+  from?: string,
+  to?:string,
 }
 
 type ListPayload = {
