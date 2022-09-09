@@ -23,7 +23,7 @@
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
 import { InHouseEventType, EventResult } from '@/enum'
-import FxTeam from '@/components/PageComponents/FxEventIndividualPage/FxEventTeam'
+import FxTeam from '@/components/PageComponents/FxInHouseEventIndividualPage/FxInHouseEventTeam'
 import FxInHouseEventResultCenterBoard from '@/components/PageComponents/FxInHouseEventIndividualPage/FxInHouseEventResultCenterBoard'
 
 export default {
@@ -45,6 +45,9 @@ export default {
       opponentTeam: 'page/inHouseEvent/opponentTeam',
       teams: 'page/inHouseEvent/teams',
     }),
+  },
+  mounted () {
+    console.log(this.myTeam)
   },
 }
 </script>

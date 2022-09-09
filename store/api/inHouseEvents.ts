@@ -32,6 +32,13 @@ export const actions: ActionTree<RootState, RootState> = {
     return event
   },
 
+  create (_, { matches, event, schoolId, inHouseCompetitionId }): Promise<InHouseEvent> {
+    return this.$axios.$post(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_events`, {
+      ...event,
+      matches,
+    })
+  },
+
   getTeamSheet (_, { schoolId, inHouseCompetitionId, id }): Promise<any[]> {
     return this.$axios.$get(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_events/${id}/team_sheets`)
   },

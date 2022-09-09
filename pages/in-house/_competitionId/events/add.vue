@@ -1,6 +1,7 @@
 <template>
-  <FxEventAddPage
+  <FxInHouseEventAddPage
     :context-school-id="schoolId"
+    :competition-id="$route.params.competitionId"
     @saved="onSave"
     @cancel="onCancel"
   />
@@ -8,15 +9,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import FxEventAddPage from '@/components/PageComponents/FxEventAddPage'
+import FxInHouseEventAddPage from '@/components/PageComponents/FxInHouseEventAddPage'
 export default {
-  name: 'AdminEventPage',
+  name: 'InHouseEventAddPage',
   components: {
-    FxEventAddPage,
+    FxInHouseEventAddPage,
   },
   layout: 'default',
   meta: {
-    isAllowed: ({ getters }) => getters['user/acl/canCreateEvent'],
+    isAllowed: ({ getters }) => getters['user/acl/canCreateInHouseEvent'],
   },
 
   computed: {
@@ -26,8 +27,8 @@ export default {
   },
 
   methods: {
-    onSave (teamId) {
-      this.$router.push({ name: 'teams-id', params: { id: teamId } })
+    onSave () {
+      this.$router.push({ name: 'in-house-competitionId-events', params: { competitionId: this.$route.params.competitionId } })
     },
     onCancel () {
       this.$router.back()

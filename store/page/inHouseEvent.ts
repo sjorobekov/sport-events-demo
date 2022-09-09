@@ -170,9 +170,9 @@ export const actions: ActionTree<RootState, RootState> = {
     }, { root: true })
 
     if (inHouseEvent.eventType === InHouseEventType.HOUSE_VS_HOUSE) {
-      commit('myTeam', inHouseEvent.matches[0]?.team)
-      commit('opponentTeam', inHouseEvent.matches[0]?.opponentTeam)
-      commit('teams', [inHouseEvent.matches[0]?.team, inHouseEvent.matches[0]?.opponentTeam])
+      commit('myTeam', matches[0]?.team)
+      commit('opponentTeam', matches[0]?.opponentTeam)
+      commit('teams', [matches[0]?.team, matches[0]?.opponentTeam])
     } else {
       dispatch('fetchTeams', inHouseEvent.schoolId)
     }

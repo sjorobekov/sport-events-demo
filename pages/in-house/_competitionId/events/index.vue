@@ -51,7 +51,7 @@
               depressed
               color="primary"
               link
-              :to="{ name: 'in-house-event-add', query: { inHouseCompetitionId: inHouseCompetitionId, sportId: inHouseCompetition.sportId, leadId: inHouseCompetition.leadId }}"
+              :to="{ name: 'in-house-competitionId-events-add', params: { competitionId: inHouseCompetitionId }}"
             >
               <v-icon>$vuetify.icons.plusOutline</v-icon>Add Event
             </v-btn>
@@ -102,8 +102,8 @@
             <nuxt-link
               class="text-decoration-none"
               :to="{ name: 'in-house-competitionId-events-eventId', params: {
-                competitionId: nextMatch.inHouseEvent.inHouseCompetitionId,
-                eventId: nextMatch.inHouseEvent.id
+                competitionId: match.inHouseEvent.inHouseCompetitionId,
+                eventId: match.inHouseEvent.id
               }}"
             >
               <FxInHouseEventItem :match="match" :me="match.team" :opponent="match.opponentTeam" :context-school-id="contextSchoolId" />
@@ -119,8 +119,8 @@
             <nuxt-link
               class="text-decoration-none"
               :to="{ name: 'in-house-competitionId-events-eventId', params: {
-                competitionId: nextMatch.inHouseEvent.inHouseCompetitionId,
-                eventId: nextMatch.inHouseEvent.id
+                competitionId: match.inHouseEvent.inHouseCompetitionId,
+                eventId: match.inHouseEvent.id
               }}"
             >
               <FxInHouseEventItem :match="match" :me="match.team" :opponent="match.opponentTeam" :context-school-id="contextSchoolId" />

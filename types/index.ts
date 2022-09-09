@@ -254,7 +254,7 @@ export interface InHouseEventResult {
 export interface InHouseEvent {
   readonly id: string
   eventType: string
-  noNeedTransport: boolean
+  noNeedTransport?: boolean
   schoolId: string
   readonly school?: School
   inHouseCompetitionId: string

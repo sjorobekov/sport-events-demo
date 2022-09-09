@@ -43,11 +43,16 @@
           </v-list-item-content>
         </v-list-item>
       </v-col>
-      <v-col cols="12" md="4" class="border-bottom">
+      <v-col v-if="!isAllHouseEvent && me" cols="12" md="4" class="border-bottom">
         <FxInHouseTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" :icon-on-right="!compact" />
       </v-col>
-      <v-col cols="12" md="4" class="border-bottom">
+      <v-col v-if="!isAllHouseEvent && opponent" cols="12" md="4" class="border-bottom">
         <FxInHouseTeamListItem class="pl-0" :participant="opponent" :context-school-id="contextSchoolId" />
+      </v-col>
+    </v-row>
+    <v-row v-if="isAllHouseEvent">
+      <v-col v-for="inHouseTeam in filteredTeams" :key="inHouseTeam.id" cols="12" md="4" class="border-bottom">
+        <FxInHouseTeamListItem class="pl-0" :participant="inHouseTeam" :context-school-id="contextSchoolId" :icon-on-right="!compact" />
       </v-col>
     </v-row>
     <slot name="bottom" />
@@ -56,7 +61,7 @@
 
 <script>
 import { DateTime } from 'luxon'
-import { EventType } from '@/enum'
+import { EventType, InHouseEventType } from '@/enum'
 
 export default {
   name: 'FxInHouseEventItem',
@@ -81,9 +86,9 @@ export default {
 
   data: () => ({
     sport: {},
-    team: {},
     user: {},
     EventType,
+    teams: [],
   }),
 
   computed: {
@@ -96,19 +101,34 @@ export default {
     },
 
     date () {
-      return DateTime.fromISO(this.match.date).toLocaleString({ weekday: 'long', month: 'long', day: '2-digit', year: 'numeric' })
+      return this.match
+        ? DateTime.fromISO(this.match.date).toLocaleString({ weekday: 'long', month: 'long', day: '2-digit', year: 'numeric' })
+        : '00-00-00'
     },
 
     time () {
-      return DateTime.fromISO(this.match.startTime).toFormat('HH:mm')
+      return this.match
+        ? DateTime.fromISO(this.match.startTime).toFormat('HH:mm')
+        : '00:00'
+    },
+    isAllHouseEvent () {
+      return this.match?.inHouseEvent?.eventType === InHouseEventType.ALL_HOUSES
+    },
+    filteredTeams () {
+      return this.teams
     },
   },
 
   async created () {
-    this.sport = await this.$store.dispatch('api/sports/fetch', this.match.inHouseEvent.inHouseCompetition.sportId)
-    this.user = await this.$store.dispatch('api/users/fetch', {
+    if (this.match?.inHouseEvent) {
+      this.sport = await this.$store.dispatch('api/sports/fetch', this.match.inHouseEvent.inHouseCompetition.sportId)
+      this.user = await this.$store.dispatch('api/users/fetch', {
+        schoolId: this.contextSchoolId,
+        id: this.match.inHouseEvent.leadId,
+      })
+    }
+    this.teams = await this.$store.dispatch('api/inHouseTeams/list', {
       schoolId: this.contextSchoolId,
-      id: this.match.inHouseEvent.leadId,
     })
   },
 }
