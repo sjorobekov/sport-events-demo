@@ -18,6 +18,7 @@
           item-value="id"
           placeholder="Select Season"
           hide-details
+          @change="onSeasonChange"
         />
       </v-list-item-content>
       <v-spacer />
@@ -85,25 +86,31 @@ export default {
     },
   },
 
-  async created () {
+  created () {
     this.params = {
       seasonId: this.currentSeason.id,
     }
+    this.onSeasonChange()
+  },
 
-    const teams = await this.$store.dispatch('api/teams/list', {
-      schoolId: this.contextSchool.id,
-      params: this.params,
-    })
+  methods: {
+    async onSeasonChange () {
+      const teams = await this.$store.dispatch('api/teams/list', {
+        schoolId: this.contextSchool.id,
+        params: this.params,
+      })
 
-    const sports = []
-    teams.forEach((team) => {
-      if (!this.teamsBySport[team.sportId]) {
-        this.$set(this.teamsBySport, team.sportId, [])
-      }
-      this.teamsBySport[team.sportId].push(team)
-      sports.push(team.sport)
-    })
-    this.sports = [...new Map(sports.map(v => [v.id, v])).values()]
+      const sports = []
+      this.teamsBySport = {}
+      teams.forEach((team) => {
+        if (!this.teamsBySport[team.sportId]) {
+          this.$set(this.teamsBySport, team.sportId, [])
+        }
+        this.teamsBySport[team.sportId].push(team)
+        sports.push(team.sport)
+      })
+      this.sports = [...new Map(sports.map(v => [v.id, v])).values()]
+    },
   },
 }
 </script>

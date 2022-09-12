@@ -18,6 +18,7 @@
           item-value="id"
           placeholder="Select Season"
           hide-details
+          @change="onSeasonChange"
         />
       </v-list-item-content>
       <v-spacer />
@@ -70,25 +71,31 @@ export default {
     }),
   },
 
-  async created () {
+  created () {
     this.params = {
       seasonId: this.currentSeason.id,
     }
+    this.onSeasonChange()
+  },
 
-    const inHouseCompetitions = await this.$store.dispatch('api/inHouseCompetitions/list', {
-      schoolId: this.contextSchool.id,
-      params: this.params,
-    })
+  methods: {
+    async onSeasonChange () {
+      const inHouseCompetitions = await this.$store.dispatch('api/inHouseCompetitions/list', {
+        schoolId: this.contextSchool.id,
+        params: this.params,
+      })
 
-    const sports = []
-    inHouseCompetitions.forEach((competition) => {
-      if (!this.competitionBySport[competition.sportId]) {
-        this.$set(this.competitionBySport, competition.sportId, [])
-      }
-      this.competitionBySport[competition.sportId].push(competition)
-      sports.push(competition.sport)
-    })
-    this.sports = [...new Map(sports.map(v => [v.id, v])).values()]
+      const sports = []
+      this.competitionBySport = {}
+      inHouseCompetitions.forEach((competition) => {
+        if (!this.competitionBySport[competition.sportId]) {
+          this.$set(this.competitionBySport, competition.sportId, [])
+        }
+        this.competitionBySport[competition.sportId].push(competition)
+        sports.push(competition.sport)
+      })
+      this.sports = [...new Map(sports.map(v => [v.id, v])).values()]
+    },
   },
 }
 </script>
