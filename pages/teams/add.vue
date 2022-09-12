@@ -75,6 +75,12 @@ export default {
       }).then((data) => {
         this.$router.push({ name: 'teams-id', params: { id: data.id } })
         this.$toast('Team has been created!')
+      }).catch((err) => {
+        if (err.response?.data?.error === 'already_exists') {
+          this.$toast.error('Team is already exists')
+        } else {
+          this.$toast.error('Unknown Error')
+        }
       }).finally(() => {
         this.loading = false
       })
