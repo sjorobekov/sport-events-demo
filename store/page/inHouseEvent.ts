@@ -102,7 +102,7 @@ export const getters: GetterTree<RootState, RootState> = {
   },
 
   hasResult (_state, getters) {
-    return !!getters.result
+    return !!getters.result.overallResult
   },
 
   isLive (_state, getters) {
@@ -114,11 +114,11 @@ export const getters: GetterTree<RootState, RootState> = {
       EventResult.WIN,
       EventResult.LOST,
       EventResult.DRAW,
-    ].includes(getters.results.results)
+    ].includes(getters.result.results)
   },
 
   isCancelled (_state, getters) {
-    return getters.results.overallResult === EventResult.CANCELLED
+    return getters.result.overallResult === EventResult.CANCELLED
   },
 
   isPostponed (_state, getters) {

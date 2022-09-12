@@ -39,7 +39,6 @@ export default {
   computed: {
     ...mapGetters({
       result: 'page/inHouseEvent/result',
-      isPlayed: 'page/inHouseEvent/isPlayed',
       isCancelled: 'page/inHouseEvent/isCancelled',
       isPostponed: 'page/inHouseEvent/isPostponed',
       hasResult: 'page/inHouseEvent/hasResult',

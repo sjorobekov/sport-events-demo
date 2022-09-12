@@ -147,17 +147,17 @@
         Select Event Location
       </template>
 
-      <section v-for="(match, i) in matchItems" :key="i">
+      <div v-for="(match, i) in matchItems" :key="i">
         <label>Location</label>
         <FxEventLocationTypeSelect
-          :value="eventForm.location"
-          @input="updateEvent('location', $event)"
+          :value="match.location"
+          @input="updateMatch(i, { location: $event })"
         />
 
         <template v-if="match.location === EventLocationType.SPORTS_LOCATIONS">
-          <label for="sportLocation">Sports Location</label>
+          <label :for="`sportLocation-${match.number}`">Sports Location</label>
           <v-autocomplete
-            id="sportLocation"
+            :id="`sportLocation-${match.number}`"
             v-async-validate
             :async-rules="[$rule.required]"
             outlined
@@ -171,9 +171,9 @@
           />
         </template>
         <template v-else-if="match.location === EventLocationType.OTHER">
-          <label for="locationOther">Sports Location</label>
+          <label :for="`locationOther-${match.number}`">Sports Location</label>
           <v-text-field
-            id="locationOther"
+            :id="`locationOther-${match.number}`"
             v-async-validate
             dense
             outlined
@@ -183,7 +183,7 @@
             @input="updateMatch(i, { otherLocation: $event })"
           />
         </template>
-      </section>
+      </div>
     </FxSteppedFormCard>
 
     <FxSteppedFormCard>
@@ -340,8 +340,10 @@ export default {
 
     add () {
       this.$emit('update:matches', tap(cloneDeep(this.matchItems), v => v.push({
+        number: this.matchItems.length,
         teamId: '',
         opponentTeamId: '',
+        location: EventLocationType.SPORTS_LOCATIONS,
       })))
     },
   },

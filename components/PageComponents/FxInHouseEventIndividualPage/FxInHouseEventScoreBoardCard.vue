@@ -46,8 +46,5 @@ export default {
       teams: 'page/inHouseEvent/teams',
     }),
   },
-  mounted () {
-    console.log(this.myTeam)
-  },
 }
 </script>

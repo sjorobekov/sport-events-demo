@@ -102,10 +102,10 @@ export default {
     formData () {
       return {
         ...this.value,
-        results: this.value.results || [
+        results: this.value?.results || [
           {
-            score: 0,
-            opponentScore: 0,
+            score: '0',
+            opponentScore: '0',
           },
         ],
       }
@@ -127,11 +127,13 @@ export default {
     },
 
     increaseScore () {
-      this.update('results[0].score', this.formData.results[0]?.score + 1)
+      const incremented = parseFloat(this.formData.results[0]?.score) + 1
+      this.update('results[0].score', incremented.toString())
     },
 
     increaseOpponentScore () {
-      this.update('results[0].opponentScore', this.formData.results[0]?.opponentScore + 1)
+      const incremented = parseFloat(this.formData.results[0]?.opponentScore) + 1
+      this.update('results[0].opponentScore', incremented.toString())
     },
   },
 }
