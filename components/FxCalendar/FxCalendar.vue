@@ -18,6 +18,17 @@
         @click="toggle"
       />
     </v-slide-item>
+
+    <template #next>
+      <v-icon class="pb-7" x-large color="info lighten-2">
+        mdi-chevron-right
+      </v-icon>
+    </template>
+    <template #prev>
+      <v-icon class="pb-7" x-large color="info lighten-2">
+        mdi-chevron-left
+      </v-icon>
+    </template>
   </v-slide-group>
 </template>
 

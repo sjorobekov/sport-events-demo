@@ -9,7 +9,7 @@
     <div class="">
       {{ month }}
     </div>
-    <v-icon color="error" class="mt-1 mr-1" small :class="{ hidden: !hasEvents }">
+    <v-icon color="error" class="mt-1 mr-1" x-small :class="{ hidden: !hasEvents }">
       $vuetify.icons.ellipse
     </v-icon>
     <div class="selected mt-1" :class="{ active }" />

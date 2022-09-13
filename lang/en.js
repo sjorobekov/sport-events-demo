@@ -1,6 +1,12 @@
-import { EventResult, FixtureType, TransportType } from '~/enum'
+import { EventResult, EventType, FixtureType, TransportType } from '~/enum'
 
 export default {
+  EVENT_TYPE: {
+    [EventType.FIXTURE]: 'Fixture',
+    [EventType.TOURNAMENT]: 'Tournament',
+    [EventType.MULTI_EVENT]: 'Multi-Events',
+    [EventType.TRAINING]: 'Training',
+  },
   FIXTURE_TYPE: {
     [FixtureType.CUP]: 'Cup',
     [FixtureType.LEAGUE]: 'League',
