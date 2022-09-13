@@ -1,6 +1,6 @@
 <template>
   <FxInHouseEventItem
-    :event="event"
+    :event-type="event.eventType"
     :context-school-id="contextSchoolId"
     :match="firstMatch"
     :me="me"

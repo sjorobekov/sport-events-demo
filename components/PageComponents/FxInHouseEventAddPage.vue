@@ -92,14 +92,14 @@ export default {
   watch: {
     formData: {
       handler (val) {
-        this.setSession('eventForm', val)
+        this.setSession('inHouseEventForm', val)
       },
       deep: true,
     },
   },
 
   mounted () {
-    this.formData = this.getSession('eventForm') || {
+    this.formData = this.getSession('inHouseEventForm') || {
       matches: [{
         number: 1,
         teamId: '',
@@ -116,7 +116,7 @@ export default {
   },
 
   beforeDestroy () {
-    this.setSession('eventForm', null)
+    this.setSession('inHouseEventForm', null)
   },
 
   methods: {
@@ -146,7 +146,7 @@ export default {
     },
 
     cancel () {
-      this.setSession('eventForm', null)
+      this.setSession('inHouseEventForm', null)
       this.$emit('cancel')
     },
 
@@ -168,7 +168,7 @@ export default {
         schoolId: this.contextSchoolId,
         ...this.formData,
       }).then(() => {
-        this.setSession('eventForm', null)
+        this.setSession('inHouseEventForm', null)
         this.$emit('saved')
       }).catch(() => {
         this.$toast.error('Something went wrong')

@@ -82,6 +82,10 @@ export default {
       type: String,
       required: true,
     },
+    eventType: {
+      type: String,
+      required: true,
+    },
   },
 
   data: () => ({
@@ -112,7 +116,7 @@ export default {
         : '00:00'
     },
     isAllHouseEvent () {
-      return this.match?.inHouseEvent?.eventType === InHouseEventType.ALL_HOUSES
+      return this.eventType === InHouseEventType.ALL_HOUSES
     },
     filteredTeams () {
       return this.teams
