@@ -139,7 +139,7 @@
               <v-icon>mdi-map-marker</v-icon>
             </template>
             <template v-if="location" #title>
-              {{ location.name }}
+              <span v-if="eventLocation">{{ eventLocation }} - </span>{{ location.name }}
             </template>
             <template v-else #title>
               Add Location
@@ -255,6 +255,14 @@ export default {
         schoolId: this.contextSchoolId,
         sportLocationId: this.canChangeLocation ? this.event.sportLocationId : undefined,
       }
+    },
+    eventLocation () {
+      const locations = {
+        HOME: 'Home',
+        NEUTRAL: 'Neutral',
+        AWAY: 'Away',
+      }
+      return this.me.eventLocation ? locations[this.me.eventLocation] : ''
     },
   },
 
