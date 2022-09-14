@@ -101,27 +101,27 @@
           <label for="gender">Gender</label>
           <FxGenderSelect
             id="gender"
-            :value="meForm.gender"
+            :value="eventForm.gender"
             :async-rules="[$rule.required]"
-            @input="updateMe('gender', $event)"
+            @input="updateEvent('gender', $event)"
           />
         </v-col>
         <v-col class="py-0">
           <label for="age">Age Level</label>
           <FxAgeLevelSelect
             id="age"
-            :value="meForm.age"
+            :value="eventForm.age"
             :async-rules="[$rule.required]"
-            @input="updateMe('age', $event)"
+            @input="updateEvent('age', $event)"
           />
         </v-col>
         <v-col class="py-0">
           <label for="ability">Ability Level</label>
           <FxAbilityLevelSelect
             id="ability"
-            :value="meForm.ability"
+            :value="eventForm.ability"
             :async-rules="[$rule.required]"
-            @input="updateMe('ability', $event)"
+            @input="updateEvent('ability', $event)"
           />
         </v-col>
       </v-row>
@@ -338,14 +338,14 @@
       </template>
 
       <v-checkbox
-        :input-value="meForm.noTransportation"
+        :input-value="meForm.noNeedTransport"
         label="This event doesn't need transport information"
         class="info--text"
         hide-details
         @change="updateMe('noTransportation', $event)"
       />
 
-      <div v-if="!meForm.noTransportation">
+      <div v-if="!meForm.noNeedTransport">
         <label>Transport to</label>
         <FxTransportToSelect
           :value="meForm.transportTo"

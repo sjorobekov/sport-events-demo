@@ -142,15 +142,15 @@ export default {
         transportFrom: TransportType.VENUE,
         teamId: this.$route.query.teamId,
         leadId: this.$route.query.leadId,
-        gender: this.$route.query.gender,
-        ability: this.$route.query.ability,
-        age: this.$route.query.age,
       },
       opponent: {},
       event: {
         fixtureType: FixtureType.FRIENDLY,
         location: EventLocationType.SPORTS_LOCATIONS,
         sportId: this.$route.query.sportId,
+        gender: this.$route.query.gender,
+        ability: this.$route.query.ability,
+        age: this.$route.query.age,
       },
     }
 
