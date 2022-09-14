@@ -48,4 +48,6 @@ export default [
   'image',
   'teams',
   'signin',
+  'multievent',
+  'training',
 ]

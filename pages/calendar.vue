@@ -20,20 +20,7 @@
         <div class="d-flex">
           <FxDateRangePicker v-model="dateRange" style="width: 232px" class="mr-2" />
 
-          <v-select
-            v-model="filter.sport"
-            class="mr-2"
-            hide-details
-            style="width: 168px"
-            placeholder="Filter by Sport"
-            dense
-            outlined
-            :items="sports"
-            item-text="name"
-            item-value="id"
-            prepend-inner-icon="$vuetify.icons.whistle"
-            clearable
-          />
+          <FxCalendarSportFilter v-model="filter.sports" class="mr-2" :items="sportIds" />
 
           <v-select
             style="width: 135px"
@@ -63,7 +50,9 @@
       </v-container>
     </v-app-bar>
 
-    <FxPill>Filters</FxPill>
+    <FxPill class="mb-4">
+      Filters
+    </FxPill>
 
     <v-row>
       <v-col>
@@ -71,6 +60,12 @@
       </v-col>
       <v-col>
         <FxCalendarEventFilter v-model="filter.eventTypes" :items="eventTypes" />
+      </v-col>
+      <v-col>
+        <FxCalendarOpponentFilter v-model="filter.opponentIds" :items="opponentIds" />
+      </v-col>
+      <v-col>
+        <FxCalendarAgeFilter v-model="filter.ageGroups" :items="ageGroups" />
       </v-col>
     </v-row>
 
@@ -108,10 +103,16 @@ import FxCalendarPill from '@/components/PageComponents/FxCalendarPage/FxCalenda
 import FxPill from '@/components/FxPill/FxPill'
 import FxCalendarStaffFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarStaffFilter'
 import FxCalendarEventFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarEventFilter'
+import FxCalendarSportFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarSportFilter'
+import FxCalendarOpponentFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarOpponentFilter'
+import FxCalendarAgeFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarAgeFilter'
 
 export default {
   name: 'CalendarPage',
   components: {
+    FxCalendarAgeFilter,
+    FxCalendarOpponentFilter,
+    FxCalendarSportFilter,
     FxCalendarEventFilter,
     FxCalendarStaffFilter,
     FxPill,
@@ -127,9 +128,11 @@ export default {
     items: [],
     sports: [],
     filter: {
-      sport: null,
+      sports: [],
       leadIds: [],
       eventTypes: [],
+      opponentIds: [],
+      ageGroups: [],
     },
   }),
 
@@ -143,12 +146,6 @@ export default {
         to: DateTime.fromJSDate(this.dateRange.endDate).toFormat('yyyy-MM-dd'),
       },
     })
-
-    this.sports = []
-    for (const event of data) {
-      const sport = await this.$store.dispatch('api/sports/fetch', event.sportId)
-      this.sports.push(sport)
-    }
 
     this.items = data
   },
@@ -164,8 +161,8 @@ export default {
 
     filtered () {
       return this.items.filter((item) => {
-        if (this.filter.sport) {
-          if (this.filter.sport !== item.sportId) {
+        if (this.filter.sports.length > 0) {
+          if (!this.filter.sports.includes(item.sportId)) {
             return false
           }
         }
@@ -178,6 +175,18 @@ export default {
 
         if (this.filter.eventTypes.length > 0) {
           if (!this.filter.eventTypes.includes(item.eventType)) {
+            return false
+          }
+        }
+
+        if (this.filter.opponentIds.length > 0) {
+          if (!this.filter.opponentIds.includes(item.opponent?.listedAsOpponentId)) {
+            return false
+          }
+        }
+
+        if (this.filter.ageGroups.length > 0) {
+          if (!this.filter.ageGroups.includes(item.age)) {
             return false
           }
         }
@@ -196,6 +205,20 @@ export default {
 
     eventTypes () {
       return uniq(this.items.map(item => item.eventType))
+    },
+
+    sportIds () {
+      return uniq(this.items.map(item => item.sportId))
+    },
+
+    opponentIds () {
+      return uniq(this.items.map(item => item.opponent?.listedAsOpponentId))
+    },
+
+    ageGroups () {
+      return uniq(this.items.map(item => item.age)).filter(item => !!item).sort((a, b) => {
+        return parseInt(a.substr(1, 2)) > parseInt(b.substr(1, 2)) ? 1 : -1
+      })
     },
   },
 
