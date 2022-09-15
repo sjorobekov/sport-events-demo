@@ -30,7 +30,7 @@ export default {
       type: Array,
       default: () => [
         { value: InHouseEventType.HOUSE_VS_HOUSE, text: 'House vs House', img: houseVsHouse },
-        { value: InHouseEventType.ALL_HOUSES, text: 'Tournament', img: allHouses },
+        { value: InHouseEventType.ALL_HOUSES, text: 'All Houses', img: allHouses },
       ],
     },
   },

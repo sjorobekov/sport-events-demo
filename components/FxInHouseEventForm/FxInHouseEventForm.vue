@@ -61,7 +61,7 @@
           />
         </v-col>
       </v-row>
-      <v-row>
+      <v-row class="pa-3">
         <v-btn text block color="info" @click="add()">
           <v-icon>mdi-plus-circle</v-icon> Add Another Match
         </v-btn>

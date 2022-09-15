@@ -82,7 +82,7 @@ export default {
   computed: {
     title () {
       if (this.formVisible) {
-        return 'Create New Event'
+        return 'Create In-House Event'
       }
 
       return 'Confirm In-House Event'
