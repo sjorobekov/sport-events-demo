@@ -2,7 +2,7 @@
   <v-card class="rounded-t-0" height="152">
     <v-row v-if="inHouseEvent.eventType === InHouseEventType.HOUSE_VS_HOUSE" no-gutters class="pa-6">
       <v-col cols="4">
-        <FxTeam :color="myTeam.color" :logo="school.logo" :name="myTeam.name" />
+        <FxTeam :color="myTeam.color" :logo="myTeam.logo" :name="myTeam.name" />
       </v-col>
       <v-col cols="4" class="text-center">
         <FxInHouseEventResultCenterBoard />

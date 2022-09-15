@@ -148,7 +148,7 @@ export const getters: GetterTree<RootState, RootState> = {
   },
 
   opponentTeam (state) {
-    return state.myTeam
+    return state.opponentTeam
   },
 
   teams (state) {
