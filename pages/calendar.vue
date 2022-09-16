@@ -22,18 +22,21 @@
 
           <FxCalendarSportFilter v-model="filter.sports" class="mr-2" :items="sportIds" />
 
-          <v-select
-            style="width: 135px"
-            hide-details
-            dense
-            outlined
-            prepend-inner-icon="$vuetify.icons.settings"
-            readonly
-            placeholder="More Filters"
-          />
+          <v-btn height="40" outlined color="info lighten-1" @click="showFilters = !showFilters">
+            <v-icon>$vuetify.icons.settings</v-icon>
+            More Filters
+          </v-btn>
+
           <v-spacer />
 
-          <v-btn color="primary" depressed link :to="{ name: 'events-add' }">
+          <v-btn
+            v-if="canCreateEvent"
+            height="40"
+            color="primary"
+            depressed
+            link
+            :to="{ name: 'events-add' }"
+          >
             <v-icon class="mr-1">
               $vuetify.icons.calendarAdd
             </v-icon>Create Event
@@ -50,24 +53,31 @@
       </v-container>
     </v-app-bar>
 
-    <FxPill class="mb-4">
-      Filters
-    </FxPill>
+    <v-expand-transition>
+      <div v-if="showFilters">
+        <FxPill class="mb-4">
+          Filters
+        </FxPill>
 
-    <v-row>
-      <v-col>
-        <FxCalendarStaffFilter v-model="filter.leadIds" :items="leadIds" />
-      </v-col>
-      <v-col>
-        <FxCalendarEventFilter v-model="filter.eventTypes" :items="eventTypes" />
-      </v-col>
-      <v-col>
-        <FxCalendarOpponentFilter v-model="filter.opponentIds" :items="opponentIds" />
-      </v-col>
-      <v-col>
-        <FxCalendarAgeFilter v-model="filter.ageGroups" :items="ageGroups" />
-      </v-col>
-    </v-row>
+        <v-row>
+          <v-col>
+            <FxCalendarStaffFilter v-model="filter.leadIds" :items="leadIds" />
+          </v-col>
+          <v-col>
+            <FxCalendarEventFilter v-model="filter.eventTypes" :items="eventTypes" />
+          </v-col>
+          <v-col>
+            <FxCalendarOpponentFilter v-model="filter.opponentIds" :items="opponentIds" />
+          </v-col>
+          <v-col>
+            <FxCalendarAgeFilter v-model="filter.ageGroups" :items="ageGroups" />
+          </v-col>
+          <v-col>
+            <FxCalendarLocationFilter v-model="filter.locations" />
+          </v-col>
+        </v-row>
+      </div>
+    </v-expand-transition>
 
     <div
       v-for="(value, key) in events"
@@ -84,7 +94,7 @@
 
       <v-card v-for="event in value" :key="`event-${event.id}`" class="mb-2">
         <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
-          <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" :context-school-id="contextSchoolId" />
+          <FxCalendarEventItem :event="event" :me="event.me" :opponent="event.opponent" :context-school-id="contextSchoolId" />
         </nuxt-link>
       </v-card>
     </div>
@@ -98,7 +108,6 @@ import { mapGetters } from 'vuex'
 import uniq from 'lodash/uniq'
 import FxCalendar from '@/components/FxCalendar/FxCalendar'
 import FxDateRangePicker from '@/components/FxDateRangePicker'
-import FxEventItem from '@/components/FxEventItem/FxEventItem'
 import FxCalendarPill from '@/components/PageComponents/FxCalendarPage/FxCalendarPill'
 import FxPill from '@/components/FxPill/FxPill'
 import FxCalendarStaffFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarStaffFilter'
@@ -106,10 +115,15 @@ import FxCalendarEventFilter from '@/components/PageComponents/FxCalendarPage/Fx
 import FxCalendarSportFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarSportFilter'
 import FxCalendarOpponentFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarOpponentFilter'
 import FxCalendarAgeFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarAgeFilter'
+import FxCalendarLocationFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarLocationFilter'
+import { EventLocationType } from '@/enum'
+import FxCalendarEventItem from '@/components/PageComponents/FxCalendarPage/FxCalendarEventItem/FxCalendarEventItem'
 
 export default {
   name: 'CalendarPage',
   components: {
+    FxCalendarEventItem,
+    FxCalendarLocationFilter,
     FxCalendarAgeFilter,
     FxCalendarOpponentFilter,
     FxCalendarSportFilter,
@@ -117,7 +131,6 @@ export default {
     FxCalendarStaffFilter,
     FxPill,
     FxCalendarPill,
-    FxEventItem,
     FxCalendar,
     FxDateRangePicker,
   },
@@ -133,7 +146,9 @@ export default {
       eventTypes: [],
       opponentIds: [],
       ageGroups: [],
+      locations: [],
     },
+    showFilters: false,
   }),
 
   async fetch () {
@@ -153,6 +168,7 @@ export default {
   computed: {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
+      canCreateEvent: 'user/acl/canCreateEvent',
     }),
 
     dots () {
@@ -187,6 +203,16 @@ export default {
 
         if (this.filter.ageGroups.length > 0) {
           if (!this.filter.ageGroups.includes(item.age)) {
+            return false
+          }
+        }
+
+        if (this.filter.locations.length > 0) {
+          if (
+            (this.filter.locations.includes(EventLocationType.OPPONENT_CONFIRMS) &&
+            item.location !== EventLocationType.OPPONENT_CONFIRMS) ||
+            !this.filter.locations.includes(item.me.eventLocation)
+          ) {
             return false
           }
         }
