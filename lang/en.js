@@ -1,4 +1,4 @@
-import { EventResult, EventType, FixtureType, TransportType } from '~/enum'
+import { EventLocation, EventLocationType, EventResult, EventType, FixtureType, TransportType } from '~/enum'
 
 export default {
   EVENT_TYPE: {
@@ -6,6 +6,16 @@ export default {
     [EventType.TOURNAMENT]: 'Tournament',
     [EventType.MULTI_EVENT]: 'Multi-Events',
     [EventType.TRAINING]: 'Training',
+  },
+  EVENT_LOCATION: {
+    [EventLocation.HOME]: 'Home',
+    [EventLocation.AWAY]: 'Away',
+    [EventLocation.NEUTRAL]: 'Neutral',
+  },
+  EVENT_LOCATION_TYPE: {
+    [EventLocationType.SPORTS_LOCATIONS]: 'Sports Location',
+    [EventLocationType.OPPONENT_CONFIRMS]: 'Opponent Confirms',
+    [EventLocationType.OTHER]: 'Other',
   },
   FIXTURE_TYPE: {
     [FixtureType.CUP]: 'Cup',

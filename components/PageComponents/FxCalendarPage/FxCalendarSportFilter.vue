@@ -31,8 +31,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   name: 'FxCalendarSportFilter',
   props: {
@@ -48,11 +46,6 @@ export default {
   data: () => ({
     sports: [],
   }),
-  computed: {
-    ...mapGetters({
-      schoolId: 'context/schoolId',
-    }),
-  },
   watch: {
     items: {
       deep: true,
