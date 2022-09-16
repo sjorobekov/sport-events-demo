@@ -2,7 +2,7 @@
   <div>
     <v-row>
       <v-col md="9">
-        <v-card>
+        <v-card v-if="inHouseCompetition.photo">
           <v-img
             class="white--text align-end"
             height="388px"
@@ -20,6 +20,16 @@
             </v-list-item>
           </v-img>
         </v-card>
+        <v-list-item v-else>
+          <v-list-item-content>
+            <v-list-item-title class="text-h3">
+              {{ inHouseCompetition.name }}
+            </v-list-item-title>
+            <v-list-item-subtitle class="text-subheading font-weight-bold">
+              In-House Sport &bull; {{ sport.name }} &bull; {{ season.name }}
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
 
         <v-row class="my-4">
           <v-col cols="6" sm="5" md="6">
@@ -59,8 +69,6 @@
         </v-row>
       </v-col>
       <v-col md="3">
-        <v-divider class="my-4" />
-
         <h3 class="text-p1 info--text text--darken-1 mb-4">
           Lead Staff Member
         </h3>

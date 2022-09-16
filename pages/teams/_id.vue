@@ -2,7 +2,7 @@
   <div>
     <v-row>
       <v-col md="9">
-        <v-card>
+        <v-card v-if="team.photo">
           <v-img
             class="white--text align-end"
             height="388px"
@@ -23,6 +23,19 @@
             </v-list-item>
           </v-img>
         </v-card>
+        <v-list-item v-else>
+          <v-list-item-content>
+            <v-list-item-title class="text-h3">
+              {{ team.name }}
+            </v-list-item-title>
+            <v-list-item-subtitle class="text-subheading font-weight-bold">
+              {{ sport.name }} &bull; {{ season.name }}
+            </v-list-item-subtitle>
+          </v-list-item-content>
+          <v-list-item-action>
+            <FxTeamPrivacyChipBig v-if="!$fetchState.pending" :publish-team="team.publishTeam" :publish-results="team.publishResults" />
+          </v-list-item-action>
+        </v-list-item>
 
         <v-row class="my-4">
           <v-col cols="6" sm="5" md="6">
@@ -237,6 +250,9 @@ export default {
 
     showTraining () {
       return (this.filter === 'training' || !this.filter) && this.training.length
+    },
+    compact () {
+      return this.$vuetify.breakpoint.smAndDown
     },
   },
 }
