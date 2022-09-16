@@ -50,6 +50,11 @@ export default {
   data: () => ({
     users: [],
   }),
+
+  async fetch () {
+    await this.fetchItems()
+  },
+
   computed: {
     ...mapGetters({
       schoolId: 'context/schoolId',
@@ -58,19 +63,24 @@ export default {
   watch: {
     items: {
       deep: true,
-      async handler (val) {
-        this.users = await Promise.all(val.filter(id => !!id).map((id) => {
-          return this.$store.dispatch('api/users/fetch', {
-            id,
-            schoolId: this.schoolId,
-          })
-        }))
+      async handler () {
+        await this.fetchItems()
       },
     },
   },
+
   methods: {
     fullname (item) {
       return `${item.firstname} ${item.lastname}`
+    },
+
+    async fetchItems () {
+      this.users = await Promise.all(this.items.filter(id => !!id).map((id) => {
+        return this.$store.dispatch('api/users/fetch', {
+          id,
+          schoolId: this.schoolId,
+        })
+      }))
     },
   },
 }

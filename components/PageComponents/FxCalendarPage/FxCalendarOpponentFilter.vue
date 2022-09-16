@@ -34,6 +34,11 @@ export default {
   data: () => ({
     opponents: [],
   }),
+
+  async fetch () {
+    await this.fetchItems()
+  },
+
   computed: {
     ...mapGetters({
       schoolId: 'context/schoolId',
@@ -42,19 +47,24 @@ export default {
   watch: {
     items: {
       deep: true,
-      async handler (val) {
-        this.opponents = await Promise.all(val.filter(id => !!id).map((id) => {
-          return this.$store.dispatch('api/opponents/fetch', {
-            id,
-            schoolId: this.schoolId,
-          })
-        }))
+      async handler () {
+        await this.fetchItems()
       },
     },
   },
+
   methods: {
     name (item) {
       return item.opponentSchool ? item.opponentSchool.name : item.name
+    },
+
+    async fetchItems () {
+      this.opponents = await Promise.all(this.items.filter(id => !!id).map((id) => {
+        return this.$store.dispatch('api/opponents/fetch', {
+          id,
+          schoolId: this.schoolId,
+        })
+      }))
     },
   },
 }
