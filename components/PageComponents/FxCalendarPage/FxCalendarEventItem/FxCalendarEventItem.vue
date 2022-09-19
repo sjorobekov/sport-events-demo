@@ -22,7 +22,10 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" md="5" class="border-bottom">
+      <v-col md="2" class="border-bottom pt-6">
+        <FxEventStatus v-if="me.overallResult === EventResult.TO_BE_PLAYED" :overall-result="me.overallResult" />
+      </v-col>
+      <v-col cols="12" md="3" class="border-bottom">
         <FxTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" :icon-on-right="!compact" />
       </v-col>
       <v-col md="2" class="hidden-sm-and-down pt-5 border-bottom text-center">
@@ -52,20 +55,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" sm="12" lg="4" class="border-bottom border-right pt-1 pb-0">
-        <ListItem>
-          <template #icon>
-            <v-icon>$vuetify.icons.calendar</v-icon>
-          </template>
-          <template #title>
-            <FxDateFormat :date="event.date" />
-          </template>
-          <template #subtitle>
-            Date
-          </template>
-        </ListItem>
-      </v-col>
-      <v-col cols="12" lg="4" class="border-bottom border-right pt-1 pb-0">
+      <v-col cols="12" md="6" lg="3" class="border-bottom border-right pt-1 pb-0">
         <ListItem>
           <template #icon>
             <v-icon>mdi-clock-outline</v-icon>
@@ -100,7 +90,7 @@
           </template>
         </ListItem>
       </v-col>
-      <v-col cols="12" lg="4" class="border-bottom pt-1 pb-0">
+      <v-col cols="12" md="6" lg="3" class="border-bottom border-right pt-1 pb-0">
         <ListItem>
           <template #icon>
             <FxAvatar :size="24" :value="user.avatar" />
@@ -108,14 +98,9 @@
           <template #title>
             {{ user.firstname }} {{ user.lastname }}
           </template>
-          <template #subtitle>
-            Lead Staff Member
-          </template>
         </ListItem>
       </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" md="6" class="border-bottom border-right pt-1 pb-0">
+      <v-col cols="12" md="6" lg="3" class="border-bottom border-right pt-1 pb-0">
         <ListItem>
           <template #icon>
             <v-icon>mdi-map-marker</v-icon>
@@ -123,37 +108,25 @@
           <template #title>
             <FxLocationLabel :event="event" :me="me" />
           </template>
-          <template #subtitle>
-            Location
-          </template>
         </ListItem>
       </v-col>
-      <v-col cols="12" sm="12" md="6" class="pt-1 pb-0">
-        <ListItem v-if="!me.noNeedTransport">
-          <template #icon>
-            <v-icon>$vuetify.icons.direction</v-icon>
-          </template>
-          <template #content>
+      <v-col cols="12" md="6" lg="3" class="py-0">
+        <v-list-item v-if="!me.noNeedTransport" class="pt-2">
+          <v-list-item-content class="py-0">
             <div>
-              <div class="d-inline-block pr-8">
+              <div v-if="me.transportTo" class="d-inline-block pr-8">
                 <v-list-item-title class="text-p2 info--text text--darken-4">
-                  {{ transportTo }}
+                  <v-icon>$vuetify.icons.arrowRight</v-icon> {{ transportTo }}
                 </v-list-item-title>
-                <v-list-item-subtitle class="text-p1 info--text">
-                  Transport To
-                </v-list-item-subtitle>
               </div>
-              <div class="d-inline-block">
+              <div v-if="me.transportFrom" class="d-inline-block">
                 <v-list-item-title class="text-p2 info--text text--darken-4">
-                  {{ transportFrom }}
+                  <v-icon>$vuetify.icons.arrowLeft</v-icon> {{ transportFrom }}
                 </v-list-item-title>
-                <v-list-item-subtitle class="text-p1 info--text">
-                  Transport From
-                </v-list-item-subtitle>
               </div>
             </div>
-          </template>
-        </ListItem>
+          </v-list-item-content>
+        </v-list-item>
       </v-col>
     </v-row>
     <slot name="bottom" />
@@ -202,6 +175,7 @@ export default {
     team: {},
     user: {},
     EventType,
+    EventResult,
   }),
 
   computed: {

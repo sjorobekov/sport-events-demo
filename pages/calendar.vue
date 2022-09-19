@@ -18,7 +18,7 @@
     >
       <v-container class="my-0 py-0">
         <div class="d-flex">
-          <FxDateRangePicker v-model="dateRange" style="width: 232px" class="mr-2" />
+          <FxDateRangePicker v-model="filter" style="width: 232px" class="mr-2" />
 
           <FxCalendarSportFilter v-model="filter.sports" class="mr-2" :items="sportIds" />
 
@@ -45,8 +45,8 @@
 
         <FxCalendar
           v-model="date"
-          :from="dateRange.startDate"
-          :to="dateRange.endDate"
+          :from="filter.startDate"
+          :to="filter.endDate"
           :dots="dots"
           @input="scrollTo"
         />
@@ -80,7 +80,7 @@
     </v-expand-transition>
 
     <div
-      v-for="(value, key) in events"
+      v-for="(value, key) in eventsGroupedByDate"
       :id="`date-${key}`"
       :key="key"
       v-intersect="{
@@ -103,6 +103,7 @@
 
 <script>
 import groupBy from 'lodash/groupBy'
+import isString from 'lodash/isString'
 import { DateTime } from 'luxon'
 import { mapGetters } from 'vuex'
 import uniq from 'lodash/uniq'
@@ -118,6 +119,8 @@ import FxCalendarAgeFilter from '@/components/PageComponents/FxCalendarPage/FxCa
 import FxCalendarLocationFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarLocationFilter'
 import { EventLocationType } from '@/enum'
 import FxCalendarEventItem from '@/components/PageComponents/FxCalendarPage/FxCalendarEventItem/FxCalendarEventItem'
+
+const DATE_FORMAT = 'yyyy-MM-dd'
 
 export default {
   name: 'CalendarPage',
@@ -136,11 +139,12 @@ export default {
   },
 
   data: () => ({
-    dateRange: { startDate: new Date(), endDate: new Date() },
     date: null,
     items: [],
     sports: [],
     filter: {
+      startDate: new Date(),
+      endDate: new Date(),
       sports: [],
       leadIds: [],
       eventTypes: [],
@@ -157,8 +161,8 @@ export default {
       params: {
         limit: 2000,
         orderDesc: 'false',
-        from: DateTime.fromJSDate(this.dateRange.startDate).toFormat('yyyy-MM-dd'),
-        to: DateTime.fromJSDate(this.dateRange.endDate).toFormat('yyyy-MM-dd'),
+        from: DateTime.fromJSDate(this.filter.startDate).toFormat(DATE_FORMAT),
+        to: DateTime.fromJSDate(this.filter.endDate).toFormat(DATE_FORMAT),
       },
     })
 
@@ -172,45 +176,45 @@ export default {
     }),
 
     dots () {
-      return Object.keys(this.events)
+      return Object.keys(this.eventsGroupedByDate)
     },
 
     filtered () {
       return this.items.filter((item) => {
-        if (this.filter.sports.length > 0) {
+        if (this.filter.sports?.length > 0) {
           if (!this.filter.sports.includes(item.sportId)) {
             return false
           }
         }
 
-        if (this.filter.leadIds.length > 0) {
+        if (this.filter.leadIds?.length > 0) {
           if (!this.filter.leadIds.includes(item.me.leadId)) {
             return false
           }
         }
 
-        if (this.filter.eventTypes.length > 0) {
+        if (this.filter.eventTypes?.length > 0) {
           if (!this.filter.eventTypes.includes(item.eventType)) {
             return false
           }
         }
 
-        if (this.filter.opponentIds.length > 0) {
+        if (this.filter.opponentIds?.length > 0) {
           if (!this.filter.opponentIds.includes(item.opponent?.listedAsOpponentId)) {
             return false
           }
         }
 
-        if (this.filter.ageGroups.length > 0) {
+        if (this.filter.ageGroups?.length > 0) {
           if (!this.filter.ageGroups.includes(item.age)) {
             return false
           }
         }
 
-        if (this.filter.locations.length > 0) {
+        if (this.filter.locations?.length > 0) {
           if (
             (this.filter.locations.includes(EventLocationType.OPPONENT_CONFIRMS) &&
-            item.location !== EventLocationType.OPPONENT_CONFIRMS) ||
+              item.location !== EventLocationType.OPPONENT_CONFIRMS) ||
             !this.filter.locations.includes(item.me.eventLocation)
           ) {
             return false
@@ -221,7 +225,7 @@ export default {
       })
     },
 
-    events () {
+    eventsGroupedByDate () {
       return groupBy(this.filtered, 'date')
     },
 
@@ -249,19 +253,43 @@ export default {
   },
 
   watch: {
-    dateRange: {
+    filter: {
       deep: true,
-      handler () {
-        this.$fetch()
+      async handler (val, old) {
+        if (val.startDate !== old.startDate || val.endDate !== old.endDate) {
+          await this.$fetch()
+        }
+
+        await this.$router.push({
+          query: {
+            ...this.filter,
+            startDate: DateTime.fromJSDate(this.filter.startDate).toFormat(DATE_FORMAT),
+            endDate: DateTime.fromJSDate(this.filter.endDate).toFormat(DATE_FORMAT),
+          },
+        })
       },
     },
+  },
+
+  created () {
+    this.filter = {
+      ...this.filter,
+      sports: this.applyFilter(this.$route.query.sports),
+      leadIds: this.applyFilter(this.$route.query.leadIds),
+      eventTypes: this.applyFilter(this.$route.query.eventTypes),
+      opponentIds: this.applyFilter(this.$route.query.opponentIds),
+      ageGroups: this.applyFilter(this.$route.query.ageGroups),
+      locations: this.applyFilter(this.$route.query.locations),
+      startDate: DateTime.fromFormat(this.$route.query.startDate || DateTime.now().toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
+      endDate: DateTime.fromFormat(this.$route.query.endDate || DateTime.now().toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
+    }
   },
 
   methods: {
     onIntersect (date) {
       return (_entries, _observer, isIntersecting) => {
         if (isIntersecting) {
-          this.date = DateTime.fromFormat(date, 'yyyy-MM-dd')
+          this.date = DateTime.fromFormat(date, DATE_FORMAT)
         }
       }
     },
@@ -270,11 +298,19 @@ export default {
         return
       }
       try {
-        const date = val.toFormat('yyyy-MM-dd')
+        const date = val.toFormat(DATE_FORMAT)
         this.$vuetify.goTo(`#date-${date}`)
       } catch (e) {
 
       }
+    },
+
+    applyFilter (val) {
+      if (isString(val)) {
+        return [val]
+      }
+
+      return Array.isArray(val) ? val : []
     },
   },
 }
