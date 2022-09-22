@@ -6,11 +6,11 @@
 import { EventType } from '@/enum'
 
 import FixtureResult
-  from '@/components/PageComponents/FxCalendarPage/FxCalendarEventItem/ExistingResult/components/FixtureResult'
+  from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/EventItem/ExistingResult/components/FixtureResult'
 import TournamentResult
-  from '@/components/PageComponents/FxCalendarPage/FxCalendarEventItem/ExistingResult/components/TournamentResult'
+  from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/EventItem/ExistingResult/components/TournamentResult'
 import MultiEventResult
-  from '@/components/PageComponents/FxCalendarPage/FxCalendarEventItem/ExistingResult/components/MultiEventResult'
+  from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/EventItem/ExistingResult/components/MultiEventResult'
 
 export default {
   name: 'ExistingResult',

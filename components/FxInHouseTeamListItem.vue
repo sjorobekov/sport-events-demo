@@ -22,10 +22,6 @@ export default {
       type: Object,
       required: true,
     },
-    contextSchoolId: {
-      type: String,
-      required: true,
-    },
     iconOnRight: {
       type: Boolean,
       default: false,

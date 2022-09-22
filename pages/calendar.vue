@@ -93,9 +93,7 @@
       <FxCalendarPill :value="key" class="my-4" />
 
       <v-card v-for="event in value" :key="`event-${event.id}`" class="mb-2">
-        <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
-          <FxCalendarEventItem :event="event" :me="event.me" :opponent="event.opponent" :context-school-id="contextSchoolId" />
-        </nuxt-link>
+        <FxCalendarEvent :value="event" />
       </v-card>
     </div>
   </div>
@@ -118,14 +116,14 @@ import FxCalendarOpponentFilter from '@/components/PageComponents/FxCalendarPage
 import FxCalendarAgeFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarAgeFilter'
 import FxCalendarLocationFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarLocationFilter'
 import { EventLocationType } from '@/enum'
-import FxCalendarEventItem from '@/components/PageComponents/FxCalendarPage/FxCalendarEventItem/FxCalendarEventItem'
+import FxCalendarEvent from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/FxCalendarEvent'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
 
 export default {
   name: 'CalendarPage',
   components: {
-    FxCalendarEventItem,
+    FxCalendarEvent,
     FxCalendarLocationFilter,
     FxCalendarAgeFilter,
     FxCalendarOpponentFilter,
@@ -156,17 +154,25 @@ export default {
   }),
 
   async fetch () {
-    const { data } = await this.$store.dispatch('api/events/getBySchool', {
-      schoolId: this.contextSchoolId,
-      params: {
-        limit: 2000,
-        orderDesc: 'false',
-        from: DateTime.fromJSDate(this.filter.startDate).toFormat(DATE_FORMAT),
-        to: DateTime.fromJSDate(this.filter.endDate).toFormat(DATE_FORMAT),
-      },
-    })
+    const params = {
+      limit: 2000,
+      orderDesc: 'false',
+      from: DateTime.fromJSDate(this.filter.startDate).toFormat(DATE_FORMAT),
+      to: DateTime.fromJSDate(this.filter.endDate).toFormat(DATE_FORMAT),
+    }
 
-    this.items = data
+    const [{ data: events }, { data: inHouseMatches }] = await Promise.all([
+      this.$store.dispatch('api/events/getBySchool', {
+        schoolId: this.contextSchoolId,
+        params,
+      }),
+      await this.$store.dispatch('api/inHouseMatches/getBySchool', {
+        schoolId: this.contextSchoolId,
+        params,
+      }),
+    ])
+
+    this.items = [...events, ...inHouseMatches]
   },
 
   computed: {
@@ -283,6 +289,8 @@ export default {
       startDate: DateTime.fromFormat(this.$route.query.startDate || DateTime.now().toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
       endDate: DateTime.fromFormat(this.$route.query.endDate || DateTime.now().toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
     }
+
+    this.showFilters = this.filter.leadIds.length || this.filter.eventTypes.length || this.filter.opponentIds.length || this.filter.ageGroups.length || this.filter.locations.length
   },
 
   methods: {

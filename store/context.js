@@ -82,10 +82,11 @@ export const actions = {
       logo: school.logo,
       color: school.color ?? 'var(--v-brand-base)',
     })
+    commit('api/schools/cache', school, { root: true })
   },
 
   async fetchSchool ({ commit, dispatch }, id) {
-    const school = await dispatch('api/schools/get', id, { root: true })
+    const school = await dispatch('api/schools/fetch', id, { root: true })
     commit('school', school)
     await dispatch('fetchSportLocations')
   },

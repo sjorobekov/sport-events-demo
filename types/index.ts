@@ -169,6 +169,8 @@ export interface EventParticipant {
   status: EventStatus
   eventLocation: EventLocation
   creator: boolean
+  readonly school?: School
+  readonly lead?: User
   overallResult: EventResult,
   results?: Array<EventParticipantResult>
 }
