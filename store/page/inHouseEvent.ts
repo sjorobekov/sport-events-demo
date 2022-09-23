@@ -10,6 +10,7 @@ type ResultData = {
 
 export const state = () => ({
   inHouseEvent: {} as InHouseEvent,
+  inHouseMatch: {} as InHouseMatch,
   firstMatch: {} as InHouseMatch,
   lead: {} as User,
   sport: {} as Sport,
@@ -29,6 +30,10 @@ export type RootState = ReturnType<typeof state>
 export const mutations: MutationTree<RootState> = {
   inHouseEvent (state, item: InHouseEvent) {
     state.inHouseEvent = item
+  },
+
+  inHouseMatch (state, item: InHouseMatch) {
+    state.inHouseMatch = item
   },
 
   inHouseCompetition (state, item: InHouseCompetition) {
@@ -75,6 +80,10 @@ export const mutations: MutationTree<RootState> = {
 export const getters: GetterTree<RootState, RootState> = {
   inHouseEvent (state) {
     return state.inHouseEvent
+  },
+
+  inHouseMatch (state) {
+    return state.inHouseMatch
   },
 
   inHouseCompetition (state) {
@@ -170,9 +179,9 @@ export const actions: ActionTree<RootState, RootState> = {
     }, { root: true })
 
     if (inHouseEvent.eventType === InHouseEventType.HOUSE_VS_HOUSE) {
-      commit('myTeam', matches[0]?.team)
-      commit('opponentTeam', matches[0]?.opponentTeam)
-      commit('teams', [matches[0]?.team, matches[0]?.opponentTeam])
+      commit('myTeam', matches[0]?.homeTeam)
+      commit('opponentTeam', matches[0]?.awayTeam)
+      commit('teams', [matches[0]?.homeTeam, matches[0]?.awayTeam])
     } else {
       dispatch('fetchTeams', inHouseEvent.schoolId)
     }
@@ -191,7 +200,7 @@ export const actions: ActionTree<RootState, RootState> = {
     const promises = [
       dispatch('fetchSport', inHouseEvent.inHouseCompetition.sportId),
       dispatch('fetchLead', inHouseEvent.leadId),
-      dispatch('fetchTeamSheets', { inHouseCompetitionId: inHouseEvent.inHouseCompetitionId, eventId: inHouseEvent.id }),
+      dispatch('fetchTeamSheets', { inHouseCompetitionId: inHouseEvent.inHouseCompetitionId, matches }),
     ]
 
     await Promise.all(promises)
@@ -213,14 +222,16 @@ export const actions: ActionTree<RootState, RootState> = {
     commit('lead', lead)
   },
 
-  async fetchTeamSheets ({ dispatch, commit, rootGetters }, { inHouseCompetitionId, eventId }) {
+  async fetchTeamSheets ({ dispatch, commit, rootGetters }, { inHouseCompetitionId, matches }) {
     const contextSchoolId = rootGetters['context/schoolId']
 
-    const teamSheets = await dispatch('api/inHouseEvents/getTeamSheet', {
-      schoolId: contextSchoolId,
-      inHouseCompetitionId,
-      id: eventId,
-    }, { root: true })
+    const teamSheets = await Promise.all(matches.map((match: InHouseMatch) => {
+      return dispatch('api/inHouseEvents/getTeamSheet', {
+        schoolId: contextSchoolId,
+        inHouseCompetitionId,
+        id: match.id,
+      }, { root: true })
+    }))
 
     commit('teamSheets', teamSheets)
   },

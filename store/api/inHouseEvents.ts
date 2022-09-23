@@ -40,11 +40,11 @@ export const actions: ActionTree<RootState, RootState> = {
   },
 
   getTeamSheet (_, { schoolId, inHouseCompetitionId, id }): Promise<any[]> {
-    return this.$axios.$get(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_events/${id}/team_sheets`)
+    return this.$axios.$get(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_matches/${id}/team_sheets`)
   },
 
   saveTeamSheet (_, { schoolId, inHouseCompetitionId, inHouseTeamId, id, sheet }: { schoolId: string, inHouseCompetitionId: string, inHouseTeamId: string, id: string, sheet: String[]}) {
-    return this.$axios.$post(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_events/${id}/team_sheets`, {
+    return this.$axios.$post(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_matches/${id}/team_sheets`, {
       inHouseTeamId,
       sheet,
     })

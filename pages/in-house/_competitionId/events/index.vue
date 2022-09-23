@@ -97,7 +97,7 @@
                 eventId: nextMatch.inHouseEvent.id
               }}"
             >
-              <FxInHouseEventItem :match="nextMatch" :me="nextMatch.team" :opponent="nextMatch.opponentTeam" :context-school-id="contextSchoolId" :event-type="nextMatch.inHouseEvent.eventType" />
+              <FxInHouseEventItem :match="nextMatch" :me="nextMatch.homeTeam" :opponent="nextMatch.awayTeam" :context-school-id="contextSchoolId" :event-type="nextMatch.inHouseEvent.eventType" />
             </nuxt-link>
           </v-card>
         </template>
@@ -114,7 +114,7 @@
                 eventId: match.inHouseEvent.id
               }}"
             >
-              <FxInHouseEventItem :match="match" :me="match.team" :opponent="match.opponentTeam" :context-school-id="contextSchoolId" :event-type="match.inHouseEvent.eventType" />
+              <FxInHouseEventItem :match="match" :me="match.homeTeam" :opponent="match.awayTeam" :context-school-id="contextSchoolId" :event-type="match.inHouseEvent.eventType" />
             </nuxt-link>
           </v-card>
         </template>
@@ -131,7 +131,7 @@
                 eventId: match.inHouseEvent.id
               }}"
             >
-              <FxInHouseEventItem :match="match" :me="match.team" :opponent="match.opponentTeam" :context-school-id="contextSchoolId" :event-type="match.inHouseEvent.eventType" />
+              <FxInHouseEventItem :match="match" :me="match.homeTeam" :opponent="match.awayTeam" :context-school-id="contextSchoolId" :event-type="match.inHouseEvent.eventType" />
             </nuxt-link>
           </v-card>
         </template>
