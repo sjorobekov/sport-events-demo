@@ -16,7 +16,7 @@
 import Vue from 'vue'
 import { EventResult } from '~/enum'
 
-const COLOR_MAP = {
+const COLOR_MAP: Record<string, string> = {
   [EventResult.POSTPONED]: 'warning',
   [EventResult.TO_BE_PLAYED]: 'success',
   [EventResult.LIVE]: 'error',
