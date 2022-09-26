@@ -40,4 +40,8 @@ export const getters = {
   canSeeOrganising (_, _getters, _rootState, rootGetters) {
     return rootGetters['context/isLoggedIn']
   },
+
+  canManageSportLocation (_, getters) {
+    return [UserRole.ADMIN, UserRole.SUPER_ADMIN].includes(getters.role)
+  },
 }
