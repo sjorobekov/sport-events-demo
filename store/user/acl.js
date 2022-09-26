@@ -36,4 +36,8 @@ export const getters = {
   canCreateCompetition (_, getters) {
     return [UserRole.ADMIN].includes(getters.role)
   },
+
+  canSeeOrganising (_, _getters, _rootState, rootGetters) {
+    return rootGetters['context/isLoggedIn']
+  },
 }

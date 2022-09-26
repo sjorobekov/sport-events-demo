@@ -79,40 +79,48 @@ import FxSchoolLogo from '@/components/FxSchoolLogo/FxSchoolLogo'
 export default {
   name: 'NavigationDrawer',
   components: { FxSchoolLogo },
-  data: () => ({
-    items: [
-      { title: 'Sports Dashboard', icon: '$vuetify.icons.dashboard', exact: true, to: { name: 'dashboard' } },
-      { title: 'Calendar', icon: '$vuetify.icons.calendar', to: { name: 'calendar' } },
-      { title: 'Announcements', icon: '$vuetify.icons.whistle', to: { name: 'announcements' } },
-      {
-        title: 'Organising',
-        icon: '$vuetify.icons.list',
-        items: [
-          { title: 'Today\'s Teams', to: { name: 'organising-todays-teams' } },
-          { title: 'Confirm Fixtures', to: { name: 'organising-confirm-fixtures' } },
-          { title: 'Missing Results', to: { name: 'organising-missing-results' } },
-          { title: 'Participation', to: { name: 'organising-participation' } },
-        ],
-      },
-      { title: 'Teams', icon: '$vuetify.icons.tshirt', to: { name: 'teams' } },
-      { title: 'In-House Sport', icon: '$vuetify.icons.cup', to: { name: 'in-house' } },
-      { title: 'Sports Records', icon: '$vuetify.icons.stopwatch', to: { name: 'records' } },
-      {
-        title: 'Directory',
-        icon: '$vuetify.icons.ibook',
-        to: { name: 'management-sports' },
-        items: [
-          { title: 'Sports Map', to: { name: 'directory-sports-map' } },
-          { title: 'Sports Contacts', to: { name: 'directory-sports-contacts' } },
-        ],
-      },
-    ],
-  }),
 
   computed: {
     ...mapGetters({
       contextSchool: 'context/school',
+      canSeeOrganising: 'user/acl/canSeeOrganising',
     }),
+
+    items () {
+      const menu = [
+        { title: 'Sports Dashboard', icon: '$vuetify.icons.dashboard', exact: true, to: { name: 'dashboard' } },
+        { title: 'Calendar', icon: '$vuetify.icons.calendar', to: { name: 'calendar' } },
+        { title: 'Announcements', icon: '$vuetify.icons.whistle', to: { name: 'announcements' } },
+
+        { title: 'Teams', icon: '$vuetify.icons.tshirt', to: { name: 'teams' } },
+        { title: 'In-House Sport', icon: '$vuetify.icons.cup', to: { name: 'in-house' } },
+        { title: 'Sports Records', icon: '$vuetify.icons.stopwatch', to: { name: 'records' } },
+        {
+          title: 'Directory',
+          icon: '$vuetify.icons.ibook',
+          to: { name: 'management-sports' },
+          items: [
+            { title: 'Sports Map', to: { name: 'directory-sports-map' } },
+            { title: 'Sports Contacts', to: { name: 'directory-sports-contacts' } },
+          ],
+        },
+      ]
+
+      if (this.canSeeOrganising) {
+        menu.splice(3, 0, {
+          title: 'Organising',
+          icon: '$vuetify.icons.list',
+          items: [
+            { title: 'Today\'s Teams', to: { name: 'organising-todays-teams' } },
+            { title: 'Confirm Fixtures', to: { name: 'organising-confirm-fixtures' } },
+            { title: 'Missing Results', to: { name: 'organising-missing-results' } },
+            { title: 'Participation', to: { name: 'organising-participation' } },
+          ],
+        })
+      }
+
+      return menu
+    },
   },
 }
 </script>

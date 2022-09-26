@@ -5,5 +5,8 @@
 <script>
 export default {
   name: 'MissingResults',
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canSeeOrganising'],
+  },
 }
 </script>
