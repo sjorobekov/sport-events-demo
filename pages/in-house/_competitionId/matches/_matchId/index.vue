@@ -8,7 +8,7 @@
       class="pr-4 d-flex"
       :class="hasResult ? 'flex-column-reverse': 'flex-column'"
     >
-      <FxInHouseEventDetails v-for="match in matches" :key="match.id" :match="match" />
+      <FxInHouseEventDetails />
       <FxInHouseEventResults id="results" />
     </v-col>
     <v-col
@@ -44,7 +44,6 @@ export default {
     ...mapGetters({
       inHouseEvent: 'page/inHouseEvent/inHouseEvent',
       hasResult: 'page/inHouseEvent/hasResult',
-      matches: 'page/inHouseEvent/matches',
       teams: 'page/inHouseEvent/teams',
     }),
   },

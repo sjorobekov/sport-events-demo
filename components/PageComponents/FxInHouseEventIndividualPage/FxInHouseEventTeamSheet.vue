@@ -7,9 +7,9 @@
       <v-btn
         outlined
         link
-        :to="{ name: 'in-house-competitionId-events-eventId-teams-teamId-sheet', params: {
+        :to="{ name: 'in-house-competitionId-matches-matchId-teams-teamId-sheet', params: {
           competitionId: inHouseEvent.inHouseCompetitionId,
-          eventId: inHouseEvent.id,
+          matchId: inHouseMatch.id,
           teamId: team.id,
         }}"
       >
@@ -42,9 +42,9 @@
                   depressed
                   color="primary"
                   link
-                  :to="{ name: 'in-house-competitionId-events-eventId-teams-teamId-sheet', params: {
+                  :to="{ name: 'in-house-competitionId-matches-matchId-teams-teamId-sheet', params: {
                     competitionId: inHouseEvent.inHouseCompetitionId,
-                    eventId: inHouseEvent.id,
+                    matchId: inHouseMatch.id,
                     teamId: team.id,
                   }}"
                 >
@@ -105,6 +105,7 @@ export default {
   computed: {
     ...mapGetters({
       inHouseEvent: 'page/inHouseEvent/inHouseEvent',
+      inHouseMatch: 'page/inHouseEvent/inHouseMatch',
       canManageTeamSheet: 'page/inHouseEvent/canManageTeamSheet',
       getTeamSheetByTeamId: 'page/inHouseEvent/getTeamSheetByTeamId',
     }),

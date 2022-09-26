@@ -1,4 +1,4 @@
-import { EventLocation, EventLocationType, EventResult, EventType, FixtureType, TransportType } from '~/enum'
+import { EventLocation, EventLocationType, EventResult, EventType, FixtureType, TransportType, InHouseEventResult } from '~/enum'
 
 export default {
   EVENT_TYPE: {
@@ -42,6 +42,16 @@ export default {
     [EventResult['2ND']]: '2nd',
     [EventResult['3RD']]: '3rd',
     [EventResult['4TH']]: '4th',
+  },
+
+  IN_HOUSE_EVENT_RESULT: {
+    [InHouseEventResult.HOME]: 'Home',
+    [InHouseEventResult.DRAW]: 'Draw',
+    [InHouseEventResult.AWAY]: 'Away',
+    [InHouseEventResult.SEE_MATCH_NOTES]: 'See Match Notes',
+    [InHouseEventResult.TO_BE_PLAYED]: 'To Be Played',
+    [InHouseEventResult.POSTPONED]: 'Postponed',
+    [InHouseEventResult.CANCELLED]: 'Cancelled',
   },
 
   TRANSPORT_TO: {

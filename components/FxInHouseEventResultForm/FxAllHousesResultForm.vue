@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12">
         <label class="text-p1">Result</label>
-        <FxEventResultSelect
+        <FxInHouseEventResultSelect
           :async-rules="[$rule.required]"
           height="52"
           hide-details

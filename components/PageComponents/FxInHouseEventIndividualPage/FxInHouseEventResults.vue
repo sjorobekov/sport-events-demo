@@ -46,9 +46,8 @@ export default {
   data: () => ({
     formVisible: false,
     formData: {
-      results: [
-        {},
-      ],
+      homeScore: '0',
+      awayScore: '0',
     },
     loading: false,
   }),
@@ -69,7 +68,7 @@ export default {
   },
 
   created () {
-    this.formData = cloneDeep(this.results)
+    this.formData = cloneDeep(this.result)
     this.formVisible = !this.hasResult
   },
 

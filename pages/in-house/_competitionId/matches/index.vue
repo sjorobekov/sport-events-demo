@@ -92,9 +92,9 @@
           <v-card>
             <nuxt-link
               class="text-decoration-none"
-              :to="{ name: 'in-house-competitionId-events-eventId', params: {
+              :to="{ name: 'in-house-competitionId-matches-matchId', params: {
                 competitionId: nextMatch.inHouseEvent.inHouseCompetitionId,
-                eventId: nextMatch.inHouseEvent.id
+                matchId: nextMatch.id
               }}"
             >
               <FxInHouseEventItem :match="nextMatch" :me="nextMatch.homeTeam" :opponent="nextMatch.awayTeam" :context-school-id="contextSchoolId" :event-type="nextMatch.inHouseEvent.eventType" />
@@ -109,9 +109,9 @@
           <v-card v-for="match in fixtures" :key="`fixture-${match.id}`" class="mb-2">
             <nuxt-link
               class="text-decoration-none"
-              :to="{ name: 'in-house-competitionId-events-eventId', params: {
+              :to="{ name: 'in-house-competitionId-matches-matchId', params: {
                 competitionId: match.inHouseEvent.inHouseCompetitionId,
-                eventId: match.inHouseEvent.id
+                matchId: match.id
               }}"
             >
               <FxInHouseEventItem :match="match" :me="match.homeTeam" :opponent="match.awayTeam" :context-school-id="contextSchoolId" :event-type="match.inHouseEvent.eventType" />
@@ -126,9 +126,9 @@
           <v-card v-for="match in results" :key="`result-${match.id}`" class="mb-2">
             <nuxt-link
               class="text-decoration-none"
-              :to="{ name: 'in-house-competitionId-events-eventId', params: {
+              :to="{ name: 'in-house-competitionId-matches-matchId', params: {
                 competitionId: match.inHouseEvent.inHouseCompetitionId,
-                eventId: match.inHouseEvent.id
+                matchId: match.id
               }}"
             >
               <FxInHouseEventItem :match="match" :me="match.homeTeam" :opponent="match.awayTeam" :context-school-id="contextSchoolId" :event-type="match.inHouseEvent.eventType" />

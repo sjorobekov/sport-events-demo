@@ -93,16 +93,9 @@ export default {
     FxAvatar,
     FxInHouseLocationLabel,
   },
-  props: {
-    match: {
-      type: Object,
-      default: undefined,
-    },
-  },
   computed: {
     ...mapGetters({
-      inHouseEvent: 'page/inHouseEvent/inHouseEvent',
-      sport: 'page/inHouseEvent/sport',
+      match: 'page/inHouseEvent/inHouseMatch',
       lead: 'page/inHouseEvent/lead',
     }),
   },

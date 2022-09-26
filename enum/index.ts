@@ -98,3 +98,13 @@ export enum InHouseEventLocationType {
   SPORTS_LOCATIONS = 'SPORTS_LOCATIONS',
   OTHER = 'OTHER',
 }
+
+export enum InHouseEventResult {
+  HOME = 'HOME',
+  DRAW = 'DRAW',
+  AWAY = 'AWAY',
+  SEE_MATCH_NOTES = 'SEE_MATCH_NOTES',
+  TO_BE_PLAYED = 'TO_BE_PLAYED',
+  POSTPONED = 'POSTPONED',
+  CANCELLED = 'CANCELLED',
+}
