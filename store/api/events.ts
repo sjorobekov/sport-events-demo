@@ -84,6 +84,7 @@ type StoreResultItem = {
   opponentSchoolId?: number,
   round?: string,
   notes?: string,
+  missingResults?: boolean,
 }
 
 type StoreResultPayload = {
