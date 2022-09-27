@@ -81,6 +81,9 @@ export const actions = {
       name: school.name,
       logo: school.logo,
       color: school.color ?? 'var(--v-brand-base)',
+      portalProtected: school.portalProtected,
+      teamSheetsProtected: school.teamSheetsProtected,
+      announcementsProtected: school.announcementsProtected,
     })
     commit('api/schools/cache', school, { root: true })
   },
