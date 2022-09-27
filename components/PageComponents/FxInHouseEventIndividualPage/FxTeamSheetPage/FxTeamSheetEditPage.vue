@@ -39,7 +39,7 @@
 
         <template #actions>
           <div>
-            <v-btn outlined link :to="{ name: 'events-eventId', params: { eventId: inHouseEvent.id } }" exact>
+            <v-btn outlined link :to="{ name: 'matches-matchId', params: { matchId: inHouseMatch.id } }" exact>
               Cancel
             </v-btn>
             <v-btn depressed color="primary" @click="save()">
@@ -133,6 +133,7 @@ export default {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
       inHouseEvent: 'page/inHouseEvent/inHouseEvent',
+      inHouseMatch: 'page/inHouseEvent/inHouseMatch',
       teamSheets: 'page/inHouseEvent/teamSheets',
       teams: 'page/inHouseEvent/teams',
     }),
@@ -170,10 +171,10 @@ export default {
         sheet: this.sheet,
       })
         .then(() => {
-          this.$store.dispatch('page/inHouseEvent/fetchTeamSheets', { inHouseCompetitionId: this.inHouseEvent.inHouseCompetitionId, eventId: this.inHouseEvent.id })
+          this.$store.dispatch('page/inHouseEvent/fetchTeamSheets', { inHouseCompetitionId: this.inHouseEvent.inHouseCompetitionId, matchId: this.inHouseMatch.id })
           this.$router.push({
-            name: 'in-house-competitionId-events-eventId',
-            params: { competitionId: this.inHouseEvent.inHouseCompetitionId, eventId: this.inHouseEvent.id },
+            name: 'in-house-competitionId-matches-matchId',
+            params: { competitionId: this.inHouseEvent.inHouseCompetitionId, matchId: this.inHouseMatch.id },
           })
         })
         .catch(() => {

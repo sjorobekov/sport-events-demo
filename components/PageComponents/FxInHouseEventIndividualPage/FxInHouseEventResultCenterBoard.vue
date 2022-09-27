@@ -6,7 +6,7 @@
       </v-alert>
 
       <v-alert v-else-if="hasResult" class="text-h1" color="#F1F5F9">
-        {{ $t(`EVENT_RESULT.${result.overallResult}`) }}
+        {{ $t(`IN_HOUSE_EVENT_RESULT.${result.overallResult}`) }}
       </v-alert>
 
       <v-btn v-else-if="!hasResult && canAddOrEditResult" color="primary" @click="$vuetify.goTo(target, options)">
@@ -59,11 +59,11 @@ export default {
     },
 
     score () {
-      return this.result?.results[0]?.score
+      return this.result?.homeScore
     },
 
     opponentScore () {
-      return this.result?.results[0]?.opponentScore
+      return this.result?.awayScore
     },
   },
 }

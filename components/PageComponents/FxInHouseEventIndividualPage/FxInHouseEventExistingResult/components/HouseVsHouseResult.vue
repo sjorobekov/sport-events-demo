@@ -1,6 +1,6 @@
 <template>
   <v-list class="py-0">
-    <div v-for="(item, i) in result.results" :key="i" class="pl-3 pr-4">
+    <div class="pl-3 pr-4">
       <v-list-item class="team-item">
         <v-list-item-avatar>
           <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" :alt="myTeam.name" />
@@ -12,7 +12,7 @@
         </v-list-item-content>
         <v-list-item-action>
           <v-avatar size="40" rounded color="#F1F5F9">
-            {{ item.score }}
+            {{ result.homeScore }}
           </v-avatar>
         </v-list-item-action>
       </v-list-item>
@@ -27,7 +27,7 @@
         </v-list-item-content>
         <v-list-item-action>
           <v-avatar size="40" rounded color="#F1F5F9">
-            {{ item.opponentScore }}
+            {{ result.awayScore }}
           </v-avatar>
         </v-list-item-action>
       </v-list-item>

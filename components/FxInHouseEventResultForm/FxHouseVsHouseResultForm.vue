@@ -15,7 +15,7 @@
 
       <v-col cols="12" sm="12" md="6">
         <label class="text-p1">&nbsp;</label>
-        <FxResultRadio :value="formData.results[0].result" @input="update('overallResult', $event)" />
+        <FxResultRadio :value="formData.overallResult" @input="update('overallResult', $event)" />
       </v-col>
     </v-row>
 
@@ -29,8 +29,8 @@
           outlined
           dense
           placeholder="0"
-          :value="formData.results[0].score"
-          @input="update('results[0].score', $event)"
+          :value="formData.homeScore"
+          @input="update('homeScore', $event)"
         />
         <v-btn height="52" block depressed @click="increaseScore">
           +1
@@ -46,8 +46,8 @@
           outlined
           dense
           placeholder="0"
-          :value="formData.results[0].opponentScore"
-          @input="update('results[0].opponentScore', $event)"
+          :value="formData.awayScore"
+          @input="update('awayScore', $event)"
         />
         <v-btn height="52" block depressed @click="increaseOpponentScore">
           +1
@@ -68,9 +68,8 @@
 import tap from 'lodash/tap'
 import cloneDeep from 'lodash/cloneDeep'
 import set from 'lodash/set'
-import { EventResult } from '@/enum'
-import FxResultRadio from '@/components/FxEventResultForm/components/FxResultRadio'
-const EXCLUDE_OPTIONS = [EventResult['1ST'], EventResult['2ND'], EventResult['3RD'], EventResult['4TH']]
+import { InHouseEventResult } from '@/enum'
+import FxResultRadio from '@/components/FxInHouseEventResultForm/components/FxResultRadio'
 
 export default {
   name: 'FxHouseVsHouseResultForm',
@@ -95,25 +94,20 @@ export default {
   },
 
   data: () => ({
-    EventResult,
+    InHouseEventResult,
   }),
 
   computed: {
     formData () {
       return {
         ...this.value,
-        results: this.value?.results || [
-          {
-            score: '0',
-            opponentScore: '0',
-          },
-        ],
+        homeScore: this.value.homeScore || '0',
+        awayScore: this.value.awayScore || '0',
       }
     },
     resultOptions () {
-      return Object.values(EventResult)
-        .filter(value => !EXCLUDE_OPTIONS.includes(value))
-        .map(value => ({ value, text: this.$t(`EVENT_RESULT.${value}`) }))
+      return Object.values(InHouseEventResult)
+        .map(value => ({ value, text: this.$t(`IN_HOUSE_EVENT_RESULT.${value}`) }))
     },
   },
 
@@ -121,19 +115,19 @@ export default {
     update (key, value) {
       const data = cloneDeep(this.formData)
       if (key === 'overallResult') {
-        data.results[0].result = value
+        data.overallResult = value
       }
       this.$emit('input', tap(data, v => set(v, key, value)))
     },
 
     increaseScore () {
-      const incremented = parseFloat(this.formData.results[0]?.score) + 1
-      this.update('results[0].score', incremented.toString())
+      const incremented = parseFloat(this.formData.homeScore) + 1
+      this.update('homeScore', incremented.toString())
     },
 
     increaseOpponentScore () {
-      const incremented = parseFloat(this.formData.results[0]?.opponentScore) + 1
-      this.update('results[0].opponentScore', incremented.toString())
+      const incremented = parseFloat(this.formData.awayScore) + 1
+      this.update('awayScore', incremented.toString())
     },
   },
 }

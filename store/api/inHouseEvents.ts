@@ -1,6 +1,5 @@
 import { ActionTree, GetterTree } from 'vuex'
-import { EventResult } from '~/enum'
-import { InHouseEvent, InHouseEventResult } from '~/types'
+import { InHouseEvent } from '~/types'
 
 export const state = () => ({})
 
@@ -12,12 +11,6 @@ export const getters: GetterTree<RootState, RootState> = {
 type ListByTeamPayload = {
   schoolId: string
   inHouseCompetitionId: string
-}
-
-type StoreResultPayload = {
-  results: Array<InHouseEventResult>
-  overallResult: EventResult
-  resultNotes: string
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -40,11 +33,11 @@ export const actions: ActionTree<RootState, RootState> = {
   },
 
   getTeamSheet (_, { schoolId, inHouseCompetitionId, id }): Promise<any[]> {
-    return this.$axios.$get(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_events/${id}/team_sheets`)
+    return this.$axios.$get(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_matches/${id}/team_sheets`)
   },
 
   saveTeamSheet (_, { schoolId, inHouseCompetitionId, inHouseTeamId, id, sheet }: { schoolId: string, inHouseCompetitionId: string, inHouseTeamId: string, id: string, sheet: String[]}) {
-    return this.$axios.$post(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_events/${id}/team_sheets`, {
+    return this.$axios.$post(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_matches/${id}/team_sheets`, {
       inHouseTeamId,
       sheet,
     })
@@ -52,11 +45,5 @@ export const actions: ActionTree<RootState, RootState> = {
 
   remove (_, { schoolId, inHouseCompetitionId, id }): Promise<void> {
     return this.$axios.$delete(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_events/${id}`)
-  },
-
-  async storeResult (_, { schoolId, inHouseCompetitionId, id, formData }: { schoolId: string, inHouseCompetitionId: string, id: string, formData: StoreResultPayload }): Promise<Event> {
-    const event: Event = await this.$axios.$post(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_events/${id}/results`, formData)
-
-    return event
   },
 }

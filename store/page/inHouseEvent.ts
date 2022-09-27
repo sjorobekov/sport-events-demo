@@ -1,21 +1,21 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex'
-import { EventResult, InHouseEventType, UserRole } from '~/enum'
-import { InHouseEvent, Sport, User, InHouseMatch, InHouseEventResult, InHouseTeam, InHouseCompetition, InHouseTeamSheet } from '~/types'
+import { InHouseEventResult, InHouseEventType, UserRole } from '~/enum'
+import { InHouseEvent, Sport, User, InHouseMatch, InHouseTeam, InHouseCompetition, InHouseTeamSheet } from '~/types'
 
 type ResultData = {
-  overallResult?: EventResult,
-  results: Array<InHouseEventResult>,
+  homeScore: string,
+  awayScore: string,
+  overallResult?: InHouseEventResult,
   resultNotes: string,
 }
 
 export const state = () => ({
   inHouseEvent: {} as InHouseEvent,
+  inHouseMatch: {} as InHouseMatch,
   firstMatch: {} as InHouseMatch,
   lead: {} as User,
   sport: {} as Sport,
-  result: {
-    results: [] as Array<InHouseEventResult>,
-  } as ResultData,
+  result: {} as ResultData,
   teamSheets: [] as Array<InHouseTeamSheet>,
   myTeam: {} as InHouseTeam,
   opponentTeam: {} as InHouseTeam,
@@ -29,6 +29,10 @@ export type RootState = ReturnType<typeof state>
 export const mutations: MutationTree<RootState> = {
   inHouseEvent (state, item: InHouseEvent) {
     state.inHouseEvent = item
+  },
+
+  inHouseMatch (state, item: InHouseMatch) {
+    state.inHouseMatch = item
   },
 
   inHouseCompetition (state, item: InHouseCompetition) {
@@ -77,6 +81,10 @@ export const getters: GetterTree<RootState, RootState> = {
     return state.inHouseEvent
   },
 
+  inHouseMatch (state) {
+    return state.inHouseMatch
+  },
+
   inHouseCompetition (state) {
     return state.inHouseCompetition
   },
@@ -105,24 +113,12 @@ export const getters: GetterTree<RootState, RootState> = {
     return !!getters.result.overallResult
   },
 
-  isLive (_state, getters) {
-    return getters.result.overallResult === EventResult.LIVE
-  },
-
   hasScore (_state, getters) {
     return getters.inHouseEvent.eventType === InHouseEventType.HOUSE_VS_HOUSE && [
-      EventResult.WIN,
-      EventResult.LOST,
-      EventResult.DRAW,
-    ].includes(getters.result.results)
-  },
-
-  isCancelled (_state, getters) {
-    return getters.result.overallResult === EventResult.CANCELLED
-  },
-
-  isPostponed (_state, getters) {
-    return getters.result.overallResult === EventResult.POSTPONED
+      InHouseEventResult.HOME,
+      InHouseEventResult.AWAY,
+      InHouseEventResult.DRAW,
+    ].includes(getters.result.overallResult)
   },
 
   canAddOrEditResult (_state, getters) {
@@ -161,37 +157,43 @@ export const getters: GetterTree<RootState, RootState> = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  async fetchData ({ commit, dispatch, rootGetters }, { inHouseCompetitionId, inHouseEventId }): Promise<void> {
+  async fetchData ({ commit, dispatch, rootGetters }, { inHouseCompetitionId, inHouseMatchId }): Promise<void> {
     const contextSchoolId = rootGetters['context/schoolId']
-    const { matches, ...inHouseEvent } = await dispatch('api/inHouseEvents/get', {
+    const match = await dispatch('api/inHouseMatches/get', {
       schoolId: contextSchoolId,
       inHouseCompetitionId,
-      id: inHouseEventId,
+      id: inHouseMatchId,
+    }, { root: true })
+
+    const inHouseEvent = await dispatch('api/inHouseEvents/get', {
+      schoolId: contextSchoolId,
+      inHouseCompetitionId,
+      id: match.inHouseEventId,
     }, { root: true })
 
     if (inHouseEvent.eventType === InHouseEventType.HOUSE_VS_HOUSE) {
-      commit('myTeam', matches[0]?.team)
-      commit('opponentTeam', matches[0]?.opponentTeam)
-      commit('teams', [matches[0]?.team, matches[0]?.opponentTeam])
+      commit('myTeam', match.homeTeam)
+      commit('opponentTeam', match?.awayTeam)
+      commit('teams', [match?.homeTeam, match?.awayTeam])
     } else {
       dispatch('fetchTeams', inHouseEvent.schoolId)
     }
 
+    commit('inHouseMatch', match)
     commit('inHouseEvent', inHouseEvent)
     commit('inHouseCompetition', inHouseEvent.inHouseCompetition)
-    commit('firstMatch', matches[0])
-    commit('matches', matches)
 
     commit('result', {
-      overallResult: inHouseEvent.overallResult,
-      results: inHouseEvent.results,
-      resultNotes: inHouseEvent.resultNotes,
+      homeScore: match.homeScore,
+      awayScore: match.awayScore,
+      overallResult: match.overallResult,
+      resultNotes: match.resultNotes,
     })
 
     const promises = [
       dispatch('fetchSport', inHouseEvent.inHouseCompetition.sportId),
       dispatch('fetchLead', inHouseEvent.leadId),
-      dispatch('fetchTeamSheets', { inHouseCompetitionId: inHouseEvent.inHouseCompetitionId, eventId: inHouseEvent.id }),
+      dispatch('fetchTeamSheets', { inHouseCompetitionId: inHouseEvent.inHouseCompetitionId, matchId: match.id }),
     ]
 
     await Promise.all(promises)
@@ -213,13 +215,13 @@ export const actions: ActionTree<RootState, RootState> = {
     commit('lead', lead)
   },
 
-  async fetchTeamSheets ({ dispatch, commit, rootGetters }, { inHouseCompetitionId, eventId }) {
+  async fetchTeamSheets ({ dispatch, commit, rootGetters }, { inHouseCompetitionId, matchId }) {
     const contextSchoolId = rootGetters['context/schoolId']
 
     const teamSheets = await dispatch('api/inHouseEvents/getTeamSheet', {
       schoolId: contextSchoolId,
       inHouseCompetitionId,
-      id: eventId,
+      id: matchId,
     }, { root: true })
 
     commit('teamSheets', teamSheets)
@@ -233,16 +235,17 @@ export const actions: ActionTree<RootState, RootState> = {
   async saveResult ({ commit, dispatch, rootGetters, getters }, payload) {
     const contextSchoolId = rootGetters['context/schoolId']
 
-    const data = await dispatch('api/inHouseEvents/storeResult', {
+    const data = await dispatch('api/inHouseMatches/storeResult', {
       schoolId: contextSchoolId,
       inHouseCompetition: getters.inHouseCompetition.id,
-      id: getters.inHouseEvent.id,
+      id: getters.inHouseMatch.id,
       formData: payload,
     }, { root: true })
 
     commit('result', {
+      homeScore: data.homeScore,
+      awayScore: data.awayScore,
       overallResult: data.overallResult,
-      results: data.results,
       resultNotes: data.resultNotes,
     })
   },
