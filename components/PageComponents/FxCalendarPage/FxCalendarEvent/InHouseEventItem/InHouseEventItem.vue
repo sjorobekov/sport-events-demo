@@ -1,13 +1,13 @@
 <template>
-  <FxCalendarItem :sport="sport" :lead="lead" :to="{ name: 'in-house-competitionId-events-eventId', params: { eventId: event.id, competitionId: competition.id } }">
+  <FxCalendarItem :sport="sport" :lead="lead" :to="{ name: 'in-house-competitionId-matches-matchId', params: { matchId: value.id, competitionId: competition.id } }">
     <template #headerLabel>
       <span class="text-p2 info--text text--lighten-1">In-House</span>
     </template>
     <template #left="{ compact }">
-      <FxInHouseTeamListItem class="pl-0" :participant="value.team" :icon-on-right="!compact" />
+      <FxInHouseTeamListItem class="pl-0" :participant="value.homeTeam" :icon-on-right="!compact" />
     </template>
     <template #right>
-      <FxInHouseTeamListItem class="pl-0" :participant="value.opponentTeam" />
+      <FxInHouseTeamListItem class="pl-0" :participant="value.awayTeam" />
     </template>
     <template #time>
       <div>
