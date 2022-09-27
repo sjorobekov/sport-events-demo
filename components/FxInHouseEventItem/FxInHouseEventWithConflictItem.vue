@@ -63,10 +63,10 @@ export default {
       return this.matches[0] || {}
     },
     me () {
-      return this.teams.find(team => team.id === this.firstMatch.teamId)
+      return this.teams.find(team => team.id === this.firstMatch.homeTeamId)
     },
     opponent () {
-      return this.teams.find(team => team.id === this.firstMatch.opponentTeamId)
+      return this.teams.find(team => team.id === this.firstMatch.awayTeamId)
     },
   },
 

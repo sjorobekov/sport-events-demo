@@ -102,8 +102,8 @@ export default {
     this.formData = this.getSession('inHouseEventForm') || {
       matches: [{
         number: 1,
-        teamId: '',
-        opponentTeamId: '',
+        homeTeamId: '',
+        awayTeamId: '',
         location: EventLocationType.SPORTS_LOCATIONS,
       }],
       event: {
