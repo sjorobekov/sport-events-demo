@@ -91,7 +91,7 @@ type StoreResultPayload = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  async getBySchool (_, { schoolId, params }: ListPayload): Promise<PaginatedList<Event>> {
+  async getBySchool ({ commit }, { schoolId, params }: ListPayload): Promise<PaginatedList<Event>> {
     const { data, meta }: PaginatedList<Event> = await this.$axios.$get(`/api/v1/schools/${schoolId}/events`, { params })
 
     data.forEach((event) => {
@@ -101,7 +101,25 @@ export const actions: ActionTree<RootState, RootState> = {
         } else {
           event.opponent = participant
         }
+
+        if (participant) {
+          if (participant.lead) {
+            commit('api/users/cache', participant.lead, { root: true })
+          }
+
+          if (participant.school) {
+            commit('api/schools/cache', participant.school, { root: true })
+          }
+
+          if (participant.team) {
+            commit('api/teams/cache', participant.team, { root: true })
+          }
+        }
       })
+
+      if (event.sport) {
+        commit('api/sports/cache', event.sport, { root: true })
+      }
     })
 
     return {

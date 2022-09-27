@@ -7,7 +7,14 @@
         </v-list-item-title>
       </v-list-item-content>
       <v-list-item-action>
-        <v-btn depressed dark color="brand" link :to="{ name: 'management-schools-id-locations-locationId', params: { locationId: 'add' } }">
+        <v-btn
+          v-if="canManageSportLocation"
+          depressed
+          dark
+          color="brand"
+          link
+          :to="{ name: editLink, params: { locationId: 'add' } }"
+        >
           <v-icon>$vuetify.icons.plusOutline</v-icon> Add Sports Location
         </v-btn>
       </v-list-item-action>
@@ -54,7 +61,7 @@
         </h4>
         <v-card v-for="item in items" :key="item.id" class="mb-3">
           <FxLocationItem :item="item" @click="handleClick">
-            <template #actions>
+            <template v-if="canManageSportLocation" #actions>
               <v-menu>
                 <template #activator="{ on, attrs }">
                   <v-btn icon v-bind="attrs" v-on="on">
@@ -64,7 +71,7 @@
                   </v-btn>
                 </template>
                 <v-list class="grey lighten-3">
-                  <v-list-item link :to="{ name: 'management-schools-id-locations-locationId', params: { locationId: item.id } }">
+                  <v-list-item link :to="{ name: editLink, params: { locationId: item.id } }">
                     <v-list-item-content>
                       <v-list-item-title class="text--info text--darken-1">
                         Edit Location
@@ -102,7 +109,7 @@ export default {
   }),
 
   async fetch () {
-    this.items = await this.$store.dispatch('api/locations/list', { schoolId: this.$route.params.id })
+    this.items = await this.$store.dispatch('api/locations/list', { schoolId: this.school.id })
 
     const item = this.items.find(item => item.coordinates.lat && item.coordinates.lng)
     if (item) {
@@ -116,6 +123,8 @@ export default {
   computed: {
     ...mapGetters({
       school: 'context/school',
+      isSuperAdminSite: 'context/isSuperAdminSite',
+      canManageSportLocation: 'user/acl/canManageSportLocation',
     }),
     mapOptions () {
       return {
@@ -127,6 +136,13 @@ export default {
         fullscreenControl: false,
         disableDefaultUi: true,
       }
+    },
+
+    editLink () {
+      if (this.isSuperAdminSite) {
+        return 'management-schools-id-locations-locationId'
+      }
+      return 'directory-sports-map-locationId'
     },
   },
 

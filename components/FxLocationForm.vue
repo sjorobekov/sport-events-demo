@@ -144,8 +144,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   name: 'FxLocationForm',
 
@@ -158,6 +156,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    country: {
+      type: String,
+      default: undefined,
+    },
   },
 
   data: () => ({
@@ -165,7 +167,6 @@ export default {
   }),
 
   computed: {
-    ...mapGetters({ school: 'admin/page/schools/schools' }),
     formData () {
       return {
         ...(this.value || { name: '', address: '' }),
@@ -174,7 +175,7 @@ export default {
 
     componentRestrictions () {
       return {
-        country: this.school.country,
+        country: this.country,
       }
     },
 

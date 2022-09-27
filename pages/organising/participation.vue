@@ -5,9 +5,8 @@
 <script>
 export default {
   name: 'ParticipationPage',
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canSeeOrganising'],
+  },
 }
 </script>
-
-<style scoped>
-
-</style>

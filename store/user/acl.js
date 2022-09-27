@@ -36,4 +36,12 @@ export const getters = {
   canCreateCompetition (_, getters) {
     return [UserRole.ADMIN].includes(getters.role)
   },
+
+  canSeeOrganising (_, _getters, _rootState, rootGetters) {
+    return rootGetters['context/isLoggedIn']
+  },
+
+  canManageSportLocation (_, getters) {
+    return [UserRole.ADMIN, UserRole.SUPER_ADMIN].includes(getters.role)
+  },
 }

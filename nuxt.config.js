@@ -81,6 +81,10 @@ export default {
 
   router: {
     middleware: 'permissions',
+    extendRoutes (routes) {
+      routes.push({ name: 'directory-sports-map', path: '/directory/sports-map', component: '@/pages/management/schools/_id/locations/index.vue' })
+      routes.push({ name: 'directory-sports-map-locationId', path: '/directory/sports-map/:locationId', component: '@/pages/management/schools/_id/locations/_locationId.vue' })
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

@@ -1,5 +1,5 @@
 import { ActionTree, GetterTree } from 'vuex'
-import { InHouseEventResult, InHouseMatch } from '~/types'
+import { InHouseEventResult, InHouseMatch, PaginatedList } from '~/types'
 
 export const state = () => ({})
 
@@ -20,11 +20,17 @@ type ListByTeamPayload = {
   inHouseCompetitionId: string
 }
 
-export const actions: ActionTree<RootState, RootState> = {
-  async getByCompetition (_, { schoolId, inHouseCompetitionId }: ListByTeamPayload): Promise<InHouseMatch[]> {
-    const data: InHouseMatch[] = await this.$axios.$get(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_matches`)
+type ListBySchoolPayload = {
+  schoolId: string
+}
 
-    return data
+export const actions: ActionTree<RootState, RootState> = {
+  getByCompetition (_, { schoolId, inHouseCompetitionId }: ListByTeamPayload): Promise<InHouseMatch[]> {
+    return this.$axios.$get(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_matches`)
+  },
+
+  getBySchool (_, { schoolId }: ListBySchoolPayload): Promise<PaginatedList<InHouseMatch>> {
+    return this.$axios.$get(`/api/v1/schools/${schoolId}/in_house_matches`)
   },
 
   async get (_, { schoolId, inHouseCompetitionId, id }): Promise<InHouseMatch> {

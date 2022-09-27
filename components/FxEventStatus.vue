@@ -16,9 +16,15 @@
 import Vue from 'vue'
 import { EventResult } from '~/enum'
 
-const COLOR_MAP = {
-  [EventResult.LIVE]: 'error',
+const COLOR_MAP: Record<string, string> = {
+  [EventResult.POSTPONED]: 'warning',
   [EventResult.TO_BE_PLAYED]: 'success',
+  [EventResult.LIVE]: 'error',
+  [EventResult.CANCELLED]: 'error darken1',
+  [EventResult.WIN]: 'success',
+  [EventResult['1ST']]: 'success',
+  [EventResult.DRAW]: 'info lighten1',
+  [EventResult.LOST]: 'error darken1',
 }
 
 export default Vue.extend({
@@ -36,7 +42,7 @@ export default Vue.extend({
         return COLOR_MAP[this.overallResult]
       }
 
-      return 'success'
+      return 'info'
     },
   },
 })

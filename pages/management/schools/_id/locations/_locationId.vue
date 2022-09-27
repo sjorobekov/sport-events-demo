@@ -4,7 +4,7 @@
       {{ title }}
     </h3>
 
-    <FxLocationForm ref="form" v-model="formData" :disabled="loading" />
+    <FxLocationForm ref="form" v-model="formData" :disabled="loading" :country="school.country" />
 
     <v-container class="mt-4 mb-8">
       <v-row>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import FxLocationForm from '@/components/FxLocationForm'
 
 export default {
@@ -35,7 +36,9 @@ export default {
   components: {
     FxLocationForm,
   },
-  layout: 'admin',
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canManageSportLocation'],
+  },
   data: () => ({
     formData: { },
     loading: false,
@@ -43,11 +46,11 @@ export default {
   async fetch () {
     if (this.isNew) {
       this.formData = {
-        schoolId: this.$route.params.id,
+        schoolId: this.schoolId,
       }
     } else {
       this.formData = await this.$store.dispatch('api/locations/get', {
-        schoolId: this.$route.params.id,
+        schoolId: this.schoolId,
         id: this.$route.params.locationId,
       })
     }
@@ -58,6 +61,10 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      schoolId: 'context/schoolId',
+      school: 'context/school',
+    }),
     isNew () {
       return this.$route.params.locationId === 'add'
     },
@@ -77,8 +84,8 @@ export default {
 
       this.$store.dispatch('api/locations/save', {
         ...this.formData,
-      }).then((res) => {
-        this.$router.push({ name: 'management-schools-id-locations', params: { id: res.schoolId } })
+      }).then(() => {
+        this.$router.back()
       }).finally(() => {
         this.loading = false
       })

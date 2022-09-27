@@ -93,9 +93,7 @@
       <FxCalendarPill :value="key" class="my-4" />
 
       <v-card v-for="event in value" :key="`event-${event.id}`" class="mb-2">
-        <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
-          <FxCalendarEventItem :event="event" :me="event.me" :opponent="event.opponent" :context-school-id="contextSchoolId" />
-        </nuxt-link>
+        <FxCalendarEvent :value="event" />
       </v-card>
     </div>
   </div>
@@ -118,14 +116,85 @@ import FxCalendarOpponentFilter from '@/components/PageComponents/FxCalendarPage
 import FxCalendarAgeFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarAgeFilter'
 import FxCalendarLocationFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarLocationFilter'
 import { EventLocationType } from '@/enum'
-import FxCalendarEventItem from '@/components/PageComponents/FxCalendarPage/FxCalendarEventItem/FxCalendarEventItem'
+import FxCalendarEvent from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/FxCalendarEvent'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
+
+const FORMAT_ADAPTER = {
+  Event (item) {
+    return {
+      sportId: item.sportId,
+      leadId: item.me?.leadId,
+      eventType: item.eventType,
+      opponentId: item.opponent?.listedAsOpponentId,
+      age: item.age,
+      location: item.me?.eventLocation,
+    }
+  },
+  InHouseEventMatch (item) {
+    return {
+      sportId: item.inHouseEvent.inHouseCompetition.sportId,
+      leadId: item.inHouseEvent.leadId,
+      eventType: item.inHouseEvent.eventType,
+      sportLocationId: item.sportLocationId,
+      location: item.location,
+    }
+  },
+}
+
+const adapt = (item) => {
+  return FORMAT_ADAPTER[item.kind](item)
+}
+
+const filter = (item, filter) => {
+  const data = adapt(item)
+  if (filter.sports?.length > 0) {
+    if (!filter.sports.includes(data.sportId)) {
+      return false
+    }
+  }
+
+  if (filter.leadIds?.length > 0) {
+    if (!filter.leadIds.includes(data.leadId)) {
+      return false
+    }
+  }
+
+  if (filter.eventTypes?.length > 0) {
+    if (!filter.eventTypes.includes(data.eventType)) {
+      return false
+    }
+  }
+
+  if (filter.opponentIds?.length > 0) {
+    if (!filter.opponentIds.includes(data.opponentId)) {
+      return false
+    }
+  }
+
+  if (filter.ageGroups?.length > 0) {
+    if (!filter.ageGroups.includes(data.age)) {
+      return false
+    }
+  }
+
+  if (filter.locations?.length > 0) {
+    if (
+      (filter.locations.includes(EventLocationType.OPPONENT_CONFIRMS) &&
+        data.location !== EventLocationType.OPPONENT_CONFIRMS) ||
+      !filter.locations.includes(data.location)
+    ) {
+      return false
+    }
+  }
+
+  return true
+}
 
 export default {
   name: 'CalendarPage',
   components: {
-    FxCalendarEventItem,
+    FxCalendarEvent,
     FxCalendarLocationFilter,
     FxCalendarAgeFilter,
     FxCalendarOpponentFilter,
@@ -156,17 +225,25 @@ export default {
   }),
 
   async fetch () {
-    const { data } = await this.$store.dispatch('api/events/getBySchool', {
-      schoolId: this.contextSchoolId,
-      params: {
-        limit: 2000,
-        orderDesc: 'false',
-        from: DateTime.fromJSDate(this.filter.startDate).toFormat(DATE_FORMAT),
-        to: DateTime.fromJSDate(this.filter.endDate).toFormat(DATE_FORMAT),
-      },
-    })
+    const params = {
+      limit: 2000,
+      orderDesc: 'false',
+      from: DateTime.fromJSDate(this.filter.startDate).toFormat(DATE_FORMAT),
+      to: DateTime.fromJSDate(this.filter.endDate).toFormat(DATE_FORMAT),
+    }
 
-    this.items = data
+    const [{ data: events }, { data: inHouseMatches }] = await Promise.all([
+      this.$store.dispatch('api/events/getBySchool', {
+        schoolId: this.contextSchoolId,
+        params,
+      }),
+      await this.$store.dispatch('api/inHouseMatches/getBySchool', {
+        schoolId: this.contextSchoolId,
+        params,
+      }),
+    ])
+
+    this.items = [...events, ...inHouseMatches]
   },
 
   computed: {
@@ -180,49 +257,7 @@ export default {
     },
 
     filtered () {
-      return this.items.filter((item) => {
-        if (this.filter.sports?.length > 0) {
-          if (!this.filter.sports.includes(item.sportId)) {
-            return false
-          }
-        }
-
-        if (this.filter.leadIds?.length > 0) {
-          if (!this.filter.leadIds.includes(item.me.leadId)) {
-            return false
-          }
-        }
-
-        if (this.filter.eventTypes?.length > 0) {
-          if (!this.filter.eventTypes.includes(item.eventType)) {
-            return false
-          }
-        }
-
-        if (this.filter.opponentIds?.length > 0) {
-          if (!this.filter.opponentIds.includes(item.opponent?.listedAsOpponentId)) {
-            return false
-          }
-        }
-
-        if (this.filter.ageGroups?.length > 0) {
-          if (!this.filter.ageGroups.includes(item.age)) {
-            return false
-          }
-        }
-
-        if (this.filter.locations?.length > 0) {
-          if (
-            (this.filter.locations.includes(EventLocationType.OPPONENT_CONFIRMS) &&
-              item.location !== EventLocationType.OPPONENT_CONFIRMS) ||
-            !this.filter.locations.includes(item.me.eventLocation)
-          ) {
-            return false
-          }
-        }
-
-        return true
-      })
+      return this.items.filter(item => filter(item, this.filter))
     },
 
     eventsGroupedByDate () {
@@ -230,7 +265,7 @@ export default {
     },
 
     leadIds () {
-      return uniq(this.items.map(item => item.me.leadId))
+      return uniq(this.items.map(item => adapt(item).leadId).filter(item => !!item))
     },
 
     eventTypes () {
@@ -238,11 +273,11 @@ export default {
     },
 
     sportIds () {
-      return uniq(this.items.map(item => item.sportId))
+      return uniq(this.items.map(item => adapt(item).sportId))
     },
 
     opponentIds () {
-      return uniq(this.items.map(item => item.opponent?.listedAsOpponentId))
+      return uniq(this.items.map(item => adapt(item).opponentId))
     },
 
     ageGroups () {
@@ -274,15 +309,17 @@ export default {
   created () {
     this.filter = {
       ...this.filter,
-      sports: this.applyFilter(this.$route.query.sports),
-      leadIds: this.applyFilter(this.$route.query.leadIds),
-      eventTypes: this.applyFilter(this.$route.query.eventTypes),
-      opponentIds: this.applyFilter(this.$route.query.opponentIds),
-      ageGroups: this.applyFilter(this.$route.query.ageGroups),
-      locations: this.applyFilter(this.$route.query.locations),
+      sports: this.applyQuery(this.$route.query.sports),
+      leadIds: this.applyQuery(this.$route.query.leadIds),
+      eventTypes: this.applyQuery(this.$route.query.eventTypes),
+      opponentIds: this.applyQuery(this.$route.query.opponentIds),
+      ageGroups: this.applyQuery(this.$route.query.ageGroups),
+      locations: this.applyQuery(this.$route.query.locations),
       startDate: DateTime.fromFormat(this.$route.query.startDate || DateTime.now().toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
       endDate: DateTime.fromFormat(this.$route.query.endDate || DateTime.now().toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
     }
+
+    this.showFilters = this.filter.leadIds.length || this.filter.eventTypes.length || this.filter.opponentIds.length || this.filter.ageGroups.length || this.filter.locations.length
   },
 
   methods: {
@@ -305,7 +342,7 @@ export default {
       }
     },
 
-    applyFilter (val) {
+    applyQuery (val) {
       if (isString(val)) {
         return [val]
       }
