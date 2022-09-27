@@ -73,5 +73,8 @@ export default {
     InHouse: {
       COMPETITIONS: 'No Competitions | 1 Competition | {count} Competitions',
     },
+    MissingResults: {
+      MISSING_RESULTS: 'No Missing Results | 1 Missing Result | {count} Missing Results',
+    },
   },
 }

@@ -1,8 +1,19 @@
 <template>
   <div>
-    <h1>Missing Results</h1>
+    <h1 class="text-h3 mt-16">
+      Missing Results
+    </h1>
+    <p class="text-p3 info--text text--darken-1 mb-6">
+      {{ $tc('page.MissingResults.MISSING_RESULTS', count) }}
+    </p>
     <FxSportExpansionPanel v-for="sport in sports" :key="sport.id" class="mb-4" :item="sport">
       <FxMissingResultEventItem v-for="event in eventsBySport[sport.id]" :key="event.id" :value="event" />
+
+      <template #actions>
+        <div class="text-p2 info--text text-right">
+          {{ $tc('page.MissingResults.MISSING_RESULTS', eventsBySport[sport.id].length) }}
+        </div>
+      </template>
     </FxSportExpansionPanel>
   </div>
 </template>
@@ -23,6 +34,7 @@ export default {
 
   data: () => ({
     sports: [],
+    count: 0,
     eventsBySport: {},
   }),
 
@@ -33,6 +45,8 @@ export default {
         missingResults: true,
       },
     })
+
+    this.count = events.length
 
     this.sports = uniqBy(events.map(event => event.sport), 'id')
     this.eventsBySport = groupBy(events, 'sportId')

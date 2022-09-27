@@ -14,6 +14,9 @@
               {{ subtitle }}
             </v-list-item-subtitle>
           </v-list-item-content>
+          <v-list-item-content>
+            <slot name="actions" />
+          </v-list-item-content>
         </v-list-item>
       </v-expansion-panel-header>
       <v-expansion-panel-content class="pa-0">
