@@ -28,7 +28,7 @@ export default {
 
   methods: {
     onSave () {
-      this.$router.push({ name: 'in-house-competitionId-events', params: { competitionId: this.$route.params.competitionId } })
+      this.$router.push({ name: 'in-house-competitionId-matches', params: { competitionId: this.$route.params.competitionId } })
     },
     onCancel () {
       this.$router.back()

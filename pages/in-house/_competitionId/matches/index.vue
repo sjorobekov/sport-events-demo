@@ -61,7 +61,7 @@
               depressed
               color="primary"
               link
-              :to="{ name: 'in-house-competitionId-events-add', params: { competitionId: inHouseCompetitionId }}"
+              :to="{ name: 'in-house-competitionId-matches-add', params: { competitionId: inHouseCompetitionId }}"
             >
               <v-icon>$vuetify.icons.plusOutline</v-icon>Add Event
             </v-btn>
