@@ -167,7 +167,7 @@ export default {
         schoolId: this.contextSchoolId,
         inHouseCompetitionId: this.inHouseEvent.inHouseCompetitionId,
         inHouseTeamId: this.team.id,
-        id: this.inHouseEvent.id,
+        id: this.inHouseMatch.id,
         sheet: this.sheet,
       })
         .then(() => {

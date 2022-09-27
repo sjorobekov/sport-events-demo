@@ -29,35 +29,35 @@
 
       <v-row v-for="(match, i) in matchItems" :key="i">
         <v-col cols="6">
-          <label for="team">House Team</label>
+          <label for="home-team">House Team</label>
           <v-autocomplete
-            id="team"
+            id="home-team"
             v-async-validate
             :async-rules="[$rule.required]"
             outlined
             dense
-            :value="match.teamId"
+            :value="match.homeTeamId"
             :items="filteredTeams"
             item-text="name"
             item-value="id"
             placeholder="Select House Team"
-            @input="updateMatch(i, { teamId: $event })"
+            @input="updateMatch(i, { homeTeamId: $event })"
           />
         </v-col>
         <v-col cols="6">
-          <label for="team">House Team</label>
+          <label for="away-team">House Team</label>
           <v-autocomplete
-            id="team"
+            id="away-team"
             v-async-validate
             :async-rules="[$rule.required]"
             outlined
             dense
-            :value="match.opponentTeamId"
+            :value="match.awayTeamId"
             :items="filteredTeams"
             item-text="name"
             item-value="id"
             placeholder="Select House Team"
-            @input="updateMatch(i, { opponentTeamId: $event })"
+            @input="updateMatch(i, { awayTeamId: $event })"
           />
         </v-col>
       </v-row>
@@ -339,9 +339,9 @@ export default {
 
     add () {
       this.$emit('update:matches', tap(cloneDeep(this.matchItems), v => v.push({
-        number: this.matchItems.length,
-        teamId: '',
-        opponentTeamId: '',
+        number: this.matchItems.length + 1,
+        homeTeamId: '',
+        awayTeamId: '',
         location: EventLocationType.SPORTS_LOCATIONS,
       })))
     },
