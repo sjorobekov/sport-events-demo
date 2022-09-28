@@ -1,7 +1,7 @@
 <template>
   <FxCalendarItem :sport="sport" :lead="lead" :to="{ name: 'in-house-competitionId-matches-matchId', params: { matchId: value.id, competitionId: competition.id } }">
     <template #subtitle>
-      <span class="text-p2 info--text text--lighten-1">In-House</span>
+      <span class="text-p2 info--text text--lighten-1">In-House {{ competition.name }}</span>
     </template>
     <template #center>
       <v-col md="2" class="border-bottom pt-6">
@@ -20,7 +20,7 @@
         </AllInHouseTeamsProvider>
       </v-col>
       <v-col md="4" class="border-bottom pt-6">
-        {{ event.name }}
+        {{ competition.name }}
       </v-col>
     </template>
     <template #time>

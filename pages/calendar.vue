@@ -75,6 +75,9 @@
           <v-col>
             <FxCalendarLocationFilter v-model="filter.locations" />
           </v-col>
+          <v-col>
+            <FxCalendarStatusFilter v-model="filter.privacy" />
+          </v-col>
         </v-row>
       </div>
     </v-expand-transition>
@@ -117,6 +120,7 @@ import FxCalendarAgeFilter from '@/components/PageComponents/FxCalendarPage/FxCa
 import FxCalendarLocationFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarLocationFilter'
 import { EventLocationType } from '@/enum'
 import FxCalendarEvent from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/FxCalendarEvent'
+import FxCalendarStatusFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarStatusFilter'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
 
@@ -129,6 +133,7 @@ const FORMAT_ADAPTER = {
       opponentId: item.opponent?.listedAsOpponentId,
       age: item.age,
       location: item.me?.eventLocation,
+      publish: item.me.team?.publishTeam,
     }
   },
   InHouseEventMatch (item) {
@@ -138,6 +143,7 @@ const FORMAT_ADAPTER = {
       eventType: item.inHouseEvent.eventType,
       sportLocationId: item.sportLocationId,
       location: item.location,
+      publish: item.inHouseEvent.inHouseCompetition.publishCompetition,
     }
   },
 }
@@ -188,12 +194,23 @@ const filter = (item, filter) => {
     }
   }
 
+  if (filter.privacy?.length > 0) {
+    if (data.publish && filter.privacy.includes('PUBLISHED')) {
+      return true
+    } else if (!data.publish && filter.privacy.includes('UNPUBLISHED')) {
+      return true
+    }
+
+    return false
+  }
+
   return true
 }
 
 export default {
   name: 'CalendarPage',
   components: {
+    FxCalendarStatusFilter,
     FxCalendarEvent,
     FxCalendarLocationFilter,
     FxCalendarAgeFilter,
@@ -220,6 +237,7 @@ export default {
       opponentIds: [],
       ageGroups: [],
       locations: [],
+      privacy: [],
     },
     showFilters: false,
   }),
