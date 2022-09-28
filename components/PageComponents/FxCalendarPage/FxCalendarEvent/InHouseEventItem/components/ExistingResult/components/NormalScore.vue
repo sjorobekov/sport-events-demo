@@ -11,15 +11,20 @@
 
 <script>
 export default {
-  name: 'HouseVsHouse',
+  name: 'NormalScore',
   props: {
-    home: {
-      type: String,
-      default: undefined,
+    match: {
+      type: Object,
+      required: true,
     },
-    away: {
-      type: String,
-      default: undefined,
+  },
+
+  computed: {
+    home () {
+      return this.match.homeScore
+    },
+    away () {
+      return this.match.awayScore
     },
   },
 }

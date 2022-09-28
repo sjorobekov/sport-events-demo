@@ -77,10 +77,12 @@ import ExistingResult
   from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/EventItem/ExistingResult/ExistingResult'
 import NoResult from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/EventItem/NoResult/NoResult'
 import CalendarItemLayout from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/CalendarItemLayout'
+import FxEventStatus from '@/components/FxEventStatus.vue'
 
 export default {
   name: 'EventItem',
   components: {
+    FxEventStatus,
     CalendarItemLayout,
     NoResult,
     ExistingResult,

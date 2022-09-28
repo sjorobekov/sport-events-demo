@@ -45,13 +45,14 @@ export default {
   },
 
   IN_HOUSE_EVENT_RESULT: {
-    [InHouseEventResult.HOME]: 'Home',
+    [InHouseEventResult.HOME]: 'Home Won',
     [InHouseEventResult.DRAW]: 'Draw',
-    [InHouseEventResult.AWAY]: 'Away',
+    [InHouseEventResult.AWAY]: 'Away Won',
     [InHouseEventResult.SEE_MATCH_NOTES]: 'See Match Notes',
     [InHouseEventResult.TO_BE_PLAYED]: 'To Be Played',
     [InHouseEventResult.POSTPONED]: 'Postponed',
     [InHouseEventResult.CANCELLED]: 'Cancelled',
+    [InHouseEventResult.TO_BE_PLAYED]: 'To Be Played',
   },
 
   TRANSPORT_TO: {

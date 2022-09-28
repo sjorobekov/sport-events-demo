@@ -4,11 +4,8 @@
       Add Result
     </v-btn>
 
-    <v-btn v-else-if="!me.sheet" outlined link :to="{ name: 'in-house-competitionId-matches-matchId', params: { matchId: match.id, competitionId: competition.id } }">
-      Add Team
-    </v-btn>
     <v-btn v-else outlined link :to="{ name: 'in-house-competitionId-matches-matchId', params: { matchId: match.id, competitionId: competition.id } }">
-      Manage Team
+      Manage Teams
     </v-btn>
   </div>
 </template>
@@ -19,10 +16,6 @@ import { DateTime } from 'luxon'
 export default {
   name: 'NoResult',
   props: {
-    me: {
-      type: Object,
-      required: true,
-    },
     match: {
       type: Object,
       required: true,

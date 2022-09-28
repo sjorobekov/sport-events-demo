@@ -20,8 +20,16 @@ type ListByTeamPayload = {
   inHouseCompetitionId: string
 }
 
+type QueryParams = {
+  page: number,
+  limit?: number,
+  from?: string,
+  to?:string,
+}
+
 type ListBySchoolPayload = {
   schoolId: string
+  params: QueryParams
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -29,17 +37,15 @@ export const actions: ActionTree<RootState, RootState> = {
     return this.$axios.$get(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_matches`)
   },
 
-  getBySchool (_, { schoolId }: ListBySchoolPayload): Promise<PaginatedList<InHouseMatch>> {
-    return this.$axios.$get(`/api/v1/schools/${schoolId}/in_house_matches`)
+  getBySchool (_, { schoolId, params }: ListBySchoolPayload): Promise<PaginatedList<InHouseMatch>> {
+    return this.$axios.$get(`/api/v1/schools/${schoolId}/in_house_matches`, { params })
   },
 
-  async get (_, { schoolId, inHouseCompetitionId, id }): Promise<InHouseMatch> {
-    const match: InHouseMatch = await this.$axios.$get(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_matches/${id}`)
-    return match
+  get (_, { schoolId, inHouseCompetitionId, id }): Promise<InHouseMatch> {
+    return this.$axios.$get(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_matches/${id}`)
   },
 
-  async storeResult (_, { schoolId, inHouseCompetitionId, id, formData }: { schoolId: string, inHouseCompetitionId: string, id: string, formData: StoreResultPayload }): Promise<InHouseMatch> {
-    const match: InHouseMatch = await this.$axios.$post(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_matches/${id}/results`, formData)
-    return match
+  storeResult (_, { schoolId, inHouseCompetitionId, id, formData }: { schoolId: string, inHouseCompetitionId: string, id: string, formData: StoreResultPayload }): Promise<InHouseMatch> {
+    return this.$axios.$post(`/api/v1/schools/${schoolId}/in_house_competitions/${inHouseCompetitionId}/in_house_matches/${id}/results`, formData)
   },
 }

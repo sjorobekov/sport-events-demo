@@ -10,7 +10,10 @@
               </v-avatar>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title class="text-p2" v-text="sport.name" />
+              <v-list-item-title class="text-p2">
+                {{ sport.name }}
+                <slot name="subtitle" />
+              </v-list-item-title>
             </v-list-item-content>
             <v-spacer />
             <slot name="actions" />
@@ -23,18 +26,20 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col md="2" class="border-bottom pt-6">
-          <slot name="status" />
-        </v-col>
-        <v-col cols="12" md="3" class="border-bottom">
-          <slot name="left" v-bind="{ compact }" />
-        </v-col>
-        <v-col md="2" class="hidden-sm-and-down pt-5 border-bottom text-center">
-          <slot name="score" />
-        </v-col>
-        <v-col cols="12" md="5" class="border-bottom">
-          <slot name="right" />
-        </v-col>
+        <slot name="center">
+          <v-col md="2" class="border-bottom pt-6">
+            <slot name="status" />
+          </v-col>
+          <v-col cols="12" md="3" class="border-bottom">
+            <slot name="left" v-bind="{ compact }" />
+          </v-col>
+          <v-col md="2" class="hidden-sm-and-down pt-5 border-bottom text-center">
+            <slot name="score" />
+          </v-col>
+          <v-col cols="12" md="5" class="border-bottom">
+            <slot name="right" />
+          </v-col>
+        </slot>
       </v-row>
       <v-row v-if="compact">
         <v-col cols="12" class="border-bottom pt-1 pb-0">
