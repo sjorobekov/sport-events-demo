@@ -36,11 +36,13 @@ export default {
   components: {
     FxTeamForm,
   },
+
   data: () => ({
-    formData: { },
+    formData: { seasonId: null },
     loading: false,
     sports: [],
   }),
+
   head: () => ({
     title: 'Create New Team',
   }),
@@ -51,12 +53,14 @@ export default {
 
   computed: {
     ...mapGetters({
+      currentSeason: 'seasons/current',
       schoolId: 'context/schoolId',
     }),
   },
 
   async beforeMount () {
     this.sports = await this.$store.dispatch('api/sports/list')
+    this.formData.seasonId = this.currentSeason.id
   },
 
   methods: {
