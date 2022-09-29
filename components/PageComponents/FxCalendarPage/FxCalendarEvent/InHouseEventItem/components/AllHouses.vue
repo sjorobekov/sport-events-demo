@@ -19,7 +19,7 @@
           </template>
         </AllInHouseTeamsProvider>
       </v-col>
-      <v-col md="4" class="border-bottom pt-6">
+      <v-col md="4" class="border-bottom pt-4">
         {{ competition.name }}
       </v-col>
     </template>

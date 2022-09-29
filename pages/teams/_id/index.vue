@@ -63,7 +63,7 @@
             </v-chip-group>
           </v-col>
           <v-col cols="6" sm="7" md="6" class="text-right">
-            <v-btn v-if="canEditTeam" outlined>
+            <v-btn v-if="canEditTeam" outlined link :to="{ name: 'teams-id-edit', params: { id: team.id } }">
               <v-icon>$vuetify.icons.edit</v-icon>Edit Team
             </v-btn>
             <v-btn
