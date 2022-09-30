@@ -1,13 +1,5 @@
 <template>
-  <FxEventItemCard>
-    <template #title>
-      Team Sheet <FxTeamPublishChip v-if="canManageTeamSheet" :publish-team="myTeam.publishTeam" />
-    </template>
-    <template v-if="canManageTeamSheet && teamSheet.length" #actions>
-      <v-btn outlined link :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }">
-        <v-icon>mdi-pencil</v-icon>Edit Team
-      </v-btn>
-    </template>
+  <div>
     <v-container v-if="!teamSheet.length">
       <v-row>
         <v-col cols="12" class="pt-6">
@@ -68,26 +60,24 @@
         </tr>
       </tbody>
     </v-simple-table>
-  </FxEventItemCard>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import FxEventItemCard from '@/components/PageComponents/FxEventIndividualPage/FxEventItemCard'
 
 export default {
-  name: 'FxEventTeamSheet',
-  components: { FxEventItemCard },
+  name: 'TeamSheet',
+  props: {
+    teamSheet: {
+      type: Array,
+      default: () => [],
+    },
+  },
   computed: {
     ...mapGetters({
       event: 'page/event/event',
-      me: 'page/event/me',
-      opponent: 'page/event/opponent',
-      sport: 'page/event/sport',
-      lead: 'page/event/lead',
-      teamSheet: 'page/event/teamSheet',
       canManageTeamSheet: 'page/event/canManageTeamSheet',
-      myTeam: 'page/event/myTeam',
     }),
   },
 }

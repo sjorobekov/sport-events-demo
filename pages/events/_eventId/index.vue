@@ -19,7 +19,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import FxEventTeamSheet from '@/components/PageComponents/FxEventIndividualPage/FxEventTeamSheet'
+import FxEventTeamSheet from '@/components/PageComponents/FxEventIndividualPage/FxEventTeamSheet/FxEventTeamSheet'
 import FxEventResults from '@/components/PageComponents/FxEventIndividualPage/FxEventResults'
 import FxEventDetails from '@/components/PageComponents/FxEventIndividualPage/FxEventDetails'
 

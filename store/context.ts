@@ -1,12 +1,27 @@
-export const state = () => ({
+import { ActionTree, GetterTree, MutationTree } from 'vuex'
+import { Dictionary, Location, School, User } from '~/types'
+
+interface ContextInterface {
+  me: User | null,
+  subdomain: string | null,
+  school: School | null,
+  sportLocations: Array<Location>,
+  sportLocationsIndexed: Dictionary<Location>,
+  isGuestSignedIn: boolean | null,
+}
+
+export const state = (): ContextInterface => ({
   me: null,
   subdomain: null,
   school: null,
   sportLocations: [],
   sportLocationsIndexed: {},
+  isGuestSignedIn: null,
 })
 
-export const getters = {
+export type RootState = ReturnType<typeof state>
+
+export const getters: GetterTree<RootState, RootState> = {
   isLoggedIn (state) {
     return !!state.me
   },
@@ -49,22 +64,34 @@ export const getters = {
   sportLocations (state) {
     return state.sportLocations
   },
+
+  isSheetPasswordProtected (state) {
+    return state.school?.teamSheetsProtected
+  },
+
+  isGuestSignedIn (state) {
+    return state.isGuestSignedIn
+  },
 }
 
-export const mutations = {
-  me (state, val) {
+export const mutations: MutationTree<RootState> = {
+  me (state, val: User) {
     state.me = val
   },
 
-  subdomain (state, val) {
+  isGuestSignedIn (state, val: boolean) {
+    state.isGuestSignedIn = val
+  },
+
+  subdomain (state, val: string) {
     state.subdomain = val
   },
 
-  school (state, val) {
+  school (state, val: School) {
     state.school = val
   },
 
-  sportLocations (state, locations) {
+  sportLocations (state, locations: Array<Location>) {
     state.sportLocations = locations
     locations.forEach((item) => {
       state.sportLocationsIndexed[item.id] = item
@@ -73,7 +100,7 @@ export const mutations = {
 }
 
 // actions
-export const actions = {
+export const actions: ActionTree<RootState, RootState> = {
   async fetchSchoolByPortalAddress ({ commit, getters }) {
     const school = await this.$axios.$get(`/api/v1/portalAddress/${getters.subdomain}`)
     commit('school', {
@@ -84,6 +111,7 @@ export const actions = {
       portalProtected: school.portalProtected,
       teamSheetsProtected: school.teamSheetsProtected,
       announcementsProtected: school.announcementsProtected,
+      email: school.email,
     })
     commit('api/schools/cache', school, { root: true })
   },
@@ -125,14 +153,23 @@ export const actions = {
     await dispatch('fetchContext')
   },
 
+  async guestSignIn ({ commit }, { password, schoolId }) {
+    await this.$axios.$post(`/api/v1/schools/${schoolId}/guestSignIn`, {
+      password,
+    })
+
+    commit('isGuestSignedIn', true)
+  },
+
   async logOut ({ dispatch }) {
     await this.$axios.$post('/api/v1/logout')
     dispatch('cleanup')
   },
 
   async fetchContext ({ commit }) {
-    const { user } = await this.$axios.$get('/api/v1/context')
+    const { user, isGuestSignedIn } = await this.$axios.$get('/api/v1/context')
     commit('me', user)
+    commit('isGuestSignedIn', isGuestSignedIn)
   },
 
   cleanup ({ commit }) {

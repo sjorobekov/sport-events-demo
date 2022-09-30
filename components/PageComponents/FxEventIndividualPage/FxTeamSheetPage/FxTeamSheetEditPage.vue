@@ -126,13 +126,13 @@ export default {
     selectedStudent: null,
     students: [],
     recentTeamSheet: [],
+    teamSheet: [],
   }),
 
   computed: {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
       event: 'page/event/event',
-      teamSheet: 'page/event/teamSheet',
       myTeam: 'page/event/myTeam',
     }),
   },
@@ -146,6 +146,11 @@ export default {
     this.recentTeamSheet = await this.$store.dispatch('api/teams/getLastSheet', {
       schoolId: this.contextSchoolId,
       id: this.myTeam.id,
+    })
+
+    this.teamSheet = await this.$store.dispatch('api/events/getTeamSheet', {
+      schoolId: this.contextSchoolId,
+      id: this.event.id,
     })
 
     this.students = data
@@ -165,7 +170,6 @@ export default {
         sheet: this.sheet,
       })
         .then(() => {
-          this.$store.dispatch('page/event/fetchTeamSheet', this.event.id)
           this.$router.push({
             name: 'events-eventId',
             params: { eventId: this.event.id },
