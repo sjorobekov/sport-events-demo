@@ -1,5 +1,5 @@
 <template>
-  <FxInHouseEventItemCard>
+  <FxInHouseEventItemCard v-if="canAddOrEditResult | hasResult">
     <template #title>
       Results
     </template>
@@ -35,6 +35,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import cloneDeep from 'lodash/cloneDeep'
+import { InHouseEventResult } from '~/enum'
 import FxInHouseEventResultForm from '@/components/FxInHouseEventResultForm/FxInHouseEventResultForm'
 import FxInHouseEventItemCard from '@/components/PageComponents/FxInHouseEventIndividualPage/FxInHouseEventItemCard'
 import FxInHouseEventExistingResult
@@ -83,6 +84,10 @@ export default {
       if (!isValid) {
         this.loading = false
         return
+      }
+      if (!Object.values(InHouseEventResult).includes(this.formData.overallResult)) {
+        this.formData.winnerId = this.formData.overallResult
+        this.formData.overallResult = InHouseEventResult.HOME
       }
       this.$store.dispatch('page/inHouseEvent/saveResult', this.formData)
         .then(() => {

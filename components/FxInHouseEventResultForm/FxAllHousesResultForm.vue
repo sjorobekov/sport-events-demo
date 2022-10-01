@@ -8,6 +8,7 @@
           height="52"
           hide-details
           :value="formData.overallResult"
+          :items="resultOptions"
           @input="update('overallResult', $event)"
         />
       </v-col>
@@ -25,6 +26,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { InHouseEventResult } from '~/enum'
+
 export default {
   name: 'FxAllHousesResultForm',
 
@@ -40,10 +44,25 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      teams: 'page/inHouseEvent/teams',
+    }),
     formData () {
       return {
         ...(this.value || {}),
+        overallResult: this.value.winnerId || this.value.overallResult,
       }
+    },
+    resultOptions () {
+      const teamResults = this.teams.map((team) => {
+        return { value: team.id, text: `${team.name} won` }
+      })
+      const results = Object.values(InHouseEventResult)
+        .filter(value => ![InHouseEventResult.HOME, InHouseEventResult.AWAY].includes(value))
+        .map((value) => {
+          return { value, text: this.$t(`IN_HOUSE_EVENT_RESULT.${value}`) }
+        })
+      return teamResults.concat(results)
     },
   },
 

@@ -101,8 +101,8 @@ export enum InHouseEventLocationType {
 
 export enum InHouseEventResult {
   HOME = 'HOME',
-  DRAW = 'DRAW',
   AWAY = 'AWAY',
+  DRAW = 'DRAW',
   SEE_MATCH_NOTES = 'SEE_MATCH_NOTES',
   TO_BE_PLAYED = 'TO_BE_PLAYED',
   POSTPONED = 'POSTPONED',

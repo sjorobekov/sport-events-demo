@@ -7,6 +7,7 @@ type ResultData = {
   awayScore: string,
   overallResult?: InHouseEventResult,
   resultNotes: string,
+  winnerId: string,
 }
 
 export const state = () => ({
@@ -22,6 +23,7 @@ export const state = () => ({
   teams: [] as InHouseTeam[],
   matches: [] as InHouseMatch[],
   inHouseCompetition: {} as InHouseCompetition,
+  winner: {} as InHouseTeam,
 })
 
 export type RootState = ReturnType<typeof state>
@@ -73,6 +75,10 @@ export const mutations: MutationTree<RootState> = {
 
   matches (state, matches: InHouseMatch[]) {
     state.matches = matches
+  },
+
+  winner (state, winner: InHouseTeam) {
+    state.winner = winner
   },
 }
 
@@ -154,6 +160,10 @@ export const getters: GetterTree<RootState, RootState> = {
   matches (state) {
     return state.matches
   },
+
+  winner (state) {
+    return state.winner
+  },
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -176,7 +186,11 @@ export const actions: ActionTree<RootState, RootState> = {
       commit('opponentTeam', match?.awayTeam)
       commit('teams', [match?.homeTeam, match?.awayTeam])
     } else {
-      dispatch('fetchTeams', inHouseEvent.schoolId)
+      const teams = await dispatch('fetchTeams', inHouseEvent.schoolId)
+      if (match.winnerId) {
+        const winner = teams.find((team: InHouseTeam) => team.id === match.winnerId)
+        commit('winner', winner)
+      }
     }
 
     commit('inHouseMatch', match)
@@ -188,6 +202,7 @@ export const actions: ActionTree<RootState, RootState> = {
       awayScore: match.awayScore,
       overallResult: match.overallResult,
       resultNotes: match.resultNotes,
+      winnerId: match.winnerId,
     })
 
     const promises = [
@@ -230,6 +245,7 @@ export const actions: ActionTree<RootState, RootState> = {
   async fetchTeams ({ dispatch, commit }, schoolId: string) {
     const teams = await dispatch('api/inHouseTeams/list', { schoolId }, { root: true })
     commit('teams', teams)
+    return teams
   },
 
   async saveResult ({ commit, dispatch, rootGetters, getters }, payload) {
@@ -242,11 +258,17 @@ export const actions: ActionTree<RootState, RootState> = {
       formData: payload,
     }, { root: true })
 
+    if (data.winnerId) {
+      const winner = getters.teams.find((team: InHouseTeam) => team.id === data.winnerId)
+      commit('winner', winner)
+    }
+
     commit('result', {
       homeScore: data.homeScore,
       awayScore: data.awayScore,
       overallResult: data.overallResult,
       resultNotes: data.resultNotes,
+      winnerId: data.winnerId,
     })
   },
 }

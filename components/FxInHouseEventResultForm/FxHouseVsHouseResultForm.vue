@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" sm="12" md="6">
         <label class="text-p1">Result</label>
-        <FxEventResultSelect
+        <FxInHouseEventResultSelect
           height="52"
           hide-details
           :value="formData.overallResult"
@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import tap from 'lodash/tap'
 import cloneDeep from 'lodash/cloneDeep'
 import set from 'lodash/set'
@@ -98,6 +99,11 @@ export default {
   }),
 
   computed: {
+    ...mapGetters({
+      inHouseEvent: 'page/inHouseEvent/inHouseEvent',
+      myTeam: 'page/inHouseEvent/myTeam',
+      opponentTeam: 'page/inHouseEvent/opponentTeam',
+    }),
     formData () {
       return {
         ...this.value,
@@ -107,7 +113,14 @@ export default {
     },
     resultOptions () {
       return Object.values(InHouseEventResult)
-        .map(value => ({ value, text: this.$t(`IN_HOUSE_EVENT_RESULT.${value}`) }))
+        .map((value) => {
+          if (value === InHouseEventResult.HOME) {
+            return { value, text: `${this.myTeam.name} won` }
+          } else if (value === InHouseEventResult.AWAY) {
+            return { value, text: `${this.opponentTeam.name} won` }
+          }
+          return { value, text: this.$t(`IN_HOUSE_EVENT_RESULT.${value}`) }
+        })
     },
   },
 

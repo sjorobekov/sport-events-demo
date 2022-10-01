@@ -12,14 +12,6 @@
       <v-btn v-else-if="!hasResult && canAddOrEditResult" color="primary" @click="$vuetify.goTo(target, options)">
         <v-icon>mdi-plus-circle-outline</v-icon> Add Result
       </v-btn>
-
-      <v-alert v-else-if="isCancelled" color="error darken-1" outlined class="text-h5">
-        Cancelled
-      </v-alert>
-
-      <v-alert v-else-if="isPostponed" color="warning lighten-2" outlined>
-        <span class="text-h5 error--text">Postponed</span>
-      </v-alert>
     </v-col>
   </v-row>
 </template>
@@ -39,8 +31,6 @@ export default {
   computed: {
     ...mapGetters({
       result: 'page/inHouseEvent/result',
-      isCancelled: 'page/inHouseEvent/isCancelled',
-      isPostponed: 'page/inHouseEvent/isPostponed',
       hasResult: 'page/inHouseEvent/hasResult',
       hasScore: 'page/inHouseEvent/hasScore',
       canAddOrEditResult: 'page/inHouseEvent/canAddOrEditResult',
