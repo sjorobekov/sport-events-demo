@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col class="py-0">
-          <FxTeamListItem class="px-0" :context-school-id="contextSchoolId" :participant="opponent" />
+          <FxTeamListItem v-if="opponent" class="px-0" :context-school-id="contextSchoolId" :participant="opponent" />
         </v-col>
         <v-col class="pt-2 pb-0">
           <v-alert v-if="!conflictsExist" dense class="mb-0 float-right">
