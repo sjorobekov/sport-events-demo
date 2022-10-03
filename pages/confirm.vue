@@ -1,41 +1,44 @@
 <template>
-  <v-main>
-    <v-container class="fill-height">
-      <v-row align="center" justify="center">
-        <v-col cols="12" sm="6" md="4" lg="3">
-          <v-card>
-            <v-card-title>
-              Password Setup
-            </v-card-title>
-            <v-card-text>
-              <FxUserSetPasswordForm ref="form" v-model="formData" :disabled="loading" />
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer />
-              <v-btn depressed color="primary" :loading="loading" @click="send">
-                Confirm
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-main>
+  <div>
+    <h1 class="text-h1 text-center mt-6">
+      Set New Password
+    </h1>
+    <FxUserSetPasswordForm ref="form" v-model="formData" :disabled="loading" />
+    <v-btn
+      height="50"
+      depressed
+      block
+      color="primary"
+      :loading="loading"
+      @click="send"
+    >
+      Set Password
+    </v-btn>
+  </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'ConfirmPage',
-  layout: 'empty',
+  layout: 'startup',
   middleware: ({ error, route }) => {
     if (!route.query.signedUrl) {
       error({ statusCode: 404, message: 'Page not found' })
     }
   },
+
   data: () => ({
     formData: { password: '' },
     loading: false,
   }),
+
+  computed: {
+    ...mapGetters({
+      contextSchool: 'context/school',
+    }),
+  },
+
   methods: {
     async send () {
       this.loading = true
@@ -44,7 +47,9 @@ export default {
         this.loading = false
         return
       }
-      this.$axios.$post(this.$route.query.signedUrl, this.formData)
+      this.$axios.$post(this.$route.query.signedUrl, {
+        password: this.formData.password,
+      })
         .then(() => {
           this.$toast('Password has been set successfully!')
           this.$router.replace({ name: 'login' })

@@ -153,6 +153,12 @@ export const actions: ActionTree<RootState, RootState> = {
     await dispatch('fetchContext')
   },
 
+  forgotPassword (_, { email, schoolId }) {
+    return this.$axios.$post(`/api/v1/schools/${schoolId}/forgotPassword`, {
+      email,
+    })
+  },
+
   async guestSignIn ({ commit }, { password, schoolId }) {
     await this.$axios.$post(`/api/v1/schools/${schoolId}/guestSignIn`, {
       password,
