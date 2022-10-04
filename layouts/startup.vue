@@ -21,9 +21,10 @@
                   <h1 class="text-h1s white--text text-center">
                     {{ contextSchool.name }}
                   </h1>
-                  <h2 class="text-h1s white--text text-center d-none d-sm-block" style="margin-top: 334px">
-                    fixturr
-                  </h2>
+
+                  <div class="d-none d-sm-block" style="margin-top: 334px">
+                    <v-img class="mx-auto" width="185" :src="require('/static/logo_new.svg')" />
+                  </div>
                   <h2 class="text-p1 font-weight-medium white--text text-center mt-4 d-block d-sm-none">
                     Sports Portal
                   </h2>

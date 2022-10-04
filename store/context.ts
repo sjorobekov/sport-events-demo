@@ -49,8 +49,12 @@ export const getters: GetterTree<RootState, RootState> = {
     return state.subdomain === 'admin'
   },
 
-  isPortalSite (state) {
-    return state.subdomain !== 'admin'
+  isPortalSite (_, getters) {
+    return !getters.isSuperAdminSite && !getters.isSignUpSite
+  },
+
+  isSignUpSite (state) {
+    return state.subdomain === 'signup'
   },
 
   school (state) {
