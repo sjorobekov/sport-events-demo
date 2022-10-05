@@ -296,3 +296,11 @@ export interface StudentsParticipationStatistics {
   weekStudents: number,
   monthStudents: number
 }
+
+export interface StudentsParticipation extends Student {
+  events: number,
+  trainings: number,
+  inHouseEvents: number,
+  totalEvents: number,
+  sports: number,
+}
