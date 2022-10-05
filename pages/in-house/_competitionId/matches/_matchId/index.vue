@@ -5,21 +5,23 @@
       sm="12"
       md="12"
       lg="7"
-      class="pr-4 d-flex"
+      class="pr-4 d-flex justify-end"
       :class="hasResult ? 'flex-column-reverse': 'flex-column'"
     >
       <FxInHouseEventDetails />
       <FxInHouseEventResults id="results" />
     </v-col>
     <v-col
-      v-for="team in teams"
-      :key="team.id"
       cols="12"
       sm="12"
       md="12"
       lg="5"
     >
-      <FxInHouseEventTeamSheet :team="team" />
+      <FxInHouseEventTeamSheet
+        v-for="team in teams"
+        :key="team.id"
+        :team="team"
+      />
     </v-col>
   </v-row>
 </template>

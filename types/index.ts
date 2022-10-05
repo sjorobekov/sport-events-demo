@@ -289,3 +289,10 @@ export interface InHouseTeamSheet {
   readonly createdAt: string
   readonly updatedAt: string
 }
+
+export interface StudentsParticipationStatistics {
+  sports: number,
+  events: number,
+  weekStudents: number,
+  monthStudents: number
+}

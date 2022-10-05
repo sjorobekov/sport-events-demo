@@ -1,27 +1,26 @@
 <template>
   <v-select
     :id="id"
-    v-async-validate
     outlined
     dense
     :value="value"
-    :items="options"
-    :async-rules="asyncRules"
+    :items="sports"
+    item-text="name"
+    item-value="id"
     :placeholder="placeholder"
     :clearable="clearable"
     @input="$emit('input', $event)"
   >
     <template v-if="icon" #prepend-inner>
-      <v-icon>mdi-filter-outline</v-icon>
+      <v-icon>mdi-whistle-outline</v-icon>
     </template>
   </v-select>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
-  name: 'FxGenderSelect',
+  name: 'FxSportSelect',
   props: {
     id: {
       type: String,
@@ -29,11 +28,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Select Gender',
-    },
-    asyncRules: {
-      type: Array,
-      default: () => [],
+      default: 'Sport',
     },
     value: {
       type: String,
@@ -48,11 +43,12 @@ export default {
       default: false,
     },
   },
+  data: () => ({
+    sports: [],
+  }),
 
-  computed: {
-    ...mapGetters({
-      options: 'api/teams/genderOptions',
-    }),
+  async fetch () {
+    this.sports = await this.$store.dispatch('api/sports/list')
   },
 }
 </script>

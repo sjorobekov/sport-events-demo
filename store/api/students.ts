@@ -1,5 +1,5 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex'
-import { PaginatedList, Student, Dictionary } from '~/types'
+import { PaginatedList, Student, Dictionary, StudentsParticipationStatistics } from '~/types'
 import { Gender } from '@/enum'
 
 export const state = () => ({
@@ -39,6 +39,13 @@ type QueryParams = {
 type ListPayload = {
   schoolId: string
   params: QueryParams
+}
+
+type ParticipationQueryParams = {
+  page: number,
+  sortBy: string,
+  sortDesc: boolean,
+  schoolId: string,
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -86,5 +93,15 @@ export const actions: ActionTree<RootState, RootState> = {
 
   remove (_, { schoolId, id }): Promise<void> {
     return this.$axios.$delete(`api/v1/schools/${schoolId}/students/${id}`)
+  },
+
+  getParticipation (_, { schoolId, ...params }: ParticipationQueryParams): Promise<Student[]> {
+    return this.$axios.$get(`api/v1/schools/${schoolId}/students/participation`, {
+      params,
+    })
+  },
+
+  getParticipationStatistics (_, { schoolId }): Promise<StudentsParticipationStatistics> {
+    return this.$axios.$get(`api/v1/schools/${schoolId}/students/participation/statistics`)
   },
 }

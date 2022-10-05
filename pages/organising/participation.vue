@@ -1,12 +1,117 @@
 <template>
-  <h1>Participation</h1>
+  <v-container>
+    <h1>Participation</h1>
+
+    <FxParticipationPageCard />
+
+    <v-row class="mt-5">
+      <v-col>
+        <FxYearGroupSelect clearable icon @input="update('yearGroup', $event)" />
+      </v-col>
+      <v-col>
+        <FxGenderSelect clearable icon @input="update('gender', $event)" />
+      </v-col>
+      <v-col>
+        <FxSportSelect clearable icon @input="update('sportId', $event)" />
+      </v-col>
+    </v-row>
+
+    <v-card flat outlined>
+      <v-data-table
+        :headers="headers"
+        :items="items"
+        class="elevation-0"
+        :loading="loading"
+        :server-items-length="meta.total"
+        :sort-by.sync="query.orderBy"
+        :sort-desc.sync="query.orderDesc"
+        :page.sync="query.page"
+      >
+        <template #item.firstname="{ item }">
+          {{ item.firstname }} {{ item.lastname }}
+        </template>
+      </v-data-table>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import FxParticipationPageCard from '@/components/PageComponents/FxParticipationPage/FxParticipationPageCard'
+import FxSportSelect from '~/components/FxSportSelect.vue'
+import FxYearGroupSelect from '~/components/FxYearGroupSelect.vue'
+
 export default {
   name: 'ParticipationPage',
   meta: {
     isAllowed: ({ getters }) => getters['user/acl/canSeeOrganising'],
+  },
+  components: {
+    FxParticipationPageCard,
+    FxSportSelect,
+    FxYearGroupSelect,
+  },
+  data: () => ({
+    loading: false,
+    headers: [
+      {
+        text: 'Student',
+        align: 'start',
+        sortable: true,
+        value: 'firstname',
+      },
+      { text: 'Year Group', value: 'yearGroup' },
+      { text: 'Gender', value: 'gender' },
+      { text: 'Sports', value: 'sports' },
+      { text: 'Team Events', value: 'events' },
+      { text: 'Team Training', value: 'trainings' },
+      { text: 'In-House Events', value: 'inHouseEvents' },
+      { text: 'Total Events', value: 'totalEvents' },
+    ],
+    items: [],
+    query: {
+      page: 1,
+      orderBy: 'firstname',
+      orderDesc: false,
+      limit: 10,
+    },
+    meta: { total: 0 },
+  }),
+
+  async fetch () {
+    this.loading = true
+    try {
+      const { data, meta } = await this.$store.dispatch('api/students/getParticipation', {
+        ...this.query,
+        schoolId: this.contextSchoolId,
+      })
+      this.items = data
+      this.meta = meta
+    } finally {
+      this.loading = false
+    }
+  },
+
+  computed: {
+    ...mapGetters({
+      contextSchoolId: 'context/schoolId',
+    }),
+  },
+
+  watch: {
+    query: {
+      async handler () {
+        await this.$router.push({ query: this.query })
+        this.$fetch()
+      },
+      deep: true,
+    },
+  },
+
+  methods: {
+    update (key, value) {
+      this.query = { ...this.query, [key]: value }
+    },
   },
 }
 </script>

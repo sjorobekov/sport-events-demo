@@ -1,18 +1,16 @@
 <template>
   <v-select
     :id="id"
-    v-async-validate
     outlined
     dense
     :value="value"
     :items="options"
-    :async-rules="asyncRules"
     :placeholder="placeholder"
     :clearable="clearable"
     @input="$emit('input', $event)"
   >
     <template v-if="icon" #prepend-inner>
-      <v-icon>mdi-filter-outline</v-icon>
+      <v-icon>mdi-clipboard-outline</v-icon>
     </template>
   </v-select>
 </template>
@@ -21,7 +19,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'FxGenderSelect',
+  name: 'FxYearGroupSelect',
   props: {
     id: {
       type: String,
@@ -29,11 +27,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Select Gender',
-    },
-    asyncRules: {
-      type: Array,
-      default: () => [],
+      default: 'Year Group',
     },
     value: {
       type: String,
@@ -51,7 +45,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      options: 'api/teams/genderOptions',
+      options: 'api/students/yearGroupOptions',
     }),
   },
 }
