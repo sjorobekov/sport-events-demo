@@ -253,7 +253,7 @@ export const actions: ActionTree<RootState, RootState> = {
 
     const data = await dispatch('api/inHouseMatches/storeResult', {
       schoolId: contextSchoolId,
-      inHouseCompetition: getters.inHouseCompetition.id,
+      inHouseCompetitionId: getters.inHouseCompetition.id,
       id: getters.inHouseMatch.id,
       formData: payload,
     }, { root: true })
@@ -270,5 +270,25 @@ export const actions: ActionTree<RootState, RootState> = {
       resultNotes: data.resultNotes,
       winnerId: data.winnerId,
     })
+  },
+
+  async updateMatch ({ commit, dispatch, rootGetters, getters }, payload) {
+    const contextSchoolId = rootGetters['context/schoolId']
+
+    const data = await dispatch('api/inHouseMatches/updateMatch', {
+      schoolId: contextSchoolId,
+      inHouseCompetitionId: getters.inHouseCompetition.id,
+      id: getters.inHouseMatch.id,
+      formData: payload,
+    }, { root: true })
+
+    commit('inHouseMatch', data)
+    commit('inHouseEvent', {
+      ...getters.inHouseEvent,
+      ...(payload.info && { info: payload.info }),
+    })
+    if (payload.leadId) {
+      await dispatch('fetchLead', payload.leadId)
+    }
   },
 }

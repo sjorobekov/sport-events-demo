@@ -19,7 +19,7 @@ import other from './other.svg'
 import { EventLocationType } from '@/enum'
 
 export default {
-  name: 'FxEventLocationTypeSelect',
+  name: 'FxInHouseEventLocationTypeSelect',
   props: {
     value: {
       type: String,

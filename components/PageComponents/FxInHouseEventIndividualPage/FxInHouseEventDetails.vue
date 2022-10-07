@@ -3,7 +3,23 @@
     <template #title>
       Details
     </template>
-    <v-container>
+    <template #actions>
+      <v-btn v-if="canEditEvent && !formVisible" outlined @click="formVisible = true">
+        <v-icon small>
+          mdi-pencil-outline
+        </v-icon>Edit Details
+      </v-btn>
+    </template>
+    <FxInHouseEventDetailsForm
+      v-if="formVisible"
+      ref="form"
+      class="px-6"
+      v-model="formData"
+      :disabled="loading"
+      @submit="save"
+      @cancel="formVisible = false"
+    />
+    <v-container v-else>
       <v-row>
         <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
           <ListItem>
@@ -58,8 +74,6 @@
             </template>
           </ListItem>
         </v-col>
-      </v-row>
-      <v-row>
         <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
           <ListItem>
             <template #icon>
@@ -70,6 +84,19 @@
             </template>
             <template #subtitle>
               Location
+            </template>
+          </ListItem>
+        </v-col>
+        <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
+          <ListItem>
+            <template #icon>
+              <v-icon>mdi-information-outline</v-icon>
+            </template>
+            <template #title>
+              Further Information
+            </template>
+            <template #subtitle>
+              {{ event.info }}
             </template>
           </ListItem>
         </v-col>
@@ -93,11 +120,50 @@ export default {
     FxAvatar,
     FxInHouseLocationLabel,
   },
+  data: () => ({
+    formVisible: false,
+    formData: {},
+    loading: false,
+  }),
   computed: {
     ...mapGetters({
+      canEditEvent: 'user/acl/canCreateInHouseEvent',
       match: 'page/inHouseEvent/inHouseMatch',
+      event: 'page/inHouseEvent/inHouseEvent',
       lead: 'page/inHouseEvent/lead',
     }),
+  },
+  created () {
+    this.formData = {
+      leadId: this.event.leadId,
+      info: this.event.info,
+      date: this.match.date,
+      startTime: this.match.startTime,
+      finishTime: this.match.finishTime,
+      location: this.match.location,
+      sportLocationId: this.match.sportLocationId,
+      otherLocation: this.match.otherLocation,
+    }
+  },
+  methods: {
+    async save () {
+      this.loading = true
+      const isValid = await this.$refs.form.validateAsync()
+      if (!isValid) {
+        this.loading = false
+        return
+      }
+      this.$store.dispatch('page/inHouseEvent/updateMatch', this.formData)
+        .then(() => {
+          this.formVisible = false
+        })
+        .catch(() => {
+          this.$toast.error('Unknown Error')
+        })
+        .finally(() => {
+          this.loading = false
+        })
+    },
   },
 }
 </script>

@@ -149,7 +149,7 @@
 
       <div v-for="(match, i) in matchItems" :key="i">
         <label>Location</label>
-        <FxEventLocationTypeSelect
+        <FxInHouseEventLocationTypeSelect
           :value="match.location"
           @input="updateMatch(i, { location: $event })"
         />
@@ -249,14 +249,14 @@ import set from 'lodash/set'
 import { mapGetters } from 'vuex'
 import FxSteppedFormCard from '@/components/FxSteppedFormCard'
 import FxEventTypeSelect from '@/components/FxInHouseEventForm/FxEventTypeSelect/FxEventTypeSelect'
-import FxEventLocationTypeSelect from '@/components/FxInHouseEventForm/FxEventLocationTypeSelect/FxEventLocationTypeSelect'
+import FxInHouseEventLocationTypeSelect from '@/components/FxInHouseEventForm/FxEventLocationTypeSelect/FxInHouseEventLocationTypeSelect'
 import { EventLocationType, InHouseEventType } from '@/enum'
 
 export default {
   name: 'FxInHouseEventForm',
   events: ['update:matches', 'update:event'],
   components: {
-    FxEventLocationTypeSelect,
+    FxInHouseEventLocationTypeSelect,
     FxSteppedFormCard,
     FxEventTypeSelect,
   },
