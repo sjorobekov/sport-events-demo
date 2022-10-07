@@ -13,8 +13,8 @@
     <FxInHouseEventDetailsForm
       v-if="formVisible"
       ref="form"
-      class="px-6"
       v-model="formData"
+      class="px-6"
       :disabled="loading"
       @submit="save"
       @cancel="formVisible = false"
