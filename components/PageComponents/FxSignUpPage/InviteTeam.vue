@@ -1,0 +1,155 @@
+<template>
+  <div>
+    <h1 class="text-h1 text-center mt-6 mb-9">
+      Invite Your Team
+    </h1>
+    <h2 class="text-p2 text-center info--text text--darken-2 mb-6">
+      Insert some text here about how it’s better with a team.
+    </h2>
+    <div class="mx-sm-auto sign-in-form">
+      <v-form ref="form" v-async-form class="mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">
+        <v-row>
+          <v-col cols="7">
+            <label class="caption">Email</label>
+          </v-col>
+          <v-col cols="5">
+            <label class="caption">User Role</label>
+          </v-col>
+        </v-row>
+
+        <v-row v-for="(item, i) in formData" :key="i">
+          <v-col cols="7">
+            <v-text-field
+              v-model="item.email"
+              v-async-validate
+              outlined
+              hide-details
+              placeholder="name@school.com"
+              :async-rules="[$rule.email]"
+            />
+          </v-col>
+          <v-col cols="5">
+            <v-select
+              v-model="item.userRole"
+              outlined
+              hide-details
+              required
+              :items="roleItems"
+              append-outer-icon="mdi-window-close"
+              @click:append-outer="removeLine(i)"
+            />
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col>
+            <v-btn
+              text
+              color="info"
+              height="54"
+              class="mt-6 mb-6 dash"
+              block
+              @click="addMore"
+            >
+              <v-icon class="mr-1">
+                mdi-plus-circle-outline
+              </v-icon>
+              Add More
+            </v-btn>
+
+            <v-btn
+              type="submit"
+              depressed
+              color="brand2"
+              dark
+              height="50"
+              :loading="loading"
+              block
+            >
+              Next
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-form>
+
+      <v-btn class="mt-3" text color="info" block @click="addLater">
+        Invite Team Later
+      </v-btn>
+    </div>
+  </div>
+</template>
+
+<script>
+import { UserRole } from '@/enum'
+
+export default {
+  name: 'InviteTeam',
+  props: {
+    value: {
+      type: Array,
+      default: () => [],
+    },
+  },
+
+  data: () => ({
+    loading: false,
+    formData: [],
+  }),
+
+  computed: {
+    roleItems () {
+      return [UserRole.ADMIN, UserRole.SPORTS_USER, UserRole.VIEW_ONLY].map((item) => {
+        return {
+          value: item,
+          text: this.$t(`USER_ROLE.${item}`),
+        }
+      })
+    },
+  },
+
+  created () {
+    if (this.value.length) {
+      this.formData = [...this.value]
+    } else {
+      this.formData = [
+        { email: '', userRole: UserRole.ADMIN },
+        { email: '', userRole: UserRole.SPORTS_USER },
+      ]
+    }
+  },
+
+  methods: {
+    addMore () {
+      this.formData.push({ email: '', userRole: UserRole.ADMIN })
+    },
+
+    async submitHandler () {
+      this.loading = true
+      const isValid = await this.$refs.form.validateAsync()
+
+      if (!isValid) {
+        this.loading = false
+        return
+      }
+
+      this.$emit('input', this.formData.filter(({ email }) => !!email))
+      this.loading = false
+    },
+
+    addLater () {
+      this.$emit('input', [])
+    },
+
+    removeLine (i) {
+      this.formData.splice(i, 1)
+    },
+  },
+}
+</script>
+
+<style scoped>
+.v-btn.dash {
+  border-style: dashed!important;
+  border-width: 1px;
+}
+</style>

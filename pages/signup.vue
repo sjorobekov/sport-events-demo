@@ -17,31 +17,7 @@
                   <v-img class="mx-auto" width="185" :src="require('/static/logo_new.svg')" />
                 </div>
                 <div class="pt-16">
-                  <v-timeline
-                    light
-                    dense
-                  >
-                    <v-timeline-item
-                      v-for="(item, i) in items"
-                      :key="i"
-                      color="primary"
-                      fill-dot
-                    >
-                      <template #icon>
-                        <v-icon size="40" color="white">
-                          mdi-adjust
-                        </v-icon>
-                      </template>
-                      <v-row class="pt-1">
-                        <v-col>
-                          <strong class="text-subheading white--text">{{ item.title }}</strong>
-                          <div class="text-p3 white--text">
-                            {{ item.caption }}
-                          </div>
-                        </v-col>
-                      </v-row>
-                    </v-timeline-item>
-                  </v-timeline>
+                  <SignUpTimeline v-model="step" />
                 </div>
               </v-col>
             </v-row>
@@ -52,9 +28,33 @@
             md="7"
             lg="8"
             xl="9"
-            class="pa-2"
+            style="padding-top: 150px"
           >
-            <div class="mx-sm-auto sign-in-form" />
+            <v-tabs-items v-model="step" style="background: none" touchless>
+              <v-tab-item>
+                <YourDetails v-model="formData.user" @input="step = STEP.CREATE_SCHOOL_PROFILE" />
+              </v-tab-item>
+              <v-tab-item />
+              <v-tab-item />
+              <v-tab-item>
+                <CreateSchoolProfile v-model="formData.school" @input="step = STEP.UPLOAD_SCHOOL_LOGO" />
+              </v-tab-item>
+              <v-tab-item>
+                <UploadSchoolLogo v-model="formData.file" @input="step = STEP.CHOOSE_SCHOOL_COLOR" />
+              </v-tab-item>
+              <v-tab-item>
+                <ChooseSchoolColour v-model="formData.school.color" @input="step = STEP.CHOOSE_PASSWORD" />
+              </v-tab-item>
+              <v-tab-item>
+                <ChoosePassword v-model="formData.user" @input="step = STEP.INVITE_YOUR_TEAM" />
+              </v-tab-item>
+              <v-tab-item>
+                <InviteTeam v-model="formData.invites" @input="save" />
+              </v-tab-item>
+              <v-tab-item>
+                <SignUpComplete :link="link" />
+              </v-tab-item>
+            </v-tabs-items>
           </v-col>
         </v-row>
       </v-container>
@@ -63,23 +63,80 @@
 </template>
 
 <script>
+import YourDetails from '@/components/PageComponents/FxSignUpPage/YourDetails'
+import SignUpTimeline from '@/components/PageComponents/FxSignUpPage/SignUpTimeline'
+import CreateSchoolProfile from '@/components/PageComponents/FxSignUpPage/CreateSchoolProfile'
+import UploadSchoolLogo from '@/components/PageComponents/FxSignUpPage/UploadSchoolLogo'
+import ChoosePassword from '@/components/PageComponents/FxSignUpPage/ChoosePassword'
+import ChooseSchoolColour from '@/components/PageComponents/FxSignUpPage/ChooseSchoolColour'
+import InviteTeam from '@/components/PageComponents/FxSignUpPage/InviteTeam'
+import SignUpComplete from '@/components/PageComponents/FxSignUpPage/SignUpComplete'
+
+const STEP = Object.freeze({
+  YOUR_DETAILS: 0,
+  IS_THIS_YOUR_SCHOOL: 1,
+  REQUEST_TO_JOIN: 2,
+  CREATE_SCHOOL_PROFILE: 3,
+  UPLOAD_SCHOOL_LOGO: 4,
+  CHOOSE_SCHOOL_COLOR: 5,
+  CHOOSE_PASSWORD: 6,
+  INVITE_YOUR_TEAM: 7,
+  WELCOME_TO_FIXTURR: 8,
+})
+
 export default {
   name: 'SignUpPage',
+  components: { SignUpComplete, InviteTeam, ChooseSchoolColour, ChoosePassword, UploadSchoolLogo, CreateSchoolProfile, SignUpTimeline, YourDetails },
   layout: 'empty',
+
   middleware: ({ store, error }) => {
     if (!store.getters['context/isSignUpSite']) {
       error({ statusCode: 404, message: 'Page not found' })
     }
   },
 
+  data: () => ({
+    STEP,
+    step: 0,
+    loading: false,
+
+    timelineStep: {
+      [STEP.YOUR_DETAILS]: 0,
+      [STEP.CREATE_SCHOOL_PROFILE]: 1,
+      [STEP.UPLOAD_SCHOOL_LOGO]: 1,
+      [STEP.CHOOSE_SCHOOL_COLOR]: 1,
+      [STEP.CHOOSE_PASSWORD]: 2,
+      [STEP.INVITE_YOUR_TEAM]: 3,
+      [STEP.WELCOME_TO_FIXTURR]: 3,
+    },
+
+    formData: {
+      user: { },
+      school: { color: '' },
+      invites: [],
+      file: null,
+    },
+  }),
+
   computed: {
-    items () {
-      return [
-        { title: 'Your details', caption: 'Please provide your name and email' },
-        { title: 'Your school', caption: 'Find your school on fixturr' },
-        { title: 'Choose a password', caption: 'Choose a secure password' },
-        { title: 'Invite your team', caption: 'Add your sports department to fixturr' },
-      ]
+    link () {
+      return this.$config.PORTAL_WILDCARD.replace('*', this.formData.school.portalAddress) + '/signin'
+    },
+  },
+
+  methods: {
+    save () {
+      this.loading = true
+      this.$store.dispatch('api/signUp/schoolSignUp', this.formData)
+        .then(() => {
+          this.step = STEP.WELCOME_TO_FIXTURR
+        })
+        .catch(() => {
+          this.$toast.error('Unknown Error')
+        })
+        .finally(() => {
+          this.loading = false
+        })
     },
   },
 }
@@ -96,15 +153,4 @@ export default {
   }
 }
 
-.theme--light.v-timeline::before {
-  background: white;
-  margin-top: 50px;
-  height: calc(100% - 100px);
-}
-.v-timeline-item__dot {
-  background: none!important;
-  box-shadow: none!important;
-  height: 45px;
-  width: 45px;
-}
 </style>

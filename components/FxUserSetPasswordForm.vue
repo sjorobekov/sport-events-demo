@@ -10,6 +10,7 @@
       outlined
       :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
       :type="showPass ? 'text' : 'password'"
+      placeholder="Password"
       @input="update('password', $event)"
       @click:append="showPass = !showPass"
     />
@@ -24,6 +25,7 @@
         dense
         outlined
         type="password"
+        placeholder="Confirm Password"
       />
     </div>
   </v-form>

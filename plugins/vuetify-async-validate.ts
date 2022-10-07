@@ -39,6 +39,9 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
 
     isEmailAvailable (id: string) {
       return async (email: string): AsyncReturnType => {
+        if (!email) {
+          return true
+        }
         const { available } = await $axios.$post('/api/v1/validation/check_email', { email, id })
         return available || 'Email is unavailable'
       }

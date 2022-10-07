@@ -13,7 +13,7 @@
         <v-icon>$vuetify.icons.upload</v-icon>Upload
       </v-btn>
       <slot name="actions" />
-      <FxImageCropModal ref="cropper" :compression="compression" :stencil="stencilProps" />
+      <FxImageCropModal ref="cropper" :stencil="stencilProps" />
     </v-col>
   </v-row>
 </template>
@@ -53,14 +53,6 @@ export default {
   },
 
   data: () => ({
-    stencilSize: {
-      width: 300,
-      height: 300,
-    },
-    limitations: {
-      minWidth: 300,
-      minHeight: 300,
-    },
     selectedFile: null,
   }),
 

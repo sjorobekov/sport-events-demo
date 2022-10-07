@@ -1,4 +1,13 @@
-import { EventLocation, EventLocationType, EventResult, EventType, FixtureType, TransportType, InHouseEventResult } from '~/enum'
+import {
+  EventLocation,
+  EventLocationType,
+  EventResult,
+  EventType,
+  FixtureType,
+  TransportType,
+  InHouseEventResult,
+  UserRole,
+} from '~/enum'
 
 export default {
   EVENT_TYPE: {
@@ -65,6 +74,12 @@ export default {
     [TransportType.BUS]: 'Bus',
     [TransportType.VENUE]: 'Collect from Venue',
     [TransportType.OTHER]: 'Other',
+  },
+
+  USER_ROLE: {
+    [UserRole.ADMIN]: 'Admin',
+    [UserRole.SPORTS_USER]: 'Sports User',
+    [UserRole.VIEW_ONLY]: 'View Only',
   },
 
   page: {
