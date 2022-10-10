@@ -86,14 +86,14 @@ export default {
         return null
       }
 
-      return DateTime.fromJSDate(this.model.startDate).toFormat('dd-MM-yyyy')
+      return DateTime.fromJSDate(this.model.startDate).toFormat('d MMM yyyy')
     },
 
     endDateFormatted () {
       if (!this.model.endDate) {
         return null
       }
-      return DateTime.fromJSDate(this.model.endDate).toFormat('dd-MM-yyyy')
+      return DateTime.fromJSDate(this.model.endDate).toFormat('d MMM yyyy')
     },
 
     rangeFormatted () {

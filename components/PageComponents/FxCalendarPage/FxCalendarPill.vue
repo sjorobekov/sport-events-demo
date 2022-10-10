@@ -22,7 +22,7 @@ export default {
       if (!this.value) {
         return ''
       }
-      return DateTime.fromFormat(this.value, 'yyyy-MM-dd').toFormat('dd-MM-yyyy')
+      return DateTime.fromFormat(this.value, 'yyyy-MM-dd').toFormat('cccc d LLLL')
     },
   },
 }

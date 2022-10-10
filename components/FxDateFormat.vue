@@ -18,7 +18,7 @@ export default {
     },
     outputFormat: {
       type: [String, Object],
-      default: () => 'dd-MM-yyyy',
+      default: () => 'd MMM yyyy',
     },
   },
   data: () => ({

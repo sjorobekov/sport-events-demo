@@ -106,7 +106,7 @@ export default {
 
     date () {
       return this.match
-        ? DateTime.fromISO(this.match.date).toFormat('dd-MM-yyyy')
+        ? DateTime.fromISO(this.match.date).toFormat('cccc d MMM yyyy')
         : '00-00-00'
     },
 
