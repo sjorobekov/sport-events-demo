@@ -83,7 +83,7 @@
           Team Overview
         </h3>
 
-        <FxWinRateBar class="mt-3" :won="4" :lost="2" :drawn="5" />
+        <FxWinRateBar class="mt-3" :won="team.won" :lost="team.lost" :drawn="team.drawn" />
 
         <v-divider class="my-4" />
 

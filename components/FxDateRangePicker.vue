@@ -86,14 +86,14 @@ export default {
         return null
       }
 
-      return DateTime.fromJSDate(this.model.startDate).toLocaleString(DateTime.DATE_MED)
+      return DateTime.fromJSDate(this.model.startDate).toFormat('dd-MM-yyyy')
     },
 
     endDateFormatted () {
       if (!this.model.endDate) {
         return null
       }
-      return DateTime.fromJSDate(this.model.endDate).toLocaleString(DateTime.DATE_MED)
+      return DateTime.fromJSDate(this.model.endDate).toFormat('dd-MM-yyyy')
     },
 
     rangeFormatted () {

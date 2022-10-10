@@ -1,5 +1,5 @@
 <template>
-  <span v-if="date">{{ DateTime.fromFormat(date, inputFormat).toLocaleString(outputFormat) }}</span>
+  <span v-if="date">{{ DateTime.fromFormat(date, inputFormat).toFormat(outputFormat) }}</span>
 </template>
 
 <script>
@@ -18,7 +18,7 @@ export default {
     },
     outputFormat: {
       type: [String, Object],
-      default: () => DateTime.DATE_FULL,
+      default: () => 'dd-MM-yyyy',
     },
   },
   data: () => ({

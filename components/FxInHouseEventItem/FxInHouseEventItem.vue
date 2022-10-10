@@ -106,7 +106,7 @@ export default {
 
     date () {
       return this.match
-        ? DateTime.fromISO(this.match.date).toLocaleString({ weekday: 'long', month: 'long', day: '2-digit', year: 'numeric' })
+        ? DateTime.fromISO(this.match.date).toFormat('dd-MM-yyyy')
         : '00-00-00'
     },
 

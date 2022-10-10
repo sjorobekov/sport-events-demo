@@ -94,13 +94,13 @@
                   <template #activator="{ on, attrs }">
                     <v-text-field
                       id="birthday"
-                      :value="formData.birthday"
+                      :value="birthday"
                       prepend-inner-icon="$vuetify.icons.calendarOutline"
                       readonly
                       outlined
                       dense
                       v-bind="attrs"
-                      placeholder="YYYY-MM-DD"
+                      placeholder="DD-MM-YYYY"
                       v-on="on"
                     />
                   </template>
@@ -193,6 +193,9 @@ export default {
     },
     today () {
       return DateTime.now().toFormat('yyyy-MM-dd')
+    },
+    birthday () {
+      return this.formData.birthday ? DateTime.fromISO(this.formData.birthday).toFormat('dd-MM-yyyy') : ''
     },
   },
 

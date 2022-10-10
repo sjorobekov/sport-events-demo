@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 v-if="me">
-      👋 Welcome, {{ me.displayName }}
+      👋 Welcome, {{ name }}
     </h1>
     <FxDashboardPageCard />
 
@@ -87,6 +87,9 @@ export default {
       me: 'context/me',
       currentSeason: 'seasons/current',
     }),
+    name () {
+      return this.me.displayName ? this.me.displayName : `${this.me.firstname} ${this.me.lastname}`
+    },
   },
   methods: {
     getTeams () {

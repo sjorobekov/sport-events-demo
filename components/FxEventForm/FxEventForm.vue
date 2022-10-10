@@ -202,13 +202,13 @@
           <v-text-field
             id="date"
             v-async-validate
-            :value="eventForm.date"
+            :value="date"
             prepend-inner-icon="$vuetify.icons.calendarOutline"
             readonly
             outlined
             dense
             v-bind="attrs"
-            placeholder="YYYY-MM-DD"
+            placeholder="DD-MM-YYYY"
             :async-rules="[$rule.required]"
             v-on="on"
           />
@@ -437,6 +437,7 @@
 </template>
 
 <script>
+import { DateTime } from 'luxon'
 import { mapGetters } from 'vuex'
 import FxSteppedFormCard from '@/components/FxSteppedFormCard'
 import FxUserSelect from '@/components/FxUserSelect'
@@ -535,6 +536,9 @@ export default {
       return this.teams.filter((team) => {
         return team.sportId === this.eventForm.sportId
       })
+    },
+    date () {
+      return this.eventForm.date ? DateTime.fromISO(this.eventForm.date).toFormat('dd-MM-yyyy') : ''
     },
   },
 

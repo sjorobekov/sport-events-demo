@@ -86,13 +86,13 @@
             <v-text-field
               id="date"
               v-async-validate
-              :value="match.date"
+              :value="formatDate(match.date)"
               prepend-inner-icon="$vuetify.icons.calendarOutline"
               readonly
               outlined
               dense
               v-bind="attrs"
-              placeholder="YYYY-MM-DD"
+              placeholder="DD-MM-YYYY"
               :async-rules="[$rule.required]"
               v-on="on"
             />
@@ -247,6 +247,7 @@ import tap from 'lodash/tap'
 import cloneDeep from 'lodash/cloneDeep'
 import set from 'lodash/set'
 import { mapGetters } from 'vuex'
+import { DateTime } from 'luxon'
 import FxSteppedFormCard from '@/components/FxSteppedFormCard'
 import FxEventTypeSelect from '@/components/FxInHouseEventForm/FxEventTypeSelect/FxEventTypeSelect'
 import FxInHouseEventLocationTypeSelect from '@/components/FxInHouseEventForm/FxEventLocationTypeSelect/FxInHouseEventLocationTypeSelect'
@@ -344,6 +345,10 @@ export default {
         awayTeamId: '',
         location: EventLocationType.SPORTS_LOCATIONS,
       })))
+    },
+
+    formatDate (date) {
+      return date ? DateTime.fromISO(date).toFormat('dd-MM-yyyy') : ''
     },
   },
 }
