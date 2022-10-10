@@ -35,6 +35,7 @@ export interface School {
   announcementsProtected?: boolean
   email?: string
   password?: string
+  emailDomains?: Array<string>,
 }
 
 export type Sport = {
