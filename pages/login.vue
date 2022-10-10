@@ -49,6 +49,7 @@ export default {
       return redirect({ name: 'signin' })
     }
   },
+
   data: () => ({
     formData: {
       email: '',
@@ -67,7 +68,12 @@ export default {
           return
         }
         await this.$store.dispatch('context/signInAsSuperAdmin', this.formData)
-        await this.$router.push({ name: 'management' })
+
+        if (typeof this.$route.query.redirectTo === 'string') {
+          await this.$router.push(this.$route.query.redirectTo)
+        } else {
+          await this.$router.push({ name: 'management' })
+        }
       } catch (e) {
         this.loading = false
         this.$toast.error('Unknown Error')
