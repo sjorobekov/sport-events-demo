@@ -23,7 +23,7 @@ export default {
     AdminAppBar,
   },
 
-  middleware: ({ req, error, store, redirect }) => {
+  middleware: ({ req, error, store, redirect, route }) => {
     const hostname = process.server ? req.headers.host : window.location.hostname
     const subdomain = hostname.split('.')[0]
     if (subdomain !== 'admin') {
@@ -31,7 +31,7 @@ export default {
     }
 
     if (!store.getters['context/isLoggedIn']) {
-      return redirect({ name: 'login' })
+      return redirect({ name: 'login', query: { redirectTo: route.fullPath } })
     }
 
     if (store.getters['context/role'] !== UserRole.SUPER_ADMIN) {

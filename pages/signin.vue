@@ -62,6 +62,19 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'LoginPage',
+
+  beforeRouteEnter (to, from, next) {
+    if (to.query.redirectTo) {
+      return next()
+    }
+
+    next(({ $router }) => {
+      if (from.fullPath) {
+        $router.replace({ query: { redirectTo: from.fullPath } })
+      }
+    })
+  },
+
   layout: 'startup',
   data: () => ({
     formData: {
@@ -91,7 +104,12 @@ export default {
           ...this.formData,
           schoolId: this.contextSchool.id,
         })
-        await this.$router.push({ name: 'index' })
+
+        if (typeof this.$route.query.redirectTo === 'string') {
+          await this.$router.push(this.$route.query.redirectTo)
+        } else {
+          await this.$router.push({ name: 'index' })
+        }
       } catch (e) {
         this.loading = false
 
