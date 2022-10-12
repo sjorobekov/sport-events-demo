@@ -342,55 +342,56 @@
         label="This event doesn't need transport information"
         class="info--text"
         hide-details
-        @change="updateMe('noTransportation', $event)"
+        @change="updateMe('noNeedTransport', $event)"
       />
-
-      <div v-if="!meForm.noNeedTransport">
-        <label>Transport to</label>
-        <FxTransportToSelect
-          :value="meForm.transportTo"
-          @input="updateMe('transportTo', $event)"
-        />
-        <v-row>
-          <v-col cols="12" sm="6" md="12" lg="6">
-            <v-expand-transition>
-              <div v-if="meForm.transportTo === TransportType.OTHER">
-                <label for="transportToOther">Other</label>
-                <v-text-field
-                  id="transportToOther"
-                  outlined
-                  dense
-                  :value="meForm.transportToOther"
-                  placeholder="Enter Transport To"
-                  @input="updateMe('transportToOther', $event)"
-                />
-              </div>
-            </v-expand-transition>
-          </v-col>
-        </v-row>
-        <label>Transport from</label>
-        <FxTransportFromSelect
-          :value="meForm.transportFrom"
-          @input="updateMe('transportFrom', $event)"
-        />
-        <v-row>
-          <v-col cols="12" sm="6" md="12" lg="6">
-            <v-expand-transition>
-              <div v-if="meForm.transportFrom === TransportType.OTHER">
-                <label for="transportFromOther">Other</label>
-                <v-text-field
-                  id="transportFromOther"
-                  outlined
-                  dense
-                  :value="meForm.transportFromOther"
-                  placeholder="Enter Transport From"
-                  @input="updateMe('transportFromOther', $event)"
-                />
-              </div>
-            </v-expand-transition>
-          </v-col>
-        </v-row>
-      </div>
+      <v-expand-transition>
+        <div v-if="!meForm.noNeedTransport">
+          <label>Transport to</label>
+          <FxTransportToSelect
+            :value="meForm.transportTo"
+            @input="updateMe('transportTo', $event)"
+          />
+          <v-row>
+            <v-col cols="12" sm="6" md="12" lg="6">
+              <v-expand-transition>
+                <div v-if="meForm.transportTo === TransportType.OTHER">
+                  <label for="transportToOther">Other</label>
+                  <v-text-field
+                    id="transportToOther"
+                    outlined
+                    dense
+                    :value="meForm.transportToOther"
+                    placeholder="Enter Transport To"
+                    @input="updateMe('transportToOther', $event)"
+                  />
+                </div>
+              </v-expand-transition>
+            </v-col>
+          </v-row>
+          <label>Transport from</label>
+          <FxTransportFromSelect
+            :value="meForm.transportFrom"
+            @input="updateMe('transportFrom', $event)"
+          />
+          <v-row>
+            <v-col cols="12" sm="6" md="12" lg="6">
+              <v-expand-transition>
+                <div v-if="meForm.transportFrom === TransportType.OTHER">
+                  <label for="transportFromOther">Other</label>
+                  <v-text-field
+                    id="transportFromOther"
+                    outlined
+                    dense
+                    :value="meForm.transportFromOther"
+                    placeholder="Enter Transport From"
+                    @input="updateMe('transportFromOther', $event)"
+                  />
+                </div>
+              </v-expand-transition>
+            </v-col>
+          </v-row>
+        </div>
+      </v-expand-transition>
     </FxSteppedFormCard>
 
     <FxSteppedFormCard>
@@ -571,7 +572,15 @@ export default {
       this.$emit('update:event', { ...this.eventForm, [key]: value })
     },
     updateMe (key, value) {
-      this.$emit('update:me', { ...this.meForm, [key]: value })
+      const data = { ...this.meForm, [key]: value }
+      if (key === 'noNeedTransport' && value) {
+        data.transportTo = null
+        data.transportFrom = null
+        data.transportToOther = null
+        data.transportFromOther = null
+      }
+
+      this.$emit('update:me', data)
     },
     updateOpponent (key, value) {
       this.$emit('update:opponent', { ...this.opponentForm, [key]: value })
