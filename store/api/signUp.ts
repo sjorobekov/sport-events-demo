@@ -27,6 +27,30 @@ type SchoolSignUpPayload = {
   file?: Blob
 }
 
+type SchoolByEmailDomainResponse = {
+  id: string,
+  name: string,
+  city: string,
+  country: string,
+  logo: string,
+  portal: string,
+  hasAdmin?: boolean,
+}
+
+type ClaimSchoolPayload = {
+  email: string,
+  firstname: string,
+  lastname: string,
+  schoolId: string,
+}
+
+type RequestToJoinPayload = {
+  email: string,
+  firstname: string,
+  lastname: string,
+  schoolId: string,
+}
+
 export const actions: ActionTree<RootState, RootState> = {
   schoolSignUp ({ rootGetters, getters }, payload: SchoolSignUpPayload): Promise<void> {
     const { file, ...data } = payload
@@ -38,5 +62,17 @@ export const actions: ActionTree<RootState, RootState> = {
     formData.append('data', JSON.stringify(data))
 
     return this.$axios.$post('/api/v1/signup', formData, { headers: getters.multipartHeaders })
+  },
+
+  checkSchoolByEmailDomain (_, emailDomain: string): Promise<SchoolByEmailDomainResponse | null> {
+    return this.$axios.$get(`/api/v1/signup/school/${emailDomain}`)
+  },
+
+  requestToJoin (_, payload: RequestToJoinPayload) {
+    return this.$axios.$post('/api/v1/signup/requestToJoin', payload)
+  },
+
+  claimSchool (_, payload: ClaimSchoolPayload) {
+    return this.$axios.$post('/api/v1/signup/claimSchool', payload)
   },
 }

@@ -32,10 +32,19 @@
           >
             <v-tabs-items v-model="step" style="background: none" touchless>
               <v-tab-item>
-                <YourDetails v-model="formData.user" @input="step = STEP.CREATE_SCHOOL_PROFILE" />
+                <YourDetails v-model="formData.user" @input="checkSchoolByEmailDomain()" />
               </v-tab-item>
-              <v-tab-item />
-              <v-tab-item />
+              <v-tab-item>
+                <IsThisYourSchool
+                  :user="formData.user"
+                  :school="matchedSchool"
+                  @accepted="step = STEP.REQUEST_SENT"
+                  @decline="step = STEP.CREATE_SCHOOL_PROFILE"
+                />
+              </v-tab-item>
+              <v-tab-item>
+                <RequestSent :school="matchedSchool" />
+              </v-tab-item>
               <v-tab-item>
                 <CreateSchoolProfile v-model="formData.school" @input="step = STEP.UPLOAD_SCHOOL_LOGO" />
               </v-tab-item>
@@ -71,11 +80,13 @@ import ChoosePassword from '@/components/PageComponents/FxSignUpPage/ChoosePassw
 import ChooseSchoolColour from '@/components/PageComponents/FxSignUpPage/ChooseSchoolColour'
 import InviteTeam from '@/components/PageComponents/FxSignUpPage/InviteTeam'
 import SignUpComplete from '@/components/PageComponents/FxSignUpPage/SignUpComplete'
+import IsThisYourSchool from '@/components/PageComponents/FxSignUpPage/IsThisYourSchool'
+import RequestSent from '@/components/PageComponents/FxSignUpPage/RequestSent'
 
 const STEP = Object.freeze({
   YOUR_DETAILS: 0,
   IS_THIS_YOUR_SCHOOL: 1,
-  REQUEST_TO_JOIN: 2,
+  REQUEST_SENT: 2,
   CREATE_SCHOOL_PROFILE: 3,
   UPLOAD_SCHOOL_LOGO: 4,
   CHOOSE_SCHOOL_COLOR: 5,
@@ -86,7 +97,18 @@ const STEP = Object.freeze({
 
 export default {
   name: 'SignUpPage',
-  components: { SignUpComplete, InviteTeam, ChooseSchoolColour, ChoosePassword, UploadSchoolLogo, CreateSchoolProfile, SignUpTimeline, YourDetails },
+  components: {
+    RequestSent,
+    IsThisYourSchool,
+    SignUpComplete,
+    InviteTeam,
+    ChooseSchoolColour,
+    ChoosePassword,
+    UploadSchoolLogo,
+    CreateSchoolProfile,
+    SignUpTimeline,
+    YourDetails,
+  },
   layout: 'empty',
 
   middleware: ({ store, error }) => {
@@ -116,6 +138,8 @@ export default {
       invites: [],
       file: null,
     },
+
+    matchedSchool: null,
   }),
 
   computed: {
@@ -125,6 +149,19 @@ export default {
   },
 
   methods: {
+    async checkSchoolByEmailDomain () {
+      const domain = this.formData.user.email.split('@')[1]
+      const school = await this.$store.dispatch('api/signUp/checkSchoolByEmailDomain', domain)
+
+      if (school) {
+        this.matchedSchool = school
+        this.step = STEP.IS_THIS_YOUR_SCHOOL
+      } else {
+        this.matchedSchool = null
+        this.step = STEP.CREATE_SCHOOL_PROFILE
+      }
+    },
+
     save () {
       this.loading = true
       this.$store.dispatch('api/signUp/schoolSignUp', this.formData)
