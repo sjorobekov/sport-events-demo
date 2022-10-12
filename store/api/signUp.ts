@@ -69,10 +69,10 @@ export const actions: ActionTree<RootState, RootState> = {
   },
 
   requestToJoin (_, payload: RequestToJoinPayload) {
-    return this.$axios.$post('/api/v1/signup/requestToJoin', payload)
+    return this.$axios.$post('/api/v1/signup/request_to_join', payload)
   },
 
   claimSchool (_, payload: ClaimSchoolPayload) {
-    return this.$axios.$post('/api/v1/signup/claimSchool', payload)
+    return this.$axios.$post('/api/v1/signup/claim_school', payload)
   },
 }
