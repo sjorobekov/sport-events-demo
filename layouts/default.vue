@@ -1,7 +1,8 @@
 <template>
   <v-app>
-    <FxNavigationDrawer />
-    <AppBar />
+    <FxNavigationDrawer v-model="drawer" :permanent="drawerPermanent" :right="isMobile" :hide-logo="isMobile" />
+    <FxMobileAppBar v-if="isMobile" v-model="drawer" />
+    <AppBar v-else v-model="drawer" />
     <v-main>
       <v-container>
         <nuxt />
@@ -14,6 +15,7 @@
 import { mapGetters } from 'vuex'
 import FxNavigationDrawer from '@/components/FxNavigationDrawer'
 import AppBar from '@/components/FxAppBar'
+import FxMobileAppBar from '@/components/FxMobileAppBar'
 
 export default {
   name: 'DefaultLayout',
@@ -21,7 +23,12 @@ export default {
   components: {
     FxNavigationDrawer,
     AppBar,
+    FxMobileAppBar,
   },
+
+  data: () => ({
+    drawer: false,
+  }),
 
   head () {
     return {
@@ -33,6 +40,14 @@ export default {
     ...mapGetters({
       contextSchool: 'context/school',
     }),
+
+    isMobile () {
+      return this.$vuetify.breakpoint.smAndDown
+    },
+
+    drawerPermanent () {
+      return !this.isMobile
+    },
   },
 }
 </script>

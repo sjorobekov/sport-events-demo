@@ -1,22 +1,37 @@
 <template>
-  <v-navigation-drawer width="224" permanent app color="primary" dark>
-    <v-avatar size="144" color="white" class="mt-10 mb-6 mx-auto d-block">
-      <FxSchoolLogo :value="contextSchool.logo" color="primary" />
-    </v-avatar>
+  <v-navigation-drawer
+    width="224"
+    :permanent="permanent"
+    :right="right"
+    app
+    color="primary"
+    dark
+    :value="value"
+    @input="$emit('input', $event)"
+  >
+    <template v-if="!hideLogo">
+      <v-avatar size="144" color="white" class="mt-10 mb-6 mx-auto d-block">
+        <FxSchoolLogo :value="contextSchool.logo" color="primary" />
+      </v-avatar>
 
-    <h1 class="text-p3 font-weight-bold white--text text-center">
-      {{ contextSchool.name }}
-    </h1>
+      <h1 class="text-p3 font-weight-bold white--text text-center">
+        {{ contextSchool.name }}
+      </h1>
 
-    <h2 class="text-p2 font-weight-medium white--text text-center mt-2 mb-6">
-      Sports Portal
-    </h2>
+      <h2 class="text-p2 font-weight-medium white--text text-center mt-2 mb-6">
+        Sports Portal
+      </h2>
+    </template>
 
     <v-list
       dense
       nav
       class="px-0"
     >
+      <template v-if="hideLogo && isLoggedIn">
+        <FxUserItem :item="me" class="px-5" :to="{ name: 'settings' } " />
+        <v-divider />
+      </template>
       <template
         v-for="(item, i) in items"
       >
@@ -69,6 +84,30 @@
           </v-list-item>
         </v-list-group>
       </template>
+
+      <template v-if="hideLogo">
+        <v-divider />
+        <v-list-item v-if="!isLoggedIn" link :to="{ name: 'signin' }">
+          <v-list-item-icon class="ml-4 mr-3">
+            <v-icon>mdi-login-variant</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title class="font-weight-bold">
+              Staff Log In
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item v-else @click="logOut">
+          <v-list-item-icon class="ml-4 mr-3">
+            <v-icon>mdi-logout-variant</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title class="font-weight-bold">
+              Log Out
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </template>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -80,9 +119,30 @@ export default {
   name: 'NavigationDrawer',
   components: { FxSchoolLogo },
 
+  props: {
+    value: {
+      type: Boolean,
+      default: false,
+    },
+    permanent: {
+      type: Boolean,
+      default: false,
+    },
+    right: {
+      type: Boolean,
+      default: false,
+    },
+    hideLogo: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
   computed: {
     ...mapGetters({
       contextSchool: 'context/school',
+      isLoggedIn: 'context/isLoggedIn',
+      me: 'context/me',
       canSeeOrganising: 'user/acl/canSeeOrganising',
     }),
 
@@ -120,6 +180,15 @@ export default {
       }
 
       return menu
+    },
+  },
+
+  methods: {
+    logOut () {
+      this.$store.dispatch('context/logOut')
+        .then(() => {
+          window.location.reload()
+        })
     },
   },
 }
