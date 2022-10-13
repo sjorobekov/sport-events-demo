@@ -83,7 +83,7 @@
     </v-expand-transition>
 
     <div
-      v-for="(value, key) in eventsGroupedByDate"
+      v-for="key in eventSortedDates"
       :id="`date-${key}`"
       :key="key"
       v-intersect="{
@@ -95,7 +95,7 @@
     >
       <FxCalendarPill :value="key" class="my-4" />
 
-      <v-card v-for="event in value" :key="`event-${event.id}`" class="mb-2">
+      <v-card v-for="event in eventsGroupedByDate[key]" :key="`event-${event.id}`" class="mb-2">
         <FxCalendarEvent :value="event" />
       </v-card>
     </div>
@@ -118,7 +118,7 @@ import FxCalendarSportFilter from '@/components/PageComponents/FxCalendarPage/Fx
 import FxCalendarOpponentFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarOpponentFilter'
 import FxCalendarAgeFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarAgeFilter'
 import FxCalendarLocationFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarLocationFilter'
-import { EventLocationType } from '@/enum'
+import { EventLocationType, EventStatus } from '@/enum'
 import FxCalendarEvent from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/FxCalendarEvent'
 import FxCalendarStatusFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarStatusFilter'
 
@@ -248,6 +248,7 @@ export default {
       orderDesc: 'false',
       from: DateTime.fromJSDate(this.filter.startDate).toFormat(DATE_FORMAT),
       to: DateTime.fromJSDate(this.filter.endDate).toFormat(DATE_FORMAT),
+      status: EventStatus.CONFIRMED,
     }
 
     const [{ data: events }, { data: inHouseMatches }] = await Promise.all([
@@ -261,7 +262,9 @@ export default {
       }),
     ])
 
-    this.items = [...events, ...inHouseMatches]
+    this.items = [...events, ...inHouseMatches].sort((a, b) => {
+      return `${a.date}T${a.startTime}` > `${b.date}T${b.startTime}` ? 1 : -1
+    })
   },
 
   computed: {
@@ -280,6 +283,10 @@ export default {
 
     eventsGroupedByDate () {
       return groupBy(this.filtered, 'date')
+    },
+
+    eventSortedDates () {
+      return Object.keys(this.eventsGroupedByDate).sort((a, b) => a > b ? 1 : -1)
     },
 
     leadIds () {
