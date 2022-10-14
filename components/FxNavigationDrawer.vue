@@ -147,11 +147,11 @@ export default {
       isLoggedIn: 'context/isLoggedIn',
       me: 'context/me',
       canSeeOrganising: 'user/acl/canSeeOrganising',
+      isLoggedIn: 'context/isLoggedIn',
     }),
 
     items () {
       const menu = [
-        { title: 'Sports Dashboard', icon: '$vuetify.icons.dashboard', exact: true, to: { name: 'dashboard' } },
         { title: 'Calendar', icon: '$vuetify.icons.calendar', to: { name: 'calendar' } },
         { title: 'Announcements', icon: '$vuetify.icons.whistle', to: { name: 'announcements' } },
 
@@ -168,6 +168,11 @@ export default {
           ],
         },
       ]
+
+      const dashboard = (this.isLoggedIn)
+        ? { title: 'Sports Dashboard', icon: '$vuetify.icons.dashboard', exact: true, to: { name: 'dashboard' } }
+        : { title: 'Sports Home', icon: '$vuetify.icons.dashboard', exact: true, to: { name: 'portal' } }
+      menu.unshift(dashboard)
 
       if (this.canSeeOrganising) {
         menu.splice(3, 0, {

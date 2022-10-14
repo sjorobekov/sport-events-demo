@@ -5,8 +5,8 @@
     </h1>
     <FxDashboardPageCard />
 
-    <div class="mt-5" :class="{ 'd-md-flex': events.length > 0 }">
-      <div>
+    <v-row class="mt-5">
+      <v-col v-if="events.length > 0" lg="9" sm="12">
         <h2>
           Today's Events
         </h2>
@@ -15,16 +15,16 @@
             <FxCalendarEvent :value="event" />
           </nuxt-link>
         </v-card>
-      </div>
+      </v-col>
 
-      <div v-if="teams.length > 0" :class="{ 'ml-2': events.length > 0 }">
+      <v-col v-if="teams.length > 0">
         <h2>
           Teams
         </h2>
         <v-card v-for="team in teams" :key="team.id" class="mb-2" :to="{ name: 'teams-id', params: { id: team.id } }">
           <v-container :style="style(team.sport)" class="rounded">
             <v-row>
-              <v-col cols="12" class="border-bottom pt-1 pb-0">
+              <v-col class="border-bottom pt-1 pb-0">
                 <v-list-item class="px-0">
                   <v-list-item-avatar>
                     <v-avatar>
@@ -42,8 +42,8 @@
             </v-row>
           </v-container>
         </v-card>
-      </div>
-    </div>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -58,6 +58,12 @@ export default {
   components: {
     FxCalendarEvent,
     FxDashboardPageCard,
+  },
+
+  middleware: ({ store, redirect }) => {
+    if (!store.getters['context/isLoggedIn']) {
+      return redirect({ name: 'portal' })
+    }
   },
 
   data: () => ({

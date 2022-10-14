@@ -12,7 +12,10 @@ export default {
   layout: 'empty',
   middleware: ({ redirect, store }) => {
     if (store.getters['context/isPortalSite']) {
-      return redirect({ name: 'dashboard' })
+      if (store.getters['context/isLoggedIn']) {
+        return redirect({ name: 'dashboard' })
+      }
+      return redirect({ name: 'portal' })
     }
 
     return redirect({ name: 'management' })
