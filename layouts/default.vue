@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <FxNavigationDrawer v-model="drawer" :permanent="drawerPermanent" :right="isMobile" :hide-logo="isMobile" />
-    <FxMobileAppBar v-if="isMobile" v-model="drawer" />
-    <AppBar v-else v-model="drawer" />
+    <FxMobileAppBar v-model="drawer" class="hidden-md-and-up" />
+    <AppBar v-model="drawer" class="hidden-sm-and-down" />
     <v-main>
       <v-container>
         <nuxt />

@@ -55,7 +55,7 @@ export default {
 
   computed: {
     values () {
-      return this.items.map((value) => {
+      return this.items.filter(a => !!a).map((value) => {
         return {
           value,
           icon: this.icons[value],

@@ -2,19 +2,11 @@
   <div>
     <v-app-bar
       elevation="0"
-      height="10"
-      color="#F1F5F9"
-      app
-      fixed
-      style="margin-top: 50px; z-index: 4"
-    />
-    <v-app-bar
-      elevation="0"
       height="172"
-      style="margin-top: 58px; z-index: 8; border-bottom: solid 8px var(--v-primary-base)"
       app
       fixed
       color="#F1F5F9"
+      class="calendar-bar"
     >
       <v-container class="my-0 py-0">
         <div class="d-flex">
@@ -377,3 +369,18 @@ export default {
   },
 }
 </script>
+
+<style scoped lang="scss">
+.calendar-bar {
+  //margin-top: 92px;
+  top: 92px;
+  z-index: 3;
+  border-bottom: solid 8px var(--v-primary-base)!important;
+}
+@media only screen and (min-width: 960px) {
+  .calendar-bar {
+    top: 58px;
+    //margin-top: 58px!important;
+  }
+}
+</style>

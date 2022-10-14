@@ -1,11 +1,12 @@
 <template>
-  <date-range-picker
-    ref="picker"
-    v-model="model"
-    :ranges="customRanges"
-    class="fx-date-range-picker"
+  <v-menu
+    ref="menu"
+    :close-on-content-click="false"
+    transition="scale-transition"
+    offset-y
+    min-width="auto"
   >
-    <template #input>
+    <template #activator="{ on, attrs }">
       <v-text-field
         dense
         hide-details
@@ -13,42 +14,55 @@
         outlined
         :value="rangeFormatted"
         readonly
+        v-bind="attrs"
+        v-on="on"
       />
     </template>
+    <date-range-picker
+      ref="picker"
+      v-model="model"
+      :ranges="customRanges"
+      class="fx-date-range-picker"
+      opens="inline"
+    >
+      <template #input>
+        <div />
+      </template>
 
-    <template #footer="data">
-      <div class="pr-4 py-4 d-flex border-top">
-        <v-spacer />
-        <v-btn outlined color="primary" class="mr-2" @click="data.clickCancel">
-          Cancel
-        </v-btn>
-        <v-btn v-if="!data.in_selection" depressed color="primary" @click="data.clickApply">
-          Apply
-        </v-btn>
-      </div>
-    </template>
+      <template #footer="data">
+        <div class="pr-4 py-4 d-flex border-top">
+          <v-spacer />
+          <v-btn outlined color="primary" class="mr-2" @click="data.clickCancel">
+            Cancel
+          </v-btn>
+          <v-btn v-if="!data.in_selection" depressed color="primary" @click="data.clickApply(); $refs.menu.save(model)">
+            Apply
+          </v-btn>
+        </div>
+      </template>
 
-    <template #ranges="ranges">
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item-group
-          color="primary"
+      <template #ranges="ranges">
+        <v-list
+          nav
+          dense
         >
-          <v-list-item
-            v-for="(range, name) in ranges.ranges"
-            :key="name"
-            @click="ranges.clickRange(range)"
+          <v-list-item-group
+            color="primary"
           >
-            <v-list-item-content>
-              <v-list-item-title>{{ name }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </template>
-  </date-range-picker>
+            <v-list-item
+              v-for="(range, name) in ranges.ranges"
+              :key="name"
+              @click="ranges.clickRange(range)"
+            >
+              <v-list-item-content>
+                <v-list-item-title>{{ name }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </template>
+    </date-range-picker>
+  </v-menu>
 </template>
 
 <script>
