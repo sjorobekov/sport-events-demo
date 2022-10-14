@@ -115,7 +115,7 @@ export const getters: GetterTree<RootState, RootState> = {
   },
 
   isPendingResult (_state, getters) {
-    return !getters.result.overallResult
+    return getters.result.overallResult === EventResult.TO_BE_PLAYED
   },
 
   canAddOrEditResult (_state, getters) {

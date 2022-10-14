@@ -6,10 +6,10 @@
       md="12"
       lg="7"
       class="pr-4 d-flex"
-      :class="hasResult ? 'flex-column-reverse': 'flex-column'"
+      :class="isPendingResult ? 'flex-column' : 'flex-column-reverse'"
     >
       <FxEventDetails />
-      <FxEventResults id="results" />
+      <FxEventResults v-if="showResultsCard" id="results" />
     </v-col>
     <v-col cols="12" sm="12" md="12" lg="5">
       <FxEventTeamSheet />
@@ -32,8 +32,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      hasResult: 'page/event/hasResult',
+      isPendingResult: 'page/event/isPendingResult',
+      hasScore: 'page/event/hasScore',
+      canAddOrEditResult: 'page/event/canAddOrEditResult',
     }),
+
+    showResultsCard () {
+      return this.hasScore || this.canAddOrEditResult
+    },
   },
 }
 </script>
