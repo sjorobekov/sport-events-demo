@@ -372,7 +372,6 @@ export default {
 
 <style scoped lang="scss">
 .calendar-bar {
-  //margin-top: 92px;
   top: 92px;
   z-index: 3;
   border-bottom: solid 8px var(--v-primary-base)!important;
@@ -380,7 +379,6 @@ export default {
 @media only screen and (min-width: 960px) {
   .calendar-bar {
     top: 58px;
-    //margin-top: 58px!important;
   }
 }
 </style>
