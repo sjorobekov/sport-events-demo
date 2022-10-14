@@ -18,7 +18,7 @@
         {{ contextSchool.name }}
       </h1>
 
-      <h2 class="text-p2 font-weight-medium white--text text-center mt-2 mb-6">
+      <h2 class="text-p2 font-weight-bold white--text text-center mt-2 mb-6">
         Sports Portal
       </h2>
     </template>
