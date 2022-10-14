@@ -1,27 +1,25 @@
 <template>
-  <v-row class="fill-height" justify="center" align="center">
-    <v-col>
-      <v-alert v-if="hasScore" class="text-h1" color="#F1F5F9">
-        {{ score }} - {{ opponentScore }}
-      </v-alert>
+  <div class="text-center">
+    <v-alert v-if="hasScore" class="px-5 score-result ma-0" color="#F1F5F9">
+      {{ score }} - {{ opponentScore }}
+    </v-alert>
 
-      <v-alert v-else-if="hasResult" class="text-h1" color="#F1F5F9">
-        {{ $t(`EVENT_RESULT.${result.overallResult}`) }}
-      </v-alert>
+    <v-alert v-else-if="isCancelled" color="error darken-1" class="ma-0 score-alert" outlined>
+      Cancelled
+    </v-alert>
 
-      <v-btn v-else-if="!hasResult && canAddOrEditResult" color="primary" @click="$vuetify.goTo(target, options)">
-        <v-icon>mdi-plus-circle-outline</v-icon> Add Result
-      </v-btn>
+    <v-alert v-else-if="isPostponed" color="warning lighten-2" outlined class="ma-0 score-alert">
+      <span class="error--text">Postponed</span>
+    </v-alert>
 
-      <v-alert v-else-if="isCancelled" color="error darken-1" outlined class="text-h5">
-        Cancelled
-      </v-alert>
+    <v-alert v-else-if="hasResult" color="#F1F5F9" class="ma-0 score-alert">
+      {{ $t(`EVENT_RESULT.${result.overallResult}`) }}
+    </v-alert>
 
-      <v-alert v-else-if="isPostponed" color="warning lighten-2" outlined>
-        <span class="text-h5 error--text">Postponed</span>
-      </v-alert>
-    </v-col>
-  </v-row>
+    <v-btn v-else-if="!hasResult && canAddOrEditResult" color="primary" @click="$vuetify.goTo(target, options)">
+      <v-icon>mdi-plus-circle-outline</v-icon> Add Result
+    </v-btn>
+  </div>
 </template>
 
 <script>
@@ -69,3 +67,14 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.score-result {
+  font-size:3vw;
+  font-weight: bold
+}
+.score-alert {
+  font-size:2vw;
+  font-weight: bold
+}
+</style>

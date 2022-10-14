@@ -6,7 +6,7 @@
           <FxTeam :color="school.color" :logo="school.logo" :name="myTeam.name" />
         </nuxt-link>
       </v-col>
-      <v-col cols="4" class="text-center">
+      <v-col cols="4" class="d-flex justify-center align-center">
         <FxEventResultCenterBoard />
       </v-col>
       <v-col cols="4">
