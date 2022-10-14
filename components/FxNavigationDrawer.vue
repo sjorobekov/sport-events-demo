@@ -42,13 +42,14 @@
           :to="item.to"
           :exact="item.exact"
           active-class="active-link"
+          class="mb-0 border-radius-0"
         >
           <v-list-item-icon class="ml-4 mr-3">
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title class="font-weight-bold">
+            <v-list-item-title class="font-weight-bold text-p2">
               {{ item.title }}
             </v-list-item-title>
           </v-list-item-content>
@@ -58,12 +59,13 @@
           v-else
           :key="i"
           active-class="white--text"
+          class="border-radius-0 mb-0"
         >
           <template #activator>
             <v-list-item-icon class="ml-4 mr-3">
               <v-icon v-text="item.icon" />
             </v-list-item-icon>
-            <v-list-item-title v-text="item.title" />
+            <v-list-item-title class="font-weight-bold text-p2" v-text="item.title" />
           </template>
 
           <v-list-item
@@ -73,13 +75,14 @@
             link
             :exact="subitem.exact"
             active-class="active-link white--text"
+            class="mb-0 border-radius-0"
           >
             <v-list-item-icon class="ml-4 mr-3">
               <v-icon v-text="subitem.icon" />
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title class="font-weight-bold" v-text="subitem.title" />
+              <v-list-item-title class="font-weight-bold text-p2" v-text="subitem.title" />
             </v-list-item-content>
           </v-list-item>
         </v-list-group>
@@ -87,22 +90,22 @@
 
       <template v-if="hideLogo">
         <v-divider />
-        <v-list-item v-if="!isLoggedIn" link :to="{ name: 'signin' }">
+        <v-list-item v-if="!isLoggedIn" link :to="{ name: 'signin' }" class="border-radius-0">
           <v-list-item-icon class="ml-4 mr-3">
             <v-icon>mdi-login-variant</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title class="font-weight-bold">
+            <v-list-item-title class="font-weight-bold  text-p2">
               Staff Log In
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item v-else @click="logOut">
+        <v-list-item v-else class="border-radius-0" @click="logOut">
           <v-list-item-icon class="ml-4 mr-3">
             <v-icon>mdi-logout-variant</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title class="font-weight-bold">
+            <v-list-item-title class="font-weight-bold text-p2">
               Log Out
             </v-list-item-title>
           </v-list-item-content>
@@ -195,9 +198,18 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.active-link
+.border-radius-0
   border-radius: 0
-  box-shadow: inset 4px 0 0 0 #FFFFFF
   &::before
     border-radius: 0
+.active-link
+  box-shadow: inset 4px 0 0 0 #FFFFFF
+</style>
+
+<style lang="sass">
+.v-list-group__header
+  border-radius: 0!important
+  margin-bottom: 0!important
+  &::before
+    border-radius: 0!important
 </style>
