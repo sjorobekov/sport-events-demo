@@ -9,14 +9,16 @@
               :key="i"
               :src="item.image"
             />
-            <v-row class="image-footer flex-nowrap">
-              <v-col md="2" sm="3">
+            <div class="gradient-footer" />
+            <v-row class="portal-menu image-footer flex-nowrap">
+              <v-col cols="3" xl="2">
                 <div class="text-h3">
                   Sports Portal
                 </div>
               </v-col>
-              <v-col md="9" sm="8">
-                <v-tabs>
+              <v-spacer />
+              <v-col cols="8">
+                <v-tabs v-model="tab" class="week-tabs">
                   <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
                     <div>
                       {{ item.day }}
@@ -27,22 +29,64 @@
                   </v-tab>
                 </v-tabs>
               </v-col>
-              <v-col>
-                <v-icon>mdi-calendar-month-outline</v-icon>
+              <v-col class="d-flex justify-center" xl="1">
+                <v-menu ref="menu" offset-y :close-on-content-click="false">
+                  <template #activator="{ on }">
+                    <a class="d-flex" v-on="on">
+                      <v-icon>
+                        mdi-calendar-month-outline
+                      </v-icon>
+                      <v-icon small>mdi-chevron-down</v-icon>
+                    </a>
+                  </template>
+                  <v-date-picker
+                    ref="picker"
+                    v-model="date"
+                    @change="onDateChange"
+                  />
+                </v-menu>
               </v-col>
             </v-row>
           </v-carousel>
         </v-card>
-        <v-list-item v-else>
-          <v-list-item-content>
-            <v-list-item-title class="text-h3">
+
+        <v-row v-else class="portal-menu flex-nowrap">
+          <v-col cols="3" xl="2">
+            <div class="text-h3">
               Sports Portal
-            </v-list-item-title>
-          </v-list-item-content>
-          <v-list-item-action>
-            <v-icon>mdi-calendar-month-outline</v-icon>
-          </v-list-item-action>
-        </v-list-item>
+            </div>
+          </v-col>
+          <v-spacer />
+          <v-col cols="8">
+            <v-tabs v-model="tab" class="week-tabs">
+              <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
+                <div>
+                  {{ item.day }}
+                </div>
+                <div>
+                  {{ item.date }}
+                </div>
+              </v-tab>
+            </v-tabs>
+          </v-col>
+          <v-col class="d-flex justify-center" xl="1">
+            <v-menu ref="menu" offset-y :close-on-content-click="false">
+              <template #activator="{ on }">
+                <a class="d-flex" v-on="on">
+                  <v-icon>
+                    mdi-calendar-month-outline
+                  </v-icon>
+                  <v-icon small>mdi-chevron-down</v-icon>
+                </a>
+              </template>
+              <v-date-picker
+                ref="picker"
+                v-model="date"
+                @change="onDateChange"
+              />
+            </v-menu>
+          </v-col>
+        </v-row>
       </v-col>
 
       <v-col md="3" class="text-p1 info--text text--darken-1">
@@ -86,16 +130,7 @@
           <FxSportExpansionPanel v-for="sport in liveSports" :key="sport.id" class="mb-4" :item="sport" :subtitle="subtitle(liveEventsBySport[sport.id].length)">
             <v-list class="py-0">
               <v-list-item v-for="event in liveEventsBySport[sport.id]" :key="event.id" style="border-bottom: 1px solid #F1F5F9">
-                <v-list-item-content>
-                  <v-list-item-title class="info--text text--darken-2 text-h5s">
-                    {{ event.date }}
-                  </v-list-item-title>
-                </v-list-item-content>
-                <v-list-item-content>
-                  <v-list-item-title class="info--text">
-                    {{ event.firstname }} {{ event.lastname }}
-                  </v-list-item-title>
-                </v-list-item-content>
+                <FxPortalEventItem :event="event" :me="event.me" />
               </v-list-item>
             </v-list>
           </FxSportExpansionPanel>
@@ -108,17 +143,7 @@
           <FxSportExpansionPanel v-for="sport in sports" :key="sport.id" class="mb-4" :item="sport" :subtitle="subtitle(fixturesBySport[sport.id].length)">
             <v-list class="py-0">
               <v-list-item v-for="event in fixturesBySport[sport.id]" :key="event.id" style="border-bottom: 1px solid #F1F5F9">
-                <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
-                  <v-row>
-                    <v-col cols="12" md="6" class="border-bottom">
-                      <FxTeamListItem class="pl-0" :participant="event.me" :context-school-id="contextSchoolId" :icon-on-right="!compact" />
-                    </v-col>
-                    <v-col cols="12" md="6" class="border-bottom">
-                      <FxTeamListItem v-if="event.eventType === EventType.FIXTURE" class="pl-0" :participant="event.opponent" :context-school-id="contextSchoolId" />
-                      <FxNonFixtureItem v-else :event-type="event.eventType" :name="event.name" />
-                    </v-col>
-                  </v-row>
-                </nuxt-link>
+                <FxPortalEventItem :event="event" :me="event.me" />
               </v-list-item>
             </v-list>
           </FxSportExpansionPanel>
@@ -132,10 +157,12 @@
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
 import { EventType, EventResult } from '~/enum'
+import FxPortalEventItem from '@/components/PageComponents/FxPortalPage/FxPortalEventItem.vue'
 
 export default {
   name: 'PortalPage',
   components: {
+    FxPortalEventItem,
   },
 
   middleware: ({ store, redirect }) => {
@@ -146,46 +173,22 @@ export default {
 
   data: () => ({
     EventType,
+    EventResult,
     images: [],
     sports: [],
     liveSports: [],
     fixturesBySport: {},
     liveEventsBySport: {},
-    date: {},
+    date: '',
+    tab: 0,
+    dates: [],
+    today: DateTime.now().toFormat('yyyy-MM-dd'),
   }),
 
   async fetch () {
     await this.$store.dispatch('context/fetchSchool', this.contextSchoolId)
     this.images = await this.$store.dispatch('api/schools/getImages', this.school.id)
-    const { data: events } = await this.$store.dispatch('api/events/getBySchool', {
-      schoolId: this.contextSchoolId,
-      params: {
-        limit: 2000,
-        orderDesc: 'false',
-        from: DateTime.now().toFormat('yyyy-MM-dd'),
-        to: DateTime.now().plus({ month: 1 }).toFormat('yyyy-MM-dd'),
-      },
-    })
-
-    const sports = []
-    const liveSports = []
-    events.forEach((event) => {
-      if (event.participants.some(item => item.status === EventResult.LIVE)) {
-        if (!this.liveEventsBySport[event.sportId]) {
-          this.$set(this.liveEventsBySport, event.sportId, [])
-        }
-        this.liveEventsBySport[event.sportId].push(event)
-        liveSports.push(event.sport)
-      } else {
-        if (!this.fixturesBySport[event.sportId]) {
-          this.$set(this.fixturesBySport, event.sportId, [])
-        }
-        this.fixturesBySport[event.sportId].push(event)
-        sports.push(event.sport)
-      }
-    })
-    this.sports = [...new Map(sports.map(v => [v.id, v])).values()]
-    this.liveSports = [...new Map(liveSports.map(v => [v.id, v])).values()]
+    await this.getEvents(this.today)
   },
 
   computed: {
@@ -203,21 +206,84 @@ export default {
 
       return 'No Events'
     },
-    compact () {
-      return this.$vuetify.breakpoint.smAndDown
+  },
+
+  watch: {
+    async tab (index) {
+      const date = this.dates[index].value
+      if (date === this.date) {
+        return
+      }
+      this.date = date
+      await this.getEvents(this.date)
     },
-    dates () {
-      const start = DateTime.now().startOf('week')
+  },
+
+  created () {
+    this.date = this.today
+    this.dates = this.calculateWeekDays(this.today)
+    this.tab = this.dates.findIndex(item => item.value === this.today)
+  },
+
+  methods: {
+    async onDateChange () {
+      this.dates = this.calculateWeekDays(this.date)
+      this.tab = this.dates.findIndex(item => item.value === this.date)
+      await this.getEvents(this.date)
+    },
+    calculateWeekDays (currentDate) {
+      const start = DateTime.fromISO(currentDate).startOf('week')
       const res = []
       for (let i = 0; i < 7; i++) {
         const item = start.plus({ day: i })
+        const isToday = item.toFormat('yyyy-MM-dd') === this.today
         res.push({
-          value: item,
-          day: (item.hasSame(DateTime.now(), 'day')) ? 'Today' : item.toFormat('cccc'),
+          value: item.toFormat('yyyy-MM-dd'),
+          day: isToday ? 'Today' : item.toFormat('cccc'),
           date: item.toFormat('d MMMM'),
         })
       }
       return res
+    },
+    async getEvents (currentDate) {
+      this.clearEvents()
+      const { data: events } = await this.$store.dispatch('api/events/getBySchool', {
+        schoolId: this.contextSchoolId,
+        params: {
+          limit: 2000,
+          orderDesc: 'false',
+          from: currentDate,
+          to: currentDate,
+        },
+      })
+      this.updateEvents(events)
+    },
+    clearEvents () {
+      this.fixturesBySport = {}
+      this.liveEventsBySport = {}
+      this.sports = []
+      this.liveSports = []
+    },
+    updateEvents (events) {
+      const sports = []
+      const liveSports = []
+      events.forEach((event) => {
+        if (event.participants.some(item => item.overallResult === EventResult.LIVE)) {
+          if (!this.liveEventsBySport[event.sportId]) {
+            this.$set(this.liveEventsBySport, event.sportId, [])
+          }
+          this.liveEventsBySport[event.sportId].push(event)
+          liveSports.push(event.sport)
+        } else {
+          if (!this.fixturesBySport[event.sportId]) {
+            this.$set(this.fixturesBySport, event.sportId, [])
+          }
+          this.fixturesBySport[event.sportId].push(event)
+          sports.push(event.sport)
+        }
+      })
+      this.sports = [...new Map(sports.map(v => [v.id, v])).values()]
+      this.liveSports = [...new Map(liveSports.map(v => [v.id, v])).values()]
     },
   },
 }
@@ -225,12 +291,30 @@ export default {
 
 <style scoped>
 .image-footer {
+  position: absolute;
+  bottom: 0;
+  color: white;
+  padding: 1em;
+}
+.portal-menu {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.gradient-footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 1em;
-  color: white;
+  height: 150px;
+  background: linear-gradient(to bottom,  rgba(137,255,241,0) 0%,rgba(0,0,0,1) 100%);
+}
+.link-width {
+  width: 100%;
+}
+</style>
+<style>
+.week-tabs.v-tabs > .v-tabs-bar {
+  background: none;
 }
 </style>
