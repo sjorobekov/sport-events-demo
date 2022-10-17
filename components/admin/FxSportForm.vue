@@ -47,7 +47,7 @@
     <label>Sport Icon</label>
     <FxSportIconUploadForm :value="formData.file" @input="update('file', $event)">
       <template #icon>
-        <v-avatar color="info lighten-3 mr-2" size="80">
+        <v-avatar color="info lighten-3 mr-2" size="80" tile>
           <v-img v-if="image" :src="image" />
           <v-icon v-else large>
             $vuetify.icons.image
