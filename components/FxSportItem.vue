@@ -1,9 +1,7 @@
 <template>
   <v-list-item :style="style">
-    <v-list-item-avatar>
-      <v-avatar>
-        <v-img :src="item.icon" />
-      </v-avatar>
+    <v-list-item-avatar tile>
+      <v-img :src="item.icon" />
     </v-list-item-avatar>
     <v-list-item-content>
       <v-list-item-title>{{ item.name }}</v-list-item-title>

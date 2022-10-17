@@ -59,10 +59,8 @@
                 </div>
               </div>
             </v-list-item-content>
-            <v-list-item-avatar>
-              <v-avatar size="22">
-                <v-img :src="sport.icon" />
-              </v-avatar>
+            <v-list-item-avatar size="22" tile>
+              <v-img :src="sport.icon" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>

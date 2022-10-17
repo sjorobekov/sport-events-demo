@@ -147,7 +147,6 @@ export default {
       isLoggedIn: 'context/isLoggedIn',
       me: 'context/me',
       canSeeOrganising: 'user/acl/canSeeOrganising',
-      isLoggedIn: 'context/isLoggedIn',
     }),
 
     items () {

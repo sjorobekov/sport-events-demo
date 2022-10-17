@@ -40,7 +40,7 @@
           <div class="d-inline-block">
             <ListItem>
               <template #icon>
-                <v-avatar size="22">
+                <v-avatar size="22" tile>
                   <v-img width="22" height="22" :src="sport.icon" />
                 </v-avatar>
               </template>

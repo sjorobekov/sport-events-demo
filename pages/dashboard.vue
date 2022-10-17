@@ -31,10 +31,8 @@
             <v-row>
               <v-col class="border-bottom pt-1 pb-0">
                 <v-list-item class="px-0">
-                  <v-list-item-avatar>
-                    <v-avatar>
-                      <v-img :src="team.sport.icon" />
-                    </v-avatar>
+                  <v-list-item-avatar tile>
+                    <v-img :src="team.sport.icon" />
                   </v-list-item-avatar>
                   <v-list-item-content>
                     <v-list-item-title>{{ team.age }} {{ team.ability }}</v-list-item-title>

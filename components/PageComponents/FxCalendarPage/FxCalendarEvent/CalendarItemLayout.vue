@@ -4,11 +4,9 @@
       <v-row v-if="!compact">
         <v-col cols="12" class="border-bottom pt-1 pb-0">
           <v-list-item class="px-0">
-            <v-list-item-icon class="mr-3">
-              <v-avatar size="22">
-                <v-img :src="sport.icon" />
-              </v-avatar>
-            </v-list-item-icon>
+            <v-list-item-avatar class="mr-3" tile size="22">
+              <v-img :src="sport.icon" />
+            </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class="text-p2">
                 {{ sport.name }}
@@ -45,7 +43,7 @@
         <v-col cols="12" class="border-bottom pt-1 pb-0">
           <ListItem>
             <template #icon>
-              <v-avatar size="22">
+              <v-avatar size="22" tile>
                 <v-img width="22" height="22" :src="sport.icon" />
               </v-avatar>
             </template>

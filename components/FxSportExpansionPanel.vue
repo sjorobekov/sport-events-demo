@@ -3,10 +3,8 @@
     <v-expansion-panel :style="style" class="fx-box-shadow">
       <v-expansion-panel-header class="py-0 pl-2">
         <v-list-item class="px-0 ">
-          <v-list-item-avatar>
-            <v-avatar>
-              <v-img :src="item.icon" />
-            </v-avatar>
+          <v-list-item-avatar tile>
+            <v-img :src="item.icon" />
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title>{{ item.name }}</v-list-item-title>
