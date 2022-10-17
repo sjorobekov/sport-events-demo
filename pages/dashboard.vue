@@ -6,15 +6,20 @@
     <FxDashboardPageCard />
 
     <v-row class="mt-5">
-      <v-col v-if="events.length > 0" lg="9" sm="12">
+      <v-col lg="9" sm="12">
         <h2>
           Today's Events
         </h2>
-        <v-card v-for="event in events" :key="`event-${event.id}`" class="mb-2">
-          <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
-            <FxCalendarEvent :value="event" />
-          </nuxt-link>
-        </v-card>
+        <section v-if="events.length > 0">
+          <v-card v-for="event in events" :key="`event-${event.id}`" class="mb-2">
+            <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
+              <FxCalendarEvent :value="event" />
+            </nuxt-link>
+          </v-card>
+        </section>
+        <section v-else>
+          <FxNoEventsState />
+        </section>
       </v-col>
 
       <v-col v-if="teams.length > 0">
@@ -52,12 +57,14 @@ import { DateTime } from 'luxon'
 import { mapGetters } from 'vuex'
 import FxCalendarEvent from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/FxCalendarEvent'
 import FxDashboardPageCard from '@/components/PageComponents/FxDashboardPage/FxDashboardPageCard'
+import FxNoEventsState from '~/components/PageComponents/FxDashboardPage/FxNoEventsState.vue'
 
 export default {
   name: 'DashboardPage',
   components: {
     FxCalendarEvent,
     FxDashboardPageCard,
+    FxNoEventsState,
   },
 
   middleware: ({ store, redirect }) => {
@@ -78,7 +85,7 @@ export default {
         limit: 2000,
         orderDesc: 'false',
         from: DateTime.now().toFormat('yyyy-MM-dd'),
-        to: DateTime.now().plus({ month: 1 }).toFormat('yyyy-MM-dd'),
+        to: DateTime.now().toFormat('yyyy-MM-dd'),
       },
     })
 
