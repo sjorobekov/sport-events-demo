@@ -280,7 +280,7 @@
         @input="updateMe('eventLocation', $event)"
       />
 
-      <v-alert v-if="opponentSchool && opponentSchool.portal" color="#ECFDF5" icon="mdi-checkbox-marked-circle-outline" class="success--text text--darken-2">
+      <v-alert v-if="hasPortalAlertVisible" color="#ECFDF5" icon="mdi-checkbox-marked-circle-outline" class="success--text text--darken-2">
         <div class="text-p1 font-weight-bold">
           {{ opponentSchool.name }} also uses Fixturr.
         </div>
@@ -449,7 +449,7 @@ import FxEventLocationTypeSelect from '@/components/FxEventForm/FxEventLocationT
 import FxTransportToSelect from '@/components/FxEventForm/FxTransportToSelect/FxTransportToSelect'
 import FxTransportFromSelect from '@/components/FxEventForm/FxTransportFromSelect/FxTransportFromSelect'
 import FxFixtureTypeSelect from '@/components/FxEventForm/FxFixtureTypeSelect'
-import { TransportType, EventLocationType, EventType } from '@/enum'
+import { TransportType, EventLocationType, EventType, EventLocation } from '@/enum'
 import FxOpponentSelect from '@/components/FxEventForm/FxOpponentSelect'
 
 export default {
@@ -540,6 +540,9 @@ export default {
     },
     date () {
       return this.eventForm.date ? DateTime.fromISO(this.eventForm.date).toFormat('dd-MM-yyyy') : ''
+    },
+    hasPortalAlertVisible () {
+      return this.opponentSchool?.portal && this.meForm.eventLocation !== EventLocation.AWAY
     },
   },
 
