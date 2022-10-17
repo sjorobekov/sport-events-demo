@@ -74,7 +74,7 @@ export default {
   font-weight: bold
 }
 .score-alert {
-  font-size:2vw;
+  font-size: clamp(1rem, 2vw, 1.5rem);
   font-weight: bold
 }
 </style>
