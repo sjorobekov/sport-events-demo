@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-container>
+    <v-container class="pa-6">
       <v-row>
         <v-col class="d-flex">
           <v-list-item to="organising/confirm-fixtures">
