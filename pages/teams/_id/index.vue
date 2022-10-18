@@ -152,7 +152,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
-import FxEventItem from '@/components/FxEventItem/FxEventItem'
+import FxEventItem from '@/components/PageComponents/FxTeamsPage/FxEventItem'
 import { EventType } from '@/enum'
 import FxTeamPrivacyChipBig from '@/components/FxTeamPrivacyChipBig'
 import FxWinRateBar from '@/components/FxWinRateBar'
