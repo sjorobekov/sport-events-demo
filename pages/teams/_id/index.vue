@@ -18,7 +18,7 @@
                 </v-list-item-subtitle>
               </v-list-item-content>
               <v-list-item-action>
-                <FxTeamPrivacyChipBig v-if="!$fetchState.pending" :publish-team="team.publishTeam" :publish-results="team.publishResults" />
+                <FxTeamPrivacyChipBig v-if="!$fetchState.pending && isLoggedIn" :publish-team="team.publishTeam" :publish-results="team.publishResults" />
               </v-list-item-action>
             </v-list-item>
           </v-img>
@@ -33,7 +33,7 @@
             </v-list-item-subtitle>
           </v-list-item-content>
           <v-list-item-action>
-            <FxTeamPrivacyChipBig v-if="!$fetchState.pending" :publish-team="team.publishTeam" :publish-results="team.publishResults" />
+            <FxTeamPrivacyChipBig v-if="!$fetchState.pending && isLoggedIn" :publish-team="team.publishTeam" :publish-results="team.publishResults" />
           </v-list-item-action>
         </v-list-item>
 
@@ -206,6 +206,7 @@ export default {
 
   computed: {
     ...mapGetters({
+      isLoggedIn: 'context/isLoggedIn',
       contextSchoolId: 'context/schoolId',
       canCreateEvent: 'user/acl/canCreateEvent',
       canEditTeam: 'user/acl/canCreateTeam',
