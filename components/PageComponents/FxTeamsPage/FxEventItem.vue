@@ -13,7 +13,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col md="2" class="border-bottom pt-6">
+      <v-col md="2" xl="1" class="border-bottom pt-6">
         <v-chip
           color="info lighten-2"
           outlined
@@ -24,14 +24,14 @@
           <span class="info--text">{{ event.startTime }}</span>
         </v-chip>
       </v-col>
-      <v-col cols="12" md="4" class="border-bottom">
+      <v-col cols="12" md="3" class="border-bottom">
         <FxTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" :icon-on-right="!compact" />
       </v-col>
       <v-col md="2" class="hidden-sm-and-down pt-5 border-bottom text-center">
         <ExistingResult v-if="hasResult" :event="event" :me="me" />
         <NoResult v-else :me="me" :event="event" />
       </v-col>
-      <v-col cols="12" md="4" class="border-bottom">
+      <v-col cols="12" md="5" class="border-bottom">
         <FxTeamListItem v-if="event.eventType === EventType.FIXTURE" class="pl-0" :participant="opponent" :context-school-id="contextSchoolId" />
         <FxNonFixtureItem v-else :event-type="event.eventType" :name="event.name" />
       </v-col>
@@ -101,13 +101,6 @@ export default {
 
   async created () {
     this.sport = await this.$store.dispatch('api/sports/fetch', this.event.sportId)
-
-    if (this.me.leadId) {
-      this.user = await this.$store.dispatch('api/users/fetch', {
-        schoolId: this.contextSchoolId,
-        id: this.me.leadId,
-      })
-    }
   },
 }
 </script>
