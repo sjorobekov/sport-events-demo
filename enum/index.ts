@@ -67,6 +67,7 @@ export enum EventStatus {
   REJECTED = 'REJECTED',
   CANCELLED = 'CANCELLED',
   POSTPONED = 'POSTPONED',
+  DISMISSED = 'DISMISSED',
 }
 
 export enum EventResult {
