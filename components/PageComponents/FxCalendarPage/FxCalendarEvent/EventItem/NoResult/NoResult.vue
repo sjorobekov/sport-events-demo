@@ -1,13 +1,13 @@
 <template>
   <div>
-    <v-btn v-if="datePassed" outlined link :to="{ name: 'events-eventId', params: { eventId: event.id } }">
+    <v-btn v-if="datePassed && canAddMissingResults" outlined link :to="{ name: 'events-eventId', params: { eventId: event.id } }">
       Add Result
     </v-btn>
 
-    <v-btn v-else-if="!me.sheet" outlined link :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }">
+    <v-btn v-else-if="!me.sheet && canManageTeamSheet" outlined link :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }">
       Add Team
     </v-btn>
-    <v-btn v-else outlined link :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }">
+    <v-btn v-else-if="canManageTeamSheet" outlined link :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }">
       Manage Team
     </v-btn>
   </div>
@@ -15,6 +15,7 @@
 
 <script>
 import { DateTime } from 'luxon'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'NoResult',
@@ -30,6 +31,10 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      canAddMissingResults: 'user/acl/canAddMissingResults',
+      canManageTeamSheet: 'page/event/canManageTeamSheet',
+    }),
     datePassed () {
       const today = DateTime.local().toFormat('yyyy-MM-dd')
       return today >= this.event.date
