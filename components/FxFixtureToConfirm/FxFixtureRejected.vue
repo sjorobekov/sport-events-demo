@@ -6,17 +6,8 @@
           <FxTeamListItem v-if="opponent" class="px-0" :context-school-id="contextSchoolId" :participant="opponent" />
         </v-col>
         <v-col class="pt-2 pb-0">
-          <v-alert v-if="!conflictsExist" dense class="mb-0 float-right">
-            <v-icon color="success darken-2">
-              mdi-checkbox-marked-circle-outline
-            </v-icon>
-            <span class="success--text text--darken-2 text-p1">No Event Conflict</span>
-          </v-alert>
-          <v-alert v-else dense class="mb-0 float-right">
-            <v-icon color="error">
-              mdi-alert-circle-outline
-            </v-icon>
-            <span class="error--text text--darken-1 text-p1 font-weight-bold">Event Conflict</span>
+          <v-alert dense class="mb-0 float-right">
+            <span class="error--text text--darken-1 text-p1 font-weight-bold">Opponent Rejected</span>
           </v-alert>
         </v-col>
       </v-row>
@@ -68,11 +59,11 @@
           </div>
 
           <div class="d-inline-block float-right mt-3">
-            <v-btn outlined color="error darken-1" @click="reject">
-              <v-icon>mdi-close</v-icon>Reject
+            <v-btn outlined color="error darken-1" @click="remove">
+              <v-icon>mdi-close</v-icon>Delete
             </v-btn>
-            <v-btn outlined color="success darken-1" @click="accept">
-              <v-icon>mdi-check</v-icon>Confirm
+            <v-btn outlined color="info darken-1" @click="dismiss">
+              Dismiss
             </v-btn>
           </div>
         </v-col>
@@ -91,8 +82,6 @@
               Start Time
             </template>
           </ListItem>
-
-          <FxMeetReturnTimeForm :value="me" @input="updateMe($event)" />
         </v-col>
 
         <v-col md="3" class="fx-columnitem">
@@ -113,8 +102,6 @@
               Team
             </template>
           </ListItem>
-
-          <FxTeamSelectForm :value="me" :season-id="season.id" :sport-id="event.sportId" @input="updateMe($event)" />
         </v-col>
 
         <v-col md="3" class="fx-columnitem">
@@ -129,8 +116,6 @@
               Assign To
             </template>
           </ListItem>
-
-          <FxLeadSelectForm :value="me" @input="updateMe($event)" />
         </v-col>
 
         <v-col md="3" class="fx-columnitem pr-6">
@@ -148,23 +133,6 @@
               Location
             </template>
           </ListItem>
-
-          <FxLocationSelectForm v-if="canChangeLocation" :value="event" @input="updateEvent($event)" />
-        </v-col>
-      </v-row>
-
-      <v-row v-if="conflictsExist" class="fx-lineitem">
-        <v-col class="px-6 pt-5">
-          <FxEventConflictItem
-            v-for="conflict in conflicts"
-            :key="conflict.eventId"
-            v-model="override"
-            :item="conflict"
-            :context-school-id="contextSchoolId"
-            hide-action
-            class="mb-2"
-            @updated="$root.$emit('conflict:updated')"
-          />
         </v-col>
       </v-row>
     </v-container>
@@ -172,25 +140,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import ListItem from '~/components/FxEventItem/ListItem'
-import FxEventConflictItem from '~/components/FxEventForm/FxEventConflictItem'
 import FxAvatar from '~/components/FxAvatar'
-import FxMeetReturnTimeForm from '~/components/FxFixtureToConfirm/FxMeetReturnTimeForm'
-import FxLeadSelectForm from '@/components/FxFixtureToConfirm/FxLeadSelectForm'
-import FxTeamSelectForm from '@/components/FxFixtureToConfirm/FxTeamSelectForm'
-import FxLocationSelectForm from '@/components/FxFixtureToConfirm/FxLocationSelectForm'
-import { EventLocationType, EventStatus } from '@/enum'
+import { EventStatus } from '@/enum'
 
 export default {
-  name: 'FxFixtureToConfirm',
+  name: 'FxFixtureRejected',
   components: {
-    FxLocationSelectForm,
-    FxTeamSelectForm,
-    FxLeadSelectForm,
-    FxMeetReturnTimeForm,
     ListItem,
-    FxEventConflictItem,
     FxAvatar,
   },
   props: {
@@ -214,20 +171,10 @@ export default {
 
   data: () => ({
     conflicts: [],
-    override: [],
-    isOpen: false,
-    confirmationData: {},
     loading: false,
   }),
 
   computed: {
-    ...mapGetters({
-      season: 'seasons/current',
-    }),
-    conflictsExist () {
-      return this.conflicts.length > 0
-    },
-
     defaultTeam () {
       if (!this.event.age || !this.event.ability) {
         return null
@@ -236,21 +183,6 @@ export default {
       return `Under ${this.event.age.slice(1)}${this.event.ability}`
     },
 
-    canChangeLocation () {
-      return this.event.location === EventLocationType.OPPONENT_CONFIRMS && !this.me.creator
-    },
-
-    formData () {
-      return {
-        meetTime: this.me.meetTime,
-        returnTime: this.me.returnTime,
-        leadId: this.me.leadId,
-        teamId: this.me.teamId,
-        eventId: this.event.id,
-        schoolId: this.contextSchoolId,
-        sportLocationId: this.canChangeLocation ? this.event.sportLocationId : undefined,
-      }
-    },
     eventLocation () {
       const locations = {
         HOME: 'Home',
@@ -266,7 +198,7 @@ export default {
 
     user () {
       return this.me.lead || {
-        firstname: 'Select Lead Staff',
+        firstname: 'No Lead Staff Selected',
       }
     },
 
@@ -279,102 +211,32 @@ export default {
     },
   },
 
-  watch: {
-    event: {
-      handler () {
-        this.checkConflict()
-      },
-      deep: true,
-    },
-    me: {
-      handler () {
-        this.checkConflict()
-      },
-      deep: true,
-    },
-  },
-
-  async created () {
-    await this.checkConflict()
-
-    this.$root.$on('conflict:updated', this.checkConflict)
-  },
-
-  beforeDestroy () {
-    this.$parent.$off('conflict:updated', this.checkConflict)
-  },
-
   methods: {
-    async checkConflict () {
-      try {
-        const { status, events } = await this.$store.dispatch('api/events/checkConflict', {
-          schoolId: this.contextSchoolId,
-          date: this.event.date,
-          startTime: this.event.startTime,
-          sportLocationId: this.event.sportLocationId,
-          teamId: this.me.teamId,
-          leadId: this.me.leadId,
-        })
-
-        this.conflicts = status === 'CONFLICT' ? events : []
-      } catch {
-        this.conflicts = []
-      }
-    },
-
-    openForm () {
-      this.isOpen = true
-    },
-
-    updateMe (value) {
-      this.$emit('update:me', value)
-    },
-
-    updateEvent (value) {
-      this.$emit('update:event', value)
-    },
-
-    accept () {
-      const isValid = this.$refs.form.validate()
-
-      if (!isValid) {
-        return
-      }
-
-      this.loading = true
-
+    dismiss () {
       this.$store.dispatch('api/events/confirm', {
-        status: EventStatus.CONFIRMED,
-        ...this.formData,
-      })
-        .then(() => {
-          this.$emit('accepted')
-        })
-        .catch(() => {
-          this.$toast.error('Unknown Error')
-        })
-        .finally(() => {
-          this.loading = false
-        })
-    },
-
-    reject () {
-      if (!confirm('Are you sure?')) {
-        return
-      }
-
-      this.$store.dispatch('api/events/confirm', {
-        status: EventStatus.REJECTED,
+        status: EventStatus.DISMISSED,
         schoolId: this.contextSchoolId,
         eventId: this.event.id,
       }).then(() => {
-        this.$emit('rejected')
+        this.$emit('dismissed')
       }).catch(() => {
         this.$toast.error('Unknown Error')
+      }).finally(() => {
+        this.loading = false
       })
-        .finally(() => {
-          this.loading = false
-        })
+    },
+
+    remove () {
+      this.$store.dispatch('api/events/remove', {
+        schoolId: this.contextSchoolId,
+        id: this.event.id,
+      }).then(() => {
+        this.$emit('removed')
+      }).catch(() => {
+        this.$toast.error('Unknown Error')
+      }).finally(() => {
+        this.loading = false
+      })
     },
   },
 }
