@@ -2,7 +2,7 @@
   <v-card>
     <v-container class="pa-6">
       <v-row>
-        <v-col class="d-flex">
+        <v-col cols="12" md="6" lg="3">
           <v-list-item to="organising/confirm-fixtures">
             <v-avatar rounded size="40" class="mr-2" color="#EBF4FF">
               <div class="d-flex justify-center">
@@ -20,7 +20,7 @@
           </v-list-item>
         </v-col>
         <v-divider vertical class="my-3" />
-        <v-col class="d-flex">
+        <v-col cols="12" md="6" lg="3">
           <v-list-item to="organising/missing-results">
             <v-avatar rounded size="40" class="mr-2" color="#FAE6E6">
               <div class="d-flex justify-center">
@@ -38,7 +38,7 @@
           </v-list-item>
         </v-col>
         <v-divider vertical class="my-3" />
-        <v-col class="d-flex">
+        <v-col cols="12" md="6" lg="3">
           <v-list-item to="organising/todays-teams">
             <v-avatar rounded size="40" class="mr-2" color="#ECFDF4">
               <div class="d-flex justify-center">
@@ -56,7 +56,7 @@
           </v-list-item>
         </v-col>
         <v-divider vertical class="my-3" />
-        <v-col class="d-flex">
+        <v-col cols="12" md="6" lg="3">
           <v-list-item to="organising/participation">
             <v-avatar rounded size="40" class="mr-2" color="#ECFDF4">
               <div class="d-flex justify-center">
