@@ -73,8 +73,6 @@ export default {
 
   data: () => ({
     sport: {},
-    team: {},
-    user: {},
     EventType,
     EventResult,
   }),
