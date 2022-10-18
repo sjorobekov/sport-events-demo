@@ -207,7 +207,11 @@ export default {
         return this.me.transportToOther
       }
 
-      return this.$t(`TRANSPORT_TO.${this.me.transportTo}`)
+      if (this.me.transportTo) {
+        return this.$t(`TRANSPORT_TO.${this.me.transportTo}`)
+      }
+
+      return ''
     },
 
     transportFrom () {
@@ -215,7 +219,11 @@ export default {
         return this.me.transportFromOther
       }
 
-      return this.$t(`TRANSPORT_FROM.${this.me.transportTo}`)
+      if (this.me.transportFrom) {
+        return this.$t(`TRANSPORT_FROM.${this.me.transportFrom}`)
+      }
+
+      return ''
     },
   },
 

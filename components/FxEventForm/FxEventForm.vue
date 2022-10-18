@@ -542,7 +542,7 @@ export default {
       return this.eventForm.date ? DateTime.fromISO(this.eventForm.date).toFormat('dd-MM-yyyy') : ''
     },
     hasPortalAlertVisible () {
-      return this.opponentSchool?.portal && this.meForm.eventLocation !== EventLocation.AWAY
+      return this.opponentSchool?.portal && this.meForm.eventLocation === EventLocation.AWAY
     },
   },
 

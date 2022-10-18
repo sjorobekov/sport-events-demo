@@ -146,6 +146,11 @@ export default {
       })
         .then(({ data }) => {
           data.forEach((school) => {
+            // exclude own school
+            if (school.id === this.schoolId) {
+              return
+            }
+
             if (!this.opponentSchoolsIndex[school.id]) {
               this.$set(this.schools, school.id, school)
             }
