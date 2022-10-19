@@ -26,7 +26,7 @@
     <v-list
       dense
       nav
-      class="px-0"
+      class="px-0 nav-list"
     >
       <template v-if="hideLogo && isLoggedIn">
         <FxUserItem :item="me" class="px-5" :to="{ name: 'settings' } " />
@@ -41,15 +41,14 @@
           link
           :to="item.to"
           :exact="item.exact"
-          active-class="active-link"
-          class="mb-0 border-radius-0"
+          class="mb-0"
         >
           <v-list-item-icon class="ml-4 mr-3">
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title class="font-weight-bold text-p2">
+            <v-list-item-title class="font-weight-bold">
               {{ item.title }}
             </v-list-item-title>
           </v-list-item-content>
@@ -59,13 +58,13 @@
           v-else
           :key="i"
           active-class="white--text"
-          class="border-radius-0 mb-0"
+          class="mb-0"
         >
           <template #activator>
             <v-list-item-icon class="ml-4 mr-3">
               <v-icon v-text="item.icon" />
             </v-list-item-icon>
-            <v-list-item-title class="font-weight-bold text-p2" v-text="item.title" />
+            <v-list-item-title class="font-weight-bold" v-text="item.title" />
           </template>
 
           <v-list-item
@@ -75,14 +74,14 @@
             link
             :exact="subitem.exact"
             active-class="active-link white--text"
-            class="mb-0 border-radius-0"
+            class="mb-0"
           >
             <v-list-item-icon class="ml-4 mr-3">
               <v-icon v-text="subitem.icon" />
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title class="font-weight-bold text-p2" v-text="subitem.title" />
+              <v-list-item-title class="font-weight-bold" v-text="subitem.title" />
             </v-list-item-content>
           </v-list-item>
         </v-list-group>
@@ -90,22 +89,22 @@
 
       <template v-if="hideLogo">
         <v-divider />
-        <v-list-item v-if="!isLoggedIn" link :to="{ name: 'signin' }" class="border-radius-0">
+        <v-list-item v-if="!isLoggedIn" link :to="{ name: 'signin' }">
           <v-list-item-icon class="ml-4 mr-3">
             <v-icon>mdi-login-variant</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title class="font-weight-bold  text-p2">
+            <v-list-item-title class="font-weight-bold">
               Staff Log In
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item v-else class="border-radius-0" @click="logOut">
+        <v-list-item v-else @click="logOut">
           <v-list-item-icon class="ml-4 mr-3">
             <v-icon>mdi-logout-variant</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title class="font-weight-bold text-p2">
+            <v-list-item-title class="font-weight-bold">
               Log Out
             </v-list-item-title>
           </v-list-item-content>
@@ -151,15 +150,15 @@ export default {
 
     items () {
       const menu = [
-        { title: 'Calendar', icon: '$vuetify.icons.calendar', to: { name: 'calendar' } },
-        { title: 'Announcements', icon: '$vuetify.icons.whistle', to: { name: 'announcements' } },
+        { title: 'Calendar', icon: '$vuetify.icons.calendarRounded', to: { name: 'calendar' } },
+        { title: 'Announcements', icon: '$vuetify.icons.bullhorn', to: { name: 'announcements' } },
 
-        { title: 'Teams', icon: '$vuetify.icons.tshirt', to: { name: 'teams' } },
-        { title: 'In-House Sport', icon: '$vuetify.icons.cup', to: { name: 'in-house' } },
-        { title: 'Sports Records', icon: '$vuetify.icons.stopwatch', to: { name: 'records' } },
+        { title: 'Teams', icon: '$vuetify.icons.teamsAlt', to: { name: 'teams' } },
+        { title: 'In-House Sport', icon: '$vuetify.icons.cupAlt', to: { name: 'in-house' } },
+        { title: 'Sports Records', icon: '$vuetify.icons.stopwatchAlt', to: { name: 'records' } },
         {
           title: 'Directory',
-          icon: '$vuetify.icons.ibook',
+          icon: 'mdi-information',
           to: { name: 'management-sports' },
           items: [
             { title: 'Sports Map', to: { name: 'directory-sports-map' } },
@@ -169,14 +168,14 @@ export default {
       ]
 
       const dashboard = (this.isLoggedIn)
-        ? { title: 'Sports Dashboard', icon: '$vuetify.icons.dashboard', exact: true, to: { name: 'dashboard' } }
-        : { title: 'Sports Home', icon: '$vuetify.icons.dashboard', exact: true, to: { name: 'portal' } }
+        ? { title: 'Sports Dashboard', icon: '$vuetify.icons.home', exact: true, to: { name: 'dashboard' } }
+        : { title: 'Sports Home', icon: '$vuetify.icons.home', exact: true, to: { name: 'portal' } }
       menu.unshift(dashboard)
 
       if (this.canSeeOrganising) {
         menu.splice(3, 0, {
           title: 'Organising',
-          icon: '$vuetify.icons.list',
+          icon: '$vuetify.icons.organising',
           items: [
             { title: 'Today\'s Teams', to: { name: 'organising-todays-teams' } },
             { title: 'Confirm Fixtures', to: { name: 'organising-confirm-fixtures' } },
@@ -201,19 +200,37 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-.border-radius-0
-  border-radius: 0
-  &::before
-    border-radius: 0
-.active-link
-  box-shadow: inset 4px 0 0 0 #FFFFFF
-</style>
-
 <style lang="sass">
-.v-list-group__header
-  border-radius: 0!important
-  margin-bottom: 0!important
+.nav-list
+  .v-list-item
+    padding-top: 8px
+    padding-bottom: 8px
+    border-radius: 0
+    .v-icon
+      color: var(--v-info-lighten3)
+    .v-list-item__title
+      color: var(--v-info-lighten5)
+      font-size: .9125rem
+    &::before
+      border-radius: 0
+    &:hover
+      background-color: var(--v-primary-darken1)
+      &::before
+        background: none
+    &.v-list-item--active
+      background-color: var(--v-primary-darken1)
+      box-shadow: inset 4px 0 0 0 #FFFFFF
+      .v-icon
+        color: white
+      .v-list-item__title
+        color: white
+      &::before
+        opacity: 0
   &::before
     border-radius: 0!important
+  .v-list-group__header
+    padding-top: 8px
+    padding-bottom: 8px
+    border-radius: 0
+    margin-bottom: 0!important
 </style>
