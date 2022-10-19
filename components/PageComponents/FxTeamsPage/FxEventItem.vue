@@ -72,7 +72,6 @@ export default {
   },
 
   data: () => ({
-    sport: {},
     EventType,
     EventResult,
   }),
@@ -82,7 +81,7 @@ export default {
       return this.$vuetify.breakpoint.smAndDown
     },
     style () {
-      return { borderLeft: `${this.sport?.color} 8px solid` }
+      return { borderLeft: `${this.event.sport?.color} 8px solid` }
     },
     hasResult () {
       return [
@@ -95,10 +94,6 @@ export default {
         EventResult.SEE_EVENT_RESULTS,
       ].includes(this.me.overallResult)
     },
-  },
-
-  async created () {
-    this.sport = await this.$store.dispatch('api/sports/fetch', this.event.sportId)
   },
 }
 </script>
