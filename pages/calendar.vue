@@ -29,7 +29,7 @@
             link
             :to="{ name: 'events-add' }"
           >
-            <v-icon class="mr-1">
+            <v-icon>
               $vuetify.icons.calendarAdd
             </v-icon>Create Event
           </v-btn>

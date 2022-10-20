@@ -10,44 +10,6 @@
       :text="item.text"
     />
   </v-item-group>
-
-<!--  <v-item-group-->
-<!--    v-model="selected"-->
-<!--  >-->
-<!--    <v-row>-->
-<!--      <v-col-->
-<!--        v-for="item in items"-->
-<!--        :key="item.value"-->
-<!--        cols="4"-->
-<!--        md="4"-->
-<!--      >-->
-<!--        <v-item v-slot="{ active, toggle }">-->
-<!--          <v-sheet v-ripple :class="active ? 'base border active' : 'base border'" @click="toggle">-->
-<!--            <v-container class="fill-height">-->
-<!--              <v-row-->
-<!--                align="center"-->
-<!--                justify="center"-->
-<!--              >-->
-<!--                <v-col class="pb-0 text-center">-->
-<!--                  <v-img class="mx-auto text&#45;&#45;primary" width="50" :src="item.img" />-->
-<!--                </v-col>-->
-<!--              </v-row>-->
-<!--              <v-row>-->
-<!--                <v-col class="pt-0 text-center">-->
-<!--                  <span class="label">{{ item.text }}</span>-->
-<!--                </v-col>-->
-<!--              </v-row>-->
-<!--            </v-container>-->
-<!--            <v-btn class="float-right" icon style="position: relative; bottom: 40px;">-->
-<!--              <v-icon v-if="active" dark color="brand">-->
-<!--                $vuetify.icons.tickFilled-->
-<!--              </v-icon>-->
-<!--            </v-btn>-->
-<!--          </v-sheet>-->
-<!--        </v-item>-->
-<!--      </v-col>-->
-<!--    </v-row>-->
-<!--  </v-item-group>-->
 </template>
 
 <script>

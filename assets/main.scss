@@ -19,6 +19,14 @@ $box-shadow: 0 1px 4px 0 rgb(0 0 0 / 15%);
 }
 
 .v-btn {
+  font-size: .925rem;
+  letter-spacing: normal;
+  .v-icon {
+    margin-right: 8px;
+  }
+}
+
+.v-btn {
   font-weight: 600!important;
 }
 

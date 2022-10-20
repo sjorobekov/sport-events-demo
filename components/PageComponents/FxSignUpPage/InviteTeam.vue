@@ -51,9 +51,6 @@
               block
               @click="addMore"
             >
-              <v-icon class="mr-1">
-                mdi-plus-circle-outline
-              </v-icon>
               Add More
             </v-btn>
 
