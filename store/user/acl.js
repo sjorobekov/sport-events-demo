@@ -44,4 +44,8 @@ export const getters = {
   canManageSportLocation (_, getters) {
     return [UserRole.ADMIN, UserRole.SUPER_ADMIN].includes(getters.role)
   },
+
+  canManageSportsRecords (_, getters) {
+    return [UserRole.ADMIN].includes(getters.role)
+  },
 }

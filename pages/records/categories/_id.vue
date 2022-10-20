@@ -33,6 +33,9 @@ import FxRecordsCategoryForm from '~/components/FxRecordsCategoryForm.vue'
 export default {
   name: 'RecordsCategoryEditPage',
   components: { FxRecordsCategoryForm },
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canManageSportsRecords'],
+  },
   data: () => ({
     formData: {},
     loading: false,

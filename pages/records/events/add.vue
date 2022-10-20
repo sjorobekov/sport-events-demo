@@ -33,6 +33,9 @@ import FxRecordsEventForm from '~/components/FxRecordsEventForm.vue'
 export default {
   name: 'RecordsEventsAddPage',
   components: { FxRecordsEventForm },
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canManageSportsRecords'],
+  },
   data: () => ({
     formData: {},
     loading: false,

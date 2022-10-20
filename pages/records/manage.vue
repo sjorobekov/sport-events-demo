@@ -57,7 +57,9 @@
 export default {
   name: 'RecordsManage',
   data: () => ({}),
-
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canManageSportsRecords'],
+  },
   computed: {
     items () {
       return [
