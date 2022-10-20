@@ -91,8 +91,23 @@ export const mutations: MutationTree<RootState> = {
     state.subdomain = val
   },
 
-  school (state, val: School) {
-    state.school = val
+  school (state, school: School) {
+    state.school = {
+      id: school.id,
+      name: school.name,
+      logo: school.logo,
+      color: school.color ?? '#193F66',
+      portalProtected: school.portalProtected,
+      teamSheetsProtected: school.teamSheetsProtected,
+      announcementsProtected: school.announcementsProtected,
+      email: school.email,
+      city: school.city,
+      country: school.country,
+      state: school.state,
+      street: school.street,
+      zip: school.zip,
+      website: school.website,
+    }
   },
 
   sportLocations (state, locations: Array<Location>) {
@@ -107,16 +122,7 @@ export const mutations: MutationTree<RootState> = {
 export const actions: ActionTree<RootState, RootState> = {
   async fetchSchoolByPortalAddress ({ commit, getters }) {
     const school = await this.$axios.$get(`/api/v1/portalAddress/${getters.subdomain}`)
-    commit('school', {
-      id: school.id,
-      name: school.name,
-      logo: school.logo,
-      color: school.color ?? 'var(--v-brand-base)',
-      portalProtected: school.portalProtected,
-      teamSheetsProtected: school.teamSheetsProtected,
-      announcementsProtected: school.announcementsProtected,
-      email: school.email,
-    })
+    commit('school', school)
     commit('api/schools/cache', school, { root: true })
   },
 

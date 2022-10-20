@@ -35,6 +35,7 @@ export interface School {
   announcementsProtected?: boolean
   email?: string
   password?: string
+  color?: string
   emailDomains?: Array<string>,
 }
 
