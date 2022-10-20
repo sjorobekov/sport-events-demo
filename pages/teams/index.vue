@@ -102,6 +102,7 @@ export default {
 
       const sports = []
       this.teamsBySport = {}
+
       teams.forEach((team) => {
         if (!this.teamsBySport[team.sportId]) {
           this.$set(this.teamsBySport, team.sportId, [])
@@ -109,7 +110,11 @@ export default {
         this.teamsBySport[team.sportId].push(team)
         sports.push(team.sport)
       })
+
       this.sports = [...new Map(sports.map(v => [v.id, v])).values()]
+        .sort((a, b) => {
+          return a.name > b.name ? 1 : -1
+        })
     },
   },
 }
