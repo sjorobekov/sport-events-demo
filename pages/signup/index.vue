@@ -39,7 +39,7 @@
                   :user="formData.user"
                   :school="matchedSchool"
                   @accepted="step = STEP.REQUEST_SENT"
-                  @decline="step = STEP.CREATE_SCHOOL_PROFILE"
+                  @decline="step = STEP.NOT_YOUR_SCHOOL"
                 />
               </v-tab-item>
               <v-tab-item>
@@ -63,6 +63,9 @@
               <v-tab-item>
                 <SignUpComplete :link="link" />
               </v-tab-item>
+              <v-tab-item>
+                <NotYourSchool />
+              </v-tab-item>
             </v-tabs-items>
           </v-col>
         </v-row>
@@ -82,6 +85,7 @@ import InviteTeam from '@/components/PageComponents/FxSignUpPage/InviteTeam'
 import SignUpComplete from '@/components/PageComponents/FxSignUpPage/SignUpComplete'
 import IsThisYourSchool from '@/components/PageComponents/FxSignUpPage/IsThisYourSchool'
 import RequestSent from '@/components/PageComponents/FxSignUpPage/RequestSent'
+import NotYourSchool from '@/components/PageComponents/FxSignUpPage/NotYourSchool'
 
 const STEP = Object.freeze({
   YOUR_DETAILS: 0,
@@ -93,11 +97,13 @@ const STEP = Object.freeze({
   CHOOSE_PASSWORD: 6,
   INVITE_YOUR_TEAM: 7,
   WELCOME_TO_FIXTURR: 8,
+  NOT_YOUR_SCHOOL: 9,
 })
 
 export default {
   name: 'SignUpPage',
   components: {
+    NotYourSchool,
     RequestSent,
     IsThisYourSchool,
     SignUpComplete,
