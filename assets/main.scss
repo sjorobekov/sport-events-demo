@@ -98,5 +98,5 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 }
 
 .v-expansion-panel::before {
-  box-shadow: 0 0 0 1px var(--v-info-lighten2)!important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
