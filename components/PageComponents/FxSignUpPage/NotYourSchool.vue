@@ -1,6 +1,6 @@
 <template>
   <div style="max-width: 506px" class="mx-auto">
-    <v-img class="mx-auto mb-4" :src="require('./img/school.svg')" width="58" />
+    <v-img class="mx-auto mb-4" :src="img" width="58" />
 
     <h1 class="text-h1 text-center mb-2">
       Not Your School?
@@ -20,13 +20,12 @@
 </template>
 
 <script>
+import img from './img/school.svg'
+
 export default {
   name: 'NotYourSchool',
-  props: {
-    school: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
+  data: () => ({
+    img,
+  }),
 }
 </script>
