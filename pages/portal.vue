@@ -186,7 +186,6 @@ export default {
   }),
 
   async fetch () {
-    await this.$store.dispatch('context/fetchSchool', this.contextSchoolId)
     this.images = await this.$store.dispatch('api/schools/getImages', this.school.id)
     await this.getEvents(this.today)
   },
@@ -308,9 +307,6 @@ export default {
   width: 100%;
   height: 150px;
   background: linear-gradient(to bottom,  rgba(137,255,241,0) 0%,rgba(0,0,0,1) 100%);
-}
-.link-width {
-  width: 100%;
 }
 </style>
 <style>
