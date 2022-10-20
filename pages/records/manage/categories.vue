@@ -1,0 +1,110 @@
+<template>
+  <v-card flat outlined>
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-title class="text-h4">
+          Categories
+        </v-list-item-title>
+        <v-list-item-subtitle />
+      </v-list-item-content>
+      <v-list-item-action>
+        <v-btn
+          depressed
+          dark
+          color="brand"
+          link
+          :to="{ name: 'records-categories-add' }"
+        >
+          <v-icon>$vuetify.icons.plusOutline</v-icon>Add New Record Category
+        </v-btn>
+      </v-list-item-action>
+    </v-list-item>
+    <client-only>
+      <v-data-table
+        :headers="headers"
+        :items="items"
+        hide-default-footer
+        disable-pagination
+      >
+        <template #item.action="{ item }">
+          <v-menu>
+            <template #activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on">
+                <v-icon color="info lighten-1">
+                  $vuetify.icons.threeDots
+                </v-icon>
+              </v-btn>
+            </template>
+            <v-list class="grey lighten-3">
+              <v-list-item link :to="{ name: 'records-categories-id', params: { id: item.id } }">
+                <v-list-item-content>
+                  <v-list-item-title class="text--info text--darken-1">
+                    Edit Category
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item @click="remove(item)">
+                <v-list-item-content>
+                  <v-list-item-title class="text--info text--darken-1">
+                    Delete Category
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </template>
+      </v-data-table>
+    </client-only>
+  </v-card>
+</template>
+
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  name: 'RecordsManageCategories',
+  data: () => ({
+    headers: [
+      {
+        text: 'Category',
+        sortable: true,
+        value: 'name',
+      },
+      { text: 'Action', value: 'action', sortable: false },
+    ],
+    items: [],
+    loading: false,
+  }),
+
+  async fetch () {
+    this.loading = true
+    try {
+      this.items = await this.$store.dispatch('api/sportsRecordCategories/list', {
+        schoolId: this.schoolId,
+      })
+    } finally {
+      this.loading = false
+    }
+  },
+
+  computed: {
+    ...mapGetters({
+      schoolId: 'context/schoolId',
+    }),
+  },
+
+  methods: {
+    remove (item) {
+      if (!confirm('Are you sure?')) {
+        return
+      }
+
+      this.$store.dispatch('api/sportsRecordCategories/remove', item).then(() => {
+        const index = this.items.indexOf(item)
+        this.items.splice(index, 1)
+      }).catch(() => {
+        this.$toast.error('Unknown Error')
+      })
+    },
+  },
+}
+</script>

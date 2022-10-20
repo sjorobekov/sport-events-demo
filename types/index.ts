@@ -309,3 +309,21 @@ export interface StudentsParticipation extends Student {
   totalEvents: number,
   sports: number,
 }
+
+export interface SportsRecordCategory {
+  readonly id: string
+  name: string
+  schoolId: string
+  readonly createdAt: string
+  readonly updatedAt: string
+}
+
+export interface SportsRecordEvent {
+  readonly id: string
+  name: string
+  schoolId: string
+  sportId: string
+  readonly sport: Sport
+  readonly createdAt: string
+  readonly updatedAt: string
+}
