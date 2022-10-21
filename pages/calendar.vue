@@ -3,7 +3,6 @@
     <v-app-bar
       elevation="0"
       height="172"
-      app
       fixed
       color="#F1F5F9"
       class="calendar-bar"
@@ -44,52 +43,52 @@
         />
       </v-container>
     </v-app-bar>
+    <div class="calendar-content">
+      <v-expand-transition>
+        <div v-if="showFilters">
+          <FxPill class="mb-4">
+            Filters
+          </FxPill>
 
-    <v-expand-transition>
-      <div v-if="showFilters">
-        <FxPill class="mb-4">
-          Filters
-        </FxPill>
+          <v-row>
+            <v-col>
+              <FxCalendarStaffFilter v-model="filter.leadIds" :items="leadIds" />
+            </v-col>
+            <v-col>
+              <FxCalendarEventFilter v-model="filter.eventTypes" :items="eventTypes" />
+            </v-col>
+            <v-col>
+              <FxCalendarOpponentFilter v-model="filter.opponentIds" :items="opponentIds" />
+            </v-col>
+            <v-col>
+              <FxCalendarAgeFilter v-model="filter.ageGroups" :items="ageGroups" />
+            </v-col>
+            <v-col>
+              <FxCalendarLocationFilter v-model="filter.locations" />
+            </v-col>
+            <v-col>
+              <FxCalendarStatusFilter v-model="filter.privacy" />
+            </v-col>
+          </v-row>
+        </div>
+      </v-expand-transition>
+      <div
+        v-for="key in eventSortedDates"
+        :id="`date-${key}`"
+        :key="key"
+        v-intersect="{
+          handler: onIntersect(key),
+          options: {
+            threshold: [1.0]
+          }
+        }"
+      >
+        <FxCalendarPill :value="key" class="my-4" />
 
-        <v-row>
-          <v-col>
-            <FxCalendarStaffFilter v-model="filter.leadIds" :items="leadIds" />
-          </v-col>
-          <v-col>
-            <FxCalendarEventFilter v-model="filter.eventTypes" :items="eventTypes" />
-          </v-col>
-          <v-col>
-            <FxCalendarOpponentFilter v-model="filter.opponentIds" :items="opponentIds" />
-          </v-col>
-          <v-col>
-            <FxCalendarAgeFilter v-model="filter.ageGroups" :items="ageGroups" />
-          </v-col>
-          <v-col>
-            <FxCalendarLocationFilter v-model="filter.locations" />
-          </v-col>
-          <v-col>
-            <FxCalendarStatusFilter v-model="filter.privacy" />
-          </v-col>
-        </v-row>
+        <v-card v-for="event in eventsGroupedByDate[key]" :key="`event-${event.id}`" class="mb-2">
+          <FxCalendarEvent :value="event" />
+        </v-card>
       </div>
-    </v-expand-transition>
-
-    <div
-      v-for="key in eventSortedDates"
-      :id="`date-${key}`"
-      :key="key"
-      v-intersect="{
-        handler: onIntersect(key),
-        options: {
-          threshold: [1.0]
-        }
-      }"
-    >
-      <FxCalendarPill :value="key" class="my-4" />
-
-      <v-card v-for="event in eventsGroupedByDate[key]" :key="`event-${event.id}`" class="mb-2">
-        <FxCalendarEvent :value="event" />
-      </v-card>
     </div>
   </div>
 </template>
@@ -372,13 +371,19 @@ export default {
 
 <style scoped lang="scss">
 .calendar-bar {
+  padding-top: 3px;
   top: 92px;
   z-index: 3;
   border-bottom: solid 8px var(--v-primary-base)!important;
+  margin-left: 0;
+}
+.calendar-content {
+  margin-top: 80px;
 }
 @media only screen and (min-width: 960px) {
   .calendar-bar {
-    top: 58px;
+    top: 55px;
+    margin-left: 224px;
   }
 }
 </style>
