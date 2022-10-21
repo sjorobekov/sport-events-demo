@@ -36,6 +36,9 @@ export default {
   components: {
     FxInHouseTeamForm,
   },
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canManageInHouseTeams'],
+  },
   data: () => ({
     formData: { },
     loading: false,

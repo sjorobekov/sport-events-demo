@@ -1,16 +1,23 @@
 export default function ({ store, route, error, redirect }) {
-  if (!(route.meta && route.meta[0])) {
+  if (!(route.meta)) {
     return
   }
 
-  const { isAllowed } = route.meta[0]
-  if (isAllowed) {
+  const isAllowedCheckers = route.meta.filter(({ isAllowed }) => {
+    return typeof isAllowed === 'function'
+  })
+
+  if (isAllowedCheckers.length > 0) {
     if (!store.getters['context/me']) {
       return redirect({ name: 'signin' })
     }
+  } else {
+    return
+  }
 
-    if (!isAllowed(store)) {
-      error({ statusCode: 403, message: 'You don\'t have access to this page' })
-    }
+  const result = isAllowedCheckers.every(({ isAllowed }) => isAllowed(store))
+
+  if (!result) {
+    return error({ statusCode: 403, message: 'You don\'t have access to this page' })
   }
 }

@@ -14,6 +14,9 @@ export default {
   components: {
     FxSchoolCustomisationPage,
   },
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canCustomizeSchool'],
+  },
 
   computed: {
     ...mapGetters({

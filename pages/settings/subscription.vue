@@ -5,5 +5,8 @@
 <script>
 export default {
   name: 'SubscriptionsPage',
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canManageSubscription'],
+  },
 }
 </script>

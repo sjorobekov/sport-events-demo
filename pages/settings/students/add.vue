@@ -11,6 +11,9 @@ export default {
   components: {
     FxStudentAddPage,
   },
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canManageStudents'],
+  },
   head: () => ({
     title: 'Add Student',
   }),

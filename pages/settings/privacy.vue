@@ -67,6 +67,10 @@ export default {
     next()
   },
 
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canManageSchoolPrivacy'],
+  },
+
   data: () => ({
     formData: {},
     original: {},

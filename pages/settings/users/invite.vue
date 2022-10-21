@@ -4,7 +4,7 @@
       <v-list-item class="px-0">
         <v-list-item-content>
           <v-list-item-title class="text-h3">
-            Invite User
+            Invite User {{ $store.getters['user/acl/canInviteUser'] }}
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -38,6 +38,9 @@ import UserInviteForm from '@/components/FxUserInviteForm'
 export default {
   name: 'UserInvitePage',
   components: { UserInviteForm },
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canInviteUser'],
+  },
   data: () => ({
     formData: {},
     loading: false,

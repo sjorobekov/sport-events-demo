@@ -161,6 +161,9 @@ export default {
     FxProfileForm,
     FxAvatar,
   },
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canManageUsers'],
+  },
   data: () => ({
     formData: {
       enabled: true,

@@ -85,6 +85,9 @@ import FxAge from '@/components/FxAge'
 export default {
   name: 'SchoolStudents',
   components: { FxGender, FxAge },
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canManageStudents'],
+  },
   data: () => ({
     headers: [
       { text: 'First Name', value: 'firstname' },

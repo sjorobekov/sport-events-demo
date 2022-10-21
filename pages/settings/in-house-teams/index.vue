@@ -59,8 +59,10 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'AdminInHouseSportsPage',
-  layout: 'admin',
+  name: 'InHouseSportsPage',
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canManageInHouseTeams'],
+  },
   data: () => ({
     headers: [
       {

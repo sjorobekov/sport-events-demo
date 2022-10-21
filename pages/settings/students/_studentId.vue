@@ -9,6 +9,9 @@ import FxStudentEditPage from '@/components/PageComponents/FxStudentEditPage'
 export default {
   name: 'SettingsStudentEditPage',
   components: { FxStudentEditPage },
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canManageStudents'],
+  },
   head: () => ({ title: 'Edit Student' }),
   computed: {
     ...mapGetters({

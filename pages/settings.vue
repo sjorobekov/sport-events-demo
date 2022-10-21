@@ -112,6 +112,12 @@ export default {
     ...mapGetters({
       school: 'context/school',
       country: 'countries/name',
+      canManageUsers: 'user/acl/canManageUsers',
+      canManageInHouseTeams: 'user/acl/canManageInHouseTeams',
+      canManageStudents: 'user/acl/canManageStudents',
+      canCustomizeSchool: 'user/acl/canCustomizeSchool',
+      canManageSubscription: 'user/acl/canManageSubscription',
+      canManageSchoolPrivacy: 'user/acl/canManageSchoolPrivacy',
     }),
     location () {
       return [this.school.city, this.country(this.school.country)].join(', ')
@@ -119,12 +125,12 @@ export default {
     items () {
       return [
         { text: 'Profile', icon: 'mdi-account-circle', exact: true, to: { name: 'settings' } },
-        { text: 'In-House Sport', icon: '$vuetify.icons.trophy', to: { name: 'settings-in-house-teams' } },
-        { text: 'Students', icon: '$vuetify.icons.student', to: { name: 'settings-students' } },
-        { text: 'Privacy', icon: '$vuetify.icons.shield', to: { name: 'settings-privacy' } },
-        { text: 'Users', icon: '$vuetify.icons.team', to: { name: 'settings-users' } },
-        { text: 'Customisation', icon: '$vuetify.icons.settings', to: { name: 'settings-customisation' } },
-        { text: 'Subscription', icon: '$vuetify.icons.repeat', to: { name: 'settings-subscription' } },
+        ...(this.canManageInHouseTeams ? [{ text: 'In-House Sport', icon: '$vuetify.icons.trophy', to: { name: 'settings-in-house-teams' } }] : []),
+        ...(this.canManageStudents ? [{ text: 'Students', icon: '$vuetify.icons.student', to: { name: 'settings-students' } }] : []),
+        ...(this.canManageSchoolPrivacy ? [{ text: 'Privacy', icon: '$vuetify.icons.shield', to: { name: 'settings-privacy' } }] : []),
+        ...(this.canManageUsers ? [{ text: 'Users', icon: '$vuetify.icons.team', to: { name: 'settings-users' } }] : []),
+        ...(this.canCustomizeSchool ? [{ text: 'Customisation', icon: '$vuetify.icons.settings', to: { name: 'settings-customisation' } }] : []),
+        ...(this.canManageSubscription ? [{ text: 'Subscription', icon: '$vuetify.icons.repeat', to: { name: 'settings-subscription' } }] : []),
       ]
     },
 

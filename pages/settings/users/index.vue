@@ -91,6 +91,9 @@ import FxTimeAgo from '@/components/FxTimeAgo'
 export default {
   name: 'SchoolUsers',
   components: { FxUserStatus, FxUserRole, FxTimeAgo },
+  meta: {
+    isAllowed: ({ getters }) => getters['user/acl/canManageUsers'],
+  },
   data: () => ({
     headers: [
       {
