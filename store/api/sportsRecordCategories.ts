@@ -15,11 +15,7 @@ export const actions: ActionTree<RootState, RootState> = {
   },
 
   save (_, payload: SportsRecordCategory): Promise<SportsRecordCategory> {
-    const { id, schoolId } = payload
-
-    const data = {
-      name: payload.name,
-    }
+    const { id, schoolId, ...data } = payload
 
     if (payload.id) {
       return this.$axios.$put(`/api/v1/schools/${schoolId}/sports_record_categories/${id}`, data)

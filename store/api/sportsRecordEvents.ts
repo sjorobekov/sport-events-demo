@@ -7,7 +7,6 @@ export type RootState = ReturnType<typeof state>
 
 type ListPayload = {
   schoolId: string
-  sportId: string
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -16,12 +15,7 @@ export const actions: ActionTree<RootState, RootState> = {
   },
 
   save (_, payload: SportsRecordEvent): Promise<SportsRecordEvent> {
-    const { id, schoolId } = payload
-
-    const data = {
-      name: payload.name,
-      sportId: payload.sportId,
-    }
+    const { id, schoolId, ...data } = payload
 
     if (payload.id) {
       return this.$axios.$put(`/api/v1/schools/${schoolId}/sports_record_events/${id}`, data)

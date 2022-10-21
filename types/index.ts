@@ -328,3 +328,22 @@ export interface SportsRecordEvent {
   readonly createdAt: string
   readonly updatedAt: string
 }
+
+export interface SportsRecord {
+  readonly id: string
+  name: string
+  schoolId: string
+  readonly school?: School
+  sportId: string
+  readonly sport?: Sport
+  sportsRecordEventId: string
+  readonly sportsRecordEvent?: SportsRecordEvent
+  sportsRecordCategoryId: string
+  readonly sportsRecordCategory?: SportsRecordCategory
+  studentId: string
+  readonly student?: Student
+  score: string
+  date: string
+  readonly createdAt: string
+  readonly updatedAt: string
+}
