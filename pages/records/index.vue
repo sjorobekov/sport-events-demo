@@ -1,87 +1,127 @@
 <template>
   <div>
     <h1>Sports Records</h1>
-    <v-container class="d-flex justify-end">
-      <v-btn outlined link :to="{ name: 'records-manage-events' }">
-        Manage
-      </v-btn>
-      <v-btn
-        depressed
-        dark
-        color="primary"
-        class="ml-2"
-        link
-        :to="{ name: 'records-add' }"
-      >
-        <v-icon>mdi-plus-circle-outline</v-icon>
-        Add Sports Record
-      </v-btn>
-    </v-container>
-    <v-container>
-      <client-only>
-        <v-data-table
-          :headers="headers"
-          :items="items"
-          class="elevation-0"
-          :server-items-length="meta.total"
-          hide-default-footer
-          :sort-by.sync="query.orderBy"
-          :sort-desc.sync="query.orderDesc"
-          :page="query.page"
-          must-sort
-        >
-          <template #item.event="{ item }">
-            <span>{{ item.sportsRecordEvent.name }}</span>
-          </template>
-          <template #item.category="{ item }">
-            <span>{{ item.sportsRecordCategory.name }}</span>
-          </template>
-          <template #item.student="{ item }">
-            <span>{{ item.student.firstname }} {{ item.student.lastname }}</span>
-          </template>
-          <template #item.date="{ item }">
-            <FxDateFormat :date="item.date" output-format="dd-MM-yyyy" />
-          </template>
-          <template #item.action="{ item }">
-            <v-menu>
+    <v-row>
+      <v-col cols="7">
+        <v-row no-gutters class="d-flex flex-wrap">
+          <v-col cols="3">
+            <FxSportSelect class="pr-2" clearable icon @input="update('sportId', $event)" />
+          </v-col>
+          <v-col cols="3">
+            <FxRecordEventSelect class="pr-2" clearable icon @input="update('sportsRecordEventId', $event)" />
+          </v-col>
+          <v-col cols="3">
+            <FxRecordCategorySelect class="pr-2" clearable icon @input="update('sportsRecordCategoryId', $event)" />
+          </v-col>
+          <v-col cols="3">
+            <v-menu ref="menu" offset-y :close-on-content-click="false">
               <template #activator="{ on, attrs }">
-                <v-btn icon v-bind="attrs" v-on="on">
-                  <v-icon color="info lighten-1">
-                    $vuetify.icons.threeDots
-                  </v-icon>
-                </v-btn>
+                <v-text-field
+                  id="date"
+                  :value="formattedDate"
+                  readonly
+                  outlined
+                  dense
+                  clearable
+                  v-bind="attrs"
+                  placeholder="Date"
+                  prepend-inner-icon="mdi-clock-outline"
+                  v-on="on"
+                  @input="update('date', $event)"
+                />
               </template>
-              <v-list class="grey lighten-3">
-                <v-list-item link :to="{ name: 'records-id', params: { id: item.id } }">
-                  <v-list-item-content>
-                    <v-list-item-title class="text--info text--darken-1">
-                      Edit Record
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-                <v-list-item @click="remove(item)">
-                  <v-list-item-content>
-                    <v-list-item-title class="text--info text--darken-1">
-                      Delete Record
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
+              <v-date-picker
+                ref="picker"
+                :value="query.date"
+                @input="update('date', $event)"
+              />
             </v-menu>
-          </template>
-        </v-data-table>
-        <v-pagination
-          v-if="meta.total > 20"
-          v-model.lazy="query.page"
-          :length="meta.lastPage"
-        />
-      </client-only>
-    </v-container>
+          </v-col>
+        </v-row>
+      </v-col>
+      <v-spacer />
+      <v-col v-if="canManageSportsRecords" cols="4">
+        <div class="d-flex justify-end">
+          <v-btn class="mr-2" outlined link :to="{ name: 'records-manage-events' }">
+            Manage
+          </v-btn>
+          <v-btn
+            depressed
+            dark
+            color="primary"
+            link
+            :to="{ name: 'records-add' }"
+          >
+            <v-icon>mdi-plus-circle-outline</v-icon>
+            Add Sports Record
+          </v-btn>
+        </div>
+      </v-col>
+    </v-row>
+    <client-only>
+      <v-data-table
+        :headers="headers"
+        :items="items"
+        class="elevation-0"
+        :server-items-length="meta.total"
+        hide-default-footer
+        :sort-by.sync="query.orderBy"
+        :sort-desc.sync="query.orderDesc"
+        :page="query.page"
+        must-sort
+      >
+        <template #item.event="{ item }">
+          <span>{{ item.sportsRecordEvent.name }}</span>
+        </template>
+        <template #item.category="{ item }">
+          <span>{{ item.sportsRecordCategory.name }}</span>
+        </template>
+        <template #item.student="{ item }">
+          <span>{{ item.student.firstname }} {{ item.student.lastname }}</span>
+        </template>
+        <template #item.date="{ item }">
+          <FxDateFormat :date="item.date" output-format="dd-MM-yyyy" />
+        </template>
+        <template #item.action="{ item }">
+          <v-menu>
+            <template #activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on">
+                <v-icon color="info lighten-1">
+                  $vuetify.icons.threeDots
+                </v-icon>
+              </v-btn>
+            </template>
+            <v-list class="grey lighten-3">
+              <v-list-item link :to="{ name: 'records-id', params: { id: item.id } }">
+                <v-list-item-content>
+                  <v-list-item-title class="text--info text--darken-1">
+                    Edit Record
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item @click="remove(item)">
+                <v-list-item-content>
+                  <v-list-item-title class="text--info text--darken-1">
+                    Delete Record
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </template>
+      </v-data-table>
+      <v-pagination
+        v-if="meta.total > 20"
+        v-model.lazy="query.page"
+        :length="meta.lastPage"
+      />
+    </client-only>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import { DateTime } from 'luxon'
 
 export default {
   name: 'RecordsPage',
@@ -96,13 +136,13 @@ export default {
       { text: 'Student', value: 'student', sortable: false },
       { text: 'Record/Score', value: 'score' },
       { text: 'Date', value: 'date' },
-      { text: 'Action', value: 'action', sortable: false },
     ],
     items: [],
     query: {
       page: 1,
       orderBy: 'date',
       orderDesc: true,
+      date: '',
     },
     meta: { total: 0 },
   }),
@@ -124,7 +164,11 @@ export default {
   computed: {
     ...mapGetters({
       schoolId: 'context/schoolId',
+      canManageSportsRecords: 'user/acl/canManageSportsRecords',
     }),
+    formattedDate () {
+      return this.query.date ? DateTime.fromISO(this.query.date).toFormat('dd-MM-yyyy') : ''
+    },
   },
 
   watch: {
@@ -138,11 +182,15 @@ export default {
   },
 
   created () {
-    this.query = {
-      ...this.$route.query,
-      page: parseInt(this.$route.query.page) || 1,
-      orderDesc: this.$route.query.orderDesc !== 'false',
+    if (this.canManageSportsRecords) {
+      this.headers.push({ text: 'Action', value: 'action', sortable: false })
     }
+  },
+
+  methods: {
+    update (key, value) {
+      this.query = { ...this.query, [key]: value }
+    },
   },
 }
 </script>
