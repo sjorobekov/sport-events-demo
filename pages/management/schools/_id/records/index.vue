@@ -1,64 +1,17 @@
 <template>
-  <div>
-    <h1>Sports Records</h1>
-    <v-row>
-      <v-col cols="7">
-        <v-row no-gutters class="d-flex flex-wrap">
-          <v-col cols="3">
-            <FxSportSelect v-model="query.sportId" class="pr-2" clearable />
-          </v-col>
-          <v-col cols="3">
-            <FxRecordEventSelect v-model="query.sportsRecordEventId" class="pr-2" clearable />
-          </v-col>
-          <v-col cols="3">
-            <FxRecordCategorySelect v-model="query.sportsRecordCategoryId" class="pr-2" clearable />
-          </v-col>
-          <v-col cols="3">
-            <v-menu ref="menu" offset-y :close-on-content-click="false">
-              <template #activator="{ on, attrs }">
-                <v-text-field
-                  id="date"
-                  :value="formattedDate"
-                  readonly
-                  outlined
-                  dense
-                  clearable
-                  v-bind="attrs"
-                  placeholder="Date"
-                  prepend-inner-icon="mdi-clock-outline"
-                  background-color="white"
-                  v-on="on"
-                  @input="update('date', $event)"
-                />
-              </template>
-              <v-date-picker
-                ref="picker"
-                :value="query.date"
-                @input="update('date', $event)"
-              />
-            </v-menu>
-          </v-col>
-        </v-row>
-      </v-col>
-      <v-spacer />
-      <v-col v-if="canManageSportsRecords" cols="4">
-        <div class="d-flex justify-end">
-          <v-btn class="mr-2" outlined link :to="{ name: 'records-manage-events' }">
-            Manage
-          </v-btn>
-          <v-btn
-            depressed
-            dark
-            color="primary"
-            link
-            :to="{ name: 'records-add' }"
-          >
-            <v-icon>mdi-plus-circle-outline</v-icon>
-            Add Sports Record
-          </v-btn>
-        </div>
-      </v-col>
-    </v-row>
+  <v-card flat outlined>
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-title class="text-h4">
+          Sports Records
+        </v-list-item-title>
+      </v-list-item-content>
+      <v-list-item-action>
+        <v-btn outlined color="brand" :to="{ name: 'management-schools-id-records-add' }" link>
+          <v-icon>$vuetify.icons.plusOutline</v-icon>Add Record
+        </v-btn>
+      </v-list-item-action>
+    </v-list-item>
     <client-only>
       <v-data-table
         :headers="headers"
@@ -71,16 +24,11 @@
         :page="query.page"
         must-sort
       >
+        <template #item.sport="{ item }">
+          <span>{{ item.sport.name }}</span>
+        </template>
         <template #item.event="{ item }">
-          <v-list-item>
-            <v-list-item-avatar v-if="item.sport.icon">
-              <v-img :src="item.sport.icon" />
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.sportsRecordEvent.name" />
-              <v-list-item-subtitle v-text="item.sport.name" />
-            </v-list-item-content>
-          </v-list-item>
+          <span>{{ item.sportsRecordEvent.name }}</span>
         </template>
         <template #item.category="{ item }">
           <span>{{ item.sportsRecordCategory.name }}</span>
@@ -101,7 +49,7 @@
               </v-btn>
             </template>
             <v-list class="grey lighten-3">
-              <v-list-item link :to="{ name: 'records-id', params: { id: item.id } }">
+              <v-list-item link :to="{ name: 'management-schools-id-records-recordId', params: { recordId: item.id } }">
                 <v-list-item-content>
                   <v-list-item-title class="text--info text--darken-1">
                     Edit Record
@@ -125,22 +73,20 @@
         :length="meta.lastPage"
       />
     </client-only>
-  </div>
+  </v-card>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { DateTime } from 'luxon'
-
 export default {
-  name: 'RecordsPage',
+  name: 'AdminRecordsPage',
+  layout: 'admin',
   data: () => ({
     items: [],
     query: {
       page: 1,
       orderBy: 'date',
       orderDesc: true,
-      date: '',
     },
     meta: { total: 0 },
   }),
@@ -162,26 +108,20 @@ export default {
   computed: {
     ...mapGetters({
       schoolId: 'context/schoolId',
-      canManageSportsRecords: 'user/acl/canManageSportsRecords',
     }),
     formattedDate () {
       return this.query.date ? DateTime.fromISO(this.query.date).toFormat('dd-MM-yyyy') : ''
     },
     headers () {
       const headers = [
-        {
-          text: 'Event',
-          sortable: false,
-          value: 'event',
-        },
+        { text: 'Sport', value: 'sport', sortable: false },
+        { text: 'Event', value: 'event', sortable: false },
         { text: 'Category', value: 'category', sortable: false },
         { text: 'Student', value: 'student', sortable: false },
         { text: 'Record/Score', value: 'score' },
         { text: 'Date', value: 'date' },
+        { text: 'Action', value: 'action', sortable: false },
       ]
-      if (this.canManageSportsRecords) {
-        headers.push({ text: 'Action', value: 'action', sortable: false })
-      }
       return headers
     },
   },
@@ -197,9 +137,6 @@ export default {
   },
 
   methods: {
-    update (key, value) {
-      this.query = { ...this.query, [key]: value }
-    },
     remove (item) {
       if (!confirm('Are you sure?')) {
         return
