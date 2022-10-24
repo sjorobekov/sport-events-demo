@@ -12,7 +12,7 @@
         <FxGenderSelect clearable icon @input="update('gender', $event)" />
       </v-col>
       <v-col>
-        <FxSportSelect clearable icon @input="update('sportId', $event)" />
+        <FxSportSelect clearable @input="update('sportId', $event)" />
       </v-col>
     </v-row>
 

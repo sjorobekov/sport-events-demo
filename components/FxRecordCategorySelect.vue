@@ -4,7 +4,7 @@
     outlined
     dense
     :value="value"
-    :items="sports"
+    :items="categories"
     item-text="name"
     item-value="id"
     :placeholder="placeholder"
@@ -18,9 +18,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
-  name: 'FxSportAutocomplete',
+  name: 'FxRecordCategorySelect',
   props: {
     id: {
       type: String,
@@ -28,7 +29,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Sport',
+      default: 'Category',
     },
     value: {
       type: String,
@@ -40,15 +41,21 @@ export default {
     },
     icon: {
       type: String,
-      default: 'mdi-whistle-outline',
+      default: 'mdi-filter-outline',
     },
   },
   data: () => ({
-    sports: [],
+    categories: [],
   }),
 
   async fetch () {
-    this.sports = await this.$store.dispatch('api/sports/list')
+    this.categories = await this.$store.dispatch('api/sportsRecordCategories/list', { schoolId: this.schoolId })
+  },
+
+  computed: {
+    ...mapGetters({
+      schoolId: 'context/schoolId',
+    }),
   },
 }
 </script>

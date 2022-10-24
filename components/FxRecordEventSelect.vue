@@ -21,7 +21,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'FxRecordEventAutocomplete',
+  name: 'FxRecordEventSelect',
   props: {
     id: {
       type: String,

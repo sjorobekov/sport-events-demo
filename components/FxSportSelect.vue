@@ -1,5 +1,5 @@
 <template>
-  <v-select
+  <v-autocomplete
     :id="id"
     outlined
     dense
@@ -12,9 +12,9 @@
     @input="$emit('input', $event)"
   >
     <template v-if="icon" #prepend-inner>
-      <v-icon>mdi-whistle-outline</v-icon>
+      <v-icon v-text="icon" />
     </template>
-  </v-select>
+  </v-autocomplete>
 </template>
 
 <script>
@@ -39,8 +39,8 @@ export default {
       default: false,
     },
     icon: {
-      type: Boolean,
-      default: false,
+      type: String,
+      default: 'mdi-whistle-outline',
     },
   },
   data: () => ({

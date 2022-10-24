@@ -5,13 +5,13 @@
       <v-col cols="7">
         <v-row no-gutters class="d-flex flex-wrap">
           <v-col cols="3">
-            <FxSportAutocomplete v-model="query.sportId" class="pr-2" clearable />
+            <FxSportSelect v-model="query.sportId" class="pr-2" clearable />
           </v-col>
           <v-col cols="3">
-            <FxRecordEventAutocomplete v-model="query.sportsRecordEventId" class="pr-2" clearable />
+            <FxRecordEventSelect v-model="query.sportsRecordEventId" class="pr-2" clearable />
           </v-col>
           <v-col cols="3">
-            <FxRecordCategoryAutocomplete v-model="query.sportsRecordCategoryId" class="pr-2" clearable />
+            <FxRecordCategorySelect v-model="query.sportsRecordCategoryId" class="pr-2" clearable />
           </v-col>
           <v-col cols="3">
             <v-menu ref="menu" offset-y :close-on-content-click="false">
