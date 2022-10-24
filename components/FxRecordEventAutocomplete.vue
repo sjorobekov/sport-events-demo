@@ -1,5 +1,5 @@
 <template>
-  <v-select
+  <v-autocomplete
     :id="id"
     outlined
     dense
@@ -12,16 +12,16 @@
     @input="$emit('input', $event)"
   >
     <template v-if="icon" #prepend-inner>
-      <v-icon>mdi-clipboard-outline</v-icon>
+      <v-icon v-text="icon" />
     </template>
-  </v-select>
+  </v-autocomplete>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'FxRecordEventSelect',
+  name: 'FxRecordEventAutocomplete',
   props: {
     id: {
       type: String,
@@ -40,8 +40,8 @@ export default {
       default: false,
     },
     icon: {
-      type: Boolean,
-      default: false,
+      type: String,
+      default: 'mdi-clipboard-outline',
     },
   },
   data: () => ({

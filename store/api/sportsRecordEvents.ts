@@ -7,11 +7,14 @@ export type RootState = ReturnType<typeof state>
 
 type ListPayload = {
   schoolId: string
+  params: {
+    sportId: string
+  }
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  list (_, { schoolId }: ListPayload): Promise<Array<SportsRecordEvent>> {
-    return this.$axios.$get(`/api/v1/schools/${schoolId}/sports_record_events`)
+  list (_, { schoolId, params }: ListPayload): Promise<Array<SportsRecordEvent>> {
+    return this.$axios.$get(`/api/v1/schools/${schoolId}/sports_record_events`, { params })
   },
 
   save (_, payload: SportsRecordEvent): Promise<SportsRecordEvent> {

@@ -1,10 +1,10 @@
 <template>
-  <v-select
+  <v-autocomplete
     :id="id"
     outlined
     dense
     :value="value"
-    :items="categories"
+    :items="sports"
     item-text="name"
     item-value="id"
     :placeholder="placeholder"
@@ -12,16 +12,15 @@
     @input="$emit('input', $event)"
   >
     <template v-if="icon" #prepend-inner>
-      <v-icon>mdi-clipboard-outline</v-icon>
+      <v-icon v-text="icon" />
     </template>
-  </v-select>
+  </v-autocomplete>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
-  name: 'FxRecordCategorySelect',
+  name: 'FxSportAutocomplete',
   props: {
     id: {
       type: String,
@@ -29,7 +28,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Category',
+      default: 'Sport',
     },
     value: {
       type: String,
@@ -40,22 +39,16 @@ export default {
       default: false,
     },
     icon: {
-      type: Boolean,
-      default: false,
+      type: String,
+      default: 'mdi-whistle-outline',
     },
   },
   data: () => ({
-    categories: [],
+    sports: [],
   }),
 
   async fetch () {
-    this.categories = await this.$store.dispatch('api/sportsRecordCategories/list', { schoolId: this.schoolId })
-  },
-
-  computed: {
-    ...mapGetters({
-      schoolId: 'context/schoolId',
-    }),
+    this.sports = await this.$store.dispatch('api/sports/list')
   },
 }
 </script>

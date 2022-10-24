@@ -5,13 +5,13 @@
       <v-col cols="7">
         <v-row no-gutters class="d-flex flex-wrap">
           <v-col cols="3">
-            <FxSportSelect class="pr-2" clearable icon @input="update('sportId', $event)" />
+            <FxSportAutocomplete v-model="query.sportId" class="pr-2" clearable />
           </v-col>
           <v-col cols="3">
-            <FxRecordEventSelect class="pr-2" clearable icon @input="update('sportsRecordEventId', $event)" />
+            <FxRecordEventAutocomplete v-model="query.sportsRecordEventId" class="pr-2" clearable />
           </v-col>
           <v-col cols="3">
-            <FxRecordCategorySelect class="pr-2" clearable icon @input="update('sportsRecordCategoryId', $event)" />
+            <FxRecordCategoryAutocomplete v-model="query.sportsRecordCategoryId" class="pr-2" clearable />
           </v-col>
           <v-col cols="3">
             <v-menu ref="menu" offset-y :close-on-content-click="false">
@@ -26,6 +26,7 @@
                   v-bind="attrs"
                   placeholder="Date"
                   prepend-inner-icon="mdi-clock-outline"
+                  background-color="white"
                   v-on="on"
                   @input="update('date', $event)"
                 />
@@ -71,7 +72,15 @@
         must-sort
       >
         <template #item.event="{ item }">
-          <span>{{ item.sportsRecordEvent.name }}</span>
+          <v-list-item>
+            <v-list-item-avatar v-if="item.sport.icon">
+              <v-img :src="item.sport.icon" />
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title v-text="item.sportsRecordEvent.name" />
+              <v-list-item-subtitle v-text="item.sport.name" />
+            </v-list-item-content>
+          </v-list-item>
         </template>
         <template #item.category="{ item }">
           <span>{{ item.sportsRecordCategory.name }}</span>
@@ -126,17 +135,6 @@ import { DateTime } from 'luxon'
 export default {
   name: 'RecordsPage',
   data: () => ({
-    headers: [
-      {
-        text: 'Event',
-        sortable: false,
-        value: 'event',
-      },
-      { text: 'Category', value: 'category', sortable: false },
-      { text: 'Student', value: 'student', sortable: false },
-      { text: 'Record/Score', value: 'score' },
-      { text: 'Date', value: 'date' },
-    ],
     items: [],
     query: {
       page: 1,
@@ -169,6 +167,23 @@ export default {
     formattedDate () {
       return this.query.date ? DateTime.fromISO(this.query.date).toFormat('dd-MM-yyyy') : ''
     },
+    headers () {
+      const headers = [
+        {
+          text: 'Event',
+          sortable: false,
+          value: 'event',
+        },
+        { text: 'Category', value: 'category', sortable: false },
+        { text: 'Student', value: 'student', sortable: false },
+        { text: 'Record/Score', value: 'score' },
+        { text: 'Date', value: 'date' },
+      ]
+      if (this.canManageSportsRecords) {
+        headers.push({ text: 'Action', value: 'action', sortable: false })
+      }
+      return headers
+    },
   },
 
   watch: {
@@ -179,12 +194,6 @@ export default {
       },
       deep: true,
     },
-  },
-
-  created () {
-    if (this.canManageSportsRecords) {
-      this.headers.push({ text: 'Action', value: 'action', sortable: false })
-    }
   },
 
   methods: {
