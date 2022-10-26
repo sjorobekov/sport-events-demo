@@ -128,11 +128,7 @@
           </h2>
 
           <FxSportExpansionPanel v-for="sport in liveSports" :key="sport.id" class="mb-4" :item="sport" :subtitle="subtitle(liveEventsBySport[sport.id].length)">
-            <v-list class="py-0">
-              <v-list-item v-for="event in liveEventsBySport[sport.id]" :key="event.id" style="border-bottom: 1px solid #F1F5F9">
-                <FxPortalEventItem :event="event" :me="event.me" />
-              </v-list-item>
-            </v-list>
+            <FxPortalEventItem v-for="event in liveEventsBySport[sport.id]" :key="event.id" :event="event" :me="event.me" />
           </FxSportExpansionPanel>
         </div>
 
@@ -141,11 +137,7 @@
             Fixtures & Results
           </h2>
           <FxSportExpansionPanel v-for="sport in sports" :key="sport.id" class="mb-4" :item="sport" :subtitle="subtitle(fixturesBySport[sport.id].length)">
-            <v-list class="py-0">
-              <v-list-item v-for="event in fixturesBySport[sport.id]" :key="event.id" style="border-bottom: 1px solid #F1F5F9">
-                <FxPortalEventItem :event="event" :me="event.me" />
-              </v-list-item>
-            </v-list>
+            <FxPortalEventItem v-for="event in fixturesBySport[sport.id]" :key="event.id" :event="event" :me="event.me" />
           </FxSportExpansionPanel>
         </div>
       </v-col>
