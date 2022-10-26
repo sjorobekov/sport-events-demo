@@ -124,10 +124,12 @@
             <label for="finishTime">Finish Time</label>
             <v-text-field
               id="finishTime"
+              v-async-validate
               type="time"
               dense
               outlined
               placeholder="HH:MM"
+              :async-rules="[$rule.required]"
               :value="match.finishTime"
               @input="updateMatch(i, { finishTime: $event })"
             />
@@ -204,6 +206,7 @@
             id="lead"
             :school-id="schoolId"
             :value="eventForm.leadId"
+            :async-rules="[$rule.required]"
             placeholder="Select Lead Staff Member"
             @input="updateEvent('leadId', $event)"
           />

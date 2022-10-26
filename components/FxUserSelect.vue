@@ -1,10 +1,12 @@
 <template>
   <v-autocomplete
     :id="id"
+    v-async-validate
     outlined
     dense
     :value="value"
     :items="items"
+    :async-rules="asyncRules"
     :search-input.sync="search"
     item-text="firstname"
     item-value="id"
@@ -41,6 +43,10 @@ export default {
     placeholder: {
       type: String,
       default: undefined,
+    },
+    asyncRules: {
+      type: Array,
+      default: () => [],
     },
     hideDetails: {
       type: Boolean,
