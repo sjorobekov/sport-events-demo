@@ -3,11 +3,11 @@
 </template>
 
 <script>
-import EventItem from './EventItem/EventItem'
-import InHouseEventItem from './InHouseEventItem/InHouseEventItem'
+import EventItem from './EventItem'
+import InHouseEventItem from './InHouseEventItem'
 
 export default {
-  name: 'FxCalendarEvent',
+  name: 'FxCalendarEventMobile',
 
   components: {
     EventItem,

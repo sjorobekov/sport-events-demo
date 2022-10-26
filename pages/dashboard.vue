@@ -53,7 +53,7 @@
 <script>
 import { DateTime } from 'luxon'
 import { mapGetters } from 'vuex'
-import FxCalendarEvent from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/FxCalendarEvent'
+import FxCalendarEvent from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent'
 import FxDashboardPageCard from '@/components/PageComponents/FxDashboardPage/FxDashboardPageCard'
 import FxNoEventsState from '~/components/PageComponents/FxDashboardPage/FxNoEventsState.vue'
 

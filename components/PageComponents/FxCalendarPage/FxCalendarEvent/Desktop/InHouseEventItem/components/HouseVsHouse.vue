@@ -6,11 +6,11 @@
     <template #status>
       <FxInHouseMatchStatus v-if="value.overallResult" :overall-result="value.overallResult" />
     </template>
-    <template #left="{ compact }">
-      <FxInHouseTeamListItem class="pl-0" :participant="value.homeTeam" :icon-on-right="!compact" />
+    <template #left>
+      <FxInHouseTeamListItem class="px-0" :participant="value.homeTeam" :icon-on-right="true" />
     </template>
     <template #right>
-      <FxInHouseTeamListItem class="pl-0" :participant="value.awayTeam" />
+      <FxInHouseTeamListItem class="px-0" :participant="value.awayTeam" />
     </template>
     <template #score>
       <ExistingResult v-if="hasResult" :match="value" />
@@ -44,10 +44,10 @@
 
 <script>
 import ExistingResult from './ExistingResult/ExistingResult'
-import FxCalendarItem from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/CalendarItemLayout'
+import FxCalendarItem from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/CalendarItemLayout'
 import { InHouseEventResult } from '@/enum'
 import NoResult
-  from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/InHouseEventItem/components/NoResult/NoResult'
+  from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/InHouseEventItem/components/NoResult/NoResult'
 
 export default {
   name: 'HouseVsHouse',

@@ -72,23 +72,25 @@
           </v-row>
         </div>
       </v-expand-transition>
-      <div
-        v-for="key in eventSortedDates"
-        :id="`date-${key}`"
-        :key="key"
-        v-intersect="{
-          handler: onIntersect(key),
-          options: {
-            threshold: [1.0]
-          }
-        }"
-      >
-        <FxCalendarPill :value="key" class="my-4" />
+      <client-only>
+        <div
+          v-for="key in eventSortedDates"
+          :id="`date-${key}`"
+          :key="key"
+          v-intersect="{
+            handler: onIntersect(key),
+            options: {
+              threshold: [1.0]
+            }
+          }"
+        >
+          <FxCalendarPill :value="key" class="my-4" />
 
-        <v-card v-for="event in eventsGroupedByDate[key]" :key="`event-${event.id}`" class="mb-2">
-          <FxCalendarEvent :value="event" />
-        </v-card>
-      </div>
+          <v-card v-for="event in eventsGroupedByDate[key]" :key="`event-${event.id}`" class="mb-2">
+            <FxCalendarEvent :value="event" />
+          </v-card>
+        </div>
+      </client-only>
     </div>
   </div>
 </template>
@@ -110,7 +112,7 @@ import FxCalendarOpponentFilter from '@/components/PageComponents/FxCalendarPage
 import FxCalendarAgeFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarAgeFilter'
 import FxCalendarLocationFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarLocationFilter'
 import { EventLocationType, EventStatus } from '@/enum'
-import FxCalendarEvent from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/FxCalendarEvent'
+import FxCalendarEvent from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent'
 import FxCalendarStatusFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarStatusFilter'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
