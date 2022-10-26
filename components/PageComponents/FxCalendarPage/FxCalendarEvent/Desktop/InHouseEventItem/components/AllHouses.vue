@@ -3,12 +3,11 @@
     <template #subtitle>
       <span class="text-p2 info--text text--lighten-1">In-House {{ competition.name }}</span>
     </template>
+    <template v-if="value.overallResult" #status>
+      <FxInHouseMatchStatus :overall-result="value.overallResult" />
+    </template>
     <template #center>
-      <v-col md="2" class="border-bottom pt-6">
-        <FxInHouseMatchStatus v-if="value.overallResult" :overall-result="value.overallResult" />
-      </v-col>
-
-      <v-col md="2" class="border-bottom pt-4 text-right">
+      <v-col md="4" class="border-bottom pt-4 text-right">
         All Houses
       </v-col>
 
@@ -50,9 +49,9 @@
 </template>
 
 <script>
-import FxCalendarItem from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/CalendarItemLayout'
+import FxCalendarItem from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/CalendarItemLayout'
 import AllInHouseTeamsProvider
-  from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/InHouseEventItem/components/AllInHouseTeamsProvider'
+  from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/InHouseEventItem/components/AllInHouseTeamsProvider'
 import FxSchoolLogo from '@/components/FxSchoolLogo/FxSchoolLogo'
 
 export default {

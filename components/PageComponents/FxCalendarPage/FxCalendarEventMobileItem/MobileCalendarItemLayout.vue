@@ -1,7 +1,7 @@
 <template>
   <nuxt-link class="text-decoration-none" :to="to">
     <v-container :style="style" class="rounded">
-      <v-row v-if="!compact">
+      <v-row>
         <v-col cols="12" class="border-bottom pt-1 pb-0">
           <v-list-item class="px-0">
             <v-list-item-avatar class="mr-3" tile size="22">
@@ -18,45 +18,26 @@
           </v-list-item>
         </v-col>
       </v-row>
-      <v-row v-if="compact">
-        <v-col class="pa-0" style="margin-bottom: -41px">
-          <slot name="actions" />
-        </v-col>
-      </v-row>
       <v-row>
         <slot name="center">
-          <v-col md="2" class="border-bottom pt-6">
+          <v-col md="2" class="border-bottom pt-6 hidden-sm-and-down">
             <slot name="status" />
           </v-col>
           <v-col cols="12" md="3" class="border-bottom">
             <slot name="left" v-bind="{ compact }" />
           </v-col>
           <v-col md="2" class="hidden-sm-and-down pt-5 border-bottom text-center">
-            <slot name="score" />
+            <slot name="score">
+              <slot name="scoreLeft" />
+              <slot name="scoreRight" />
+            </slot>
           </v-col>
           <v-col cols="12" md="5" class="border-bottom">
             <slot name="right" />
           </v-col>
         </slot>
       </v-row>
-      <v-row v-if="compact">
-        <v-col cols="12" class="border-bottom pt-1 pb-0">
-          <ListItem>
-            <template #icon>
-              <v-avatar size="22" tile>
-                <v-img width="22" height="22" :src="sport.icon" />
-              </v-avatar>
-            </template>
-            <template #title>
-              {{ sport.name }}
-            </template>
-            <template #subtitle>
-              Sport
-            </template>
-          </ListItem>
-        </v-col>
-      </v-row>
-      <v-row>
+      <v-row class="hidden-sm-and-down">
         <v-col cols="12" md="6" lg="3" class="border-bottom border-right pt-1 pb-0">
           <ListItem>
             <template #icon>

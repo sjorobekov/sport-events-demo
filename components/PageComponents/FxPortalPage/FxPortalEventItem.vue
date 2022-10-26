@@ -30,7 +30,7 @@
 import { mapGetters } from 'vuex'
 import { EventType, EventResult } from '~/enum'
 import ExistingResult
-  from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/EventItem/ExistingResult/ExistingResult'
+  from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/EventItem/ExistingResult/ExistingResult'
 
 export default {
   name: 'FxPortalEventItem',

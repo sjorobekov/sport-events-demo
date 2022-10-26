@@ -1,36 +1,30 @@
 <template>
-  <div>
+  <div style="width: 120px">
     <v-avatar rounded size="40" class="mr-2" color="#F1F5F9">
-      {{ left }}
+      {{ home }}
     </v-avatar>
     <v-avatar rounded size="40" class="ml-2" color="#F1F5F9">
-      {{ right }}
+      {{ away }}
     </v-avatar>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'FixtureResult',
+  name: 'NormalScore',
   props: {
-    me: {
+    match: {
       type: Object,
       required: true,
     },
   },
 
   computed: {
-    left () {
-      if (!this.me.results) {
-        return 0
-      }
-      return this.me.results[0].score
+    home () {
+      return this.match.homeScore
     },
-    right () {
-      if (!this.me.results) {
-        return 0
-      }
-      return this.me.results[0].opponentScore
+    away () {
+      return this.match.awayScore
     },
   },
 }

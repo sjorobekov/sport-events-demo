@@ -6,6 +6,8 @@
     <v-list-item-content>
       <v-list-item-title class="text-p2 font-weight-bold" v-text="title" />
     </v-list-item-content>
+
+    <slot name="action" />
   </v-list-item>
 </template>
 

@@ -119,11 +119,11 @@ export const getters: GetterTree<RootState, RootState> = {
   },
 
   canAddOrEditResult (_state, getters) {
-    return [UserRole.ADMIN, UserRole.SUPER_ADMIN].includes(getters.role)
+    return [UserRole.ADMIN, UserRole.SUPER_ADMIN, UserRole.SPORTS_USER].includes(getters.role)
   },
 
   canManageTeamSheet (_state, getters) {
-    return [UserRole.ADMIN, UserRole.SUPER_ADMIN].includes(getters.role)
+    return [UserRole.ADMIN, UserRole.SUPER_ADMIN, UserRole.SPORTS_USER].includes(getters.role)
   },
 
   role (_, _getters, _rootState, rootGetters) {

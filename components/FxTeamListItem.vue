@@ -8,6 +8,8 @@
         {{ name }}
       </v-list-item-title>
     </v-list-item-content>
+
+    <slot name="action" />
   </v-list-item>
 </template>
 

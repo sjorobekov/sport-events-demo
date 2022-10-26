@@ -1,5 +1,5 @@
 <template>
-  <div class="result">
+  <div class="result text-no-wrap px-2">
     {{ overallResult }}
   </div>
 </template>

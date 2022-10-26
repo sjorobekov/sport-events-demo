@@ -43,8 +43,8 @@
 <script>
 import { EventResult, EventType } from '@/enum'
 import ExistingResult
-  from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/EventItem/ExistingResult/ExistingResult'
-import NoResult from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/EventItem/NoResult/NoResult'
+  from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/EventItem/ExistingResult/ExistingResult'
+import NoResult from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/EventItem/NoResult/NoResult'
 
 export default {
   name: 'FxTeamsEventItem',
