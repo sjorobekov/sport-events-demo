@@ -10,7 +10,7 @@
         <v-list-item>
           <v-list-item-content class="text-center pl-14 pt-5">
             <v-list-item-title class="text-subheading mb-1">
-              <FxDateFormat :date="event.date" :output-format="DATE_HUGE" />
+              <FxDateFormat :date="event.date" output-format="cccc dd MMMM yyyy" />
             </v-list-item-title>
             <v-list-item-subtitle class="text-p2 white--text">
               {{ sport.name }} &#x2022; {{ $t(`FIXTURE_TYPE.${event.fixtureType}`) }}
@@ -37,7 +37,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { DateTime } from 'luxon'
 import { EventType, EventResult } from '@/enum'
 import FxEventScoreBoardCard from '@/components/PageComponents/FxEventIndividualPage/FxEventScoreBoardCard'
 
@@ -56,7 +55,6 @@ export default {
   data: () => ({
     EventType,
     EventResult,
-    DATE_HUGE: DateTime.DATE_HUGE,
   }),
 
   async fetch () {
