@@ -23,7 +23,7 @@
               <v-btn icon>
                 <v-icon>mdi-printer-outline</v-icon>
               </v-btn>
-              <v-btn icon>
+              <v-btn v-if="isLoggedIn" icon>
                 <v-icon>mdi-dots-horizontal</v-icon>
               </v-btn>
             </div>
@@ -76,6 +76,7 @@ export default {
       result: 'page/event/result',
       hasResult: 'page/event/hasResult',
       isPendingResult: 'page/event/isPendingResult',
+      isLoggedIn: 'context/isLoggedIn',
     }),
   },
 }
