@@ -24,7 +24,7 @@
               <v-btn icon>
                 <v-icon>mdi-printer-outline</v-icon>
               </v-btn>
-              <v-btn icon>
+              <v-btn v-if="isLoggedIn" icon>
                 <v-icon>mdi-dots-horizontal</v-icon>
               </v-btn>
             </div>
@@ -69,6 +69,7 @@ export default {
       inHouseEvent: 'page/inHouseEvent/inHouseEvent',
       sport: 'page/inHouseEvent/sport',
       match: 'page/inHouseEvent/inHouseMatch',
+      isLoggedIn: 'context/isLoggedIn',
     }),
   },
 }
