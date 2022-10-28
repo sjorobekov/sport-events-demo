@@ -6,6 +6,7 @@
           <v-img
             class="white--text align-end"
             height="388px"
+            gradient="to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)"
             :src="inHouseCompetition.photo"
           >
             <v-list-item dark>

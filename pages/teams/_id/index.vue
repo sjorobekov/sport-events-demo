@@ -7,6 +7,7 @@
             class="white--text align-end"
             height="388px"
             :src="team.photo"
+            gradient="to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)"
           >
             <v-list-item dark>
               <v-list-item-content>
