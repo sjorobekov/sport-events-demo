@@ -5,7 +5,9 @@
         mdi-lock
       </v-icon>
       <div class="info--text text--darken-1 text-p1 mb-3">
-        This Team Sheet is Password Protected.
+        <slot name="subtitle">
+          This Team Sheet is Password Protected.
+        </slot>
       </div>
 
       <v-text-field
@@ -14,6 +16,7 @@
         :loading="loading"
         class="mb-2"
         hide-details
+        background-color="white"
         placeholder="Enter Password"
         :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
         :type="showPass ? 'text' : 'password'"
@@ -29,7 +32,9 @@
         class="mb-4"
         @click="view"
       >
-        View Team Sheet
+        <slot name="buttonLabel">
+          View Team Sheet
+        </slot>
       </v-btn>
       <template v-if="school.email">
         <div class="info--text text--darken-1 text-p1">

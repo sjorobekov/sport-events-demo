@@ -1,5 +1,6 @@
 import { GetterTree } from 'vuex'
 import { UserRole } from '~/enum'
+import { Announcement } from '~/types'
 
 export const state = () => ({})
 
@@ -80,5 +81,19 @@ export const getters: GetterTree<RootState, RootState> = {
 
   canManageSportsRecords (_, getters) {
     return [UserRole.ADMIN, UserRole.SPORTS_USER].includes(getters.role)
+  },
+
+  canCreateAnnouncement (_, getters) {
+    return [UserRole.ADMIN, UserRole.SPORTS_USER].includes(getters.role)
+  },
+
+  canEditOrRemoveAnnouncement (_, getters, _rootState, rootGetters) {
+    return (announcement: Announcement) => {
+      if (getters.role === UserRole.ADMIN) {
+        return true
+      }
+
+      return announcement.userId === rootGetters['context/myId']
+    }
   },
 }

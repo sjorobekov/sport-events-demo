@@ -88,6 +88,17 @@ export type Student = {
   readonly updatedAt: string,
 }
 
+export type Announcement = {
+  readonly id: string,
+  subject: string,
+  body: string,
+  userId: string,
+  schoolId: string,
+  readonly user: User,
+  readonly createdAt: string,
+  readonly updatedAt: string,
+}
+
 export interface Team {
   readonly id: string,
   sportId: string,
