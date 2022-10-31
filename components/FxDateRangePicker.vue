@@ -8,6 +8,7 @@
   >
     <template #activator="{ on, attrs }">
       <v-text-field
+        background-color="white"
         dense
         hide-details
         prepend-inner-icon="$vuetify.icon.calendar"
@@ -15,10 +16,28 @@
         :value="rangeFormatted"
         readonly
         v-bind="attrs"
+        class="mr-2"
         v-on="on"
       />
     </template>
+
+    <v-date-picker
+      v-if="mobile"
+      v-model="mobileModel"
+      range
+    >
+      <v-spacer />
+      <v-btn
+        depressed
+        color="primary"
+        @click="$refs.menu.save(mobileModel)"
+      >
+        OK
+      </v-btn>
+    </v-date-picker>
+
     <date-range-picker
+      v-else
       ref="picker"
       v-model="model"
       :ranges="customRanges"
@@ -81,6 +100,10 @@ export default {
       type: Object,
       default: () => ({ startDate: null, endDate: null }),
     },
+    mobile: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
@@ -95,6 +118,28 @@ export default {
         return { ...this.value }
       },
     },
+    mobileModel: {
+      set (value) {
+        const data = {}
+
+        const sorted = value.sort((a, b) => a > b ? 1 : -1)
+
+        data.startDate = DateTime.fromFormat(sorted[0], 'yyyy-MM-dd').toJSDate()
+
+        if (sorted[1]) {
+          data.endDate = DateTime.fromFormat(sorted[1], 'yyyy-MM-dd').toJSDate()
+        }
+
+        this.$emit('input', data)
+      },
+      get () {
+        return [
+          DateTime.fromJSDate(this.value.startDate).toFormat('yyyy-MM-dd'),
+          ...(this.value.endDate ? [DateTime.fromJSDate(this.value.endDate).toFormat('yyyy-MM-dd')] : []),
+        ].sort((a, b) => a > b ? 1 : -1)
+      },
+    },
+
     startDateFormatted () {
       if (!this.model.startDate) {
         return null

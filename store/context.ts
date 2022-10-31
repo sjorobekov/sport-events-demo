@@ -135,6 +135,7 @@ export const actions: ActionTree<RootState, RootState> = {
   applyPrimaryColor ({ getters }) {
     const root = document.documentElement
     root.style.setProperty('--v-primary-base', getters.school.color)
+    root.style.setProperty('--v-accent-base', getters.school.color)
     root.style.setProperty('--v-primary-darken1', shadeColor(getters.school.color, -30))
   },
 

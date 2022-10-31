@@ -10,6 +10,7 @@
     chips
     :value="value"
     deletable-chips
+    background-color="white"
     @input="$emit('input', $event)"
   />
 </template>

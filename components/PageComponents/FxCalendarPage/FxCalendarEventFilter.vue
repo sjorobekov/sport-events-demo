@@ -9,6 +9,7 @@
     :items="values"
     chips
     :value="value"
+    background-color="white"
     deletable-chips
     @input="$emit('input', $event)"
   >
