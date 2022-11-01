@@ -11,19 +11,42 @@
             </v-list-item-content>
           </v-list-item>
         </v-col>
-        <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
+        <v-col v-for="contact in contacts" :key="contact.id" cols="12" class="border-bottom border-right pt-1 pb-0">
           <v-list-item class="px-0">
             <v-list-item-avatar class="mr-2">
               <FxAvatar size="22" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class="text-p2 info--text text--darken-4">
-                {{ opponent.address }}
+                {{ contact.name }}
+                <v-icon v-if="contact.main">
+                  mdi-star
+                </v-icon>
               </v-list-item-title>
               <v-list-item-subtitle class="text-p1 info--text">
-                Address
+                {{ contact.role }}
               </v-list-item-subtitle>
             </v-list-item-content>
+            <v-list-item-action>
+              <v-btn
+                depressed
+                color="primary"
+                link
+                icon
+              >
+                <v-icon>mdi-phone-in-talk</v-icon>
+              </v-btn>
+            </v-list-item-action>
+            <v-list-item-action>
+              <v-btn
+                depressed
+                color="primary"
+                link
+                icon
+              >
+                <v-icon>mdi-email-outline</v-icon>
+              </v-btn>
+            </v-list-item-action>
           </v-list-item>
         </v-col>
       </v-row>
@@ -32,9 +55,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
-  name: 'FxOpponentCard',
+  name: 'FxContactsCard',
   props: {
     opponentId: {
       type: String,
@@ -43,26 +65,11 @@ export default {
   },
 
   data: () => ({
-    opponent: {},
+    contacts: [
+      { id: 1, name: 'Miracle Herwitz', role: 'Sports Contact', main: true },
+      { id: 2, name: 'Miracle Herwitz', role: 'Sports Contact' },
+      { id: 3, name: 'Miracle Herwitz', role: 'Sports Contact' },
+    ],
   }),
-
-  async fetch () {
-    this.opponent = await this.$store.dispatch('api/opponents/fetch', { schoolId: this.contextSchoolId, id: this.opponentId })
-  },
-
-  computed: {
-    ...mapGetters({
-      contextSchoolId: 'context/schoolId',
-    }),
-    school () {
-      return this.opponent.opponentSchool || {}
-    },
-  },
-
-  watch: {
-    opponentId () {
-      this.$fetch()
-    },
-  },
 }
 </script>
