@@ -11,7 +11,7 @@
           v-if="canManageSportLocation"
           depressed
           dark
-          color="brand"
+          color="primary"
           link
           :to="{ name: editLink, params: { locationId: 'add' } }"
         >
