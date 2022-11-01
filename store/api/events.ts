@@ -42,6 +42,7 @@ type ListByTeamPayload = {
 }
 
 type CheckEventConflictPayload = {
+  eventId?: string,
   schoolId: string,
   date: string,
   startTime: string,
