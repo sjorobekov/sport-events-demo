@@ -162,6 +162,7 @@ export default {
           to: { name: 'management-sports' },
           items: [
             { title: 'Sports Map', to: { name: 'directory-sports-map' } },
+            { title: 'Opponents', to: { name: 'directory-opponents' } },
             { title: 'Sports Contacts', to: { name: 'directory-sports-contacts' } },
           ],
         },
