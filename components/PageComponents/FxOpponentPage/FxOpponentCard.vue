@@ -63,36 +63,16 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'FxOpponentCard',
   props: {
-    opponentId: {
-      type: String,
+    opponent: {
+      type: Object,
       default: undefined,
     },
-  },
-
-  data: () => ({
-    opponent: {},
-  }),
-
-  async fetch () {
-    this.opponent = await this.$store.dispatch('api/opponents/fetch', { schoolId: this.contextSchoolId, id: this.opponentId })
-  },
-
-  computed: {
-    ...mapGetters({
-      contextSchoolId: 'context/schoolId',
-    }),
-    school () {
-      return this.opponent.opponentSchool || {}
-    },
-  },
-
-  watch: {
-    opponentId () {
-      this.$fetch()
+    school: {
+      type: Object,
+      default: undefined,
     },
   },
 }
