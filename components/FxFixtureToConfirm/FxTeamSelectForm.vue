@@ -19,7 +19,7 @@
             v-model="formData.teamId"
             outlined
             dense
-            :items="teams"
+            :items="filteredTeams"
             item-text="name"
             item-value="id"
             placeholder="Select Team"
@@ -68,6 +68,10 @@ export default {
     ...mapGetters({
       schoolId: 'context/schoolId',
     }),
+
+    filteredTeams () {
+      return this.teams.filter(team => team.sportId === this.sportId)
+    },
   },
 
   watch: {
