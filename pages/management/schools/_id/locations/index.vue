@@ -29,13 +29,20 @@
           style="height: 500px"
           :options="mapOptions"
         >
+          <gmap-info-window
+            v-if="selectedItem"
+            :position="selectedItem.coordinates"
+            :options="infoOptions"
+            opened
+          >
+            <strong class="text-p3 font-weight-bold white--text">{{ selectedItem.name }}</strong>
+          </gmap-info-window>
           <GmapMarker
             v-for="item in items"
             :key="item.id"
             clickable
             :position="item.coordinates"
-            :title="item.name"
-            :label="item.name"
+            @click="toggleInfoWindow(item)"
           />
         </GmapMap>
       </v-col>
@@ -104,6 +111,16 @@ export default {
   data: () => ({
     items: [],
     center: {},
+    infoWindowPos: null,
+    infoWinOpen: false,
+    infoOptions: {
+      pixelOffset: {
+        width: 0,
+        height: -30,
+      },
+    },
+    selectedItem: null,
+    currentMidx: null,
     mapCenter: { lng: 0, lat: 0 },
     zoom: 5,
   }),
@@ -150,6 +167,7 @@ export default {
     handleClick (item) {
       this.panTo(item.coordinates)
       this.zoom = 15
+      this.selectedItem = item
     },
 
     panTo (location) {
@@ -171,6 +189,29 @@ export default {
         this.$toast.error('Unknown Error')
       })
     },
+
+    toggleInfoWindow (item) {
+      if (item === this.selectedItem) {
+        this.selectedItem = null
+      } else {
+        this.selectedItem = item
+      }
+    },
   },
 }
 </script>
+
+<style scoped>
+/deep/ .gm-ui-hover-effect {
+  display: none !important;
+}
+
+/deep/ .gm-style .gm-style-iw-d::-webkit-scrollbar-track,
+/deep/ .gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece,
+/deep/ .gm-style .gm-style-iw-c,
+/deep/ .gm-style .gm-style-iw-t::after,
+/deep/ .gm-style .gm-style-iw-tc::after {
+  background: var(--v-primary-base);
+}
+
+</style>
