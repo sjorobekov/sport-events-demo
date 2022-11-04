@@ -1,45 +1,62 @@
 <template>
   <div>
+    <v-row class="hidden-md-and-up">
+      <v-col>
+        <v-chip-group
+          v-model="filter"
+          mandatory
+          class="float-left"
+          active-class="primary white--text"
+        >
+          <v-chip class="info--text" :value="null">
+            All
+          </v-chip>
+
+          <v-chip class="info--text" value="fixtures">
+            Fixtures
+          </v-chip>
+
+          <v-chip class="info--text" value="results">
+            Results
+          </v-chip>
+
+          <v-chip class="info--text" value="training">
+            Training
+          </v-chip>
+        </v-chip-group>
+      </v-col>
+    </v-row>
     <v-row>
-      <v-col md="9">
-        <v-card v-if="team.photo">
+      <v-col cols="12" sm="12" md="9">
+        <v-card :flat="!hasPhoto" :class="!hasPhoto ? 'no-photo' : null">
           <v-img
             class="white--text align-end"
-            height="388px"
+            :height="photoHeight"
             :src="team.photo"
-            gradient="to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)"
+            :gradient="gradient"
           >
-            <v-list-item dark>
-              <v-list-item-content>
-                <v-list-item-title class="text-h3">
-                  {{ team.name }}
-                </v-list-item-title>
-                <v-list-item-subtitle class="text-subheading font-weight-bold white--text">
-                  {{ sport.name }} &bull; {{ season.name }}
-                </v-list-item-subtitle>
-              </v-list-item-content>
-              <v-list-item-action>
+            <v-row no-gutters>
+              <v-col cols="12" md="8">
+                <v-list-item :dark="hasPhoto">
+                  <v-list-item-content>
+                    <v-list-item-title class="text-h3">
+                      {{ team.name }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle class="text-subheading font-weight-bold">
+                      {{ sport.name }} &bull; {{ season.name }}
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-col>
+              <v-col cols="12" md="4" class="d-flex align-end justify-end">
                 <FxTeamPrivacyChipBig v-if="!$fetchState.pending && isLoggedIn" :publish-team="team.publishTeam" :publish-results="team.publishResults" />
-              </v-list-item-action>
-            </v-list-item>
+              </v-col>
+            </v-row>
           </v-img>
         </v-card>
-        <v-list-item v-else>
-          <v-list-item-content>
-            <v-list-item-title class="text-h3">
-              {{ team.name }}
-            </v-list-item-title>
-            <v-list-item-subtitle class="text-subheading font-weight-bold">
-              {{ sport.name }} &bull; {{ season.name }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
-          <v-list-item-action>
-            <FxTeamPrivacyChipBig v-if="!$fetchState.pending && isLoggedIn" :publish-team="team.publishTeam" :publish-results="team.publishResults" />
-          </v-list-item-action>
-        </v-list-item>
 
-        <v-row class="my-4">
-          <v-col cols="6" sm="5" md="6">
+        <v-row class="mt-4 mb-0 hidden-sm-and-down">
+          <v-col cols="12" sm="5" md="6" class="pb-0">
             <v-chip-group
               v-model="filter"
               mandatory
@@ -63,7 +80,7 @@
               </v-chip>
             </v-chip-group>
           </v-col>
-          <v-col cols="6" sm="7" md="6" class="text-right">
+          <v-col cols="12" sm="7" md="6" class="text-right pb-0">
             <v-btn v-if="canEditTeam" outlined link :to="{ name: 'teams-id-edit', params: { id: team.id } }">
               <v-icon>$vuetify.icons.edit</v-icon>Edit Team
             </v-btn>
@@ -78,8 +95,63 @@
             </v-btn>
           </v-col>
         </v-row>
+
+        <v-row class="hidden-md-and-up">
+          <v-col>
+            <FxUserItem class="mx-auto" :item="coach" :subtitle="coach.jobRole" />
+
+            <FxWinRateBar class="mt-3" :won="team.won" :lost="team.lost" :drawn="team.drawn" />
+          </v-col>
+        </v-row>
+
+        <v-row class="mt-0">
+          <v-col class="pt-0">
+            <template v-if="showNextEvent">
+              <h2 class="text-p2 font-weight-bold mb-2 info--text text--darken-3">
+                Next Event
+              </h2>
+
+              <v-card>
+                <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: nextEvent.id } }">
+                  <FxEventItem :event="nextEvent" :me="nextEvent.me" :opponent="nextEvent.opponent" />
+                </nuxt-link>
+              </v-card>
+            </template>
+
+            <template v-if="showFixtures">
+              <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
+                Fixtures
+              </h2>
+              <v-card v-for="event in fixtures" :key="`fixture-${event.id}`" class="mb-2">
+                <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
+                  <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" />
+                </nuxt-link>
+              </v-card>
+            </template>
+
+            <template v-if="showResults">
+              <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
+                Results
+              </h2>
+              <v-card v-for="event in results" :key="`result-${event.id}`" class="mb-2">
+                <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
+                  <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" />
+                </nuxt-link>
+              </v-card>
+            </template>
+
+            <template v-if="showTraining">
+              <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
+                Training
+              </h2>
+              <v-card v-for="event in training" :key="`training-${event.id}`" class="mb-2">
+                <FxEventItem :event="event" :me="event.me" :context-school-id="contextSchoolId" />
+              </v-card>
+            </template>
+          </v-col>
+        </v-row>
       </v-col>
-      <v-col md="3">
+      <v-col md="3" class="hidden-sm-and-down">
         <h3 class="text-p1 info--text text--darken-1 mb-4">
           Team Overview
         </h3>
@@ -99,52 +171,6 @@
         <div v-if="coach.phone" class="text-p1">
           <v-icon>mdi-phone-in-talk</v-icon> <a class="info--text text--darken-2" :href="`tel:${coach.phone}`">{{ coach.phone }}</a>
         </div>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col md="9">
-        <template v-if="showNextEvent">
-          <h2 class="text-p2 font-weight-bold mb-2 info--text text--darken-3">
-            Next Event
-          </h2>
-
-          <v-card>
-            <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: nextEvent.id } }">
-              <FxEventItem :event="nextEvent" :me="nextEvent.me" :opponent="nextEvent.opponent" :context-school-id="contextSchoolId" />
-            </nuxt-link>
-          </v-card>
-        </template>
-
-        <template v-if="showFixtures">
-          <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
-            Fixtures
-          </h2>
-          <v-card v-for="event in fixtures" :key="`fixture-${event.id}`" class="mb-2">
-            <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
-              <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" :context-school-id="contextSchoolId" />
-            </nuxt-link>
-          </v-card>
-        </template>
-
-        <template v-if="showResults">
-          <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
-            Results
-          </h2>
-          <v-card v-for="event in results" :key="`result-${event.id}`" class="mb-2">
-            <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
-              <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" :context-school-id="contextSchoolId" />
-            </nuxt-link>
-          </v-card>
-        </template>
-
-        <template v-if="showTraining">
-          <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
-            Training
-          </h2>
-          <v-card v-for="event in training" :key="`training-${event.id}`" class="mb-2">
-            <FxEventItem :event="event" :me="event.me" :context-school-id="contextSchoolId" />
-          </v-card>
-        </template>
       </v-col>
     </v-row>
   </div>
@@ -256,6 +282,25 @@ export default {
     compact () {
       return this.$vuetify.breakpoint.smAndDown
     },
+    photoHeight () {
+      if (!this.hasPhoto) {
+        return null
+      }
+
+      return this.compact ? '220px' : '388px'
+    },
+    hasPhoto () {
+      return !!this.team.photo
+    },
+    gradient () {
+      return this.hasPhoto ? 'to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)' : null
+    },
   },
 }
 </script>
+
+<style scoped>
+/deep/ .no-photo {
+  background: none;
+}
+</style>

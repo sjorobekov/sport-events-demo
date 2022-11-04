@@ -88,7 +88,7 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
   border-color: var(--v-info-lighten2)!important;
 }
 
-.v-sheet.v-card:not(.v-sheet--outlined) {
+.v-sheet.v-card:not(.v-sheet--outlined, .v-card--flat) {
   box-shadow: $box-shadow!important;
 }
 .fx-box-shadow {
