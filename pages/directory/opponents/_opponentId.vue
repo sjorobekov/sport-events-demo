@@ -48,7 +48,7 @@ export default {
       return this.$route.params.opponentId
     },
     school () {
-      return this.opponent.opponentSchool || {}
+      return this.opponent.opponentSchool || null
     },
   },
 

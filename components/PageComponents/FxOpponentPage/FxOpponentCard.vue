@@ -4,17 +4,17 @@
       <v-row>
         <v-col cols="12" class="border-bottom pt-1 pb-0">
           <v-list-item class="px-0">
-            <v-list-item-avatar color="white" size="44">
+            <v-list-item-avatar v-if="school" color="white" size="44">
               <FxSchoolLogo :value="school.logo" :color="school.color" :size="44" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class="text-p2 info--text text--darken-4">
-                {{ school.name }}
+                {{ name }}
               </v-list-item-title>
             </v-list-item-content>
             <v-list-item-action>
               <v-btn
-                v-if="school.portal"
+                v-if="school && school.portal"
                 depressed
                 outlined
                 color="primary"
@@ -42,7 +42,7 @@
             </v-list-item-content>
           </v-list-item>
         </v-col>
-        <v-col cols="12" class="border-bottom pt-1 pb-0">
+        <v-col v-if="school" cols="12" class="border-bottom pt-1 pb-0">
           <v-list-item class="px-0">
             <v-list-item-icon class="mr-3">
               <v-icon>mdi-link-variant</v-icon>
@@ -73,6 +73,11 @@ export default {
     school: {
       type: Object,
       default: undefined,
+    },
+  },
+  computed: {
+    name () {
+      return this.school ? this.school.name : this.opponent.name
     },
   },
 }

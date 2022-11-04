@@ -109,3 +109,9 @@ export enum InHouseEventResult {
   POSTPONED = 'POSTPONED',
   CANCELLED = 'CANCELLED',
 }
+
+export enum SchoolStatus {
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
+  PENDING = 'PENDING',
+}

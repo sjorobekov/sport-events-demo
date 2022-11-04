@@ -149,6 +149,10 @@ export interface Opponent {
   readonly id: string
   name: string
   address: string
+  coordinates: {
+    lng: number,
+    lat: number,
+  },
   schoolId: string
   opponentSchoolId: string
   opponentSchool: School

@@ -51,6 +51,10 @@ type RequestToJoinPayload = {
   schoolId: string,
 }
 
+type RequestAddSchoolPayload = {
+  schoolId: string,
+}
+
 export const actions: ActionTree<RootState, RootState> = {
   schoolSignUp ({ rootGetters, getters }, payload: SchoolSignUpPayload): Promise<void> {
     const { file, ...data } = payload
@@ -74,5 +78,9 @@ export const actions: ActionTree<RootState, RootState> = {
 
   claimSchool (_, payload: ClaimSchoolPayload) {
     return this.$axios.$post('/api/v1/signup/claim_school', payload)
+  },
+
+  requestAddSchool (_, payload: RequestAddSchoolPayload) {
+    return this.$axios.$post('/api/v1/signup/request_add_school', payload)
   },
 }

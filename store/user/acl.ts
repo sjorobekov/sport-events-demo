@@ -96,4 +96,8 @@ export const getters: GetterTree<RootState, RootState> = {
       return announcement.userId === rootGetters['context/myId']
     }
   },
+
+  canCreateOpponent (_, getters) {
+    return [UserRole.ADMIN, UserRole.SPORTS_USER].includes(getters.role)
+  },
 }
