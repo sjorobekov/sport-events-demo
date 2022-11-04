@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    <h1>Participation</h1>
+    <h1 class="text-h3 mb-6">
+      Participation
+    </h1>
 
     <FxParticipationPageCard />
 
