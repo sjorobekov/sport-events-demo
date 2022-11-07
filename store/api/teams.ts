@@ -28,6 +28,7 @@ export const getters: GetterTree<RootState, RootState> = {
   genderOptions: () => ([
     { text: 'Male', value: Gender.MALE },
     { text: 'Female', value: Gender.FEMALE },
+    { text: 'Mixed', value: Gender.MIXED },
   ]),
   publishTeamOptions: () => ([
     { text: 'Yes, team will be made public on Sports Portal', value: true },
