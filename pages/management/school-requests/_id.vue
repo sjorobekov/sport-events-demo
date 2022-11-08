@@ -4,86 +4,31 @@
       <h4 class="mb-6 text-h4">
         Edit School Request
       </h4>
-      <v-card class="fx-card-border-top-brand2">
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col
-                cols="12"
-                md="5"
-              >
-                <v-list>
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-avatar color="brand">
-                        <span class="white--text text-h5">1</span>
-                      </v-avatar>
-                    </v-list-item-avatar>
+      <FxSteppedFormCard>
+        <template #number>
+          1
+        </template>
+        <template #title>
+          School Information
+        </template>
+        <template #content>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </template>
+        <SchoolInfoForm ref="form1" v-model="formData" :disabled="loading" />
+      </FxSteppedFormCard>
 
-                    <v-list-item-content>
-                      <v-list-item-title>School Information</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-
-                  <v-list-item>
-                    <v-list-item-avatar />
-                    <v-list-item-content class="text--disabled">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list>
-              </v-col>
-              <v-col
-                cols="12"
-                md="5"
-              >
-                <SchoolInfoForm ref="form1" v-model="formData" :disabled="loading" />
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card-text>
-      </v-card>
-
-      <v-card class="mt-4 fx-card-border-top-brand2">
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col
-                cols="12"
-                md="5"
-              >
-                <v-list>
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-avatar color="brand">
-                        <span class="white--text text-h5">2</span>
-                      </v-avatar>
-                    </v-list-item-avatar>
-
-                    <v-list-item-content>
-                      <v-list-item-title>Fixturr Portal</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-
-                  <v-list-item>
-                    <v-list-item-avatar />
-
-                    <v-list-item-content class="text--disabled">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list>
-              </v-col>
-              <v-col
-                cols="12"
-                md="5"
-              >
-                <SchoolPortalForm ref="form2" v-model="formData" :disabled="loading" />
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card-text>
-      </v-card>
+      <FxSteppedFormCard>
+        <template #number>
+          2
+        </template>
+        <template #title>
+          Fixturr Portal
+        </template>
+        <template #content>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </template>
+        <SchoolPortalForm ref="form2" v-model="formData" :disabled="loading" />
+      </FxSteppedFormCard>
 
       <v-container class="mt-4 mb-8">
         <v-row>
