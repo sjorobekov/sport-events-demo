@@ -62,6 +62,12 @@ export default {
         ...this.formData,
       }).then(() => {
         this.$router.push({ name: 'records-manage-events' })
+      }).catch((e) => {
+        if (e.response?.data?.error === 'already_exists') {
+          this.$toast.error('Event already exists')
+        } else {
+          this.$toast.error('Unknown Error')
+        }
       }).finally(() => {
         this.loading = false
       })
