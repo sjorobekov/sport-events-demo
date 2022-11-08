@@ -5,7 +5,7 @@
       sm="12"
       md="12"
       lg="7"
-      class="pr-4 d-flex justify-end"
+      class="pr-4 d-flex justify-start"
       :class="hasResult ? 'flex-column-reverse': 'flex-column'"
     >
       <FxInHouseEventDetails />
