@@ -1,13 +1,12 @@
 <template>
   <div>
-    <v-list-item class="px-0">
-      <v-list-item-content>
-        <v-list-item-title class="text-h3">
+    <v-row class="mb-2">
+      <v-col cols="6" sm="6" md="4">
+        <h1 class="text-h3">
           Teams
-        </v-list-item-title>
-      </v-list-item-content>
-      <v-spacer />
-      <v-list-item-content>
+        </h1>
+      </v-col>
+      <v-col cols="6" sm="6" md="4">
         <v-autocomplete
           id="season"
           v-model="params.seasonId"
@@ -20,16 +19,14 @@
           hide-details
           @change="onSeasonChange"
         />
-      </v-list-item-content>
-      <v-spacer />
-      <v-list-item-action>
-        <v-btn v-if="canCreateTeam" depressed color="primary" link :to="{ name: 'teams-add' }">
+      </v-col>
+      <v-col v-if="canCreateTeam" cols="12" sm="12" md="4" class="text-right">
+        <v-btn depressed color="primary" link :to="{ name: 'teams-add' }">
           <v-icon>$vuetify.icons.plusOutline</v-icon>
           Add Team
         </v-btn>
-      </v-list-item-action>
-    </v-list-item>
-
+      </v-col>
+    </v-row>
     <FxSportExpansionPanel v-for="sport in sports" :key="sport.id" class="mb-4" :item="sport" :subtitle="subtitle(teamsBySport[sport.id].length)">
       <v-list class="py-0">
         <v-list-item v-for="team in teamsBySport[sport.id]" :key="team.id" style="border-bottom: 1px solid #F1F5F9">

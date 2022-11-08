@@ -1,54 +1,98 @@
 <template>
-  <v-container :style="style" class="rounded">
-    <v-row>
-      <v-col cols="12" class="border-bottom pt-1 pb-0">
-        <v-list-item class="px-0">
-          <v-list-item-content>
-            <v-list-item-title class="text-p2">
-              <FxDateFormat :date="event.date" output-format="cccc dd MMMM yyyy" />
-            </v-list-item-title>
-          </v-list-item-content>
-          <v-spacer />
-        </v-list-item>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col md="2" xl="1" class="border-bottom pt-6">
-        <v-chip
-          color="info lighten-2"
-          outlined
-          dark
-          label
-          class="pr-3 radius-6 height-24"
-        >
-          <span class="info--text">{{ event.startTime }}</span>
-        </v-chip>
-      </v-col>
-      <v-col cols="12" md="3" class="border-bottom">
-        <FxTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" :icon-on-right="!compact" />
-      </v-col>
-      <v-col md="2" class="hidden-sm-and-down pt-5 border-bottom text-center">
-        <ExistingResult v-if="hasResult" :event="event" :me="me" />
-        <NoResult v-else :me="me" :event="event" />
-      </v-col>
-      <v-col cols="12" md="5" class="border-bottom">
-        <FxTeamListItem v-if="event.eventType === EventType.FIXTURE" class="pl-0" :participant="opponent" :context-school-id="contextSchoolId" />
-        <FxNonFixtureItem v-else :event-type="event.eventType" :name="event.name" />
-      </v-col>
-    </v-row>
-    <slot name="bottom" />
-  </v-container>
+  <FxTeamEventContainer>
+    <template #date>
+      <v-list-item class="px-0">
+        <v-list-item-content>
+          <v-list-item-title class="text-p2">
+            <FxDateFormat :date="event.date" output-format="cccc dd MMMM yyyy" />
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </template>
+
+    <template #left>
+      <v-list-item class="flex-md-row-reverse px-0">
+        <v-list-item-avatar class="mx-3">
+          <FxSchoolLogo :value="contextSchool.logo" :alt="contextSchool.name" :color="contextSchool.color" />
+        </v-list-item-avatar>
+        <v-list-item-content class="text-md-right">
+          <v-list-item-title :class="'text-p2 font-weight-bold'">
+            {{ me.team.name }}
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </template>
+
+    <template #right>
+      <v-list-item v-if="event.eventType === EventType.FIXTURE" class="px-0">
+        <v-list-item-avatar class="mx-3">
+          <FxSchoolLogo :value="opponent.school.logo" :alt="opponent.school.name" :color="opponent.school.color" />
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title :class="'text-p2 font-weight-bold'">
+            {{ opponent.school.name }}
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <FxNonFixtureItem v-else :event-type="event.eventType" :name="event.name" />
+    </template>
+
+    <template #score>
+      <ExistingResult v-if="hasResult" :event="event" :me="me" />
+      <NoResult v-else :me="me" :event="event" />
+    </template>
+
+    <template #time>
+      <div>
+        <div v-if="me.meetTime" class="d-inline-block pr-8">
+          <v-list-item-title class="text-p2 info--text text--darken-4">
+            {{ me.meetTime }}
+          </v-list-item-title>
+          <v-list-item-subtitle class="text-p1 info--text">
+            Meet Time
+          </v-list-item-subtitle>
+        </div>
+        <div class="d-inline-block pr-8">
+          <v-list-item-title class="text-p2 info--text text--darken-4">
+            {{ event.startTime }}
+          </v-list-item-title>
+          <v-list-item-subtitle class="text-p1 info--text">
+            Start Time
+          </v-list-item-subtitle>
+        </div>
+        <div v-if="me.returnTime" class="d-inline-block">
+          <v-list-item-title class="text-p2 info--text text--darken-4">
+            {{ me.returnTime }}
+          </v-list-item-title>
+          <v-list-item-subtitle class="text-p1 info--text">
+            Return Time
+          </v-list-item-subtitle>
+        </div>
+      </div>
+    </template>
+
+    <template #location>
+      <FxLocationLabel :event="event" :me="me" />
+    </template>
+  </FxTeamEventContainer>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { EventResult, EventType } from '@/enum'
 import ExistingResult
   from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/EventItem/ExistingResult/ExistingResult'
 import NoResult from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/EventItem/NoResult/NoResult'
+import FxSchoolLogo from '@/components/FxSchoolLogo/FxSchoolLogo'
+import FxLocationLabel from '@/components/FxEventItem/FxLocationLabel'
+import FxTeamEventContainer from '@/components/PageComponents/FxTeamsPage/FxTeamEventContainer'
 
 export default {
   name: 'FxTeamsEventItem',
   components: {
+    FxTeamEventContainer,
+    FxLocationLabel,
+    FxSchoolLogo,
     ExistingResult,
     NoResult,
   },
@@ -65,10 +109,6 @@ export default {
       type: Object,
       default: () => {},
     },
-    contextSchoolId: {
-      type: String,
-      required: true,
-    },
   },
 
   data: () => ({
@@ -77,11 +117,11 @@ export default {
   }),
 
   computed: {
+    ...mapGetters({
+      contextSchool: 'context/school',
+    }),
     compact () {
       return this.$vuetify.breakpoint.smAndDown
-    },
-    style () {
-      return { borderLeft: `${this.event.sport?.color} 8px solid` }
     },
     hasResult () {
       return [

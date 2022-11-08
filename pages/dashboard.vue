@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 v-if="me">
+    <h1 v-if="me" class="text-h3 mb-6">
       👋 Welcome, {{ name }}
     </h1>
     <FxDashboardPageCard />

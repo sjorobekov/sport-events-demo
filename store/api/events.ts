@@ -1,6 +1,6 @@
 import { ActionTree, GetterTree } from 'vuex'
 import { PaginatedList, Event, CreateEventPayload, CreateEventBatchPayload, Student } from '~/types'
-import { EventResult, EventStatus, Gender } from '@/enum'
+import { EventResult, EventStatus, EventType, Gender } from '@/enum'
 
 export const state = () => ({})
 
@@ -18,6 +18,10 @@ export const getters: GetterTree<RootState, RootState> = {
     { text: 'Male', value: Gender.MALE },
     { text: 'Female', value: Gender.FEMALE },
   ]),
+
+  eventTypesCanHaveResults () {
+    return [EventType.FIXTURE, EventType.MULTI_EVENT, EventType.TOURNAMENT]
+  },
 }
 
 type QueryParams = {
@@ -42,6 +46,7 @@ type ListByTeamPayload = {
 }
 
 type CheckEventConflictPayload = {
+  eventId?: string,
   schoolId: string,
   date: string,
   startTime: string,

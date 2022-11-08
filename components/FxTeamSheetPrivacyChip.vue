@@ -16,9 +16,9 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'FxTeamPublishChip',
+  name: 'FxTeamSheetPrivacyChip',
   props: {
-    publishTeam: {
+    protected: {
       type: Boolean,
       required: true,
     },
@@ -26,19 +26,15 @@ export default Vue.extend({
 
   computed: {
     color (): string {
-      if (!this.publishTeam) {
+      if (this.protected) {
         return 'warning lighten-1'
       }
 
-      return 'success'
+      return this.protected ? 'warning lighten-1' : 'success'
     },
 
     label (): string {
-      if (!this.publishTeam) {
-        return 'Private'
-      }
-
-      return 'Public'
+      return this.protected ? 'Password Protected' : 'Public'
     },
   },
 })

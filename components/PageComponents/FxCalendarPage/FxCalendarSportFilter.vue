@@ -6,9 +6,10 @@
     multiple
     placeholder="Sport"
     prepend-inner-icon="$vuetify.icons.whistle"
-    :items="sports"
+    :items="items"
     item-text="name"
     item-value="id"
+    background-color="white"
     chips
     :value="value"
     deletable-chips
@@ -41,19 +42,6 @@ export default {
     value: {
       type: Array,
       default: () => [],
-    },
-  },
-  data: () => ({
-    sports: [],
-  }),
-  watch: {
-    items: {
-      deep: true,
-      async handler (val) {
-        this.sports = await Promise.all(val.filter(id => !!id).map((id) => {
-          return this.$store.dispatch('api/sports/fetch', id)
-        }))
-      },
     },
   },
 }

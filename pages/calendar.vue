@@ -5,20 +5,42 @@
       height="172"
       fixed
       color="#F1F5F9"
-      class="calendar-bar"
+      class="calendar-bar px-0"
     >
-      <v-container class="my-0 py-0">
+      <v-container class="my-0 py-0 px-0">
         <div class="d-flex">
-          <FxDateRangePicker v-model="filter" style="width: 232px" class="mr-2" />
+          <FxDateRangePicker v-model="filter" style="width: 232px" :mobile="isMobile" class="mr-2" />
 
-          <FxCalendarSportFilter v-model="filter.sports" class="mr-2" :items="sportIds" />
+          <FxCalendarSportFilter v-model="filter.sports" :items="sports" class="hidden-md-and-down mr-2" />
 
-          <v-btn height="40" outlined color="info lighten-1" @click="showFilters = !showFilters">
-            <v-icon>$vuetify.icons.settings</v-icon>
-            More Filters
-          </v-btn>
+          <v-badge
+            class="hidden-md-and-down mr-2"
+            bordered
+            color="primary"
+            :content="desktopFilterBadges"
+            :value="desktopFilterBadges"
+            overlap
+          >
+            <v-btn height="40" outlined color="info lighten-1" style="background-color: white" @click="showFilters = !showFilters">
+              <v-icon>$vuetify.icons.settings</v-icon>
+              More Filters
+            </v-btn>
+          </v-badge>
 
           <v-spacer />
+
+          <v-badge
+            class="hidden-lg-and-up mr-2"
+            bordered
+            color="primary"
+            :content="mobileFilterBadges"
+            :value="mobileFilterBadges"
+            overlap
+          >
+            <v-btn height="40" width="40" icon color="info lighten-1" @click="showFilters = !showFilters">
+              <v-icon>$vuetify.icons.settings</v-icon>
+            </v-btn>
+          </v-badge>
 
           <v-btn
             v-if="canCreateEvent"
@@ -28,9 +50,9 @@
             link
             :to="{ name: 'events-add' }"
           >
-            <v-icon>
+            <v-icon :class="isMobile ? 'mr-0' : 'mr-2'">
               $vuetify.icons.calendarAdd
-            </v-icon>Create Event
+            </v-icon><span class="hidden-xs-only">Create Event</span>
           </v-btn>
         </div>
 
@@ -44,34 +66,41 @@
       </v-container>
     </v-app-bar>
     <div class="calendar-content">
-      <v-expand-transition>
-        <div v-if="showFilters">
-          <FxPill class="mb-4">
-            Filters
-          </FxPill>
+      <client-only>
+        <v-expand-transition>
+          <div v-if="showFilters">
+            <FxPill class="mb-4">
+              Filters
+            </FxPill>
 
-          <v-row>
-            <v-col>
-              <FxCalendarStaffFilter v-model="filter.leadIds" :items="leadIds" />
-            </v-col>
-            <v-col>
-              <FxCalendarEventFilter v-model="filter.eventTypes" :items="eventTypes" />
-            </v-col>
-            <v-col>
-              <FxCalendarOpponentFilter v-model="filter.opponentIds" :items="opponentIds" />
-            </v-col>
-            <v-col>
-              <FxCalendarAgeFilter v-model="filter.ageGroups" :items="ageGroups" />
-            </v-col>
-            <v-col>
-              <FxCalendarLocationFilter v-model="filter.locations" />
-            </v-col>
-            <v-col>
-              <FxCalendarStatusFilter v-model="filter.privacy" />
-            </v-col>
-          </v-row>
-        </div>
-      </v-expand-transition>
+            <v-row class="hidden-lg-and-up">
+              <v-col>
+                <FxCalendarSportFilter v-model="filter.sports" :items="sports" />
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12" sm="6" md="4">
+                <FxCalendarStaffFilter v-model="filter.leadIds" :items="leadIds" />
+              </v-col>
+              <v-col cols="12" sm="6" md="4">
+                <FxCalendarEventFilter v-model="filter.eventTypes" :items="eventTypes" />
+              </v-col>
+              <v-col cols="12" sm="6" md="4">
+                <FxCalendarOpponentFilter v-model="filter.opponentIds" :items="opponentIds" />
+              </v-col>
+              <v-col cols="12" sm="6" md="4">
+                <FxCalendarAgeFilter v-model="filter.ageGroups" :items="ageGroups" />
+              </v-col>
+              <v-col cols="12" sm="6" md="4">
+                <FxCalendarLocationFilter v-model="filter.locations" />
+              </v-col>
+              <v-col cols="12" sm="6" md="4">
+                <FxCalendarStatusFilter v-model="filter.privacy" />
+              </v-col>
+            </v-row>
+          </div>
+        </v-expand-transition>
+      </client-only>
       <client-only>
         <div
           v-for="key in eventSortedDates"
@@ -98,9 +127,10 @@
 <script>
 import groupBy from 'lodash/groupBy'
 import isString from 'lodash/isString'
+import uniq from 'lodash/uniq'
+import uniqBy from 'lodash/uniqBy'
 import { DateTime } from 'luxon'
 import { mapGetters } from 'vuex'
-import uniq from 'lodash/uniq'
 import FxCalendar from '@/components/FxCalendar/FxCalendar'
 import FxDateRangePicker from '@/components/FxDateRangePicker'
 import FxCalendarPill from '@/components/PageComponents/FxCalendarPage/FxCalendarPill'
@@ -121,6 +151,7 @@ const FORMAT_ADAPTER = {
   Event (item) {
     return {
       sportId: item.sportId,
+      sport: item.sport,
       leadId: item.me?.leadId,
       eventType: item.eventType,
       opponentId: item.opponent?.listedAsOpponentId,
@@ -132,6 +163,7 @@ const FORMAT_ADAPTER = {
   InHouseEventMatch (item) {
     return {
       sportId: item.inHouseEvent.inHouseCompetition.sportId,
+      sport: item.inHouseEvent.inHouseCompetition.sport,
       leadId: item.inHouseEvent.leadId,
       eventType: item.inHouseEvent.eventType,
       sportLocationId: item.sportLocationId,
@@ -220,7 +252,6 @@ export default {
   data: () => ({
     date: null,
     items: [],
-    sports: [],
     filter: {
       startDate: new Date(),
       endDate: new Date(),
@@ -266,6 +297,10 @@ export default {
       canCreateEvent: 'user/acl/canCreateEvent',
     }),
 
+    isMobile () {
+      return this.$vuetify.breakpoint.smAndDown
+    },
+
     dots () {
       return Object.keys(this.eventsGroupedByDate)
     },
@@ -290,8 +325,8 @@ export default {
       return uniq(this.items.map(item => item.eventType))
     },
 
-    sportIds () {
-      return uniq(this.items.map(item => adapt(item).sportId))
+    sports () {
+      return uniqBy(this.items.map(item => adapt(item).sport), a => a.id)
     },
 
     opponentIds () {
@@ -303,12 +338,28 @@ export default {
         return parseInt(a.substr(1, 2)) > parseInt(b.substr(1, 2)) ? 1 : -1
       })
     },
+
+    mobileFilterBadges () {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { startDate, endDate, ...filters } = this.filter
+      return Object.values(filters).filter(item => item.length).length
+    },
+
+    desktopFilterBadges () {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { startDate, endDate, sports, ...filters } = this.filter
+      return Object.values(filters).filter(item => item.length).length
+    },
   },
 
   watch: {
     filter: {
       deep: true,
       async handler (val, old) {
+        if (!(val.startDate && val.endDate)) {
+          return
+        }
+
         if (val.startDate !== old.startDate || val.endDate !== old.endDate) {
           await this.$fetch()
         }
@@ -348,6 +399,7 @@ export default {
         }
       }
     },
+
     scrollTo (val) {
       if (!process.client) {
         return
@@ -380,12 +432,15 @@ export default {
   margin-left: 0;
 }
 .calendar-content {
-  margin-top: 80px;
+  margin-top: 120px;
 }
 @media only screen and (min-width: 960px) {
   .calendar-bar {
     top: 55px;
     margin-left: 224px;
+  }
+  .calendar-content {
+    margin-top: 80px;
   }
 }
 </style>

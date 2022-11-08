@@ -8,6 +8,7 @@
     prepend-inner-icon="$vuetify.icons.staff"
     :items="users"
     :item-text="fullname"
+    background-color="white"
     item-value="id"
     chips
     :value="value"

@@ -16,7 +16,7 @@ import Vue from 'vue'
 import { PublishResult } from '~/enum'
 
 export default Vue.extend({
-  name: 'FxUserStatus',
+  name: 'FxTeamPrivacyChipBig',
   props: {
     publishTeam: {
       type: Boolean,

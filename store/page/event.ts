@@ -122,6 +122,10 @@ export const getters: GetterTree<RootState, RootState> = {
     return [UserRole.ADMIN, UserRole.SUPER_ADMIN, UserRole.SPORTS_USER].includes(getters.role)
   },
 
+  canHaveResult (_state, getters, _rootState, rootGetters) {
+    return rootGetters['api/events/eventTypesCanHaveResults'].includes(getters.event.eventType)
+  },
+
   canManageTeamSheet (_state, getters) {
     return [UserRole.ADMIN, UserRole.SUPER_ADMIN, UserRole.SPORTS_USER].includes(getters.role)
   },

@@ -114,7 +114,7 @@
             </template>
           </ListItem>
 
-          <FxTeamSelectForm :value="me" :season-id="season.id" :sport-id="event.sportId" @input="updateMe($event)" />
+          <FxTeamSelectForm :value="me" :season-id="season.id" :sport-id="event.sportId" @input="onTeamUpdate($event)" />
         </v-col>
 
         <v-col md="3" class="fx-columnitem">
@@ -130,7 +130,7 @@
             </template>
           </ListItem>
 
-          <FxLeadSelectForm :value="me" @input="updateMe($event)" />
+          <FxLeadSelectForm :value="me" @input="onLeadUpdate($event)" />
         </v-col>
 
         <v-col md="3" class="fx-columnitem pr-6">
@@ -161,7 +161,6 @@
             v-model="override"
             :item="conflict"
             :context-school-id="contextSchoolId"
-            hide-action
             class="mb-2"
             @updated="$root.$emit('conflict:updated')"
           />
@@ -224,6 +223,7 @@ export default {
     ...mapGetters({
       season: 'seasons/current',
     }),
+
     conflictsExist () {
       return this.conflicts.length > 0
     },
@@ -286,12 +286,6 @@ export default {
       },
       deep: true,
     },
-    me: {
-      handler () {
-        this.checkConflict()
-      },
-      deep: true,
-    },
   },
 
   async created () {
@@ -308,6 +302,7 @@ export default {
     async checkConflict () {
       try {
         const { status, events } = await this.$store.dispatch('api/events/checkConflict', {
+          eventId: this.event.id,
           schoolId: this.contextSchoolId,
           date: this.event.date,
           startTime: this.event.startTime,
@@ -324,6 +319,24 @@ export default {
 
     openForm () {
       this.isOpen = true
+    },
+
+    async onLeadUpdate (value) {
+      const lead = await this.$store.dispatch('api/users/fetch', {
+        schoolId: this.contextSchoolId,
+        id: value.leadId,
+      })
+
+      this.updateMe({ ...value, lead })
+    },
+
+    async onTeamUpdate (value) {
+      const team = await this.$store.dispatch('api/teams/fetch', {
+        schoolId: this.contextSchoolId,
+        id: value.teamId,
+      })
+
+      this.updateMe({ ...value, team })
     },
 
     updateMe (value) {

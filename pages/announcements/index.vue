@@ -32,7 +32,7 @@
 
     <v-row v-else>
       <v-col cols="5">
-        <div class="rounded-r background-white overflow-hidden bt">
+        <div class="rounded background-white overflow-hidden bt">
           <template v-if="items.length">
             <FxAnnouncementListItem
               v-for="item in items"

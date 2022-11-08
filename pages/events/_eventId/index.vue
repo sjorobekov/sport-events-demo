@@ -35,10 +35,11 @@ export default {
       isPendingResult: 'page/event/isPendingResult',
       hasScore: 'page/event/hasScore',
       canAddOrEditResult: 'page/event/canAddOrEditResult',
+      canHaveResult: 'page/event/canHaveResult',
     }),
 
     showResultsCard () {
-      return this.hasScore || this.canAddOrEditResult
+      return this.hasScore || (this.canHaveResult && this.canAddOrEditResult)
     },
   },
 }

@@ -51,7 +51,7 @@
           />
         </v-list-item-action>
       </v-list-item>
-      <v-list-item v-if="!hideAction" class="hidden-sm-and-down">
+      <v-list-item class="hidden-sm-and-down">
         <v-list-item-content />
         <v-list-item-action>
           <v-btn rounded outlined @click="isOpen = !isOpen">
@@ -92,10 +92,6 @@ export default {
     contextSchoolId: {
       type: String,
       required: true,
-    },
-    hideAction: {
-      type: Boolean,
-      default: false,
     },
   },
 
