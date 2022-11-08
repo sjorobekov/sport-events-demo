@@ -62,18 +62,20 @@ export default {
         this.loading = false
         return
       }
-
-      await this.$store.dispatch('api/schools/requestAdd', {
-        schoolId: this.schoolId,
-        ...this.formData,
-      }).then(async (res) => {
+      try {
+        const schoolRequest = await this.$store.dispatch('api/schoolRequests/save', {
+          schoolId: this.schoolId,
+          ...this.formData,
+        })
         await this.$store.dispatch('api/signUp/requestAddSchool', {
-          schoolId: res.id,
+          schoolRequestId: schoolRequest.id,
         })
         this.$router.push({ name: 'directory-opponents' })
-      }).finally(() => {
+      } catch (e) {
+        this.$toast.error('Unknown Error')
+      } finally {
         this.loading = false
-      })
+      }
     },
   },
 }

@@ -1,5 +1,4 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex'
-import { SchoolStatus } from '~/enum'
 import { Dictionary, PaginatedList, School, User } from '~/types'
 
 export const state = () => ({
@@ -44,26 +43,9 @@ export const actions: ActionTree<RootState, RootState> = {
       website: payload.website,
       portalAddress: payload.portal ? payload.portalAddress : null,
       emailDomains: payload.emailDomains,
-      status: SchoolStatus.APPROVED,
     }
     if (payload.id) {
       return this.$axios.$put(`/api/v1/schools/${payload.id}`, data)
-    }
-
-    return this.$axios.$post('/api/v1/schools', data)
-  },
-
-  requestAdd (_, payload: School): Promise<School> {
-    const data = {
-      name: payload.name,
-      email: payload.email,
-      street: payload.street,
-      country: payload.country,
-      city: payload.city,
-      state: payload.state,
-      zip: payload.zip,
-      website: payload.website,
-      status: SchoolStatus.PENDING,
     }
 
     return this.$axios.$post('/api/v1/schools', data)

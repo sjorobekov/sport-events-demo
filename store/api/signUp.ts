@@ -52,7 +52,7 @@ type RequestToJoinPayload = {
 }
 
 type RequestAddSchoolPayload = {
-  schoolId: string,
+  schoolRequestId: string,
 }
 
 export const actions: ActionTree<RootState, RootState> = {

@@ -362,3 +362,15 @@ export interface SportsRecord {
   readonly createdAt: string
   readonly updatedAt: string
 }
+
+export interface SchoolRequest {
+  readonly id: string
+  name: string
+  street?: string
+  country?: string
+  city?: string
+  state?: string
+  zip?: string
+  website?: string
+  email?: string
+}

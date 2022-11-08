@@ -110,7 +110,7 @@ export enum InHouseEventResult {
   CANCELLED = 'CANCELLED',
 }
 
-export enum SchoolStatus {
+export enum SchoolRequestStatus {
   APPROVED = 'APPROVED',
   REJECTED = 'REJECTED',
   PENDING = 'PENDING',
