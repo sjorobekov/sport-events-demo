@@ -63,12 +63,9 @@ export default {
         return
       }
       try {
-        const schoolRequest = await this.$store.dispatch('api/schoolRequests/save', {
+        await this.$store.dispatch('api/schoolRequests/save', {
           schoolId: this.schoolId,
           ...this.formData,
-        })
-        await this.$store.dispatch('api/signUp/requestAddSchool', {
-          schoolRequestId: schoolRequest.id,
         })
         this.$router.push({ name: 'directory-opponents' })
       } catch (e) {
