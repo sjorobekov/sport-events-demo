@@ -65,6 +65,7 @@ export default {
         ...this.formData,
       }).then((res) => {
         this.$emit('created', res)
+        this.$router.push('/announcements')
       }).finally(() => {
         this.loading = false
       })
