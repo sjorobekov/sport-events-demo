@@ -87,6 +87,21 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
         return available || 'Address is unavailable'
       }
     },
+
+    isRecordCategoryAvailable (schoolId: string) {
+      return async (name: string): AsyncReturnType => {
+        const { available } = await $axios.$post('/api/v1/validation/check_sports_record_category', { name, schoolId })
+        return available || 'Category name is unavailable'
+      }
+    },
+
+    isRecordEventAvailable (schoolId: string, sportId: string) {
+      return async (name: string): AsyncReturnType => {
+        const { available } = await $axios.$post('/api/v1/validation/check_sports_record_event', { name, schoolId, sportId })
+          .catch(() => { return 'Event name is unavailable' })
+        return available || 'Event name is unavailable'
+      }
+    },
   }
 
   inject('rule', rule)

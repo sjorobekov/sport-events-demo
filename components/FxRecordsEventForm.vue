@@ -31,7 +31,7 @@
           id="event"
           v-async-validate
           :value="formData.name"
-          :async-rules="[$rule.required]"
+          :async-rules="[$rule.required, $rule.isRecordEventAvailable(schoolId, formData.sportId)]"
           dense
           outlined
           placeholder="Event Name"
@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'FxRecordsCategoryForm',
 
@@ -62,6 +64,9 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      schoolId: 'context/schoolId',
+    }),
     formData () {
       return {
         ...(this.value || {}),

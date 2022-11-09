@@ -16,7 +16,7 @@
         id="category"
         v-async-validate
         :value="formData.name"
-        :async-rules="[$rule.required]"
+        :async-rules="[$rule.required, $rule.isRecordCategoryAvailable(schoolId)]"
         dense
         outlined
         placeholder="Category Name"
@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'FxRecordsCategoryForm',
 
@@ -42,6 +44,9 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      schoolId: 'context/schoolId',
+    }),
     formData () {
       return {
         ...(this.value || {}),
