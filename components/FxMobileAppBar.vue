@@ -7,7 +7,7 @@
     flat
     color="primary"
   >
-    <v-list-item>
+    <v-list-item class="pl-0">
       <v-list-item-avatar color="white" size="44">
         <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" :size="44" />
       </v-list-item-avatar>
