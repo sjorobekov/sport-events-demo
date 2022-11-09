@@ -170,7 +170,7 @@ export default {
 
       const dashboard = (this.isLoggedIn)
         ? { title: 'Sports Dashboard', icon: '$vuetify.icons.home', exact: true, to: { name: 'dashboard' } }
-        : { title: 'Sports Home', icon: '$vuetify.icons.home', exact: true, to: { name: 'portal' } }
+        : { title: 'Sports Home', icon: '$vuetify.icons.home', exact: true, to: { name: 'home' } }
       menu.unshift(dashboard)
 
       if (this.canSeeOrganising) {

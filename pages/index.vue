@@ -15,7 +15,7 @@ export default {
       if (store.getters['context/isLoggedIn']) {
         return redirect({ name: 'dashboard' })
       }
-      return redirect({ name: 'portal' })
+      return redirect({ name: 'home' })
     }
 
     return redirect({ name: 'management' })
