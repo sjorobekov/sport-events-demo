@@ -58,12 +58,8 @@ export default {
         ...this.formData,
       }).then(() => {
         this.$router.push({ name: 'records-manage-categories' })
-      }).catch((e) => {
-        if (e.response?.status === 422) {
-          this.$toast.error('Category already exists')
-        } else {
-          this.$toast.error('Unknown Error')
-        }
+      }).catch(() => {
+        this.$toast.error('Unknown Error')
       }).finally(() => {
         this.loading = false
       })
