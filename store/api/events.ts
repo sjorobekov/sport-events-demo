@@ -1,5 +1,5 @@
 import { ActionTree, GetterTree } from 'vuex'
-import { PaginatedList, Event, CreateEventPayload, CreateEventBatchPayload, Student } from '~/types'
+import { PaginatedList, Event, CreateEventBatchPayload, Student } from '~/types'
 import { EventResult, EventStatus, EventType, Gender } from '@/enum'
 
 export const state = () => ({})
@@ -148,14 +148,6 @@ export const actions: ActionTree<RootState, RootState> = {
     })
 
     return data
-  },
-
-  create (_, { me, opponent, event, schoolId }: CreateEventPayload): Promise<Event> {
-    return this.$axios.$post(`/api/v1/schools/${schoolId}/events`, {
-      me,
-      opponent,
-      event,
-    })
   },
 
   createBatch (_, { events, schoolId }: CreateEventBatchPayload): Promise<void> {

@@ -197,7 +197,7 @@
       </template>
 
       <label for="date">Date</label>
-      <v-menu ref="menu" offset-y :close-on-content-click="false">
+      <v-menu ref="menu" offset-y :close-on-content-click="false" min-width="auto">
         <template #activator="{ on, attrs }">
           <v-text-field
             id="date"

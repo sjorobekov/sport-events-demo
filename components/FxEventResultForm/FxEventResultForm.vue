@@ -23,10 +23,19 @@
 </template>
 
 <script>
+import FxEventFixtureResultForm from './FxEventFixtureResultForm'
+import FxEventMultiResultForm from './FxEventMultiResultForm'
+import FxEventTournamentResultForm from './FxEventTournamentResultForm'
 import { EventType } from '@/enum'
 
 export default {
   name: 'FxEventResultForm',
+  components: {
+    FxEventFixtureResultForm,
+    FxEventMultiResultForm,
+    FxEventTournamentResultForm,
+  },
+
   props: {
     eventType: {
       type: String,
