@@ -82,8 +82,8 @@ export default {
         ...this.value,
         results: this.value.results || [
           {
-            score: 0,
-            opponentScore: 0,
+            score: '0',
+            opponentScore: '0',
           },
         ],
       }
@@ -107,8 +107,8 @@ export default {
 
     add () {
       this.$emit('input', tap(cloneDeep(this.formData), v => v.results.push({
-        score: 0,
-        opponentScore: 0,
+        score: '0',
+        opponentScore: '0',
       })))
     },
   },

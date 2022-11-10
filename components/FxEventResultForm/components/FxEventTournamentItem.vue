@@ -111,8 +111,8 @@ export default {
     }),
     formData () {
       return {
-        score: 0,
-        opponentScore: 0,
+        score: '0',
+        opponentScore: '0',
         opponentSchoolId: null,
         ...(this.value || {}),
       }
@@ -128,11 +128,13 @@ export default {
     },
 
     increaseScore () {
-      this.$emit('input', { ...this.formData, score: (this.formData.score + 1) })
+      const incremented = parseFloat(this.formData.score) + 1
+      this.$emit('input', { ...this.formData, score: incremented.toString() })
     },
 
     increaseOpponentScore () {
-      this.$emit('input', { ...this.formData, opponentScore: (this.formData.opponentScore + 1) })
+      const incremented = parseFloat(this.formData.opponentScore) + 1
+      this.$emit('input', { ...this.formData, opponentScore: incremented.toString() })
     },
 
     updateOpponent (key, value) {
