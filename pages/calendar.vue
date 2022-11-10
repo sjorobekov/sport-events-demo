@@ -11,7 +11,7 @@
         <div class="d-flex">
           <FxDateRangePicker v-model="filter" style="width: 232px" :mobile="isMobile" class="mr-2" />
 
-          <FxCalendarSportFilter v-model="filter.sports" :items="sports" class="hidden-md-and-down mr-2" />
+          <FxCalendarSportFilter v-model="filter.sports" style="width: 50px" :items="sports" class="hidden-md-and-down mr-2" />
 
           <v-badge
             class="hidden-md-and-down mr-2"
