@@ -5,7 +5,7 @@
       sm="12"
       md="12"
       lg="7"
-      class="pr-4 d-flex"
+      class="pr-4 d-flex justify-end"
       :class="isPendingResult ? 'flex-column' : 'flex-column-reverse'"
     >
       <FxEventDetails />
