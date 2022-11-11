@@ -355,8 +355,9 @@ export interface SportsRecord {
   readonly sportsRecordEvent?: SportsRecordEvent
   sportsRecordCategoryId: string
   readonly sportsRecordCategory?: SportsRecordCategory
-  studentId: string
+  studentId?: string
   readonly student?: Student
+  studentName?: string
   score: string
   date: string
   readonly createdAt: string

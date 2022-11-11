@@ -77,18 +77,18 @@
       <v-row>
         <v-col cols="12" sm="6">
           <label for="student">Student</label>
-          <v-autocomplete
+          <v-combobox
             id="student"
             v-async-validate
             :async-rules="[$rule.required]"
             outlined
             dense
-            :value="formData.studentId"
+            :value="formData.student"
             :items="students"
             :item-text="fullname"
             item-value="id"
             placeholder="Select Student"
-            @input="update('studentId', $event)"
+            @input="update('student', $event)"
           />
         </v-col>
         <v-col cols="12" sm="6">

@@ -86,7 +86,8 @@
           <span>{{ item.sportsRecordCategory.name }}</span>
         </template>
         <template #item.student="{ item }">
-          <span>{{ item.student.firstname }} {{ item.student.lastname }}</span>
+          <span v-if="item.student">{{ item.student.firstname }} {{ item.student.lastname }}</span>
+          <span v-else>{{ item.studentName }}</span>
         </template>
         <template #item.date="{ item }">
           <FxDateFormat :date="item.date" output-format="dd-MM-yyyy" />
