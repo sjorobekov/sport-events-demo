@@ -29,13 +29,8 @@
       </v-col>
       <v-col>
         <label for="startTime">Start Time</label>
-        <v-text-field
+        <FxTimePickerMenu
           id="startTime"
-          v-async-validate
-          type="time"
-          dense
-          outlined
-          placeholder="HH:MM"
           :async-rules="[$rule.required]"
           :value="formData.startTime"
           @input="update('startTime', $event)"

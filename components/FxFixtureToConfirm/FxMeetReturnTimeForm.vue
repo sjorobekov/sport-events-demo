@@ -14,22 +14,16 @@
       <v-row>
         <v-col>
           <label>Meet Time</label>
-          <v-text-field
+          <FxTimePickerMenu
             v-model="formData.meetTime"
-            dense
-            type="time"
             hide-details
-            outlined
             placeholder="Meet Time"
           />
         </v-col>
         <v-col>
           <label>Return Time</label>
-          <v-text-field
+          <FxTimePickerMenu
             v-model="formData.returnTime"
-            dense
-            type="time"
-            hide-details
             outlined
             placeholder="Return Time"
           />

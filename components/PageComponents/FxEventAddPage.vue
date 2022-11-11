@@ -95,6 +95,7 @@ export default {
       event: {
         fixtureType: FixtureType.FRIENDLY,
         location: EventLocationType.SPORTS_LOCATIONS,
+        startTime: '09:00',
       },
     },
     items: [],

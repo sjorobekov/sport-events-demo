@@ -20,24 +20,16 @@
     <v-row>
       <v-col cols="6" sm="6" md="4">
         <label for="meetTime">Meet Time</label>
-        <v-text-field
+        <FxTimePickerMenu
           id="meetTime"
-          type="time"
-          dense
-          outlined
-          placeholder="HH:MM"
           :value="formData.meetTime"
           @input="update('meetTime', $event)"
         />
       </v-col>
       <v-col cols="6" sm="6" md="4">
         <label for="returnTime">Return Time</label>
-        <v-text-field
+        <FxTimePickerMenu
           id="returnTime"
-          type="time"
-          dense
-          outlined
-          placeholder="HH:MM"
           :value="formData.returnTime"
           @input="update('returnTime', $event)"
         />

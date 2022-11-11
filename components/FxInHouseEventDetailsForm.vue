@@ -39,13 +39,8 @@
           </v-col>
           <v-col cols="4">
             <label for="startTime">Start Time</label>
-            <v-text-field
+            <FxTimePickerMenu
               id="startTime"
-              v-async-validate
-              type="time"
-              dense
-              outlined
-              placeholder="HH:MM"
               :async-rules="[$rule.required]"
               :value="formData.startTime"
               @input="update('startTime', $event)"
@@ -53,12 +48,8 @@
           </v-col>
           <v-col cols="4">
             <label for="finishTime">Finish Time</label>
-            <v-text-field
+            <FxTimePickerMenu
               id="finishTime"
-              type="time"
-              dense
-              outlined
-              placeholder="HH:MM"
               :value="formData.finishTime"
               @input="update('finishTime', $event)"
             />
