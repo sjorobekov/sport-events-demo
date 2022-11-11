@@ -1,25 +1,17 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex'
-import { Dictionary, SchoolRequest } from '~/types'
+import { SchoolRequest } from '~/types'
 
-export const state = () => ({
-  indexed: {} as Dictionary<SchoolRequest>,
-})
+export const state = () => ({})
 
 export type RootState = ReturnType<typeof state>
 
 export const getters: GetterTree<RootState, RootState> = {}
 
-export const mutations: MutationTree<RootState> = {
-  cache (state, item: SchoolRequest): void {
-    state.indexed[item.id] = item
-  },
-}
+export const mutations: MutationTree<RootState> = {}
 
 export const actions: ActionTree<RootState, RootState> = {
-  async list (_, { params }): Promise<Array<SchoolRequest>> {
-    const data: SchoolRequest[] = await this.$axios.$get('/api/v1/school_requests', { params })
-
-    return data
+  list (_, { params }): Promise<Array<SchoolRequest>> {
+    return this.$axios.$get('/api/v1/school_requests', { params })
   },
 
   save (_, { id, ...payload }: SchoolRequest): Promise<SchoolRequest> {
@@ -36,15 +28,6 @@ export const actions: ActionTree<RootState, RootState> = {
 
   get (_, { id }: { id: string }): Promise<SchoolRequest> {
     return this.$axios.$get(`api/v1/school_requests/${id}`)
-  },
-
-  async fetch ({ commit, state, dispatch }, { id }): Promise<SchoolRequest> {
-    if (!state.indexed[id]) {
-      const data = await dispatch('get', { id })
-      commit('cache', data)
-    }
-
-    return state.indexed[id]
   },
 
   remove (_, { id }: { id: string }): Promise<void> {
