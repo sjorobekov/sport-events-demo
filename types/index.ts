@@ -149,6 +149,10 @@ export interface Opponent {
   readonly id: string
   name: string
   address: string
+  coordinates: {
+    lng: number,
+    lat: number,
+  },
   schoolId: string
   opponentSchoolId: string
   opponentSchool: School
@@ -357,4 +361,16 @@ export interface SportsRecord {
   date: string
   readonly createdAt: string
   readonly updatedAt: string
+}
+
+export interface SchoolRequest {
+  readonly id: string
+  name: string
+  street?: string
+  country?: string
+  city?: string
+  state?: string
+  zip?: string
+  website?: string
+  email?: string
 }

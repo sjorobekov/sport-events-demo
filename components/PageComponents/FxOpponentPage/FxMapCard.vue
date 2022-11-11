@@ -28,8 +28,7 @@ export default {
   },
 
   data: () => ({
-    mapCenter: { lng: 0, lat: 0 },
-    zoom: 5,
+    zoom: 15,
   }),
 
   computed: {
@@ -43,6 +42,9 @@ export default {
         fullscreenControl: false,
         disableDefaultUi: true,
       }
+    },
+    mapCenter () {
+      return this.coordinates || { lng: 0, lat: 0 }
     },
   },
 }

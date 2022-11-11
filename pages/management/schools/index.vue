@@ -13,6 +13,11 @@
           </v-list-item-content>
 
           <v-list-item-action>
+            <v-btn outlined color="brand" depressed :to="{ name: 'management-school-requests' }">
+              <v-icon>mdi-town-hall</v-icon>Requests
+            </v-btn>
+          </v-list-item-action>
+          <v-list-item-action>
             <v-btn dark color="brand" depressed :to="{ name: 'management-schools-add' }">
               <v-icon>$vuetify.icons.plusOutline</v-icon>Add School
             </v-btn>

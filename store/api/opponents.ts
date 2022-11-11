@@ -47,6 +47,7 @@ export const actions: ActionTree<RootState, RootState> = {
     const req = {
       name: payload.name,
       address: payload.address,
+      coordinates: payload.coordinates,
     }
 
     if (id) {
