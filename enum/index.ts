@@ -8,6 +8,7 @@ export enum UserRole {
 export enum Gender {
   MALE = 'MALE',
   FEMALE = 'FEMALE',
+  MIXED = 'MIXED',
 }
 
 export enum PublishResult {

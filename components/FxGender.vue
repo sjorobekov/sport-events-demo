@@ -20,7 +20,13 @@ export default {
         return ''
       }
 
-      return this.value === Gender.MALE ? 'Male' : 'Female'
+      if (this.value === Gender.MALE) {
+        return 'Male'
+      } else if (this.value === Gender.FEMALE) {
+        return 'Female'
+      } else {
+        return 'Mixed'
+      }
     },
   },
 }
