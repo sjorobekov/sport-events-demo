@@ -16,7 +16,7 @@
 import { FixtureType } from '@/enum'
 
 export default {
-  name: 'FxGenderSelect',
+  name: 'FxFixtureTypeSelect',
   props: {
     id: {
       type: String,
