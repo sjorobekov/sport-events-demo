@@ -53,11 +53,11 @@ export default {
     students: [],
   }),
   async fetch () {
-    const data = await this.$store.dispatch('api/sportsRecords/get', {
+    const { student, ...data } = await this.$store.dispatch('api/sportsRecords/get', {
       schoolId: this.schoolId,
       id: this.$route.params.id,
     })
-    data.student = data.student || data.studentName
+    data.student = student || data.studentName
     this.formData = data
   },
   computed: {
