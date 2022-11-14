@@ -88,7 +88,7 @@
             :item-text="fullname"
             item-value="id"
             placeholder="Select Student"
-            @input="update('student', $event)"
+            @input="updateStudent($event)"
           />
         </v-col>
         <v-col cols="12" sm="6">
@@ -182,6 +182,15 @@ export default {
     },
     update (key, value) {
       this.$emit('input', { ...this.formData, [key]: value })
+    },
+    updateStudent (value) {
+      let data
+      if (typeof value === 'object' && value) {
+        data = { studentId: value.id }
+      } else {
+        data = { studentName: value }
+      }
+      this.$emit('input', { ...this.formData, ...data })
     },
     fullname (item) {
       return `${item.firstname} ${item.lastname}`
