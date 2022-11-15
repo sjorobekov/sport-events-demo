@@ -178,6 +178,7 @@ export interface EventParticipant {
   teamId?: string
   readonly team?: Team,
   listedAsOpponentId?: string
+  readonly opponent?: Opponent
   noNeedTransport?: boolean
   transportTo?: TransportType
   transportToOther?: string
@@ -190,6 +191,7 @@ export interface EventParticipant {
   status: EventStatus
   eventLocation: EventLocation
   creator: boolean
+  leadId?: string,
   readonly school?: School
   readonly lead?: User
   overallResult: EventResult,

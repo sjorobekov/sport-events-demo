@@ -1,6 +1,7 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex'
-import { Event, EventParticipant, EventParticipantResult, School, Sport, Team, User } from '~/types'
+import { Event, EventParticipant, EventParticipantResult } from '~/types'
 import { EventResult, EventType, UserRole } from '~/enum'
+import { EventUpdatePayload } from '~/store/api/events'
 
 type ResultData = {
   overallResult?: EventResult,
@@ -11,11 +12,7 @@ type ResultData = {
 export const state = () => ({
   event: {} as Event,
   me: {} as EventParticipant,
-  myTeam: {} as Team,
   opponent: {} as EventParticipant,
-  opponentTeam: {} as School,
-  lead: {} as User,
-  sport: {} as Sport,
   result: {
     results: [] as Array<EventParticipantResult>,
   } as ResultData,
@@ -32,24 +29,8 @@ export const mutations: MutationTree<RootState> = {
     state.me = me
   },
 
-  myTeam (state, myTeam: Team) {
-    state.myTeam = myTeam
-  },
-
   opponent (state, opponent: EventParticipant) {
     state.opponent = opponent
-  },
-
-  opponentTeam (state, school: School) {
-    state.opponentTeam = school
-  },
-
-  lead (state, lead: User) {
-    state.lead = lead
-  },
-
-  sport (state, sport: Sport) {
-    state.sport = sport
   },
 
   result (state, result: ResultData) {
@@ -67,7 +48,7 @@ export const getters: GetterTree<RootState, RootState> = {
   },
 
   myTeam (state) {
-    return state.myTeam
+    return state.me.team
   },
 
   opponent (state) {
@@ -75,15 +56,18 @@ export const getters: GetterTree<RootState, RootState> = {
   },
 
   opponentTeam (state) {
-    return state.opponentTeam
+    if (state.opponent) {
+      return state.opponent.school || state.opponent.opponent
+    }
+    return null
   },
 
   lead (state) {
-    return state.lead
+    return state.me.lead
   },
 
   sport (state) {
-    return state.sport
+    return state.event.sport
   },
 
   result (state) {
@@ -152,65 +136,6 @@ export const actions: ActionTree<RootState, RootState> = {
       results: me.results,
       resultNotes: me.resultNotes,
     })
-
-    const promises = [
-      dispatch('fetchMyTeam', me.teamId),
-      dispatch('fetchSport', event.sportId),
-      dispatch('fetchLead', me.leadId),
-    ]
-
-    if (opponent) {
-      promises.push(dispatch('fetchOpponentTeam', {
-        listedAsOpponentId: opponent.listedAsOpponentId,
-        schoolId: opponent.schoolId,
-      }))
-    }
-
-    await Promise.all(promises)
-  },
-
-  async fetchMyTeam ({ commit, dispatch, rootGetters }, teamId: string) {
-    const contextSchoolId = rootGetters['context/schoolId']
-
-    const myTeam = await dispatch('api/teams/fetch', {
-      schoolId: contextSchoolId,
-      id: teamId,
-    }, { root: true })
-
-    commit('myTeam', myTeam)
-  },
-
-  async fetchOpponentTeam ({ commit, dispatch, rootGetters }, { listedAsOpponentId, schoolId }: { listedAsOpponentId?: string, schoolId?: string }) {
-    const contextSchoolId = rootGetters['context/schoolId']
-
-    if (schoolId) {
-      const school = await dispatch('api/schools/fetch', schoolId, { root: true })
-      commit('opponentTeam', school)
-    } else if (listedAsOpponentId) {
-      const opponent = await dispatch('api/opponents/fetch', {
-        schoolId: contextSchoolId,
-        id: listedAsOpponentId,
-      }, { root: true })
-      commit('opponentTeam', opponent)
-    } else {
-      throw new Error('Logic Error')
-    }
-  },
-
-  async fetchSport ({ dispatch, commit }, sportId: string) {
-    const sport = await dispatch('api/sports/fetch', sportId, { root: true })
-    commit('sport', sport)
-  },
-
-  async fetchLead ({ dispatch, commit, rootGetters }, leadId: string) {
-    const contextSchoolId = rootGetters['context/schoolId']
-
-    const lead = await dispatch('api/users/fetch', {
-      schoolId: contextSchoolId,
-      id: leadId,
-    }, { root: true })
-
-    commit('lead', lead)
   },
 
   async saveResult ({ commit, dispatch, rootGetters, getters }, payload) {
@@ -227,5 +152,19 @@ export const actions: ActionTree<RootState, RootState> = {
       results: me.results,
       resultNotes: me.resultNotes,
     })
+  },
+
+  async update ({ commit, dispatch, rootGetters, getters }, payload: EventUpdatePayload) {
+    const contextSchoolId = rootGetters['context/schoolId']
+
+    const { me, opponent, ...event } = await dispatch('api/events/update', {
+      schoolId: contextSchoolId,
+      id: getters.event.id,
+      data: payload,
+    }, { root: true })
+
+    commit('event', event)
+    commit('me', me)
+    commit('opponent', opponent)
   },
 }

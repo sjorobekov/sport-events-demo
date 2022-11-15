@@ -1,6 +1,6 @@
 import { ActionTree, GetterTree } from 'vuex'
 import { PaginatedList, Event, CreateEventBatchPayload, Student } from '~/types'
-import { EventResult, EventStatus, EventType, Gender } from '@/enum'
+import { EventLocationType, EventResult, EventStatus, EventType, Gender, TransportType } from '@/enum'
 
 export const state = () => ({})
 
@@ -92,6 +92,23 @@ type StoreResultItem = {
   missingResults?: boolean,
 }
 
+export type EventUpdatePayload = {
+  date: string
+  startTime: string
+  meetTime: string
+  returnTime: string
+  leadId: string
+  location: EventLocationType,
+  sportLocationId: string
+  otherLocation: string
+  info: string
+  noNeedTransport: boolean
+  transportTo: TransportType
+  transportToOther?: string
+  transportFrom: TransportType
+  transportFromOther?: string
+}
+
 type StoreResultPayload = {
   results: Array<StoreResultItem>
 }
@@ -173,6 +190,20 @@ export const actions: ActionTree<RootState, RootState> = {
 
   async get (_, { schoolId, id }): Promise<Event> {
     const event: Event = await this.$axios.$get(`/api/v1/schools/${schoolId}/events/${id}`)
+
+    event.participants.forEach((participant) => {
+      if (participant?.schoolId === schoolId) {
+        event.me = participant
+      } else {
+        event.opponent = participant
+      }
+    })
+
+    return event
+  },
+
+  async update (_, { schoolId, id, data }: { schoolId: string, id: string, data: EventUpdatePayload }): Promise<Event> {
+    const event: Event = await this.$axios.$put(`/api/v1/schools/${schoolId}/events/${id}`, data)
 
     event.participants.forEach((participant) => {
       if (participant?.schoolId === schoolId) {

@@ -101,3 +101,7 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 .v-expansion-panel::before {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
+
+.child-border > div:not(:last-child) {
+  border-bottom: 1px var(--v-info-lighten4) solid;
+}
