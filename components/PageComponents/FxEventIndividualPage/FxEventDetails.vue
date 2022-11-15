@@ -3,9 +3,24 @@
     <template #title>
       Details
     </template>
-    <v-container>
+    <template #actions>
+      <v-btn v-if="canEditEvent && !formVisible" outlined @click="open">
+        <v-icon small>
+          mdi-pencil-outline
+        </v-icon>Edit Details
+      </v-btn>
+    </template>
+    <FxEventDetailsEditForm
+      v-if="formVisible"
+      ref="form"
+      v-model="formData"
+      :disabled="loading"
+      @submit="save"
+      @cancel="formVisible = false"
+    />
+    <v-container v-else class="child-border">
       <v-row>
-        <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
+        <v-col cols="12" class="pt-1 pb-0">
           <ListItem>
             <template #icon>
               <v-icon>$vuetify.icons.calendar</v-icon>
@@ -18,7 +33,9 @@
             </template>
           </ListItem>
         </v-col>
-        <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
+      </v-row>
+      <v-row>
+        <v-col cols="12" class="pt-1 pb-0">
           <ListItem>
             <template #icon>
               <v-icon>mdi-clock-outline</v-icon>
@@ -53,7 +70,9 @@
             </template>
           </ListItem>
         </v-col>
-        <v-col cols="12" class="border-bottom pt-1 pb-0">
+      </v-row>
+      <v-row>
+        <v-col cols="12" class="pt-1 pb-0">
           <ListItem>
             <template #icon>
               <FxAvatar :size="24" :value="lead.avatar" />
@@ -68,7 +87,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
+        <v-col cols="12" class="pt-1 pb-0">
           <ListItem>
             <template #icon>
               <v-icon>mdi-map-marker</v-icon>
@@ -81,8 +100,10 @@
             </template>
           </ListItem>
         </v-col>
+      </v-row>
+      <v-row v-if="!me.noNeedTransport">
         <v-col cols="12" class="pt-1 pb-0">
-          <ListItem v-if="!me.noNeedTransport">
+          <ListItem>
             <template #icon>
               <v-icon>$vuetify.icons.direction</v-icon>
             </template>
@@ -110,6 +131,7 @@
         </v-col>
       </v-row>
     </v-container>
+    <FxEventDateOrStartTimeChangeConfirmationModal ref="confirmationDialog" />
   </FxEventItemCard>
 </template>
 
@@ -120,15 +142,26 @@ import ListItem from '@/components/FxEventItem/ListItem'
 import FxAvatar from '@/components/FxAvatar'
 import FxLocationLabel from '@/components/FxEventItem/FxLocationLabel'
 import FxEventItemCard from '@/components/PageComponents/FxEventIndividualPage/FxEventItemCard'
+import FxEventDetailsEditForm from '@/components/FxEventDetailsEditForm'
+import FxEventDateOrStartTimeChangeConfirmationModal from '@/components/FxEventDateOrStartTimeChangeConfirmationModal'
 
 export default {
   name: 'FxEventDetails',
   components: {
+    FxEventDateOrStartTimeChangeConfirmationModal,
+    FxEventDetailsEditForm,
     FxEventItemCard,
     ListItem,
     FxAvatar,
     FxLocationLabel,
   },
+
+  data: () => ({
+    formVisible: false,
+    formData: {},
+    loading: false,
+  }),
+
   computed: {
     ...mapGetters({
       event: 'page/event/event',
@@ -136,7 +169,9 @@ export default {
       opponent: 'page/event/opponent',
       sport: 'page/event/sport',
       lead: 'page/event/lead',
+      canEditEvent: 'user/acl/canCreateEvent',
     }),
+
     transportTo () {
       if (this.me.transportTo === TransportType.OTHER) {
         return this.me.transportToOther
@@ -151,6 +186,62 @@ export default {
       }
 
       return this.$t(`TRANSPORT_FROM.${this.me.transportTo}`)
+    },
+
+    dateOrStartTimeChanged () {
+      return this.event.startTime !== this.formData.startTime || this.event.date !== this.formData.date
+    },
+  },
+
+  methods: {
+    open () {
+      this.formData = {
+        date: this.event.date,
+        startTime: this.event.startTime,
+        meetTime: this.me.meetTime,
+        returnTime: this.me.returnTime,
+        leadId: this.me.leadId,
+        location: this.event.location,
+        sportLocationId: this.event.sportLocationId,
+        otherLocation: this.event.otherLocation,
+        info: this.me.info,
+        noNeedTransport: this.me.noNeedTransport,
+        transportTo: this.me.transportTo,
+        transportToOther: this.me.transportToOther,
+        transportFrom: this.me.transportFrom,
+        transportFromOther: this.me.transportFromOther,
+      }
+
+      this.formVisible = true
+    },
+
+    async save () {
+      this.loading = true
+
+      const isValid = await this.$refs.form.validateAsync()
+
+      if (!isValid) {
+        this.loading = false
+        return
+      }
+
+      if (this.dateOrStartTimeChanged) {
+        if (!(await this.$refs.confirmationDialog.open())) {
+          return
+        }
+      }
+
+      this.$store.dispatch('page/event/update', this.formData)
+        .then(() => {
+          this.formVisible = false
+          this.$toast.success('Event has been updated!')
+        })
+        .catch(() => {
+          this.$toast.error('Unknown Error')
+        })
+        .finally(() => {
+          this.loading = false
+        })
     },
   },
 }
