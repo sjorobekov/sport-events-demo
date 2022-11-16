@@ -71,7 +71,7 @@
           </ListItem>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row v-if="lead">
         <v-col cols="12" class="pt-1 pb-0">
           <ListItem>
             <template #icon>
@@ -101,7 +101,7 @@
           </ListItem>
         </v-col>
       </v-row>
-      <v-row v-if="!me.noNeedTransport">
+      <v-row v-if="!me.noNeedTransport && me.transportTo && me.transportFrom">
         <v-col cols="12" class="pt-1 pb-0">
           <ListItem>
             <template #icon>

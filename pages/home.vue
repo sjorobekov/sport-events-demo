@@ -148,7 +148,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
-import { EventType, EventResult } from '~/enum'
+import { EventType, EventResult, EventStatus } from '~/enum'
 import FxPortalEventItem from '@/components/PageComponents/FxPortalPage/FxPortalEventItem.vue'
 
 export default {
@@ -245,6 +245,7 @@ export default {
           orderDesc: 'false',
           from: currentDate,
           to: currentDate,
+          status: EventStatus.CONFIRMED,
         },
       })
       this.updateEvents(events)

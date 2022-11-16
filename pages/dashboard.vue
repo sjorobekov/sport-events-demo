@@ -56,6 +56,7 @@ import { mapGetters } from 'vuex'
 import FxCalendarEvent from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent'
 import FxDashboardPageCard from '@/components/PageComponents/FxDashboardPage/FxDashboardPageCard'
 import FxNoEventsState from '~/components/PageComponents/FxDashboardPage/FxNoEventsState.vue'
+import { EventStatus } from '@/enum'
 
 export default {
   name: 'DashboardPage',
@@ -84,6 +85,7 @@ export default {
         orderDesc: 'false',
         from: DateTime.now().toFormat('yyyy-MM-dd'),
         to: DateTime.now().toFormat('yyyy-MM-dd'),
+        status: EventStatus.CONFIRMED,
       },
     })
 
