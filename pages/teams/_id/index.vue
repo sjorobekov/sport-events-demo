@@ -12,16 +12,12 @@
             All
           </v-chip>
 
-          <v-chip class="info--text" value="fixtures">
-            Fixtures
+          <v-chip class="info--text" value="upcoming">
+            Upcoming
           </v-chip>
 
-          <v-chip class="info--text" value="results">
-            Results
-          </v-chip>
-
-          <v-chip class="info--text" value="training">
-            Training
+          <v-chip class="info--text" value="past">
+            Past
           </v-chip>
         </v-chip-group>
       </v-col>
@@ -55,8 +51,8 @@
           </v-img>
         </v-card>
 
-        <v-row class="mt-4 mb-0 hidden-sm-and-down">
-          <v-col cols="12" sm="5" md="6" class="pb-0">
+        <div class="hidden-sm-and-down">
+          <div class="d-flex mt-4">
             <v-chip-group
               v-model="filter"
               mandatory
@@ -67,34 +63,36 @@
                 All
               </v-chip>
 
-              <v-chip class="info--text" value="fixtures">
-                Fixtures
+              <v-chip class="info--text" value="upcoming">
+                Upcoming
               </v-chip>
 
-              <v-chip class="info--text" value="results">
-                Results
-              </v-chip>
-
-              <v-chip class="info--text" value="training">
-                Training
+              <v-chip class="info--text" value="past">
+                Past
               </v-chip>
             </v-chip-group>
-          </v-col>
-          <v-col cols="12" sm="7" md="6" class="text-right pb-0">
-            <v-btn v-if="canEditTeam" outlined link :to="{ name: 'teams-id-edit', params: { id: team.id } }">
-              <v-icon>$vuetify.icons.edit</v-icon>Edit Team
-            </v-btn>
-            <v-btn
-              v-if="canCreateEvent"
-              depressed
-              color="primary"
-              link
-              :to="{ name: 'events-add', query: { teamId: teamId, sportId: team.sportId, leadId: team.coachId, gender: team.gender, ability: team.ability, age: team.age }}"
-            >
-              <v-icon>$vuetify.icons.plusOutline</v-icon>Add Event
-            </v-btn>
-          </v-col>
-        </v-row>
+            <div class="pl-2">
+              <v-switch v-model="training" class="mt-2" label="Show Training" inset hide-details />
+            </div>
+
+            <v-spacer />
+
+            <div class="pt-1">
+              <v-btn v-if="canEditTeam" outlined link :to="{ name: 'teams-id-edit', params: { id: team.id } }">
+                <v-icon>$vuetify.icons.edit</v-icon>Edit Team
+              </v-btn>
+              <v-btn
+                v-if="canCreateEvent"
+                depressed
+                color="primary"
+                link
+                :to="{ name: 'events-add', query: { teamId: teamId, sportId: team.sportId, leadId: team.coachId, gender: team.gender, ability: team.ability, age: team.age }}"
+              >
+                <v-icon>$vuetify.icons.plusOutline</v-icon>Add Event
+              </v-btn>
+            </div>
+          </div>
+        </div>
 
         <v-row class="hidden-md-and-up">
           <v-col>
@@ -106,46 +104,25 @@
 
         <v-row class="mt-0">
           <v-col class="pt-0">
-            <template v-if="showNextEvent">
-              <h2 class="text-p2 font-weight-bold mb-2 info--text text--darken-3">
-                Next Event
-              </h2>
-
-              <v-card>
-                <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: nextEvent.id } }">
-                  <FxEventItem :event="nextEvent" :me="nextEvent.me" :opponent="nextEvent.opponent" />
-                </nuxt-link>
-              </v-card>
-            </template>
-
-            <template v-if="showFixtures">
+            <template v-if="showUpcoming">
               <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
-                Fixtures
+                Upcoming
               </h2>
-              <v-card v-for="event in fixtures" :key="`fixture-${event.id}`" class="mb-2">
+              <v-card v-for="event in upcoming" :key="`upcoming-${event.id}`" class="mb-2">
                 <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
                   <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" />
                 </nuxt-link>
               </v-card>
             </template>
 
-            <template v-if="showResults">
+            <template v-if="showPast">
               <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
-                Results
+                Past
               </h2>
-              <v-card v-for="event in results" :key="`result-${event.id}`" class="mb-2">
+              <v-card v-for="event in past" :key="`past-${event.id}`" class="mb-2">
                 <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
                   <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" />
                 </nuxt-link>
-              </v-card>
-            </template>
-
-            <template v-if="showTraining">
-              <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
-                Training
-              </h2>
-              <v-card v-for="event in training" :key="`training-${event.id}`" class="mb-2">
-                <FxEventItem :event="event" :me="event.me" :context-school-id="contextSchoolId" />
               </v-card>
             </template>
           </v-col>
@@ -180,9 +157,9 @@
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
 import FxEventItem from '@/components/PageComponents/FxTeamsPage/FxEventItem'
-import { EventType } from '@/enum'
 import FxTeamPrivacyChipBig from '@/components/FxTeamPrivacyChipBig'
 import FxWinRateBar from '@/components/FxWinRateBar'
+import { EventType } from '@/enum'
 
 export default {
   name: 'TeamPage',
@@ -193,6 +170,7 @@ export default {
   },
   data: () => ({
     filter: null,
+    training: false,
     team: {},
     sport: {},
     season: {},
@@ -238,50 +216,49 @@ export default {
       canCreateEvent: 'user/acl/canCreateEvent',
       canEditTeam: 'user/acl/canCreateTeam',
     }),
+
     teamId () {
       return this.$route.params.id
     },
+
     today () {
       return DateTime.now().toFormat('yyyy-MM-dd')
     },
+
     timeNow () {
       return DateTime.now().toFormat('HH:mm')
     },
-    nextEvent () {
-      return this.events.find((event) => {
-        return (event.date > this.today) || (event.date > this.today && event.startTime >= this.timeNow)
+
+    trainingFilter () {
+      if (this.training) {
+        return this.events
+      }
+
+      return this.events.filter(event => event.eventType !== EventType.TRAINING)
+    },
+
+    upcoming () {
+      return this.trainingFilter.filter((event) => {
+        return event.date >= this.today
       })
     },
-    fixtures () {
-      return this.events
-    },
-    results () {
-      return this.events
-    },
-    training () {
-      return this.events.filter((event) => {
-        return event.eventType === EventType.TRAINING
-      })
+
+    past () {
+      return this.trainingFilter.filter(event => event.date < this.today)
     },
 
-    showNextEvent () {
-      return this.filter === null && this.nextEvent
+    showPast () {
+      return (this.filter === 'past' || !this.filter) && this.past.length
     },
 
-    showFixtures () {
-      return (this.filter === 'fixtures' || !this.filter) && this.fixtures.length
+    showUpcoming () {
+      return (this.filter === 'upcoming' || !this.filter) && this.upcoming.length
     },
 
-    showResults () {
-      return (this.filter === 'results' || !this.filter) && this.results.length
-    },
-
-    showTraining () {
-      return (this.filter === 'training' || !this.filter) && this.training.length
-    },
     compact () {
       return this.$vuetify.breakpoint.smAndDown
     },
+
     photoHeight () {
       if (!this.hasPhoto) {
         return null
@@ -289,9 +266,11 @@ export default {
 
       return this.compact ? '220px' : '388px'
     },
+
     hasPhoto () {
       return !!this.team.photo
     },
+
     gradient () {
       return this.hasPhoto ? 'to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)' : null
     },
