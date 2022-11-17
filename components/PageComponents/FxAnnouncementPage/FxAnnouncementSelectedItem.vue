@@ -1,7 +1,18 @@
 <template>
-  <v-card class="pa-6">
+  <v-card tile class="pa-4" color="info lighten-3">
+
+    <v-card tile color="info lighten-5" class="px-3 pt-5">
+    
     <v-card-title class="text-h4 font-weight-bold">
-      {{ item.subject }}
+      <v-icon size="20">
+          $vuetify.icons.announcement
+        </v-icon>
+      <v-col>
+        {{ item.subject }}
+      </v-col>
+
+      </v-col>
+      
     </v-card-title>
 
     <v-card-text class="pb-0 d-flex">
@@ -34,19 +45,21 @@
       </div>
     </v-card-text>
 
-    <v-card-text class="pt-0 text-p2">
+    <v-card-text>
       {{ item.body }}
       <slot name="actions" />
     </v-card-text>
+
+  </v-card>
   </v-card>
 </template>
 
 <script>
-import { DateTime } from 'luxon'
-import FxAvatar from '@/components/FxAvatar/FxAvatar'
+import { DateTime } from "luxon";
+import FxAvatar from "@/components/FxAvatar/FxAvatar";
 
 export default {
-  name: 'FxAnnouncementSelectedItem',
+  name: "FxAnnouncementSelectedItem",
   components: { FxAvatar },
   props: {
     item: {
@@ -56,13 +69,13 @@ export default {
   },
 
   computed: {
-    user () {
-      return this.item.user || {}
+    user() {
+      return this.item.user || {};
     },
 
-    date () {
-      return DateTime.fromISO(this.item.createdAt).toFormat('dd/MM/yyyy')
+    date() {
+      return DateTime.fromISO(this.item.createdAt).toFormat("dd/MM/yyyy");
     },
   },
-}
+};
 </script>

@@ -1,12 +1,13 @@
 <template>
   <v-form ref="form" v-async-form :disabled="disabled">
-    <v-card class="fx-card-border-top-primary mb-3">
+    <v-card :flat="tile" :tile="tile" class="fx-card-border-top-sm-primary mb-3">
       <v-container>
         <v-row>
           <v-col
             cols="12"
             md="6"
             lg="4"
+            class="hidden-xs-only"
           >
             <FxInstructionItem>
               <template #number>
@@ -21,7 +22,7 @@
             </FxInstructionItem>
           </v-col>
           <v-col
-            cols="12"
+            cols="24"
             md="6"
             lg="7"
             class="pt-8"
@@ -71,6 +72,10 @@ export default {
       default: () => {},
     },
     disabled: {
+      type: Boolean,
+      default: false,
+    },
+    tile: {
       type: Boolean,
       default: false,
     },

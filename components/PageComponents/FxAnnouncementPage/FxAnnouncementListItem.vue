@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link v-ripple exact class="d-block text-decoration-none pt-4 pb-1 px-8 fx-announcement-item" :to="to">
+  <nuxt-link v-ripple exact class="d-block text-decoration-none pt-4 pb-4 px-8 fx-announcement-item" :to="to">
     <div class="text-p1 font-weight-bold info--text text--darken-3 line-clamp-2 mb-2">
       {{ announcement.subject }}
     </div>
@@ -22,6 +22,7 @@
         </v-list-item-action-text>
       </v-list-item-action>
     </v-list-item>
+    <slot name="actions" />
   </nuxt-link>
 </template>
 
@@ -52,6 +53,7 @@ export default {
 </script>
 
 <style scoped>
+
 .line-clamp-2 {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;

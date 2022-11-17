@@ -46,6 +46,15 @@ body {
   border-top-color: var(--v-primary-base) !important;
 }
 
+@media screen and (min-width: 600px) {
+  .fx-card-border-top-sm-primary {
+    border-top-width: 4px!important;
+    border-top-style: solid;
+    border-top-color: var(--v-primary-base) !important;
+  } 
+}
+
+
 label {
   font-size: .875rem;
   line-height: 1.063rem;
