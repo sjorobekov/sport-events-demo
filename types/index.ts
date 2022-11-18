@@ -377,3 +377,17 @@ export interface SchoolRequest {
   website?: string
   email?: string
 }
+
+export interface SportsContact {
+  readonly id: string
+  name: string
+  schoolId: string
+  readonly school?: School
+  role: string
+  email: string
+  phone: string
+  main: string
+  file?: File,
+  readonly createdAt: string
+  readonly updatedAt: string
+}

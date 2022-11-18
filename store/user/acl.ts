@@ -100,4 +100,8 @@ export const getters: GetterTree<RootState, RootState> = {
   canCreateOpponent (_, getters) {
     return [UserRole.ADMIN, UserRole.SPORTS_USER].includes(getters.role)
   },
+
+  canCreateSportsContacts (_, getters) {
+    return [UserRole.ADMIN, UserRole.SPORTS_USER].includes(getters.role)
+  },
 }

@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: 'FxContactsCard',
+  name: 'FxMapCard',
   props: {
     coordinates: {
       type: Object,
