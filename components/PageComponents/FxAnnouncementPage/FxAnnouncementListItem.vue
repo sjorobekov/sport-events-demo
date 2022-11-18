@@ -1,13 +1,20 @@
 <template>
-  <nuxt-link v-ripple exact class="d-block text-decoration-none pt-4 pb-4 px-8 fx-announcement-item" :to="to">
-    <div class="text-p1 font-weight-bold info--text text--darken-3 line-clamp-2 mb-2">
-      {{ announcement.subject }}
-    </div>
-    <div class="text-caption info--text line-clamp-2">
-      {{ announcement.body }}
+  <nuxt-link v-ripple exact class="d-block text-decoration-none py-3 px-3 px-md-8 fx-announcement-item" :to="to">
+    <div class="d-flex">
+      <div class="flex-shrink-1 pr-2 hidden-md-and-up">
+        <v-icon>mdi-bullhorn</v-icon>
+      </div>
+      <div class="flex-grow-1">
+        <div class="text-p1 font-weight-bold info--text text--darken-3 line-clamp-2 mb-2">
+          {{ announcement.subject }}
+        </div>
+        <div class="text-caption info--text line-clamp-2 text-fade">
+          {{ announcement.body }}
+        </div>
+      </div>
     </div>
 
-    <v-list-item class="px-0">
+    <v-list-item class="px-0 mb-n2">
       <v-list-item-avatar size="20" class="mr-2">
         <FxAvatar size="20" :value="announcement.user.avatar" />
       </v-list-item-avatar>
@@ -59,6 +66,12 @@ export default {
   -webkit-box-orient: vertical;
   display: -webkit-box;
   overflow: hidden;
+}
+
+@media screen and (max-width: 600px) {
+  .text-fade {
+    -webkit-mask-image: linear-gradient(180deg, #000 15%, transparent);
+  }
 }
 </style>
 

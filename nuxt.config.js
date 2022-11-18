@@ -84,6 +84,28 @@ export default {
     extendRoutes (routes) {
       routes.push({ name: 'directory-sports-map', path: '/directory/sports-map', component: '@/pages/management/schools/_id/locations/index.vue' })
       routes.push({ name: 'directory-sports-map-locationId', path: '/directory/sports-map/:locationId', component: '@/pages/management/schools/_id/locations/_locationId.vue' })
+      routes.push({
+        name: 'announcements-add',
+        path: '/announcements/add',
+        component: '@/pages/announcements/add.vue',
+      })
+      routes.push({
+        name: 'announcements',
+        path: '/announcements',
+        component: '@/pages/announcements/index.vue',
+        children: [
+          {
+            name: 'announcements-id',
+            path: ':id',
+            component: '@/pages/announcements/_id/index',
+          },
+          {
+            name: 'announcements-id-edit',
+            path: ':id/edit',
+            component: '@/pages/announcements/_id/edit',
+          },
+        ],
+      })
     },
   },
 

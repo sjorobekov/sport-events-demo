@@ -1,60 +1,28 @@
 <template>
-  <wrapped-component :wrap="isMobile">
-    <template #wrapper>
-      <FxAnnouncementDialog
-        :value="open"
-        title="Edit Announcement"
-        @back="$router.back()"
-      />
-    </template>
-    <div>
-      <h3 class="text-h3 mb-6 hidden-sm-and-down">
-        Edit Announcement
-      </h3>
-
-      <FxAnnouncementForm
-        ref="form"
-        v-model="formData"
-        :disabled="loading"
-        :tile="isMobile"
-      />
-
-      <v-container class="mt-4 mb-8">
-        <v-row>
-          <v-spacer />
-          <v-btn outlined class="hidden-sm-and-down" @click="$router.back()">
-            Cancel
-          </v-btn>
+  <div>
+    <client-only>
+      <FxAnnouncementResponsiveFormContainer title="Edit Announcement" :modal="isMobile" @click:back="$router.back()">
+        <FxAnnouncementForm
+          ref="form"
+          v-model="formData"
+          :disabled="loading"
+        />
+        <template v-if="isMobile">
           <v-btn
+            block
             depressed
             color="primary"
             dark
-            class="ml-2 hidden-sm-and-down"
             :loading="loading"
+            class="mb-3"
             @click="save"
           >
             <v-icon size="20" class="hidden-sm-and-down mx-2">
               mdi-content-save
             </v-icon>Update Announcement
           </v-btn>
-        </v-row>
-        <v-container class="mt-4">
+
           <v-btn
-            depressed
-            color="primary"
-            dark
-            class="hidden-md-and-up"
-            block
-            pb-2-4
-            :loading="loading"
-            @click="save"
-          >
-            Update Announcement
-          </v-btn>
-        </v-container>
-        <v-container>
-          <v-btn
-            class="hidden-md-and-up"
             depressed
             color="error"
             outlined
@@ -63,19 +31,53 @@
           >
             Delete Announcement
           </v-btn>
-        </v-container>
-      </v-container>
-    </div>
-  </wrapped-component>
+        </template>
+      </FxAnnouncementResponsiveFormContainer>
+    </client-only>
+    <v-container class="mt-4 mb-8">
+      <v-row>
+        <v-spacer />
+        <v-btn outlined class="hidden-sm-and-down" @click="$router.back()">
+          Cancel
+        </v-btn>
+        <v-btn
+          depressed
+          color="primary"
+          dark
+          class="ml-2 hidden-sm-and-down"
+          :loading="loading"
+          @click="save"
+        >
+          <v-icon size="20" class="hidden-sm-and-down mx-2">
+            mdi-content-save
+          </v-icon>Update Announcement
+        </v-btn>
+
+        <v-btn
+          class="hidden-md-and-up"
+          depressed
+          color="error"
+          outlined
+          block
+          @click="$emit('click:remove', selectedItem.id)"
+        >
+          Delete Announcement
+        </v-btn>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import FxAnnouncementForm from '@/components/FxAnnouncementForm'
+import FxAnnouncementForm from '@/components/PageComponents/FxAnnouncementPage/FxAnnouncementForm'
+import FxAnnouncementResponsiveFormContainer
+  from '@/components/PageComponents/FxAnnouncementPage/FxAnnouncementResponsiveFormContainer'
 
 export default {
   name: 'FxAnnouncementEditPage',
   components: {
+    FxAnnouncementResponsiveFormContainer,
     FxAnnouncementForm,
   },
 
@@ -105,17 +107,6 @@ export default {
   },
 
   methods: {
-    async removeHandler () {
-      if (!confirm('Are you sure?')) {
-        return
-      }
-      await this.$store.dispatch('api/announcements/remove', {
-        schoolId: this.schoolId,
-        id: this.formData.id,
-      })
-      this.$toast.info('Announcement has been removed')
-      this.$router.push({ name: 'announcements' })
-    },
     async save () {
       this.loading = true
       const isValid = await this.$refs.form.validateAsync()
@@ -131,11 +122,25 @@ export default {
         })
         .then((res) => {
           this.$toast.success('Announcement has been updated!')
-          this.$router.push({ name: 'announcements', query: { id: res.id } })
+          this.$router.push({ name: 'announcements-id', params: { id: res.id } })
+          this.$emit('updated', res)
         })
         .finally(() => {
           this.loading = false
         })
+    },
+
+    async removeHandler () {
+      if (!confirm('Are you sure?')) {
+        return
+      }
+      await this.$store.dispatch('api/announcements/remove', {
+        schoolId: this.schoolId,
+        id: this.formData.id,
+      })
+      this.$toast.info('Announcement has been removed')
+      await this.$router.push({ name: 'announcements' })
+      this.$emit('removed', this.formData.id)
     },
   },
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-list-item>
+    <v-list-item class="px-0">
       <v-list-item-content>
         <v-list-item-title class="text-xs-h4s text-sm-h3">
           Announcements
@@ -49,7 +49,7 @@
             <FxAnnouncementListItem
               v-for="item in items"
               :key="item.id"
-              :to="{ name: 'announcements', query: { id: item.id } }"
+              :to="{ name: 'announcements-id', params: { id: item.id } }"
               :announcement="item"
             >
               <template #actions>
@@ -73,62 +73,7 @@
         </div>
       </v-col>
       <v-col class="hidden-sm-and-down" md="7">
-        <wrapped-component v-if="selectedItem" :wrap="isMobile">
-          <template #wrapper>
-            <FxAnnouncementDialog
-              :value="!!selectedItem"
-              @back="$router.back()"
-            />
-          </template>
-          <FxAnnouncementSelectedItem v-if="selectedItem" :item="selectedItem">
-            <template #actions>
-              <v-menu
-                v-if="canEditOrRemoveAnnouncement(selectedItem)"
-                left
-                bottom
-              >
-                <template #activator="{ on, attrs }">
-                  <v-btn
-                    icon
-                    class="float-right mt-2 hidden-sm-and-down"
-                    v-bind="attrs"
-                    v-on="on"
-                  >
-                    <v-icon>mdi-dots-horizontal</v-icon>
-                  </v-btn>
-                </template>
-
-                <v-list>
-                  <v-list-item
-                    :to="{
-                      name: 'announcements-id-edit',
-                      params: { id: selectedItem.id },
-                    }"
-                  >
-                    <v-list-item-title>Edit</v-list-item-title>
-                  </v-list-item>
-                  <v-list-item @click="removeHandler(selectedItem.id)">
-                    <v-list-item-title>Delete</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </v-menu>
-               <v-btn
-                    depressed
-                    color="primary"
-                    outlined
-                    class="hidden-md-and-up mt-4"
-                    block
-                    :to="{
-                      name: 'announcements-id-edit',
-                      params: { id: selectedItem.id },
-                    }"
-                    link
-                  >
-                    Edit
-                  </v-btn>
-            </template>
-          </FxAnnouncementSelectedItem>
-        </wrapped-component>
+        <NuxtChild @updated="updateHandler" @removed="removeHandler" />
       </v-col>
     </v-row>
   </div>
@@ -137,17 +82,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import FxAnnouncementListItem from '@/components/PageComponents/FxAnnouncementPage/FxAnnouncementListItem'
-import FxAnnouncementSelectedItem from '@/components/PageComponents/FxAnnouncementPage/FxAnnouncementSelectedItem'
 import GuestLoginForm from '@/components/PageComponents/FxEventIndividualPage/FxEventTeamSheet/GuestLoginForm'
-import FxAnnouncementDialog from '~/components/FxAnnouncementDialog.vue'
 
 export default {
   name: 'AnnouncementsPage',
   components: {
     GuestLoginForm,
-    FxAnnouncementSelectedItem,
     FxAnnouncementListItem,
-    FxAnnouncementDialog,
   },
 
   data: () => ({
@@ -174,20 +115,10 @@ export default {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
       canCreateAnnouncement: 'user/acl/canCreateAnnouncement',
-      canEditOrRemoveAnnouncement: 'user/acl/canEditOrRemoveAnnouncement',
     }),
+
     isMobile () {
       return this.$vuetify.breakpoint.smAndDown
-    },
-
-    drawerPermanent () {
-      return !this.isMobile
-    },
-  },
-
-  watch: {
-    '$route.query' ({ id }) {
-      this.selectedItem = this.items.find(item => item.id === id)
     },
   },
 
@@ -196,33 +127,25 @@ export default {
       return
     }
 
-    const { id } = this.$route.query
+    const { id } = this.$route.params
     if (!id) {
       if (this.items[0]) {
-        await this.$router.replace({ query: { id: this.items[0].id } })
+        await this.$router.push({ name: 'announcements-id', params: { id: this.items[0].id } })
       }
     }
-
-    try {
-      this.selectedItem = await this.$store.dispatch('api/announcements/get', {
-        schoolId: this.contextSchoolId,
-        id,
-      })
-    } catch (e) {}
   },
 
   methods: {
-    async removeHandler (id) {
-      await this.$store.dispatch('api/announcements/remove', {
-        schoolId: this.contextSchoolId,
-        id,
-      })
+    removeHandler (id) {
       const index = this.items.findIndex(item => item.id === id)
       if (index > -1) {
         this.items.splice(index, 1)
       }
-      this.selectedItem = null
-      this.$toast.info('Announcement has been removed')
+    },
+
+    updateHandler (val) {
+      const announcement = this.items.find(item => item.id === val.id)
+      Object.assign(announcement, val)
     },
   },
 }

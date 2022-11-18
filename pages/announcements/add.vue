@@ -4,7 +4,26 @@
       New Announcement
     </h3>
 
-    <FxAnnouncementForm ref="form" v-model="formData" :disabled="loading" />
+    <client-only>
+      <FxAnnouncementResponsiveFormContainer :modal="isMobile" @click:back="$router.back()">
+        <FxAnnouncementForm
+          ref="form"
+          v-model="formData"
+          :disabled="loading"
+        />
+        <v-btn
+          v-if="isMobile"
+          depressed
+          color="primary"
+          dark
+          :loading="loading"
+          block
+          @click="save"
+        >
+          Post Announcement
+        </v-btn>
+      </FxAnnouncementResponsiveFormContainer>
+    </client-only>
 
     <v-container class="mt-4 mb-8">
       <v-row>
@@ -31,11 +50,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import FxAnnouncementForm from '@/components/FxAnnouncementForm'
+import FxAnnouncementForm from '@/components/PageComponents/FxAnnouncementPage/FxAnnouncementForm'
+import FxAnnouncementResponsiveFormContainer
+  from '@/components/PageComponents/FxAnnouncementPage/FxAnnouncementResponsiveFormContainer'
 
 export default {
   name: 'FxAnnouncementAddPage',
   components: {
+    FxAnnouncementResponsiveFormContainer,
     FxAnnouncementForm,
   },
 
@@ -48,6 +70,9 @@ export default {
     ...mapGetters({
       schoolId: 'context/schoolId',
     }),
+    isMobile () {
+      return this.$vuetify.breakpoint.smAndDown
+    },
   },
 
   methods: {
@@ -64,8 +89,7 @@ export default {
         schoolId: this.schoolId,
         ...this.formData,
       }).then((res) => {
-        this.$emit('created', res)
-        this.$router.push({ name: 'announcements', query: { id: res.id } })
+        this.$router.push({ name: 'announcements-id', params: { id: res.id } })
       }).finally(() => {
         this.loading = false
       })
