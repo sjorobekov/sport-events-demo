@@ -70,6 +70,10 @@ export const getters: GetterTree<RootState, RootState> = {
     return state.event.sport
   },
 
+  sportLocation (state) {
+    return state.event.sportLocation
+  },
+
   result (state) {
     return state.result
   },
