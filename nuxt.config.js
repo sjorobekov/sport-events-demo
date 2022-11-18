@@ -34,6 +34,7 @@ export default {
       mode: 'client',
     },
     '~/plugins/wrapped-component.js',
+    '~/plugins/device.server.ts',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

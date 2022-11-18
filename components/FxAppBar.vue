@@ -1,6 +1,27 @@
 <template>
-  <v-app-bar height="56" app fixed class="shadow" color="white">
-    <v-container>
+  <v-app-bar
+    :height="height"
+    app
+    fixed
+    class="shadow"
+    :color="color"
+    :dark="dark"
+    :flat="flat"
+  >
+    <template v-if="isMobile">
+      <v-list-item class="pl-0">
+        <v-list-item-avatar color="white" size="44">
+          <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" :size="44" />
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title>
+            {{ contextSchool.name }}
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-app-bar-nav-icon @click="$emit('input', !value)" />
+    </template>
+    <v-container v-else>
       <v-row align="center">
         <v-spacer />
 
@@ -49,19 +70,57 @@
 <script>
 import { mapGetters } from 'vuex'
 import FxAvatar from '@/components/FxAvatar/FxAvatar'
+import FxSchoolLogo from '@/components/FxSchoolLogo/FxSchoolLogo'
 
 export default {
   name: 'AppBar',
-  components: { FxAvatar },
+  components: { FxSchoolLogo, FxAvatar },
+  props: {
+    value: {
+      type: Boolean,
+      default: false,
+    },
+  },
   computed: {
     ...mapGetters({
       me: 'context/me',
+      isMobileDevice: 'context/isMobile',
+      isTabletDevice: 'context/isTablet',
+      contextSchool: 'context/school',
     }),
     items () {
       return [
         { title: 'Settings', handler: () => this.$router.push({ name: 'settings' }) },
         { title: 'Logout', handler: () => this.logOut() },
       ]
+    },
+
+    isMobile () {
+      if (process.client) {
+        return this.$vuetify.breakpoint.smAndDown
+      }
+
+      return this.isMobileDevice || this.isTabletDevice
+    },
+
+    drawerPermanent () {
+      return !this.isMobile
+    },
+
+    height () {
+      return this.isMobile ? '92' : '56'
+    },
+
+    color () {
+      return this.isMobile ? 'primary' : 'white'
+    },
+
+    dark () {
+      return this.isMobile
+    },
+
+    flat () {
+      return this.isMobile
     },
   },
 

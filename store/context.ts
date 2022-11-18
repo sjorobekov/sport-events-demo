@@ -1,5 +1,6 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex'
 import { Dictionary, Location, School, User } from '~/types'
+import { DeviceType } from '~/enum'
 
 interface ContextInterface {
   me: User | null,
@@ -8,6 +9,7 @@ interface ContextInterface {
   sportLocations: Array<Location>,
   sportLocationsIndexed: Dictionary<Location>,
   isGuestSignedIn: boolean | null,
+  device: DeviceType,
 }
 
 export const state = (): ContextInterface => ({
@@ -17,6 +19,7 @@ export const state = (): ContextInterface => ({
   sportLocations: [],
   sportLocationsIndexed: {},
   isGuestSignedIn: null,
+  device: DeviceType.DESKTOP,
 })
 
 export type RootState = ReturnType<typeof state>
@@ -76,6 +79,18 @@ export const getters: GetterTree<RootState, RootState> = {
   isGuestSignedIn (state) {
     return state.isGuestSignedIn
   },
+
+  device (state) {
+    return state.device
+  },
+
+  isMobile (state) {
+    return state.device === DeviceType.MOBILE
+  },
+
+  isTablet (state) {
+    return state.device === DeviceType.TABLET
+  },
 }
 
 export const mutations: MutationTree<RootState> = {
@@ -115,6 +130,10 @@ export const mutations: MutationTree<RootState> = {
     locations.forEach((item) => {
       state.sportLocationsIndexed[item.id] = item
     })
+  },
+
+  device (state, val) {
+    state.device = val
   },
 }
 

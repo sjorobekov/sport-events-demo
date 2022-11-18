@@ -1,29 +1,7 @@
 <template>
   <div>
-    <v-row class="hidden-md-and-up">
-      <v-col>
-        <v-chip-group
-          v-model="filter"
-          mandatory
-          class="float-left"
-          active-class="primary white--text"
-        >
-          <v-chip class="info--text" :value="null">
-            All
-          </v-chip>
-
-          <v-chip class="info--text" value="upcoming">
-            Upcoming
-          </v-chip>
-
-          <v-chip class="info--text" value="past">
-            Past
-          </v-chip>
-        </v-chip-group>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" sm="12" md="9">
+    <v-row class="mt-2 mt-md-8">
+      <v-col cols="12" sm="12" lg="9">
         <v-card :flat="!hasPhoto" :class="!hasPhoto ? 'no-photo' : null">
           <v-img
             class="white--text align-end"
@@ -31,27 +9,29 @@
             :src="team.photo"
             :gradient="gradient"
           >
-            <v-row no-gutters>
-              <v-col cols="12" md="8">
-                <v-list-item :dark="hasPhoto">
-                  <v-list-item-content>
-                    <v-list-item-title class="text-h3">
-                      {{ team.name }}
-                    </v-list-item-title>
-                    <v-list-item-subtitle class="text-subheading font-weight-bold">
-                      {{ sport.name }} &bull; {{ season.name }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-col>
-              <v-col cols="12" md="4" class="d-flex align-end justify-end">
+            <div class="d-flex">
+              <v-list-item :dark="hasPhoto">
+                <v-list-item-content>
+                  <v-list-item-title class="text-h3">
+                    {{ team.name }}
+                  </v-list-item-title>
+                  <v-list-item-subtitle class="text-subheading font-weight-bold">
+                    {{ sport.name }} &bull; {{ season.name }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+              <div class="d-flex align-end">
                 <FxTeamPrivacyChipBig v-if="!$fetchState.pending && isLoggedIn" :publish-team="team.publishTeam" :publish-results="team.publishResults" />
-              </v-col>
-            </v-row>
+              </div>
+            </div>
           </v-img>
         </v-card>
-
-        <div class="hidden-sm-and-down">
+        <v-row class="hidden-lg-and-up">
+          <v-col>
+            <FxWinRateBar class="mt-5" :won="team.won" :lost="team.lost" :drawn="team.drawn" />
+          </v-col>
+        </v-row>
+        <div>
           <div class="d-flex mt-4">
             <v-chip-group
               v-model="filter"
@@ -72,35 +52,45 @@
               </v-chip>
             </v-chip-group>
             <div class="pl-2">
-              <v-switch v-model="training" class="mt-2" label="Show Training" inset hide-details />
+              <v-switch v-model="training" class="mt-1 mt-md-2" label="Show Training" inset hide-details />
             </div>
 
             <v-spacer />
 
             <div class="pt-1">
-              <v-btn v-if="canEditTeam" outlined link :to="{ name: 'teams-id-edit', params: { id: team.id } }">
+              <v-btn v-if="canEditTeam" class="hidden-sm-and-down" outlined link :to="{ name: 'teams-id-edit', params: { id: team.id } }">
                 <v-icon>$vuetify.icons.edit</v-icon>Edit Team
               </v-btn>
               <v-btn
                 v-if="canCreateEvent"
                 depressed
+                class="hidden-sm-and-down"
                 color="primary"
                 link
                 :to="{ name: 'events-add', query: { teamId: teamId, sportId: team.sportId, leadId: team.coachId, gender: team.gender, ability: team.ability, age: team.age }}"
               >
                 <v-icon>$vuetify.icons.plusOutline</v-icon>Add Event
               </v-btn>
+
+              <v-menu v-if="canEditTeam || canCreateEvent">
+                <template #activator="{ on, attrs }">
+                  <v-btn class="hidden-md-and-up" icon v-bind="attrs" v-on="on">
+                    <v-icon>mdi-dots-vertical</v-icon>
+                  </v-btn>
+                </template>
+
+                <v-list>
+                  <v-list-item v-if="canCreateEvent" link :to="{ name: 'events-add', query: { teamId: teamId, sportId: team.sportId, leadId: team.coachId, gender: team.gender, ability: team.ability, age: team.age }}">
+                    <v-list-item-title>Create Event</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item v-if="canEditTeam" link :to="{ name: 'teams-id-edit', params: { id: team.id } }">
+                    <v-list-item-title>Edit Team</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
             </div>
           </div>
         </div>
-
-        <v-row class="hidden-md-and-up">
-          <v-col>
-            <FxUserItem class="mx-auto" :item="coach" :subtitle="coach.jobRole" />
-
-            <FxWinRateBar class="mt-3" :won="team.won" :lost="team.lost" :drawn="team.drawn" />
-          </v-col>
-        </v-row>
 
         <v-row class="mt-0">
           <v-col class="pt-0">
@@ -128,7 +118,7 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col md="3" class="hidden-sm-and-down">
+      <v-col lg="3" class="hidden-md-and-down">
         <h3 class="text-p1 info--text text--darken-1 mb-4">
           Team Overview
         </h3>

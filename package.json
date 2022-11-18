@@ -33,6 +33,7 @@
     "gmap-vue": "^3.5.4",
     "lodash": "^4.17.21",
     "luxon": "^2.4.0",
+    "mobile-detect": "^1.4.5",
     "nuxt": "^2.15.8",
     "sass-rem": "^3.0.0",
     "validator": "^13.7.0",
