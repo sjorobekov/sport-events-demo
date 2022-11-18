@@ -9,10 +9,10 @@
       <v-card class="rounded-b-0" color="primary" dark height="80">
         <v-list-item>
           <v-list-item-content id="padding" class="text-center pt-5 pl-12">
-            <v-list-item-title class="text-subheading mb-1 pl-md-8">
+            <v-list-item-title class="text-subheading mb-1 pl-md-11">
               <FxDateFormat :date="event.date" output-format="cccc dd MMMM yyyy" />
             </v-list-item-title>
-            <v-list-item-subtitle class="text-p2 white--text pl-md-8">
+            <v-list-item-subtitle class="text-p2 white--text pl-md-11">
               {{ sport.name }} &#x2022; {{ $t(`FIXTURE_TYPE.${event.fixtureType}`) }}
             </v-list-item-subtitle>
           </v-list-item-content>
