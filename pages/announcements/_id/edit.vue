@@ -1,28 +1,67 @@
 <template>
   <div>
-    <h3 class="text-h3 mb-6">
-      Edit Announcement
-    </h3>
+    <client-only>
+      <FxAnnouncementResponsiveFormContainer title="Edit Announcement" :modal="isMobile" @click:back="$router.back()">
+        <FxAnnouncementForm
+          ref="form"
+          v-model="formData"
+          :disabled="loading"
+        />
+        <template v-if="isMobile">
+          <v-btn
+            block
+            depressed
+            color="primary"
+            dark
+            :loading="loading"
+            class="mb-3"
+            @click="save"
+          >
+            <v-icon size="20" class="hidden-sm-and-down mx-2">
+              mdi-content-save
+            </v-icon>Update Announcement
+          </v-btn>
 
-    <FxAnnouncementForm ref="form" v-model="formData" :disabled="loading" />
-
+          <v-btn
+            depressed
+            color="error"
+            outlined
+            block
+            @click="removeHandler()"
+          >
+            Delete Announcement
+          </v-btn>
+        </template>
+      </FxAnnouncementResponsiveFormContainer>
+    </client-only>
     <v-container class="mt-4 mb-8">
       <v-row>
         <v-spacer />
-        <v-btn outlined @click="$router.back()">
+        <v-btn outlined class="hidden-sm-and-down" @click="$router.back()">
           Cancel
         </v-btn>
         <v-btn
           depressed
           color="primary"
           dark
-          class="ml-2"
+          class="ml-2 hidden-sm-and-down"
           :loading="loading"
           @click="save"
         >
-          <v-icon size="20">
+          <v-icon size="20" class="hidden-sm-and-down mx-2">
             mdi-content-save
           </v-icon>Update Announcement
+        </v-btn>
+
+        <v-btn
+          class="hidden-md-and-up"
+          depressed
+          color="error"
+          outlined
+          block
+          @click="$emit('click:remove', selectedItem.id)"
+        >
+          Delete Announcement
         </v-btn>
       </v-row>
     </v-container>
@@ -31,17 +70,21 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import FxAnnouncementForm from '@/components/FxAnnouncementForm'
+import FxAnnouncementForm from '@/components/PageComponents/FxAnnouncementPage/FxAnnouncementForm'
+import FxAnnouncementResponsiveFormContainer
+  from '@/components/PageComponents/FxAnnouncementPage/FxAnnouncementResponsiveFormContainer'
 
 export default {
   name: 'FxAnnouncementEditPage',
   components: {
+    FxAnnouncementResponsiveFormContainer,
     FxAnnouncementForm,
   },
 
   data: () => ({
-    formData: { },
+    formData: {},
     loading: false,
+    open: true,
   }),
 
   async fetch () {
@@ -58,6 +101,9 @@ export default {
     ...mapGetters({
       schoolId: 'context/schoolId',
     }),
+    isMobile () {
+      return this.$vuetify.breakpoint.smAndDown
+    },
   },
 
   methods: {
@@ -70,14 +116,31 @@ export default {
         return
       }
 
-      this.$store.dispatch('api/announcements/save', {
-        ...this.formData,
-      }).then((res) => {
-        this.$toast.success('Announcement has been updated!')
-        this.$router.push({ name: 'announcements', query: { id: res.id } })
-      }).finally(() => {
-        this.loading = false
+      this.$store
+        .dispatch('api/announcements/save', {
+          ...this.formData,
+        })
+        .then((res) => {
+          this.$toast.success('Announcement has been updated!')
+          this.$router.push({ name: 'announcements-id', params: { id: res.id } })
+          this.$emit('updated', res)
+        })
+        .finally(() => {
+          this.loading = false
+        })
+    },
+
+    async removeHandler () {
+      if (!confirm('Are you sure?')) {
+        return
+      }
+      await this.$store.dispatch('api/announcements/remove', {
+        schoolId: this.schoolId,
+        id: this.formData.id,
       })
+      this.$toast.info('Announcement has been removed')
+      await this.$router.push({ name: 'announcements' })
+      this.$emit('removed', this.formData.id)
     },
   },
 }
