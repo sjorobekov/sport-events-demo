@@ -7,9 +7,8 @@
     </v-card>
     <template v-else>
       <v-card class="rounded-b-0" color="primary" dark height="80">
-        <v-list-item>
-          <v-list-item-action />
-          <v-list-item-content class="text-center pl-14 pt-5">
+        <v-list-item class="text-center">
+          <v-list-item-content class="text-center pt-5">
             <v-list-item-title class="text-subheading mb-1">
               <FxDateFormat :date="event.date" output-format="cccc dd MMMM yyyy" />
             </v-list-item-title>
@@ -18,7 +17,7 @@
             </v-list-item-subtitle>
           </v-list-item-content>
 
-          <v-list-item-action>
+          <v-list-item-action class="hidden-sm-and-down">
             <div>
               <v-btn icon>
                 <v-icon>mdi-printer-outline</v-icon>
