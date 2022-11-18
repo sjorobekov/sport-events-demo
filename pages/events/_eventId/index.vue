@@ -13,7 +13,7 @@
     </v-col>
     <v-col cols="12" sm="12" md="12" lg="5">
       <FxEventTeamSheet />
-      <FxMap />
+      <FxMap v-if="sportLocation" :coordinates="sportLocation.coordinates" />
     </v-col>
   </v-row>
 </template>
@@ -23,7 +23,7 @@ import { mapGetters } from 'vuex'
 import FxEventTeamSheet from '@/components/PageComponents/FxEventIndividualPage/FxEventTeamSheet/FxEventTeamSheet'
 import FxEventResults from '@/components/PageComponents/FxEventIndividualPage/FxEventResults'
 import FxEventDetails from '@/components/PageComponents/FxEventIndividualPage/FxEventDetails'
-import FxMap from '~/components/FxMap'
+import FxMap from '@/components/PageComponents/FxEventIndividualPage/FxMap'
 
 export default {
   name: 'EventIndexPage',
@@ -35,6 +35,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      sportLocation: 'page/event/sportLocation',
       isPendingResult: 'page/event/isPendingResult',
       hasScore: 'page/event/hasScore',
       canAddOrEditResult: 'page/event/canAddOrEditResult',
