@@ -14,7 +14,7 @@
           :src="image"
           :stencil-size="stencilSize"
           :stencil-props="stencilProps"
-          image-restriction="stencil"
+          image-restriction="none"
           :min-height="limitations.minHeight"
           :min-width="limitations.minWidth"
           :stencil-component="stencilComponent"
