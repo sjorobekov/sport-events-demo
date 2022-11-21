@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <FxSchoolLogo class="mx-auto" size="64" :value="logo" :alt="name" :color="color" />
-    <div class="text-h5 info--text text--darken-2">
+    <div class="text-md-h5 text-h6s info--text text--darken-2">
       {{ name }}
     </div>
   </div>

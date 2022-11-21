@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-alert v-if="hasScore" class="px-5 score-result ma-0" color="#F1F5F9">
+    <v-alert v-if="hasScore" class="pa-2 px-md-5 py-md-2 score-result ma-0" color="#F1F5F9">
       {{ score }} - {{ opponentScore }}
     </v-alert>
 

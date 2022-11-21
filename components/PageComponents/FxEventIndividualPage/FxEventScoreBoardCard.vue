@@ -2,14 +2,14 @@
   <v-card class="rounded-t-0" height="152">
     <v-row no-gutters class="pa-6">
       <v-col cols="5">
-        <wrapped-component :wrap="myTeam">
+        <wrapped-component :wrap="!!myTeam">
           <template #wrapper>
             <nuxt-link class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeam } }" />
           </template>
           <FxTeam :color="school.color" :logo="school.logo" :name="myName" />
         </wrapped-component>
       </v-col>
-      <v-col cols="2" class="d-flex justify-center align-center">
+      <v-col cols="2" class="d-flex justify-center align-start">
         <FxEventResultCenterBoard />
       </v-col>
       <v-col cols="5">
