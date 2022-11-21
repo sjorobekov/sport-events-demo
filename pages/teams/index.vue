@@ -7,7 +7,7 @@
         </h1>
       </v-col>
       <v-col cols="6" sm="6" md="4">
-        <v-autocomplete
+        <v-select
           id="season"
           v-model="params.seasonId"
           outlined

@@ -6,7 +6,7 @@
     <FxDashboardPageCard />
 
     <v-row class="mt-5">
-      <v-col lg="9" sm="12">
+      <v-col cols="12" md="9">
         <h2>
           Today's Events
         </h2>
