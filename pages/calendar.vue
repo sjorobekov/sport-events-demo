@@ -385,7 +385,7 @@ export default {
       ageGroups: this.applyQuery(this.$route.query.ageGroups),
       locations: this.applyQuery(this.$route.query.locations),
       startDate: DateTime.fromFormat(this.$route.query.startDate || DateTime.now().toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
-      endDate: DateTime.fromFormat(this.$route.query.endDate || DateTime.now().toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
+      endDate: DateTime.fromFormat(this.$route.query.endDate || DateTime.now().plus({ month: 1 }).toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
     }
 
     this.showFilters = this.filter.leadIds.length || this.filter.eventTypes.length || this.filter.opponentIds.length || this.filter.ageGroups.length || this.filter.locations.length
