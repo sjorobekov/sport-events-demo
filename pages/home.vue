@@ -140,7 +140,7 @@
                 {{ contact.email }}
               </a>
             </div>
-            <div class="text-p1">
+            <div v-if="contact.phone" class="text-p1">
               <v-icon small>
                 mdi-phone-in-talk
               </v-icon>
@@ -244,12 +244,15 @@ export default {
   }),
 
   async fetch () {
-    this.images = await this.$store.dispatch('api/schools/getImages', this.school.id)
-    await this.getEvents(this.today)
-    const data = await this.$store.dispatch('api/sportsContacts/list', {
-      schoolId: this.contextSchoolId,
-    })
-    this.contacts = data.slice(0, 3)
+    const [images, contacts] = await Promise.all([
+      this.$store.dispatch('api/schools/getImages', this.school.id),
+      this.$store.dispatch('api/sportsContacts/list', {
+        schoolId: this.contextSchoolId,
+      }),
+      this.getEvents(this.today),
+    ])
+    this.images = images
+    this.contacts = contacts.slice(0, 3)
   },
 
   computed: {
