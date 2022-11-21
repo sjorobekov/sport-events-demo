@@ -35,6 +35,7 @@ export default {
     },
     '~/plugins/wrapped-component.js',
     '~/plugins/device.server.ts',
+    '~/plugins/vue-balance-text.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
