@@ -13,10 +13,12 @@
         <v-list-item-avatar color="white" size="44">
           <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" :size="44" />
         </v-list-item-avatar>
-        <v-list-item-content>
-          <v-list-item-title>
-            {{ contextSchool.name }}
-          </v-list-item-title>
+        <v-list-item-content class="school-name d-block text-center">
+          <client-only>
+            <h1 v-balance-text class="school-name">
+              {{ contextSchool.name }}
+            </h1>
+          </client-only>
         </v-list-item-content>
       </v-list-item>
       <v-app-bar-nav-icon @click="$emit('input', !value)" />
@@ -138,5 +140,10 @@ export default {
 <style scoped>
 .shadow {
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25)!important;
+}
+.school-name {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 19px;
 }
 </style>

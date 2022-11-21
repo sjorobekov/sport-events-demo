@@ -86,9 +86,10 @@ export default {
     }),
   },
 
-  created () {
+  async created () {
+    const school = await this.$store.dispatch('api/schools/fetch', this.school.id)
     this.formData = {
-      ...this.school,
+      ...school,
     }
   },
 
