@@ -132,7 +132,7 @@
             </div>
           </div>
           <div class="my-1">
-            <div class="text-p1">
+            <div v-if="contact.email" class="text-p1">
               <v-icon small>
                 mdi-email-outline
               </v-icon>
