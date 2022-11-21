@@ -3,7 +3,7 @@
     <v-row v-if="!isMobile">
       <v-col md="9">
         <v-card v-if="images.length">
-          <v-carousel hide-delimiters>
+          <v-carousel hide-delimiters height="320px">
             <v-carousel-item
               v-for="(item,i) in images"
               :key="i"
