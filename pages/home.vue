@@ -90,9 +90,14 @@
       </v-col>
 
       <v-col md="3" class="text-p1 info--text text--darken-1">
-        <h4 class="font-weight-regular mb-2">
-          School Location
-        </h4>
+        <div class="d-flex justify-space-between">
+          <h4 class="font-weight-regular mb-2">
+            School Location
+          </h4>
+          <nuxt-link class="text-decoration-none" :to="{ name: 'directory-sports-map' }">
+            View All
+          </nuxt-link>
+        </div>
         <div class="text--darken-2 font-weight-bold">
           {{ school.name }}
         </div>
@@ -107,16 +112,43 @@
 
         <v-divider class="my-4" />
 
-        <h3 class="text-p1 info--text text--darken-1 mb-4">
-          Sports Contacts
-        </h3>
-        <FxUserItem :item="{ avatar: null }" />
-
-        <div class="text-p1">
-          <v-icon>mdi-email-outline</v-icon> <a class="info--text text--darken-2" :href="`mailto:`" />
+        <div class="d-flex justify-space-between">
+          <h3 class="text-p1 info--text text--darken-1 mb-4">
+            Sports Contacts
+          </h3>
+          <nuxt-link class="text-decoration-none" :to="{ name: 'directory-sports-contacts' }">
+            View All
+          </nuxt-link>
         </div>
-        <div class="text-p1">
-          <v-icon>mdi-phone-in-talk</v-icon> <a class="info--text text--darken-2" :href="`tel:`" />
+        <div v-for="contact in contacts" :key="contact.id">
+          <div class="d-flex text-p1">
+            <FxAvatar :value="contact.avatar" />
+
+            <div class="pa-2">
+              <div class="text--darken-1 font-weight-bold">
+                {{ contact.name }}
+              </div>
+              <div>{{ contact.role }}</div>
+            </div>
+          </div>
+          <div class="my-1">
+            <div class="text-p1">
+              <v-icon small>
+                mdi-email-outline
+              </v-icon>
+              <a class="info--text text--darken-2" :href="`mailto:${contact.email}`">
+                {{ contact.email }}
+              </a>
+            </div>
+            <div class="text-p1">
+              <v-icon small>
+                mdi-phone-in-talk
+              </v-icon>
+              <a class="info--text text--darken-2" :href="`tel:${contact.phone}`">
+                {{ contact.phone }}
+              </a>
+            </div>
+          </div>
         </div>
       </v-col>
     </v-row>
@@ -207,12 +239,17 @@ export default {
     date: '',
     tab: 0,
     dates: [],
+    contacts: [],
     today: DateTime.now().toFormat('yyyy-MM-dd'),
   }),
 
   async fetch () {
     this.images = await this.$store.dispatch('api/schools/getImages', this.school.id)
     await this.getEvents(this.today)
+    const data = await this.$store.dispatch('api/sportsContacts/list', {
+      schoolId: this.contextSchoolId,
+    })
+    this.contacts = data.slice(0, 3)
   },
 
   computed: {
