@@ -8,7 +8,7 @@
     <template v-else>
       <v-card class="rounded-b-0" color="primary" dark height="80">
         <v-list-item>
-          <v-list-item-content id="padding" class="text-center pt-5 pl-12">
+          <v-list-item-content class="text-center pt-5 pl-12">
             <v-list-item-title class="text-subheading mb-1 pl-md-11">
               <FxDateFormat :date="event.date" output-format="cccc dd MMMM yyyy" />
             </v-list-item-title>
