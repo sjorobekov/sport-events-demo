@@ -8,19 +8,18 @@
     <template v-else>
       <v-card class="rounded-b-0" color="primary" dark height="80">
         <v-list-item>
-          <v-list-item-action />
-          <v-list-item-content class="text-center pl-14 pt-5">
-            <v-list-item-title class="text-subheading mb-1">
+          <v-list-item-content class="text-center pt-5 pl-12">
+            <v-list-item-title class="text-subheading mb-1 pl-md-11">
               <FxDateFormat :date="event.date" output-format="cccc dd MMMM yyyy" />
             </v-list-item-title>
-            <v-list-item-subtitle class="text-p2 white--text">
+            <v-list-item-subtitle class="text-p2 white--text pl-md-11">
               {{ sport.name }} &#x2022; {{ $t(`FIXTURE_TYPE.${event.fixtureType}`) }}
             </v-list-item-subtitle>
           </v-list-item-content>
 
           <v-list-item-action>
             <div>
-              <v-btn icon>
+              <v-btn icon class="hidden-sm-and-down">
                 <v-icon>mdi-printer-outline</v-icon>
               </v-btn>
               <v-btn v-if="isLoggedIn" icon>
