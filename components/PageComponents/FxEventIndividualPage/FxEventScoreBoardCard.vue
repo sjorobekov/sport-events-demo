@@ -9,7 +9,7 @@
           <FxTeam :color="school.color" :logo="school.logo" :name="myName" />
         </wrapped-component>
       </v-col>
-      <v-col cols="2" class="d-flex justify-center align-center">
+      <v-col cols="2" class="d-flex justify-center align-start">
         <FxEventResultCenterBoard />
       </v-col>
       <v-col cols="5">
