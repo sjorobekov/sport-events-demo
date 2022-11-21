@@ -49,11 +49,7 @@
     </v-row>
     <v-row>
       <v-col class="d-none d-sm-none d-md-block" md="4" lg="3">
-        <v-card
-          class="mx-auto"
-          flat
-          outlined
-        >
+        <v-card>
           <v-list dense class="py-0">
             <v-list-item>
               <v-list-item-content>
