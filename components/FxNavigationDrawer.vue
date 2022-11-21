@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    width="224"
+    :width="width"
     :permanent="permanent"
     :right="right"
     app
@@ -147,6 +147,16 @@ export default {
       me: 'context/me',
       canSeeOrganising: 'user/acl/canSeeOrganising',
     }),
+
+    width () {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return 224
+        case 'sm': return 224
+        case 'md': return 240
+        case 'lg': return 240
+        case 'xl': return 240
+      }
+    },
 
     items () {
       const menu = [
