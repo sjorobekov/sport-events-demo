@@ -6,6 +6,8 @@
       <v-container>
         <nuxt />
       </v-container>
+
+      <FxBottomNav v-if="isMobile" v-model="drawer" />
     </v-main>
   </v-app>
 </template>
