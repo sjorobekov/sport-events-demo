@@ -14,7 +14,7 @@
       @click="item.onClick"
     >
       <span class="text-p1 menu-title">{{ item.title }}</span>
-      <v-icon class="mr-0 menu-icon" size="25" v-text="item.icon" />
+      <v-icon class="mr-0 mb-1 menu-icon" size="25" v-text="item.icon" />
     </v-btn>
   </v-bottom-navigation>
 </template>
@@ -43,12 +43,25 @@ export default {
 }
 </script>
 
-<style scoped>
-/deep/ .fx-bottom-menu .menu-icon, .fx-bottom-menu .menu-title {
-  color: var(--v-info-lighten1)!important;
-}
+<style scoped lang="scss">
+.fx-bottom-menu {
+  .menu-icon {
+    color: var(--v-info-lighten1)!important;
+  }
 
-/deep/ .fx-bottom-menu.v-btn--active .menu-icon, /deep/ .fx-bottom-menu.v-btn--active .menu-title {
-  color: var(--v-primary-base) !important
+  .menu-title {
+    color: var(--v-info-lighten1)!important;
+  }
+
+  &.v-btn--active {
+    .menu-icon {
+      color: var(--v-primary-base) !important;
+    }
+    .menu-title {
+      color: var(--v-primary-base) !important;
+      font-family: ProximaNova-Semibold, sans-serif!important;
+      font-weight: 400;
+    }
+  }
 }
 </style>
