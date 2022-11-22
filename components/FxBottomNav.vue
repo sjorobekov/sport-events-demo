@@ -5,9 +5,16 @@
     app
     fixed
   >
-    <v-btn v-for="(item, i) in items" :key="i" link :to="item.to" @click="item.onClick">
-      <span class="text-p1 info--text">{{ item.title }}</span>
-      <v-icon class="mr-0" size="25" color="info lighten-1" v-text="item.icon" />
+    <v-btn
+      v-for="(item, i) in items"
+      :key="i"
+      class="fx-bottom-menu"
+      link
+      :to="item.to"
+      @click="item.onClick"
+    >
+      <span class="text-p1 menu-title">{{ item.title }}</span>
+      <v-icon class="mr-0 menu-icon" size="25" v-text="item.icon" />
     </v-btn>
   </v-bottom-navigation>
 </template>
@@ -35,3 +42,13 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+/deep/ .fx-bottom-menu .menu-icon, .fx-bottom-menu .menu-title {
+  color: var(--v-info-lighten1)!important;
+}
+
+/deep/ .fx-bottom-menu.v-btn--active .menu-icon, /deep/ .fx-bottom-menu.v-btn--active .menu-title {
+  color: var(--v-primary-base) !important
+}
+</style>
