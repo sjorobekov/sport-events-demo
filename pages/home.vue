@@ -223,7 +223,6 @@ export default {
     EventResult,
     images: [],
     sports: [],
-    liveSports: [],
     fixturesBySport: {},
     liveEventsBySport: {},
     date: '',
@@ -326,18 +325,14 @@ export default {
       this.fixturesBySport = {}
       this.liveEventsBySport = {}
       this.sports = []
-      this.liveSports = []
     },
     updateEvents (events) {
       const sports = []
-      const liveSports = []
       events.forEach((event) => {
         if (event.participants.some(item => item.overallResult === EventResult.LIVE)) {
           if (!this.liveEventsBySport[event.sportId]) {
             this.$set(this.liveEventsBySport, event.sportId, [])
           }
-          this.liveEventsBySport[event.sportId].push(event)
-          liveSports.push(event.sport)
         } else {
           if (!this.fixturesBySport[event.sportId]) {
             this.$set(this.fixturesBySport, event.sportId, [])
@@ -347,7 +342,6 @@ export default {
         }
       })
       this.sports = [...new Map(sports.map(v => [v.id, v])).values()]
-      this.liveSports = [...new Map(liveSports.map(v => [v.id, v])).values()]
     },
   },
 }
