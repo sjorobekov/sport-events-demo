@@ -14,6 +14,7 @@
           :to="{ name: 'announcements-add' }"
           depressed
           color="primary"
+          height="40"
         >
           <v-icon>mdi-bullhorn</v-icon>Create Announcement
         </v-btn>
