@@ -6,7 +6,7 @@
       md="12"
       lg="7"
       class="pr-4 d-flex"
-      :class="[isPendingResult ? 'flex-column' : 'flex-column-reverse', isPendingResult ? 'justify-start' : 'justify-end']"
+      :class="isPendingResult ? 'flex-column justify-start' : 'flex-column-reverse justify-end'"
     >
       <FxEventDetails />
       <FxEventResults v-if="showResultsCard" id="results" />
