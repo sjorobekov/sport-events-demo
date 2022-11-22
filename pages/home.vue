@@ -189,16 +189,6 @@
       <v-col md="9">
         <div>
           <h2 class="text-p2 font-weight-bold mb-2 info--text text--darken-3">
-            Live Scores
-          </h2>
-
-          <FxSportExpansionPanel v-for="sport in liveSports" :key="sport.id" class="mb-4" :item="sport" :subtitle="subtitle(liveEventsBySport[sport.id].length)">
-            <FxPortalEventItem v-for="event in liveEventsBySport[sport.id]" :key="event.id" :event="event" :me="event.me" />
-          </FxSportExpansionPanel>
-        </div>
-
-        <div>
-          <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
             Fixtures & Results
           </h2>
           <FxSportExpansionPanel v-for="sport in sports" :key="sport.id" class="mb-4" :item="sport" :subtitle="subtitle(fixturesBySport[sport.id].length)">
