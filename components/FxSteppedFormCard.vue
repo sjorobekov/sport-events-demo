@@ -24,7 +24,7 @@
           cols="12"
           md="7"
           lg="7"
-          class="pt-8"
+          class="pt-10"
         >
           <slot name="default" />
         </v-col>

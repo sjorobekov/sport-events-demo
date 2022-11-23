@@ -1,5 +1,5 @@
 <template>
-  <v-list dense class="mt-3">
+  <v-list dense class="my-0">
     <v-list-item class="my-0">
       <v-list-item-avatar class="my-0" height="32" min-width="32" width="32">
         <v-avatar color="primary">
@@ -16,8 +16,8 @@
       </v-list-item-content>
     </v-list-item>
 
-    <v-list-item class="my-0">
-      <v-list-item-avatar class="py-0 my-0" height="32" min-width="32" width="32" />
+    <v-list-item class="my-0 helper-list-item">
+      <v-list-item-avatar class="py-0 my-0" height="17" min-width="32" width="32" />
       <v-list-item-content class="py-0 text-p1 info--text text--darken-1">
         <slot name="content" />
       </v-list-item-content>
@@ -38,6 +38,6 @@ export default {
   font-weight: 600;
 }
 .v-list--dense .v-list-item {
-  min-height: 32px;
+  min-height: 15px;
 }
 </style>
