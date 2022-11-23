@@ -1,15 +1,16 @@
 <template>
   <div>
     <v-row class="mb-2">
-      <v-col cols="6" sm="6" md="4">
+      <v-col cols="9" sm="5" md="5">
         <h1 class="text-h3">
           Teams
         </h1>
       </v-col>
-      <v-col cols="6" sm="6" md="4">
+      <v-col cols="3" sm="3" md="3">
         <v-select
           id="season"
           v-model="params.seasonId"
+          style="max-width: 120px"
           outlined
           dense
           :items="seasons"
@@ -20,7 +21,7 @@
           @change="onSeasonChange"
         />
       </v-col>
-      <v-col v-if="canCreateTeam" cols="12" sm="12" md="4" class="text-right">
+      <v-col v-if="canCreateTeam" cols="12" sm="4" md="4" class="text-right">
         <v-btn depressed color="primary" link :to="{ name: 'teams-add' }">
           <v-icon>$vuetify.icons.plusOutline</v-icon>
           Add Team
