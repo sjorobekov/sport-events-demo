@@ -5,12 +5,12 @@
         <v-icon>mdi-bullhorn</v-icon>
       </div>
       <div class="flex-grow-1">
-        <div class="text-p1 font-weight-bold info--text text--darken-3 line-clamp-2 mb-2">
+        <section class="font-weight-bold info--text text--darken-3 line-clamp-2 mb-2 f">
           {{ announcement.subject }}
-        </div>
-        <div class="text-caption info--text line-clamp-2 text-fade">
+        </section>
+        <section class="info--text line-clamp-2 text-fade">
           {{ announcement.body }}
-        </div>
+        </section>
       </div>
     </div>
 
@@ -61,6 +61,10 @@ export default {
 
 <style scoped>
 
+.text-p1 {
+  size: 30px;
+}
+
 .line-clamp-2 {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -79,5 +83,10 @@ export default {
 .fx-announcement-item.nuxt-link-active {
   box-shadow: inset -4px 0 0 0 var(--v-primary-base);
   background: var(--v-info-lighten3);
+}
+
+section {
+  font-size: 0.975rem;
+  line-height: 1.25rem
 }
 </style>
