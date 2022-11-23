@@ -5,20 +5,25 @@
     hide-details
     multiple
     placeholder="Staff"
-    prepend-inner-icon="$vuetify.icons.staff"
     :items="users"
     :item-text="fullname"
-    background-color="white"
     item-value="id"
-    chips
     :value="value"
-    deletable-chips
+    prepend-inner-icon="mdi-account-filter-outline"
+    :class="{ 'staff-filter': value.length > 0 }"
     @input="$emit('input', $event)"
   >
+    <template #selection="{ index }">
+      <v-chip v-show="index === 0">
+        {{ value.length }} selected <v-icon size="18" @click.stop="$emit('input', [])">
+          mdi-close-circle
+        </v-icon>
+      </v-chip>
+    </template>
     <template #item="{ item, on, attrs }">
       <v-list-item v-bind="attrs" v-on="on">
         <v-list-item-action class="mr-2">
-          <v-checkbox :value="attrs.inputValue" />
+          <v-checkbox :input-value="attrs.inputValue" />
         </v-list-item-action>
         <v-list-item-avatar size="24" class="mr-2">
           <FxAvatar size="24" :value="item.avatar" />
@@ -86,3 +91,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+ .staff-filter /deep/ input {
+  display: none;
+}
+</style>
