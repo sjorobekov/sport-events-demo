@@ -1,5 +1,5 @@
 <template>
-  <v-list dense class="my-0">
+  <v-list dense class="mt-3">
     <v-list-item class="my-0">
       <v-list-item-avatar class="my-0" height="32" min-width="32" width="32">
         <v-avatar color="primary">
