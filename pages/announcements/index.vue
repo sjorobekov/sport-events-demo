@@ -16,7 +16,7 @@
           color="primary"
           height="40"
         >
-          <v-icon>mdi-bullhorn</v-icon>Create Announcement
+          <v-icon>$vuetify.icons.bullhorn</v-icon>Create Announcement
         </v-btn>
         <v-btn
           v-if="canCreateAnnouncement"

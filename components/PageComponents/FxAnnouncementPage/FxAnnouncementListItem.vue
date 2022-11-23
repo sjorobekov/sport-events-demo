@@ -2,15 +2,15 @@
   <nuxt-link v-ripple exact class="d-block text-decoration-none py-3 px-3 px-md-8 fx-announcement-item" :to="to">
     <div class="d-flex">
       <div class="flex-shrink-1 pr-2 hidden-md-and-up">
-        <v-icon>mdi-bullhorn</v-icon>
+        <v-icon>$vuetify.icons.bullhorn</v-icon>
       </div>
       <div class="flex-grow-1">
-        <section class="font-weight-bold info--text text--darken-3 line-clamp-2 mb-2 f">
+        <div class="custom-font-size font-weight-bold info--text text--darken-3 line-clamp-2 mb-2 f">
           {{ announcement.subject }}
-        </section>
-        <section class="info--text line-clamp-2 text-fade">
+        </div>
+        <div class="custom-font-size info--text line-clamp-2 text-fade">
           {{ announcement.body }}
-        </section>
+        </div>
       </div>
     </div>
 
@@ -61,10 +61,6 @@ export default {
 
 <style scoped>
 
-.text-p1 {
-  size: 30px;
-}
-
 .line-clamp-2 {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -85,7 +81,7 @@ export default {
   background: var(--v-info-lighten3);
 }
 
-section {
+.custom-font-size {
   font-size: 0.975rem;
   line-height: 1.25rem
 }
