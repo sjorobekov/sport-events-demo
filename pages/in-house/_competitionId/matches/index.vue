@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row>
-      <v-col md="9">
+      <v-col cols="12" md="9">
         <v-card v-if="inHouseCompetition.photo">
           <v-img
             class="white--text align-end"
@@ -32,33 +32,35 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-row class="my-4">
-          <v-col cols="6" sm="5" md="6">
-            <v-chip-group
-              v-model="filter"
-              mandatory
-              class="float-left"
-              active-class="primary white--text"
-            >
-              <v-chip class="info--text" :value="null">
-                All
-              </v-chip>
+        <div class="d-flex mt-4">
+          <v-chip-group
+            v-model="filter"
+            mandatory
+            class="float-left"
+            active-class="primary white--text"
+          >
+            <v-chip class="info--text" :value="null">
+              All
+            </v-chip>
 
-              <v-chip class="info--text" value="fixtures">
-                Fixtures
-              </v-chip>
+            <v-chip class="info--text" value="fixtures">
+              Fixtures
+            </v-chip>
 
-              <v-chip class="info--text" value="results">
-                Results
-              </v-chip>
-            </v-chip-group>
-          </v-col>
-          <v-col cols="6" sm="7" md="6" class="text-right">
-            <v-btn v-if="canEditCompetition" outlined>
+            <v-chip class="info--text" value="results">
+              Results
+            </v-chip>
+          </v-chip-group>
+
+          <v-spacer />
+
+          <div class="pt-1">
+            <v-btn v-if="canEditCompetition" class="hidden-sm-and-down" outlined>
               <v-icon>$vuetify.icons.edit</v-icon>Edit Comp
             </v-btn>
             <v-btn
               v-if="canCreateInHouseEvent"
+              class="hidden-sm-and-down"
               depressed
               color="primary"
               link
@@ -66,10 +68,26 @@
             >
               <v-icon>$vuetify.icons.plusOutline</v-icon>Add Event
             </v-btn>
-          </v-col>
-        </v-row>
+
+            <v-menu>
+              <template #activator="{ on, attrs }">
+                <v-btn class="hidden-md-and-up" icon v-bind="attrs" v-on="on">
+                  <v-icon>mdi-dots-vertical</v-icon>
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-item v-if="canEditCompetition">
+                  <v-list-item-title>Edit Competition</v-list-item-title>
+                </v-list-item>
+                <v-list-item v-if="canCreateInHouseEvent" link :to="{ name: 'in-house-competitionId-matches-add', params: { competitionId: inHouseCompetitionId }}">
+                  <v-list-item-title>Add Event</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </div>
+        </div>
       </v-col>
-      <v-col md="3">
+      <v-col md="3" class="hidden-sm-and-down">
         <h3 class="text-p1 info--text text--darken-1 mb-4">
           Lead Staff Member
         </h3>
