@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row class="mb-2">
-      <v-col cols="9" sm="5" md="12">
+      <v-col cols="12" sm="5" md="12">
         <h1 class="text-h3">
           Today's Team
         </h1>
