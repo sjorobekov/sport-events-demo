@@ -22,7 +22,7 @@
         </slot>
       </v-row>
       <v-row class="hidden-sm-and-down">
-        <v-col cols="12" md="6" lg="6" class="border-right pt-1 pb-0">
+        <v-col cols="12" md="6" lg="6" class="border-right pt-1 pb-0 d-flex justify-center align-center">
           <ListItem>
             <template #icon>
               <v-icon>mdi-clock-outline</v-icon>
@@ -32,7 +32,7 @@
             </template>
           </ListItem>
         </v-col>
-        <v-col cols="12" md="6" lg="6" class="pt-1 pb-0">
+        <v-col cols="12" md="6" lg="6" class="pt-1 pb-0 d-flex justify-center align-center">
           <ListItem>
             <template #icon>
               <v-icon>mdi-map-marker</v-icon>

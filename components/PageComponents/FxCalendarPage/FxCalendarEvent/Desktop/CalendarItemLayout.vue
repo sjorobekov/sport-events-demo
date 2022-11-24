@@ -22,7 +22,7 @@
       </slot>
     </v-row>
     <v-row class="hidden-sm-and-down">
-      <v-col cols="12" md="6" lg="4" class="border-right pt-1 pb-0">
+      <v-col cols="12" md="6" lg="4" class="border-right pt-1 pb-0 d-flex justify-center align-center">
         <ListItem>
           <template #icon>
             <v-icon>mdi-clock-outline</v-icon>
@@ -32,7 +32,7 @@
           </template>
         </ListItem>
       </v-col>
-      <v-col cols="12" lg="4" class="hidden-md-and-down border-right pt-1 pb-0">
+      <v-col cols="12" lg="4" class="hidden-md-and-down border-right pt-1 pb-0 d-flex justify-center align-center">
         <ListItem v-if="lead">
           <template #icon>
             <FxAvatar :size="24" :value="lead.avatar" />
@@ -42,7 +42,7 @@
           </template>
         </ListItem>
       </v-col>
-      <v-col cols="12" md="6" lg="4" class="border-right pt-1 pb-0">
+      <v-col cols="12" md="6" lg="4" class="pt-1 pb-0 d-flex justify-center align-center">
         <ListItem>
           <template #icon>
             <v-icon>mdi-map-marker</v-icon>
