@@ -101,7 +101,7 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
   border-color: var(--v-info-lighten2)!important;
 }
 
-.v-select .v-input__slot  {
+.v-select .v-input__slot, .v-text-field .v-input__slot  {
   background-color: white!important;
 }
 
@@ -123,5 +123,5 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 }
 
 .v-application .font-weight-bold {
-  font-family: "ProximaNova-Semibold";
+  font-family: ProximaNova-Semibold, sans-serif;
 }
