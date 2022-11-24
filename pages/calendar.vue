@@ -87,26 +87,6 @@
               <FxCalendarLocationFilter v-model="filter.locations" />
               <FxCalendarStatusFilter v-if="isLoggedIn" v-model="filter.privacy" />
             </div>
-            <!--            <v-row no-gutters>-->
-            <!--              <v-col cols="12" sm="4" md="4" lg="2" class="pr-1">-->
-            <!--                <FxCalendarStaffFilter style="width: 190px" v-model="filter.leadIds" :items="leadIds" />-->
-            <!--              </v-col>-->
-            <!--              <v-col cols="12" sm="4" md="4" lg="2" class="pr-1">-->
-            <!--                <FxCalendarEventFilter style="width: 190px" v-model="filter.eventTypes" :items="eventTypes" />-->
-            <!--              </v-col>-->
-            <!--              <v-col cols="12" sm="4" md="4" lg="2" class="pr-1">-->
-            <!--                <FxCalendarOpponentFilter style="width: 190px" v-model="filter.opponentIds" :items="opponentIds" />-->
-            <!--              </v-col>-->
-            <!--              <v-col cols="12" sm="4" md="4" lg="2" class="pr-1">-->
-            <!--                <FxCalendarAgeFilter style="width: 190px" v-model="filter.ageGroups" :items="ageGroups" />-->
-            <!--              </v-col>-->
-            <!--              <v-col cols="12" sm="4" md="4" lg="2" class="pr-1">-->
-            <!--                <FxCalendarLocationFilter style="width: 190px" v-model="filter.locations" />-->
-            <!--              </v-col>-->
-            <!--              <v-col cols="12" sm="4" md="4" lg="2">-->
-            <!--                <FxCalendarStatusFilter style="width: 190px" v-model="filter.privacy" />-->
-            <!--              </v-col>-->
-            <!--            </v-row>-->
           </div>
         </v-expand-transition>
       </client-only>

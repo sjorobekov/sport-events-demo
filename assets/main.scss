@@ -97,7 +97,7 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
   border-right: 1px var(--v-info-lighten4) solid;
 }
 
-.v-text-field--outlined fieldset:not(.v-icon) {
+.v-text-field--outlined fieldset {
   border-color: var(--v-info-lighten2)!important;
 }
 
