@@ -11,6 +11,8 @@
     <v-btn v-else-if="canManageTeamSheet" outlined link :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }">
       Manage Team
     </v-btn>
+
+    <div v-else style="width: 120px" />
   </div>
 </template>
 
