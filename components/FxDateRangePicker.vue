@@ -16,7 +16,6 @@
         :value="rangeFormatted"
         readonly
         v-bind="attrs"
-        class="mr-2"
         v-on="on"
       />
     </template>

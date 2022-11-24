@@ -1,15 +1,15 @@
 <template>
   <div>
     <v-row class="mb-2">
-      <v-col cols="12" sm="5" md="12">
+      <v-col cols="12">
         <h1 class="text-h3">
           Today's Team
         </h1>
       </v-col>
-      <v-col cols="6" sm="7" md="6">
-        <FxDateRangePicker v-model="filter" class="mr-2"/>
+      <v-col cols="12" sm="6" md="5">
+        <FxDateRangePicker v-model="filter" />
       </v-col>
-      <v-col cols="6" sm="12" md="6" class="text-right">
+      <v-col cols="12" sm="6" md="7" class="text-right">
         <v-btn outlined style="background: white;" color="info base">
           <v-icon>mdi-printer-outline</v-icon>
           Print Team Sheets
