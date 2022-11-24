@@ -45,7 +45,7 @@
 
     <v-row v-else>
       <v-col cols="12" md="5">
-        <div class="rounded background-white overflow-hidden bt">
+        <v-card>
           <template v-if="items.length">
             <FxAnnouncementListItem
               v-for="item in items"
@@ -71,7 +71,7 @@
               </v-row>
             </v-sheet>
           </template>
-        </div>
+        </v-card>
       </v-col>
       <v-col class="hidden-sm-and-down" md="7">
         <NuxtChild @updated="updateHandler" @removed="removeHandler" />
@@ -151,12 +151,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.background-white {
-  background: white;
-}
-.bt > :not(:last-child) {
-  border-bottom: solid 1px var(--v-info-lighten4);
-}
-</style>
