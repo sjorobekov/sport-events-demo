@@ -151,12 +151,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.background-white {
-  background: white;
-}
-.bt > :not(:last-child) {
-  border-bottom: solid 1px var(--v-info-lighten4);
-}
-</style>
