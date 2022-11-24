@@ -100,7 +100,7 @@
               </h2>
               <v-card v-for="event in upcoming" :key="`upcoming-${event.id}`" class="mb-2">
                 <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
-                  <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" />
+                  <FxEventItem :value="event" />
                 </nuxt-link>
               </v-card>
             </template>
@@ -111,7 +111,7 @@
               </h2>
               <v-card v-for="event in past" :key="`past-${event.id}`" class="mb-2">
                 <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
-                  <FxEventItem :event="event" :me="event.me" :opponent="event.opponent" />
+                  <FxEventItem :value="event" />
                 </nuxt-link>
               </v-card>
             </template>
@@ -146,7 +146,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
-import FxEventItem from '@/components/PageComponents/FxTeamsPage/FxEventItem'
+import FxEventItem from '@/components/PageComponents/FxTeamsPage/FxTeamEvent'
 import FxTeamPrivacyChipBig from '@/components/FxTeamPrivacyChipBig'
 import FxWinRateBar from '@/components/FxWinRateBar'
 import { EventType } from '@/enum'

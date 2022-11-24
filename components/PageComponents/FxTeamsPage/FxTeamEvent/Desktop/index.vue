@@ -79,13 +79,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import FxTeamEventContainer from './FxTeamEventDesktopLayout'
 import { EventResult, EventType } from '@/enum'
 import ExistingResult
   from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/EventItem/ExistingResult/ExistingResult'
 import NoResult from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/EventItem/NoResult/NoResult'
 import FxSchoolLogo from '@/components/FxSchoolLogo/FxSchoolLogo'
 import FxLocationLabel from '@/components/FxEventItem/FxLocationLabel'
-import FxTeamEventContainer from '@/components/PageComponents/FxTeamsPage/FxTeamEventContainer'
 
 export default {
   name: 'FxTeamsEventItem',
@@ -97,15 +97,7 @@ export default {
     NoResult,
   },
   props: {
-    event: {
-      type: Object,
-      default: () => {},
-    },
-    me: {
-      type: Object,
-      default: () => {},
-    },
-    opponent: {
+    value: {
       type: Object,
       default: () => {},
     },
@@ -120,9 +112,18 @@ export default {
     ...mapGetters({
       contextSchool: 'context/school',
     }),
-    compact () {
-      return this.$vuetify.breakpoint.smAndDown
+    event () {
+      return this.value
     },
+
+    me () {
+      return this.event.me
+    },
+
+    opponent () {
+      return this.event.opponent
+    },
+
     hasResult () {
       return [
         EventResult.WIN,
