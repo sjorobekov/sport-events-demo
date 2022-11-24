@@ -7,6 +7,8 @@
     <v-btn v-else-if="canManageTeams" outlined link :to="{ name: 'in-house-competitionId-matches-matchId', params: { matchId: match.id, competitionId: competition.id } }">
       Manage Teams
     </v-btn>
+
+    <div v-else style="width: 120px" />
   </div>
 </template>
 
