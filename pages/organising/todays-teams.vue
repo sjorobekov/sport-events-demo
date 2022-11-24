@@ -1,9 +1,19 @@
 <template>
   <div>
-    <h1>Today's Teams</h1>
-    <v-row>
-      <v-col cols="4">
-        <FxDateRangePicker v-model="filter" class="mr-2" />
+    <v-row class="mb-2">
+      <v-col cols="9" sm="5" md="12">
+        <h1 class="text-h3">
+          Today's Team
+        </h1>
+      </v-col>
+      <v-col cols="6" sm="7" md="6">
+        <FxDateRangePicker v-model="filter" class="mr-2"/>
+      </v-col>
+      <v-col cols="6" sm="12" md="6" class="text-right">
+        <v-btn outlined style="background: white;" color="info base">
+          <v-icon>mdi-printer-outline</v-icon>
+          Print Team Sheets
+        </v-btn>
       </v-col>
     </v-row>
     <v-card v-for="event in events" :key="event.id" class="mb-2">
