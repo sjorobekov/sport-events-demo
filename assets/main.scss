@@ -55,7 +55,7 @@ body {
     border-top-width: 4px!important;
     border-top-style: solid;
     border-top-color: var(--v-primary-base) !important;
-  } 
+  }
 }
 
 
@@ -99,7 +99,10 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 
 .v-text-field--outlined fieldset {
   border-color: var(--v-info-lighten2)!important;
-  background-color: white;
+}
+
+.v-select .v-input__slot  {
+  background-color: white!important;
 }
 
 .v-sheet.v-card:not(.v-sheet--outlined, .v-card--flat) {

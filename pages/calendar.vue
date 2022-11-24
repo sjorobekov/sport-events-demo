@@ -74,30 +74,19 @@
             </FxPill>
 
             <v-row class="hidden-lg-and-up">
-              <v-col>
+              <v-col class=" mb-2">
                 <FxCalendarSportFilter v-model="filter.sports" :items="sports" />
               </v-col>
             </v-row>
-            <v-row>
-              <v-col cols="12" sm="6" md="4">
-                <FxCalendarStaffFilter v-model="filter.leadIds" :items="leadIds" />
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <FxCalendarEventFilter v-model="filter.eventTypes" :items="eventTypes" />
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <FxCalendarOpponentFilter v-model="filter.opponentIds" :items="opponentIds" />
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <FxCalendarAgeFilter v-model="filter.ageGroups" :items="ageGroups" />
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <FxCalendarLocationFilter v-model="filter.locations" />
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <FxCalendarStatusFilter v-model="filter.privacy" />
-              </v-col>
-            </v-row>
+
+            <div class="d-flex" style="flex-wrap: wrap;gap: 8px;">
+              <FxCalendarStaffFilter v-model="filter.leadIds" :items="leadIds" />
+              <FxCalendarEventFilter v-model="filter.eventTypes" :items="eventTypes" />
+              <FxCalendarOpponentFilter v-model="filter.opponentIds" :items="opponentIds" />
+              <FxCalendarAgeFilter v-model="filter.ageGroups" :items="ageGroups" />
+              <FxCalendarLocationFilter v-model="filter.locations" />
+              <FxCalendarStatusFilter v-if="isLoggedIn" v-model="filter.privacy" />
+            </div>
           </div>
         </v-expand-transition>
       </client-only>
@@ -295,6 +284,7 @@ export default {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
       canCreateEvent: 'user/acl/canCreateEvent',
+      isLoggedIn: 'context/isLoggedIn',
     }),
 
     isMobile () {
@@ -406,7 +396,7 @@ export default {
       }
       try {
         const date = val.toFormat(DATE_FORMAT)
-        this.$vuetify.goTo(`#date-${date}`)
+        this.$vuetify.goTo(`#date-${date}`, { offset: 190 })
       } catch (e) {
 
       }
@@ -432,7 +422,7 @@ export default {
   margin-left: 0;
 }
 .calendar-content {
-  margin-top: 120px;
+  margin-top: 180px;
 }
 @media only screen and (min-width: 960px) {
   .calendar-bar {
@@ -440,7 +430,7 @@ export default {
     margin-left: 224px;
   }
   .calendar-content {
-    margin-top: 80px;
+    margin-top: 180px;
   }
 }
 </style>
