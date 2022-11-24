@@ -45,7 +45,7 @@
 
     <v-row v-else>
       <v-col cols="12" md="5">
-        <v-card>
+        <v-card class="bt">
           <template v-if="items.length">
             <FxAnnouncementListItem
               v-for="item in items"
@@ -151,3 +151,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.bt > :not(:last-child) {
+  border-bottom: solid 1px var(--v-info-lighten4);
+}
+</style>
