@@ -57,7 +57,7 @@ export default {
         schoolId: this.$route.params.id,
         ...this.formData,
       }).then((res) => {
-        this.$router.push({ name: 'management-schools-id-in-house-teams', params: { id: res.schoolId, teamId: res.id } })
+        this.$router.push({ name: 'management-schools-id-in-house-sports', params: { id: res.schoolId, teamId: res.id } })
       }).finally(() => {
         this.loading = false
       })

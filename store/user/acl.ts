@@ -64,7 +64,7 @@ export const getters: GetterTree<RootState, RootState> = {
   },
 
   canCreateInHouseEvent (_, getters) {
-    return [UserRole.ADMIN, UserRole.SPORTS_USER].includes(getters.role)
+    return [UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.SPORTS_USER].includes(getters.role)
   },
 
   canCreateCompetition (_, getters) {
