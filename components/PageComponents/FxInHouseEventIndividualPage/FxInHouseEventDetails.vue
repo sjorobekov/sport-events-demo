@@ -127,7 +127,7 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      canEditEvent: 'user/acl/canCreateInHouseEvent',
+      canEditEvent: 'page/inHouseEvent/canEditDetails',
       match: 'page/inHouseEvent/inHouseMatch',
       event: 'page/inHouseEvent/inHouseEvent',
       lead: 'page/inHouseEvent/lead',

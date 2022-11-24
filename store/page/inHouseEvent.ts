@@ -127,6 +127,10 @@ export const getters: GetterTree<RootState, RootState> = {
     ].includes(getters.result.overallResult)
   },
 
+  canEditDetails (_state, getters) {
+    return [UserRole.ADMIN, UserRole.SUPER_ADMIN].includes(getters.role)
+  },
+
   canAddOrEditResult (_state, getters) {
     return [UserRole.ADMIN, UserRole.SUPER_ADMIN].includes(getters.role)
   },

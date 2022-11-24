@@ -1,5 +1,5 @@
 <template>
-  <FxInHouseEventItemCard v-if="canAddOrEditResult | hasResult">
+  <FxInHouseEventItemCard v-if="canAddOrEditResult || hasResult">
     <template #title>
       Results
     </template>
