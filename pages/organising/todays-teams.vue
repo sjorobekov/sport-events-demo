@@ -9,7 +9,7 @@
       <v-col cols="12" sm="6" md="5">
         <FxDateRangePicker v-model="filter" />
       </v-col>
-      <v-col cols="12" sm="6" md="7" class="text-right">
+      <v-col md="7" class="text-right hidden-sm-and-down">
         <v-btn outlined style="background: white;" color="info base">
           <v-icon>mdi-printer-outline</v-icon>
           Print Team Sheets
