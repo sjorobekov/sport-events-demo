@@ -38,6 +38,7 @@
           </v-list>
         </v-menu>
         <v-btn
+          v-if="canEditOrRemoveAnnouncement(selectedItem)"
           depressed
           color="primary"
           outlined
