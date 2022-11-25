@@ -1,5 +1,9 @@
 <template>
-  <v-dialog :value="isOpen" persistent width="520">
+  <v-dialog
+    :value="isOpen"
+    persistent
+    width="520"
+  >
     <v-card flat>
       <v-card-text class="text-center pt-16">
         <v-img class="d-inline-block mx-auto mb-8" width="120" :src="icon" />
@@ -11,11 +15,10 @@
           You will change this event for you and the opponent school.
         </p>
       </v-card-text>
-      <v-card-actions>
+      <v-card-actions class="pb-10 justify-center">
         <v-btn outlined @click="cancel">
           No, Cancel Changes
         </v-btn>
-        <v-spacer />
         <v-btn depressed color="primary" @click="confirm">
           Yes, Confirm Changes
         </v-btn>
@@ -56,3 +59,10 @@ export default {
   },
 }
 </script>
+
+<style>
+.v-overlay__scrim {
+  background: rgba(255, 255, 255, 0.3)!important;
+  backdrop-filter: blur(8px);
+}
+</style>
