@@ -1,56 +1,27 @@
 <template>
   <v-container :style="style" class="rounded">
-    <v-row v-if="!compact">
+    <v-row>
       <v-col cols="12" class="border-bottom pt-1 pb-0">
         <v-list-item class="px-0">
           <v-list-item-content>
             <v-list-item-title class="text-p2" v-text="date" />
           </v-list-item-content>
           <v-spacer />
-          <slot name="actions" />
+          <slot name="actions">
+            <span class="in-house-event-time" style="font-size: 12px; line-height: 18px" v-text="time" />
+          </slot>
         </v-list-item>
       </v-col>
     </v-row>
-    <v-row v-if="compact">
-      <v-col md="6" class="border-bottom pt-1 pb-0">
-        <v-list-item class="px-0">
-          <v-list-item-content>
-            <v-list-item-title class="text-p2" v-text="date" />
-          </v-list-item-content>
-          <v-spacer />
-          <slot name="actions" />
-        </v-list-item>
-      </v-col>
-
-      <v-col cols="2" class="border-bottom pt-0 pb-0">
-        <v-list-item class="px-0">
-          <v-list-item-content>
-            <v-list-item-title class="d-flex justify-center in-house-event-time" v-text="time" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-col>
-    </v-row>
-    <v-row v-if="compact">
-      <v-col class="pa-0" style="margin-bottom: -41px">
-        <slot name="actions" />
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col v-if="!compact" cols="2" xl="1">
-        <v-list-item class="px-0">
-          <v-list-item-content>
-            <v-list-item-title class="d-flex justify-center in-house-event-time" v-text="time" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-col>
-      <v-col v-if="!isAllHouseEvent && me" cols="12" md="4" class="border-bottom">
+    <v-row v-if="!isAllHouseEvent">
+      <v-col v-if="!isAllHouseEvent && me" cols="12" md="6" class="border-bottom">
         <FxInHouseTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" :icon-on-right="!compact" />
       </v-col>
-      <v-col v-if="!isAllHouseEvent && opponent" cols="12" md="4" class="border-bottom">
+      <v-col v-if="!isAllHouseEvent && opponent" cols="12" md="6" class="border-bottom">
         <FxInHouseTeamListItem class="pl-0" :participant="opponent" :context-school-id="contextSchoolId" />
       </v-col>
     </v-row>
-    <v-row v-if="isAllHouseEvent">
+    <v-row v-else>
       <v-col v-for="inHouseTeam in filteredTeams" :key="inHouseTeam.id" cols="12" md="4" class="border-bottom">
         <FxInHouseTeamListItem class="pl-0" :participant="inHouseTeam" :context-school-id="contextSchoolId" :icon-on-right="!compact" />
       </v-col>
@@ -143,6 +114,8 @@ export default {
   border: 1px solid var(--v-info-base);
   border-radius: 5px;
   color: var(--v-info-base);
-  padding: 0.2em 0em;
+  padding: 0.2em 1em;
+  font-size: 12px;
+  line-height: 18px
 }
 </style>
