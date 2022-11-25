@@ -6,7 +6,7 @@
       />
     </v-card>
     <template v-else>
-      <v-card class="rounded-b-0" color="primary" dark height="80">
+      <v-card class="rounded-b-0 mt-8" color="primary" dark height="80">
         <v-list-item>
           <v-list-item-content class="text-center pt-5 pl-12">
             <v-list-item-title class="text-subheading mb-1 pl-md-11">
