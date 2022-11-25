@@ -7,18 +7,18 @@
       <FxInHouseMatchStatus :overall-result="value.overallResult" />
     </template>
     <template #center>
-      <v-col md="4" class="border-bottom pt-4 text-right">
+      <v-col md="4" class="border-bottom pt-5 text-right text-p2 font-weight-bold info--text text--darken-3">
         All Houses
       </v-col>
 
-      <v-col md="4" class="border-bottom pt-3">
+      <v-col md="4" class="border-bottom pt-3 ">
         <AllInHouseTeamsProvider class="text-center">
           <template #default="{ teams }">
             <FxSchoolLogo v-for="team in teams" :key="team.id" :color="team.color" :alt="team.name" size="40" />
           </template>
         </AllInHouseTeamsProvider>
       </v-col>
-      <v-col md="4" class="border-bottom pt-4">
+      <v-col md="4" class="border-bottom pt-5 text-p2 font-weight-bold info--text text--darken-3">
         {{ competition.name }}
       </v-col>
     </template>
