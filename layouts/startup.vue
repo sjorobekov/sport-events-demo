@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <div class="fill-height d-flex flex-column flex-md-row justify-center align-center">
+      <div class="fill-height d-md-flex flex-column flex-md-row justify-center align-center">
         <div class="fill-height school-panel d-flex flex-column align-center justify-space-around" :style="style">
           <div>
             <div class="school-logo mt-2 mt-md-8 mb-2 mb-md-10 mx-auto d-block">
@@ -21,7 +21,7 @@
             </h2>
           </div>
         </div>
-        <div class="mx-sm-auto px-2 py-2 content-part d-flex align-center justify-center">
+        <div class="mx-sm-auto px-2 pt-2 pb-12 content-part d-flex align-center justify-center">
           <div class="content-wrap">
             <Nuxt />
           </div>
@@ -64,6 +64,7 @@ export default {
   min-width: 220px;
   border-radius: 50%;
   background-color: white;
+  overflow: hidden;
 }
 .content-wrap {
   width: 100%;
@@ -80,17 +81,18 @@ export default {
     width: 400px;
   }
   .content-part {
-    max-width: 400px
+    max-width: 400px;
   }
 }
 @media only screen and (max-width: 959px) {
   .school-panel {
     width: 100%;
+    height: 50vh;
   }
   .content-part {
-    height: 100%;
     width: 100%;
     max-width: 100%;
+    height: 50vh;
   }
   .content-wrap {
     max-width: 600px!important;
