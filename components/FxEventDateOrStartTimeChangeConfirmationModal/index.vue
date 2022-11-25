@@ -11,11 +11,10 @@
           You will change this event for you and the opponent school.
         </p>
       </v-card-text>
-      <v-card-actions>
+      <v-card-actions class="pb-10 justify-center">
         <v-btn outlined @click="cancel">
           No, Cancel Changes
         </v-btn>
-        <v-spacer />
         <v-btn depressed color="primary" @click="confirm">
           Yes, Confirm Changes
         </v-btn>
