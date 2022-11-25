@@ -11,53 +11,24 @@
             />
             <div class="gradient-footer" />
             <v-row class="portal-menu image-footer flex-nowrap">
-              <v-col cols="3" xl="2">
+              <v-col>
                 <div class="text-h3">
                   Sports Portal
                 </div>
               </v-col>
-              <v-spacer />
-              <v-col cols="8">
-                <v-tabs v-model="tab" class="week-tabs">
-                  <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
-                    <div>
-                      {{ item.day }}
-                    </div>
-                    <div>
-                      {{ item.date }}
-                    </div>
-                  </v-tab>
-                </v-tabs>
-              </v-col>
-              <v-col class="d-flex justify-center" xl="1">
-                <v-menu ref="menu" offset-y :close-on-content-click="false">
-                  <template #activator="{ on }">
-                    <a class="d-flex" v-on="on">
-                      <v-icon>
-                        mdi-calendar-month-outline
-                      </v-icon>
-                      <v-icon small>mdi-chevron-down</v-icon>
-                    </a>
-                  </template>
-                  <v-date-picker
-                    ref="picker"
-                    v-model="date"
-                    @change="onDateChange"
-                  />
-                </v-menu>
-              </v-col>
             </v-row>
           </v-carousel>
         </v-card>
-
         <v-row v-else class="portal-menu flex-nowrap">
           <v-col cols="3" xl="2">
             <div class="text-h3">
               Sports Portal
             </div>
           </v-col>
-          <v-spacer />
-          <v-col cols="8">
+        </v-row>
+
+        <v-row class="portal-menu flex-nowrap">
+          <v-col cols="11">
             <v-tabs v-model="tab" class="week-tabs">
               <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
                 <div>
@@ -263,10 +234,10 @@ export default {
 
     isMobile () {
       if (process.client) {
-        return this.$vuetify.breakpoint.smAndDown
+        return this.$vuetify.breakpoint.xsOnly
       }
 
-      return this.isMobileDevice || this.isTabletDevice
+      return this.isMobileDevice
     },
   },
 
