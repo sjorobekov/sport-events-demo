@@ -10,7 +10,7 @@
               :src="item.image"
             />
             <div class="gradient-footer" />
-            <v-row class="portal-menu image-footer flex-nowrap">
+            <v-row class="image-footer">
               <v-col>
                 <div class="text-h3">
                   Sports Portal
@@ -19,7 +19,7 @@
             </v-row>
           </v-carousel>
         </v-card>
-        <v-row v-else class="portal-menu flex-nowrap">
+        <v-row v-else>
           <v-col cols="3" xl="2">
             <div class="text-h3">
               Sports Portal
@@ -27,37 +27,34 @@
           </v-col>
         </v-row>
 
-        <v-row class="portal-menu flex-nowrap">
-          <v-col cols="11">
-            <v-tabs v-model="tab" class="week-tabs">
-              <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
-                <div>
-                  {{ item.day }}
-                </div>
-                <div>
-                  {{ item.date }}
-                </div>
-              </v-tab>
-            </v-tabs>
-          </v-col>
-          <v-col class="d-flex justify-center" xl="1">
-            <v-menu ref="menu" offset-y :close-on-content-click="false">
-              <template #activator="{ on }">
-                <a class="d-flex" v-on="on">
-                  <v-icon>
-                    mdi-calendar-month-outline
-                  </v-icon>
-                  <v-icon small>mdi-chevron-down</v-icon>
-                </a>
-              </template>
-              <v-date-picker
-                ref="picker"
-                v-model="date"
-                @change="onDateChange"
-              />
-            </v-menu>
-          </v-col>
-        </v-row>
+        <div class="portal-menu">
+          <v-tabs v-model="tab" class="week-tabs" show-arrows>
+            <v-tabs-slider color="teal lighten-3" />
+            <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
+              <div>
+                {{ item.day }}
+              </div>
+              <div>
+                {{ item.date }}
+              </div>
+            </v-tab>
+          </v-tabs>
+          <v-menu ref="menu" offset-y :close-on-content-click="false">
+            <template #activator="{ on }">
+              <a class="d-flex" v-on="on">
+                <v-icon>
+                  mdi-calendar-month-outline
+                </v-icon>
+                <v-icon small>mdi-chevron-down</v-icon>
+              </a>
+            </template>
+            <v-date-picker
+              ref="picker"
+              v-model="date"
+              @change="onDateChange"
+            />
+          </v-menu>
+        </div>
       </v-col>
 
       <v-col md="3" class="text-p1 info--text text--darken-1">
@@ -327,9 +324,10 @@ export default {
 }
 .portal-menu {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
+}
+.portal-menu .week-tabs {
+  width: 90%;
 }
 .gradient-footer {
   position: absolute;
