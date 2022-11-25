@@ -1,7 +1,6 @@
 <template>
   <v-dialog
     :value="isOpen"
-    overlay-color="white"
     opacity="0.8"
     persistent
     width="520"
@@ -61,3 +60,10 @@ export default {
   },
 }
 </script>
+
+<style>
+.v-overlay__scrim {
+  background: rgba(255, 255, 255, 0.3)!important;
+  backdrop-filter: blur(8px);
+}
+</style>
