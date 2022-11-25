@@ -1,5 +1,11 @@
 <template>
-  <v-dialog :value="isOpen" persistent width="520">
+  <v-dialog
+    :value="isOpen"
+    overlay-color="white"
+    opacity="0.8"
+    persistent
+    width="520"
+  >
     <v-card flat>
       <v-card-text class="text-center pt-16">
         <v-img class="d-inline-block mx-auto mb-8" width="120" :src="icon" />
