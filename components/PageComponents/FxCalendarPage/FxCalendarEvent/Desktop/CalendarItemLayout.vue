@@ -32,7 +32,7 @@
           </template>
         </ListItem>
       </v-col>
-      <v-col cols="12" lg="4" class="hidden-md-and-down border-right pt-1 pb-0 d-flex justify-center align-center">
+      <v-col cols="12" lg="4" class="hidden-md-and-down border-right pt-1 pb-0 d-lg-flex justify-center align-center">
         <ListItem v-if="lead">
           <template #icon>
             <FxAvatar :size="24" :value="lead.avatar" />
