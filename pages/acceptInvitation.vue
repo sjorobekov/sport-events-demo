@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-h1 text-center mt-6">
+    <h1 class="text-md-h1 text-h3s text-center mt-6">
       Welcome to Fixturr
     </h1>
 

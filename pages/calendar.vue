@@ -427,7 +427,7 @@ export default {
 @media only screen and (min-width: 960px) {
   .calendar-bar {
     top: 55px;
-    margin-left: 224px;
+    margin-left: 240px;
   }
   .calendar-content {
     margin-top: 180px;
