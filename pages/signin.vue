@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-h1 text-center mt-6">
+    <h1 class="text-md-h1 text-h3s text-center mt-6">
       Welcome
     </h1>
     <v-form ref="form" v-async-form :disabled="loading" @submit.prevent="submit">
@@ -48,7 +48,7 @@
       >
         Log In
       </v-btn>
-      <p style="margin-top: 229px" class="text-center text-p1 info--text text--darken-2 d-none d-sm-block">
+      <p style="margin-top: 229px" class="text-center text-p1 info--text text--darken-2 hidden-sm-and-down">
         By logging in to fixturr you accept our <nuxt-link to="" style="text-decoration: none" class="font-weight-bold">
           Terms & Conditions
         </nuxt-link>
