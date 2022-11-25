@@ -1,7 +1,6 @@
 <template>
   <v-dialog
     :value="isOpen"
-    opacity="0.8"
     persistent
     width="520"
   >
