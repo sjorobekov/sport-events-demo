@@ -127,7 +127,6 @@ export default {
     sport: {},
     user: {},
     EventType,
-    teams: [],
     allHousesImg: allHouses,
   }),
   computed: {
@@ -140,9 +139,6 @@ export default {
     isAllHouseEvent () {
       return this.event.eventType === InHouseEventType.ALL_HOUSES
     },
-    filteredTeams () {
-      return this.teams
-    },
   },
   async created () {
     this.inHouseCompetition = await this.$store.dispatch('api/inHouseCompetitions/get', {
@@ -153,9 +149,6 @@ export default {
     this.user = await this.$store.dispatch('api/users/fetch', {
       schoolId: this.contextSchoolId,
       id: this.event.leadId,
-    })
-    this.teams = await this.$store.dispatch('api/inHouseTeams/list', {
-      schoolId: this.contextSchoolId,
     })
   },
 }
