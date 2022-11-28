@@ -321,6 +321,9 @@ export default {
       return this.$refs.form.validateAsync()
     },
     updateEvent (key, value) {
+      if (value === InHouseEventType.ALL_HOUSES) {
+        this.$emit('update:matches', [this.matchItems[0]])
+      }
       this.$emit('update:event', { ...this.eventForm, [key]: value })
     },
 

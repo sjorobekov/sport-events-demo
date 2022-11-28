@@ -1,8 +1,8 @@
 <template>
-  <FxInHouseEventItem
-    :event-type="event.eventType"
+  <FxInHouseEventItemToConfirm
+    :event="event"
     :context-school-id="contextSchoolId"
-    :match="firstMatch"
+    :match="match"
     :me="me"
     :opponent="opponent"
   >
@@ -25,17 +25,17 @@
         </v-row>
       </template>
     </template>
-  </FxInHouseEventItem>
+  </FxInHouseEventItemToConfirm>
 </template>
 
 <script>
-import FxInHouseEventItem from '@/components/FxInHouseEventItem/FxInHouseEventItem'
+import FxInHouseEventItemToConfirm from '@/components/FxInHouseEventItem/FxInHouseEventItemToConfirm'
 import ListItem from '@/components/FxInHouseEventItem/ListItem'
 
 export default {
   name: 'FxInHouseEventWithConflictItem',
   components: {
-    FxInHouseEventItem,
+    FxInHouseEventItemToConfirm,
     ListItem,
   },
   props: {
@@ -43,9 +43,9 @@ export default {
       type: Object,
       default: () => {},
     },
-    matches: {
-      type: Array,
-      default: () => [],
+    match: {
+      type: Object,
+      default: () => {},
     },
     contextSchoolId: {
       type: String,
@@ -59,14 +59,11 @@ export default {
   }),
 
   computed: {
-    firstMatch () {
-      return this.matches[0] || {}
-    },
     me () {
-      return this.teams.find(team => team.id === this.firstMatch.homeTeamId)
+      return this.teams.find(team => team.id === this.match.homeTeamId)
     },
     opponent () {
-      return this.teams.find(team => team.id === this.firstMatch.awayTeamId)
+      return this.teams.find(team => team.id === this.match.awayTeamId)
     },
   },
 

@@ -2,11 +2,11 @@
   <div>
     <h3 class="text-h3 mb-6" v-text="title" />
     <v-form v-if="!formVisible" ref="confirmForm" lazy-validation>
-      <v-card class="mb-3">
+      <v-card v-for="(match, index) in formData.matches" :key="index" class="mb-3">
         <FxInHouseEventWithConflictItem
           ref="eventItem"
           :context-school-id="contextSchoolId"
-          :matches="formData.matches"
+          :match="match"
           :event="formData.event"
         />
       </v-card>
