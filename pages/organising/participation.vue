@@ -7,14 +7,23 @@
     <FxParticipationPageCard />
 
     <v-row class="mt-5">
-      <v-col>
+      <v-col cols="12" sm="6" md="3" class="py-0">
         <FxYearGroupSelect clearable icon @input="update('yearGroup', $event)" />
       </v-col>
-      <v-col>
+      <v-col cols="12" sm="6" md="3" class="py-0">
         <FxGenderSelect clearable icon @input="update('gender', $event)" />
       </v-col>
-      <v-col>
+      <v-col cols="12" sm="6" md="3" class="py-0">
         <FxSportSelect clearable @input="update('sportId', $event)" />
+      </v-col>
+      <v-col cols="12" sm="6" md="3" class="py-0">
+        <v-text-field
+          placeholder="Search"
+          prepend-inner-icon="mdi-magnify"
+          outlined
+          dense
+          @input="update('search', $event)"
+        />
       </v-col>
     </v-row>
 
@@ -38,6 +47,7 @@
 </template>
 
 <script>
+import debounce from 'lodash/debounce'
 import { mapGetters } from 'vuex'
 import FxParticipationPageCard from '@/components/PageComponents/FxParticipationPage/FxParticipationPageCard'
 import FxSportSelect from '~/components/FxSportSelect.vue'
@@ -76,22 +86,13 @@ export default {
       orderBy: 'firstname',
       orderDesc: false,
       limit: 10,
+      search: '',
     },
     meta: { total: 0 },
   }),
 
-  async fetch () {
-    this.loading = true
-    try {
-      const { data, meta } = await this.$store.dispatch('api/students/getParticipation', {
-        ...this.query,
-        schoolId: this.contextSchoolId,
-      })
-      this.items = data
-      this.meta = meta
-    } finally {
-      this.loading = false
-    }
+  fetch () {
+    this.fetchData()
   },
 
   computed: {
@@ -104,13 +105,26 @@ export default {
     query: {
       async handler () {
         await this.$router.push({ query: this.query })
-        this.$fetch()
+        this.fetchData()
       },
       deep: true,
     },
   },
 
   methods: {
+    fetchData: debounce(async function () {
+      this.loading = true
+      try {
+        const { data, meta } = await this.$store.dispatch('api/students/getParticipation', {
+          ...this.query,
+          schoolId: this.contextSchoolId,
+        })
+        this.items = data
+        this.meta = meta
+      } finally {
+        this.loading = false
+      }
+    }, 500),
     update (key, value) {
       this.query = { ...this.query, [key]: value }
     },

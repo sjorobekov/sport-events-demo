@@ -16,7 +16,7 @@
     @input="selectHandler"
   >
     <template #item="{ item }">
-      <template v-if="typeof item !== 'object'">
+      <template v-if="(typeof item !== 'object')">
         <v-list-item-content v-text="item" />
       </template>
       <template v-else>

@@ -2,7 +2,7 @@
   <v-card>
     <v-container>
       <v-row>
-        <v-col class="d-flex">
+        <v-col cols="12" sm="6" md="3">
           <v-list-item>
             <v-avatar rounded size="40" class="mr-2" color="#EBF4FF">
               <div class="d-flex justify-center">
@@ -19,8 +19,8 @@
             </div>
           </v-list-item>
         </v-col>
-        <v-divider vertical class="my-3" />
-        <v-col class="d-flex">
+        <v-divider vertical class="d-none d-sm-block my-3" />
+        <v-col cols="12" sm="6" md="3">
           <v-list-item>
             <v-avatar rounded size="40" class="mr-2" color="#FAE6E6">
               <div class="d-flex justify-center">
@@ -37,8 +37,8 @@
             </div>
           </v-list-item>
         </v-col>
-        <v-divider vertical class="my-3" />
-        <v-col class="d-flex">
+        <v-divider vertical class="d-none d-md-block my-3" />
+        <v-col cols="12" sm="6" md="3">
           <v-list-item>
             <v-avatar rounded size="40" class="mr-2" color="#ECFDF4">
               <div class="d-flex justify-center">
@@ -55,8 +55,8 @@
             </div>
           </v-list-item>
         </v-col>
-        <v-divider vertical class="my-3" />
-        <v-col class="d-flex">
+        <v-divider vertical class="d-none d-sm-block my-3" />
+        <v-col cols="12" sm="6" md="3">
           <v-list-item>
             <v-avatar rounded size="40" class="mr-2" color="#ECFDF4">
               <div class="d-flex justify-center">

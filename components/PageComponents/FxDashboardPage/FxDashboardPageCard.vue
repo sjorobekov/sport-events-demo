@@ -19,7 +19,7 @@
             </div>
           </v-list-item>
         </v-col>
-        <v-divider vertical class="my-3" />
+        <v-divider vertical class="d-none d-md-block my-3" />
         <v-col cols="12" md="6" lg="3">
           <v-list-item to="organising/missing-results">
             <v-avatar rounded size="40" class="mr-2" color="#FAE6E6">
@@ -37,7 +37,7 @@
             </div>
           </v-list-item>
         </v-col>
-        <v-divider vertical class="my-3" />
+        <v-divider vertical class="d-none d-lg-block my-3" />
         <v-col cols="12" md="6" lg="3">
           <v-list-item to="organising/todays-teams">
             <v-avatar rounded size="40" class="mr-2" color="#ECFDF4">
@@ -55,7 +55,7 @@
             </div>
           </v-list-item>
         </v-col>
-        <v-divider vertical class="my-3" />
+        <v-divider vertical class="d-none d-md-block my-3" />
         <v-col cols="12" md="6" lg="3">
           <v-list-item to="organising/participation">
             <v-avatar rounded size="40" class="mr-2" color="#ECFDF4">
