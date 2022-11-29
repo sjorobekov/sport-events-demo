@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-md-h1 text-h3s text-center mt-6">
+    <h1 class="text-md-h1 text-h6 text-center mt-2 mt-sm-6">
       Welcome
     </h1>
     <v-form ref="form" v-async-form :disabled="loading" @submit.prevent="submit">
@@ -9,20 +9,22 @@
         v-model="formData.email"
         v-async-validate
         outlined
-        dense
         placeholder="name@school.com"
         :async-rules="[$rule.required, $rule.email]"
+        hide-details
+        height="56"
       />
       <label>Password</label>
       <v-text-field
         v-model="formData.password"
         v-async-validate
-        dense
         outlined
         placeholder="********************"
         :async-rules="[$rule.required]"
         :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
         :type="showPass ? 'text' : 'password'"
+        height="56"
+        hide-details
         @click:append="showPass = !showPass"
       />
 

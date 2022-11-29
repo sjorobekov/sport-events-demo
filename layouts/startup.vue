@@ -1,13 +1,13 @@
 <template>
   <v-app>
     <v-main>
-      <div class="fill-height d-md-flex flex-column flex-md-row justify-center align-center">
-        <div class="fill-height school-panel d-flex flex-column align-center justify-space-around" :style="style">
-          <div>
-            <div class="school-logo mt-2 mt-md-8 mb-2 mb-md-10 mx-auto d-block">
+      <div class="fill-height d-sm-flex flex-column flex-sm-row justify-center align-center">
+        <div class="school-panel d-flex flex-column align-center flex-shrink-1 justify-sm-space-around" :style="style">
+          <div class="pt-2 pt-sm-0">
+            <div class="school-logo-container mb-4">
               <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" />
             </div>
-            <h1 class="text-md-h1s text-h3s white--text text-center">
+            <h1 class="text-md-h1s text-h6 white--text text-center">
               {{ contextSchool.name }}
             </h1>
           </div>
@@ -21,7 +21,7 @@
             </h2>
           </div>
         </div>
-        <div class="mx-sm-auto px-2 pt-2 pb-12 content-part d-flex align-center justify-center">
+        <div class="mx-sm-auto px-2 pt-2 pb-12 content-part d-flex align-center flex-grow-1 justify-center">
           <div class="content-wrap">
             <Nuxt />
           </div>
@@ -57,45 +57,38 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.school-logo {
-  width: 220px;
-  height: 220px;
-  min-width: 220px;
-  border-radius: 50%;
-  background-color: white;
-  overflow: hidden;
-}
-.content-wrap {
-  width: 100%;
-}
-@media screen and (max-height: 667px) {
-  .school-logo {
-    width: 170px!important;
-    height: 170px!important;
-    min-width: 170px!important;
-  }
-}
-@media only screen and (min-width: 960px) {
-  .school-panel {
-    width: 400px;
-  }
-  .content-part {
-    max-width: 400px;
-  }
-}
-@media only screen and (max-width: 959px) {
-  .school-panel {
-    width: 100%;
-    height: 50vh;
-  }
-  .content-part {
-    width: 100%;
-    max-width: 100%;
-    height: 50vh;
-  }
-  .content-wrap {
-    max-width: 600px!important;
-  }
-}
+<style lang="sass" scoped>
+@import '~vuetify/src/styles/styles.sass'
+
+.school-panel
+  width: 400px
+.school-logo-container
+  display: block
+  margin: 0 auto
+  border-radius: 50%
+  overflow: hidden
+  background-color: white
+  width: 220px
+  height: 220px
+
+@media #{map-get($display-breakpoints, 'xs-only')}
+  .school-panel
+    width: 100%
+    //height: 50vh
+    border-bottom: 4px solid var(--v-info-lighten2)
+  .school-logo-container
+    width: 200px
+    height: 200px
+  .content-wrap
+    width: 100%
+
+  @media screen and (max-device-height: 667px)
+    .school-logo-container
+      width: 120px
+      height: 120px
+
+@media #{map-get($display-breakpoints, 'sm-and-up')}
+  .school-panel
+    height: 100%
+    max-width: 50vw
 </style>
