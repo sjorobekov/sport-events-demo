@@ -1,12 +1,12 @@
 <template>
   <div>
     <v-row class="mb-2">
-      <v-col cols="9" sm="5" md="5">
+      <v-col cols="12" sm="5" md="5">
         <h1 class="text-h3">
           In-House Sport
         </h1>
       </v-col>
-      <v-col cols="3" sm="3" md="3">
+      <v-col cols="6" sm="3" md="3">
         <v-select
           id="season"
           v-model="params.seasonId"
@@ -21,7 +21,7 @@
           @change="onSeasonChange"
         />
       </v-col>
-      <v-col v-if="canCreateTeam" cols="12" sm="4" md="4" class="text-right">
+      <v-col v-if="canCreateTeam" cols="6" sm="4" md="4" class="text-right">
         <v-btn depressed color="primary" link :to="{ name: 'in-house-add' }">
           <v-icon>$vuetify.icons.plusOutline</v-icon>
           Add Competition
