@@ -33,7 +33,7 @@
               <a class="info--text text--darken-2" :href="`tel:${contact.phone}`">{{ contact.phone }}</a>
             </div>
             <v-menu>
-              <template #activator="{ on, attrs }">
+              <template v-if="canCreateSportsContacts" #activator="{ on, attrs }">
                 <v-btn icon v-bind="attrs" v-on="on">
                   <v-icon color="info lighten-1">
                     $vuetify.icons.threeDots
@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'FxSportsContactCard',
   props: {
@@ -73,7 +74,11 @@ export default {
       default: () => {},
     },
   },
-
+  computed: {
+    ...mapGetters({
+      canCreateSportsContacts: 'user/acl/canCreateSportsContacts',
+    }),
+  },
   methods: {
     remove () {
       if (!confirm('Are you sure?')) {
