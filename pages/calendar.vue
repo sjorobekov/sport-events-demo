@@ -50,7 +50,7 @@
             link
             :to="{ name: 'events-add' }"
           >
-            <v-icon :class="isMobile ? 'mr-0' : 'mr-2'">
+            <v-icon class="mr-0 mr-md-2">
               $vuetify.icons.calendarAdd
             </v-icon><span class="hidden-xs-only">Create Event</span>
           </v-btn>
@@ -81,7 +81,7 @@
 
             <div class="d-flex" style="flex-wrap: wrap;gap: 8px;">
               <FxCalendarStaffFilter v-model="filter.leadIds" :items="leadIds" />
-              <FxCalendarEventFilter v-model="filter.eventTypes" :items="eventTypes" />
+              <FxCalendarEventFilter v-model="filter.eventTypes" :items="eventTypes" :in-house-filter="containsInHouseEvents" />
               <FxCalendarOpponentFilter v-model="filter.opponentIds" :items="opponentIds" />
               <FxCalendarAgeFilter v-model="filter.ageGroups" :items="ageGroups" />
               <FxCalendarLocationFilter v-model="filter.locations" />
@@ -154,7 +154,7 @@ const FORMAT_ADAPTER = {
       sportId: item.inHouseEvent.inHouseCompetition.sportId,
       sport: item.inHouseEvent.inHouseCompetition.sport,
       leadId: item.inHouseEvent.leadId,
-      eventType: item.inHouseEvent.eventType,
+      eventType: item.kind,
       sportLocationId: item.sportLocationId,
       location: item.location,
       publish: item.inHouseEvent.inHouseCompetition.publishCompetition,
@@ -339,6 +339,10 @@ export default {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { startDate, endDate, sports, ...filters } = this.filter
       return Object.values(filters).filter(item => item.length).length
+    },
+
+    containsInHouseEvents () {
+      return this.items.some(item => item.kind === 'InHouseEventMatch')
     },
   },
 

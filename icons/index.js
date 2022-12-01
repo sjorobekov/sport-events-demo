@@ -18,6 +18,7 @@ export default [
   'arrowRight',
   'school',
   'whistle',
+  'inHouseEvent',
   'bell',
   'sort',
   'edit',

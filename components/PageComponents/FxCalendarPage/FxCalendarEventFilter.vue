@@ -51,6 +51,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    inHouseFilter: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data: () => ({
@@ -64,13 +68,16 @@ export default {
 
   computed: {
     values () {
-      return this.items.filter(a => !!a).map((value) => {
-        return {
-          value,
-          icon: this.icons[value],
-          text: this.$t(`EVENT_TYPE.${value}`),
-        }
-      })
+      return [
+        ...this.items.filter(a => !!a).map((value) => {
+          return {
+            value,
+            icon: this.icons[value],
+            text: this.$t(`EVENT_TYPE.${value}`),
+          }
+        }),
+        ...(this.inHouseFilter ? [{ value: 'InHouseEventMatch', icon: '$vuetify.icons.inHouseEvent', text: 'In-House Sport' }] : []),
+      ]
     },
   },
 }
