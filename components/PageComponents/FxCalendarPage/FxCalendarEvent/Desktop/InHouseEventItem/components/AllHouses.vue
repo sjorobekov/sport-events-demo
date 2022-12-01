@@ -19,7 +19,7 @@
         </AllInHouseTeamsProvider>
       </v-col>
       <v-col md="4" class="border-bottom pt-5 text-p2 font-weight-bold info--text text--darken-3">
-        {{ competition.name }}
+        {{ event.name || competition.name }}
       </v-col>
     </template>
     <template #time>

@@ -4,9 +4,12 @@
       <v-col cols="12" class="border-bottom pt-1 pb-0">
         <v-list-item class="px-0">
           <v-list-item-content>
-            <v-list-item-title class="text-p2" v-text="date" />
+            <v-list-item-title class="text-p2">
+              {{ date }}
+              <span class="info--text text--lighten-1">{{ event.name }}</span>
+            </v-list-item-title>
           </v-list-item-content>
-          <v-spacer />
+
           <slot name="actions">
             <span class="in-house-event-time" style="font-size: 12px; line-height: 18px" v-text="time" />
           </slot>
@@ -14,18 +17,30 @@
       </v-col>
     </v-row>
     <v-row v-if="!isAllHouseEvent">
-      <v-col v-if="!isAllHouseEvent && me" cols="12" md="6" class="border-bottom">
+      <v-col v-if="!isAllHouseEvent && me" cols="12" md="6">
         <FxInHouseTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" :icon-on-right="!compact" />
       </v-col>
-      <v-col v-if="!isAllHouseEvent && opponent" cols="12" md="6" class="border-bottom">
+      <v-col v-if="!isAllHouseEvent && opponent" cols="12" md="6">
         <FxInHouseTeamListItem class="pl-0" :participant="opponent" :context-school-id="contextSchoolId" />
       </v-col>
     </v-row>
     <v-row v-else>
-      <v-col v-for="inHouseTeam in filteredTeams" :key="inHouseTeam.id" cols="12" md="4" class="border-bottom">
-        <FxInHouseTeamListItem class="pl-0" :participant="inHouseTeam" :context-school-id="contextSchoolId" :icon-on-right="!compact" />
+      <v-col>
+        <AllInHouseTeamsProvider style="width: 100%" class="d-flex flex-column flex-md-row justify-md-center">
+          <template #default="{ teams }">
+            <FxInHouseTeamListItem
+              v-for="inHouseTeam in teams"
+              :key="inHouseTeam.id"
+              class="pl-0"
+              :participant="inHouseTeam"
+              :context-school-id="contextSchoolId"
+              :icon-on-right="!compact"
+            />
+          </template>
+        </AllInHouseTeamsProvider>
       </v-col>
     </v-row>
+
     <slot name="bottom" />
   </v-container>
 </template>
@@ -33,9 +48,12 @@
 <script>
 import { DateTime } from 'luxon'
 import { EventType, InHouseEventType } from '@/enum'
+import AllInHouseTeamsProvider
+  from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/InHouseEventItem/components/AllInHouseTeamsProvider'
 
 export default {
   name: 'FxInHouseEventItem',
+  components: { AllInHouseTeamsProvider },
   props: {
     match: {
       type: Object,
@@ -57,13 +75,14 @@ export default {
       type: String,
       required: true,
     },
+    hideSportColor: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data: () => ({
-    sport: {},
-    user: {},
     EventType,
-    teams: [],
   }),
 
   computed: {
@@ -72,7 +91,7 @@ export default {
     },
 
     style () {
-      return { borderLeft: `${this.sport?.color} 8px solid` }
+      return this.hideSportColor ? {} : { borderLeft: `${this.sport?.color} 8px solid` }
     },
 
     date () {
@@ -89,22 +108,14 @@ export default {
     isAllHouseEvent () {
       return this.eventType === InHouseEventType.ALL_HOUSES
     },
-    filteredTeams () {
-      return this.teams
-    },
-  },
 
-  async created () {
-    if (this.match?.inHouseEvent) {
-      this.sport = await this.$store.dispatch('api/sports/fetch', this.match.inHouseEvent.inHouseCompetition.sportId)
-      this.user = await this.$store.dispatch('api/users/fetch', {
-        schoolId: this.contextSchoolId,
-        id: this.match.inHouseEvent.leadId,
-      })
-    }
-    this.teams = await this.$store.dispatch('api/inHouseTeams/list', {
-      schoolId: this.contextSchoolId,
-    })
+    event () {
+      return this.match.inHouseEvent
+    },
+
+    sport () {
+      return this.match.inHouseEvent?.inHouseCompetition?.sport
+    },
   },
 }
 </script>

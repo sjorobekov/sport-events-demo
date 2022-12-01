@@ -26,7 +26,7 @@
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="text-p2">
-          {{ competition.name }}
+          {{ event.name || competition.name }}
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
