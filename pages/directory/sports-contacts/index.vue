@@ -1,8 +1,10 @@
 <template>
   <div>
-    <v-row>
+    <v-row class="mt-1 mt-md-n4">
       <v-col cols="6">
-        <h1>Sports Contacts</h1>
+        <h1 class="text-h4s text-md-h3">
+          Sports Contacts
+        </h1>
       </v-col>
       <v-col v-if="canCreateSportsContacts" cols="6" class="d-flex justify-end align-center">
         <v-btn dark color="primary" :to="{ name: 'directory-sports-contacts-add' }">

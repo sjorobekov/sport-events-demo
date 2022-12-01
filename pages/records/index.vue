@@ -1,6 +1,12 @@
 <template>
   <div>
-    <h1>Sports Records</h1>
+    <v-list-item class="px-0 mt-1 mt-md-n4">
+      <v-list-item-content>
+        <h1 class="text-h4s text-md-h3">
+          Sports Records
+        </h1>
+      </v-list-item-content>
+    </v-list-item>
     <v-row>
       <v-col cols="7">
         <v-row no-gutters class="d-flex flex-wrap">

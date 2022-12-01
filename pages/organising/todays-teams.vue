@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="mt-4 mt-md-n4">
     <v-row class="mb-2">
       <v-col cols="12">
-        <h1 class="text-h3">
+        <h1 class="text-h4s text-md-h3">
           Today's Team
         </h1>
       </v-col>

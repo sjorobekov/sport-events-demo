@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-list-item class="px-0">
+    <v-list-item class="px-0 mt-md-n4">
       <v-list-item-content>
-        <v-list-item-title class="text-h3 mb-6">
+        <h1 class="text-h4s text-md-h3">
           Sports Map
-        </v-list-item-title>
+        </h1>
       </v-list-item-content>
       <v-list-item-action>
         <v-btn

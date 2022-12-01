@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="mt-1 mt-md-n4  mb-3">
     <v-list-item class="px-0">
       <v-list-item-content>
-        <v-list-item-title class="text-xs-h4s text-sm-h3">
+        <h1 class="text-h4s text-md-h3">
           Announcements
-        </v-list-item-title>
+        </h1>
       </v-list-item-content>
       <v-list-item-action>
         <v-btn

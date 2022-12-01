@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1 class="text-h3 mt-16">
+  <div class="mt-4 mt-md-n1">
+    <h1 class="text-h4s text-md-h3">
       Missing Results
     </h1>
     <p class="text-p3 info--text text--darken-1 mb-6">

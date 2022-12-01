@@ -61,10 +61,10 @@ $headings: map-deep-merge(
       ),
       'h3': (
         'size': rem(33px),
-        'weight': 600,
+        'weight': 400,
         'line-height': rem(40px),
         'letter-spacing': -0.02em,
-        'font-family': $heading-font-family,
+        'font-family': $title-font,
         'text-transform': false
       ),
       'h3s': (
@@ -85,10 +85,10 @@ $headings: map-deep-merge(
       ),
       'h4s': (
         'size': rem(23px),
-        'weight': 600,
+        'weight': 400,
         'line-height': rem(28px),
         'letter-spacing': -0.02em,
-        'font-family': $heading-font-family,
+        'font-family': $title-font,
         'text-transform': false
       ),
       'h5': (

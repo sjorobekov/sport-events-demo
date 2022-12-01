@@ -1,7 +1,9 @@
 <template>
   <div>
-    <div class="d-flex">
-      <h2>Opponents</h2>
+    <div class="d-flex mt-4 mt-md-n1">
+      <h1 class="text-h4s text-md-h3">
+        Opponents
+      </h1>
       <v-spacer />
       <div v-if="canCreateOpponent">
         <v-btn

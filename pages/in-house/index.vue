@@ -1,16 +1,36 @@
 <template>
   <div>
-    <v-row class="mb-2">
-      <v-col cols="12" sm="5" md="5">
-        <h1 class="text-h3">
+    <v-row class="mb-2 mt-1 mt-md-n4 align-center">
+      <v-col v-if="canCreateTeam" cols="12" sm="5" md="5">
+        <h1 class="text-h4s text-md-h3">
           In-House Sport
         </h1>
       </v-col>
-      <v-col cols="6" sm="3" md="3">
+      <v-col v-else cols="7" sm="9" md="10">
+        <h1 class="text-h4s text-md-h3">
+          In-House Sport
+        </h1>
+      </v-col>
+      <v-col v-if="canCreateTeam" cols="6" sm="3" md="3">
         <v-select
           id="season"
           v-model="params.seasonId"
           style="max-width: 120px"
+          outlined
+          dense
+          :items="seasons"
+          item-text="name"
+          item-value="id"
+          placeholder="Select Season"
+          hide-details
+          @change="onSeasonChange"
+        />
+      </v-col>
+      <v-col v-else cols="5" sm="3" md="2">
+        <v-select
+          id="season"
+          v-model="params.seasonId"
+          style="min-width: 120px"
           outlined
           dense
           :items="seasons"

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1 class="text-h3 mb-6 mt-16">
+  <div class="mt-4 mt-md-n1">
+    <h1 class="text-h4s text-md-h3">
       Fixtures To Confirm
     </h1>
 
