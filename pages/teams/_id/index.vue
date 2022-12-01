@@ -51,9 +51,14 @@
                 Past
               </v-chip>
             </v-chip-group>
-            <div class="pl-2">
-              <v-switch v-model="training" class="mt-1 mt-md-2" label="Show Training" inset hide-details />
-            </div>
+            <v-switch
+              v-model="training"
+              class="ml-2 mt-0"
+              style="width: 30px"
+              label="Show Training"
+              inset
+              hide-details
+            />
 
             <v-spacer />
 
