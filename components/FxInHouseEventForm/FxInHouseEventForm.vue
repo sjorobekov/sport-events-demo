@@ -16,9 +16,31 @@
       <FxEventTypeSelect :value="eventForm.eventType" @input="updateEvent('eventType', $event)" />
     </FxSteppedFormCard>
 
-    <FxSteppedFormCard v-if="eventForm.eventType === InHouseEventType.HOUSE_VS_HOUSE">
+    <FxSteppedFormCard v-if="eventForm.eventType === InHouseEventType.ALL_HOUSES">
       <template #number>
         2
+      </template>
+      <template #title>
+        Event Name
+      </template>
+      <template #content>
+        Enter event name
+      </template>
+      <label for="eventName">Event Name</label>
+      <v-text-field
+        id="eventName"
+        :value="eventForm.name"
+        outlined
+        dense
+        placeholder="Event Name"
+        maxlength="120"
+        @input="updateEvent('name', $event)"
+      />
+    </FxSteppedFormCard>
+
+    <FxSteppedFormCard v-if="eventForm.eventType === InHouseEventType.HOUSE_VS_HOUSE">
+      <template #number>
+        3
       </template>
       <template #title>
         Select House Team
@@ -179,7 +201,7 @@
 
     <FxSteppedFormCard>
       <template #number>
-        7
+        6
       </template>
       <template #title>
         Further Information
