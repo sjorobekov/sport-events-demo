@@ -60,6 +60,9 @@ export default {
 <style lang="sass" scoped>
 @import '~vuetify/src/styles/styles.sass'
 
+.v-main
+  padding-top: 0!important
+
 .school-panel
   width: 400px
 .school-logo-container
@@ -74,7 +77,6 @@ export default {
 @media #{map-get($display-breakpoints, 'xs-only')}
   .school-panel
     width: 100%
-    //height: 50vh
     border-bottom: 4px solid var(--v-info-lighten2)
   .school-logo-container
     width: 200px
