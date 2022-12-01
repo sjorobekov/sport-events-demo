@@ -4,7 +4,7 @@
       <v-col cols="5">
         <wrapped-component :wrap="!!myTeam">
           <template #wrapper>
-            <nuxt-link class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeam } }" />
+            <nuxt-link class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeam.id } }" />
           </template>
           <FxTeam :color="school.color" :logo="school.logo" :name="myName" />
         </wrapped-component>
