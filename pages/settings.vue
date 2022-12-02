@@ -72,6 +72,7 @@
               link
               :to="item.to"
               :exact="item.exact"
+              active-class="link-active"
             >
               <v-list-item-icon class="mr-4">
                 <v-icon color="info lighten-1" v-text="item.icon" />
@@ -144,3 +145,9 @@ export default {
   },
 }
 </script>
+
+<style>
+.link-active {
+  box-shadow: inset -4px 0 0 0 var(--v-primary-base) !important;
+}
+</style>
