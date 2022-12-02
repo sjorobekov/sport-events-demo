@@ -59,4 +59,5 @@ export default [
   'signin',
   'multievent',
   'training',
+  'portrait',
 ]

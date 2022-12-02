@@ -35,7 +35,7 @@ export default {
       return [
         { title: 'Calendar', icon: '$vuetify.icons.calendarRounded', to: { name: 'calendar' }, onClick: () => {} },
         { title: 'Teams', icon: '$vuetify.icons.teamsAlt', to: { name: 'teams' }, onClick: () => {} },
-        { title: 'Records', icon: '$vuetify.icons.stopwatchAlt', to: { name: 'records' }, onClick: () => {} },
+        { title: 'Sports Contacts', icon: '$vuetify.icons.portrait', to: { name: 'directory-sports-contacts' }, onClick: () => {} },
         { title: 'Menu', icon: 'mdi-menu', onClick: () => this.$emit('input', !this.value) },
       ]
     },
