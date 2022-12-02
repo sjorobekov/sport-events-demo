@@ -1,8 +1,18 @@
 <template>
-  <FxSchoolCustomisationPage
-    :school="school"
-    @updated="onUpdateHandler"
-  />
+  <div>
+    <v-list-item class="px-0">
+      <v-list-item-content>
+        <v-list-item-title class="text-h4">
+          Customisation
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+
+    <FxSchoolCustomisationPage
+      :school="school"
+      @updated="onUpdateHandler"
+    />
+  </div>
 </template>
 
 <script>

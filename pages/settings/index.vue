@@ -1,8 +1,12 @@
 <template>
   <div>
-    <h1 class="info--text text--darken-3 text-h4 mb-6">
-      Profile
-    </h1>
+    <v-list-item class="px-0">
+      <v-list-item-content>
+        <v-list-item-title class="text-h4">
+          Profile
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
 
     <div v-if="$fetchState.error">
       <h1 class="text--disabled">

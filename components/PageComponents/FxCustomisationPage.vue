@@ -1,9 +1,5 @@
 <template>
   <v-card outlined flat>
-    <v-card-title class="text-h4s">
-      Customisation
-    </v-card-title>
-
     <v-card-title class="text-p3 font-weight-bold">
       Home Page Images
     </v-card-title>
@@ -15,18 +11,22 @@
         </v-col>
         <v-col cols="12" md="7">
           <label>Upload Image</label>
-          <v-file-input
-            v-model="imageFile"
-            accept="image/*"
-            outlined
-            dense
-            :prepend-icon="null"
-            :loading="imageUploading"
-            prepend-inner-icon="mdi-camera"
+          <FxFileDragDrop
             :disabled="images.length >= 5"
-            @change="uploadImageHandler"
-          />
-          <FxCustomizationSchoolHomePageImagesList :items="images" @remove="removeImageHandler" />
+            @select="uploadImageHandler"
+          >
+            <template #default="{ openSelectFile }">
+              <v-icon size="30" color="info">
+                $vuetify.icons.image
+              </v-icon>
+              <br>
+              <v-btn text class="text-p2 info--text" @click="openSelectFile">
+                Upload Image
+              </v-btn>
+            </template>
+          </FxFileDragDrop>
+
+          <FxCustomizationSchoolHomePageImagesList class="mt-4" :items="images" @remove="removeImageHandler" />
         </v-col>
       </v-row>
     </v-container>
@@ -105,7 +105,6 @@ export default {
     logoFile: null,
     imageUploading: false,
     images: [],
-    imageFile: null,
   }),
 
   async fetch () {
@@ -177,7 +176,6 @@ export default {
           this.$toast.error('Unknown error')
         })
         .finally(() => {
-          this.imageFile = null
           this.imageUploading = false
         })
     },
@@ -201,7 +199,7 @@ export default {
 
 <style lang="scss">
 .school-logo {
-  border: #CBD5E1 1px solid;
+  border: var(--v-info-lighten2) 1px solid;
   border-radius: 4px;
 }
 </style>

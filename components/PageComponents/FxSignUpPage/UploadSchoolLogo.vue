@@ -7,37 +7,19 @@
       SVG, WEBP, PNG, JPG and GIF files are allowed
     </h2>
     <v-form class="mx-sm-auto sign-in-form" @submit.prevent="submitHandler">
-      <v-sheet
-        v-if="!file"
-        color="white"
-        height="165"
-        @drop.prevent="drop"
-        @dragover.prevent="hover"
-        @dragleave.prevent="dragLeave"
-      >
-        <v-row
-          align="center"
-          justify="center"
-          class="fill-height border"
-          :class="{ 'hover': isHover }"
-          no-gutters
-        >
-          <v-col
-            class="text-center"
-            cols="12"
-          >
-            <v-icon size="30">
-              mdi-cloud-upload-outline
-            </v-icon>
-            <div class="text-p2 font-weight-bold info--text text--darken-1">
-              Drag file here <br> or
-            </div>
-            <v-btn color="#2972F3" text class="text-p2" @click="openSelectFile">
-              browse
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-sheet>
+      <FxFileDragDrop v-if="!file" height="165" color="white" @select="select">
+        <template #default="{ openSelectFile }">
+          <v-icon size="30">
+            mdi-cloud-upload-outline
+          </v-icon>
+          <div class="text-p2 font-weight-bold info--text text--darken-1">
+            Drag file here <br> or
+          </div>
+          <v-btn color="#2972F3" text class="text-p2" @click="openSelectFile">
+            browse
+          </v-btn>
+        </template>
+      </FxFileDragDrop>
 
       <v-img v-else :src="preview">
         <v-row>
@@ -113,31 +95,6 @@ export default {
   methods: {
     ...mapActions({ readBlob: 'helper/readBlob', compressImage: 'helper/compressImage' }),
 
-    drop (ev) {
-      if (ev.dataTransfer.files[0]) {
-        this.select(ev.dataTransfer.files[0])
-      }
-    },
-
-    hover () {
-      this.isHover = true
-    },
-
-    dragLeave () {
-      this.isHover = false
-    },
-
-    openSelectFile () {
-      const input = document.createElement('input')
-      input.type = 'file'
-      input.accept = 'image/*'
-      input.onchange = (e) => {
-        this.select(e.target.files[0])
-      }
-
-      input.click()
-    },
-
     remove () {
       this.file = null
     },
@@ -169,12 +126,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.border {
-  border: 1px dashed var(--v-info-lighten2);
-}
-.border.hover {
-  border: 2px dashed var(--v-info-lighten1);
-}
-</style>

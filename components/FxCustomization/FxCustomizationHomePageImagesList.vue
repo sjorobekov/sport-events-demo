@@ -1,28 +1,24 @@
 <template>
-  <v-row>
-    <v-col
+  <div
+    class="d-flex align-start gap"
+  >
+    <div
       v-for="item in items"
       :key="item.id"
-      class="d-flex child-flex"
-      cols="4"
     >
-      <div>
-        <v-btn
-          style="z-index: 1"
-          color="white"
-          elevation="1"
-          fab
-          x-small
-          class="ml-n3 mb-n3 d-block"
-          @click="$emit('remove', item.id)"
-        >
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
+      <v-icon
+        x-small
+        class="remove-button ml-n3 mb-n3 d-block elevation-0"
+        color="info"
+        @click="$emit('remove', item.id)"
+      >
+        mdi-close
+      </v-icon>
 
+      <v-avatar rounded size="80">
         <v-img
           :src="item.image"
           aspect-ratio="1"
-          class="grey lighten-2"
         >
           <template #placeholder>
             <v-row
@@ -37,9 +33,9 @@
             </v-row>
           </template>
         </v-img>
-      </div>
-    </v-col>
-  </v-row>
+      </v-avatar>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -53,3 +49,19 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.gap {
+  gap: 12px;
+}
+.remove-button {
+  z-index: 1;
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid var(--v-info-lighten2);
+  width: 20px;
+  height: 20px;
+  padding-left: 1px;
+  padding-top: 1px;
+}
+</style>
