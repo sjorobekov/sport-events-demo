@@ -65,23 +65,25 @@
           flat
           outlined
         >
-          <v-list dense class="py-0">
-            <v-list-item
-              v-for="(item, i) in items"
-              :key="i"
-              link
-              :to="item.to"
-              :exact="item.exact"
-              active-class="link-active"
-            >
-              <v-list-item-icon class="mr-4">
-                <v-icon color="info lighten-1" v-text="item.icon" />
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title class="text--info text--darken-1" v-text="item.text" />
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
+          <div class="line-clamp-2">
+            <v-list dense class="py-0">
+              <v-list-item
+                v-for="(item, i) in items"
+                :key="i"
+                link
+                :to="item.to"
+                :exact="item.exact"
+                active-class="link-active"
+              >
+                <v-list-item-icon class="mr-4">
+                  <v-icon color="info lighten-1" v-text="item.icon" />
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title class="text--info text--darken-1" v-text="item.text" />
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </div>
         </v-card>
       </v-col>
       <v-col md="8" lg="9">
@@ -145,6 +147,15 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.line-clamp-2 {
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+}
+</style>
 
 <style>
 .link-active {
