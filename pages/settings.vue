@@ -155,10 +155,7 @@ export default {
   display: -webkit-box;
   overflow: hidden;
 }
-</style>
-
-<style>
-.link-active {
+/deep/ .link-active {
   box-shadow: inset -4px 0 0 0 var(--v-primary-base) !important;
 }
 </style>
