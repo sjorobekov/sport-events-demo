@@ -16,7 +16,7 @@
     </template>
     <template #time>
       <div>
-        <div v-if="me.meetTime" class="d-inline-block pr-8">
+        <div v-if="me.meetTime" class="d-inline-block pr-2">
           <v-list-item-title class="text-p2 info--text text--darken-4">
             {{ me.meetTime }}
           </v-list-item-title>
@@ -24,7 +24,7 @@
             Meet Time
           </v-list-item-subtitle>
         </div>
-        <div class="d-inline-block pr-8">
+        <div class="d-inline-block pr-2">
           <v-list-item-title class="text-p2 info--text text--darken-4">
             {{ event.startTime }}
           </v-list-item-title>

@@ -1,8 +1,8 @@
 <template>
   <nuxt-link class="text-decoration-none" :to="to">
-    <v-container :style="style" class="rounded">
+    <v-container :style="style" class="rounded child-border">
       <v-row>
-        <v-col cols="12" class="border-bottom pt-1 pb-0">
+        <v-col cols="12" class="pt-1 pb-0">
           <v-list-item class="px-0">
             <v-list-item-avatar class="mr-3" tile size="22">
               <v-img :src="sport.icon" />

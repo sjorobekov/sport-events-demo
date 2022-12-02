@@ -8,11 +8,11 @@
     </template>
     <v-row class="d-flex justify-center">
       <slot name="center">
-        <v-col class="border-bottom flex-grow-1 ">
+        <v-col class="flex-grow-1">
           <slot name="left" />
         </v-col>
         <v-col
-          class="flex-grow-0 flex-shrink-1 hidden-sm-and-down pt-5 border-bottom text-center"
+          class="flex-grow-0 flex-shrink-1 hidden-sm-and-down pt-5 text-center"
         >
           <slot name="score" />
         </v-col>
