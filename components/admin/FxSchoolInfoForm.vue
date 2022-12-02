@@ -92,6 +92,15 @@
       append-icon=""
       @input="update('emailDomains', $event)"
     />
+    <GmapMap
+      ref="mapRef"
+      :center="mapCenter"
+      :zoom="zoom"
+      style="height: 300px"
+      :options="mapOptions"
+    >
+      <GmapMarker :position="formData.coordinates" :draggable="true" @update:position="updatePositionHandler" />
+    </GmapMap>
   </v-form>
 </template>
 
@@ -268,6 +277,9 @@ export default {
       default: false,
     },
   },
+  data: () => ({
+    mapCenter: { lng: 0, lat: 0 },
+  }),
 
   computed: {
     ...mapGetters({
@@ -277,6 +289,43 @@ export default {
     formData () {
       return this.value || {}
     },
+    zoom () {
+      if (this.value.coordinates?.lat && this.value.coordinates?.lng) {
+        return 15
+      }
+      return 1
+    },
+    mapOptions () {
+      return {
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: false,
+        fullscreenControl: false,
+        disableDefaultUi: true,
+      }
+    },
+  },
+
+  watch: {
+    'formData.coordinates': {
+      handler (val) {
+        this.panTo({ ...val })
+          .catch((e) => {
+            console.error(e)
+          })
+      },
+      deep: true,
+    },
+  },
+
+  mounted () {
+    if (this.formData.coordinates?.lat && this.formData.coordinates?.lng) {
+      setTimeout(() => {
+        this.panTo({ ...this.formData.coordinates })
+      }, 500)
+    }
   },
 
   methods: {
@@ -308,6 +357,19 @@ export default {
         return true
       }
       return val.length <= 5 || 'Max number of domains is 5'
+    },
+
+    updatePositionHandler (coordinates) {
+      this.$emit('input', {
+        ...this.formData,
+        coordinates,
+      })
+    },
+
+    panTo (location) {
+      return this.$refs.mapRef.$mapPromise.then((map) => {
+        return map.panTo(location)
+      })
     },
   },
 }

@@ -77,7 +77,9 @@ export default {
     SchoolPortalForm,
   },
   data: () => ({
-    formData: {},
+    formData: {
+      coordinates: { lat: 0, lng: 0 },
+    },
   }),
 
   computed: {
