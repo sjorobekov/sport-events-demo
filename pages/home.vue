@@ -161,9 +161,10 @@
           <h2 class="text-p2 font-weight-bold mb-2 info--text text--darken-3">
             Fixtures & Results
           </h2>
-          <FxSportExpansionPanel v-for="sport in sports" :key="sport.id" class="mb-4" :item="sport" :subtitle="subtitle(fixturesBySport[sport.id].length)">
-            <FxPortalEventItem v-for="event in fixturesBySport[sport.id]" :key="event.id" :event="event" :me="event.me" />
-          </FxSportExpansionPanel>
+
+          <v-card v-for="item in fixtures" :key="item.id">
+            <FxCalendarEvent :value="item" />
+          </v-card>
         </div>
       </v-col>
     </v-row>
@@ -174,12 +175,14 @@
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
 import { EventType, EventResult, EventStatus } from '~/enum'
-import FxPortalEventItem from '@/components/PageComponents/FxPortalPage/FxPortalEventItem.vue'
+import FxAvatar from '@/components/FxAvatar/FxAvatar'
+import FxCalendarEvent from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent'
 
 export default {
   name: 'PortalPage',
   components: {
-    FxPortalEventItem,
+    FxAvatar,
+    FxCalendarEvent,
   },
 
   middleware: ({ store, redirect }) => {
@@ -193,13 +196,12 @@ export default {
     EventResult,
     images: [],
     sports: [],
-    fixturesBySport: {},
-    liveEventsBySport: {},
     date: '',
     tab: 0,
     dates: [],
     contacts: [],
     today: DateTime.now().toFormat('yyyy-MM-dd'),
+    events: [],
   }),
 
   async fetch () {
@@ -237,6 +239,10 @@ export default {
       }
 
       return this.isMobileDevice
+    },
+
+    fixtures () {
+      return this.events.filter(event => event.overallResult !== EventResult.LIVE)
     },
   },
 
@@ -278,7 +284,6 @@ export default {
       return res
     },
     async getEvents (currentDate) {
-      this.clearEvents()
       const { data: events } = await this.$store.dispatch('api/events/getBySchool', {
         schoolId: this.contextSchoolId,
         params: {
@@ -289,29 +294,8 @@ export default {
           status: EventStatus.CONFIRMED,
         },
       })
-      this.updateEvents(events)
-    },
-    clearEvents () {
-      this.fixturesBySport = {}
-      this.liveEventsBySport = {}
-      this.sports = []
-    },
-    updateEvents (events) {
-      const sports = []
-      events.forEach((event) => {
-        if (event.participants.some(item => item.overallResult === EventResult.LIVE)) {
-          if (!this.liveEventsBySport[event.sportId]) {
-            this.$set(this.liveEventsBySport, event.sportId, [])
-          }
-        } else {
-          if (!this.fixturesBySport[event.sportId]) {
-            this.$set(this.fixturesBySport, event.sportId, [])
-          }
-          this.fixturesBySport[event.sportId].push(event)
-          sports.push(event.sport)
-        }
-      })
-      this.sports = [...new Map(sports.map(v => [v.id, v])).values()]
+
+      this.events = events
     },
   },
 }
