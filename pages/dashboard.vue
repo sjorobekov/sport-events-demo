@@ -23,8 +23,8 @@
       </v-col>
 
       <v-col v-if="teams.length > 0">
-        <h2>
-          Teams
+        <h2 class="text-h4s mb-2">
+          My Teams
         </h2>
         <v-card v-for="team in teams" :key="team.id" class="mb-2" :to="{ name: 'teams-id', params: { id: team.id } }">
           <v-container :style="style(team.sport)" class="rounded">
