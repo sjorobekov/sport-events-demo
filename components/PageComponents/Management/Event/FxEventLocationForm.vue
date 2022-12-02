@@ -13,7 +13,7 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="homeTeam !== EventLocation.NEUTRAL">
+    <v-row>
       <v-col>
         <label for="sportLocation">Location</label>
         <v-autocomplete
@@ -83,7 +83,10 @@ export default {
         return this.rightLocations
       }
 
-      return []
+      return [
+        ...this.leftLocations,
+        ...this.rightLocations,
+      ]
     },
 
     homeTeam: {
