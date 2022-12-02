@@ -66,14 +66,14 @@
           outlined
         >
           <div class="line-clamp-2">
-            <v-list dense class="py-0">
+            <v-list dense class="py-0 settings-menu">
               <v-list-item
                 v-for="(item, i) in items"
                 :key="i"
                 link
                 :to="item.to"
                 :exact="item.exact"
-                active-class="link-active"
+                active-class="link-active deep"
               >
                 <v-list-item-icon class="mr-4">
                   <v-icon color="info lighten-1" v-text="item.icon" />
@@ -155,7 +155,7 @@ export default {
   display: -webkit-box;
   overflow: hidden;
 }
-/deep/ .link-active {
+.settings-menu /deep/ .link-active  {
   box-shadow: inset -4px 0 0 0 var(--v-primary-base) !important;
 }
 </style>
