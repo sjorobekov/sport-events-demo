@@ -124,6 +124,7 @@ export default {
       city: '',
       country: '',
       website: '',
+      coordinates: { lat: 0, lng: 0 },
     },
     loading: false,
   }),

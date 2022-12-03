@@ -37,6 +37,10 @@ export interface School {
   password?: string
   color?: string
   emailDomains?: Array<string>,
+  coordinates?: {
+    lng: number,
+    lat: number,
+  },
 }
 
 export type Sport = {

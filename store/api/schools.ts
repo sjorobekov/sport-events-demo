@@ -43,6 +43,7 @@ export const actions: ActionTree<RootState, RootState> = {
       website: payload.website,
       portalAddress: payload.portal ? payload.portalAddress : null,
       emailDomains: payload.emailDomains,
+      coordinates: payload.coordinates,
     }
     if (payload.id) {
       return this.$axios.$put(`/api/v1/schools/${payload.id}`, data)
