@@ -219,7 +219,7 @@ export default {
       color: var(--v-info-lighten3)
     .v-list-item__title
       color: var(--v-info-lighten5)
-      font-size: .9125rem
+      font-size: 1rem
     &::before
       border-radius: 0
     &:hover
