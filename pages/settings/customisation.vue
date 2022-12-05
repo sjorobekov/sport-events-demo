@@ -7,11 +7,12 @@
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
-
+    <v-card>
     <FxSchoolCustomisationPage
       :school="school"
       @updated="onUpdateHandler"
     />
+  </v-card>
   </div>
 </template>
 

@@ -60,11 +60,7 @@
     </v-row>
     <v-row>
       <v-col class="d-none d-sm-none d-md-block" md="4" lg="3">
-        <v-card
-          class="mx-auto"
-          flat
-          outlined
-        >
+        <v-card class="mx-auto">
           <div class="line-clamp-2">
             <v-list dense class="py-0 settings-menu">
               <v-list-item
