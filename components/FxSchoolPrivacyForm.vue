@@ -132,7 +132,7 @@
         <v-btn
           :loading="loading"
           depressed
-          color="brand"
+          color="primary"
           dark
           class="ml-2"
           @click="$emit('save')"

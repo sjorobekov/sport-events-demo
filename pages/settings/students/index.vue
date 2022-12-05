@@ -7,7 +7,7 @@
         </v-list-item-title>
       </v-list-item-content>
       <v-list-item-action>
-        <v-btn depressed dark color="brand" :to="{ name: 'settings-students-add' }" link>
+        <v-btn depressed dark color="primary" :to="{ name: 'settings-students-add' }" link>
           <v-icon>$vuetify.icons.plusOutline</v-icon>Add Student
         </v-btn>
       </v-list-item-action>

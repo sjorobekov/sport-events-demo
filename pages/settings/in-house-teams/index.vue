@@ -8,7 +8,7 @@
         <v-list-item-subtitle />
       </v-list-item-content>
       <v-list-item-action>
-        <v-btn depressed dark color="brand" :to="{ name: 'settings-in-house-teams-add' }" link>
+        <v-btn depressed dark color="primary" :to="{ name: 'settings-in-house-teams-add' }" link>
           <v-icon>$vuetify.icons.plusOutline</v-icon>Add House Team
         </v-btn>
       </v-list-item-action>
