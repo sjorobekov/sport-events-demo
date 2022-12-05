@@ -69,6 +69,18 @@
             View All
           </nuxt-link>
         </div>
+        <GmapMap
+          ref="mapRef"
+          :center="mapCenter"
+          :zoom="zoom"
+          style="height: 250px"
+          :options="mapOptions"
+        >
+          <GmapMarker
+            clickable
+            :position="school.coordinates"
+          />
+        </GmapMap>
         <div class="text--darken-2 font-weight-bold">
           {{ school.name }}
         </div>
@@ -202,6 +214,7 @@ export default {
     contacts: [],
     today: DateTime.now().toFormat('yyyy-MM-dd'),
     events: [],
+    zoom: 15,
   }),
 
   async fetch () {
@@ -222,6 +235,23 @@ export default {
       contextSchoolId: 'context/schoolId',
       isMobileDevice: 'context/isMobile',
     }),
+
+    mapOptions () {
+      return {
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: false,
+        fullscreenControl: false,
+        disableDefaultUi: true,
+      }
+    },
+
+    mapCenter () {
+      return this.school.coordinates || { lng: 0, lat: 0 }
+    },
+
     subtitle: () => (number) => {
       if (number === 1) {
         return '1 Event'

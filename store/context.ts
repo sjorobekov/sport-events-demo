@@ -122,6 +122,7 @@ export const mutations: MutationTree<RootState> = {
       street: school.street,
       zip: school.zip,
       website: school.website,
+      coordinates: school.coordinates,
     }
   },
 

@@ -10,7 +10,7 @@
         <FxContactsCard />
       </v-col>
       <v-col>
-        <FxMapCard :coordinates="opponent.coordinates" />
+        <FxMapCard :coordinates="coordinates" />
       </v-col>
     </v-row>
   </div>
@@ -49,6 +49,9 @@ export default {
     },
     school () {
       return this.opponent.opponentSchool || null
+    },
+    coordinates () {
+      return this.school?.coordinates || null
     },
   },
 
