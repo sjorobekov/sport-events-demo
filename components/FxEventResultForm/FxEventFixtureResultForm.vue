@@ -19,7 +19,7 @@
       </v-col>
     </v-row>
 
-    <v-row>
+    <v-row class="align-end">
       <v-col>
         <label>{{ leftName }}</label>
         <v-text-field
