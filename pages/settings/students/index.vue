@@ -13,7 +13,7 @@
       </v-list-item-action>
     </v-list-item>
 
-    <v-card flat outlined>
+    <v-card>
       <client-only>
         <v-data-table
           :headers="headers"
