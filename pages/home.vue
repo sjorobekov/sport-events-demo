@@ -73,7 +73,7 @@
           ref="mapRef"
           :center="mapCenter"
           :zoom="zoom"
-          style="height: 250px"
+          style="height: 180px"
           class="mb-4"
           :options="mapOptions"
         >
