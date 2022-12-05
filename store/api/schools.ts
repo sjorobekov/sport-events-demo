@@ -31,7 +31,7 @@ export const actions: ActionTree<RootState, RootState> = {
     })
   },
 
-  save (_, payload: School): Promise<School> {
+  async save ({ commit }, payload: School): Promise<School> {
     const data = {
       name: payload.name,
       street: payload.street,
@@ -46,7 +46,9 @@ export const actions: ActionTree<RootState, RootState> = {
       coordinates: payload.coordinates,
     }
     if (payload.id) {
-      return this.$axios.$put(`/api/v1/schools/${payload.id}`, data)
+      const res = await this.$axios.$put(`/api/v1/schools/${payload.id}`, data)
+      commit('cache', res)
+      return res
     }
 
     return this.$axios.$post('/api/v1/schools', data)

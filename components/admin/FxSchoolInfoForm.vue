@@ -92,6 +92,8 @@
       append-icon=""
       @input="update('emailDomains', $event)"
     />
+
+    <label for="mapRef">Location</label>
     <GmapMap
       ref="mapRef"
       :center="mapCenter"
@@ -321,11 +323,11 @@ export default {
   },
 
   mounted () {
-    if (this.formData.coordinates?.lat && this.formData.coordinates?.lng) {
-      setTimeout(() => {
-        this.panTo({ ...this.formData.coordinates })
-      }, 500)
-    }
+    const coordinates = (this.formData.coordinates?.lat && this.formData.coordinates?.lng)
+      ? { ...this.formData.coordinates }
+      : { lat: 0, lng: 0 }
+
+    this.panTo(coordinates)
   },
 
   methods: {

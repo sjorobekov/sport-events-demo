@@ -77,9 +77,7 @@ export default {
     SchoolPortalForm,
   },
   data: () => ({
-    formData: {
-      coordinates: { lat: 0, lng: 0 },
-    },
+    formData: {},
   }),
 
   computed: {
@@ -92,6 +90,7 @@ export default {
     const school = await this.$store.dispatch('api/schools/fetch', this.school.id)
     this.formData = {
       ...school,
+      coordinates: school.coordinates ? { ...school.coordinates } : { lat: 0, lng: 0 },
     }
   },
 
