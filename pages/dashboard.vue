@@ -108,7 +108,7 @@ export default {
     getTeams () {
       return this.$store.dispatch('api/teams/list', {
         schoolId: this.contextSchoolId,
-        params: { seasonId: this.currentSeason.id },
+        params: { seasonId: this.currentSeason.id, coachId: this.me.id },
       })
     },
     style (sport) {
