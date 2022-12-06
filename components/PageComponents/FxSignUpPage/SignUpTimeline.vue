@@ -16,7 +16,10 @@
       </template>
       <v-row class="pt-1">
         <v-col>
-          <strong class="text-subheading font-weight-bold info--text text--lighten-2">{{ item.title }}</strong>
+          <strong
+            class="text-subheading font-weight-bold info--text"
+            :class="i <= value - i ? 'white--text' : 'info--lighten-2'"
+          >{{ item.title }}</strong>
           <div class="text-p3 white--text">
             {{ item.caption }}
           </div>

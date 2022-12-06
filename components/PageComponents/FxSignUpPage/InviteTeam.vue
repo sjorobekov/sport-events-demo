@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1 class="text-h1 text-center mt-6 mb-9">
+    <h1 class="text-h1 text-center primary--text mt-6 mb-9">
       Invite Your Team
     </h1>
-    <h2 class="text-p2 text-center info--text text--darken-2 mb-6">
+    <h2 class="text-p2 text-center primary--text mb-6">
       Insert some text here about how it’s better with a team.
     </h2>
     <div class="mx-sm-auto sign-in-form">

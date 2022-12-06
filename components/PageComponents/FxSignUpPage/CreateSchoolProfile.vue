@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1 class="text-h1 text-center mt-6">
+    <h1 class="text-h1 text-center primary--text mt-6">
       Create School Profile
     </h1>
-    <h2 class="text-p2 text-center info--text text--darken-2 mb-6">
+    <h2 class="text-p2 text-center primary--text mb-6">
       We couldn't match your email to a school in our database
     </h2>
     <v-form ref="form" v-async-form class="mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">
