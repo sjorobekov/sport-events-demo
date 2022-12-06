@@ -9,9 +9,9 @@
     >
       <v-container class="my-0 py-0 px-0">
         <div class="d-flex">
-          <FxDateRangePicker v-model="filter" style="width: 232px" :mobile="isMobile" class="mr-2" />
+          <FxDateRangePicker v-model="filter" :mobile="isMobile" class="ml-2" />
 
-          <FxCalendarSportFilter v-model="filter.sports" style="width: 50px" :items="sports" class="hidden-md-and-down mr-2" />
+          <FxCalendarSportFilter v-model="filter.sports" style="max-width: 200px" :items="sports" class="hidden-md-and-down ml-2 mr-2" />
 
           <v-badge
             class="hidden-md-and-down mr-2"

@@ -10,6 +10,7 @@
       <v-text-field
         background-color="white"
         dense
+        style="max-width:250px"
         hide-details
         prepend-inner-icon="$vuetify.icon.calendar"
         outlined
