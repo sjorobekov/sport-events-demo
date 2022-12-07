@@ -44,6 +44,28 @@ export default {
   meta: {
     isAllowed: ({ getters }) => getters['user/acl/canManageSportsRecords'],
   },
+
+  async asyncData ({ store }) {
+    const schoolId = store.getters['context/schoolId']
+    const [events, categories, { data: students }] = await Promise.all([
+      store.dispatch('api/sportsRecordEvents/list', { schoolId }),
+      store.dispatch('api/sportsRecordCategories/list', { schoolId }),
+      store.dispatch('api/students/list', {
+        schoolId,
+        params: { limit: -1, orderDesc: false },
+      }),
+    ])
+
+    const sports = events.map(item => item.sport)
+
+    return {
+      events,
+      categories,
+      sports,
+      students,
+    }
+  },
+
   data: () => ({
     formData: {},
     loading: false,
@@ -65,16 +87,7 @@ export default {
       deep: true,
     },
   },
-  async beforeMount () {
-    this.sports = await this.$store.dispatch('api/sports/list')
-    this.events = await this.$store.dispatch('api/sportsRecordEvents/list', { schoolId: this.schoolId })
-    this.categories = await this.$store.dispatch('api/sportsRecordCategories/list', { schoolId: this.schoolId })
-    const { data } = await this.$store.dispatch('api/students/list', {
-      schoolId: this.schoolId,
-      params: { limit: -1, orderDesc: false },
-    })
-    this.students = data
-  },
+
   methods: {
     async save () {
       this.loading = true

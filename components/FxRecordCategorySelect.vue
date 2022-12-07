@@ -9,6 +9,7 @@
     item-value="id"
     :placeholder="placeholder"
     :clearable="clearable"
+    hide-details
     @input="$emit('input', $event)"
   >
     <template v-if="icon" #prepend-inner>

@@ -60,4 +60,6 @@ export default [
   'multievent',
   'training',
   'portrait',
+  'listOutline',
+  'user',
 ]

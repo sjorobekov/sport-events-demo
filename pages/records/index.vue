@@ -6,48 +6,54 @@
           Sports Records
         </h1>
       </v-list-item-content>
+      <v-list-item-action class="hidden-md-and-up">
+        <FxSportsRecordsFilterDialog v-model="query" :events="events" :sports="sports" @click:clear="clearAll">
+          <template #activator="{ on, attrs }">
+            <v-badge
+              bordered
+              color="primary"
+              :content="selectedFilters"
+              :value="selectedFilters"
+              overlap
+            >
+              <v-btn
+                v-bind="attrs"
+                rounded
+                outlined
+                color="info"
+                v-on="on"
+              >
+                <v-icon>mdi-filter-outline</v-icon>
+                Filters
+              </v-btn>
+            </v-badge>
+          </template>
+        </FxSportsRecordsFilterDialog>
+      </v-list-item-action>
+      <v-list-item-action v-if="canManageSportsRecords" class="hidden-md-and-up">
+        <v-menu>
+          <template #activator="{ on, attrs }">
+            <v-icon v-bind="attrs" v-on="on">
+              mdi-dots-vertical
+            </v-icon>
+          </template>
+          <v-list>
+            <v-list-item :to="{ name: 'records-manage-events' }">
+              <v-list-item-content>
+                <v-list-item-title>Manage</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item :to="{ name: 'records-add' }">
+              <v-list-item-content>
+                <v-list-item-title>Add Sports Record</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </v-list-item-action>
     </v-list-item>
-    <v-row>
-      <v-col cols="7">
-        <v-row no-gutters class="d-flex flex-wrap">
-          <v-col cols="3">
-            <FxSportSelect v-model="query.sportId" class="pr-2" clearable />
-          </v-col>
-          <v-col cols="3">
-            <FxRecordEventSelect v-model="query.sportsRecordEventId" class="pr-2" clearable />
-          </v-col>
-          <v-col cols="3">
-            <FxRecordCategorySelect v-model="query.sportsRecordCategoryId" class="pr-2" clearable />
-          </v-col>
-          <v-col cols="3">
-            <v-menu ref="menu" offset-y :close-on-content-click="false">
-              <template #activator="{ on, attrs }">
-                <v-text-field
-                  id="date"
-                  :value="formattedDate"
-                  readonly
-                  outlined
-                  dense
-                  clearable
-                  v-bind="attrs"
-                  placeholder="Date"
-                  prepend-inner-icon="mdi-clock-outline"
-                  background-color="white"
-                  v-on="on"
-                  @input="update('date', $event)"
-                />
-              </template>
-              <v-date-picker
-                ref="picker"
-                :value="query.date"
-                @input="update('date', $event)"
-              />
-            </v-menu>
-          </v-col>
-        </v-row>
-      </v-col>
-      <v-spacer />
-      <v-col v-if="canManageSportsRecords" cols="4">
+    <v-row class="mb-2 hidden-sm-and-down">
+      <v-col v-if="canManageSportsRecords" sm="12" md="5">
         <div class="d-flex justify-end">
           <v-btn class="mr-2" outlined link :to="{ name: 'records-manage-events' }">
             Manage
@@ -64,7 +70,11 @@
           </v-btn>
         </div>
       </v-col>
+      <v-col class="order-md-first" sm="12" md="7">
+        <FxSportsRecordsFilter v-model="query" :events="events" :sports="sports" />
+      </v-col>
     </v-row>
+    <FxSportsRecordDialog v-if="selectedItem" :item="selectedItem" :value="openDialog" @click:back="closeRecord" />
     <client-only>
       <v-data-table
         :headers="headers"
@@ -76,10 +86,12 @@
         :sort-desc.sync="query.orderDesc"
         :page="query.page"
         must-sort
+        mobile-breakpoint="0"
+        @click:row="openRecord"
       >
         <template #item.event="{ item }">
-          <v-list-item>
-            <v-list-item-avatar v-if="item.sport.icon">
+          <v-list-item class="px-0">
+            <v-list-item-avatar v-if="item.sport.icon && !isMobile">
               <v-img :src="item.sport.icon" />
             </v-list-item-avatar>
             <v-list-item-content>
@@ -92,11 +104,20 @@
           <span>{{ item.sportsRecordCategory.name }}</span>
         </template>
         <template #item.student="{ item }">
-          <span v-if="item.student">{{ item.student.firstname }} {{ item.student.lastname }}</span>
-          <span v-else>{{ item.studentName }}</span>
+          <v-list-item class="px-0">
+            <v-list-item-content>
+              <v-list-item-title>
+                <span v-if="item.student">{{ item.student.firstname }} {{ item.student.lastname }}</span>
+                <span v-else>{{ item.studentName }}</span>
+              </v-list-item-title>
+              <v-list-item-subtitle v-if="isMobile">
+                {{ item.sportsRecordCategory.name }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
         </template>
         <template #item.date="{ item }">
-          <FxDateFormat :date="item.date" output-format="dd-MM-yyyy" />
+          <FxDateFormat :date="item.date" output-format="dd-MM-yyyy" class="text-no-wrap" />
         </template>
         <template #item.action="{ item }">
           <v-menu>
@@ -138,9 +159,25 @@
 <script>
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
+import pick from 'lodash/pick'
+import FxSportsRecordsFilter from '@/components/PageComponents/FxSportsRecords/FxSportsRecordsFilter'
+import FxSportsRecordsFilterDialog from '@/components/PageComponents/FxSportsRecords/FxSportsRecordsFilterDialog'
+import FxSportsRecordDialog from '@/components/PageComponents/FxSportsRecords/FxSportsRecordDialog'
 
 export default {
   name: 'RecordsPage',
+  components: { FxSportsRecordDialog, FxSportsRecordsFilterDialog, FxSportsRecordsFilter },
+
+  async asyncData ({ store }) {
+    const contextSchoolId = store.getters['context/schoolId']
+    const events = await store.dispatch('api/sportsRecordEvents/list', { schoolId: contextSchoolId })
+    const sports = [...new Map(events.map(event => [event.sportId, event.sport])).values()]
+
+    return {
+      events,
+      sports,
+    }
+  },
   data: () => ({
     items: [],
     query: {
@@ -150,6 +187,10 @@ export default {
       date: '',
     },
     meta: { total: 0 },
+    sports: [],
+    events: [],
+    selectedItem: null,
+    openDialog: false,
   }),
 
   async fetch () {
@@ -170,26 +211,37 @@ export default {
     ...mapGetters({
       schoolId: 'context/schoolId',
       canManageSportsRecords: 'user/acl/canManageSportsRecords',
+      isMobileDevice: 'context/isMobile',
     }),
     formattedDate () {
       return this.query.date ? DateTime.fromISO(this.query.date).toFormat('dd-MM-yyyy') : ''
     },
+    isMobile () {
+      if (process.client) {
+        return this.$vuetify.breakpoint.xsOnly
+      }
+
+      return this.isMobileDevice
+    },
     headers () {
-      const headers = [
+      return [
         {
           text: 'Event',
           sortable: false,
           value: 'event',
         },
-        { text: 'Category', value: 'category', sortable: false },
+        ...(this.isMobile ? [] : [{ text: 'Category', value: 'category', sortable: false }]),
         { text: 'Student', value: 'student', sortable: false },
         { text: 'Record/Score', value: 'score' },
         { text: 'Date', value: 'date' },
+        ...(this.canManageSportsRecords ? [{ text: 'Action', value: 'action', sortable: false }] : []),
       ]
-      if (this.canManageSportsRecords) {
-        headers.push({ text: 'Action', value: 'action', sortable: false })
-      }
-      return headers
+    },
+
+    selectedFilters () {
+      return Object.values(pick(this.query, ['sportId', 'sportsRecordEventId', 'sportsRecordCategoryId', 'date']))
+        .filter(val => !!val)
+        .length
     },
   },
 
@@ -218,6 +270,28 @@ export default {
       }).catch(() => {
         this.$toast.error('Unknown Error')
       })
+    },
+
+    openRecord (item) {
+      if (!this.isMobile) {
+        return
+      }
+      this.selectedItem = item
+      this.openDialog = true
+    },
+
+    closeRecord () {
+      this.openDialog = false
+    },
+
+    clearAll () {
+      this.query = {
+        ...this.query,
+        sportId: null,
+        sportsRecordEventId: null,
+        sportsRecordCategoryId: null,
+        date: null,
+      }
     },
   },
 }
