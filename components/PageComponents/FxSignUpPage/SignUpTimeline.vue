@@ -56,10 +56,11 @@ export default {
 
 <style>
 .theme--light.v-timeline::before {
-  background: var(--v-info-lighten5);
+  background: var(--v-info-darken5);
   margin-top: 50px;
   height: calc(100% - 100px);
 }
+
 .v-timeline-item__dot {
   background: none!important;
   box-shadow: none!important;
