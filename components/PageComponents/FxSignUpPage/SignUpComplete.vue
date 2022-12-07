@@ -4,11 +4,11 @@
       mdi-check-circle
     </v-icon>
 
-    <h1 class="text-h1 mt-3">
+    <h1 class="text-h1 primary--text mt-3">
       Welcome to Fixturr
     </h1>
 
-    <div class="text-p3 info--text text--darken-2 mt-1 mb-8">
+    <div class="text-p3 primary--text mt-1 mb-8">
       Sign Up Complete. <br>
       We have sent you an email, please check inbox
     </div>

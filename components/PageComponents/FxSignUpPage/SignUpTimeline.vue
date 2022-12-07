@@ -10,14 +10,20 @@
       fill-dot
     >
       <template #icon>
-        <v-icon size="40" :color="i <= value ? 'info lighten-5' : 'info lighten-2'">
+        <v-icon size="40" :color="i <= value ? 'brand2' : 'info darken-5'">
           mdi-adjust
         </v-icon>
       </template>
       <v-row class="pt-1">
         <v-col>
-          <strong class="text-subheading font-weight-bold info--text text--lighten-2">{{ item.title }}</strong>
-          <div class="text-p3 white--text">
+          <strong
+            class="text-subheading font-weight-bold info--text"
+            :class="i <= value ? 'white--text' : 'text--darken-5'"
+          >{{ item.title }}</strong>
+          <div
+            class="text-p3 info--text"
+            :class="i <= value ? 'white--text' : 'text--darken-5'"
+          >
             {{ item.caption }}
           </div>
         </v-col>

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1 class="text-h1 text-center mt-6">
+    <h1 class="text-h1 text-center primary--text mt-6">
       Upload Your School Logo
     </h1>
-    <h2 class="text-p2 text-center info--text text--darken-2 mb-6">
+    <h2 class="text-p2 text-center primary--text mb-6">
       SVG, WEBP, PNG, JPG and GIF files are allowed
     </h2>
     <v-form class="mx-sm-auto sign-in-form" @submit.prevent="submitHandler">
