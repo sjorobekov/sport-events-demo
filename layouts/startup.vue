@@ -14,7 +14,7 @@
 
           <div>
             <div class="hidden-sm-and-down">
-              <v-img class="mx-auto" width="185" :src="require('/static/logo_new.svg')" />
+              <v-img class="mx-auto" width="185" :src="require('/static/logo.svg')" />
             </div>
             <h2 class="text-p1 font-weight-medium white--text text-center mt-4 mb-2 hidden-md-and-up">
               Sports Portal

@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer width="224" permanent app color="brand" dark>
-    <v-img class="mt-10 mb-12 mx-6" src="/logo.svg" />
+    <v-img class="mt-10 mb-12 mx-6" src="/logo_new.svg" />
 
     <v-list
       dense
