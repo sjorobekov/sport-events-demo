@@ -10,7 +10,7 @@
       fill-dot
     >
       <template #icon>
-        <v-icon size="40" :color="i <= value ? 'info lighten-5' : 'info lighten-2'">
+        <v-icon size="40" :color="i <= value - i ? 'info lighten-5' : 'info lighten-2'">
           mdi-adjust
         </v-icon>
       </template>
