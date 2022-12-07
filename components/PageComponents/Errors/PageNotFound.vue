@@ -11,7 +11,14 @@
         Try going back to the home page.
       </p>
 
-      <v-btn depressed color="primary" class="text-center" link :to="{ name: 'home' }">
+      <v-btn
+        depressed
+        height="56"
+        color="primary"
+        class="text-center"
+        link
+        :to="{ name: 'home' }"
+      >
         <v-icon>mdi-arrow-right</v-icon> Go to Sports Home
       </v-btn>
     </div>
