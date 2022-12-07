@@ -21,7 +21,7 @@ export default {
         brand: '#193F66',
         primary: '#27325E',
         secondary: '#1FC1C3',
-        brand2: '#4368FA',
+        brand2: '#1FC1C3',
         info: {
           lighten5: '#F8FAFC',
           lighten4: '#F1F5F9',
@@ -33,6 +33,7 @@ export default {
           darken2: '#334155',
           darken3: '#1E293B',
           darken4: '#0F172A',
+          darken5: '#848DB0',
         },
         success: {
           lighten5: '#ECFDF5',
