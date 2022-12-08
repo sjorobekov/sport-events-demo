@@ -26,7 +26,7 @@
 
     <FxTeamListItem class="px-0" :participant="me" :context-school-id="contextSchoolId">
       <template #action>
-        <v-list-item-avatar rounded size="40" class="mr-2" color="info lighten-4">
+        <v-list-item-avatar rounded width="60" class="mr-2" color="info lighten-4">
           {{ left }}
         </v-list-item-avatar>
       </template>
@@ -34,7 +34,7 @@
 
     <FxTeamListItem v-if="event.eventType === EventType.FIXTURE" class="px-0" :participant="opponent" :context-school-id="contextSchoolId">
       <template #action>
-        <v-list-item-avatar rounded size="40" class="mr-2" color="info lighten-4">
+        <v-list-item-avatar rounded width="60" class="mr-2" color="info lighten-4">
           {{ right }}
         </v-list-item-avatar>
       </template>
