@@ -20,14 +20,14 @@
 
     <FxInHouseTeamListItem class="px-0" :participant="value.homeTeam">
       <template #action>
-        <v-list-item-avatar rounded size="40" class="mr-2" color="info lighten-4">
+        <v-list-item-avatar rounded width="60" class="mr-2" color="info lighten-4">
           {{ homeScore }}
         </v-list-item-avatar>
       </template>
     </FxInHouseTeamListItem>
     <FxInHouseTeamListItem class="px-0" :participant="value.awayTeam">
       <template #action>
-        <v-list-item-avatar rounded size="40" class="mr-2" color="info lighten-4">
+        <v-list-item-avatar rounded width="60" class="mr-2" color="info lighten-4">
           {{ awayScore }}
         </v-list-item-avatar>
       </template>
