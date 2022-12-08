@@ -17,14 +17,16 @@
     </v-row>
 
     <template v-else>
-      <v-tabs v-model="currentItem" class="mobile-tabs" :show-arrows="false" active-class="active-mobile-tab">
-        <v-tab>Result</v-tab>
-        <v-tab>Details</v-tab>
-        <v-tab>Team Sheet</v-tab>
-        <v-tab v-if="$slots.map">
-          Map
-        </v-tab>
-      </v-tabs>
+      <v-card flat color="white" class="pl-6 card-border">
+        <v-tabs v-model="currentItem" class="mobile-tabs" :show-arrows="false" active-class="active-mobile-tab">
+          <v-tab>Result</v-tab>
+          <v-tab>Details</v-tab>
+          <v-tab>Team Sheet</v-tab>
+          <v-tab v-if="$slots.map">
+            Map
+          </v-tab>
+        </v-tabs>
+      </v-card>
 
       <v-tabs-items v-model="currentItem" style="background: none">
         <v-tab-item class="px-2 pb-2">
@@ -75,13 +77,17 @@ export default {
   height: 4px!important;
 }
 
-.mobile-tabs {
-  border-bottom: 16px solid var(--v-primary-base);
+.card-border {
+  border-bottom: 16px solid var(--v-primary-base)!important;
+  border-radius: 0;
 }
 
 .mobile-tabs /deep/ .v-tab {
   font-weight: 600;
   font-size: 14px;
   line-height: 17px;
+  letter-spacing: normal!important;
+  padding: 0 8px;
+  min-width: initial;
 }
 </style>
