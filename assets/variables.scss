@@ -29,10 +29,10 @@ $headings: map-deep-merge(
     (
       'h1': (
         'size': rem(48px),
-        'weight': 600,
+        'weight': 400,
         'line-height': rem(56px),
         'letter-spacing': -0.04em,
-        'font-family': $heading-font-family,
+        'font-family': $title-font,
         'text-transform': false
       ),
       'h1s': (
