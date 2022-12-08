@@ -60,7 +60,7 @@
         </div>
       </v-col>
 
-      <v-col md="3" class="text-p1 info--text text--darken-1">
+      <v-col md="3" class="text-p1 info--text text--darken-1 hidden-md-and-down">
         <div class="d-flex justify-space-between">
           <h4 class="font-weight-regular mb-2">
             School Location
