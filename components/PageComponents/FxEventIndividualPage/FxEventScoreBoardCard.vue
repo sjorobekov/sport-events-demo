@@ -1,5 +1,5 @@
 <template>
-  <v-card class="rounded-t-0" height="152">
+  <v-card class="rounded-t-0">
     <v-row no-gutters class="pa-6">
       <v-col cols="5">
         <wrapped-component :wrap="!!myTeam">

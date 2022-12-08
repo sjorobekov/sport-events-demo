@@ -87,7 +87,11 @@ export default {
   font-size: 14px;
   line-height: 17px;
   letter-spacing: normal!important;
-  padding: 0 8px;
+  padding: 0 12px;
   min-width: initial;
+}
+
+.mobile-tabs /deep/ .v-tabs-slider {
+  border-radius: 2px 2px 0 0;
 }
 </style>
