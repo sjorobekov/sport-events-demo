@@ -11,7 +11,7 @@
         <v-btn
           depressed
           dark
-          color="brand"
+          color="primary"
           link
           :to="{ name: 'records-events-add' }"
         >

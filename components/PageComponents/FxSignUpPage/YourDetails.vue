@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1 class="text-h1 text-center mt-6">
+    <h1 class="text-h1 primary--text text-center mt-6">
       Your Details
     </h1>
-    <h2 class="text-p2 text-center info--text text--darken-2 mb-6">
+    <h2 class="text-p2 text-center primary--text mb-6">
       We just need your name and email to get started.
     </h2>
     <v-form ref="form" v-async-form class="mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">

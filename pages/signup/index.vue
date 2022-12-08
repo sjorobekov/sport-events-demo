@@ -17,7 +17,7 @@
                   <v-img class="mx-auto" width="185" :src="require('/static/logo_new.svg')" />
                 </div>
                 <div class="pt-16">
-                  <SignUpTimeline v-model="step" />
+                  <SignUpTimeline v-model="timelineStep[step]" />
                 </div>
               </v-col>
             </v-row>

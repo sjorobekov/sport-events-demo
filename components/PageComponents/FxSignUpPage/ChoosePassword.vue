@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-h1 text-center mt-6 mb-9">
+    <h1 class="text-h1 text-center primary--text mt-6 mb-9">
       Choose a Password
     </h1>
 
