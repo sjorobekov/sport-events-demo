@@ -15,7 +15,7 @@
         </v-list-item-avatar>
         <v-list-item-content class="school-name d-block text-center">
           <client-only>
-            <h1 v-balance-text class="school-name">
+            <h1 v-balance-text class="school-name font-weight-bold">
               {{ contextSchool.name }}
             </h1>
           </client-only>
@@ -143,7 +143,6 @@ export default {
 }
 .school-name {
   font-size: 18px;
-  font-weight: 600;
   line-height: 19px;
 }
 </style>
