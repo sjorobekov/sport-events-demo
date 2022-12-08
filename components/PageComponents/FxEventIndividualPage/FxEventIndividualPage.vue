@@ -1,18 +1,21 @@
 <template>
-  <div>
-    <v-card v-if="$fetchState.pending">
-      <v-skeleton-loader
-        type="card-avatar, article, actions"
-      />
-    </v-card>
-    <template v-else>
-      <v-card class="rounded-b-0 mt-8" color="primary" dark height="80">
+  <wrapped-component :wrap="isMobile">
+    <template #wrapper>
+      <FxEventMobileContainer />
+    </template>
+    <div>
+      <v-card class="rounded-b-0" color="primary" dark :tile="isMobile">
         <v-list-item>
-          <v-list-item-content class="text-center pt-5 pl-12">
-            <v-list-item-title class="text-subheading mb-1 pl-md-11">
+          <v-list-item-action>
+            <v-btn v-if="isMobile" icon @click="$router.back()">
+              <v-icon>mdi-arrow-left</v-icon>
+            </v-btn>
+          </v-list-item-action>
+          <v-list-item-content class="text-center pt-5 pl-md-4">
+            <v-list-item-title class="text-subheading mb-1">
               <FxDateFormat :date="event.date" output-format="cccc dd MMMM yyyy" />
             </v-list-item-title>
-            <v-list-item-subtitle class="text-p2 white--text pl-md-11">
+            <v-list-item-subtitle class="text-p2 white--text hidden-sm-and-down">
               {{ sport.name }} &#x2022; {{ $t(`FIXTURE_TYPE.${event.fixtureType}`) }}
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -28,37 +31,35 @@
             </div>
           </v-list-item-action>
         </v-list-item>
+
+        <div class="hidden-md-and-up">
+          <div class="d-flex px-3 pb-3">
+            <v-chip outlined>
+              {{ sport.name }}
+            </v-chip>
+            <v-spacer />
+            <v-chip outlined>
+              {{ $t(`EVENT_TYPE.${event.eventType}`) }}
+            </v-chip>
+          </div>
+        </div>
       </v-card>
       <FxEventScoreBoardCard />
       <NuxtChild />
-    </template>
-  </div>
+    </div>
+  </wrapped-component>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { EventType, EventResult } from '@/enum'
 import FxEventScoreBoardCard from '@/components/PageComponents/FxEventIndividualPage/FxEventScoreBoardCard'
+import FxEventMobileContainer from '@/components/PageComponents/FxEventIndividualPage/FxEventMobilePage'
 
 export default {
-  name: 'FxEventIndividualPage',
+  name: 'FxEventDesktopPage',
   components: {
+    FxEventMobileContainer,
     FxEventScoreBoardCard,
-  },
-  props: {
-    eventId: {
-      type: String,
-      default: undefined,
-    },
-  },
-
-  data: () => ({
-    EventType,
-    EventResult,
-  }),
-
-  async fetch () {
-    await this.$store.dispatch('page/event/fetchData', this.eventId)
   },
 
   computed: {
@@ -76,7 +77,17 @@ export default {
       hasResult: 'page/event/hasResult',
       isPendingResult: 'page/event/isPendingResult',
       isLoggedIn: 'context/isLoggedIn',
+      isMobileDevice: 'context/isMobile',
+      isTabletDevice: 'context/isTablet',
     }),
+
+    isMobile () {
+      if (process.client) {
+        return this.$vuetify.breakpoint.smAndDown
+      }
+
+      return this.isMobileDevice || this.isTabletDevice
+    },
   },
 }
 </script>

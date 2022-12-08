@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <v-icon size="64" color="info darken-2" v-text="icon" />
-    <div class="text-h5 info--text text--darken-2" v-text="title" />
+    <div class="text-md-h5 text-h6s info--text text--darken-2" v-text="title" />
   </div>
 </template>
 

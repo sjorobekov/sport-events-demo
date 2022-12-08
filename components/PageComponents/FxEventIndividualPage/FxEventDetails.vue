@@ -1,138 +1,152 @@
 <template>
-  <FxEventItemCard>
-    <template #title>
-      Details
-    </template>
-    <template #actions>
-      <v-btn v-if="canEditEvent && !formVisible" outlined @click="open">
-        <v-icon small>
-          mdi-pencil-outline
-        </v-icon>Edit Details
-      </v-btn>
-    </template>
-    <FxEventDetailsEditForm
-      v-if="formVisible"
-      ref="form"
-      v-model="formData"
-      :disabled="loading"
-      @submit="save"
-      @cancel="formVisible = false"
-    />
-    <v-container v-else class="child-border">
-      <v-row>
-        <v-col cols="12" class="pt-1 pb-0">
-          <ListItem>
-            <template #icon>
-              <v-icon>$vuetify.icons.calendar</v-icon>
-            </template>
-            <template #title>
-              <FxDateFormat :date="event.date" />
-            </template>
-            <template #subtitle>
-              Date
-            </template>
-          </ListItem>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" class="pt-1 pb-0">
-          <ListItem>
-            <template #icon>
-              <v-icon>mdi-clock-outline</v-icon>
-            </template>
-            <template #content>
-              <div>
-                <div v-if="me.meetTime" class="d-inline-block pr-8">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
-                    {{ me.meetTime }}
-                  </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
-                    Meet Time
-                  </v-list-item-subtitle>
+  <div>
+    <FxEventItemCard>
+      <template #title>
+        Details
+      </template>
+      <template #actions>
+        <v-btn v-if="canEditEvent && !formVisible" outlined @click="open">
+          <v-icon small>
+            mdi-pencil-outline
+          </v-icon>Edit Details
+        </v-btn>
+      </template>
+      <FxEventDetailsEditForm
+        v-if="formVisible"
+        ref="form"
+        v-model="formData"
+        :disabled="loading"
+        @submit="save"
+        @cancel="formVisible = false"
+      />
+      <v-container v-else class="child-border">
+        <v-row>
+          <v-col cols="12" class="pt-1 pb-0">
+            <ListItem>
+              <template #icon>
+                <v-icon>$vuetify.icons.calendar</v-icon>
+              </template>
+              <template #title>
+                <FxDateFormat :date="event.date" />
+              </template>
+              <template #subtitle>
+                Date
+              </template>
+            </ListItem>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12" class="pt-1 pb-0">
+            <ListItem>
+              <template #icon>
+                <v-icon>mdi-clock-outline</v-icon>
+              </template>
+              <template #content>
+                <div>
+                  <div v-if="me.meetTime" class="d-inline-block pr-8">
+                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                      {{ me.meetTime }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle class="text-p1 info--text">
+                      Meet Time
+                    </v-list-item-subtitle>
+                  </div>
+                  <div class="d-inline-block pr-8">
+                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                      {{ event.startTime }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle class="text-p1 info--text">
+                      Start Time
+                    </v-list-item-subtitle>
+                  </div>
+                  <div v-if="me.returnTime" class="d-inline-block">
+                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                      {{ me.returnTime }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle class="text-p1 info--text">
+                      Return Time
+                    </v-list-item-subtitle>
+                  </div>
                 </div>
-                <div class="d-inline-block pr-8">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
-                    {{ event.startTime }}
-                  </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
-                    Start Time
-                  </v-list-item-subtitle>
+              </template>
+            </ListItem>
+          </v-col>
+        </v-row>
+        <v-row v-if="lead">
+          <v-col cols="12" class="pt-1 pb-0">
+            <ListItem>
+              <template #icon>
+                <FxAvatar :size="24" :value="lead.avatar" />
+              </template>
+              <template #title>
+                {{ lead.firstname }} {{ lead.lastname }}
+              </template>
+              <template #subtitle>
+                Lead Staff Member
+              </template>
+            </ListItem>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12" class="pt-1 pb-0">
+            <ListItem>
+              <template #icon>
+                <v-icon>mdi-map-marker</v-icon>
+              </template>
+              <template #title>
+                <FxLocationLabel :event="event" :me="me" />
+              </template>
+              <template #subtitle>
+                Location
+              </template>
+            </ListItem>
+          </v-col>
+        </v-row>
+        <v-row v-if="!me.noNeedTransport && me.transportTo && me.transportFrom">
+          <v-col cols="12" class="pt-1 pb-0">
+            <ListItem>
+              <template #icon>
+                <v-icon>$vuetify.icons.direction</v-icon>
+              </template>
+              <template #content>
+                <div>
+                  <div class="d-inline-block pr-8">
+                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                      {{ transportTo }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle class="text-p1 info--text">
+                      Transport To
+                    </v-list-item-subtitle>
+                  </div>
+                  <div class="d-inline-block">
+                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                      {{ transportFrom }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle class="text-p1 info--text">
+                      Transport From
+                    </v-list-item-subtitle>
+                  </div>
                 </div>
-                <div v-if="me.returnTime" class="d-inline-block">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
-                    {{ me.returnTime }}
-                  </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
-                    Return Time
-                  </v-list-item-subtitle>
-                </div>
-              </div>
-            </template>
-          </ListItem>
-        </v-col>
-      </v-row>
-      <v-row v-if="lead">
-        <v-col cols="12" class="pt-1 pb-0">
-          <ListItem>
-            <template #icon>
-              <FxAvatar :size="24" :value="lead.avatar" />
-            </template>
-            <template #title>
-              {{ lead.firstname }} {{ lead.lastname }}
-            </template>
-            <template #subtitle>
-              Lead Staff Member
-            </template>
-          </ListItem>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" class="pt-1 pb-0">
-          <ListItem>
-            <template #icon>
-              <v-icon>mdi-map-marker</v-icon>
-            </template>
-            <template #title>
-              <FxLocationLabel :event="event" :me="me" />
-            </template>
-            <template #subtitle>
-              Location
-            </template>
-          </ListItem>
-        </v-col>
-      </v-row>
-      <v-row v-if="!me.noNeedTransport && me.transportTo && me.transportFrom">
-        <v-col cols="12" class="pt-1 pb-0">
-          <ListItem>
-            <template #icon>
-              <v-icon>$vuetify.icons.direction</v-icon>
-            </template>
-            <template #content>
-              <div>
-                <div class="d-inline-block pr-8">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
-                    {{ transportTo }}
-                  </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
-                    Transport To
-                  </v-list-item-subtitle>
-                </div>
-                <div class="d-inline-block">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
-                    {{ transportFrom }}
-                  </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
-                    Transport From
-                  </v-list-item-subtitle>
-                </div>
-              </div>
-            </template>
-          </ListItem>
-        </v-col>
-      </v-row>
-    </v-container>
-    <FxEventDateOrStartTimeChangeConfirmationModal ref="confirmationDialog" />
-  </FxEventItemCard>
+              </template>
+            </ListItem>
+          </v-col>
+        </v-row>
+      </v-container>
+      <FxEventDateOrStartTimeChangeConfirmationModal ref="confirmationDialog" />
+    </FxEventItemCard>
+    <v-btn
+      v-if="canEditEvent && !formVisible"
+      height="50"
+      outlined
+      block
+      class="mt-4 hidden-md-and-up"
+      @click="open"
+    >
+      <v-icon small>
+        mdi-pencil-outline
+      </v-icon>Edit Details
+    </v-btn>
+  </div>
 </template>
 
 <script>

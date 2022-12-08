@@ -1,7 +1,18 @@
 <template>
   <v-list class="py-0">
     <div v-for="(item, i) in result.results" :key="i" class="pl-3 pr-4">
-      <v-list-item class="team-item">
+      <div class="hidden-md-and-up">
+        <v-list-item class="px-0" style="height: 24px; min-height: initial">
+          <v-list-item-content class="text-caption pa-0">
+            {{ $t(`FIXTURE_TYPE.${event.fixtureType}`) }}
+          </v-list-item-content>
+          <v-list-item-action>
+            <span class="text-caption result-box" :class="item.result.toLowerCase()">{{ $t(`EVENT_RESULT.${item.result}`) }}</span>
+          </v-list-item-action>
+        </v-list-item>
+      </div>
+
+      <v-list-item class="px-0">
         <v-list-item-avatar>
           <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" :alt="myTeam.name" />
         </v-list-item-avatar>
@@ -11,12 +22,12 @@
           </v-list-item-title>
         </v-list-item-content>
         <v-list-item-action>
-          <v-avatar size="40" rounded color="#F1F5F9">
+          <v-avatar height="40" width="60" rounded color="#F1F5F9">
             {{ item.score }}
           </v-avatar>
         </v-list-item-action>
       </v-list-item>
-      <v-list-item class="team-item">
+      <v-list-item class="px-0">
         <v-list-item-avatar>
           <FxSchoolLogo :value="opponentTeam.logo" :color="opponentTeam.color" :alt="opponentTeam.name" />
         </v-list-item-avatar>
@@ -26,7 +37,7 @@
           </v-list-item-title>
         </v-list-item-content>
         <v-list-item-action>
-          <v-avatar size="40" rounded color="#F1F5F9">
+          <v-avatar height="40" width="60" rounded color="#F1F5F9">
             {{ item.opponentScore }}
           </v-avatar>
         </v-list-item-action>
@@ -60,6 +71,7 @@ export default {
     ...mapGetters({
       contextSchool: 'context/school',
       myTeam: 'page/event/myTeam',
+      event: 'page/event/event',
       opponentTeam: 'page/event/opponentTeam',
       result: 'page/event/result',
       hasResult: 'page/event/hasResult',
@@ -67,3 +79,24 @@ export default {
   },
 }
 </script>
+<style scoped lang="scss">
+.result-box {
+  border-radius: 6px;
+  padding: 2px 8px 2px 8px;
+
+  &.win {
+    color: var(--v-success-darken2);
+    box-shadow: 0 0 0 1px var(--v-success-base);
+  }
+
+  &.draw {
+    color: var(--v-info-darken1);
+    box-shadow: 0 0 0 1px var(--v-info-lighten1);
+  }
+
+  &.lost {
+    color: var(--v-error-darken2);
+    box-shadow: 0 0 0 1px var(--v-error-base);
+  }
+}
+</style>

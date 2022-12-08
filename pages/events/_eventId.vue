@@ -1,9 +1,12 @@
 <template>
-  <FxEventIndividualPage :event-id="eventId" />
+  <div class="pt-8">
+    <FxEventIndividualPage />
+  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import { EventResult, EventType } from '@/enum'
 import FxEventIndividualPage from '@/components/PageComponents/FxEventIndividualPage/FxEventIndividualPage'
 
 export default {
@@ -12,13 +15,27 @@ export default {
     FxEventIndividualPage,
   },
 
+  async asyncData ({ store, route }) {
+    await store.dispatch('page/event/fetchData', route.params.eventId)
+  },
+
+  data: () => ({
+    EventType,
+    EventResult,
+  }),
+
   computed: {
     ...mapGetters({
-      contextSchoolId: 'context/schoolId',
+      isMobileDevice: 'context/isMobile',
+      isTabletDevice: 'context/isTablet',
     }),
 
-    eventId () {
-      return this.$route.params.eventId
+    isMobile () {
+      if (process.client) {
+        return this.$vuetify.breakpoint.smAndDown
+      }
+
+      return this.isMobileDevice || this.isTabletDevice
     },
   },
 }

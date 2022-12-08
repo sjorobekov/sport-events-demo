@@ -103,6 +103,18 @@
               </template>
             </v-col>
           </v-row>
+          <v-divider class="hidden-md-and-up my-4" />
+          <v-row class="hidden-md-and-up">
+            <v-col class="d-flex">
+              <v-spacer />
+              <v-btn outlined link :to="{ name: 'events-eventId', params: { eventId: event.id } }" exact class="mr-2">
+                Cancel
+              </v-btn>
+              <v-btn depressed color="primary" @click="save()">
+                Confirm
+              </v-btn>
+            </v-col>
+          </v-row>
         </v-container>
       </FxEventItemCard>
     </v-col>

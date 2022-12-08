@@ -1,21 +1,18 @@
 <template>
-  <v-row>
-    <v-col
-      cols="12"
-      sm="12"
-      md="12"
-      lg="7"
-      class="pr-4 d-flex"
-      :class="isPendingResult ? 'flex-column justify-start' : 'flex-column-reverse justify-end'"
-    >
+  <FxEventTabulatedContent :is-pending-result="isPendingResult" :show-tabs="isMobile">
+    <template #details>
       <FxEventDetails />
+    </template>
+    <template #results>
       <FxEventResults v-if="showResultsCard" id="results" />
-    </v-col>
-    <v-col cols="12" sm="12" md="12" lg="5">
+    </template>
+    <template #teamSheet>
       <FxEventTeamSheet />
-      <FxMap v-if="sportLocation" :coordinates="sportLocation.coordinates" />
-    </v-col>
-  </v-row>
+    </template>
+    <template v-if="sportLocation" #map>
+      <FxMap :coordinates="sportLocation.coordinates" />
+    </template>
+  </FxEventTabulatedContent>
 </template>
 
 <script>
@@ -24,10 +21,12 @@ import FxEventTeamSheet from '@/components/PageComponents/FxEventIndividualPage/
 import FxEventResults from '@/components/PageComponents/FxEventIndividualPage/FxEventResults'
 import FxEventDetails from '@/components/PageComponents/FxEventIndividualPage/FxEventDetails'
 import FxMap from '@/components/PageComponents/FxEventIndividualPage/FxMap'
+import FxEventTabulatedContent from '@/components/PageComponents/FxEventIndividualPage/components/FxEventTabulatedContent'
 
 export default {
   name: 'EventIndexPage',
   components: {
+    FxEventTabulatedContent,
     FxEventTeamSheet,
     FxEventResults,
     FxEventDetails,
@@ -44,6 +43,14 @@ export default {
 
     showResultsCard () {
       return this.hasScore || (this.canHaveResult && this.canAddOrEditResult)
+    },
+
+    isMobile () {
+      if (process.client) {
+        return this.$vuetify.breakpoint.smAndDown
+      }
+
+      return this.isMobileDevice || this.isTabletDevice
     },
   },
 }

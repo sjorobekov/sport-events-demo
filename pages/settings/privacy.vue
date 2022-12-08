@@ -47,8 +47,8 @@
       </div>
     </v-alert>
     <v-card>
-    <FxSchoolPrivacyForm ref="form" v-model="formData" :loading="loading" @save="save" />
-  </v-card>
+      <FxSchoolPrivacyForm ref="form" v-model="formData" :loading="loading" @save="save" />
+    </v-card>
   </div>
 </template>
 

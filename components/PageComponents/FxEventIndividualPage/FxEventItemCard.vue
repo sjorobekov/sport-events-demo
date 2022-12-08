@@ -1,6 +1,6 @@
 <template>
   <v-card class="mt-4">
-    <v-list-item class="event-item-heading border-bottom">
+    <v-list-item class="event-item-heading border-bottom hidden-sm-and-down">
       <v-list-item-content>
         <v-list-item-title class="text-subheading font-weight-bold">
           <slot name="title" />

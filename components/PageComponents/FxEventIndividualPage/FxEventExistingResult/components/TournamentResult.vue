@@ -13,7 +13,9 @@
       </v-list-item>
     </v-list>
 
-    <TournamentResultItem v-for="(item, i) in result.results" :key="i" :item="item" />
+    <div class="child-border">
+      <TournamentResultItem v-for="(item, i) in result.results" :key="i" :item="item" />
+    </div>
   </div>
 </template>
 
