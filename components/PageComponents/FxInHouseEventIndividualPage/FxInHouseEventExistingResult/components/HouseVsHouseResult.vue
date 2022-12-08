@@ -11,7 +11,7 @@
           </v-list-item-title>
         </v-list-item-content>
         <v-list-item-action>
-          <v-avatar size="40" rounded color="#F1F5F9">
+          <v-avatar width="60" rounded color="#F1F5F9">
             {{ result.homeScore }}
           </v-avatar>
         </v-list-item-action>
@@ -26,7 +26,7 @@
           </v-list-item-title>
         </v-list-item-content>
         <v-list-item-action>
-          <v-avatar size="40" rounded color="#F1F5F9">
+          <v-avatar width="60" rounded color="#F1F5F9">
             {{ result.awayScore }}
           </v-avatar>
         </v-list-item-action>
