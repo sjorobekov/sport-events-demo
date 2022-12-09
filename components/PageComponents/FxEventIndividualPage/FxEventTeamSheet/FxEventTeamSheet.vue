@@ -1,16 +1,31 @@
 <template>
-  <FxEventItemCard>
-    <template #title>
-      Team Sheet <FxTeamSheetPrivacyChip v-if="canManageTeamSheet" :protected="teamSheetProtected" />
-    </template>
-    <template v-if="canManageTeamSheet && teamSheet.length" #actions>
-      <v-btn outlined link :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }">
-        <v-icon>mdi-pencil</v-icon>Edit Team
-      </v-btn>
-    </template>
-    <GuestLoginForm v-if="!showTeamSheet" @signedIn="$fetch" />
-    <TeamSheet v-else :team-sheet="teamSheet" />
-  </FxEventItemCard>
+  <div>
+    <FxEventItemCard>
+      <template #title>
+        Team Sheet <FxTeamSheetPrivacyChip v-if="canManageTeamSheet" :protected="teamSheetProtected" />
+      </template>
+      <template v-if="canManageTeamSheet && teamSheet.length" #actions>
+        <v-btn outlined link :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }">
+          <v-icon>mdi-pencil</v-icon>Edit Team
+        </v-btn>
+      </template>
+      <GuestLoginForm v-if="!showTeamSheet" @signedIn="$fetch" />
+      <TeamSheet v-else :team-sheet="teamSheet" />
+    </FxEventItemCard>
+    <v-btn
+      v-if="canManageTeamSheet && teamSheet.length"
+      outlined
+      block
+      height="50"
+      class="mt-4 hidden-md-and-up"
+      link
+      :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }"
+    >
+      <v-icon small>
+        mdi-pencil
+      </v-icon>Edit Team
+    </v-btn>
+  </div>
 </template>
 
 <script>
