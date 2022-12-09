@@ -3,8 +3,8 @@
     <template #details>
       <FxEventDetails />
     </template>
-    <template #results>
-      <FxEventResults v-if="showResultsCard" id="results" />
+    <template v-if="showResultsCard" #results>
+      <FxEventResults id="results" />
     </template>
     <template #teamSheet>
       <FxEventTeamSheet />

@@ -34,11 +34,11 @@
 
         <div class="hidden-md-and-up">
           <div class="d-flex px-3 pb-3">
-            <v-chip outlined>
+            <v-chip outlined class="event-header-chip">
               {{ sport.name }}
             </v-chip>
             <v-spacer />
-            <v-chip outlined>
+            <v-chip outlined class="event-header-chip">
               {{ $t(`EVENT_TYPE.${event.eventType}`) }}
             </v-chip>
           </div>
@@ -91,3 +91,8 @@ export default {
   },
 }
 </script>
+
+<style scoped lang="sass">
+.event-header-chip
+  border-color: rgba(255, 255, 255, 0.5)
+</style>

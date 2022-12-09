@@ -1,18 +1,18 @@
 <template>
   <div class="text-center">
-    <v-alert v-if="hasScore" class="pa-2 px-md-5 py-md-2 score-result ma-0" color="#F1F5F9">
+    <v-alert v-if="hasScore" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0" color="#F1F5F9">
       {{ score }} - {{ opponentScore }}
     </v-alert>
 
-    <v-alert v-else-if="isCancelled" color="error darken-1" class="ma-0 score-alert" outlined>
+    <v-alert v-else-if="isCancelled" color="error darken-1" class="ma-0 score-alert font-weight-bold" outlined>
       Cancelled
     </v-alert>
 
-    <v-alert v-else-if="isPostponed" color="warning lighten-2" outlined class="ma-0 score-alert">
+    <v-alert v-else-if="isPostponed" color="warning lighten-2" outlined class="ma-0 score-alert font-weight-bold">
       <span class="error--text">Postponed</span>
     </v-alert>
 
-    <v-alert v-else-if="hasResult" color="#F1F5F9" class="ma-0 score-alert">
+    <v-alert v-else-if="hasResult" color="#F1F5F9" class="ma-0 score-alert font-weight-bold">
       {{ $t(`EVENT_RESULT.${result.overallResult}`) }}
     </v-alert>
 
@@ -37,7 +37,6 @@ export default {
   computed: {
     ...mapGetters({
       result: 'page/event/result',
-      isPlayed: 'page/event/isPlayed',
       isCancelled: 'page/event/isCancelled',
       isPostponed: 'page/event/isPostponed',
       hasResult: 'page/event/hasResult',
@@ -68,13 +67,17 @@ export default {
 }
 </script>
 
-<style scoped>
-.score-result {
-  font-size:3vw;
-  font-weight: bold
-}
-.score-alert {
-  font-size: clamp(1rem, 2vw, 1.5rem);
-  font-weight: bold
-}
+<style scoped lang="sass">
+@import '~vuetify/src/styles/styles.sass'
+
+.score-result
+  font-size: 2rem
+
+.score-alert
+  font-size: clamp(1rem, 2vw, 1.5rem)
+
+@media #{map-get($display-breakpoints, 'sm-and-down')}
+  .score-result
+    font-size: 1rem
+
 </style>

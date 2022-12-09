@@ -19,17 +19,23 @@
     <template v-else>
       <v-card flat color="white" class="pl-6 card-border">
         <v-tabs v-model="currentItem" class="mobile-tabs" :show-arrows="false" active-class="active-mobile-tab">
-          <v-tab>Result</v-tab>
-          <v-tab>Details</v-tab>
-          <v-tab>Team Sheet</v-tab>
-          <v-tab v-if="$slots.map">
+          <v-tab v-if="$slots.results" class="font-weight-bold">
+            Result
+          </v-tab>
+          <v-tab class="font-weight-bold">
+            Details
+          </v-tab>
+          <v-tab class="font-weight-bold">
+            Team Sheet
+          </v-tab>
+          <v-tab v-if="$slots.map" class="font-weight-bold">
             Map
           </v-tab>
         </v-tabs>
       </v-card>
 
       <v-tabs-items v-model="currentItem" style="background: none">
-        <v-tab-item class="px-2 pb-2">
+        <v-tab-item v-if="$slots.results" class="px-2 pb-2">
           <slot name="results" />
         </v-tab-item>
         <v-tab-item class="px-2 pb-2">
@@ -83,15 +89,19 @@ export default {
 }
 
 .mobile-tabs /deep/ .v-tab {
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 1rem;
+  line-height: 1.0625rem;
   letter-spacing: normal!important;
   padding: 0 12px;
   min-width: initial;
+  margin-right: 8px;
 }
 
 .mobile-tabs /deep/ .v-tabs-slider {
   border-radius: 2px 2px 0 0;
+}
+
+.mobile-tabs /deep/ .v-tab--active:hover::before {
+  opacity: 0;
 }
 </style>

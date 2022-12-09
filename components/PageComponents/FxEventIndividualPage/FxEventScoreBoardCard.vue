@@ -1,27 +1,49 @@
 <template>
-  <v-card class="rounded-t-0">
-    <v-row no-gutters class="pa-6">
-      <v-col cols="5">
-        <wrapped-component :wrap="!!myTeam">
-          <template #wrapper>
-            <nuxt-link class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeam.id } }" />
-          </template>
-          <FxTeam :color="school.color" :logo="school.logo" :name="myName" />
-        </wrapped-component>
-      </v-col>
-      <v-col cols="2" class="d-flex justify-center align-center">
-        <FxEventResultCenterBoard />
-      </v-col>
-      <v-col cols="5">
-        <wrapped-component v-if="event.eventType === EventType.FIXTURE" :wrap="!!opponentLink">
-          <template #wrapper>
-            <a :href="opponentLink" class="text-decoration-none" />
-          </template>
-          <FxTeam class="pl-0" :name="opponentTeam.name" :color="opponentTeam.color" :logo="opponentTeam.logo" />
-        </wrapped-component>
-        <FxEventNonFixture v-else :event-type="event.eventType" :name="event.name" />
-      </v-col>
-    </v-row>
+  <v-card class="rounded-t-0 pt-3 pb-4">
+    <table style="width: 100%">
+      <tbody>
+        <tr>
+          <td class="text-center team-cell">
+            <wrapped-component :wrap="!!myTeam">
+              <template #wrapper>
+                <nuxt-link class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeam.id } }" />
+              </template>
+              <FxSchoolLogo class="mx-auto" size="64" :value="school.logo" :alt="leftLabel" :color="school.color" />
+            </wrapped-component>
+          </td>
+          <td rowspan="2">
+            <FxEventResultCenterBoard />
+          </td>
+          <td class="text-center team-cell">
+            <wrapped-component v-if="opponentTeam" :wrap="!!opponentLink">
+              <template #wrapper>
+                <a :href="opponentLink" class="text-decoration-none" />
+              </template>
+              <FxSchoolLogo class="mx-auto" size="64" :value="opponentTeam.logo" :alt="rightLabel" :color="opponentTeam.color" />
+            </wrapped-component>
+            <v-icon v-else size="64" color="info darken-2" v-text="icon" />
+          </td>
+        </tr>
+        <tr>
+          <td class="text-center team-name px-2 px-md-6">
+            <wrapped-component :wrap="!!myTeam">
+              <template #wrapper>
+                <nuxt-link class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeam.id } }" />
+              </template>
+              <span>{{ leftLabel }}</span>
+            </wrapped-component>
+          </td>
+          <td class="text-center team-name px-2 px-md-6">
+            <wrapped-component :wrap="!!opponentLink">
+              <template #wrapper>
+                <a :href="opponentLink" class="text-decoration-none" />
+              </template>
+              <span>{{ rightLabel }}</span>
+            </wrapped-component>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </v-card>
 </template>
 
@@ -29,16 +51,20 @@
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
 import { EventType, EventResult } from '@/enum'
-import FxTeam from '@/components/PageComponents/FxEventIndividualPage/FxEventTeam'
-import FxEventNonFixture from '@/components/PageComponents/FxEventIndividualPage/FxEventNonFixture'
 import FxEventResultCenterBoard from '@/components/PageComponents/FxEventIndividualPage/FxEventResultCenterBoard'
+import FxSchoolLogo from '@/components/FxSchoolLogo/FxSchoolLogo'
+
+const iconEventTypeMap = {
+  [EventType.MULTI_EVENT]: '$vuetify.icons.sports',
+  [EventType.TOURNAMENT]: '$vuetify.icons.tournament',
+  [EventType.TRAINING]: '$vuetify.icons.tactic',
+}
 
 export default {
   name: 'FxEventScoreBoardCard',
   components: {
+    FxSchoolLogo,
     FxEventResultCenterBoard,
-    FxTeam,
-    FxEventNonFixture,
   },
   data: () => ({
     EventType,
@@ -52,15 +78,47 @@ export default {
       myTeam: 'page/event/myTeam',
       opponentTeam: 'page/event/opponentTeam',
     }),
+
     opponentLink () {
-      if (this.opponentTeam.portalAddress) {
+      if (this.opponentTeam?.portalAddress) {
         return this.$config.PORTAL_WILDCARD.replace('*', this.opponentTeam.portalAddress)
       }
       return false
     },
-    myName () {
-      return this.myTeam ? this.myTeam.name : this.school.name
+
+    leftLabel () {
+      return this.myTeam?.name || this.school?.name || ''
+    },
+
+    icon () {
+      return iconEventTypeMap[this.event.eventType]
+    },
+
+    rightLabel () {
+      if (this.opponentTeam) {
+        return this.opponentTeam.name
+      }
+
+      if (this.event.name) {
+        return this.event.name
+      }
+
+      return this.$t(`EVENT_TYPE.${this.event.eventType}`)
     },
   },
 }
 </script>
+
+<style scoped lang="sass">
+@import '~vuetify/src/styles/styles.sass'
+.team-name
+  font-size: 1.4375rem
+  line-height: 1.3rem
+  font-family: ProximaNova-Semibold, sans-serif
+.team-cell
+  width: 40%
+@media #{map-get($display-breakpoints, 'sm-and-down')}
+  .team-name
+    font-size: 0.975rem
+    line-height: 1rem
+</style>
