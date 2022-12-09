@@ -1,5 +1,5 @@
 <template>
-  <v-dialog fullscreen :value="true" :transition="false">
+  <v-dialog fullscreen :value="true" :transition="false" persistent>
     <v-card color="info lighten-3" tile>
       <slot name="default" />
     </v-card>
