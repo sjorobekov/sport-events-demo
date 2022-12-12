@@ -4,7 +4,7 @@
       <v-row>
         <v-col>
           <div class="d-flex justify-space-between text-p1">
-            <FxAvatar :value="contact.avatar" />
+            <FxAvatar :value="avatar" />
             <v-chip
               v-if="contact.main"
               class="ma-2"
@@ -34,6 +34,13 @@
             </div>
             <v-menu>
               <template v-if="canCreateSportsContacts" #activator="{ on, attrs }">
+                <v-btn icon v-bind="attrs" v-on="on">
+                  <v-icon color="info lighten-1">
+                    $vuetify.icons.threeDots
+                  </v-icon>
+                </v-btn>
+              </template>
+              <template v-if="!contact.user" #activator="{ on, attrs }">
                 <v-btn icon v-bind="attrs" v-on="on">
                   <v-icon color="info lighten-1">
                     $vuetify.icons.threeDots
@@ -78,6 +85,9 @@ export default {
     ...mapGetters({
       canCreateSportsContacts: 'user/acl/canCreateSportsContacts',
     }),
+    avatar () {
+      return this.contact.user ? this.contact.user.avatar : this.contact.avatar
+    },
   },
   methods: {
     remove () {
