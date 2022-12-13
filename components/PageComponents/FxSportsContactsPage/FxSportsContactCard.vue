@@ -4,7 +4,7 @@
       <v-row>
         <v-col>
           <div class="d-flex justify-space-between text-p1">
-            <FxAvatar :value="avatar" />
+            <FxAvatar :value="avatar" class="border-avatar" />
             <v-chip
               v-if="contact.main"
               class="ma-2"
@@ -97,3 +97,11 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+
+.border-avatar {
+  border: 1px solid #E2E8F0;
+}
+
+</style>
