@@ -33,7 +33,7 @@
               <a class="info--text text--darken-2" :href="`tel:${contact.phone}`">{{ contact.phone }}</a>
             </div>
             <v-menu>
-              <template v-if="canCreateSportsContacts && contact.kind !== 'User'" #activator="{ on, attrs }">
+              <template v-if="canCreateSportsContacts && contact.kind === 'SportsContact'" #activator="{ on, attrs }">
                 <v-btn icon v-bind="attrs" v-on="on">
                   <v-icon color="info lighten-1">
                     $vuetify.icons.threeDots
