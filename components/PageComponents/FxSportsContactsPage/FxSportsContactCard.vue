@@ -4,7 +4,7 @@
       <v-row>
         <v-col>
           <div class="d-flex justify-space-between text-p1">
-            <FxAvatar :value="contact.avatar" />
+            <FxAvatar :value="avatar" class="border-avatar" />
             <v-chip
               v-if="contact.main"
               class="ma-2"
@@ -18,7 +18,7 @@
           </div>
           <div class="py-2">
             <div class="text--darken-1 font-weight-bold">
-              {{ contact.name }}
+              {{ name }}
             </div>
             <div>{{ contact.role }}</div>
           </div>
@@ -33,7 +33,7 @@
               <a class="info--text text--darken-2" :href="`tel:${contact.phone}`">{{ contact.phone }}</a>
             </div>
             <v-menu>
-              <template v-if="canCreateSportsContacts" #activator="{ on, attrs }">
+              <template v-if="canCreateSportsContacts && contact.kind === 'SportsContact'" #activator="{ on, attrs }">
                 <v-btn icon v-bind="attrs" v-on="on">
                   <v-icon color="info lighten-1">
                     $vuetify.icons.threeDots
@@ -78,6 +78,12 @@ export default {
     ...mapGetters({
       canCreateSportsContacts: 'user/acl/canCreateSportsContacts',
     }),
+    avatar () {
+      return this.contact.user ? this.contact.user.avatar : this.contact.avatar
+    },
+    name () {
+      return this.contact.kind === 'SportsContact' ? this.contact.name : `${this.contact.firstname} ${this.contact.lastname}`
+    },
   },
   methods: {
     remove () {
@@ -94,3 +100,11 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+
+.border-avatar {
+  border: 1px solid #E2E8F0;
+}
+
+</style>
