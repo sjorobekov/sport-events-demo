@@ -18,7 +18,7 @@
           </div>
           <div class="py-2">
             <div class="text--darken-1 font-weight-bold">
-              {{ contact.name }}
+              {{ name }}
             </div>
             <div>{{ contact.role }}</div>
           </div>
@@ -80,6 +80,9 @@ export default {
     }),
     avatar () {
       return this.contact.user ? this.contact.user.avatar : this.contact.avatar
+    },
+    name () {
+      return this.contact.kind === 'SportsContact' ? this.contact.name : `${this.contact.firstname} ${this.contact.lastname}`
     },
   },
   methods: {
