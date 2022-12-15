@@ -149,4 +149,9 @@ export default {
   border-style: dashed!important;
   border-width: 1px;
 }
+
+.v-application .brand2 {
+    background-color: #4368FA !important;
+}
+
 </style>

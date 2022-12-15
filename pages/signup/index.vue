@@ -197,3 +197,41 @@ export default {
 }
 
 </style>
+
+<style scoped>
+
+
+element.style {
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+}
+.v-main {
+    display: flex;
+    flex: 1 0 auto;
+    max-width: 100%;
+    transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+details, main {
+    display: block;
+}
+* {
+    padding: 0;
+    margin: 0;
+}
+*, ::before, ::after {
+    background-repeat: no-repeat;
+    box-sizing: inherit;
+}
+user agent stylesheet
+main {
+    display: block;
+}
+.theme--light.v-application {
+    background: #F1F4FA;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+
+</style>

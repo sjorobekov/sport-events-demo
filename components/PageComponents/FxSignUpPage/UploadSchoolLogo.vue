@@ -126,3 +126,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.v-application .brand2 {
+    background-color: #4368FA !important;
+}
+
+</style>
