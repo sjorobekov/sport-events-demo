@@ -117,6 +117,7 @@ export default {
       canCustomizeSchool: 'user/acl/canCustomizeSchool',
       canManageSubscription: 'user/acl/canManageSubscription',
       canManageSchoolPrivacy: 'user/acl/canManageSchoolPrivacy',
+      canManageIntegrations: 'user/acl/canManageIntegrations',
     }),
     location () {
       return [this.school.city, this.country(this.school.country)].join(', ')
@@ -130,6 +131,7 @@ export default {
         ...(this.canManageUsers ? [{ text: 'Users', icon: '$vuetify.icons.team', to: { name: 'settings-users' } }] : []),
         ...(this.canCustomizeSchool ? [{ text: 'Customisation', icon: '$vuetify.icons.settings', to: { name: 'settings-customisation' } }] : []),
         ...(this.canManageSubscription ? [{ text: 'Subscription', icon: '$vuetify.icons.repeat', to: { name: 'settings-subscription' } }] : []),
+        ...(this.canManageIntegrations ? [{ text: 'Integrations', icon: 'mdi-link-variant', to: { name: 'settings-integrations' } }] : []),
       ]
     },
 

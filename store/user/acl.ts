@@ -39,6 +39,10 @@ export const getters: GetterTree<RootState, RootState> = {
     return [UserRole.ADMIN].includes(getters.role)
   },
 
+  canManageIntegrations (_, getters) {
+    return [UserRole.ADMIN].includes(getters.role)
+  },
+
   canManageInHouseTeams (_, getters) {
     return [UserRole.ADMIN].includes(getters.role)
   },

@@ -130,6 +130,7 @@ export default {
         { text: 'Customisation', icon: '$vuetify.icons.settings', to: { name: 'management-schools-id-customisation', params: { id: this.$route.params.id } } },
         { text: 'Announcements', icon: '$vuetify.icons.announcement', to: { name: 'management-schools-id-announcements', params: { id: this.$route.params.id } } },
         { text: 'Subscription', icon: '$vuetify.icons.repeat', to: { name: 'management-schools-id-subscription', params: { id: this.$route.params.id } } },
+        { text: 'Integrations', icon: 'mdi-link-variant', to: { name: 'management-schools-id-integrations', params: { id: this.$route.params.id } } },
       ]
     },
 

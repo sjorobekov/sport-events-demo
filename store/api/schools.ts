@@ -64,6 +64,14 @@ export const actions: ActionTree<RootState, RootState> = {
     })
   },
 
+  saveXportal (_, { id, ...payload }): Promise<School> {
+    return this.$axios.$patch(`/api/v1/schools/${id}/xportal`, {
+      xportalRelyingPartyId: payload.xportalRelyingPartyId,
+      xportalSchoolId: payload.xportalSchoolId,
+      xportalSecret: payload.xportalSecret,
+    })
+  },
+
   get (_, id): Promise<School> {
     return this.$axios.$get(`api/v1/schools/${id}`)
   },

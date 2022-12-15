@@ -41,6 +41,11 @@ export interface School {
     lng: number,
     lat: number,
   },
+  xportalRelyingPartyId: string,
+  xportalSchoolId: string,
+  xportalSecret: string,
+  xportalToken?: string,
+  xportalTokenExpires?: string,
 }
 
 export type Sport = {

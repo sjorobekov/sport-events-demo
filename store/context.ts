@@ -123,6 +123,9 @@ export const mutations: MutationTree<RootState> = {
       zip: school.zip,
       website: school.website,
       coordinates: school.coordinates,
+      xportalRelyingPartyId: school.xportalRelyingPartyId,
+      xportalSchoolId: school.xportalSchoolId,
+      xportalSecret: school.xportalSecret,
     }
   },
 
