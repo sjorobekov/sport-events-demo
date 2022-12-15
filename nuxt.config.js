@@ -70,6 +70,9 @@ export default {
     manifest: {
       lang: 'en',
     },
+    icon: {
+      source: '~/static/icon.png',
+    },
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
