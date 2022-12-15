@@ -25,6 +25,7 @@
         height="50"
         :loading="loading"
         block
+        class="font-weight-bold"
       >
         Send Reset Instructions
       </v-btn>
@@ -83,10 +84,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.v-btn {
-  font-weight: 400 !important;
-  font-family: 'ProximaNova-Semibold';
-}
-</style>

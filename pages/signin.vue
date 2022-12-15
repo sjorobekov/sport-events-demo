@@ -47,6 +47,7 @@
         :loading="loading"
         block
         height="50"
+        class="font-weight-bold"
       >
         Log In
       </v-btn>
@@ -125,10 +126,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.v-btn {
-  font-weight: 400 !important;
-  font-family: 'ProximaNova-Semibold';
-}
-</style>
