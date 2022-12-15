@@ -41,7 +41,7 @@
         type="submit"
         class="mt-4"
         depressed
-        color="brand2"
+        color="brand3"
         dark
         height="50"
         :loading="loading"

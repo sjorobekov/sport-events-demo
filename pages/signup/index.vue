@@ -195,5 +195,12 @@ export default {
     max-width: 400px
   }
 }
+</style>
+
+<style scoped>
+
+.theme--light.v-application {
+    background: #F1F4FA;
+}
 
 </style>

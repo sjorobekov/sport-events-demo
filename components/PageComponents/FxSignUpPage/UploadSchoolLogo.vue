@@ -39,7 +39,7 @@
         class="mt-8"
         type="submit"
         depressed
-        color="brand2"
+        color="brand3"
         dark
         height="50"
         :loading="loading"

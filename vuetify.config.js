@@ -21,7 +21,8 @@ export default {
         brand: '#193F66',
         primary: '#27325E',
         secondary: '#1FC1C3',
-        brand2: '#1FC1C3',
+        brand2: '#75DDDD',
+        brand3: '#4368FA',
         info: {
           lighten5: '#F8FAFC',
           lighten4: '#F1F5F9',
