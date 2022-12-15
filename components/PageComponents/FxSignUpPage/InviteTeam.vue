@@ -57,7 +57,7 @@
             <v-btn
               type="submit"
               depressed
-              color="brand2"
+              color="brand3"
               dark
               height="50"
               :loading="loading"
@@ -149,9 +149,4 @@ export default {
   border-style: dashed!important;
   border-width: 1px;
 }
-
-.v-application .brand2 {
-    background-color: #4368FA !important;
-}
-
 </style>

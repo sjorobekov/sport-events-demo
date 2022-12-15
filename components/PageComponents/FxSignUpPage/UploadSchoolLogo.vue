@@ -39,7 +39,7 @@
         class="mt-8"
         type="submit"
         depressed
-        color="brand2"
+        color="brand3"
         dark
         height="50"
         :loading="loading"
@@ -126,10 +126,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.v-application .brand2 {
-    background-color: #4368FA !important;
-}
-
-</style>

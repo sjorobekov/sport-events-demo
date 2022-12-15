@@ -48,7 +48,7 @@
       <v-btn
         type="submit"
         depressed
-        color="brand2"
+        color="brand3"
         dark
         height="50"
         :loading="loading"
