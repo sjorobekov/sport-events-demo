@@ -83,3 +83,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.v-btn {
+  font-weight: 400 !important;
+  font-family: 'ProximaNova-Semibold';
+}
+</style>
