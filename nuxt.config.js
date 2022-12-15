@@ -68,7 +68,10 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
+      name: 'Fixturr',
+      short_name: 'Fixturr',
       lang: 'en',
+      useWebmanifestExtension: false,
     },
     icon: {
       source: '~/static/icon.png',
