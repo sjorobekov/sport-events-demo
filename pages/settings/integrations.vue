@@ -76,17 +76,18 @@ export default {
     formData: {},
     original: {},
     loading: false,
+    school: {},
   }),
 
   computed: {
     ...mapGetters({
       schoolId: 'context/schoolId',
-      school: 'context/school',
     }),
   },
 
-  created () {
-    this.formData = { ...this.school }
+  async created () {
+    this.school = await this.$store.dispatch('api/schools/getXportal', this.schoolId)
+    this.formData = { ...this.school, id: this.schoolId }
     this.original = { ...this.formData }
   },
 
@@ -101,8 +102,6 @@ export default {
       }
 
       this.$store.dispatch('api/schools/saveXportal', this.formData).then((res) => {
-        this.$store.commit('context/school', res)
-
         this.formData = { ...res }
         this.original = { ...this.formData }
 

@@ -72,6 +72,10 @@ export const actions: ActionTree<RootState, RootState> = {
     })
   },
 
+  getXportal (_, id): Promise<School> {
+    return this.$axios.$get(`api/v1/schools/${id}/xportal`)
+  },
+
   get (_, id): Promise<School> {
     return this.$axios.$get(`api/v1/schools/${id}`)
   },
