@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-md-h1 text-h3s text-center mt-6">
+    <h1 class="text-md-h1 text-h3s font-weight-bold text-center mt-6">
       Forgot Password?
     </h1>
     <h2 class="text-p2 text-center info--text text--darken-2 mb-6">
@@ -13,6 +13,7 @@
         v-async-validate
         outlined
         dense
+        height="56"
         placeholder="name@school.com"
         :async-rules="[$rule.required, $rule.email]"
       />
