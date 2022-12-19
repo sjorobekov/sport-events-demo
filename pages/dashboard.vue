@@ -7,7 +7,7 @@
 
     <v-row class="mt-5">
       <v-col cols="12" md="9">
-        <h2>
+        <h2 class="font-weight-bold">
           Today's Events
         </h2>
         <section v-if="events.length > 0">
