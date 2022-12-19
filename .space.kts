@@ -29,9 +29,9 @@ job("Deploy to dev") {
         echo ${'$'}TAG && docker compose pull ui
         docker compose up -d --force-recreate ui
         echo 'Container has been started'
-        echo 'Start cleaning'
+        echo 'Start pruning unused containers, images, networks, build cache'
         docker system prune -f
-        echo 'End cleaning'
+        echo 'Prune completed'
       """
     }
   }
@@ -52,9 +52,9 @@ job("Deploy to prod") {
         echo ${'$'}TAG && docker compose pull ui
         docker compose up -d --force-recreate ui
         echo 'Container has been started'
-        echo 'Start cleaning'
+        echo 'Start pruning unused containers, images, networks, build cache'
         docker system prune -f
-        echo 'End cleaning'
+        echo 'Prune completed'
       """
     }
   }
