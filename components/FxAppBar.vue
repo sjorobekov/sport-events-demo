@@ -30,7 +30,7 @@
         <v-btn v-if="!me" outlined color="info darken-1" link :to="{ name: 'signin' }">
           <v-icon size="14">
             $vuetify.icons.signin
-          </v-icon> Sign In
+          </v-icon> Log In
         </v-btn>
 
         <template v-else>
