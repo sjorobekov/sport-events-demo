@@ -34,12 +34,6 @@
         </v-btn>
 
         <template v-else>
-          <v-btn icon class="mr-2">
-            <v-icon size="32" color="secondary">
-              $vuetify.icons.bell
-            </v-icon>
-          </v-btn>
-
           <v-menu
             left
             bottom
