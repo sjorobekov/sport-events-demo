@@ -59,3 +59,20 @@ job("Deploy to prod") {
     }
   }
 }
+
+job("Get docker logs") {
+  requirements {
+    workerPool = WorkerPools.SELF_HOSTED
+    workerTags("dev")
+  }
+
+  host("Get docker compose logs") {
+    shellScript {
+      interpreter = "/bin/bash"
+      content = """
+        cd /home/fixturr/app/ui
+        docker compose logs
+      """
+    }
+  }
+}
