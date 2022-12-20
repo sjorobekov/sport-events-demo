@@ -27,7 +27,7 @@
           </v-col>
         </v-row>
 
-        <div class="d-flex align-center pt-4">
+        <div class="d-flex align-center pt-md-4">
           <div class="date-picker">
             <v-tabs v-model="tab" class="week-tabs" show-arrows>
               <v-tabs-slider color="teal lighten-3" />
