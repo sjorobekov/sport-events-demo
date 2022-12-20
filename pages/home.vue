@@ -58,6 +58,15 @@
             </v-menu>
           </div>
         </div>
+        <div class="d-flex align-center pt-sm-6">
+          <h2 class="text-p2 font-weight-bold mb-2 info--text text--darken-3">
+            Fixtures & Results
+          </h2>
+
+          <v-card v-for="item in fixtures" :key="item.id">
+            <FxCalendarEvent :value="item" />
+          </v-card>
+        </div>
       </v-col>
 
       <v-col lg="3" class="text-p1 info--text text--darken-1 hidden-md-and-down">
@@ -168,7 +177,7 @@
         </v-tab>
       </v-tabs>
     </div>
-    <v-row>
+    <v-row class="hidden-sm-and-up pt-4">
       <v-col md="9">
         <div>
           <h2 class="text-p2 font-weight-bold mb-2 info--text text--darken-3">
