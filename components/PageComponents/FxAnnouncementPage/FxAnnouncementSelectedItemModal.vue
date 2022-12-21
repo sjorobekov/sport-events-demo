@@ -7,11 +7,6 @@
       />
     </template>
     <FxAnnouncementSelectedItem :item="item">
-      <template v-if="modal" #icon>
-        <v-icon size="28" class="ml-1">
-          mdi-bullhorn
-        </v-icon>
-      </template>
       <template v-if="!modal" #actions>
         <slot name="actions" />
       </template>

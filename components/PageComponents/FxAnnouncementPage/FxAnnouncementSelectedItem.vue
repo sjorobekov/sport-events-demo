@@ -15,7 +15,10 @@
               <FxAvatar size="24" :value="user.avatar" />
             </v-list-item-avatar>
             <v-list-item-content>
-              <v-list-item-title class="text-caption info--text">
+              <v-list-item-title class="text-caption info--text hidden-sm-and-down">
+                {{ user.firstname }} {{ user.lastname }}
+              </v-list-item-title>
+              <v-list-item-title class="text-caption info--text custom-font-mobile hidden-md-and-up">
                 {{ user.firstname }} {{ user.lastname }}
               </v-list-item-title>
             </v-list-item-content>
@@ -30,7 +33,10 @@
               </v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title class="text-caption info--text">
+              <v-list-item-title class="text-caption info--text hidden-sm-and-down">
+                {{ date }}
+              </v-list-item-title>
+              <v-list-item-title class="text-caption info--text custom-font-mobile hidden-md-and-up">
                 {{ date }}
               </v-list-item-title>
             </v-list-item-content>
@@ -75,5 +81,9 @@ export default {
 <style scoped>
 .custom-font {
   font-size: 1rem;
+}
+
+.custom-font-mobile {
+  font-size: 0.925rem !important;
 }
 </style>
