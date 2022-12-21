@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row class="pt-8">
-      <v-col lg="9" class="pt-8">
+      <v-col lg="9">
         <div v-if="!isMobile">
           <v-card v-if="images.length">
             <v-carousel hide-delimiters height="320px">
