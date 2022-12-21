@@ -4,7 +4,7 @@
       <slot name="icon" />
     </div>
     <div class="flex-grow-1">
-      <v-card-title class="text-h4 font-weight-bold pt-0" style="word-break: break-word">
+      <v-card-title class="text-h4 font-weight-bold pt-0 mb-n4" style="word-break: break-word">
         {{ item.subject }}
       </v-card-title>
 
@@ -12,7 +12,7 @@
         <div class="flex-shrink-1 flex-grow-0 pr-6">
           <v-list-item class="px-0">
             <v-list-item-avatar size="20" class="mr-2">
-              <FxAvatar size="20" :value="user.avatar" />
+              <FxAvatar size="24" :value="user.avatar" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class="text-caption info--text">
@@ -38,7 +38,7 @@
         </div>
       </v-card-text>
 
-      <v-card-text>
+      <v-card-text class="mt-n4 custom-font">
         {{ item.body }}
         <slot name="actions" />
       </v-card-text>
@@ -71,3 +71,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.custom-font {
+  font-size: 1rem;
+}
+</style>
