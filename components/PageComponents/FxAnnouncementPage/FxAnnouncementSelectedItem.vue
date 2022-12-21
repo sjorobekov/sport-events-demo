@@ -18,7 +18,7 @@
               <v-list-item-title class="text-caption info--text hidden-sm-and-down">
                 {{ user.firstname }} {{ user.lastname }}
               </v-list-item-title>
-              <v-list-item-title class="text-caption info--text custom-font-mobile hidden-md-and-up">
+              <v-list-item-title class="info--text custom-font-mobile hidden-md-and-up">
                 {{ user.firstname }} {{ user.lastname }}
               </v-list-item-title>
             </v-list-item-content>
@@ -36,7 +36,7 @@
               <v-list-item-title class="text-caption info--text hidden-sm-and-down">
                 {{ date }}
               </v-list-item-title>
-              <v-list-item-title class="text-caption info--text custom-font-mobile hidden-md-and-up">
+              <v-list-item-title class="info--text custom-font-mobile hidden-md-and-up">
                 {{ date }}
               </v-list-item-title>
             </v-list-item-content>
