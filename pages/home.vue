@@ -147,7 +147,7 @@
             View All
           </nuxt-link>
         </div>
-        <div v-for="contact in contacts" :key="contact.id">
+        <div v-for="contact in contacts" :key="contact.id" class="mb-4">
           <div class="d-flex text-p1">
             <FxAvatar :value="contact.avatar" />
 
@@ -159,8 +159,8 @@
             </div>
           </div>
           <div class="my-1">
-            <div v-if="contact.email" class="text-p1">
-              <v-icon small>
+            <div v-if="contact.email" class="text-p1 mb-2">
+              <v-icon small class="mr-2">
                 mdi-email-outline
               </v-icon>
               <a class="info--text text--darken-2" :href="`mailto:${contact.email}`">
@@ -168,7 +168,7 @@
               </a>
             </div>
             <div v-if="contact.phone" class="text-p1">
-              <v-icon small>
+              <v-icon small class="mr-2">
                 mdi-phone-in-talk
               </v-icon>
               <a class="info--text text--darken-2" :href="`tel:${contact.phone}`">
