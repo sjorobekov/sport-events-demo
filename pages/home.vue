@@ -1,47 +1,70 @@
 <template>
   <div>
-    <v-row v-if="!isMobile" class="pt-8">
-      <v-col lg="9">
-        <v-card v-if="images.length">
-          <v-carousel hide-delimiters height="320px">
-            <v-carousel-item
-              v-for="(item,i) in images"
-              :key="i"
-              :src="item.image"
-            />
-            <div class="gradient-footer" />
-            <v-row class="image-footer">
-              <v-col>
-                <div class="text-h3">
-                  Sports Portal
-                </div>
-              </v-col>
-            </v-row>
-          </v-carousel>
-        </v-card>
-        <v-row v-else>
-          <v-col cols="3" xl="2">
+    <v-row class="pt-8">
+      <v-col lg="9" class="pt-8">
+        <div v-if="!isMobile">
+          <v-card v-if="images.length">
+            <v-carousel hide-delimiters height="320px">
+              <v-carousel-item
+                v-for="(item,i) in images"
+                :key="i"
+                :src="item.image"
+              />
+              <div class="gradient-footer" />
+              <v-row class="image-footer">
+                <v-col>
+                  <div class="text-h3">
+                    Sports Portal
+                  </div>
+                </v-col>
+              </v-row>
+            </v-carousel>
+          </v-card>
+          <v-row v-else>
+            <v-col cols="3" xl="2">
+              <div class="text-h3">
+                Sports Portal
+              </div>
+            </v-col>
+          </v-row>
+
+          <div class="d-flex align-center pt-md-4">
+            <div class="date-picker">
+              <v-tabs v-model="tab" class="week-tabs" show-arrows>
+                <v-tabs-slider color="teal lighten-3" />
+                <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
+                  <div>
+                    {{ item.day }}
+                  </div>
+                  <div>
+                    {{ item.date }}
+                  </div>
+                </v-tab>
+              </v-tabs>
+            </div>
+            <div>
+              <v-menu ref="menu" offset-y :close-on-content-click="false">
+                <template #activator="{ on }">
+                  <v-btn icon v-on="on">
+                    <v-icon>
+                      mdi-calendar-month-outline
+                    </v-icon>
+                  </v-btn>
+                </template>
+                <v-date-picker
+                  ref="picker"
+                  v-model="date"
+                  @change="onDateChange"
+                />
+              </v-menu>
+            </div>
+          </div>
+        </div>
+        <div v-else>
+          <div class="d-flex justify-space-between">
             <div class="text-h3">
               Sports Portal
             </div>
-          </v-col>
-        </v-row>
-
-        <div class="d-flex align-center pt-md-4">
-          <div class="date-picker">
-            <v-tabs v-model="tab" class="week-tabs" show-arrows>
-              <v-tabs-slider color="teal lighten-3" />
-              <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
-                <div>
-                  {{ item.day }}
-                </div>
-                <div>
-                  {{ item.date }}
-                </div>
-              </v-tab>
-            </v-tabs>
-          </div>
-          <div>
             <v-menu ref="menu" offset-y :close-on-content-click="false">
               <template #activator="{ on }">
                 <v-btn icon v-on="on">
@@ -57,12 +80,23 @@
               />
             </v-menu>
           </div>
+          <v-tabs v-model="tab" class="week-tabs" show-arrows>
+            <v-tabs-slider color="teal lighten-3" />
+            <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
+              <div>
+                {{ item.day }}
+              </div>
+              <div>
+                {{ item.date }}
+              </div>
+            </v-tab>
+          </v-tabs>
         </div>
-        <div class="d-flex align-center pt-sm-6">
+
+        <div class="pt-6">
           <h2 class="text-p2 font-weight-bold mb-2 info--text text--darken-3">
             Fixtures & Results
           </h2>
-
           <v-card v-for="item in fixtures" :key="item.id">
             <FxCalendarEvent :value="item" />
           </v-card>
@@ -142,51 +176,6 @@
               </a>
             </div>
           </div>
-        </div>
-      </v-col>
-    </v-row>
-    <div v-else>
-      <div class="d-flex justify-space-between">
-        <div class="text-h3">
-          Sports Portal
-        </div>
-        <v-menu ref="menu" offset-y :close-on-content-click="false">
-          <template #activator="{ on }">
-            <v-btn icon v-on="on">
-              <v-icon>
-                mdi-calendar-month-outline
-              </v-icon>
-            </v-btn>
-          </template>
-          <v-date-picker
-            ref="picker"
-            v-model="date"
-            @change="onDateChange"
-          />
-        </v-menu>
-      </div>
-      <v-tabs v-model="tab" class="week-tabs" show-arrows>
-        <v-tabs-slider color="teal lighten-3" />
-        <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
-          <div>
-            {{ item.day }}
-          </div>
-          <div>
-            {{ item.date }}
-          </div>
-        </v-tab>
-      </v-tabs>
-    </div>
-    <v-row class="hidden-sm-and-up pt-4">
-      <v-col md="9">
-        <div>
-          <h2 class="text-p2 font-weight-bold mb-2 info--text text--darken-3">
-            Fixtures & Results
-          </h2>
-
-          <v-card v-for="item in fixtures" :key="item.id">
-            <FxCalendarEvent :value="item" />
-          </v-card>
         </div>
       </v-col>
     </v-row>
