@@ -84,6 +84,6 @@ export default {
 }
 
 .custom-font-mobile {
-  font-size: 0.925rem !important;
+  font-size: 0.925rem;
 }
 </style>
