@@ -2,7 +2,7 @@
   <nuxt-link v-ripple exact class="d-block text-decoration-none py-3 px-3 px-md-8 fx-announcement-item" :to="to">
     <div class="d-flex">
       <div class="flex-shrink-1 pr-2 hidden-md-and-up">
-        <v-icon class="bullhorn-color">$vuetify.icons.bullhorn</v-icon>
+        <v-icon color="#adadad">$vuetify.icons.bullhorn</v-icon>
       </div>
       <div class="flex-grow-1">
         <div class="custom-font-size font-weight-bold info--text text--darken-3 line-clamp-2 mb-2 f">
@@ -61,9 +61,6 @@ export default {
 
 <style scoped>
 
-.bullhorn-color {
-  color: #adadad;
-}
 .line-clamp-2 {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
