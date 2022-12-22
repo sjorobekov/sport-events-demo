@@ -44,10 +44,10 @@ export default {
   computed: {
     items () {
       return [
-        { title: 'Your details', caption: 'Please provide your name and email' },
-        { title: 'Your school', caption: 'Find your school on fixturr' },
-        { title: 'Choose a password', caption: 'Choose a secure password' },
-        { title: 'Invite your team', caption: 'Add your sports department to fixturr' },
+        { title: 'Your Details', caption: 'Please provide your name and email' },
+        { title: 'Your School', caption: 'Find your school on Fixturr' },
+        { title: 'Choose a Password', caption: 'Choose a secure password' },
+        { title: 'Invite Your Team', caption: 'Add your sports department to Fixturr' },
       ]
     },
   },
