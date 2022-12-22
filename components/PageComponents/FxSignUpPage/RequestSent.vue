@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-width">
+  <div class="custom-width width">
     <h1 class="text-h1 primary--text text-center mt-6">
       Request Sent
     </h1>
@@ -29,7 +29,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .custom-width {
   width:100%;
   max-width: 640px;
