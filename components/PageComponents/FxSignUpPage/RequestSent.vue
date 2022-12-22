@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1 class="text-h1 text-center mt-6">
+    <h1 class="text-h1 primary--text text-center mt-6">
       Request Sent
     </h1>
 
-    <h2 class="text-p2 text-center info--text text--darken-2 mb-6">
+    <h2 class="text-p2 text-center primary--text mb-6">
       Your request to join Fixturr has been sent.
     </h2>
 
