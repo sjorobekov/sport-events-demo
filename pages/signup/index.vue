@@ -200,7 +200,7 @@ export default {
 <style scoped>
 
 .theme--light.v-application {
-    background: #F1F4FA;
+    background: #F1F4FB;
 }
 
 </style>
