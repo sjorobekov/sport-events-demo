@@ -1,8 +1,10 @@
 <template>
-  <nuxt-link v-ripple exact class="d-block text-decoration-none py-3 px-3 px-md-8 fx-announcement-item" :to="to">
+  <nuxt-link v-ripple exact class="d-block text-decoration-none py-6 px-3 px-md-8 fx-announcement-item" :to="to">
     <div class="d-flex">
       <div class="flex-shrink-1 pr-2 hidden-md-and-up">
-        <v-icon color="#adadad">$vuetify.icons.bullhorn</v-icon>
+        <v-icon color="#adadad">
+          $vuetify.icons.bullhorn
+        </v-icon>
       </div>
       <div class="flex-grow-1">
         <div class="custom-font-size font-weight-bold info--text text--darken-3 line-clamp-2 mb-2 f">
@@ -19,12 +21,12 @@
         <FxAvatar size="20" :value="announcement.user.avatar" />
       </v-list-item-avatar>
       <v-list-item-content>
-        <v-list-item-title class="text-caption info--text">
+        <v-list-item-title class="custom-font-size info--text">
           {{ announcement.user.firstname }} {{ announcement.user.lastname }}
         </v-list-item-title>
       </v-list-item-content>
       <v-list-item-action>
-        <v-list-item-action-text class="text-caption info--text text-capitalize">
+        <v-list-item-action-text class="custom-font-size info--text text-capitalize">
           {{ date }}
         </v-list-item-action-text>
       </v-list-item-action>
