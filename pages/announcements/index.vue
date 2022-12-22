@@ -54,7 +54,7 @@
               :announcement="item"
             >
               <template #actions>
-                <v-btn depressed color="primary" class="hidden-md-and-up" block>
+                <v-btn depressed color="primary" class="mt-1 hidden-md-and-up" block>
                   Read More
                 </v-btn>
               </template>
