@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-row class="pt-8">
+  <div class="mt-n9">
+    <v-row>
       <v-col lg="9">
         <div v-if="!isMobile">
           <v-card v-if="images.length">
