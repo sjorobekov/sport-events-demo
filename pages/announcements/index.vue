@@ -114,7 +114,7 @@ export default {
     const { id } = this.$route.params
     if (!id) {
       if (this.items[0] && !this.isMobile) {
-        await this.$router.push({ name: 'announcements-id', params: { id: this.items[0].id } })
+        await this.$router.replace({ name: 'announcements-id', params: { id: this.items[0].id } })
       }
     }
   },
