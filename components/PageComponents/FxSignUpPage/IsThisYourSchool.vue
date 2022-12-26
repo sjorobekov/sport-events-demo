@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1 class="text-h1 text-center mt-6">
+    <h1 class="text-h1 primary--text text-center mt-6">
       {{ title }}
     </h1>
 
-    <h2 class="text-p2 text-center info--text text--darken-2 mb-6">
+    <h2 class="text-p2 text-center primary--text mb-6">
       {{ subtitle }}
     </h2>
 
@@ -30,8 +30,9 @@
         :loading="loading"
         depressed
         block
-        color="brand2"
+        color="brand3"
         dark
+        height="56"
         class="mt-10"
         @click="submitHandler"
       >
@@ -44,6 +45,7 @@
         text
         color="info"
         class="mt-1"
+        height="56"
         @click="$emit('decline')"
       >
         No, that's not my school
