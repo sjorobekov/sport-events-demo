@@ -60,7 +60,7 @@ job("Deploy to prod") {
   }
 }
 
-job("Get docker logs") {
+job("Get Dev docker logs") {
   requirements {
     workerPool = WorkerPools.SELF_HOSTED
     workerTags("dev")
@@ -70,7 +70,7 @@ job("Get docker logs") {
     shellScript {
       interpreter = "/bin/bash"
       content = """
-        cd /home/fixturr/app/ui
+        cd /home/runner/fixturr-compose/ui
         docker compose logs
       """
     }
