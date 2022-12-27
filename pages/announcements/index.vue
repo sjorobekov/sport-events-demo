@@ -110,6 +110,13 @@ export default {
         this.showAnnouncements = false
       }
     }
+
+    const { id } = this.$route.params
+    if (!id) {
+      if (this.items[0] && !this.isMobile) {
+        await this.$router.replace({ name: 'announcements-id', params: { id: this.items[0].id } })
+      }
+    }
   },
 
   computed: {
@@ -121,19 +128,6 @@ export default {
     isMobile () {
       return this.$vuetify.breakpoint.smAndDown
     },
-  },
-
-  async mounted () {
-    if (this.isMobile) {
-      return
-    }
-
-    const { id } = this.$route.params
-    if (!id) {
-      if (this.items[0]) {
-        await this.$router.push({ name: 'announcements-id', params: { id: this.items[0].id } })
-      }
-    }
   },
 
   methods: {
