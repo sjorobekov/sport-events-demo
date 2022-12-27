@@ -10,6 +10,7 @@
       outlined
       :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
       :type="showPass ? 'text' : 'password'"
+      height="56"
       placeholder="Password"
       @input="update('password', $event)"
       @click:append="showPass = !showPass"
@@ -24,6 +25,7 @@
         :async-rules="[$rule.required, $rule.equal(formData.password)]"
         dense
         outlined
+        height="56"
         type="password"
         placeholder="Confirm Password"
       />
