@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-n9">
+  <div class="mt-md-n9">
     <v-row>
       <v-col lg="9">
         <div v-if="!isMobile">
@@ -80,17 +80,19 @@
               />
             </v-menu>
           </div>
-          <v-tabs v-model="tab" class="week-tabs" show-arrows>
-            <v-tabs-slider color="teal lighten-3" />
-            <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
-              <div>
-                {{ item.day }}
-              </div>
-              <div>
-                {{ item.date }}
-              </div>
-            </v-tab>
-          </v-tabs>
+          <div class="mx-n4">
+            <v-tabs v-model="tab" class="week-tabs" show-arrows>
+              <v-tabs-slider color="teal lighten-3" />
+              <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
+                <div>
+                  {{ item.day }}
+                </div>
+                <div>
+                  {{ item.date }}
+                </div>
+              </v-tab>
+            </v-tabs>
+          </div>
         </div>
 
         <div class="pt-6">
