@@ -5,7 +5,7 @@
     transition="scale-transition"
     offset-y
     min-width="auto"
-    :max-width="$vuetify.breakpoint.xs ? 584 : 'auto'"
+    :max-width="$vuetify.breakpoint.xs ? 'calc(100% - 32px)' : 'auto'"
   >
     <template #activator="{ on, attrs }">
       <v-text-field
