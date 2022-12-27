@@ -65,7 +65,7 @@
             <div class="text-h3">
               Sports Portal
             </div>
-            <v-menu ref="menu" offset-y :close-on-content-click="false">
+            <v-menu ref="menu" offset-y max-width="600px" :close-on-content-click="false">
               <template #activator="{ on }">
                 <v-btn icon v-on="on">
                   <v-icon>
@@ -76,6 +76,7 @@
               <v-date-picker
                 ref="picker"
                 v-model="date"
+                full-width
                 @change="onDateChange"
               />
             </v-menu>

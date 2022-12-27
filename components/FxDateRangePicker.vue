@@ -5,6 +5,7 @@
     transition="scale-transition"
     offset-y
     min-width="auto"
+    :max-width="$vuetify.breakpoint.xs ? 584 : 'auto'"
   >
     <template #activator="{ on, attrs }">
       <v-text-field
@@ -24,6 +25,7 @@
     <v-date-picker
       v-if="mobile"
       v-model="mobileModel"
+      full-width
       range
     >
       <v-spacer />
