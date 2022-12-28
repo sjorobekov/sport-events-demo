@@ -17,7 +17,7 @@
             </nuxt-link>
           </v-card>
         </section>
-        <section v-else>
+        <section v-else class="mt-6 mt-md-12">
           <FxNoEventsState />
         </section>
       </v-col>
