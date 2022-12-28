@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-n9">
+  <div class="mt-md-n9">
     <v-row>
       <v-col lg="9">
         <div v-if="!isMobile">
@@ -65,7 +65,7 @@
             <div class="text-h3">
               Sports Portal
             </div>
-            <v-menu ref="menu" offset-y :close-on-content-click="false">
+            <v-dialog ref="menu" offset-y :close-on-content-click="false">
               <template #activator="{ on }">
                 <v-btn icon v-on="on">
                   <v-icon>
@@ -76,21 +76,24 @@
               <v-date-picker
                 ref="picker"
                 v-model="date"
+                full-width
                 @change="onDateChange"
               />
-            </v-menu>
+            </v-dialog>
           </div>
-          <v-tabs v-model="tab" class="week-tabs" show-arrows>
-            <v-tabs-slider color="teal lighten-3" />
-            <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
-              <div>
-                {{ item.day }}
-              </div>
-              <div>
-                {{ item.date }}
-              </div>
-            </v-tab>
-          </v-tabs>
+          <div class="mx-n4">
+            <v-tabs v-model="tab" class="week-tabs" show-arrows>
+              <v-tabs-slider color="teal lighten-3" />
+              <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
+                <div>
+                  {{ item.day }}
+                </div>
+                <div>
+                  {{ item.date }}
+                </div>
+              </v-tab>
+            </v-tabs>
+          </div>
         </div>
 
         <div class="pt-6">

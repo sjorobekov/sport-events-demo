@@ -55,14 +55,15 @@
             </v-icon><span class="hidden-xs-only">Create Event</span>
           </v-btn>
         </div>
-
-        <FxCalendar
-          v-model="date"
-          :from="filter.startDate"
-          :to="filter.endDate"
-          :dots="dots"
-          @input="scrollTo"
-        />
+        <div class="mx-n4 mx-md-0">
+          <FxCalendar
+            v-model="date"
+            :from="filter.startDate"
+            :to="filter.endDate"
+            :dots="dots"
+            @input="scrollTo"
+          />
+        </div>
       </v-container>
     </v-app-bar>
     <div class="calendar-content">
