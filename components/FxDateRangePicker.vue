@@ -1,89 +1,112 @@
 <template>
-  <v-menu
-    ref="menu"
-    :close-on-content-click="false"
-    transition="scale-transition"
-    offset-y
-    min-width="auto"
-    :max-width="$vuetify.breakpoint.xs ? 'calc(100% - 32px)' : 'auto'"
-  >
-    <template #activator="{ on, attrs }">
-      <v-text-field
-        background-color="white"
-        dense
-        style="max-width:250px"
-        hide-details
-        prepend-inner-icon="$vuetify.icon.calendar"
-        outlined
-        :value="rangeFormatted"
-        readonly
-        v-bind="attrs"
-        v-on="on"
-      />
-    </template>
-
-    <v-date-picker
-      v-if="mobile"
-      v-model="mobileModel"
-      full-width
-      range
+  <div v-if="!isMobile">
+    <v-menu
+      ref="menu"
+      :close-on-content-click="false"
+      transition="scale-transition"
+      offset-y
+      min-width="auto"
     >
-      <v-spacer />
-      <v-btn
-        depressed
-        color="primary"
-        @click="$refs.menu.save(mobileModel)"
-      >
-        OK
-      </v-btn>
-    </v-date-picker>
-
-    <date-range-picker
-      v-else
-      ref="picker"
-      v-model="model"
-      :ranges="customRanges"
-      class="fx-date-range-picker"
-      opens="inline"
-    >
-      <template #input>
-        <div />
-      </template>
-
-      <template #footer="data">
-        <div class="pr-4 py-4 d-flex border-top">
-          <v-spacer />
-          <v-btn outlined color="primary" class="mr-2" @click="data.clickCancel">
-            Cancel
-          </v-btn>
-          <v-btn v-if="!data.in_selection" depressed color="primary" @click="data.clickApply(); $refs.menu.save(model)">
-            Apply
-          </v-btn>
-        </div>
-      </template>
-
-      <template #ranges="ranges">
-        <v-list
-          nav
+      <template #activator="{ on, attrs }">
+        <v-text-field
+          background-color="white"
           dense
-        >
-          <v-list-item-group
-            color="primary"
-          >
-            <v-list-item
-              v-for="(range, name) in ranges.ranges"
-              :key="name"
-              @click="ranges.clickRange(range)"
-            >
-              <v-list-item-content>
-                <v-list-item-title>{{ name }}</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-item-group>
-        </v-list>
+          style="width:250px"
+          hide-details
+          prepend-inner-icon="$vuetify.icon.calendar"
+          outlined
+          :value="rangeFormatted"
+          readonly
+          v-bind="attrs"
+          v-on="on"
+        />
       </template>
-    </date-range-picker>
-  </v-menu>
+      <date-range-picker
+        ref="picker"
+        v-model="model"
+        :ranges="customRanges"
+        class="fx-date-range-picker"
+        opens="inline"
+      >
+        <template #input>
+          <div />
+        </template>
+
+        <template #footer="data">
+          <div class="pr-4 py-4 d-flex border-top">
+            <v-spacer />
+            <v-btn outlined color="primary" class="mr-2" @click="data.clickCancel">
+              Cancel
+            </v-btn>
+            <v-btn v-if="!data.in_selection" depressed color="primary" @click="data.clickApply(); $refs.menu.save(model)">
+              Apply
+            </v-btn>
+          </div>
+        </template>
+
+        <template #ranges="ranges">
+          <v-list
+            nav
+            dense
+          >
+            <v-list-item-group
+              color="primary"
+            >
+              <v-list-item
+                v-for="(range, name) in ranges.ranges"
+                :key="name"
+                @click="ranges.clickRange(range)"
+              >
+                <v-list-item-content>
+                  <v-list-item-title>{{ name }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+        </template>
+      </date-range-picker>
+    </v-menu>
+  </div>
+  <div v-else>
+    <v-dialog
+      ref="menu"
+      :close-on-content-click="false"
+      transition="scale-transition"
+      offset-y
+      min-width="auto"
+    >
+      <template #activator="{ on, attrs }">
+        <v-text-field
+          background-color="white"
+          dense
+          style="width:250px"
+          hide-details
+          prepend-inner-icon="$vuetify.icon.calendar"
+          outlined
+          :value="rangeFormatted"
+          readonly
+          v-bind="attrs"
+          v-on="on"
+        />
+      </template>
+
+      <v-date-picker
+        v-model="mobileModel"
+        full-width
+        range
+        scrollable
+      >
+        <v-spacer />
+        <v-btn
+          depressed
+          color="primary"
+          @click="$refs.menu.save(mobileModel)"
+        >
+          OK
+        </v-btn>
+      </v-date-picker>
+    </v-dialog>
+  </div>
 </template>
 
 <script>
@@ -102,10 +125,6 @@ export default {
       type: Object,
       default: () => ({ startDate: null, endDate: null }),
     },
-    mobile: {
-      type: Boolean,
-      default: false,
-    },
   },
 
   computed: {
@@ -119,6 +138,13 @@ export default {
       get () {
         return { ...this.value }
       },
+    },
+    isMobile () {
+      if (process.client) {
+        return this.$vuetify.breakpoint.smAndDown
+      }
+
+      return this.isMobileDevice
     },
     mobileModel: {
       set (value) {
