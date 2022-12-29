@@ -105,8 +105,8 @@
               <FxCalendarEvent :value="item" />
             </v-card>
           </template>
-          <template v-else-if="!$fetchState.pending" class="mt-6 mt-md-12">
-            <v-container class="d-flex flex-column justify-center align-center">
+          <template v-else-if="!$fetchState.pending">
+            <v-container class="d-flex flex-column justify-center align-center mt-6 mt-md-12">
               <v-row>
                 <v-col class="d-flex flex-column justify-center align-center">
                   <v-img width="100" :src="calendar" class="mb-3" />
