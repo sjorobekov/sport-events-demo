@@ -100,9 +100,34 @@
           <h2 class="text-p2 font-weight-bold mb-2 info--text text--darken-3">
             Fixtures & Results
           </h2>
-          <v-card v-for="item in fixtures" :key="item.id">
-            <FxCalendarEvent :value="item" />
-          </v-card>
+          <section v-if="events.length > 0">
+            <v-card v-for="item in fixtures" :key="item.id">
+              <FxCalendarEvent :value="item" />
+            </v-card>
+          </section>
+          <section v-else class="mt-6 mt-md-12">
+            <v-container class="d-flex flex-column justify-center align-center">
+              <v-row>
+                <v-col class="d-flex flex-column justify-center align-center">
+                  <v-img width="100" :src="calendar" class="mb-3" />
+                  <div class="text-p3 text-center info--text text--darken-3 mb-2">
+                    No Events Today
+                  </div>
+                  <div class="text-p2 text-center info--text text--darken-3 mb-4" style="width:120px">
+                    Try change the date or
+                  </div>
+                  <v-btn
+                    link
+                    outlined
+                    :to="{ name: 'calendar' }"
+                    class="text-p1 font-weight-bold info--text text--darken-1"
+                  >
+                    Go to Calendar
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
+          </section>
         </div>
       </v-col>
 
@@ -191,12 +216,14 @@ import { DateTime } from 'luxon'
 import { EventType, EventResult, EventStatus } from '~/enum'
 import FxAvatar from '@/components/FxAvatar/FxAvatar'
 import FxCalendarEvent from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent'
+import calendar from '@/components/PageComponents/FxDashboardPage/calendar.svg'
 
 export default {
   name: 'PortalPage',
   components: {
     FxAvatar,
     FxCalendarEvent,
+    calendar,
   },
 
   middleware: ({ store, redirect }) => {
@@ -217,6 +244,7 @@ export default {
     today: DateTime.now().toFormat('yyyy-MM-dd'),
     events: [],
     zoom: 15,
+    calendar,
   }),
 
   async fetch () {
