@@ -100,12 +100,12 @@
           <h2 class="text-p2 font-weight-bold mb-2 info--text text--darken-3">
             Fixtures & Results
           </h2>
-          <section v-if="events.length > 0">
+          <template v-if="events.length > 0">
             <v-card v-for="item in fixtures" :key="item.id">
               <FxCalendarEvent :value="item" />
             </v-card>
-          </section>
-          <section v-else class="mt-6 mt-md-12">
+          </template>
+          <template v-else-if="!$fetchState.pending" class="mt-6 mt-md-12">
             <v-container class="d-flex flex-column justify-center align-center">
               <v-row>
                 <v-col class="d-flex flex-column justify-center align-center">
@@ -127,7 +127,7 @@
                 </v-col>
               </v-row>
             </v-container>
-          </section>
+          </template>
         </div>
       </v-col>
 
@@ -223,7 +223,6 @@ export default {
   components: {
     FxAvatar,
     FxCalendarEvent,
-    calendar,
   },
 
   middleware: ({ store, redirect }) => {
