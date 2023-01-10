@@ -125,4 +125,13 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 
 .v-application .font-weight-bold {
   font-family: ProximaNova-Semibold, sans-serif!important;
+
+}
+
+.v-text-field .v-icon {
+  color: var(--v-info-lighten1)
+}
+
+.theme--light.v-icon {
+  color: var(--v-info-lighten1)
 }
