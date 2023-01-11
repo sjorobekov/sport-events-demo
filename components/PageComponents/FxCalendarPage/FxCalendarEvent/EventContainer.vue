@@ -7,7 +7,7 @@
             <v-list-item-avatar class="mr-3" tile size="22">
               <v-img :src="sport.icon" />
             </v-list-item-avatar>
-            <v-list-item-content>
+            <v-list-item-content class="my-n4">
               <v-list-item-title class="text-p2">
                 {{ sport.name }}
                 <slot name="subtitle" />
@@ -17,7 +17,9 @@
           </v-list-item>
         </v-col>
       </v-row>
-      <slot name="default" />
+      <div class="mr-n2 ml-n3">
+        <slot name="default" />
+      </div>
     </v-container>
   </nuxt-link>
 </template>

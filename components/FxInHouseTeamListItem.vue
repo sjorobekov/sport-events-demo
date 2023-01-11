@@ -1,6 +1,6 @@
 <template>
   <v-list-item v-bind="$props" :class="iconOnRight ? 'flex-row-reverse': ''">
-    <v-list-item-avatar class="mx-3">
+    <v-list-item-avatar class="mx-1">
       <FxSchoolLogo :alt="participant.name" :color="participant.color" />
     </v-list-item-avatar>
     <v-list-item-content>
