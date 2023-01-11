@@ -187,19 +187,6 @@ export default {
       return this.$refs.form.validateAsync()
     },
     update (key, value) {
-      if ((key === 'teamSheetsProtected' && this.formData.announcementsProtected) ||
-        (key === 'announcementsProtected' && value && this.formData.teamSheetsProtected)
-      ) {
-        this.$emit('input', {
-          ...this.formData,
-          portalProtected: true,
-          teamSheetsProtected: true,
-          announcementsProtected: true,
-        })
-
-        return
-      }
-
       if (key === 'portalProtected') {
         this.$emit('input', {
           ...this.formData,
