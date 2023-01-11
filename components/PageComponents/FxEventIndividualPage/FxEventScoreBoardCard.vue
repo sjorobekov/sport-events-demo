@@ -4,12 +4,17 @@
       <tbody>
         <tr>
           <td class="text-center team-cell">
-            <wrapped-component :wrap="!!myTeam">
-              <template #wrapper>
-                <nuxt-link class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeam.id } }" />
-              </template>
+            <nuxt-link v-if="!!myTeam" class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeam.id } }">
               <FxSchoolLogo class="mx-auto" size="64" :value="school.logo" :alt="leftLabel" :color="school.color" />
-            </wrapped-component>
+            </nuxt-link>
+            <FxSchoolLogo
+              v-else
+              class="mx-auto"
+              size="64"
+              :value="school.logo"
+              :alt="leftLabel"
+              :color="school.color"
+            />
           </td>
           <td rowspan="2">
             <FxEventResultCenterBoard />
@@ -26,12 +31,10 @@
         </tr>
         <tr>
           <td class="text-center team-name px-2 px-md-6">
-            <wrapped-component :wrap="!!myTeam">
-              <template #wrapper>
-                <nuxt-link class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeam.id } }" />
-              </template>
+            <nuxt-link v-if="!!myTeam" class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeam.id } }">
               <span>{{ leftLabel }}</span>
-            </wrapped-component>
+            </nuxt-link>
+            <span v-else>{{ leftLabel }}</span>
           </td>
           <td class="text-center team-name px-2 px-md-6">
             <wrapped-component :wrap="!!opponentLink">

@@ -94,7 +94,7 @@ export const actions: ActionTree<RootState, RootState> = {
 
   async fetch ({ commit, state, dispatch }, { schoolId, id }): Promise<Team> {
     if (!state.indexed[id]) {
-      const data = await dispatch('get', { schoolId, id })
+      const data = await dispatch('get', { schoolId, id }).catch(() => ({ id }))
       commit('cache', data)
     }
 

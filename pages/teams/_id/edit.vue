@@ -1,8 +1,14 @@
 <template>
   <div>
-    <h3 class="text-h3 mb-6">
-      {{ team.name }}
-    </h3>
+    <div class="d-flex">
+      <h3 class="text-h3 mb-6">
+        {{ team.name }}
+      </h3>
+      <v-spacer />
+      <v-btn color="error darken-1" outlined @click="remove()">
+        <v-icon>mdi-delete</v-icon>Delete Team
+      </v-btn>
+    </div>
 
     <FxTeamForm ref="form" v-model="formData" :disabled="loading" :sports="sports" :school-id="schoolId" />
 
@@ -99,6 +105,16 @@ export default {
         }
       }).finally(() => {
         this.loading = false
+      })
+    },
+    remove () {
+      if (!confirm('This team will be marked as deleted. Events will not be affected. Are you sure?')) {
+        return
+      }
+      this.$store.dispatch('api/teams/remove', this.team).then(() => {
+        this.$router.push({ name: 'teams' })
+      }).catch(() => {
+        this.$toast.error('Unknown Error')
       })
     },
   },
