@@ -65,7 +65,7 @@
             <div class="text-h3">
               Sports Portal
             </div>
-            <v-dialog ref="menu" v-model="show" offset-y>
+            <v-dialog ref="menu" v-model="showCalendar" offset-y>
               <template #activator="{ on }">
                 <v-btn icon v-on="on">
                   <v-icon>
@@ -244,7 +244,7 @@ export default {
     events: [],
     zoom: 15,
     calendar,
-    show: false,
+    showCalendar: false,
   }),
 
   async fetch () {
@@ -327,7 +327,7 @@ export default {
     async onDateChange () {
       this.dates = this.calculateWeekDays(this.date)
       this.tab = this.dates.findIndex(item => item.value === this.date)
-      this.show = !this.show
+      this.showCalendar = !this.showCalendar
       await this.getEvents(this.date)
     },
     calculateWeekDays (currentDate) {
