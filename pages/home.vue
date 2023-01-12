@@ -78,7 +78,16 @@
                 v-model="date"
                 full-width
                 @change="onDateChange"
-              />
+              >
+                <v-spacer />
+                <v-btn
+                  depressed
+                  color="primary"
+                  @click="$refs.menu.save(onDateChange)"
+                >
+                  OK
+                </v-btn>
+              </v-date-picker>
             </v-dialog>
           </div>
           <div class="mx-n4">
