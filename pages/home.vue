@@ -65,7 +65,7 @@
             <div class="text-h3">
               Sports Portal
             </div>
-            <v-dialog ref="menu" v-model="showCalendar" offset-y>
+            <v-dialog v-model="showCalendar">
               <template #activator="{ on }">
                 <v-btn icon v-on="on">
                   <v-icon>
