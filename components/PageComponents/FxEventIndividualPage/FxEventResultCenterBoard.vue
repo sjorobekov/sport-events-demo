@@ -1,6 +1,10 @@
 <template>
   <div class="text-center">
-    <v-alert v-if="hasScore" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0" color="#F1F5F9">
+    <v-alert v-if="cantSeeResults" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0" color="#F1F5F9">
+      ―
+    </v-alert>
+
+    <v-alert v-else-if="hasScore" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0" color="#F1F5F9">
       {{ score }} - {{ opponentScore }}
     </v-alert>
 
@@ -24,6 +28,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { PublishResult } from '~/enum'
 
 export default {
   name: 'FxEventResultCenterBoard',
@@ -42,6 +47,8 @@ export default {
       hasResult: 'page/event/hasResult',
       hasScore: 'page/event/hasScore',
       canAddOrEditResult: 'page/event/canAddOrEditResult',
+      myTeam: 'page/event/myTeam',
+      isLoggedIn: 'context/isLoggedIn',
     }),
 
     target () {
@@ -62,6 +69,10 @@ export default {
 
     opponentScore () {
       return this.result?.results[0]?.opponentScore
+    },
+
+    cantSeeResults () {
+      return !this.isLoggedIn && [PublishResult.EVENTS, PublishResult.RESULTS].includes(this.myTeam.publishResults)
     },
   },
 }

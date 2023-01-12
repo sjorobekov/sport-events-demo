@@ -28,7 +28,7 @@
         </v-card>
         <v-row class="hidden-lg-and-up">
           <v-col>
-            <FxWinRateBar class="mt-5" :won="team.won" :lost="team.lost" :drawn="team.drawn" />
+            <FxWinRateBar v-if="showWinRate" class="mt-5" :won="team.won" :lost="team.lost" :drawn="team.drawn" />
           </v-col>
         </v-row>
         <div>
@@ -128,7 +128,7 @@
           Team Overview
         </h3>
 
-        <FxWinRateBar class="mt-3" :won="team.won" :lost="team.lost" :drawn="team.drawn" />
+        <FxWinRateBar v-if="showWinRate" class="mt-3" :won="team.won" :lost="team.lost" :drawn="team.drawn" />
 
         <v-divider class="my-4" />
 
@@ -154,7 +154,7 @@ import { DateTime } from 'luxon'
 import FxEventItem from '@/components/PageComponents/FxTeamsPage/FxTeamEvent'
 import FxTeamPrivacyChipBig from '@/components/FxTeamPrivacyChipBig'
 import FxWinRateBar from '@/components/FxWinRateBar'
-import { EventType } from '@/enum'
+import { EventType, PublishResult } from '@/enum'
 
 export default {
   name: 'TeamPage',
@@ -268,6 +268,10 @@ export default {
 
     gradient () {
       return this.hasPhoto ? 'to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)' : null
+    },
+
+    showWinRate () {
+      return this.team.publishResults !== PublishResult.EVENTS
     },
   },
 }
