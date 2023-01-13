@@ -52,7 +52,7 @@ export default {
       })
         .then(() => {
           this.$toast('Password has been set successfully!')
-          this.$router.replace({ name: 'login' })
+          this.$router.replace({ name: 'signin', query: { redirectTo: '/' } })
         })
         .catch(() => {
           this.$toast.error('Unknown Error')
