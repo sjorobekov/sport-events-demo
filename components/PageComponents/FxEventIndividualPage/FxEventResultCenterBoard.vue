@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-alert v-if="cantSeeResults" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0" color="#F1F5F9">
+    <v-alert v-if="!canSeeResults" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0" color="#F1F5F9">
       ―
     </v-alert>
 
@@ -71,8 +71,8 @@ export default {
       return this.result?.results[0]?.opponentScore
     },
 
-    cantSeeResults () {
-      return !this.isLoggedIn && [PublishResult.EVENTS, PublishResult.RESULTS].includes(this.myTeam.publishResults)
+    canSeeResults () {
+      return this.isLoggedIn || PublishResult.RESULTS_SCORES === this.myTeam.publishResults
     },
   },
 }

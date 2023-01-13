@@ -19,7 +19,7 @@
           >
             <span class="info--text">{{ event.startTime }}</span>
           </v-chip>
-          <FxEventStatus v-else-if="me.overallResult && !cantSeeResults" :overall-result="me.overallResult" />
+          <FxEventStatus v-else-if="me.overallResult && canSeeResults" :overall-result="me.overallResult" />
         </v-list-item-action>
       </v-list-item>
     </template>
@@ -108,8 +108,8 @@ export default {
       return this.me.team
     },
 
-    cantSeeResults () {
-      return !this.isLoggedIn && [PublishResult.EVENTS, PublishResult.RESULTS].includes(this.myTeam.publishResults)
+    canSeeResults () {
+      return this.isLoggedIn || PublishResult.RESULTS_SCORES === this.myTeam.publishResults
     },
   },
 }

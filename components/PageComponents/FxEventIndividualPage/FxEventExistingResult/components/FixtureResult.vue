@@ -6,7 +6,7 @@
           <v-list-item-content class="text-caption pa-0">
             {{ $t(`FIXTURE_TYPE.${event.fixtureType}`) }}
           </v-list-item-content>
-          <v-list-item-action v-if="!cantSeeResults">
+          <v-list-item-action v-if="canSeeResults">
             <span class="text-caption result-box" :class="item.result.toLowerCase()">{{ $t(`EVENT_RESULT.${item.result}`) }}</span>
           </v-list-item-action>
         </v-list-item>
@@ -79,8 +79,8 @@ export default {
       isLoggedIn: 'context/isLoggedIn',
     }),
 
-    cantSeeResults () {
-      return !this.isLoggedIn && [PublishResult.EVENTS, PublishResult.RESULTS].includes(this.myTeam.publishResults)
+    canSeeResults () {
+      return this.isLoggedIn || PublishResult.RESULTS_SCORES === this.myTeam.publishResults
     },
   },
 }
