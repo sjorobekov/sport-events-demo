@@ -6,7 +6,7 @@
           <v-list-item-content class="text-caption pa-0">
             {{ $t(`FIXTURE_TYPE.${event.fixtureType}`) }}
           </v-list-item-content>
-          <v-list-item-action>
+          <v-list-item-action v-if="!cantSeeResults">
             <span class="text-caption result-box" :class="item.result.toLowerCase()">{{ $t(`EVENT_RESULT.${item.result}`) }}</span>
           </v-list-item-action>
         </v-list-item>
@@ -60,6 +60,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { PublishResult } from '~/enum'
 import FxSchoolLogo from '@/components/FxSchoolLogo/FxSchoolLogo'
 
 export default {
@@ -75,7 +76,12 @@ export default {
       opponentTeam: 'page/event/opponentTeam',
       result: 'page/event/result',
       hasResult: 'page/event/hasResult',
+      isLoggedIn: 'context/isLoggedIn',
     }),
+
+    cantSeeResults () {
+      return !this.isLoggedIn && [PublishResult.EVENTS, PublishResult.RESULTS].includes(this.myTeam.publishResults)
+    },
   },
 }
 </script>
