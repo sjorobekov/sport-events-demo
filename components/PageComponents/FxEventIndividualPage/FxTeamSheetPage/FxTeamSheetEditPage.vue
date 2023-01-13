@@ -1,12 +1,6 @@
 <template>
-  <v-row>
-    <v-col
-      cols="12"
-      sm="12"
-      md="12"
-      lg="7"
-      class="pr-4"
-    >
+  <FxEventSheetTabulatedContent :show-tabs="isMobile">
+    <template #select>
       <FxEventItemCard>
         <template #title>
           Search & Add
@@ -30,8 +24,8 @@
           </v-row>
         </v-container>
       </FxEventItemCard>
-    </v-col>
-    <v-col cols="12" sm="12" md="12" lg="5">
+    </template>
+    <template #sorting>
       <FxEventItemCard>
         <template #title>
           Team Sheet
@@ -78,8 +72,8 @@
                   {{ $tc('page.FxTeamSheetEditPage.STUDENTS_SELECTED', sheet.length) }}
                 </div>
                 <v-simple-table class="sheet-table">
-                  <draggable v-model="sheet" ghost-class="ghost" tag="tbody">
-                    <tr v-for="(studentId, i) in sheet" :key="studentId">
+                  <draggable v-model="sheet" ghost-class="ghost" tag="tbody" handle=".student-icon">
+                    <tr v-for="(studentId, i) in sheet" :key="`student-id-${studentId}`">
                       <td style="width: 70px" class="text-center no-right-border">
                         <span class="info--text text-p3">{{ (i + 1).toString().padStart(2, '0') }}.</span>
                       </td>
@@ -103,22 +97,21 @@
               </template>
             </v-col>
           </v-row>
-          <v-divider class="hidden-md-and-up my-4" />
-          <v-row class="hidden-md-and-up">
-            <v-col class="d-flex">
-              <v-spacer />
-              <v-btn outlined link :to="{ name: 'events-eventId', params: { eventId: event.id } }" exact class="mr-2">
-                Cancel
-              </v-btn>
-              <v-btn depressed color="primary" @click="save()">
-                Confirm
-              </v-btn>
-            </v-col>
-          </v-row>
         </v-container>
       </FxEventItemCard>
-    </v-col>
-  </v-row>
+    </template>
+    <template #actions>
+      <div class="d-flex px-2 pb-4">
+        <v-spacer />
+        <v-btn outlined link :to="{ name: 'events-eventId', params: { eventId: event.id } }" exact class="mr-2">
+          Cancel
+        </v-btn>
+        <v-btn depressed color="primary" @click="save()">
+          Confirm
+        </v-btn>
+      </div>
+    </template>
+  </FxEventSheetTabulatedContent>
 </template>
 
 <script>
@@ -127,10 +120,12 @@ import { mapGetters } from 'vuex'
 import FxEventItemCard from '@/components/PageComponents/FxEventIndividualPage/FxEventItemCard'
 import FxGroupedTeamSheetSelect
   from '@/components/PageComponents/FxEventIndividualPage/FxTeamSheetPage/FxGroupedTeamSheetSelect'
+import FxEventSheetTabulatedContent
+  from '~/components/PageComponents/FxEventIndividualPage/FxEventTeamSheet/FxEventSheetTabulatedContent.vue'
 
 export default {
   name: 'FxTeamSheetEditPage',
-  components: { FxGroupedTeamSheetSelect, FxEventItemCard, draggable },
+  components: { FxEventSheetTabulatedContent, FxGroupedTeamSheetSelect, FxEventItemCard, draggable },
 
   data: () => ({
     sheet: [],
@@ -146,7 +141,16 @@ export default {
       contextSchoolId: 'context/schoolId',
       event: 'page/event/event',
       myTeam: 'page/event/myTeam',
+      isMobileDevice: 'context/isMobile',
+      isTabletDevice: 'context/isTablet',
     }),
+    isMobile () {
+      if (process.client) {
+        return this.$vuetify.breakpoint.smAndDown
+      }
+
+      return this.isMobileDevice || this.isTabletDevice
+    },
   },
 
   async created () {
@@ -203,9 +207,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.list-item-border:first-child {
-
-}
 .list-item-border {
   border: 1px var(--v-info-lighten3) solid;
 }

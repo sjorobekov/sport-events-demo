@@ -1,6 +1,6 @@
 <template>
   <v-list-item v-slot="{ active, toggle }" class="px-0" :value="value" :active-class="activeClass" inactive>
-    <v-list-item-icon v-if="$slots.icon" class="mr-1 ml-0">
+    <v-list-item-icon v-if="$slots.icon" class="mr-1 ml-0 student-icon">
       <slot name="icon" />
     </v-list-item-icon>
     <v-list-item-avatar class="mr-2">
