@@ -11,6 +11,7 @@
     :loading="loading"
     multiple
     prepend-inner-icon="mdi-magnify"
+    persistent-placeholder
     @input="$emit('input', $event)"
   >
     <template #item="{ item, attrs }">
@@ -18,15 +19,16 @@
         <template #action>
           <v-btn color="info darken-1" outlined>
             <template v-if="attrs.inputValue">
-              <v-icon>mdi-check</v-icon> Student Added
+              <v-icon>mdi-check</v-icon> Added
             </template>
             <template v-else>
-              <v-icon>$vuetify.icons.studentAdd</v-icon> Add Student To Event
+              <v-icon>$vuetify.icons.studentAdd</v-icon> Add
             </template>
           </v-btn>
         </template>
       </FxStudentListItem>
     </template>
+    <template #selection />
   </v-autocomplete>
 </template>
 
