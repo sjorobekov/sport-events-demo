@@ -4,17 +4,12 @@
       <tbody>
         <tr>
           <td class="text-center team-cell">
-            <nuxt-link v-if="!!myTeam" class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeam.id } }">
+            <wrapped-component :wrap="!!myTeam">
+              <template #wrapper>
+                <nuxt-link class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeamId } }" />
+              </template>
               <FxSchoolLogo class="mx-auto" size="64" :value="school.logo" :alt="leftLabel" :color="school.color" />
-            </nuxt-link>
-            <FxSchoolLogo
-              v-else
-              class="mx-auto"
-              size="64"
-              :value="school.logo"
-              :alt="leftLabel"
-              :color="school.color"
-            />
+            </wrapped-component>
           </td>
           <td rowspan="2">
             <FxEventResultCenterBoard />
@@ -31,10 +26,12 @@
         </tr>
         <tr>
           <td class="text-center team-name px-2 px-md-6">
-            <nuxt-link v-if="!!myTeam" class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeam.id } }">
+            <wrapped-component :wrap="!!myTeam">
+              <template #wrapper>
+                <nuxt-link class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeamId } }" />
+              </template>
               <span>{{ leftLabel }}</span>
-            </nuxt-link>
-            <span v-else>{{ leftLabel }}</span>
+            </wrapped-component>
           </td>
           <td class="text-center team-name px-2 px-md-6">
             <wrapped-component :wrap="!!opponentLink">
@@ -107,6 +104,10 @@ export default {
       }
 
       return this.$t(`EVENT_TYPE.${this.event.eventType}`)
+    },
+
+    myTeamId () {
+      return this.myTeam?.id
     },
   },
 }
