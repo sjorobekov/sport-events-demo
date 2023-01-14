@@ -72,7 +72,7 @@ export default {
     }
 
     next(({ $router }) => {
-      if (from.fullPath) {
+      if (from.fullPath && !from.query.redirectTo) {
         $router.replace({ query: { redirectTo: from.fullPath } })
       }
     })
