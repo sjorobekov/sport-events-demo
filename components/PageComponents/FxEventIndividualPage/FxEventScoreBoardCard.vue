@@ -6,7 +6,7 @@
           <td class="text-center team-cell">
             <wrapped-component :wrap="!!myTeam">
               <template #wrapper>
-                <nuxt-link class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeam.id } }" />
+                <nuxt-link class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeamId } }" />
               </template>
               <FxSchoolLogo class="mx-auto" size="64" :value="school.logo" :alt="leftLabel" :color="school.color" />
             </wrapped-component>
@@ -28,7 +28,7 @@
           <td class="text-center team-name px-2 px-md-6">
             <wrapped-component :wrap="!!myTeam">
               <template #wrapper>
-                <nuxt-link class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeam.id } }" />
+                <nuxt-link class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeamId } }" />
               </template>
               <span>{{ leftLabel }}</span>
             </wrapped-component>
@@ -104,6 +104,10 @@ export default {
       }
 
       return this.$t(`EVENT_TYPE.${this.event.eventType}`)
+    },
+
+    myTeamId () {
+      return this.myTeam?.id
     },
   },
 }
