@@ -108,7 +108,10 @@ export default {
       })
     },
     remove () {
-      if (!confirm('This team will be marked as deleted. Events will not be affected. Are you sure?')) {
+      const warning = 'Warning: Continuing will permanently delete this team. ' +
+                      'However, events linked to this team will still be retained in the database. ' +
+                      'Are you sure you want to proceed?'
+      if (!confirm(warning)) {
         return
       }
       this.$store.dispatch('api/teams/remove', this.team).then(() => {
