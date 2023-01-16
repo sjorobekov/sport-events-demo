@@ -3,11 +3,11 @@
     <v-container :style="style" class="rounded child-border">
       <v-row>
         <v-col cols="12" class="pt-1 pb-0">
-          <v-list-item class="px-0">
+          <v-list-item class="px-2">
             <v-list-item-avatar class="mr-3" tile size="22">
               <v-img :src="sport.icon" />
             </v-list-item-avatar>
-            <v-list-item-content class="my-n4">
+            <v-list-item-content class="">
               <v-list-item-title class="text-p2">
                 {{ sport.name }}
                 <slot name="subtitle" />
@@ -17,7 +17,7 @@
           </v-list-item>
         </v-col>
       </v-row>
-      <div class="mr-n2 ml-n3">
+      <div>
         <slot name="default" />
       </div>
     </v-container>
