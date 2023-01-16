@@ -26,7 +26,7 @@
     </v-row>
     <v-row v-else>
       <v-col>
-        <AllInHouseTeamsProvider style="width: 100%" class="d-flex flex-column flex-md-row justify-md-center">
+        <AllInHouseTeamsProvider style="max-width: 100%" class="d-flex flex-wrap flex-column flex-md-row justify-md-center">
           <template #default="{ teams }">
             <FxInHouseTeamListItem
               v-for="inHouseTeam in teams"
@@ -35,6 +35,7 @@
               :participant="inHouseTeam"
               :context-school-id="contextSchoolId"
               :icon-on-right="!compact"
+              style="max-width: fit-content"
             />
           </template>
         </AllInHouseTeamsProvider>

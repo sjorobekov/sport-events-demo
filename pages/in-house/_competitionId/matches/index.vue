@@ -43,12 +43,12 @@
               All
             </v-chip>
 
-            <v-chip class="info--text" value="fixtures">
-              Fixtures
+            <v-chip class="info--text" value="upcoming">
+              Upcoming
             </v-chip>
 
-            <v-chip class="info--text" value="results">
-              Results
+            <v-chip class="info--text" value="past">
+              Past
             </v-chip>
           </v-chip-group>
 
@@ -103,36 +103,11 @@
     </v-row>
     <v-row>
       <v-col md="9">
-        <template v-if="showNextMatch">
-          <h2 class="text-p2 font-weight-bold mb-2 info--text text--darken-3">
-            Next Event
-          </h2>
-
-          <v-card>
-            <nuxt-link
-              class="text-decoration-none"
-              :to="{ name: 'in-house-competitionId-matches-matchId', params: {
-                competitionId: nextMatch.inHouseEvent.inHouseCompetitionId,
-                matchId: nextMatch.id
-              }}"
-            >
-              <FxInHouseEventItem
-                :match="nextMatch"
-                :me="nextMatch.homeTeam"
-                :opponent="nextMatch.awayTeam"
-                :context-school-id="contextSchoolId"
-                :event-type="nextMatch.inHouseEvent.eventType"
-                hide-sport-color
-              />
-            </nuxt-link>
-          </v-card>
-        </template>
-
-        <template v-if="showFixtures">
+        <template v-if="showUpcoming">
           <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
-            Fixtures
+            Upcoming
           </h2>
-          <v-card v-for="match in fixtures" :key="`fixture-${match.id}`" class="mb-2">
+          <v-card v-for="match in upcoming" :key="`upcoming-${match.id}`" class="mb-2">
             <nuxt-link
               class="text-decoration-none"
               :to="{ name: 'in-house-competitionId-matches-matchId', params: {
@@ -152,11 +127,11 @@
           </v-card>
         </template>
 
-        <template v-if="showResults">
+        <template v-if="showPast">
           <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
-            Results
+            Past
           </h2>
-          <v-card v-for="match in results" :key="`result-${match.id}`" class="mb-2">
+          <v-card v-for="match in past" :key="`past-${match.id}`" class="mb-2">
             <nuxt-link
               class="text-decoration-none"
               :to="{ name: 'in-house-competitionId-matches-matchId', params: {
@@ -236,37 +211,33 @@ export default {
       canCreateInHouseEvent: 'user/acl/canCreateInHouseEvent',
       canEditCompetition: 'user/acl/canCreateCompetition',
     }),
+
     inHouseCompetitionId () {
       return this.$route.params.competitionId
     },
+
     today () {
       return DateTime.now().toFormat('yyyy-MM-dd')
     },
+
     timeNow () {
       return DateTime.now().toFormat('HH:mm')
     },
-    nextMatch () {
-      return this.matches.find((match) => {
-        return (match.date > this.today) || (match.date > this.today && match.startTime >= this.timeNow)
-      })
-    },
-    fixtures () {
-      return this.matches
-    },
-    results () {
-      return this.matches
+
+    upcoming () {
+      return this.matches.filter(match => match.date >= this.today)
     },
 
-    showNextMatch () {
-      return this.filter === null && this.nextMatch
+    past () {
+      return this.matches.filter(match => match.date < this.today)
     },
 
-    showFixtures () {
-      return (this.filter === 'fixtures' || !this.filter) && this.fixtures.length
+    showPast () {
+      return (this.filter === 'past' || !this.filter) && this.past.length
     },
 
-    showResults () {
-      return (this.filter === 'results' || !this.filter) && this.results.length
+    showUpcoming () {
+      return (this.filter === 'upcoming' || !this.filter) && this.upcoming.length
     },
   },
 }
