@@ -2,36 +2,25 @@
   <div>
     <v-row>
       <v-col cols="12" md="9">
-        <v-card v-if="inHouseCompetition.photo">
+        <v-card :flat="!hasPhoto" :class="!hasPhoto ? 'no-photo' : null">
           <v-img
             class="white--text align-end"
-            height="388px"
-            gradient="to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)"
+            :height="photoHeight"
+            :gradient="gradient"
             :src="inHouseCompetition.photo"
           >
-            <v-list-item dark>
+            <v-list-item :dark="hasPhoto">
               <v-list-item-content>
                 <v-list-item-title class="text-h3">
                   {{ inHouseCompetition.name }}
                 </v-list-item-title>
-                <v-list-item-subtitle class="text-subheading font-weight-bold white--text">
+                <v-list-item-subtitle class="text-subheading font-weight-bold">
                   In-House Sport &bull; {{ sport.name }} &bull; {{ season.name }}
                 </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-img>
         </v-card>
-        <v-list-item v-else>
-          <v-list-item-content>
-            <v-list-item-title class="text-h3">
-              {{ inHouseCompetition.name }}
-            </v-list-item-title>
-            <v-list-item-subtitle class="text-subheading font-weight-bold">
-              In-House Sport &bull; {{ sport.name }} &bull; {{ season.name }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-
         <div class="d-flex mt-4">
           <v-chip-group
             v-model="filter"
@@ -239,6 +228,32 @@ export default {
     showUpcoming () {
       return (this.filter === 'upcoming' || !this.filter) && this.upcoming.length
     },
+
+    compact () {
+      return this.$vuetify.breakpoint.smAndDown
+    },
+
+    photoHeight () {
+      if (!this.hasPhoto) {
+        return null
+      }
+
+      return this.compact ? '220px' : '388px'
+    },
+
+    hasPhoto () {
+      return !!this.inHouseCompetition.photo
+    },
+
+    gradient () {
+      return this.hasPhoto ? 'to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)' : null
+    },
   },
 }
 </script>
+
+<style scoped>
+::v-deep .no-photo {
+  background: none;
+}
+</style>
