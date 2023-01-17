@@ -7,7 +7,7 @@
             <v-list-item-avatar class="mr-3" tile size="22">
               <v-img :src="sport.icon" />
             </v-list-item-avatar>
-            <v-list-item-content class="">
+            <v-list-item-content>
               <v-list-item-title class="text-p2">
                 {{ sport.name }}
                 <slot name="subtitle" />
