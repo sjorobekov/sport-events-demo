@@ -17,9 +17,7 @@
           </v-list-item>
         </v-col>
       </v-row>
-      <div>
-        <slot name="default" />
-      </div>
+      <slot name="default" />
     </v-container>
   </nuxt-link>
 </template>
