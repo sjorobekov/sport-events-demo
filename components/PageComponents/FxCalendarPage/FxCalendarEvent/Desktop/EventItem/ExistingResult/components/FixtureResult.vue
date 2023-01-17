@@ -1,9 +1,9 @@
 <template>
-  <div style="width: 120px">
-    <v-avatar rounded size="40" class="mr-2" color="info lighten-4">
+  <div style="width: 150px">
+    <v-avatar rounded height="40" width="60" class="mr-2" color="info lighten-4">
       {{ left }}
     </v-avatar>
-    <v-avatar rounded size="40" class="ml-2" color="info lighten-4">
+    <v-avatar rounded height="40" width="60" class="ml-2" color="info lighten-4">
       {{ right }}
     </v-avatar>
   </div>

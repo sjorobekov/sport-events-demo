@@ -1,9 +1,9 @@
 <template>
-  <div style="width: 120px">
-    <v-avatar rounded size="40" class="mr-2" color="#F1F5F9">
+  <div style="width: 150px">
+    <v-avatar rounded height="40" width="60" class="mr-2" color="#F1F5F9">
       {{ home }}
     </v-avatar>
-    <v-avatar rounded size="40" class="ml-2" color="#F1F5F9">
+    <v-avatar rounded height="40" width="60" class="ml-2" color="#F1F5F9">
       {{ away }}
     </v-avatar>
   </div>

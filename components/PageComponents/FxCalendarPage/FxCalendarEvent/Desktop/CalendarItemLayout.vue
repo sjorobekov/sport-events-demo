@@ -16,7 +16,7 @@
         >
           <slot name="score" />
         </v-col>
-        <v-col class="border-bottom flex-grow-1 ">
+        <v-col class="flex-grow-1 ">
           <slot name="right" />
         </v-col>
       </slot>
