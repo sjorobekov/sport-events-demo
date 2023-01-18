@@ -4,7 +4,7 @@
       <v-row>
         <v-col cols="12" class="pt-1 pb-0">
           <v-list-item class="px-2">
-            <v-list-item-avatar class="mr-3" tile size="22">
+            <v-list-item-avatar class="mr-1" tile size="20">
               <v-img :src="sport.icon" />
             </v-list-item-avatar>
             <v-list-item-content>

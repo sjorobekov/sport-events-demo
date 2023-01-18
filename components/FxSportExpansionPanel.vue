@@ -7,7 +7,9 @@
             <v-img :src="item.icon" />
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title class="info--text text--darken-2 text-h5s">{{ item.name }}</v-list-item-title>
+            <v-list-item-title class="info--text text--darken-2 text-h5s">
+              {{ item.name }}
+            </v-list-item-title>
             <v-list-item-subtitle v-if="subtitle">
               {{ subtitle }}
             </v-list-item-subtitle>
