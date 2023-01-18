@@ -1,6 +1,10 @@
 <template>
   <div class="text-center">
-    <v-alert v-if="!canSeeResults" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0" color="#F1F5F9">
+    <div v-if="!isLoggedIn && isResultsOnly" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0">
+      <FxEventResult :result="result.overallResult" />
+    </div>
+
+    <v-alert v-else-if="!isLoggedIn && isEventsOnly" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0" color="#F1F5F9">
       ―
     </v-alert>
 
@@ -28,10 +32,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { PublishResult } from '~/enum'
+import { PublishResult } from '@/enum'
+import FxEventResult from '@/components/FxEventResult'
 
 export default {
   name: 'FxEventResultCenterBoard',
+  components: {
+    FxEventResult,
+  },
 
   data: () => ({
     easing: 'easeInOutCubic',
@@ -47,8 +55,8 @@ export default {
       hasResult: 'page/event/hasResult',
       hasScore: 'page/event/hasScore',
       canAddOrEditResult: 'page/event/canAddOrEditResult',
-      myTeam: 'page/event/myTeam',
       isLoggedIn: 'context/isLoggedIn',
+      myTeam: 'page/event/myTeam',
     }),
 
     target () {
@@ -71,8 +79,12 @@ export default {
       return this.result?.results[0]?.opponentScore
     },
 
-    canSeeResults () {
-      return this.isLoggedIn || PublishResult.RESULTS_SCORES === this.myTeam.publishResults
+    isResultsOnly () {
+      return PublishResult.RESULTS === this.myTeam.publishResults
+    },
+
+    isEventsOnly () {
+      return PublishResult.EVENTS === this.myTeam.publishResults
     },
   },
 }

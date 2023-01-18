@@ -71,7 +71,6 @@ export default {
   computed: {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
-      isLoggedIn: 'context/isLoggedIn',
     }),
 
     event () {
@@ -109,7 +108,7 @@ export default {
     },
 
     canSeeResults () {
-      return this.isLoggedIn || PublishResult.RESULTS_SCORES === this.myTeam.publishResults
+      return [PublishResult.RESULTS, PublishResult.RESULTS_SCORES].includes(this.myTeam.publishResults)
     },
   },
 }
