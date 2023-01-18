@@ -2,19 +2,19 @@
   <div v-if="!isLoggedIn && isResultsOnly">
     <FxEventResult :result="me.overallResult" />
   </div>
-  <div v-else-if="!isLoggedIn && isEventsOnly" style="width: 120px">
-    <v-avatar rounded size="40" class="mr-2" color="info lighten-4">
+  <div v-else-if="!isLoggedIn && isEventsOnly" style="width: 150px">
+    <v-avatar rounded height="40" width="60" class="mr-2" color="info lighten-4">
       -
     </v-avatar>
-    <v-avatar rounded size="40" class="ml-2" color="info lighten-4">
+    <v-avatar rounded height="40" width="60" class="ml-2" color="info lighten-4">
       -
     </v-avatar>
   </div>
-  <div v-else style="width: 120px">
-    <v-avatar rounded size="40" class="mr-2" color="info lighten-4">
+  <div v-else style="width: 150px">
+    <v-avatar rounded height="40" width="60" class="mr-2" color="info lighten-4">
       {{ left }}
     </v-avatar>
-    <v-avatar rounded size="40" class="ml-2" color="info lighten-4">
+    <v-avatar rounded height="40" width="60" class="ml-2" color="info lighten-4">
       {{ right }}
     </v-avatar>
   </div>

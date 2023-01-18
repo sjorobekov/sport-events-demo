@@ -1,6 +1,6 @@
 <template>
   <v-list-item class="pl-0">
-    <v-list-item-avatar class="mx-3">
+    <v-list-item-avatar class="mx-1">
       <v-icon v-text="icon" />
     </v-list-item-avatar>
     <v-list-item-content>
