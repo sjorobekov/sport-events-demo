@@ -1,9 +1,8 @@
 <template>
-  <div v-if="!isLoggedIn && isResultsOnly" class="result text-no-wrap px-2">
-    <FxEventResult :result="me.overallResult" />
-  </div>
-  <div v-else-if="!isLoggedIn && isEventsOnly" class="result text-no-wrap px-2">
-    –
+  <div v-if="!hasResults" style="width: 150px">
+    <v-avatar rounded height="40" width="60" class="mr-2" color="info lighten-4">
+      ―
+    </v-avatar>
   </div>
   <div v-else class="result text-no-wrap px-2">
     {{ overallResult }}
@@ -11,16 +10,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import FxEventResult from '~/components/FxEventResult'
-import { PublishResult } from '@/enum'
-
 export default {
   name: 'MultiEventResult',
-  components: {
-    FxEventResult,
-  },
-
   props: {
     me: {
       type: Object,
@@ -28,20 +19,11 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({
-      isLoggedIn: 'context/isLoggedIn',
-    }),
     overallResult () {
       return this.$t(`EVENT_RESULT.${this.me.overallResult}`)
     },
-    myTeam () {
-      return this.me.team
-    },
-    isResultsOnly () {
-      return PublishResult.RESULTS === this.myTeam.publishResults
-    },
-    isEventsOnly () {
-      return PublishResult.EVENTS === this.myTeam.publishResults
+    hasResults () {
+      return !!this.me.results
     },
   },
 }

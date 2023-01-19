@@ -108,7 +108,7 @@ export default {
     },
 
     canSeeResults () {
-      return [PublishResult.RESULTS, PublishResult.RESULTS_SCORES].includes(this.myTeam.publishResults)
+      return [PublishResult.RESULTS, PublishResult.RESULTS_SCORES].includes(this.myTeam?.publishResults)
     },
   },
 }

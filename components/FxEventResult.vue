@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-alert v-if="isResultAcceptable" :color="backgroundColor[result]" :style="{color: color[result]}" class="ma-0 result-alert font-weight-bold">
+    <v-alert v-if="isResultAcceptable" :style="style" class="ma-0 result-alert font-weight-bold">
       {{ $t(`EVENT_RESULT.${result}`) }}
     </v-alert>
   </div>
@@ -17,18 +17,22 @@ export default {
       type: String,
       default: undefined,
     },
+    size: {
+      type: String,
+      default: 'small',
+    },
   },
 
   data: () => ({
     backgroundColor: {
-      [EventResult.WIN]: '#ECFDF5',
-      [EventResult.DRAW]: '#F1F5F9',
-      [EventResult.LOST]: '#FEF2F2',
+      [EventResult.WIN]: 'var(--v-success-lighten5)',
+      [EventResult.DRAW]: 'var(--v-info-lighten4)',
+      [EventResult.LOST]: 'var(--v-error-lighten5)',
     },
     color: {
-      [EventResult.WIN]: '#065F46',
-      [EventResult.DRAW]: '#1E293B',
-      [EventResult.LOST]: '#991B1B',
+      [EventResult.WIN]: 'var(--v-success-darken3)',
+      [EventResult.DRAW]: 'var(--v-info-darken3)',
+      [EventResult.LOST]: 'var(--v-error-darken3)',
     },
   }),
 
@@ -36,13 +40,19 @@ export default {
     isResultAcceptable () {
       return [EventResult.WIN, EventResult.DRAW, EventResult.LOST].includes(this.result)
     },
+    style () {
+      return {
+        color: this.color[this.result],
+        'background-color': this.backgroundColor[this.result],
+        'font-size': this.size === 'small' ? '1rem' : 'clamp(1rem, 2vw, 1.5rem)',
+      }
+    },
   },
 }
 </script>
 
 <style scoped>
 .result-alert {
-  font-size: clamp(1rem, 2vw, 1.5rem);
   padding: 8px 16px;
 }
 </style>

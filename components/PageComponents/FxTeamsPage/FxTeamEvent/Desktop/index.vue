@@ -52,7 +52,8 @@
     </template>
 
     <template #score>
-      <ExistingResult v-if="hasResult" :event="event" :me="me" />
+      <FxEventResult v-if="!isLoggedIn && isResultsOnly" :result="me.overallResult" />
+      <ExistingResult v-else-if="hasResult" :event="event" :me="me" />
       <NoResult v-else :me="me" :event="event" />
     </template>
 
@@ -100,6 +101,7 @@ import ExistingResult
 import NoResult from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/EventItem/NoResult/NoResult'
 import FxSchoolLogo from '@/components/FxSchoolLogo/FxSchoolLogo'
 import FxLocationLabel from '@/components/FxEventItem/FxLocationLabel'
+import FxEventResult from '@/components/FxEventResult'
 
 export default {
   name: 'FxTeamsEventItem',
@@ -109,6 +111,7 @@ export default {
     FxSchoolLogo,
     ExistingResult,
     NoResult,
+    FxEventResult,
   },
   props: {
     value: {
@@ -155,8 +158,16 @@ export default {
       ].includes(this.me.overallResult)
     },
 
+    isResultsOnly () {
+      return PublishResult.RESULTS === this.myTeam?.publishResults
+    },
+
+    isEventsOnly () {
+      return PublishResult.EVENTS === this.myTeam?.publishResults
+    },
+
     canSeeResults () {
-      return [PublishResult.RESULTS, PublishResult.RESULTS_SCORES].includes(this.myTeam.publishResults)
+      return [PublishResult.RESULTS, PublishResult.RESULTS_SCORES].includes(this.myTeam?.publishResults)
     },
   },
 }

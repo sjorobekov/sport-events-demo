@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <div v-if="!isLoggedIn && isResultsOnly" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0">
-      <FxEventResult :result="result.overallResult" />
+      <FxEventResult :result="result.overallResult" size="big" />
     </div>
 
     <v-alert v-else-if="!isLoggedIn && isEventsOnly" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0" color="#F1F5F9">
@@ -80,11 +80,11 @@ export default {
     },
 
     isResultsOnly () {
-      return PublishResult.RESULTS === this.myTeam.publishResults
+      return PublishResult.RESULTS === this.myTeam?.publishResults
     },
 
     isEventsOnly () {
-      return PublishResult.EVENTS === this.myTeam.publishResults
+      return PublishResult.EVENTS === this.myTeam?.publishResults
     },
   },
 }
