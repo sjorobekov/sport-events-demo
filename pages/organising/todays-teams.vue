@@ -25,6 +25,7 @@
 <script>
 import { DateTime } from 'luxon'
 import { mapGetters } from 'vuex'
+import { EventStatus } from '@/enum'
 import FxTeamsEventItem from '@/components/PageComponents/FxTodaysTeamsPage/FxTeamsEventItem'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
@@ -51,6 +52,7 @@ export default {
         orderDesc: 'false',
         from: DateTime.fromJSDate(this.filter.startDate).toFormat(DATE_FORMAT),
         to: DateTime.fromJSDate(this.filter.endDate).toFormat(DATE_FORMAT),
+        status: EventStatus.CONFIRMED,
       },
     })
     this.events = events
