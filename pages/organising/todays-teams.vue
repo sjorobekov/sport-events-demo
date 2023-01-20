@@ -66,6 +66,9 @@ export default {
     filter: {
       deep: true,
       async handler (val, old) {
+        if (!(val.startDate && val.endDate)) {
+          return
+        }
         if (val.startDate !== old.startDate || val.endDate !== old.endDate) {
           await this.$fetch()
         }
@@ -79,6 +82,12 @@ export default {
         })
       },
     },
+  },
+  created () {
+    this.filter = {
+      startDate: DateTime.fromFormat(this.$route.query.startDate || DateTime.now().toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
+      endDate: DateTime.fromFormat(this.$route.query.endDate || DateTime.now().plus({ month: 1 }).toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
+    }
   },
 }
 </script>
