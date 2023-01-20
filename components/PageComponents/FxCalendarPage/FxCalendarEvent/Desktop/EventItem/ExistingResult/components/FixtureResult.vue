@@ -1,5 +1,10 @@
 <template>
-  <div style="width: 150px">
+  <div v-if="!hasResults" style="width: 150px">
+    <v-avatar rounded height="40" width="60" class="mr-2" color="info lighten-4">
+      ―
+    </v-avatar>
+  </div>
+  <div v-else style="width: 150px">
     <v-avatar rounded height="40" width="60" class="mr-2" color="info lighten-4">
       {{ left }}
     </v-avatar>
@@ -12,6 +17,7 @@
 <script>
 export default {
   name: 'FixtureResult',
+
   props: {
     me: {
       type: Object,
@@ -31,6 +37,9 @@ export default {
         return 0
       }
       return this.me.results[0].opponentScore
+    },
+    hasResults () {
+      return !!this.me.results
     },
   },
 }

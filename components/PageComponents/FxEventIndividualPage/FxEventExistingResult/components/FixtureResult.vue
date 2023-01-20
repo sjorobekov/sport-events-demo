@@ -80,7 +80,7 @@ export default {
     }),
 
     canSeeResults () {
-      return this.isLoggedIn || PublishResult.RESULTS_SCORES === this.myTeam.publishResults
+      return this.isLoggedIn || PublishResult.RESULTS_SCORES === this.myTeam?.publishResults
     },
   },
 }

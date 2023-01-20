@@ -1,13 +1,14 @@
 <template>
   <CalendarItemLayout :sport="event.sport" :lead="me.lead" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
     <template #status>
-      <FxEventStatus :overall-result="me.overallResult" />
+      <FxEventStatus v-if="me.overallResult && canSeeResults" :overall-result="me.overallResult" />
     </template>
     <template #left>
       <FxTeamListItem class="px-0" :participant="me" :context-school-id="contextSchoolId" :icon-on-right="true" />
     </template>
     <template #score>
-      <ExistingResult v-if="hasResult" :event="event" :me="me" />
+      <FxEventResult v-if="!isLoggedIn && isResultsOnly" :result="me.overallResult" />
+      <ExistingResult v-else-if="hasResult" :event="event" :me="me" />
       <NoResult v-else :me="me" :event="event" />
     </template>
     <template #right>
@@ -51,12 +52,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import FxLocationLabel from '@/components/FxEventItem/FxLocationLabel'
-import { EventResult, EventType, TransportType } from '@/enum'
+import { EventResult, EventType, TransportType, PublishResult } from '@/enum'
 import ExistingResult
   from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/EventItem/ExistingResult/ExistingResult'
 import NoResult from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/EventItem/NoResult/NoResult'
 import CalendarItemLayout from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/CalendarItemLayout'
 import FxEventStatus from '@/components/FxEventStatus.vue'
+import FxEventResult from '@/components/FxEventResult'
 
 export default {
   name: 'EventItem',
@@ -66,6 +68,7 @@ export default {
     NoResult,
     ExistingResult,
     FxLocationLabel,
+    FxEventResult,
   },
   props: {
     value: {
@@ -82,6 +85,7 @@ export default {
   computed: {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
+      isLoggedIn: 'context/isLoggedIn',
     }),
 
     event () {
@@ -123,6 +127,22 @@ export default {
         EventResult.SEE_EVENT_RESULTS,
         EventResult.SEE_MATCH_NOTES,
       ].includes(this.me.overallResult)
+    },
+
+    myTeam () {
+      return this.event.me.team
+    },
+
+    isResultsOnly () {
+      return PublishResult.RESULTS === this.myTeam?.publishResults
+    },
+
+    isEventsOnly () {
+      return PublishResult.EVENTS === this.myTeam?.publishResults
+    },
+
+    canSeeResults () {
+      return [PublishResult.RESULTS, PublishResult.RESULTS_SCORES].includes(this.myTeam?.publishResults)
     },
   },
 }

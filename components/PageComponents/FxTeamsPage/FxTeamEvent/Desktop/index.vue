@@ -7,6 +7,20 @@
             <FxDateFormat :date="event.date" output-format="cccc dd MMMM yyyy" />
           </v-list-item-title>
         </v-list-item-content>
+
+        <v-list-item-action>
+          <v-chip
+            v-if="me.overallResult === EventResult.TO_BE_PLAYED"
+            color="info lighten-2"
+            outlined
+            dark
+            label
+            class="pr-3 radius-6 height-24"
+          >
+            <span class="info--text">{{ event.startTime }}</span>
+          </v-chip>
+          <FxEventStatus v-else-if="me.overallResult && canSeeResults" :overall-result="me.overallResult" />
+        </v-list-item-action>
       </v-list-item>
     </template>
 
@@ -38,7 +52,8 @@
     </template>
 
     <template #score>
-      <ExistingResult v-if="hasResult" :event="event" :me="me" />
+      <FxEventResult v-if="!isLoggedIn && isResultsOnly" :result="me.overallResult" />
+      <ExistingResult v-else-if="hasResult" :event="event" :me="me" />
       <NoResult v-else :me="me" :event="event" />
     </template>
 
@@ -80,12 +95,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import FxTeamEventContainer from './FxTeamEventDesktopLayout'
-import { EventResult, EventType } from '@/enum'
+import { EventResult, EventType, PublishResult } from '@/enum'
 import ExistingResult
   from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/EventItem/ExistingResult/ExistingResult'
 import NoResult from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/EventItem/NoResult/NoResult'
 import FxSchoolLogo from '@/components/FxSchoolLogo/FxSchoolLogo'
 import FxLocationLabel from '@/components/FxEventItem/FxLocationLabel'
+import FxEventResult from '@/components/FxEventResult'
 
 export default {
   name: 'FxTeamsEventItem',
@@ -95,6 +111,7 @@ export default {
     FxSchoolLogo,
     ExistingResult,
     NoResult,
+    FxEventResult,
   },
   props: {
     value: {
@@ -111,6 +128,7 @@ export default {
   computed: {
     ...mapGetters({
       contextSchool: 'context/school',
+      isLoggedIn: 'context/isLoggedIn',
     }),
     event () {
       return this.value
@@ -124,6 +142,10 @@ export default {
       return this.event.opponent
     },
 
+    myTeam () {
+      return this.me.team
+    },
+
     hasResult () {
       return [
         EventResult.WIN,
@@ -134,6 +156,18 @@ export default {
         EventResult['3RD'],
         EventResult.SEE_EVENT_RESULTS,
       ].includes(this.me.overallResult)
+    },
+
+    isResultsOnly () {
+      return PublishResult.RESULTS === this.myTeam?.publishResults
+    },
+
+    isEventsOnly () {
+      return PublishResult.EVENTS === this.myTeam?.publishResults
+    },
+
+    canSeeResults () {
+      return [PublishResult.RESULTS, PublishResult.RESULTS_SCORES].includes(this.myTeam?.publishResults)
     },
   },
 }
