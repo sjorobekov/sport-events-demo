@@ -24,6 +24,7 @@ export default {
         brand2: '#75DDDD',
         brand3: '#4368FA',
         info: {
+          lighten6: '#F7F7F7',
           lighten5: '#F8FAFC',
           lighten4: '#F1F5F9',
           lighten3: '#E2E8F0',

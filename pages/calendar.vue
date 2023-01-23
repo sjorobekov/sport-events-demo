@@ -4,7 +4,6 @@
       elevation="0"
       height="172"
       fixed
-      color="#F1F5F9"
       class="calendar-bar px-0"
     >
       <v-container class="my-0 py-0 px-0">
