@@ -4,7 +4,7 @@
       <v-icon v-text="icon" />
     </v-list-item-avatar>
     <v-list-item-content>
-      <v-list-item-title class="text-p2 font-weight-bold" v-text="title" />
+      <v-list-item-title class="text-p2 font-weight-bold pl-2 pl-md-0" v-text="title" />
     </v-list-item-content>
 
     <slot name="action" />

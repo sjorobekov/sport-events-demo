@@ -4,7 +4,7 @@
       <FxSchoolLogo :value="school.logo" :alt="school.name" :color="school.color" />
     </v-list-item-avatar>
     <v-list-item-content>
-      <v-list-item-title :class="iconOnRight ? 'text-p2 font-weight-bold text-right': 'text-p2 font-weight-bold'">
+      <v-list-item-title :class="iconOnRight ? 'text-p2 font-weight-bold text-right': 'text-p2 font-weight-bold pl-2'">
         {{ name }}
       </v-list-item-title>
     </v-list-item-content>
