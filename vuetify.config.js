@@ -23,6 +23,7 @@ export default {
         secondary: '#1FC1C3',
         brand2: '#75DDDD',
         brand3: '#4368FA',
+        background: '#F7F7F7',
         info: {
           lighten5: '#F8FAFC',
           lighten4: '#F1F5F9',
