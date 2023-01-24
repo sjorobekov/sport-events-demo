@@ -109,6 +109,12 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 .v-sheet.v-card:not(.v-sheet--outlined, .v-card--flat) {
   box-shadow: $box-shadow!important;
 }
+
+.v-sheet.v-card {
+  border-radius: 12px!important;
+}
+
+
 .fx-box-shadow {
   &.v-expansion-panel::before{
     box-shadow: $box-shadow;
