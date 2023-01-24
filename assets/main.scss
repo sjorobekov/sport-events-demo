@@ -107,7 +107,9 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 }
 
 .v-sheet.v-card:not(.v-sheet--outlined, .v-card--flat) {
-  box-shadow: $box-shadow!important;
+  box-shadow: none!important;
+  border: 1px solid #E4E9EF;
+  overflow: hidden;
 }
 .fx-box-shadow {
   &.v-expansion-panel::before{
@@ -134,8 +136,4 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 
 .theme--light.v-icon {
   color: var(--v-info-lighten1)
-}
-
-.theme--light.v-application {
-  background: var(--v-background-base)!important;
 }
