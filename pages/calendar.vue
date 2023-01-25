@@ -2,12 +2,12 @@
   <div>
     <v-app-bar
       elevation="0"
-      height="172"
+      height="192"
       fixed
       color="background"
       class="calendar-bar px-0"
     >
-      <v-container class="my-0 py-0 px-0">
+      <v-container class="my-0 py-0 px-0 mt-4">
         <div class="d-flex">
           <FxDateRangePicker v-model="filter" :mobile="isMobile" class="ml-2" />
 
@@ -55,7 +55,7 @@
             </v-icon><span class="hidden-xs-only">Create Event</span>
           </v-btn>
         </div>
-        <div class="mx-n4 mx-md-0">
+        <div class="mx-n4 mx-md-0 mt-1">
           <FxCalendar
             v-model="date"
             :from="filter.startDate"
