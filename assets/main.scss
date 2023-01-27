@@ -123,9 +123,12 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
   border-bottom: 1px var(--v-info-lighten4) solid;
 }
 
+.child-border-horizontal > div:not(:last-child) {
+  border-right: 1px var(--v-info-lighten4) solid;
+}
+
 .v-application .font-weight-bold {
   font-family: ProximaNova-Semibold, sans-serif!important;
-
 }
 
 .v-text-field .v-icon {

@@ -1,6 +1,6 @@
 <template>
-  <div class="mt-4 mt-md-n1">
-    <h1 class="text-h4s text-md-h3">
+  <div>
+    <h1 class="text-h4s text-md-h3 mt-16 mb-6">
       Fixtures To Confirm
     </h1>
 
@@ -9,14 +9,25 @@
       :key="`confirm-${index}`"
       class="mb-3"
     >
-      <FxFixtureToConfirm
-        :context-school-id="contextSchoolId"
-        :me.sync="item.me"
+      <!--      <FxFixtureToConfirm-->
+      <!--        :context-school-id="contextSchoolId"-->
+      <!--        :me.sync="item.me"-->
+      <!--        :opponent="item.opponent"-->
+      <!--        :event.sync="items[index]"-->
+      <!--        @accepted="removeToConfirm(index)"-->
+      <!--        @rejected="removeToConfirm(index)"-->
+      <!--      />-->
+      <FxFixtureToConfirmItem
+        :me="item.me"
         :opponent="item.opponent"
-        :event.sync="items[index]"
-        @accepted="removeToConfirm(index)"
-        @rejected="removeToConfirm(index)"
-      />
+        :event="items[index]"
+      >
+        <template #action>
+          <v-btn outlined color="info darken-1" height="34" link :to="{ name: 'organising-confirm-fixtures-eventId', params: { eventId: item.id } }">
+            View Event
+          </v-btn>
+        </template>
+      </FxFixtureToConfirmItem>
     </v-card>
 
     <p v-if="!items.length" class="text--disabled">
@@ -48,17 +59,19 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { EventStatus } from '@/enum'
-import FxFixtureToConfirm from '@/components/FxFixtureToConfirm/FxFixtureToConfirm'
-import FxFixtureRejected from '@/components/FxFixtureToConfirm/FxFixtureRejected'
+import { EventStatus } from '~/enum'
+import FxFixtureRejected from '~/components/PageComponents/FxFixtureConfirmPage/components/FxFixtureRejected.vue'
+import FxFixtureToConfirmItem
+  from '~/components/PageComponents/FxFixtureConfirmPage/components/FxFixtureToConfirmItem.vue'
 
 export default {
   name: 'ConfirmFixtures',
-  components: { FxFixtureRejected, FxFixtureToConfirm },
+  components: { FxFixtureToConfirmItem, FxFixtureRejected },
 
   meta: {
     isAllowed: ({ getters }) => getters['user/acl/canConfirmFixtures'],
   },
+
   data: () => ({
     loadingToConfirm: false,
     items: [],
@@ -80,6 +93,12 @@ export default {
     this.items = data
 
     this.rejected = rejected
+  },
+
+  head () {
+    return {
+      title: 'Fixtures To Confirm',
+    }
   },
 
   computed: {

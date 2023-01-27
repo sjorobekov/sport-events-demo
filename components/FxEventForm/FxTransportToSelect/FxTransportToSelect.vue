@@ -1,7 +1,6 @@
 <template>
   <v-item-group
     v-model="selected"
-    mandatory
   >
     <FxSheetOption
       v-for="item in items"
@@ -49,16 +48,3 @@ export default {
   },
 }
 </script>
-
-<style lang="sass" scoped>
-.base
-  height: 107px
-
-.border
-  border-radius: 4px
-  box-shadow: 0 0 0 1px var(--v-info-lighten2)
-  &.active
-    box-shadow: 0 0 0 3px var(--v-brand-base)
-  .label
-    color: var(--v-info-darken2)
-</style>
