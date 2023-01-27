@@ -4,7 +4,7 @@
       <v-col lg="9">
         <div v-if="!isMobile">
           <v-card v-if="images.length">
-            <v-carousel hide-delimiters height="320px">
+            <v-carousel cycle hide-delimiters height="320px">
               <v-carousel-item
                 v-for="(item,i) in images"
                 :key="i"
