@@ -13,6 +13,7 @@
         :async-rules="[$rule.required, $rule.email]"
         hide-details
         height="56"
+        class="mb-3"
       />
       <label>Password</label>
       <v-text-field
@@ -25,12 +26,13 @@
         :type="showPass ? 'text' : 'password'"
         height="56"
         hide-details
+        class="mb-6"
         @click:append="showPass = !showPass"
       />
 
       <v-row no-gutters>
         <v-col>
-          <v-checkbox class="mt-0" label="Remember me" />
+          <v-checkbox class="mt-0 remember-checkbox" label="Remember me" />
         </v-col>
         <v-col class="text-right">
           <nuxt-link :to="{ name: 'forgot' }" class="text-p1 info--text text--darken-4">
@@ -47,12 +49,12 @@
         :loading="loading"
         block
         height="50"
-        class="font-weight-bold"
+        class="font-weight-bold mt-2"
       >
         Log In
       </v-btn>
-      <p style="margin-top: 229px" class="text-center text-p1 info--text text--darken-2 hidden-sm-and-down">
-        By logging in to fixturr you accept our <nuxt-link to="" style="text-decoration: none" class="font-weight-bold">
+      <p style="margin-top: 120px" class="text-center text-p1 info--text text--darken-2 hidden-sm-and-down">
+        By logging in to Fixturr you accept our <nuxt-link to="" style="text-decoration: none" class="font-weight-bold">
           Terms & Conditions
         </nuxt-link>
       </p>
@@ -126,3 +128,9 @@ export default {
   },
 }
 </script>
+<style scoped lang="sass">
+
+::v-deep .remember-checkbox .v-label
+  font-size: 0.875rem!important
+  color: var(--v-info-darken4)!important
+</style>
