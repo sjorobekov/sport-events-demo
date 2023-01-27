@@ -4,7 +4,7 @@
       <FxEventMobileContainer />
     </template>
     <div>
-      <v-card class="rounded-b-0" color="primary" dark :tile="isMobile">
+      <v-card class="rounded-b-0 date-card" color="primary" dark :tile="isMobile">
         <v-list-item>
           <v-list-item-action>
             <v-btn v-if="isMobile" icon @click="$router.back()">
@@ -93,6 +93,15 @@ export default {
 </script>
 
 <style scoped lang="sass">
+@import '~vuetify/src/styles/styles.sass'
 .event-header-chip
   border-color: rgba(255, 255, 255, 0.5)
+.date-card
+  border: 1px solid #E4E9EF!important
+  border-bottom: none!important
+
+@media #{map-get($display-breakpoints, 'sm-and-down')}
+  .date-card.v-card
+    border-radius: 0px!important
+    border: none!important
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="rounded-t-0 pt-3 pb-4">
+  <v-card class="rounded-t-0 pt-4 pb-4 score-card">
     <table style="width: 100%">
       <tbody>
         <tr>
@@ -121,8 +121,18 @@ export default {
   font-family: ProximaNova-Semibold, sans-serif
 .team-cell
   width: 40%
+.score-card
+  border-top-left-radius: 0!important
+  border-top-right-radius: 0!important
+  border-bottom-left-radius: 12px!important
+  border-bottom-right-radius: 12px!important
 @media #{map-get($display-breakpoints, 'sm-and-down')}
   .team-name
     font-size: 0.975rem
     line-height: 1rem
+
+  .score-card.v-card
+    border-radius: 0!important
+    border: 0!important
+
 </style>

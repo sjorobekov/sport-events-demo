@@ -85,7 +85,7 @@ export default {
 
 .card-border {
   border-bottom: 16px solid var(--v-primary-base)!important;
-  border-radius: 0;
+  border-radius: 0!important;
 }
 
 .mobile-tabs /deep/ .v-tab {
