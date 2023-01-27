@@ -1,7 +1,7 @@
 <template>
   <v-expansion-panels>
     <v-expansion-panel :style="style" class="fx-box-shadow">
-      <v-expansion-panel-header class="py-0 pl-2">
+      <v-expansion-panel-header class="pl-4 py-1">
         <v-list-item class="px-0 ">
           <v-list-item-avatar tile>
             <v-img :src="item.icon" />
@@ -50,4 +50,9 @@ export default {
 <style lang="sass">
 .v-expansion-panel-content__wrap
   padding: 0!important
+
+.v-expansion-panels
+  border: 1px solid #E4E9EF
+  overflow: hidden
+  border-radius: 8px
 </style>
