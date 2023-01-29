@@ -9,7 +9,7 @@
     <v-btn
       v-for="(item, i) in items"
       :key="i"
-      class="fx-bottom-menu mx-1"
+      class="fx-bottom-menu mx-1 pt-1"
       link
       :to="item.to"
       @click="item.onClick"
