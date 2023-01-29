@@ -1,9 +1,9 @@
 <template>
-  <v-card class="rounded-t-0 pt-4 pb-4 score-card">
+  <v-card class="rounded-t-0 pa-6 score-card ">
     <table style="width: 100%">
       <tbody>
-        <tr>
-          <td class="text-center team-cell">
+        <tr class="hover-none">
+          <td class="text-center team-cell pb-2 pb-md-3">
             <wrapped-component :wrap="!!myTeam">
               <template #wrapper>
                 <nuxt-link class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeamId } }" />
@@ -14,7 +14,7 @@
           <td rowspan="2">
             <FxEventResultCenterBoard />
           </td>
-          <td class="text-center team-cell">
+          <td class="text-center team-cell pb-2 pb-md-3">
             <wrapped-component v-if="opponentTeam" :wrap="!!opponentLink">
               <template #wrapper>
                 <a :href="opponentLink" class="text-decoration-none" />
@@ -24,7 +24,7 @@
             <v-icon v-else size="64" color="info darken-2" v-text="icon" />
           </td>
         </tr>
-        <tr>
+        <tr class="hover-none">
           <td class="text-center team-name px-2 px-md-6">
             <wrapped-component :wrap="!!myTeam">
               <template #wrapper>
@@ -126,6 +126,10 @@ export default {
   border-top-right-radius: 0!important
   border-bottom-left-radius: 12px!important
   border-bottom-right-radius: 12px!important
+
+.hover-none:hover
+  background-color: white!important
+
 @media #{map-get($display-breakpoints, 'sm-and-down')}
   .team-name
     font-size: 0.975rem
