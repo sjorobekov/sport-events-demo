@@ -62,4 +62,9 @@ export default [
   'portrait',
   'listOutline',
   'user',
+  'calendar-1',
+  'clock-1',
+  'location-1',
+  'transport-1',
+  'info-1',
 ]
