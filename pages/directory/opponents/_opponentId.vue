@@ -1,33 +1,22 @@
 <template>
-  <div v-if="opponentId">
-    <v-row>
-      <v-col>
-        <FxOpponentCard :opponent="opponent" :school="school" />
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <FxContactsCard />
-      </v-col>
-      <v-col>
-        <FxMapCard :coordinates="coordinates" />
-      </v-col>
-    </v-row>
-  </div>
+  <client-only>
+    <FxOpponentSelectedItemModal
+      v-if="opponent"
+      :item="opponent"
+      :modal="isMobile"
+      @click:back="$router.push({name: 'directory-opponents'})"
+    />
+  </client-only>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import FxOpponentCard from '@/components/PageComponents/FxOpponentPage/FxOpponentCard'
-import FxContactsCard from '@/components/PageComponents/FxOpponentPage/FxContactsCard'
-import FxMapCard from '@/components/PageComponents/FxOpponentPage/FxMapCard'
+import FxOpponentSelectedItemModal from '@/components/PageComponents/FxOpponentPage/FxOpponentSelectedItemModal'
 
 export default {
   name: 'OpponentIndividualPage',
   components: {
-    FxOpponentCard,
-    FxContactsCard,
-    FxMapCard,
+    FxOpponentSelectedItemModal,
   },
 
   data: () => ({
@@ -35,9 +24,7 @@ export default {
   }),
 
   async fetch () {
-    if (this.opponentId) {
-      this.opponent = await this.$store.dispatch('api/opponents/fetch', { schoolId: this.contextSchoolId, id: this.opponentId })
-    }
+    this.opponent = await this.$store.dispatch('api/opponents/fetch', { schoolId: this.contextSchoolId, id: this.opponentId })
   },
 
   computed: {
@@ -53,10 +40,13 @@ export default {
     coordinates () {
       return this.school?.coordinates || null
     },
+    isMobile () {
+      return this.$vuetify.breakpoint.smAndDown
+    },
   },
 
   watch: {
-    opponentId () {
+    '$route.params.opponentId' () {
       this.$fetch()
     },
   },
