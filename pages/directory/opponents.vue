@@ -81,10 +81,6 @@ export default {
       schoolId: 'context/schoolId',
       canCreateOpponent: 'user/acl/canCreateOpponent',
     }),
-
-    isMobile () {
-      return this.$vuetify.breakpoint.smAndDown
-    },
   },
 }
 </script>

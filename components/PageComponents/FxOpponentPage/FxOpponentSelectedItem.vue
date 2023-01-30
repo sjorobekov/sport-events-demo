@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import FxOpponentCard from '@/components/PageComponents/FxOpponentPage/FxOpponentCard'
 import FxContactsCard from '@/components/PageComponents/FxOpponentPage/FxContactsCard'
 import FxMapCard from '@/components/PageComponents/FxOpponentPage/FxMapCard'
@@ -67,6 +68,9 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      isMobileDevice: 'context/isMobile',
+    }),
     opponentId () {
       return this.$route.params.opponentId
     },
@@ -80,7 +84,10 @@ export default {
       return this.school?.coordinates || null
     },
     isMobile () {
-      return this.$vuetify.breakpoint.smAndDown
+      if (process.client) {
+        return this.$vuetify.breakpoint.smAndDown
+      }
+      return this.isMobileDevice
     },
     name () {
       return this.school?.name
@@ -96,7 +103,6 @@ export default {
 </script>
 
 <style scoped lang="sass">
-@import '~vuetify/src/styles/styles.sass'
 .team-name
   font-size: 1.4375rem
   line-height: 1.3rem
