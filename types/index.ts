@@ -216,6 +216,7 @@ export interface Event {
   fixtureType: FixtureType
   date: string
   startTime: string
+  endTime?: string
   repeats?: boolean
   repeatPeriod?: RepeatPeriod
   repeatDays?: string[]

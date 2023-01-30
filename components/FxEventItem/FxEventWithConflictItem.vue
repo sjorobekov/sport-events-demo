@@ -131,6 +131,9 @@ export default {
         sportLocationId: this.event.sportLocationId,
         teamId: this.me.teamId,
         leadId: this.me.leadId,
+        meetTime: this.me.meetTime,
+        endTime: this.event.endTime,
+        returnTime: this.me.returnTime,
       })
 
       this.conflicts = status === 'CONFLICT' ? events : []

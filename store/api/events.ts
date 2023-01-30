@@ -53,7 +53,9 @@ type CheckEventConflictPayload = {
   sportLocationId: string,
   teamId: string,
   leadId: string,
-  returnTime: string,
+  returnTime?: string,
+  meetTime?: string,
+  endTime: string
 }
 
 type EventConflictResponse = {
@@ -97,6 +99,7 @@ export type EventUpdatePayload = {
   startTime: string
   meetTime: string
   returnTime: string
+  endTime: string
   leadId: string
   location: EventLocationType,
   sportLocationId: string
