@@ -38,7 +38,7 @@ export default {
   computed: {
     selected: {
       set (val) {
-        this.$emit('input', this.items[val].value)
+        this.$emit('input', val ? this.items[val].value : null)
       },
       get () {
         return this.items.findIndex(item => item.value === this.value)

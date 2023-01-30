@@ -34,6 +34,10 @@
     </template>
     <template v-else>
       <FxFixtureDetailsConfirmItem :sport="event.sport" :event="event" :opponent="opponent" :form-data="formData" :me="me">
+        <template #actions>
+          <FxFixtureConflictBadge :conflict="!!conflicts.length" />
+        </template>
+
         <FxFixtureConflictAlert v-for="(conflict, idx) in conflicts" :key="`conflict-${conflict.eventId}`" :conflict="conflict">
           <FxFixtureConflictDialog :event-id="conflict.eventId" :conflict="conflict" @resolved="onConflictResolveHandler(idx)">
             <template #activator="{ on, attrs }">
@@ -107,16 +111,14 @@ export default {
     step: 1,
     conflicts: [],
 
-    // /** @type {Partial<EventConfirmationPayload>} */
-    // formData: {
-    //   leadId: null,
-    //   teamId: null,
-    //   meetTime: null,
-    //   returnTime: null,
-    //   sportLocationId: null,
-    // },
-
-    formData: { leadId: 'ffbcd333-39d5-44c1-b7b7-4a6e70ca131e', teamId: '7875df49-67d6-46de-82d4-29c939dbe55f', meetTime: '10:00', returnTime: '10:00', sportLocationId: null, transportTo: 'VENUE', transportFrom: 'BUS' },
+    /** @type {Partial<EventConfirmationPayload>} */
+    formData: {
+      leadId: null,
+      teamId: null,
+      meetTime: null,
+      returnTime: null,
+      sportLocationId: null,
+    },
 
     lead: {},
   }),

@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-container :style="style" class="rounded">
+    <v-container :style="style" class="rounded child-border">
       <v-row>
         <v-col class="pt-1 pb-0">
           <v-list-item class="px-0">
@@ -18,15 +18,15 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col>
-          <FxTeamListItem :participant="meData" icon-on-right />
+        <v-col cols="12" sm="6">
+          <FxTeamListItem :participant="meData" :icon-on-right="!isMobile" />
         </v-col>
-        <v-col>
+        <v-col cols="12" sm="6">
           <FxTeamListItem :participant="opponent" />
         </v-col>
       </v-row>
-      <v-row>
-        <v-col class="d-flex align-center" cols="12" sm="12" md="4">
+      <v-row class="child-border-break-sm">
+        <v-col class="d-flex align-center" cols="12" md="4">
           <ListItem>
             <template #icon>
               <v-icon>$vuetify.icons.calendarRoundedOutline</v-icon>
@@ -39,7 +39,7 @@
             </template>
           </ListItem>
         </v-col>
-        <v-col class="d-flex align-center" cols="12" sm="12" md="4">
+        <v-col class="d-flex align-center" cols="12" md="4">
           <ListItem>
             <template #icon>
               <v-icon>$vuetify.icons.clockOutline</v-icon>
@@ -74,7 +74,7 @@
             </template>
           </ListItem>
         </v-col>
-        <v-col class="d-flex align-center" cols="12" sm="12" md="4">
+        <v-col class="d-flex align-center" cols="12" md="4">
           <ListItem>
             <template #icon>
               <FxAvatar :size="24" :value="lead.avatar" />
@@ -85,8 +85,8 @@
           </ListItem>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col class="d-flex align-center">
+      <v-row class="child-border-break-xs">
+        <v-col class="d-flex align-center" cols="12" sm="6">
           <ListItem>
             <template #icon>
               <v-icon>$vuetify.icons.locationOutline</v-icon>
@@ -103,7 +103,7 @@
             </template>
           </ListItem>
         </v-col>
-        <v-col class="d-flex align-center">
+        <v-col class="d-flex align-center" cols="12" sm="6">
           <ListItem v-if="!formData.noNeedTransport">
             <template #icon>
               <v-icon>$vuetify.icons.travel</v-icon>
@@ -146,7 +146,7 @@
           </ListItem>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row v-if="$slots.default">
         <v-col>
           <slot name="default" />
         </v-col>
@@ -220,6 +220,10 @@ export default {
         ...this.me,
         teamId: this.formData.teamId,
       }
+    },
+
+    isMobile () {
+      return this.$vuetify.breakpoint.xsOnly
     },
   },
 }
