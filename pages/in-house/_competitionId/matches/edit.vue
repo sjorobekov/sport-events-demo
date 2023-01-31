@@ -91,13 +91,26 @@ export default {
         return
       }
 
-      this.$store.dispatch('api/inHouseTeams/save', {
+      this.$store.dispatch('api/inHouseCompetitions/save', {
         schoolId: this.contextSchoolId,
         ...this.formData,
       }).then((res) => {
         this.$router.push({ name: 'settings-in-house-teams', params: { id: res.schoolId, teamId: res.id } })
       }).finally(() => {
         this.loading = false
+      })
+    },
+    remove () {
+      const warning = 'Warning: Continuing will permanently delete this competition. ' +
+                      'However, events linked to this team will still be retained in the database. ' +
+                      'Are you sure you want to proceed?'
+      if (!confirm(warning)) {
+        return
+      }
+      this.$store.dispatch('api/inHouseCompetitions/remove', this.inHouseCompetition).then(() => {
+        this.$router.push({ name: 'inHouseCompetitions' })
+      }).catch(() => {
+        this.$toast.error('Unknown Error')
       })
     },
   },
