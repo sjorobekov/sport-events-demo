@@ -1,5 +1,5 @@
 <template>
-  <v-container class="rounded">
+  <v-container>
     <v-row>
       <v-col cols="12" class="border-bottom pt-1 pb-0">
         <slot name="date" />

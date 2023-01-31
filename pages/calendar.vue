@@ -105,7 +105,7 @@
         >
           <FxCalendarPill :value="key" class="my-4" />
 
-          <v-card v-for="event in eventsGroupedByDate[key]" :key="`event-${event.id}`" class="mb-2">
+          <v-card v-for="event in eventsGroupedByDate[key]" :key="`event-${event.id}`" class="mb-2 card-has-hover">
             <FxCalendarEvent :value="event" />
           </v-card>
         </div>
@@ -429,6 +429,7 @@ export default {
 .calendar-content {
   margin-top: 180px;
 }
+
 @media only screen and (min-width: 960px) {
   .calendar-bar {
     top: 55px;

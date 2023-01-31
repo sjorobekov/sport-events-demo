@@ -96,7 +96,7 @@
           <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
             Upcoming
           </h2>
-          <v-card v-for="match in upcoming" :key="`upcoming-${match.id}`" class="mb-2">
+          <v-card v-for="match in upcoming" :key="`upcoming-${match.id}`" class="mb-2 card-has-hover">
             <nuxt-link
               class="text-decoration-none"
               :to="{ name: 'in-house-competitionId-matches-matchId', params: {
@@ -120,7 +120,7 @@
           <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
             Past
           </h2>
-          <v-card v-for="match in past" :key="`past-${match.id}`" class="mb-2">
+          <v-card v-for="match in past" :key="`past-${match.id}`" class="mb-2 card-has-hover">
             <nuxt-link
               class="text-decoration-none"
               :to="{ name: 'in-house-competitionId-matches-matchId', params: {
