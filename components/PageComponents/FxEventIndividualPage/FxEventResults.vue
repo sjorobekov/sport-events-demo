@@ -50,7 +50,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import cloneDeep from 'lodash/cloneDeep'
 import FxEventResultForm from '@/components/FxEventResultForm/FxEventResultForm'
-import FxEventItemCard from '~/components/FxEventItemCard.vue'
+import FxEventItemCard from '@/components/FxEventItemCard'
 import FxEventExistingResult
   from '@/components/PageComponents/FxEventIndividualPage/FxEventExistingResult/FxEventExistingResult'
 import { EventType } from '@/enum'

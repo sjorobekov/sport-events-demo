@@ -91,7 +91,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import FxEventItemCard from '~/components/FxEventItemCard.vue'
+import FxEventItemCard from '@/components/FxEventItemCard'
 
 export default {
   name: 'FxInHouseEventTeamSheet',
