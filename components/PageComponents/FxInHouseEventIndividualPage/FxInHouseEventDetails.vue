@@ -1,5 +1,5 @@
 <template>
-  <FxInHouseEventItemCard>
+  <FxEventItemCard>
     <template #title>
       Details
     </template>
@@ -102,7 +102,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </FxInHouseEventItemCard>
+  </FxEventItemCard>
 </template>
 
 <script>
@@ -110,12 +110,10 @@ import { mapGetters } from 'vuex'
 import ListItem from '@/components/FxEventItem/ListItem'
 import FxAvatar from '@/components/FxAvatar'
 import FxInHouseLocationLabel from '@/components/FxInHouseEventItem/FxInHouseLocationLabel'
-import FxInHouseEventItemCard from '@/components/PageComponents/FxInHouseEventIndividualPage/FxInHouseEventItemCard'
 
 export default {
   name: 'FxInHouseEventDetails',
   components: {
-    FxInHouseEventItemCard,
     ListItem,
     FxAvatar,
     FxInHouseLocationLabel,

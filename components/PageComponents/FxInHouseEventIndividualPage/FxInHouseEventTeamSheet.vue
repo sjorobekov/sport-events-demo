@@ -1,5 +1,5 @@
 <template>
-  <FxInHouseEventItemCard>
+  <FxEventItemCard>
     <template #title>
       {{ name }} Team Sheet
     </template>
@@ -86,16 +86,16 @@
         </tr>
       </tbody>
     </v-simple-table>
-  </FxInHouseEventItemCard>
+  </FxEventItemCard>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import FxInHouseEventItemCard from '@/components/PageComponents/FxInHouseEventIndividualPage/FxInHouseEventItemCard'
+import FxEventItemCard from '~/components/FxEventItemCard.vue'
 
 export default {
   name: 'FxInHouseEventTeamSheet',
-  components: { FxInHouseEventItemCard },
+  components: { FxEventItemCard },
   props: {
     team: {
       type: Object,

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import FxEventItemCard from '@/components/PageComponents/FxEventIndividualPage/FxEventItemCard'
+import FxEventItemCard from '~/components/FxEventItemCard.vue'
 export default {
   name: 'FxMap',
   components: { FxEventItemCard },

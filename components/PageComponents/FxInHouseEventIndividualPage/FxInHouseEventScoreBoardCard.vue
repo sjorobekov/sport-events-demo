@@ -11,11 +11,17 @@
         <FxTeam class="pl-0" :name="opponentTeam.name" :color="opponentTeam.color" :logo="opponentTeam.logo" />
       </v-col>
     </v-row>
-    <v-row v-else no-gutters class="pa-6 d-flex justify-center">
-      <v-col v-for="team in teams" :key="team.id" cols="2">
-        <FxTeam class="pl-0" :name="team.name" :color="team.color" :logo="team.logo" />
-      </v-col>
-    </v-row>
+
+    <div v-else class="pa-6 d-flex gap-md justify-center">
+      <FxTeam
+        v-for="team in teams"
+        :key="team.id"
+        class="pl-0"
+        :name="team.name"
+        :color="team.color"
+        :logo="team.logo"
+      />
+    </div>
   </v-card>
 </template>
 

@@ -39,6 +39,8 @@ export default {
       hasScore: 'page/event/hasScore',
       canAddOrEditResult: 'page/event/canAddOrEditResult',
       canHaveResult: 'page/event/canHaveResult',
+      isMobileDevice: 'context/isMobile',
+      isTabletDevice: 'context/isTablet',
     }),
 
     showResultsCard () {

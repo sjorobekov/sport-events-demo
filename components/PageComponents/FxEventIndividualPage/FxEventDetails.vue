@@ -155,7 +155,7 @@ import { TransportType } from '@/enum'
 import ListItem from '@/components/FxEventItem/ListItem'
 import FxAvatar from '@/components/FxAvatar'
 import FxLocationLabel from '@/components/FxEventItem/FxLocationLabel'
-import FxEventItemCard from '@/components/PageComponents/FxEventIndividualPage/FxEventItemCard'
+import FxEventItemCard from '~/components/FxEventItemCard.vue'
 import FxEventDetailsEditForm from '@/components/FxEventDetailsEditForm'
 import FxEventDateOrStartTimeChangeConfirmationModal from '@/components/FxEventDateOrStartTimeChangeConfirmationModal'
 
