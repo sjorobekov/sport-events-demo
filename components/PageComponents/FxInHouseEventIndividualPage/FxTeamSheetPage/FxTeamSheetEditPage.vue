@@ -1,13 +1,7 @@
 <template>
-  <v-row>
-    <v-col
-      cols="12"
-      sm="12"
-      md="12"
-      lg="7"
-      class="pr-4"
-    >
-      <FxInHouseEventItemCard>
+  <FxEventSheetTabulatedContent :show-tabs="isMobile">
+    <template #select>
+      <FxEventItemCard>
         <template #title>
           Search & Add
         </template>
@@ -29,17 +23,18 @@
             </v-col>
           </v-row>
         </v-container>
-      </FxInHouseEventItemCard>
-    </v-col>
-    <v-col cols="12" sm="12" md="12" lg="5">
-      <FxInHouseEventItemCard>
+      </FxEventItemCard>
+    </template>
+
+    <template #sorting>
+      <FxEventItemCard>
         <template #title>
           Team Sheet
         </template>
 
         <template #actions>
           <div>
-            <v-btn outlined link :to="{ name: 'matches-matchId', params: { matchId: inHouseMatch.id } }" exact>
+            <v-btn outlined link exact @click="$router.back()">
               Cancel
             </v-btn>
             <v-btn depressed color="primary" @click="save()">
@@ -78,7 +73,7 @@
                   {{ $tc('page.FxTeamSheetEditPage.STUDENTS_SELECTED', sheet.length) }}
                 </div>
                 <v-simple-table class="sheet-table">
-                  <draggable v-model="sheet" ghost-class="ghost" tag="tbody">
+                  <draggable v-model="sheet" ghost-class="ghost" tag="tbody" handle=".student-icon">
                     <tr v-for="(studentId, i) in sheet" :key="studentId">
                       <td style="width: 70px" class="text-center no-right-border">
                         <span class="info--text text-p3">{{ (i + 1).toString().padStart(2, '0') }}.</span>
@@ -104,21 +99,33 @@
             </v-col>
           </v-row>
         </v-container>
-      </FxInHouseEventItemCard>
-    </v-col>
-  </v-row>
+      </FxEventItemCard>
+    </template>
+
+    <template #actions>
+      <div class="d-flex px-2 pb-4">
+        <v-spacer />
+        <v-btn outlined class="mr-2" @click="$router.back()">
+          Cancel
+        </v-btn>
+        <v-btn depressed color="primary" @click="save()">
+          Confirm
+        </v-btn>
+      </div>
+    </template>
+  </FxEventSheetTabulatedContent>
 </template>
 
 <script>
 import draggable from 'vuedraggable'
 import { mapGetters } from 'vuex'
-import FxInHouseEventItemCard from '@/components/PageComponents/FxInHouseEventIndividualPage/FxInHouseEventItemCard'
-import FxGroupedTeamSheetSelect
-  from '@/components/PageComponents/FxInHouseEventIndividualPage/FxTeamSheetPage/FxGroupedTeamSheetSelect'
+import FxGroupedTeamSheetSelect from './FxGroupedTeamSheetSelect'
+import FxEventSheetTabulatedContent
+  from '@/components/FxEventSheetTabulatedContent.vue'
 
 export default {
   name: 'FxTeamSheetEditPage',
-  components: { FxGroupedTeamSheetSelect, FxInHouseEventItemCard, draggable },
+  components: { FxEventSheetTabulatedContent, FxGroupedTeamSheetSelect, draggable },
 
   data: () => ({
     sheet: [],
@@ -127,6 +134,7 @@ export default {
     students: [],
     recentTeamSheet: [],
     team: {},
+    teamSheet: [],
   }),
 
   computed: {
@@ -136,7 +144,18 @@ export default {
       inHouseMatch: 'page/inHouseEvent/inHouseMatch',
       teamSheets: 'page/inHouseEvent/teamSheets',
       teams: 'page/inHouseEvent/teams',
+      isMobileDevice: 'context/isMobile',
+      isTabletDevice: 'context/isTablet',
+      getTeamSheetByTeamId: 'page/inHouseEvent/getTeamSheetByTeamId',
     }),
+
+    isMobile () {
+      if (process.client) {
+        return this.$vuetify.breakpoint.smAndDown
+      }
+
+      return this.isMobileDevice || this.isTabletDevice
+    },
   },
 
   async created () {
@@ -153,6 +172,8 @@ export default {
     })
 
     this.students = data
+
+    this.teamSheet = this.getTeamSheetByTeamId(this.team.id)
 
     if (this.teamSheet) {
       this.sheet = [...this.teamSheet.map(item => item.id)]

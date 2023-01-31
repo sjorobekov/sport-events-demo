@@ -121,7 +121,7 @@ import FxEventItemCard from '@/components/FxEventItemCard'
 import FxGroupedTeamSheetSelect
   from '@/components/PageComponents/FxEventIndividualPage/FxTeamSheetPage/FxGroupedTeamSheetSelect'
 import FxEventSheetTabulatedContent
-  from '~/components/PageComponents/FxEventIndividualPage/FxEventTeamSheet/FxEventSheetTabulatedContent.vue'
+  from '@/components/FxEventSheetTabulatedContent.vue'
 
 export default {
   name: 'FxTeamSheetEditPage',
