@@ -44,7 +44,7 @@
           <v-spacer />
 
           <div class="pt-1">
-            <v-btn v-if="canEditCompetition" class="hidden-sm-and-down" outlined>
+            <v-btn v-if="canEditCompetition" class="hidden-sm-and-down" outlined link :to="{ name: 'in-house-competitionId-matches-edit', params: { competitionId: inHouseCompetitionId }}">
               <v-icon>$vuetify.icons.edit</v-icon>Edit Comp
             </v-btn>
             <v-btn
@@ -65,7 +65,7 @@
                 </v-btn>
               </template>
               <v-list>
-                <v-list-item v-if="canEditCompetition">
+                <v-list-item v-if="canEditCompetition" link :to="{ name: 'in-house-competitionId-matches-edit', params: { competitionId: inHouseCompetitionId }}">
                   <v-list-item-title>Edit Competition</v-list-item-title>
                 </v-list-item>
                 <v-list-item v-if="canCreateInHouseEvent" link :to="{ name: 'in-house-competitionId-matches-add', params: { competitionId: inHouseCompetitionId }}">
