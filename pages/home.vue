@@ -98,7 +98,7 @@
 
         <div class="pt-4">
           <template v-if="events.length > 0">
-            <v-card v-for="item in fixtures" :key="item.id" class="mb-4">
+            <v-card v-for="item in fixtures" :key="item.id" class="mb-4 card-has-hover">
               <FxCalendarEvent :value="item" />
             </v-card>
           </template>
