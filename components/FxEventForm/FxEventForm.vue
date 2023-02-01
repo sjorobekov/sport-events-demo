@@ -222,7 +222,7 @@
       </v-menu>
 
       <v-row>
-        <v-col cols="4">
+        <v-col cols="6" sm="3">
           <label for="startTime">Start Time</label>
 
           <FxTimePickerMenu
@@ -232,7 +232,7 @@
             @input="updateEvent('startTime', $event)"
           />
         </v-col>
-        <v-col cols="4">
+        <v-col cols="6" sm="3">
           <label for="meetTime">Meet Time</label>
 
           <FxTimePickerMenu
@@ -241,11 +241,23 @@
             @input="updateMe('meetTime', $event)"
           />
         </v-col>
-        <v-col cols="4">
+
+        <v-col cols="6" sm="3">
+          <label for="endTime">End Time</label>
+
+          <FxTimePickerMenu
+            id="endTime"
+            :value="eventForm.endTime"
+            @input="updateEvent('endTime', $event)"
+          />
+        </v-col>
+
+        <v-col cols="6" sm="3">
           <label for="returnTime">Return Time</label>
 
           <FxTimePickerMenu
             id="returnTime"
+            :async-rules="[$rule.required]"
             :value="meForm.returnTime"
             @input="updateMe('returnTime', $event)"
           />

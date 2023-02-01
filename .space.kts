@@ -10,7 +10,7 @@ job("Build and push Docker") {
     }
 
     push("fixturr.registry.jetbrains.space/p/software-development/registry/ui") {
-      tags("\$BRANCH")
+      tags("\$BRANCH-\$JB_SPACE_EXECUTION_NUMBER")
     }
   }
 }

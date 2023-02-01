@@ -2,7 +2,7 @@
   <v-card>
     <v-container>
       <v-row>
-        <v-col cols="12" class="border-bottom pt-1 pb-0">
+        <v-col cols="12" class="border-bottom pt-1 pb-0 hidden-sm-and-down">
           <v-list-item class="px-0">
             <v-list-item-avatar v-if="school" color="white" size="44">
               <FxSchoolLogo :value="school.logo" :color="school.color" :size="44" />
@@ -30,7 +30,7 @@
         <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
           <v-list-item class="px-0">
             <v-list-item-icon class="mr-3">
-              <v-icon>$vuetify.icons.calendar</v-icon>
+              <v-icon>mdi-map-marker</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="text-p2 info--text text--darken-4">

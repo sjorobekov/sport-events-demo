@@ -7,11 +7,11 @@
 
     <v-row class="mt-5">
       <v-col cols="12" md="9">
-        <h2 class="text-h4s">
+        <h2 class="text-h4s mb-2">
           Today's Events
         </h2>
         <section v-if="events.length > 0">
-          <v-card v-for="event in events" :key="`event-${event.id}`" class="mb-2">
+          <v-card v-for="event in events" :key="`event-${event.id}`" class="mb-2 card-has-hover">
             <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
               <FxCalendarEvent :value="event" />
             </nuxt-link>
@@ -26,7 +26,7 @@
         <h2 class="text-h4s mb-2">
           My Teams
         </h2>
-        <v-card v-for="team in teams" :key="team.id" class="mb-2" :to="{ name: 'teams-id', params: { id: team.id } }">
+        <v-card v-for="team in teams" :key="team.id" class="mb-2 card-has-hover" :to="{ name: 'teams-id', params: { id: team.id } }">
           <v-container :style="style(team.sport)" class="rounded">
             <v-row>
               <v-col class="border-bottom pt-1 pb-0">

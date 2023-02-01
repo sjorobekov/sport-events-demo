@@ -1,11 +1,13 @@
 <template>
   <div>
-    <div class="d-flex mt-4 mt-md-n1">
-      <h1 class="text-h4s text-md-h3">
-        Opponents
-      </h1>
+    <v-row class="d-flex mt-4 mt-md-n1">
+      <v-col cols="12" sm="5" md="5">
+        <h1 class="text-h4s text-md-h3">
+          Opponents
+        </h1>
+      </v-col>
       <v-spacer />
-      <div v-if="canCreateOpponent">
+      <v-col v-if="canCreateOpponent" class="d-flex">
         <v-btn
           depressed
           outlined
@@ -27,30 +29,10 @@
           <v-icon>mdi-plus-circle-outline</v-icon>
           Add School
         </v-btn>
-      </div>
-    </div>
-    <v-row class="d-md-none">
-      <v-col>
-        <v-tabs icons-and-text centered fixed-tabs>
-          <v-tab
-            v-for="(item, i) in opponents"
-            :key="i"
-            link
-            :to="{ name: 'directory-opponents-opponentId', params: { opponentId: item.id } }"
-          >
-            <section v-if="item.opponentSchool">
-              {{ item.opponentSchool.name }}
-              <FxSchoolLogo :value="item.opponentSchool.logo" :color="item.opponentSchool.color" :size="44" />
-            </section>
-            <section v-else>
-              {{ item.name }}
-            </section>
-          </v-tab>
-        </v-tabs>
       </v-col>
     </v-row>
     <v-row>
-      <v-col class="d-none d-sm-none d-md-block" md="4" lg="3">
+      <v-col cols="12" md="4">
         <v-card>
           <v-list dense class="py-0">
             <v-list-item>
@@ -59,8 +41,8 @@
               </v-list-item-content>
             </v-list-item>
             <v-list-item
-              v-for="(item, i) in opponents"
-              :key="i"
+              v-for="item in opponents"
+              :key="item.id"
               link
               :to="{ name: 'directory-opponents-opponentId', params: { opponentId: item.id } }"
             >
@@ -76,7 +58,7 @@
           </v-list>
         </v-card>
       </v-col>
-      <v-col md="8" lg="9">
+      <v-col class="hidden-sm-and-down" md="7">
         <NuxtChild />
       </v-col>
     </v-row>

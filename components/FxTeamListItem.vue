@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import FxSchoolLogo from '@/components/FxSchoolLogo/FxSchoolLogo'
 
 export default {
@@ -23,10 +23,6 @@ export default {
   props: {
     participant: {
       type: Object,
-      required: true,
-    },
-    contextSchoolId: {
-      type: String,
       required: true,
     },
     iconOnRight: {
@@ -42,6 +38,9 @@ export default {
   }),
 
   computed: {
+    ...mapGetters({
+      contextSchoolId: 'context/schoolId',
+    }),
     name () {
       return this.opponent?.name || this.team?.name || this.school?.name
     },
