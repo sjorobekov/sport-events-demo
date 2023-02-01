@@ -78,7 +78,6 @@ export default {
 .v-item-group.v-bottom-navigation .v-btn.v-btn--active::before {
   content:'';
   position: absolute;
-  align: center;
   background-color: var(--v-primary-base);
   height: 6px;
   width: 50%;
@@ -87,7 +86,7 @@ export default {
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
   margin-left:auto;
-  margin-right:auto;  
-  opacity: 100%; 
+  margin-right:auto;
+  opacity: 100%;
 }
 </style>
