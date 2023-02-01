@@ -102,7 +102,7 @@ export default {
     },
     remove () {
       const warning = 'Warning: Continuing will permanently delete this competition. ' +
-                      'However, events linked to this team will still be retained in the database. ' +
+                      'However, events linked to this competition will still be retained in the database. ' +
                       'Are you sure you want to proceed?'
       if (!confirm(warning)) {
         return
