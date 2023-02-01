@@ -46,8 +46,8 @@
               <v-menu ref="menu" offset-y :close-on-content-click="true">
                 <template #activator="{ on }">
                   <v-btn icon v-on="on">
-                    <v-icon>
-                      mdi-calendar-month-outline
+                    <v-icon size="32" color="info lighten1">
+                      $vuetify.icons.calendar-1
                     </v-icon>
                   </v-btn>
                 </template>
@@ -68,8 +68,8 @@
             <v-dialog v-model="showCalendar">
               <template #activator="{ on }">
                 <v-btn icon v-on="on">
-                  <v-icon>
-                    mdi-calendar-month-outline
+                  <v-icon size="32" color="info lighten1">
+                    $vuetify.icons.calendar-1
                   </v-icon>
                 </v-btn>
               </template>
@@ -159,7 +159,7 @@
           <span v-if="school.city">{{ school.city }}, </span><fx-country-name :code="school.country" />
         </address>
         <div v-if="school.website">
-          <v-icon>mdi-link-variant</v-icon> <a target="_blank" :href="school.website"> School Website</a>
+          <v-icon size="20" color="primary">$vuetify.icons.link-1</v-icon> <a target="_blank" :href="school.website"> School Website</a>
         </div>
 
         <v-divider class="my-6" />
@@ -185,16 +185,16 @@
           </div>
           <div class="my-1">
             <div v-if="contact.email" class="text-p1 mb-2">
-              <v-icon small class="mr-1">
-                mdi-email-outline
+              <v-icon size="20" color="primary" class="mr-1">
+                $vuetify.icons.email-1
               </v-icon>
               <a class="info--text text--darken-2" :href="`mailto:${contact.email}`">
                 {{ contact.email }}
               </a>
             </div>
             <div v-if="contact.phone" class="text-p1">
-              <v-icon small class="mr-1">
-                mdi-phone-in-talk
+              <v-icon size="20" color="primary" class="mr-1">
+                $vuetify.icons.phone-1
               </v-icon>
               <a class="info--text text--darken-2" :href="`tel:${contact.phone}`">
                 {{ contact.phone }}
