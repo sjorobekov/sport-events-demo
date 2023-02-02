@@ -1,13 +1,11 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex'
-import { Dictionary, Location, School, User } from '~/types'
+import { School, User } from '~/types'
 import { DeviceType } from '~/enum'
 
 interface ContextInterface {
   me: User | null,
   subdomain: string | null,
   school: School | null,
-  sportLocations: Array<Location>,
-  sportLocationsIndexed: Dictionary<Location>,
   isGuestSignedIn: boolean | null,
   device: DeviceType,
 }
@@ -16,8 +14,6 @@ export const state = (): ContextInterface => ({
   me: null,
   subdomain: null,
   school: null,
-  sportLocations: [],
-  sportLocationsIndexed: {},
   isGuestSignedIn: null,
   device: DeviceType.DESKTOP,
 })
@@ -66,10 +62,6 @@ export const getters: GetterTree<RootState, RootState> = {
 
   schoolId (state) {
     return state.school?.id
-  },
-
-  sportLocations (state) {
-    return state.sportLocations
   },
 
   isSheetPasswordProtected (state) {
@@ -126,13 +118,6 @@ export const mutations: MutationTree<RootState> = {
     }
   },
 
-  sportLocations (state, locations: Array<Location>) {
-    state.sportLocations = locations
-    locations.forEach((item) => {
-      state.sportLocationsIndexed[item.id] = item
-    })
-  },
-
   device (state, val) {
     state.device = val
   },
@@ -149,7 +134,6 @@ export const actions: ActionTree<RootState, RootState> = {
   async fetchSchool ({ commit, dispatch }, id) {
     const school = await dispatch('api/schools/fetch', id, { root: true })
     commit('school', school)
-    await dispatch('fetchSportLocations')
   },
 
   applyPrimaryColor ({ getters }) {
@@ -157,14 +141,6 @@ export const actions: ActionTree<RootState, RootState> = {
     root.style.setProperty('--v-primary-base', getters.school.color)
     root.style.setProperty('--v-accent-base', getters.school.color)
     root.style.setProperty('--v-primary-darken1', shadeColor(getters.school.color, -30))
-  },
-
-  async fetchSportLocations ({ commit, getters, dispatch }) {
-    const items = await dispatch('api/locations/list', {
-      schoolId: getters.schoolId,
-    }, { root: true })
-
-    commit('sportLocations', items)
   },
 
   async signInAsSuperAdmin ({ dispatch }, { email, password }) {

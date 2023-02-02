@@ -1,14 +1,16 @@
 <template>
   <div>
     <div class="text-center pa-6">
-      <v-icon size="40" color="info darken-1 mb-3">
-        mdi-lock
-      </v-icon>
-      <div class="info--text text--darken-1 text-p1 mb-3">
-        <slot name="subtitle">
-          This Team Sheet is Password Protected.
-        </slot>
-      </div>
+      <slot name="content">
+        <v-icon size="40" color="info darken-1 mb-3">
+          mdi-lock
+        </v-icon>
+        <div class="info--text text--darken-1 text-p1 mb-3">
+          <slot name="subtitle">
+            This Team Sheet is Password Protected.
+          </slot>
+        </div>
+      </slot>
 
       <v-text-field
         v-model="password"
@@ -30,6 +32,7 @@
         color="primary"
         block
         class="mb-4"
+        height="52"
         @click="view"
       >
         <slot name="buttonLabel">

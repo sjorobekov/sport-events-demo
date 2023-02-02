@@ -312,12 +312,12 @@ export default {
     EventLocationType,
     InHouseEventType,
     opponentSchool: null,
+    locations: [],
   }),
 
   computed: {
     ...mapGetters({
       currentSeason: 'seasons/current',
-      locations: 'context/sportLocations',
     }),
     eventForm () {
       return this.event || {}
@@ -334,6 +334,10 @@ export default {
 
   async beforeMount () {
     this.teams = await this.$store.dispatch('api/inHouseTeams/list', {
+      schoolId: this.schoolId,
+    })
+
+    this.locations = await this.$store.dispatch('api/locations/list', {
       schoolId: this.schoolId,
     })
   },

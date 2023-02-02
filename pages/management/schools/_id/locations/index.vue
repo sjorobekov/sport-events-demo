@@ -59,7 +59,9 @@
           <span v-if="school.city">{{ school.city }}, </span><fx-country-name :code="school.country" />
         </address>
         <div v-if="school.website">
-          <v-icon size="20">$vuetify.icons.link-1</v-icon> <a target="_blank" :href="school.website"> School Website</a>
+          <v-icon size="20">
+            $vuetify.icons.link-1
+          </v-icon> <a target="_blank" :href="school.website"> School Website</a>
         </div>
 
         <v-divider class="mt-4" />

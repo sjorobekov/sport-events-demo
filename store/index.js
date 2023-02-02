@@ -5,7 +5,6 @@ export const actions = {
     commit('context/subdomain', subdomain)
     if (getters['context/isPortalSite']) {
       await dispatch('context/fetchSchoolByPortalAddress', subdomain)
-      await dispatch('context/fetchSportLocations')
     }
 
     await dispatch('context/fetchContext').catch((e) => {

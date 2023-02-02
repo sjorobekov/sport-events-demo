@@ -83,7 +83,7 @@ export default {
     const schoolId = store.getters['context/schoolId']
     const currentSeason = store.getters['seasons/current']
 
-    const [{ me, opponent, ...event }, teams] = await Promise.all([
+    const [{ me, opponent, ...event }, teams, sportLocations] = await Promise.all([
       store.dispatch('api/events/get', {
         schoolId,
         id: route.params.eventId,
@@ -92,6 +92,9 @@ export default {
         schoolId,
         params: { seasonId: currentSeason.id },
       }),
+      store.dispatch('api/locations/list', {
+        schoolId,
+      }),
     ])
 
     return {
@@ -99,6 +102,7 @@ export default {
       me,
       opponent,
       teams: teams.filter(t => t.sportId === event.sportId),
+      sportLocations,
     }
   },
 
@@ -110,7 +114,7 @@ export default {
     teams: [],
     step: 1,
     conflicts: [],
-
+    sportLocations: [],
     /** @type {Partial<EventConfirmationPayload>} */
     formData: {
       leadId: null,
@@ -136,7 +140,6 @@ export default {
   computed: {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
-      sportLocations: 'context/sportLocations',
     }),
   },
 

@@ -15,6 +15,7 @@ export default [
   'tactic',
   'dashboard',
   'direction',
+  'padlock',
   'dragVertical',
   'arrowLeft',
   'arrowRight',
