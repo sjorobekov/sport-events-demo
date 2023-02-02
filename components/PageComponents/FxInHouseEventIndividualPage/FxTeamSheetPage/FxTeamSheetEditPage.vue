@@ -1,119 +1,126 @@
 <template>
-  <FxEventSheetTabulatedContent :show-tabs="isMobile">
-    <template #select>
-      <FxEventItemCard>
-        <template #title>
-          Search & Add
-        </template>
-        <v-container>
-          <v-row>
-            <v-col>
-              <label>Search Students</label>
-              <FxStudentSelect
-                v-model="sheet"
-                :school-id="contextSchoolId"
-                placeholder="Type Student Name"
-                :items="students"
-              />
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col>
-              <FxGroupedTeamSheetSelect v-model="sheet" :items="students" :recent="recentTeamSheet" :team-name="team.name" />
-            </v-col>
-          </v-row>
-        </v-container>
-      </FxEventItemCard>
-    </template>
+  <div>
+    <v-card class="hidden-md-and-up" tile color="white">
+      <h1 class="py-3 px-3 text-h6 info--text text--darken-2">
+        {{ team.name }} Team Sheet
+      </h1>
+    </v-card>
+    <FxEventSheetTabulatedContent :show-tabs="isMobile">
+      <template #select>
+        <FxEventItemCard>
+          <template #title>
+            Search & Add
+          </template>
+          <v-container>
+            <v-row>
+              <v-col>
+                <label>Search Students</label>
+                <FxStudentSelect
+                  v-model="sheet"
+                  :school-id="contextSchoolId"
+                  placeholder="Type Student Name"
+                  :items="students"
+                />
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <FxGroupedTeamSheetSelect v-model="sheet" :items="students" :recent="recentTeamSheet" :team-name="team.name" />
+              </v-col>
+            </v-row>
+          </v-container>
+        </FxEventItemCard>
+      </template>
 
-    <template #sorting>
-      <FxEventItemCard>
-        <template #title>
-          Team Sheet
-        </template>
+      <template #sorting>
+        <FxEventItemCard>
+          <template #title>
+            Team Sheet
+          </template>
 
-        <template #actions>
-          <div>
-            <v-btn outlined link exact @click="$router.back()">
-              Cancel
-            </v-btn>
-            <v-btn depressed color="primary" @click="save()">
-              Confirm
-            </v-btn>
-          </div>
-        </template>
+          <template #actions>
+            <div>
+              <v-btn outlined link exact @click="$router.back()">
+                Cancel
+              </v-btn>
+              <v-btn depressed color="primary" @click="save()">
+                Confirm
+              </v-btn>
+            </div>
+          </template>
 
-        <v-container>
-          <v-row>
-            <v-col cols="12" class="pt-6">
-              <v-sheet v-if="!sheet.length" height="216" color="info lighten-5">
-                <v-row
-                  align="center"
-                  justify="center"
-                  class="fill-height"
-                >
-                  <v-col
-                    class="text-center"
-                    cols="12"
+          <v-container>
+            <v-row>
+              <v-col cols="12" class="pt-6">
+                <v-sheet v-if="!sheet.length" height="216" color="info lighten-5">
+                  <v-row
+                    align="center"
+                    justify="center"
+                    class="fill-height"
                   >
-                    <div class="mb-4">
-                      <v-icon size="88" color="info darken-2">
-                        mdi-account-group
-                      </v-icon>
-                    </div>
-                    <div class="text-p2 info--text text--darken-2 font-weight-bold mb-2">
-                      No Students Selected
-                    </div>
-                  </v-col>
-                </v-row>
-              </v-sheet>
+                    <v-col
+                      class="text-center"
+                      cols="12"
+                    >
+                      <div class="mb-4">
+                        <v-icon size="88" color="info darken-2">
+                          mdi-account-group
+                        </v-icon>
+                      </div>
+                      <div class="text-p2 info--text text--darken-2 font-weight-bold mb-2">
+                        No Students Selected
+                      </div>
+                    </v-col>
+                  </v-row>
+                </v-sheet>
 
-              <template v-else>
-                <div class="text-center text-p2 font-weight-bold info--text text--darken-2 py-4">
-                  {{ $tc('page.FxTeamSheetEditPage.STUDENTS_SELECTED', sheet.length) }}
-                </div>
-                <v-simple-table class="sheet-table">
-                  <draggable v-model="sheet" ghost-class="ghost" tag="tbody" handle=".student-icon">
-                    <tr v-for="(studentId, i) in sheet" :key="studentId">
-                      <td style="width: 70px" class="text-center no-right-border">
-                        <span class="info--text text-p3">{{ (i + 1).toString().padStart(2, '0') }}.</span>
-                      </td>
-                      <td class="pl-0">
-                        <FxStudentListItem :student-id="studentId">
-                          <template #icon>
-                            <v-icon color="info lighten-2">
-                              $vuetify.icon.dragVertical
-                            </v-icon>
-                          </template>
-                          <template #action>
-                            <v-btn icon color="info lighten-1" @click="remove(i)">
-                              <v-icon>mdi-window-close</v-icon>
-                            </v-btn>
-                          </template>
-                        </FxStudentListItem>
-                      </td>
-                    </tr>
-                  </draggable>
-                </v-simple-table>
-              </template>
-            </v-col>
-          </v-row>
-        </v-container>
-      </FxEventItemCard>
-    </template>
+                <template v-else>
+                  <div class="text-center text-p2 font-weight-bold info--text text--darken-2 py-4">
+                    {{ $tc('page.FxTeamSheetEditPage.STUDENTS_SELECTED', sheet.length) }}
+                  </div>
+                  <v-simple-table class="sheet-table">
+                    <draggable v-model="sheet" ghost-class="ghost" tag="tbody" handle=".student-icon">
+                      <tr v-for="(studentId, i) in sheet" :key="studentId">
+                        <td style="width: 70px" class="text-center no-right-border">
+                          <span class="info--text text-p3">{{ (i + 1).toString().padStart(2, '0') }}.</span>
+                        </td>
+                        <td class="pl-0">
+                          <FxStudentListItem :student-id="studentId">
+                            <template #icon>
+                              <v-icon color="info lighten-2">
+                                $vuetify.icon.dragVertical
+                              </v-icon>
+                            </template>
+                            <template #action>
+                              <v-btn icon color="info lighten-1" @click="remove(i)">
+                                <v-icon>mdi-window-close</v-icon>
+                              </v-btn>
+                            </template>
+                          </FxStudentListItem>
+                        </td>
+                      </tr>
+                    </draggable>
+                  </v-simple-table>
+                </template>
+              </v-col>
+            </v-row>
+          </v-container>
+        </FxEventItemCard>
+      </template>
 
-    <template #actions>
-      <div class="d-flex px-2 pb-4">
-        <v-spacer />
-        <v-btn outlined class="mr-2" @click="$router.back()">
-          Cancel
-        </v-btn>
-        <v-btn depressed color="primary" @click="save()">
-          Confirm
-        </v-btn>
-      </div>
-    </template>
-  </FxEventSheetTabulatedContent>
+      <template #actions>
+        <div class="d-flex px-2 pb-4">
+          <v-spacer />
+          <v-btn outlined class="mr-2" @click="$router.back()">
+            Cancel
+          </v-btn>
+          <v-btn depressed color="primary" @click="save()">
+            Confirm
+          </v-btn>
+        </div>
+      </template>
+    </FxEventSheetTabulatedContent>
+  </div>
 </template>
 
 <script>
