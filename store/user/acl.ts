@@ -75,6 +75,10 @@ export const getters: GetterTree<RootState, RootState> = {
     return [UserRole.ADMIN, UserRole.SPORTS_USER].includes(getters.role)
   },
 
+  canEditCompetition (_, getters) {
+    return [UserRole.ADMIN, UserRole.SPORTS_USER].includes(getters.role)
+  },
+
   canSeeOrganising (_, _getters, _rootState, rootGetters) {
     return rootGetters['context/isLoggedIn']
   },
