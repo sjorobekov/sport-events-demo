@@ -52,7 +52,7 @@
     </template>
 
     <template #score>
-      <FxEventResult v-if="!isLoggedIn && isResultsOnly" :result="me.overallResult" />
+      <FxEventResult v-if="!isLoggedIn && isResultsEventsOnly" :result="me.overallResult" />
       <ExistingResult v-else-if="hasResult" :event="event" :me="me" />
       <NoResult v-else :me="me" :event="event" />
     </template>
@@ -158,12 +158,8 @@ export default {
       ].includes(this.me.overallResult)
     },
 
-    isResultsOnly () {
-      return PublishResult.RESULTS === this.myTeam?.publishResults
-    },
-
-    isEventsOnly () {
-      return PublishResult.EVENTS === this.myTeam?.publishResults
+    isResultsEventsOnly () {
+      return [PublishResult.RESULTS, PublishResult.EVENTS].includes(this.myTeam?.publishResults)
     },
 
     canSeeResults () {

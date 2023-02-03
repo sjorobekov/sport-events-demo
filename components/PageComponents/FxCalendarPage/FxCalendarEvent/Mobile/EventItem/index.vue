@@ -11,7 +11,7 @@
       >
         <span class="info--text">{{ event.startTime }}</span>
       </v-chip>
-      <FxEventStatus v-else-if="me.overallResult" :overall-result="me.overallResult" />
+      <FxEventStatus v-else-if="me.overallResult && canSeeResults" :overall-result="me.overallResult" />
     </template>
 
     <FxTeamListItem class="px-0" :participant="me" :context-school-id="contextSchoolId">
@@ -42,7 +42,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import FxCalendarEventMobileLayout from '../FxCalendarEventMobileLayout'
-import { EventResult, EventType } from '@/enum'
+import { EventResult, EventType, PublishResult } from '@/enum'
 
 export default {
   name: 'EventItem',
@@ -92,6 +92,14 @@ export default {
         return '-'
       }
       return this.me.results[0].opponentScore || '-'
+    },
+
+    myTeam () {
+      return this.me.team
+    },
+
+    canSeeResults () {
+      return [PublishResult.RESULTS, PublishResult.RESULTS_SCORES].includes(this.myTeam?.publishResults)
     },
   },
 }
