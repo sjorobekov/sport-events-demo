@@ -1,6 +1,6 @@
 <template>
   <v-dialog fullscreen :value="value">
-    <v-card color="info lighten-3">
+    <v-card color="info lighten-3 dialog-toolbar">
       <v-toolbar dark color="primary" flat height="72">
         <v-btn icon dark @click="$emit('click:back', $event)">
           <v-icon>mdi-arrow-left</v-icon>
@@ -13,7 +13,7 @@
         <v-toolbar-items />
       </v-toolbar>
 
-      <div class="px-2 pt-6">
+      <div>
         <slot name="default" />
       </div>
     </v-card>

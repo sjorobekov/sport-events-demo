@@ -180,3 +180,8 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 .card-has-hover:hover {
   box-shadow: 0px 0px 10px 0px #dadfe6!important;
 }
+
+.dialog-toolbar {
+  border-radius: 0!important;
+  border: 0!important;
+}
