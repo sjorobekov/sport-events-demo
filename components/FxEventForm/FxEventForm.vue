@@ -518,13 +518,12 @@ export default {
     EventLocationType,
     EventType,
     opponentSchool: null,
+    locations: [],
   }),
 
   computed: {
     ...mapGetters({
-      school: 'admin/page/schools/schools',
       currentSeason: 'seasons/current',
-      locations: 'context/sportLocations',
     }),
     eventForm () {
       return this.event || {}
@@ -556,6 +555,10 @@ export default {
 
     const sports = this.teams.map(team => team.sport)
     this.sports = [...new Map(sports.map(v => [v.id, v])).values()]
+
+    this.locations = await this.$store.dispatch('api/locations/list', {
+      schoolId: this.schoolId,
+    })
   },
 
   methods: {

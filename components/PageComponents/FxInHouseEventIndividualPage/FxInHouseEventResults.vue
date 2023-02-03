@@ -1,5 +1,5 @@
 <template>
-  <FxInHouseEventItemCard v-if="canAddOrEditResult || hasResult">
+  <FxEventItemCard v-if="canAddOrEditResult || hasResult">
     <template #title>
       Results
     </template>
@@ -29,21 +29,19 @@
         </v-col>
       </v-row>
     </v-container>
-  </FxInHouseEventItemCard>
+  </FxEventItemCard>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import cloneDeep from 'lodash/cloneDeep'
+import FxInHouseEventExistingResult from './FxInHouseEventExistingResult/FxInHouseEventExistingResult.vue'
 import { InHouseEventResult } from '~/enum'
 import FxInHouseEventResultForm from '@/components/FxInHouseEventResultForm/FxInHouseEventResultForm'
-import FxInHouseEventItemCard from '@/components/PageComponents/FxInHouseEventIndividualPage/FxInHouseEventItemCard'
-import FxInHouseEventExistingResult
-  from '@/components/PageComponents/FxInHouseEventIndividualPage/FxInHouseEventExistingResult/FxInHouseEventExistingResult'
 
 export default {
   name: 'FxInHouseEventFResults',
-  components: { FxInHouseEventExistingResult, FxInHouseEventItemCard, FxInHouseEventResultForm },
+  components: { FxInHouseEventExistingResult, FxInHouseEventResultForm },
   data: () => ({
     formVisible: false,
     formData: {

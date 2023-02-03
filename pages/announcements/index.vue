@@ -1,6 +1,6 @@
 <template>
   <div class="mt-1 mt-md-n4  mb-3">
-    <v-list-item class="px-0">
+    <v-list-item class="px-0 mb-4">
       <v-list-item-content>
         <h1 class="text-h4s text-md-h3">
           Announcements

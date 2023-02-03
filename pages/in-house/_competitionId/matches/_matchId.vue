@@ -1,9 +1,8 @@
 <template>
-  <FxInHouseEventIndividualPage :competition-id="competitionId" :match-id="matchId" />
+  <FxInHouseEventIndividualPage />
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import FxInHouseEventIndividualPage from '@/components/PageComponents/FxInHouseEventIndividualPage/FxInHouseEventIndividualPage'
 
 export default {
@@ -12,18 +11,11 @@ export default {
     FxInHouseEventIndividualPage,
   },
 
-  computed: {
-    ...mapGetters({
-      contextSchoolId: 'context/schoolId',
-    }),
-
-    competitionId () {
-      return this.$route.params.competitionId
-    },
-
-    matchId () {
-      return this.$route.params.matchId
-    },
+  async asyncData ({ store, route }) {
+    await store.dispatch('page/inHouseEvent/fetchData', {
+      inHouseCompetitionId: route.params.competitionId,
+      inHouseMatchId: route.params.matchId,
+    })
   },
 }
 </script>

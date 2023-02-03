@@ -53,6 +53,13 @@
       >
         Log In
       </v-btn>
+
+      <div class="text-center mt-10">
+        <nuxt-link class="signin-link font-weight-bold info--text text--darken-2" :to="{ name: 'schoolPass', query: $route.query }">
+          View Portal with School Password
+        </nuxt-link>
+      </div>
+
       <p style="margin-top: 120px" class="text-center text-p1 info--text text--darken-2 hidden-sm-and-down">
         By logging in to Fixturr you accept our <nuxt-link to="" style="text-decoration: none" class="font-weight-bold">
           Terms & Conditions
@@ -133,4 +140,7 @@ export default {
 ::v-deep .remember-checkbox .v-label
   font-size: 0.875rem!important
   color: var(--v-info-darken4)!important
+
+.signin-link
+  font-size: 18px
 </style>

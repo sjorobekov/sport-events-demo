@@ -1,5 +1,5 @@
 <template>
-  <FxInHouseEventItemCard>
+  <FxEventItemCard>
     <template #title>
       {{ name }} Team Sheet
     </template>
@@ -57,45 +57,66 @@
         <v-col cols="12" />
       </v-row>
     </v-container>
-    <v-simple-table v-else>
-      <thead>
-        <tr style="background-color: var(--v-info-lighten4)">
-          <th />
-          <th class="text-left text-p2 info--text text--darken-1">
-            Name
-          </th>
-          <th class="text-left text-p2 info--text text--darken-1">
-            Year
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="(item, i) in sheet"
-          :key="item.id"
-        >
-          <td class="text-right text-p2 info--text text--darken-1">
-            {{ i + 1 }}.
-          </td>
-          <td class="text-p2 info--text text--darken-2">
-            {{ item.firstname }} {{ item.lastname }}
-          </td>
-          <td class="text-p2 info--text text--darken-1">
-            <span v-if="item.yearGroup">Year {{ item.yearGroup }}</span>
-          </td>
-        </tr>
-      </tbody>
-    </v-simple-table>
-  </FxInHouseEventItemCard>
+    <template v-else>
+      <v-list-item class="px-3 text-h5 hidden-md-and-up info--text text--darken-2">
+        <v-list-item-content>
+          <v-list-item-title>{{ name }} Team Sheet</v-list-item-title>
+        </v-list-item-content>
+        <v-list-item-action v-if="canManageTeamSheet">
+          <v-btn
+            icon
+            link
+            :to="{ name: 'in-house-competitionId-matches-matchId-teams-teamId-sheet', params: {
+              competitionId: inHouseEvent.inHouseCompetitionId,
+              matchId: inHouseMatch.id,
+              teamId: team.id,
+            }}"
+          >
+            <v-icon>mdi-pencil</v-icon>
+          </v-btn>
+        </v-list-item-action>
+      </v-list-item>
+
+      <v-simple-table>
+        <thead>
+          <tr style="background-color: var(--v-info-lighten4)">
+            <th />
+            <th class="text-left text-p2 info--text text--darken-1">
+              Name
+            </th>
+            <th class="text-left text-p2 info--text text--darken-1">
+              Year
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="(item, i) in sheet"
+            :key="item.id"
+          >
+            <td class="text-right text-p2 info--text text--darken-1">
+              {{ i + 1 }}.
+            </td>
+            <td class="text-p2 info--text text--darken-2">
+              {{ item.firstname }} {{ item.lastname }}
+            </td>
+            <td class="text-p2 info--text text--darken-1">
+              <span v-if="item.yearGroup">Year {{ item.yearGroup }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </v-simple-table>
+    </template>
+  </FxEventItemCard>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import FxInHouseEventItemCard from '@/components/PageComponents/FxInHouseEventIndividualPage/FxInHouseEventItemCard'
+import FxEventItemCard from '@/components/FxEventItemCard'
 
 export default {
   name: 'FxInHouseEventTeamSheet',
-  components: { FxInHouseEventItemCard },
+  components: { FxEventItemCard },
   props: {
     team: {
       type: Object,

@@ -34,9 +34,20 @@ export default {
       default: () => [],
     },
   },
+
+  data: () => ({
+    locations: [],
+  }),
+
+  async fetch () {
+    this.locations = await this.$store.dispatch('api/locations/list', {
+      schoolId: this.schoolId,
+    })
+  },
+
   computed: {
     ...mapGetters({
-      locations: 'context/sportLocations',
+      schoolId: 'context/schoolId',
     }),
   },
 }

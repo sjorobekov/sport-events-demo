@@ -19,10 +19,10 @@ export default {
 </script>
 
 <style scoped lang="sass">
-@import '~vuetify/src/styles/styles.sass'
+@import '~vuetify/src/styles/styles'
 
 @media #{map-get($display-breakpoints, 'sm-and-down')}
   .mobile-dialog-card.v-card
     border: 0!important
     overflow: visible!important
-  </style>
+</style>

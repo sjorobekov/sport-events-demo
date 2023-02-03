@@ -1,64 +1,59 @@
 <template>
-  <wrapped-component :wrap="isMobile">
-    <template #wrapper>
-      <FxEventMobileContainer />
-    </template>
-    <div>
-      <v-card class="rounded-b-0 date-card" color="primary" dark :tile="isMobile">
-        <v-list-item>
-          <v-list-item-action>
-            <v-btn v-if="isMobile" icon @click="$router.back()">
-              <v-icon>mdi-arrow-left</v-icon>
+  <FxEventMobileWrapper :is-mobile="isMobile">
+    <v-card class="rounded-b-0 date-card" color="primary" dark :tile="isMobile">
+      <v-list-item>
+        <v-list-item-action>
+          <v-btn v-if="isMobile" icon @click="$router.back()">
+            <v-icon>mdi-arrow-left</v-icon>
+          </v-btn>
+        </v-list-item-action>
+        <v-list-item-content class="text-center pt-5 pl-md-4">
+          <v-list-item-title class="text-subheading mb-1">
+            <FxDateFormat :date="event.date" output-format="cccc dd MMMM yyyy" />
+          </v-list-item-title>
+          <v-list-item-subtitle class="text-p2 white--text hidden-sm-and-down">
+            {{ sport.name }} &#x2022; {{ $t(`FIXTURE_TYPE.${event.fixtureType}`) }}
+          </v-list-item-subtitle>
+        </v-list-item-content>
+
+        <v-list-item-action>
+          <div>
+            <v-btn icon class="hidden-sm-and-down">
+              <v-icon>mdi-printer-outline</v-icon>
             </v-btn>
-          </v-list-item-action>
-          <v-list-item-content class="text-center pt-5 pl-md-4">
-            <v-list-item-title class="text-subheading mb-1">
-              <FxDateFormat :date="event.date" output-format="cccc dd MMMM yyyy" />
-            </v-list-item-title>
-            <v-list-item-subtitle class="text-p2 white--text hidden-sm-and-down">
-              {{ sport.name }} &#x2022; {{ $t(`FIXTURE_TYPE.${event.fixtureType}`) }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
-
-          <v-list-item-action>
-            <div>
-              <v-btn icon class="hidden-sm-and-down">
-                <v-icon>mdi-printer-outline</v-icon>
-              </v-btn>
-              <v-btn v-if="isLoggedIn" icon>
-                <v-icon>mdi-dots-horizontal</v-icon>
-              </v-btn>
-            </div>
-          </v-list-item-action>
-        </v-list-item>
-
-        <div class="hidden-md-and-up">
-          <div class="d-flex px-3 pb-3">
-            <v-chip outlined class="event-header-chip">
-              {{ sport.name }}
-            </v-chip>
-            <v-spacer />
-            <v-chip outlined class="event-header-chip">
-              {{ $t(`EVENT_TYPE.${event.eventType}`) }}
-            </v-chip>
+            <v-btn v-if="isLoggedIn" icon>
+              <v-icon>mdi-dots-horizontal</v-icon>
+            </v-btn>
           </div>
+        </v-list-item-action>
+      </v-list-item>
+
+      <div class="hidden-md-and-up">
+        <div class="d-flex px-3 pb-3">
+          <v-chip outlined class="event-header-chip">
+            {{ sport.name }}
+          </v-chip>
+          <v-spacer />
+          <v-chip outlined class="event-header-chip">
+            {{ $t(`EVENT_TYPE.${event.eventType}`) }}
+          </v-chip>
         </div>
-      </v-card>
-      <FxEventScoreBoardCard />
-      <NuxtChild />
-    </div>
-  </wrapped-component>
+      </div>
+    </v-card>
+    <FxEventScoreBoardCard />
+    <NuxtChild />
+  </FxEventMobileWrapper>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import FxEventScoreBoardCard from '@/components/PageComponents/FxEventIndividualPage/FxEventScoreBoardCard'
-import FxEventMobileContainer from '@/components/PageComponents/FxEventIndividualPage/FxEventMobilePage'
+import FxEventMobileWrapper from '~/components/FxEventMobileWrapper/index.vue'
 
 export default {
-  name: 'FxEventDesktopPage',
+  name: 'FxEventIndividualPage',
   components: {
-    FxEventMobileContainer,
+    FxEventMobileWrapper,
     FxEventScoreBoardCard,
   },
 
@@ -102,6 +97,6 @@ export default {
 
 @media #{map-get($display-breakpoints, 'sm-and-down')}
   .date-card.v-card
-    border-radius: 0px!important
+    border-radius: 0!important
     border: none!important
 </style>

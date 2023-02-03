@@ -175,12 +175,18 @@ export default {
   data: () => ({
     EventLocationType,
     FxInHouseEventLocationTypeSelect,
+    locations: [],
   }),
+
+  async fetch () {
+    this.locations = await this.$store.dispatch('api/locations/list', {
+      schoolId: this.schoolId,
+    })
+  },
 
   computed: {
     ...mapGetters({
       schoolId: 'context/schoolId',
-      locations: 'context/sportLocations',
     }),
     formData () {
       return { ...this.value }

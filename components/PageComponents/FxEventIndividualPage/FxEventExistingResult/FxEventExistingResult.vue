@@ -4,7 +4,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import FxEventItemCard from '@/components/PageComponents/FxEventIndividualPage/FxEventItemCard'
 import { EventType } from '@/enum'
 import FixtureResult from '@/components/PageComponents/FxEventIndividualPage/FxEventExistingResult/components/FixtureResult'
 import TournamentResult
@@ -15,7 +14,6 @@ import MultiEventResult
 export default {
   name: 'FxEventExistingResult',
   components: {
-    FxEventItemCard,
     FixtureResult,
     TournamentResult,
     MultiEventResult,

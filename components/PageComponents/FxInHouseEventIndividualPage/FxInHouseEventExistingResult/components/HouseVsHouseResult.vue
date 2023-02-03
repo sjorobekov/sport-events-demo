@@ -3,7 +3,7 @@
     <div class="pl-3 pr-4">
       <v-list-item class="team-item">
         <v-list-item-avatar>
-          <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" :alt="myTeam.name" />
+          <FxSchoolLogo :value="myTeam.logo" :color="myTeam.color" :alt="myTeam.name" />
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title class="text-p2">

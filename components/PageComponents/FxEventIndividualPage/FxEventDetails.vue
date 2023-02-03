@@ -24,7 +24,7 @@
           <v-col cols="12" class="pt-1 pb-0">
             <ListItem>
               <template #icon>
-                <v-icon>$vuetify.icons.calendar</v-icon>
+                <v-icon>$vuetify.icons.calendar-1</v-icon>
               </template>
               <template #title>
                 <FxDateFormat :date="event.date" />
@@ -39,7 +39,7 @@
           <v-col cols="12" class="pt-1 pb-0">
             <ListItem>
               <template #icon>
-                <v-icon>mdi-clock-outline</v-icon>
+                <v-icon>$vuetify.icons.clock-1</v-icon>
               </template>
               <template #content>
                 <div>
@@ -91,7 +91,7 @@
           <v-col cols="12" class="pt-1 pb-0">
             <ListItem>
               <template #icon>
-                <v-icon>mdi-map-marker</v-icon>
+                <v-icon>$vuetify.icons.location-1</v-icon>
               </template>
               <template #title>
                 <FxLocationLabel :event="event" :me="me" />
@@ -106,7 +106,7 @@
           <v-col cols="12" class="pt-1 pb-0">
             <ListItem>
               <template #icon>
-                <v-icon>$vuetify.icons.direction</v-icon>
+                <v-icon>$vuetify.icons.transport-1</v-icon>
               </template>
               <template #content>
                 <div>
@@ -155,7 +155,7 @@ import { TransportType } from '@/enum'
 import ListItem from '@/components/FxEventItem/ListItem'
 import FxAvatar from '@/components/FxAvatar'
 import FxLocationLabel from '@/components/FxEventItem/FxLocationLabel'
-import FxEventItemCard from '@/components/PageComponents/FxEventIndividualPage/FxEventItemCard'
+import FxEventItemCard from '@/components/FxEventItemCard'
 import FxEventDetailsEditForm from '@/components/FxEventDetailsEditForm'
 import FxEventDateOrStartTimeChangeConfirmationModal from '@/components/FxEventDateOrStartTimeChangeConfirmationModal'
 

@@ -6,7 +6,7 @@ import {
   FixtureType,
   TransportType,
   InHouseEventResult,
-  UserRole,
+  UserRole, InHouseEventType,
 } from '~/enum'
 
 export default {
@@ -62,6 +62,11 @@ export default {
     [InHouseEventResult.POSTPONED]: 'Postponed',
     [InHouseEventResult.CANCELLED]: 'Cancelled',
     [InHouseEventResult.TO_BE_PLAYED]: 'To Be Played',
+  },
+
+  IN_HOUSE_EVENT_TYPE: {
+    [InHouseEventType.HOUSE_VS_HOUSE]: 'House vs. House',
+    [InHouseEventType.ALL_HOUSES]: 'All Houses',
   },
 
   TRANSPORT_TO: {

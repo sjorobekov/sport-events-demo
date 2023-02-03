@@ -53,12 +53,18 @@ export default {
   data: () => ({
     showForm: false,
     formData: { leadId: null },
+    sportLocations: [],
   }),
+
+  async fetch () {
+    this.sportLocations = await this.$store.dispatch('api/locations/list', {
+      schoolId: this.schoolId,
+    })
+  },
 
   computed: {
     ...mapGetters({
       schoolId: 'context/schoolId',
-      sportLocations: 'context/sportLocations',
     }),
   },
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FxInHouseEventIndividualPage :competition-id="competitionId" :match-id="matchId" />
+    <FxInHouseEventIndividualPage />
 
     <v-row>
       <v-col
@@ -28,21 +28,17 @@ export default {
     FxInHouseEventDetails,
   },
 
+  async asyncData ({ store, route }) {
+    await store.dispatch('page/inHouseEvent/fetchData', {
+      inHouseCompetitionId: route.params.competitionId,
+      inHouseMatchId: route.params.matchId,
+    })
+  },
+
   computed: {
     ...mapGetters({
-      contextSchoolId: 'context/schoolId',
-      inHouseEvent: 'page/inHouseEvent/inHouseEvent',
       hasResult: 'page/inHouseEvent/hasResult',
-      teams: 'page/inHouseEvent/teams',
     }),
-
-    competitionId () {
-      return this.$route.params.competitionId
-    },
-
-    matchId () {
-      return this.$route.params.matchId
-    },
   },
 }
 </script>

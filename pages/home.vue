@@ -28,7 +28,7 @@
             </v-col>
           </v-row>
 
-          <div class="d-flex align-center pt-sm-4">
+          <div class="d-flex align-center mt-2 pt-sm-4">
             <div class="date-picker">
               <v-tabs v-model="tab" class="week-tabs" show-arrows>
                 <v-tabs-slider color="teal lighten-3" />
@@ -43,11 +43,11 @@
               </v-tabs>
             </div>
             <div>
-              <v-menu ref="menu" offset-y :close-on-content-click="false">
+              <v-menu ref="menu" offset-y :close-on-content-click="true">
                 <template #activator="{ on }">
                   <v-btn icon v-on="on">
-                    <v-icon>
-                      mdi-calendar-month-outline
+                    <v-icon size="32" color="info lighten1">
+                      $vuetify.icons.calendar-1
                     </v-icon>
                   </v-btn>
                 </template>
@@ -68,8 +68,8 @@
             <v-dialog v-model="showCalendar">
               <template #activator="{ on }">
                 <v-btn icon v-on="on">
-                  <v-icon>
-                    mdi-calendar-month-outline
+                  <v-icon size="32" color="info lighten1">
+                    $vuetify.icons.calendar-1
                   </v-icon>
                 </v-btn>
               </template>
@@ -96,12 +96,9 @@
           </div>
         </div>
 
-        <div class="pt-6">
-          <h2 class="text-p2 font-weight-bold mb-2 info--text text--darken-3">
-            Fixtures & Results
-          </h2>
+        <div class="pt-4">
           <template v-if="events.length > 0">
-            <v-card v-for="item in fixtures" :key="item.id">
+            <v-card v-for="item in fixtures" :key="item.id" class="mb-4 card-has-hover">
               <FxCalendarEvent :value="item" />
             </v-card>
           </template>
@@ -133,7 +130,7 @@
 
       <v-col lg="3" class="text-p1 info--text text--darken-1 hidden-md-and-down">
         <div class="d-flex justify-space-between">
-          <h4 class="font-weight-regular mb-2">
+          <h4 class="font-weight-regular mb-4">
             School Location
           </h4>
           <nuxt-link class="text-decoration-none" :to="{ name: 'directory-sports-map' }">
@@ -162,22 +159,24 @@
           <span v-if="school.city">{{ school.city }}, </span><fx-country-name :code="school.country" />
         </address>
         <div v-if="school.website">
-          <v-icon>mdi-link-variant</v-icon> <a target="_blank" :href="school.website"> School Website</a>
+          <v-icon size="20" color="primary">
+            $vuetify.icons.link-1
+          </v-icon> <a target="_blank" :href="school.website"> School Website</a>
         </div>
 
-        <v-divider class="my-4" />
+        <v-divider class="my-6" />
 
         <div class="d-flex justify-space-between">
-          <h3 class="text-p1 info--text text--darken-1 mb-4">
+          <h3 class="text-p1 info--text text--darken-1 mb-6">
             Sports Contacts
           </h3>
           <nuxt-link class="text-decoration-none" :to="{ name: 'directory-sports-contacts' }">
             View All
           </nuxt-link>
         </div>
-        <div v-for="contact in contacts" :key="contact.id" class="mb-4">
+        <div v-for="contact in contacts" :key="contact.id" class="mb-6">
           <div class="d-flex text-p1">
-            <FxAvatar :value="contact.avatar" />
+            <FxAvatar :value="contact.avatar" class="mb-2" />
 
             <div class="pa-2">
               <div class="text--darken-1 font-weight-bold">
@@ -188,16 +187,16 @@
           </div>
           <div class="my-1">
             <div v-if="contact.email" class="text-p1 mb-2">
-              <v-icon small class="mr-2">
-                mdi-email-outline
+              <v-icon size="20" color="primary" class="mr-1">
+                $vuetify.icons.email-1
               </v-icon>
               <a class="info--text text--darken-2" :href="`mailto:${contact.email}`">
                 {{ contact.email }}
               </a>
             </div>
             <div v-if="contact.phone" class="text-p1">
-              <v-icon small class="mr-2">
-                mdi-phone-in-talk
+              <v-icon size="20" color="primary" class="mr-1">
+                $vuetify.icons.phone-1
               </v-icon>
               <a class="info--text text--darken-2" :href="`tel:${contact.phone}`">
                 {{ contact.phone }}

@@ -30,7 +30,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import FxEventItemCard from '@/components/PageComponents/FxEventIndividualPage/FxEventItemCard'
+import FxEventItemCard from '@/components/FxEventItemCard'
 import TeamSheet from '@/components/PageComponents/FxEventIndividualPage/FxEventTeamSheet/TeamSheet'
 import GuestLoginForm from '@/components/PageComponents/FxEventIndividualPage/FxEventTeamSheet/GuestLoginForm'
 import FxTeamSheetPrivacyChip from '@/components/FxTeamSheetPrivacyChip'

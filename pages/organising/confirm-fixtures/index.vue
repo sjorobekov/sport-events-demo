@@ -9,14 +9,6 @@
       :key="`confirm-${index}`"
       class="mb-3"
     >
-      <!--      <FxFixtureToConfirm-->
-      <!--        :context-school-id="contextSchoolId"-->
-      <!--        :me.sync="item.me"-->
-      <!--        :opponent="item.opponent"-->
-      <!--        :event.sync="items[index]"-->
-      <!--        @accepted="removeToConfirm(index)"-->
-      <!--        @rejected="removeToConfirm(index)"-->
-      <!--      />-->
       <FxFixtureToConfirmItem
         :me="item.me"
         :opponent="item.opponent"
