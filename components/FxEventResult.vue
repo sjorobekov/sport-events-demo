@@ -3,6 +3,9 @@
     <v-alert v-if="isResultAcceptable" :style="style" class="ma-0 result-alert font-weight-bold">
       {{ $t(`EVENT_RESULT.${result}`) }}
     </v-alert>
+    <v-alert v-else class="ma-0 result-alert font-weight-bold">
+      ―
+    </v-alert>
   </div>
 </template>
 

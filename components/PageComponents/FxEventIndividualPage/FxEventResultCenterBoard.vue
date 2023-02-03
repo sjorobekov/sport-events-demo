@@ -1,12 +1,8 @@
 <template>
   <div class="text-center">
-    <div v-if="!isLoggedIn && isResultsOnly" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0">
+    <div v-if="!isLoggedIn && isResultsEventsOnly" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0">
       <FxEventResult :result="result.overallResult" size="big" />
     </div>
-
-    <v-alert v-else-if="!isLoggedIn && isEventsOnly" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0" color="#F1F5F9">
-      ―
-    </v-alert>
 
     <v-alert v-else-if="hasScore" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0" color="#F1F5F9">
       {{ score }} - {{ opponentScore }}
@@ -79,12 +75,8 @@ export default {
       return this.result?.results[0]?.opponentScore
     },
 
-    isResultsOnly () {
-      return PublishResult.RESULTS === this.myTeam?.publishResults
-    },
-
-    isEventsOnly () {
-      return PublishResult.EVENTS === this.myTeam?.publishResults
+    isResultsEventsOnly () {
+      return [PublishResult.RESULTS, PublishResult.EVENTS].includes(this.myTeam?.publishResults)
     },
   },
 }

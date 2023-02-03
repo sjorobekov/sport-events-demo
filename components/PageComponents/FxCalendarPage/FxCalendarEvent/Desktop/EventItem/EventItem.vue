@@ -7,7 +7,7 @@
       <FxTeamListItem class="px-0" :participant="me" :context-school-id="contextSchoolId" :icon-on-right="true" />
     </template>
     <template #score>
-      <FxEventResult v-if="!isLoggedIn && isResultsOnly" :result="me.overallResult" />
+      <FxEventResult v-if="!isLoggedIn && isResultsEventsOnly" :result="me.overallResult" />
       <ExistingResult v-else-if="hasResult" :event="event" :me="me" />
       <NoResult v-else :me="me" :event="event" />
     </template>
@@ -133,12 +133,8 @@ export default {
       return this.event.me.team
     },
 
-    isResultsOnly () {
-      return PublishResult.RESULTS === this.myTeam?.publishResults
-    },
-
-    isEventsOnly () {
-      return PublishResult.EVENTS === this.myTeam?.publishResults
+    isResultsEventsOnly () {
+      return [PublishResult.RESULTS, PublishResult.EVENTS].includes(this.myTeam?.publishResults)
     },
 
     canSeeResults () {
