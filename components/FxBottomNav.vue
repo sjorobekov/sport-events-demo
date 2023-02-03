@@ -9,7 +9,7 @@
     <v-btn
       v-for="(item, i) in items"
       :key="i"
-      class="fx-bottom-menu mx-1 pt-1"
+      class="fx-bottom-menu mx-1 pt-3"
       link
       :to="item.to"
       @click="item.onClick"
@@ -69,13 +69,24 @@ export default {
 
 .v-item-group.v-bottom-navigation .v-btn.v-btn--active {
   color: white;
-  border-top: solid 6px var(--v-primary-base) !important;
-  border-radius: 4px;
 }
 
 .theme--light.v-bottom-navigation .v-btn:not(.v-btn--active) {
   color: white!important;
-  border-top: solid 6px white;
-  border-radius: 4px;
+}
+
+.v-item-group.v-bottom-navigation .v-btn.v-btn--active::before {
+  content:'';
+  position: absolute;
+  background-color: var(--v-primary-base);
+  height: 6px;
+  width: 50%;
+  top: 0;
+  left:0;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  margin-left:auto;
+  margin-right:auto;
+  opacity: 100%;
 }
 </style>
