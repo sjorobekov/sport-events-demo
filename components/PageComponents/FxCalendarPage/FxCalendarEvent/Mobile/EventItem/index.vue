@@ -98,14 +98,6 @@ export default {
       return this.me.team
     },
 
-    isResultsOnly () {
-      return PublishResult.RESULTS === this.myTeam?.publishResults
-    },
-
-    isEventsOnly () {
-      return PublishResult.EVENTS === this.myTeam?.publishResults
-    },
-
     canSeeResults () {
       return [PublishResult.RESULTS, PublishResult.RESULTS_SCORES].includes(this.myTeam?.publishResults)
     },
