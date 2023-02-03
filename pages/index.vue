@@ -10,7 +10,7 @@
 export default {
   name: 'IndexPage',
   layout: 'empty',
-  middleware: ({ redirect, store }) => {
+  middleware: ({ redirect, store, error }) => {
     if (store.getters['context/isPortalSite']) {
       if (store.getters['context/isLoggedIn']) {
         return redirect({ name: 'dashboard' })
@@ -18,7 +18,15 @@ export default {
       return redirect({ name: 'home' })
     }
 
-    return redirect({ name: 'management' })
+    if (store.getters['context/isFindMySchoolSite']) {
+      return redirect({ name: 'find' })
+    }
+
+    if (store.getters['context/isSuperAdminSite']) {
+      return redirect({ name: 'management' })
+    }
+
+    error({ statusCode: 404, message: 'Page not found' })
   },
 }
 </script>
