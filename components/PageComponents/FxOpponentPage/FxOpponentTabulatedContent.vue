@@ -38,16 +38,16 @@
       </v-card>
 
       <v-tabs-items v-model="currentItem" style="background: none">
-        <v-tab-item class="px-2 pb-2">
+        <v-tab-item class="px-2 pb-2 mt-2">
           <slot name="details" />
         </v-tab-item>
-        <v-tab-item class="px-2 pb-2">
+        <v-tab-item class="px-2 pb-2 mt-2">
           <slot name="contacts" />
         </v-tab-item>
-        <v-tab-item v-if="$slots.map" class="px-2 pb-2">
+        <v-tab-item v-if="$slots.map" class="px-2 pb-2 mt-2">
           <slot name="map" />
         </v-tab-item>
-        <v-tab-item v-if="$slots.portal" class="px-2 pb-2">
+        <v-tab-item v-if="$slots.portal" class="px-2 pb-2 mt-2">
           <slot name="portal" />
         </v-tab-item>
       </v-tabs-items>

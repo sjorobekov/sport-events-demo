@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-card v-if="isMobile" class="d-flex flex-column py-4">
+    <v-card v-if="isMobile" class="d-flex flex-column py-5 opponent-mobile">
       <FxSchoolLogo
-        class="mx-auto"
+        class="mx-auto mb-2"
         size="64"
         :value="logo"
         :alt="name"
@@ -107,4 +107,8 @@ export default {
   font-size: 1.4375rem
   line-height: 1.3rem
   font-family: ProximaNova-Semibold, sans-serif
+
+.opponent-mobile.v-card
+  border-radius: 0!important
+  border: 0!important
 </style>
