@@ -51,7 +51,9 @@
             </v-btn>
           </template>
           <template v-else>
-            <FxSchoolLogo class="mx-auto mb-10" :value="school.logo" :color="school.color" :alt="school.name" size="160" />
+            <div class="mb-10 text-center">
+              <FxSchoolLogo :value="school.logo" :color="school.color" :alt="school.name" size="160" />
+            </div>
             <h1 class="text-h1 primary--text text-center">
               {{ school.name }}
             </h1>
@@ -61,6 +63,7 @@
             </h2>
 
             <v-btn
+              v-if="school.portal"
               link
               :href="school.portalUrl"
               depressed
@@ -73,6 +76,10 @@
                 mdi-arrow-right
               </v-icon>
             </v-btn>
+
+            <h3 v-else class="message primary--text text-center">
+              This school is in our database, but it doesn't have an active Fixturr portal.
+            </h3>
 
             <v-btn text color="primary" block class="mt-10" @click="school = null">
               <v-icon size="16">
@@ -156,5 +163,11 @@ export default {
 
   left: 50%;
   transform: translate(-50%, 0);
+}
+
+.message {
+  font-size: 32px;
+  line-height: 46px;
+  font-weight: 400;
 }
 </style>
