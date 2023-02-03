@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="custom-background">
     <v-img class="ellipse-left-top" :src="require('@/assets/img/ellipse-left-top.svg')" width="220" height="220" />
     <v-img class="ellipse-right-bottom" :src="require('@/assets/img/ellipse-right-bottom.svg')" width="220" height="220" />
     <v-img class="logo" :src="require('@/assets/img/logo_light.svg')" width="249" />
@@ -52,7 +52,7 @@
           </template>
           <template v-else>
             <div class="mb-10 text-center">
-              <FxSchoolLogo :value="school.logo" :color="school.color" :alt="school.name" size="160" />
+              <FxSchoolLogo class="d-inline-block" :value="school.logo" :color="school.color" :alt="school.name" size="160" />
             </div>
             <h1 class="text-h1 primary--text text-center">
               {{ school.name }}
@@ -169,5 +169,9 @@ export default {
   font-size: 32px;
   line-height: 46px;
   font-weight: 400;
+}
+
+.custom-background {
+  background-color: #F2F4FB!important;
 }
 </style>
