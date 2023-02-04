@@ -2,23 +2,20 @@
   <v-app>
     <v-main>
       <div class="fill-height d-sm-flex flex-column flex-sm-row justify-center align-center">
-        <div class="school-panel d-flex flex-column align-center flex-shrink-1 justify-sm-space-around" :style="style">
-          <div class="pt-2 pt-sm-0">
-            <div class="school-logo-container mb-4">
+        <div class="school-panel d-flex flex-column align-center flex-shrink-1 justify-sm-space-between" :style="style">
+          <div class="school-info">
+            <div class="school-logo-container mb-5 mb-sm-5">
               <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" />
             </div>
-            <h1 class="text-md-h1s text-h6 white--text text-center">
+            <h1 class="text-sm-h1s text-h6 white--text text-center pb-5">
               {{ contextSchool.name }}
             </h1>
           </div>
 
           <div>
-            <div class="hidden-sm-and-down">
-              <v-img class="mx-auto" width="185" :src="require('/static/logo.svg')" />
+            <div class="hidden-xs-only">
+              <v-img class="mb-5" width="185" :src="require('/static/logo.svg')" />
             </div>
-            <h2 class="text-p1 font-weight-medium white--text text-center mt-4 mb-2 hidden-md-and-up">
-              Sports Portal
-            </h2>
           </div>
         </div>
         <div class="mx-sm-auto px-2 pt-2 pb-12 content-part d-flex align-center flex-grow-1 justify-center">
@@ -64,7 +61,18 @@ export default {
   padding-top: 0!important
 
 .school-panel
-  width: 400px
+  width: 45%
+  background-image: url('../assets/img/fixturr-bg-icon.svg')!important
+  background-repeat: no-repeat!important
+  background-position: 100% 95%!important
+  background-size: contain!important
+  margin-top: auto
+  margin-bottom: auto
+  border-radius: 64px
+  margin-left: 2.5%
+  box-shadow: 0 0 16px 0 #dadfe6!important
+  padding-left: 32px
+  padding-right: 32px
 .school-logo-container
   display: block
   margin: 0 auto
@@ -73,16 +81,29 @@ export default {
   background-color: white
   width: 220px
   height: 220px
+  box-shadow: 0px 1px 16px 5px rgba(255, 255, 255, 0.15)
+
+.school-info
+  margin-top: auto
+  margin-bottom: auto
 
 @media #{map-get($display-breakpoints, 'xs-only')}
   .school-panel
-    width: 100%
-    border-bottom: 4px solid var(--v-info-lighten2)
+    width: 95%
+    margin-top: 2.5%
+    margin-left: auto
+    margin-right: auto
+    border-radius: 32px
   .school-logo-container
     width: 200px
     height: 200px
   .content-wrap
     width: 100%
+
+  .school-info
+    margin-top: 20px
+    padding-left: 24px
+    padding-right: 24px
 
   @media screen and (max-device-height: 667px)
     .school-logo-container
@@ -91,6 +112,6 @@ export default {
 
 @media #{map-get($display-breakpoints, 'sm-and-up')}
   .school-panel
-    height: 100%
+    height: 95%
     max-width: 50vw
 </style>
