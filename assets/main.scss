@@ -194,12 +194,12 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 }
 
 .v-tab--active {
-  color: #1947a0 !important;
+  color: var(--v-primary-base) !important;
 }
 
 .v-tabs-slider {
   border-radius: 12px;
   height: 4px !important;
   margin-top: -2px;
-  color: #1947a0;
+
 }
