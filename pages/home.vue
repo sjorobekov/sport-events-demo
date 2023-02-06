@@ -46,7 +46,7 @@
               <v-menu ref="menu" offset-y :close-on-content-click="true">
                 <template #activator="{ on }">
                   <v-btn icon v-on="on">
-                    <v-icon size="32" color="info lighten1">
+                    <v-icon size="32" color="info lighten-1">
                       $vuetify.icons.calendar-1
                     </v-icon>
                   </v-btn>

@@ -185,3 +185,21 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
   border-radius: 0!important;
   border: 0!important;
 }
+
+.v-tab {
+  color: var(--v-info-darken1) !important;
+    font-size: .975rem !important;
+    letter-spacing: 0 !important;
+    margin-bottom: 8px;
+}
+
+.v-tab--active {
+  color: #1947a0 !important;
+}
+
+.v-tabs-slider {
+  border-radius: 12px;
+  height: 4px !important;
+  margin-top: -2px;
+  color: #1947a0;
+}
