@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="12" md="9">
+      <v-col cols="12" lg="9">
         <v-card :flat="!hasPhoto" :class="!hasPhoto ? 'no-photo' : null">
           <v-img
             class="white--text align-end"
@@ -76,7 +76,7 @@
           </div>
         </div>
       </v-col>
-      <v-col md="3" class="hidden-sm-and-down">
+      <v-col lg="3" class="hidden-md-and-down">
         <h3 class="text-p1 info--text text--darken-1 mb-4">
           Lead Staff Member
         </h3>
@@ -91,7 +91,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col md="9">
+      <v-col lg="9">
         <template v-if="showUpcoming">
           <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
             Upcoming
