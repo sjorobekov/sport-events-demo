@@ -96,4 +96,6 @@ export default [
   'subscription-1',
   'users-1',
   'customise-1',
+  'interrogationMark',
+  'login',
 ]
