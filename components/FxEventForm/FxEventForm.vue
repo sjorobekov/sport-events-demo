@@ -575,6 +575,15 @@ export default {
         gender: team.gender,
         ability: team.ability,
       })
+
+      this.$nextTick(() => {
+        this.$emit('update:event', {
+          ...this.eventForm,
+          age: team.age,
+          gender: team.gender,
+          ability: team.ability,
+        })
+      })
     },
     updateEvent (key, value) {
       this.$emit('update:event', { ...this.eventForm, [key]: value })
