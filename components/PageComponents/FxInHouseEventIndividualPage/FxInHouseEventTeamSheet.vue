@@ -17,8 +17,17 @@
       </v-btn>
     </template>
     <v-container v-if="!sheet.length">
+      <v-row no-gutters>
+        <v-col>
+          <v-list-item class="px-0 text-h5 hidden-md-and-up info--text text--darken-2">
+            <v-list-item-content>
+              <v-list-item-title>{{ name }} Team Sheet</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-col>
+      </v-row>
       <v-row>
-        <v-col cols="12" class="pt-6">
+        <v-col cols="12" class="pt-3">
           <v-sheet height="216" color="info lighten-5">
             <v-row
               align="center"
@@ -54,7 +63,6 @@
             </v-row>
           </v-sheet>
         </v-col>
-        <v-col cols="12" />
       </v-row>
     </v-container>
     <template v-else>

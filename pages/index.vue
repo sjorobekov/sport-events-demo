@@ -18,6 +18,10 @@ export default {
       return redirect({ name: 'home' })
     }
 
+    if (store.getters['context/isSignUpSite']) {
+      return redirect({ name: 'signup' })
+    }
+
     if (store.getters['context/isFindMySchoolSite']) {
       return redirect({ name: 'find' })
     }
