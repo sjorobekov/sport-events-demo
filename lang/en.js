@@ -98,8 +98,8 @@ export default {
       MISSING_RESULTS: 'No Missing Results | 1 Missing Result | {count} Missing Results',
     },
     Dashboard: {
-      FIXTURES_TO_CONFIRM: 'No Fixtures To Confirm | 1 Fixture To Confirm | {count} Fixtures To Confirm',
-      TEAMS_TODAY: 'No Teams Today | 1 Team Today | {count} Teams Today',
+      FIXTURES_TO_CONFIRM: 'No Fixtures | 1 Fixture | {count} Fixtures',
+      TEAMS_TODAY: 'No Teams | 1 Team | {count} Teams',
       STUDENTS: 'No Students | 1 Student | {count} Students',
     },
   },
