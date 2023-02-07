@@ -37,13 +37,15 @@
           <v-menu
             left
             bottom
+            offset-y
+            content-class="user-menu"
           >
             <template #activator="{ on, attrs }">
               <div class="flex-shrink-1 flex-grow-0">
-                <v-list-item class="px-0">
+                <v-list-item class="px-0 user-menu-handler" v-bind="attrs" :ripple="false" v-on="on">
                   <v-list-item-content class="text-right">
                     <v-list-item-title class="menu-text font-weight-bold">
-                      {{ me.displayName }}
+                      {{ me.firstname }} {{ me.lastname }}
                     </v-list-item-title>
                     <v-list-item-subtitle class="menu-text">
                       {{ me.jobRole }}
@@ -51,10 +53,8 @@
                   </v-list-item-content>
                   <v-list-item-avatar class="ml-3">
                     <FxAvatar
-                      v-bind="attrs"
                       size="32"
                       :value="me.avatar"
-                      v-on="on"
                     />
                   </v-list-item-avatar>
                   <v-list-item-icon class="ml-0">
@@ -65,14 +65,42 @@
                 </v-list-item>
               </div>
             </template>
+            <v-list class="py-0">
+              <FxUserItem class="px-4" :item="me" :subtitle="me.email" />
 
-            <v-list>
-              <v-list-item
-                v-for="(item, index) in items"
-                :key="index"
-                @click="item.handler"
-              >
-                <v-list-item-title v-text="item.title" />
+              <v-divider />
+              <v-list-item class="user-menu-item" :to="{ name: 'settings' }">
+                <v-list-item-icon class="mr-4">
+                  <v-icon>$vuetify.icons.settings</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title class="user-menu-text font-weight-bold info--text">
+                    Settings
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item class="user-menu-item" href="https://help.fixturr.com">
+                <v-list-item-icon class="mr-4">
+                  <v-icon>$vuetify.icons.interrogationMark</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title class="user-menu-text font-weight-bold info--text">
+                    Help Center
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-divider />
+              <v-list-item class="user-menu-item" @click="logOut">
+                <v-list-item-content>
+                  <v-list-item-title class="user-menu-text font-weight-bold error--text">
+                    Log Out
+                  </v-list-item-title>
+                </v-list-item-content>
+                <v-list-item-icon>
+                  <v-icon color="error">
+                    $vuetify.icons.login
+                  </v-icon>
+                </v-list-item-icon>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -105,8 +133,20 @@ export default {
     }),
     items () {
       return [
-        { title: 'Settings', handler: () => this.$router.push({ name: 'settings' }) },
-        { title: 'Logout', handler: () => this.logOut() },
+        {
+          title: 'Settings',
+          icon: '$vuetify.icons.settings',
+          handler: () => this.$router.push({ name: 'settings' }),
+        },
+        {
+          title: 'Help Center',
+          icon: '$vuetify.icons.interrogationMark',
+          to: 'https://help.fixturr.com/',
+        },
+        {
+          title: 'Logout',
+          handler: () => this.logOut(),
+        },
       ]
     },
 
@@ -162,5 +202,17 @@ export default {
 .menu-text {
   color: #868686!important;
   font-size: 14px;
+}
+
+.user-menu-text {
+  font-size: 14px;
+}
+
+.user-menu /deep/ {
+  border-radius: 12px!important;
+}
+
+.user-menu-handler.v-list-item:hover::before /deep/ {
+  opacity: 0!important;
 }
 </style>
