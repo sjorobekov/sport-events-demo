@@ -39,12 +39,31 @@
             bottom
           >
             <template #activator="{ on, attrs }">
-              <FxAvatar
-                v-bind="attrs"
-                size="32"
-                :value="me.avatar"
-                v-on="on"
-              />
+              <div class="flex-shrink-1 flex-grow-0">
+                <v-list-item class="px-0">
+                  <v-list-item-content class="text-right">
+                    <v-list-item-title class="menu-text font-weight-bold">
+                      {{ me.displayName }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle class="menu-text">
+                      {{ me.jobRole }}
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                  <v-list-item-avatar class="ml-3">
+                    <FxAvatar
+                      v-bind="attrs"
+                      size="32"
+                      :value="me.avatar"
+                      v-on="on"
+                    />
+                  </v-list-item-avatar>
+                  <v-list-item-icon class="ml-0">
+                    <v-icon color="#ababab" size="30">
+                      mdi-menu-down
+                    </v-icon>
+                  </v-list-item-icon>
+                </v-list-item>
+              </div>
             </template>
 
             <v-list>
@@ -138,5 +157,10 @@ export default {
 .school-name {
   font-size: 18px;
   line-height: 19px;
+}
+
+.menu-text {
+  color: #868686!important;
+  font-size: 14px;
 }
 </style>
