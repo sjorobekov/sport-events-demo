@@ -32,7 +32,7 @@
             <div class="date-picker">
               <v-tabs fixed-tabs v-model="tab" class="week-tabs" show-arrows>
                 <v-tabs-slider color="teal lighten-3" />
-                <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
+                <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column" style="width: 135px;">
                   <div>
                     {{ item.day }}
                   </div>
