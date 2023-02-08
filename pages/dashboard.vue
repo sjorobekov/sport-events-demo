@@ -3,7 +3,7 @@
     <h1 v-if="me" class="text-h4s text-md-h3 mb-6 mt-4 mt-md-n1">
       👋 Welcome, {{ name }}
     </h1>
-    <FxDashboardPageCard />
+    <FxDashboardPageCard :teams-today="teamsToday" />
 
     <v-row class="mt-5">
       <v-col cols="12" md="9">
@@ -75,6 +75,7 @@ export default {
   data: () => ({
     events: [],
     teams: [],
+    teamsToday: 0,
   }),
 
   async fetch () {
@@ -90,6 +91,11 @@ export default {
     })
 
     this.events = data
+    const teams = this.events
+      .flatMap(item => item.participants)
+      .filter(item => item.team?.schoolId === this.contextSchoolId)
+      .map(item => item.teamId)
+    this.teamsToday = [...new Set(teams)].length
 
     this.teams = await this.getTeams()
   },
