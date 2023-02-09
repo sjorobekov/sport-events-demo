@@ -98,4 +98,7 @@ export default [
   'customise-1',
   'interrogationMark',
   'login',
+  'filter',
+  'magnifying-glass',
+  'gender',
 ]

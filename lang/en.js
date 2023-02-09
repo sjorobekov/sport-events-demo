@@ -102,5 +102,9 @@ export default {
       TEAMS_TODAY: 'No Teams | 1 Team | {count} Teams',
       STUDENTS: 'No Students | 1 Student | {count} Students',
     },
+    Participation: {
+      EVENTS: 'No Events | 1 Event | {count} Events',
+      SPORTS: 'No Sports | 1 Sport | {count} Sports',
+    },
   },
 }
