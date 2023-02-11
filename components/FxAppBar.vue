@@ -225,4 +225,10 @@ export default {
   border-color: #F1F5F9;
 }
 
+.user-menu-item:hover {
+  background-color: var(--v-info-lighten5)!important;
+}
+.theme--light.v-list-item:before, .theme--light.v-list-item:hover:before, .theme--light.v-list-item:focus:before {
+  opacity: 0;
+}
 </style>
