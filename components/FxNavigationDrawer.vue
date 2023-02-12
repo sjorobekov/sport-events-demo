@@ -216,9 +216,9 @@ export default {
     padding-bottom: 8px
     border-radius: 0
     .v-icon
-      color: var(--v-info-lighten3)
+      color: rgba(255, 255, 255, 0.8)
     .v-list-item__title
-      color: var(--v-info-lighten5)
+      color: rgba(255, 255, 255, 0.9)
       font-size: 1rem
     &::before
       border-radius: 0
