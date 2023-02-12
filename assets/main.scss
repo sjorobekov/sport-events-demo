@@ -211,3 +211,8 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
     opacity: 100%;
   }
 }
+
+.v-window__prev, .v-window__next {
+  background: rgba(0, 0, 0, 0.0)!important;
+  opacity: 50%;
+}
