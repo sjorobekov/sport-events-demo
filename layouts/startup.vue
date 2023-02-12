@@ -61,7 +61,7 @@ export default {
   padding-top: 0!important
 
 .school-panel
-  width: 45%
+  width:calc(100% - 48px)
   background-image: url('../assets/img/fixturr-bg-icon.svg')!important
   background-repeat: no-repeat!important
   background-position: 100% 95%!important
@@ -89,8 +89,8 @@ export default {
 
 @media #{map-get($display-breakpoints, 'xs-only')}
   .school-panel
-    width: 95%
-    margin-top: 2.5%
+    width: calc(100% - 24px)
+    margin-top: 12px
     margin-left: auto
     margin-right: auto
     border-radius: 32px
@@ -112,6 +112,6 @@ export default {
 
 @media #{map-get($display-breakpoints, 'sm-and-up')}
   .school-panel
-    height: 95%
+    height: calc(100% - 48px)
     max-width: 50vw
 </style>
