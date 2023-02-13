@@ -259,35 +259,17 @@
             <v-row>
               <v-col cols="12" class="mt-0 pt-0">
                 <label>Publish Team to Sports Portal</label>
-                <v-radio-group
+                <FxPublishTeamSelect
                   :value="formData.publishTeam"
-                  mandatory
-                  class="mt-0"
-                  @change="update('publishTeam', $event)"
-                >
-                  <v-radio
-                    v-for="opt in publishTeamOptions"
-                    :key="opt.value"
-                    :label="opt.text"
-                    :value="opt.value"
-                  />
-                </v-radio-group>
+                  @input="update('publishTeam', $event)"
+                />
               </v-col>
               <v-col cols="12" class="mt-0 pt-0">
                 <label>Publish Results to Sports Portal</label>
-                <v-radio-group
+                <FxPublishResultsSelect
                   :value="formData.publishResults"
-                  mandatory
-                  class="mt-0"
-                  @change="update('publishResults', $event)"
-                >
-                  <v-radio
-                    v-for="opt in publishResultsOptions"
-                    :key="opt.value"
-                    :label="opt.text"
-                    :value="opt.value"
-                  />
-                </v-radio-group>
+                  @input="update('publishResults', $event)"
+                />
               </v-col>
             </v-row>
           </v-col>
@@ -329,8 +311,6 @@ export default {
 
   computed: {
     ...mapGetters({
-      publishResultsOptions: 'api/teams/publishResultsOptions',
-      publishTeamOptions: 'api/teams/publishTeamOptions',
       seasons: 'seasons/all',
     }),
     formData () {
