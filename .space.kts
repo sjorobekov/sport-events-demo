@@ -3,6 +3,7 @@ job("Build and push Docker") {
     beforeBuildScript {
       content = """
         export BRANCH=${'$'}(echo ${'$'}JB_SPACE_GIT_BRANCH | cut -d'/' -f 3)
+        export HASH=${'$'}(git rev-parse --short HEAD)
       """
     }
     build {
@@ -10,7 +11,7 @@ job("Build and push Docker") {
     }
 
     push("fixturr.registry.jetbrains.space/p/software-development/registry/ui") {
-      tags("\$BRANCH-\$JB_SPACE_EXECUTION_NUMBER")
+      tags("\$BRANCH-\$HASH")
     }
   }
 }
@@ -24,7 +25,7 @@ job("Deploy to dev") {
     shellScript {
       interpreter = "/bin/bash"
       content = """
-        export TAG=${'$'}(echo ${'$'}JB_SPACE_GIT_BRANCH | cut -d'/' -f 3)
+        export TAG=${'$'}(echo ${'$'}JB_SPACE_GIT_BRANCH | cut -d'/' -f 3)-${'$'}(git rev-parse --short HEAD)
         cd /home/runner/fixturr-compose/ui
         echo ${'$'}TAG && docker compose pull ui
         docker compose up -d --force-recreate ui
@@ -47,7 +48,7 @@ job("Deploy to prod") {
     shellScript {
       interpreter = "/bin/bash"
       content = """
-        export TAG=${'$'}(echo ${'$'}JB_SPACE_GIT_BRANCH | cut -d'/' -f 3)
+        export TAG=${'$'}(echo ${'$'}JB_SPACE_GIT_BRANCH | cut -d'/' -f 3)-${'$'}(git rev-parse --short HEAD)
         cd /home/fixturr/app/ui
         echo ${'$'}TAG && docker compose pull ui
         docker compose up -d --force-recreate ui
