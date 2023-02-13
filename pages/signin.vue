@@ -3,7 +3,7 @@
     <h1 class="text-md-h1 text-h6 text-center mt-2 mt-sm-6">
       Welcome
     </h1>
-    <v-form ref="form" v-async-form :disabled="loading" @submit.prevent="submit">
+    <v-form ref="form" v-async-form :disabled="loading" class="log-in-form" @submit.prevent="submit">
       <label>Email</label>
       <v-text-field
         v-model="formData.email"
@@ -59,12 +59,6 @@
           View Portal with School Password
         </nuxt-link>
       </div>
-
-      <p style="margin-top: 120px" class="text-center text-p1 info--text text--darken-2 hidden-sm-and-down">
-        By logging in to Fixturr you accept our <nuxt-link to="" style="text-decoration: none" class="font-weight-bold">
-          Terms & Conditions
-        </nuxt-link>
-      </p>
     </v-form>
   </div>
 </template>
@@ -143,4 +137,7 @@ export default {
 
 .signin-link
   font-size: 18px
+
+.log-in-form
+  min-width: 320px
 </style>
