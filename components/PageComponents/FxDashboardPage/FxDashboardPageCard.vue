@@ -1,16 +1,16 @@
 <template>
   <v-row>
     <v-col cols="12" md="6" lg="3">
-      <v-card>
+      <v-card class="card-has-shadow">
         <v-list-item :to="{ name: 'organising-confirm-fixtures' }" class="px-8 py-4">
-          <v-list-item-avatar size="40" tile>
-            <v-img :src="fixturesIcon" />
-          </v-list-item-avatar>
+          <v-icon size="40" color="primary" class="mr-3">
+            $vuetify.icons.scoreboard-1
+          </v-icon>
           <v-list-item-content>
             <v-list-item-title class="text-p2 info--text text--darken-4 font-weight-bold">
               {{ $tc('page.Dashboard.FIXTURES_TO_CONFIRM', fixturesToConfirm) }}
             </v-list-item-title>
-            <v-list-item-subtitle class="text-p1 info--text pt-1">
+            <v-list-item-subtitle class="text-p1 info--text">
               To Confirm
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -18,16 +18,16 @@
       </v-card>
     </v-col>
     <v-col cols="12" md="6" lg="3">
-      <v-card>
+      <v-card class="card-has-shadow">
         <v-list-item :to="{ name: 'organising-missing-results' }" class="px-8 py-4">
-          <v-list-item-avatar size="40" tile>
-            <v-img :src="resultsIcon" />
-          </v-list-item-avatar>
+          <v-icon size="40" color="primary" class="mr-3">
+            $vuetify.icons.warning-1
+          </v-icon>
           <v-list-item-content>
             <v-list-item-title class="text-p2 info--text text--darken-4 font-weight-bold">
               {{ missingResults }}
             </v-list-item-title>
-            <v-list-item-subtitle class="text-p1 info--text pt-1">
+            <v-list-item-subtitle class="text-p1 info--text">
               Missing Results
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -35,16 +35,16 @@
       </v-card>
     </v-col>
     <v-col cols="12" md="6" lg="3">
-      <v-card>
+      <v-card class="card-has-shadow">
         <v-list-item :to="{ name: 'organising-todays-teams' }" class="px-8 py-4">
-          <v-list-item-avatar size="40" tile>
-            <v-img :src="teamsIcon" />
-          </v-list-item-avatar>
+          <v-icon size="40" color="primary" class="mr-3">
+            $vuetify.icons.teams-1
+          </v-icon>
           <v-list-item-content>
             <v-list-item-title class="text-p2 info--text text--darken-4 font-weight-bold">
               {{ $tc('page.Dashboard.TEAMS_TODAY', teamsToday) }}
             </v-list-item-title>
-            <v-list-item-subtitle class="text-p1 info--text pt-1">
+            <v-list-item-subtitle class="text-p1 info--text">
               Have Events Today
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -52,16 +52,16 @@
       </v-card>
     </v-col>
     <v-col cols="12" md="6" lg="3">
-      <v-card>
+      <v-card class="card-has-shadow">
         <v-list-item :to="{ name: 'organising-participation' }" class="px-8 py-4">
-          <v-list-item-avatar size="40" tile>
-            <v-img :src="studentsIcon" />
-          </v-list-item-avatar>
+          <v-icon size="40" color="primary" class="mr-3">
+            $vuetify.icons.participating-1
+          </v-icon>
           <v-list-item-content>
             <v-list-item-title class="text-p2 info--text text--darken-4 align-self-start font-weight-bold">
               {{ $tc('page.Dashboard.STUDENTS', weekStudents) }}
             </v-list-item-title>
-            <v-list-item-subtitle class="text-p1 info--text pt-1">
+            <v-list-item-subtitle class="text-p1 info--text">
               Participating (Week)
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -73,10 +73,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import fixturesIcon from './fixtures.svg'
-import resultsIcon from './results.svg'
-import teamsIcon from './teams.svg'
-import studentsIcon from './students.svg'
 import { EventStatus } from '~/enum'
 
 export default {
@@ -89,10 +85,6 @@ export default {
   },
   data () {
     return {
-      fixturesIcon,
-      resultsIcon,
-      teamsIcon,
-      studentsIcon,
       fixturesToConfirm: 0,
       missingResults: 0,
       weekStudents: 0,

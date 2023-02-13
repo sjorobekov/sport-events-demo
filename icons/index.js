@@ -101,4 +101,8 @@ export default [
   'filter',
   'magnifying-glass',
   'gender',
+  'participating-1',
+  'scoreboard-1',
+  'teams-1',
+  'warning-1',
 ]
