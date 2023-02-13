@@ -216,3 +216,7 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
   background: rgba(0, 0, 0, 0.0)!important;
   opacity: 50%;
 }
+
+.card-has-shadow {
+  box-shadow: 0px 0px 10px 0px #dadfe6!important;
+}
