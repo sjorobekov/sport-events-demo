@@ -12,7 +12,7 @@
     @input="$emit('input', $event)"
   >
     <template v-if="icon" #prepend-inner>
-      <v-icon>mdi-filter-outline</v-icon>
+      <v-icon v-text="icon" />
     </template>
   </v-select>
 </template>
@@ -44,8 +44,8 @@ export default {
       default: false,
     },
     icon: {
-      type: Boolean,
-      default: false,
+      type: String,
+      default: undefined,
     },
   },
 
