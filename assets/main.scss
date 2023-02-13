@@ -46,21 +46,6 @@ body {
   border-top-color: var(--v-brand2-base) !important;
 }
 
-.fx-card-border-top-primary {
-  border-top-width: 4px!important;
-  border-top-style: solid;
-  border-top-color: var(--v-primary-base) !important;
-}
-
-@media screen and (min-width: 600px) {
-  .fx-card-border-top-sm-primary {
-    border-top-width: 4px!important;
-    border-top-style: solid;
-    border-top-color: var(--v-primary-base) !important;
-  }
-}
-
-
 label {
   font-size: .875rem;
   line-height: 1.063rem;
@@ -202,4 +187,32 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
   height: 4px !important;
   margin-top: -2px;
 
+}
+.fx-card-border-top-primary:before {
+  content:'';
+  position: absolute;
+  background-color: var(--v-primary-base);
+  height: 4px;
+  width: 100%;
+  top: 0;
+  left:0;
+  opacity: 100%;
+}
+
+@media screen and (min-width: 600px) {
+  .fx-card-border-top-sm-primary:before {
+    content:'';
+    position: absolute;
+    background-color: var(--v-primary-base);
+    height: 4px;
+    width: 100%;
+    top: 0;
+    left:0;
+    opacity: 100%;
+  }
+}
+
+.v-window__prev, .v-window__next {
+  background: rgba(0, 0, 0, 0.0)!important;
+  opacity: 50%;
 }
