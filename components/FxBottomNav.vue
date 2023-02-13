@@ -1,6 +1,6 @@
 <template>
   <v-bottom-navigation
-    class="elevation-2 px-1"
+    class="elevation-2 px-1 fish"
     grow
     app
     fixed
@@ -75,7 +75,7 @@ export default {
   color: white!important;
 }
 
-.v-item-group.v-bottom-navigation .v-btn.v-btn--active::before {
+::v-deep .v-item-group.v-bottom-navigation.fish .v-btn.v-btn--active::before {
   content:'';
   position: absolute;
   background-color: var(--v-primary-base);

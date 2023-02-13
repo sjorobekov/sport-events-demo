@@ -1,14 +1,19 @@
 <template>
-  <component :is="component" :value="value" />
+  <component :is="component[value.kind]" :value="value" />
 </template>
 
 <script>
-import Desktop from './Desktop'
-import Mobile from './Mobile'
+import EventItem from './EventItem/EventItem'
+import InHouseEventItem from './InHouseEventItem/InHouseEventItem'
 
 export default {
   name: 'FxCalendarEvent',
-  components: { Desktop, Mobile },
+
+  components: {
+    EventItem,
+    InHouseEventItem,
+  },
+
   props: {
     value: {
       type: Object,
@@ -16,14 +21,11 @@ export default {
     },
   },
 
-  computed: {
-    compact () {
-      return this.$vuetify.breakpoint.smAndDown
+  data: () => ({
+    component: {
+      InHouseEventMatch: 'InHouseEventItem',
+      Event: 'EventItem',
     },
-
-    component () {
-      return this.compact ? 'Mobile' : 'Desktop'
-    },
-  },
+  }),
 }
 </script>

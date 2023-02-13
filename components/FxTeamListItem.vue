@@ -1,16 +1,18 @@
 <template>
-  <v-list-item v-bind="$props" :class="iconOnRight ? 'flex-row-reverse': ''">
-    <v-list-item-avatar class="mx-1">
-      <FxSchoolLogo :value="school.logo" :alt="school.name" :color="school.color" />
-    </v-list-item-avatar>
-    <v-list-item-content>
-      <v-list-item-title :class="iconOnRight ? 'text-p2 font-weight-bold text-right': 'text-p2 font-weight-bold pl-2'">
-        {{ name }}
-      </v-list-item-title>
-    </v-list-item-content>
+  <client-only>
+    <v-list-item v-bind="$props" :class="itemClass">
+      <v-list-item-avatar class="mx-1">
+        <FxSchoolLogo :value="logo" :alt="name" :color="color" />
+      </v-list-item-avatar>
+      <v-list-item-content>
+        <v-list-item-title class="text-p2 font-weight-bold px-2">
+          {{ name }}
+        </v-list-item-title>
+      </v-list-item-content>
 
-    <slot name="action" />
-  </v-list-item>
+      <slot name="action" />
+    </v-list-item>
+  </client-only>
 </template>
 
 <script>
@@ -25,9 +27,9 @@ export default {
       type: Object,
       required: true,
     },
-    iconOnRight: {
-      type: Boolean,
-      default: false,
+    itemClass: {
+      type: String,
+      default: '',
     },
   },
 
@@ -40,27 +42,46 @@ export default {
   computed: {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
+      contextSchool: 'context/school',
     }),
     name () {
       return this.opponent?.name || this.team?.name || this.school?.name
     },
+
+    isMySchool () {
+      return this.contextSchoolId === this.participant.schoolId
+    },
+
+    isCustomOpponent () {
+      return this.participant.listedAsOpponentId && !this.participant.opponentSchoolId
+    },
+
+    logo () {
+      return this.school.logo
+    },
+
+    color () {
+      return this.school.color
+    },
   },
 
   async created () {
-    if (this.participant.listedAsOpponentId && !this.participant.schoolId) {
-      this.opponent = await this.fetchOpponent({
+    if (this.isCustomOpponent) {
+      this.opponent = this.participant.opponent || (await this.fetchOpponent({
         schoolId: this.contextSchoolId,
         id: this.participant.listedAsOpponentId,
-      })
-    } else {
-      this.school = await this.fetchSchool(this.participant.schoolId || this.contextSchoolId)
+      }))
     }
 
-    if (this.contextSchoolId === this.participant.schoolId && this.participant.teamId) {
-      this.team = await this.fetchTeam({
+    if (this.participant.schoolId) {
+      this.school = this.participant.school || (await this.fetchSchool(this.participant.schoolId))
+    }
+
+    if (this.isMySchool && this.participant.teamId) {
+      this.team = this.participant.team || (await this.fetchTeam({
         schoolId: this.contextSchoolId,
         id: this.participant.teamId,
-      })
+      }))
     }
   },
 

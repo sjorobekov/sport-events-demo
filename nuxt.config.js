@@ -115,6 +115,18 @@ export default {
           },
         ],
       })
+      routes.push({
+        name: 'directory-opponents',
+        path: '/directory/opponents',
+        component: '@/components/PageComponents/FxOpponentPage/FxOpponentsListPage.vue',
+        children: [
+          {
+            name: 'directory-opponents-opponentId',
+            path: ':opponentId',
+            component: '@/components/PageComponents/FxOpponentPage/FxOpponentIndividualPage.vue',
+          },
+        ],
+      })
     },
   },
 

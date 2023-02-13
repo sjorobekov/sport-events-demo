@@ -19,7 +19,7 @@
         <FxDateFormat class="text-p2" :date="match.date" output-format="cccc dd MMMM yyyy" />
       </v-col>
       <v-col v-if="me" cols="12" md="4" class="border-bottom">
-        <FxInHouseTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" :icon-on-right="!compact" />
+        <FxInHouseTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" item-class="flex-row flex-md-row-reverse text-md-right" />
       </v-col>
       <v-col v-if="opponent" cols="12" md="5" class="border-bottom">
         <FxInHouseTeamListItem class="pl-0" :participant="opponent" :context-school-id="contextSchoolId" />

@@ -10,7 +10,7 @@
         </div>
       </v-col>
       <v-col cols="12" md="3" class="border-bottom">
-        <FxTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" :icon-on-right="!compact" />
+        <FxTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" item-class="flex-row flex-md-row-reverse text-md-right" />
       </v-col>
       <v-col md="2" class="hidden-sm-and-down pt-5 border-bottom text-center">
         <div>

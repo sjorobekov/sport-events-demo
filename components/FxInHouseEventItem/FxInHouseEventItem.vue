@@ -18,7 +18,7 @@
     </v-row>
     <v-row v-if="!isAllHouseEvent">
       <v-col v-if="!isAllHouseEvent && me" cols="12" md="6">
-        <FxInHouseTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" :icon-on-right="!compact" />
+        <FxInHouseTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" />
       </v-col>
       <v-col v-if="!isAllHouseEvent && opponent" cols="12" md="6">
         <FxInHouseTeamListItem class="pl-0" :participant="opponent" :context-school-id="contextSchoolId" />
@@ -34,7 +34,7 @@
               class="pl-0"
               :participant="inHouseTeam"
               :context-school-id="contextSchoolId"
-              :icon-on-right="!compact"
+              item-class="flex-row flex-md-row-reverse text-md-right"
               style="max-width: fit-content"
             />
           </template>
@@ -50,7 +50,7 @@
 import { DateTime } from 'luxon'
 import { EventType, InHouseEventType } from '@/enum'
 import AllInHouseTeamsProvider
-  from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/Desktop/InHouseEventItem/components/AllInHouseTeamsProvider'
+  from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/InHouseEventItem/components/AllInHouseTeamsProvider'
 
 export default {
   name: 'FxInHouseEventItem',

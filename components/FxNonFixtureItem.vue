@@ -1,5 +1,5 @@
 <template>
-  <v-list-item class="pl-0">
+  <v-list-item class="px-0">
     <v-list-item-avatar class="mx-1">
       <v-icon v-text="icon" />
     </v-list-item-avatar>

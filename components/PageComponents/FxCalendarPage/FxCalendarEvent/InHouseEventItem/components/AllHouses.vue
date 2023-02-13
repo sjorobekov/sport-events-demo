@@ -1,0 +1,107 @@
+<template>
+  <FxCalendarItem :sport="sport" :lead="lead" :to="{ name: 'in-house-competitionId-matches-matchId', params: { matchId: value.id, competitionId: competition.id } }">
+    <template #subtitle>
+      <span class="text-p2 info--text text--lighten-1">In-House {{ competition.name }}</span>
+    </template>
+    <template v-if="value.overallResult" #status>
+      <FxInHouseMatchStatus :overall-result="value.overallResult" />
+    </template>
+    <template #center>
+      <!--      <div class="d-flex justify-center" style="width: 100%">-->
+      <!--      <div class="text-p2 font-weight-bold info&#45;&#45;text text&#45;&#45;darken-3 d-flex align-center justify-end">-->
+      <!--        All Houses-->
+      <!--      </div>-->
+
+      <v-list-item class="text-md-right">
+        <v-list-item-content>
+          <v-list-item-title class="font-weight-bold info--text text--darken-3">
+            All Houses
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+
+      <div class="hidden-sm-and-down flex-grow-1" style="min-width: 170px">
+        <AllInHouseTeamsProvider class="text-center">
+          <template #default="{ teams }">
+            <FxSchoolLogo v-for="team in teams" :key="team.id" :color="team.color" :alt="team.name" size="40" />
+          </template>
+        </AllInHouseTeamsProvider>
+      </div>
+
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="text-p2 font-weight-bold info--text text--darken-3">
+            {{ event.name || competition.name }}
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </template>
+    <template #time>
+      <div>
+        <div v-if="value.startTime" class="d-inline-block pr-8">
+          <v-list-item-title class="text-p2 info--text text--darken-4">
+            {{ value.startTime }}
+          </v-list-item-title>
+          <v-list-item-subtitle class="text-p1 info--text">
+            Start Time
+          </v-list-item-subtitle>
+        </div>
+        <div class="d-inline-block pr-8">
+          <v-list-item-title class="text-p2 info--text text--darken-4">
+            {{ value.finishTime }}
+          </v-list-item-title>
+          <v-list-item-subtitle class="text-p1 info--text">
+            Finish Time
+          </v-list-item-subtitle>
+        </div>
+      </div>
+    </template>
+    <template #location>
+      <span>{{ locationLabel }}</span>
+    </template>
+  </FxCalendarItem>
+</template>
+
+<script>
+import FxCalendarItem from '~/components/PageComponents/FxCalendarPage/FxCalendarEvent/CalendarItemLayout.vue'
+import AllInHouseTeamsProvider
+  from '~/components/PageComponents/FxCalendarPage/FxCalendarEvent/InHouseEventItem/components/AllInHouseTeamsProvider.vue'
+import FxSchoolLogo from '~/components/FxSchoolLogo/FxSchoolLogo.vue'
+
+export default {
+  name: 'AllHouses',
+  components: { FxSchoolLogo, AllInHouseTeamsProvider, FxCalendarItem },
+  props: {
+    value: {
+      type: Object,
+      required: true,
+    },
+  },
+
+  computed: {
+    event () {
+      return this.value.inHouseEvent
+    },
+
+    competition () {
+      return this.value.inHouseEvent.inHouseCompetition
+    },
+
+    sport () {
+      return this.competition.sport
+    },
+
+    lead () {
+      return this.event.lead
+    },
+
+    locationLabel () {
+      if (this.value.sportLocation) {
+        return this.value.sportLocation.name
+      }
+
+      return this.value.otherLocation
+    },
+  },
+}
+</script>
