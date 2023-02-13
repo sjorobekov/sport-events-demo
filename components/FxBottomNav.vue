@@ -1,6 +1,6 @@
 <template>
   <v-bottom-navigation
-    class="elevation-2 px-1"
+    class="elevation-2 px-1 bottom-menu"
     grow
     app
     fixed
@@ -75,7 +75,8 @@ export default {
   color: white!important;
 }
 
-.v-item-group.v-bottom-navigation .v-btn.v-btn--active::before {
+::v-deep.bottom-menu.v-item-group.v-bottom-navigation {
+  .v-btn.v-btn--active::before {
   content:'';
   position: absolute;
   background-color: var(--v-primary-base);
@@ -87,6 +88,7 @@ export default {
   border-bottom-right-radius: 6px;
   margin-left:auto;
   margin-right:auto;
-  opacity: 100%;
+  opacity: 1;
+  }
 }
 </style>
