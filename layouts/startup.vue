@@ -61,7 +61,7 @@ export default {
   padding-top: 0!important
 
 .school-panel
-  width:calc(100% - 48px)
+  width: calc(100% - 48px) 
   background-image: url('../assets/img/fixturr-bg-icon.svg')!important
   background-repeat: no-repeat!important
   background-position: 100% 95%!important
