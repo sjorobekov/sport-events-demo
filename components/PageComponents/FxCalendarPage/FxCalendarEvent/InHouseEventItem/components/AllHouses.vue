@@ -7,11 +7,6 @@
       <FxInHouseMatchStatus :overall-result="value.overallResult" />
     </template>
     <template #center>
-      <!--      <div class="d-flex justify-center" style="width: 100%">-->
-      <!--      <div class="text-p2 font-weight-bold info&#45;&#45;text text&#45;&#45;darken-3 d-flex align-center justify-end">-->
-      <!--        All Houses-->
-      <!--      </div>-->
-
       <v-list-item class="text-md-right">
         <v-list-item-content>
           <v-list-item-title class="font-weight-bold info--text text--darken-3">
@@ -20,8 +15,8 @@
         </v-list-item-content>
       </v-list-item>
 
-      <div class="hidden-sm-and-down flex-grow-1" style="min-width: 170px">
-        <AllInHouseTeamsProvider class="text-center">
+      <div class="hidden-sm-and-down">
+        <AllInHouseTeamsProvider class="d-flex flex-nowrap justify-center">
           <template #default="{ teams }">
             <FxSchoolLogo v-for="team in teams" :key="team.id" :color="team.color" :alt="team.name" size="40" />
           </template>
