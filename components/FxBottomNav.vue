@@ -1,6 +1,6 @@
 <template>
   <v-bottom-navigation
-    class="elevation-2 px-1 fish"
+    class="elevation-2 px-1 bottom-menu"
     grow
     app
     fixed
@@ -75,18 +75,20 @@ export default {
   color: white!important;
 }
 
-::v-deep .v-item-group.v-bottom-navigation.fish .v-btn.v-btn--active::before {
-  content:'';
-  position: absolute;
-  background-color: var(--v-primary-base);
-  height: 6px;
-  width: 50%;
-  top: 0;
-  left:0;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-  margin-left:auto;
-  margin-right:auto;
-  opacity: 100%;
+::v-deep.bottom-menu.v-item-group.v-bottom-navigation {
+  .v-btn.v-btn--active::before {
+    content:'';
+    position: absolute;
+    background-color: var(--v-primary-base);
+    height: 6px;
+    width: 50%;
+    top: 0;
+    left:0;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    margin-left:auto;
+    margin-right:auto;
+    opacity: 1;
+  }
 }
 </style>
