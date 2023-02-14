@@ -29,7 +29,7 @@
                 </v-icon>
               </v-btn>
             </template>
-            <v-list v-if="event.date > date" class="grey lighten-3">
+            <v-list  class="grey lighten-3">
               <v-list-item @click="remove(item)">
                 <v-list-item-content>
                   <v-list-item-title class="text--info text--darken-1">
@@ -112,9 +112,13 @@ export default {
         return
       }
 
-      this.$store.dispatch('api/sportsRecordEvents/remove', item).then(() => {
-        const index = this.items.indexOf(item)
-        this.items.splice(index, 1)
+      this.$store.dispatch('api/events/remove', {
+        id: item.id,
+        schoolId: item.me.schoolId,
+      }).then(() => {
+        this.$fetch()
+        this.$toast('Event has been removed')
+        this.$router.back()
       }).catch(() => {
         this.$toast.error('Unknown Error')
       })
