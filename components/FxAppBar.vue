@@ -66,11 +66,11 @@
               </div>
             </template>
             <v-list class="py-0">
-              <FxUserItem class="px-4" :item="me" :subtitle="me.email" />
+              <FxUserItem class="px-4 py-2" :item="me" :subtitle="me.email" />
 
               <v-divider />
               <v-list-item class="user-menu-item" :to="{ name: 'settings' }">
-                <v-list-item-icon class="mr-4">
+                <v-list-item-icon class="mr-3">
                   <v-icon>$vuetify.icons.settings</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
@@ -80,7 +80,7 @@
                 </v-list-item-content>
               </v-list-item>
               <v-list-item class="user-menu-item" href="https://help.fixturr.com">
-                <v-list-item-icon class="mr-4">
+                <v-list-item-icon class="mr-3">
                   <v-icon>$vuetify.icons.interrogationMark</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
@@ -214,5 +214,21 @@ export default {
 
 .user-menu-handler.v-list-item:hover::before /deep/ {
   opacity: 0!important;
+}
+
+.v-menu__content {
+  box-shadow: 0 0 4px rgb(0 0 0 / 4%), 0 8px 16px rgb(0 0 0 / 8%);
+  border: 1px solid #E4E9EF;
+}
+
+.theme--light.v-divider {
+  border-color: #F1F5F9;
+}
+
+.user-menu-item:hover {
+  background-color: var(--v-info-lighten5)!important;
+}
+.theme--light.v-list-item:before, .theme--light.v-list-item:hover:before, .theme--light.v-list-item:focus:before {
+  opacity: 0;
 }
 </style>
