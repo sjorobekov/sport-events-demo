@@ -95,7 +95,8 @@ export default {
         schoolId: this.contextSchoolId,
         ...this.formData,
       }).then((res) => {
-        this.$router.push({ name: 'settings-in-house-teams', params: { id: res.schoolId, teamId: res.id } })
+        this.$toast.success('Saved changes.')
+        this.$router.push({ name: 'in-house', params: { id: res.schoolId, teamId: res.id } })
       }).finally(() => {
         this.loading = false
       })
