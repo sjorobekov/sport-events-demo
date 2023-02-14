@@ -70,7 +70,7 @@ export default {
   margin-bottom: auto
   border-radius: 64px
   margin-left: 2.5%
-  box-shadow: 0 0 16px 0 #dadfe6!important
+  box-shadow: 0px 0px 16px rgba(255, 255, 255, 0.8)!important
   padding-left: 32px
   padding-right: 32px
 .school-logo-container
