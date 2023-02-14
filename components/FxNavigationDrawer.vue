@@ -10,7 +10,7 @@
     @input="$emit('input', $event)"
   >
     <template v-if="!hideLogo">
-      <v-avatar size="144" color="white" class="mt-10 mb-6 mx-auto d-block">
+      <v-avatar size="144" color="white" class="mt-10 mb-6 mx-auto d-block school-logo-nav">
         <FxSchoolLogo :value="contextSchool.logo" color="primary" />
       </v-avatar>
 
@@ -30,7 +30,6 @@
     >
       <template v-if="hideLogo && isLoggedIn">
         <FxUserItem :item="me" class="px-5" :to="{ name: 'settings' } " />
-        <v-divider />
       </template>
       <template
         v-for="(item, i) in items"
@@ -42,6 +41,7 @@
           :to="item.to"
           :exact="item.exact"
           class="mb-0"
+          :ripple="false"
         >
           <v-list-item-icon class="ml-4 mr-3">
             <v-icon>{{ item.icon }}</v-icon>
@@ -59,6 +59,7 @@
           :key="i"
           active-class="white--text"
           class="mb-0"
+          :ripple="false"
         >
           <template #activator>
             <v-list-item-icon class="ml-4 mr-3">
@@ -75,6 +76,7 @@
             :exact="subitem.exact"
             active-class="active-link white--text"
             class="mb-0"
+            :ripple="false"
           >
             <v-list-item-icon class="ml-4 mr-3">
               <v-icon v-text="subitem.icon" />
@@ -88,20 +90,19 @@
       </template>
 
       <template v-if="hideLogo">
-        <v-divider />
         <v-list-item v-if="!isLoggedIn" link :to="{ name: 'signin' }">
           <v-list-item-icon class="ml-4 mr-3">
-            <v-icon>mdi-login-variant</v-icon>
+            <v-icon> $vuetify.icons.login-1 </v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title class="font-weight-bold">
-              Staff Log In
+              Log In
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item v-else @click="logOut">
           <v-list-item-icon class="ml-4 mr-3">
-            <v-icon>mdi-logout-variant</v-icon>
+            <v-icon>$vuetify.icons.login-1</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title class="font-weight-bold">
@@ -158,15 +159,15 @@ export default {
 
     items () {
       const menu = [
-        { title: 'Calendar', icon: '$vuetify.icons.calendarRounded', to: { name: 'calendar' } },
-        { title: 'Announcements', icon: '$vuetify.icons.bullhorn', to: { name: 'announcements' } },
+        { title: 'Calendar', icon: '$vuetify.icons.calendar-outline', to: { name: 'calendar' } },
+        { title: 'Announcements', icon: '$vuetify.icons.announcements-outline', to: { name: 'announcements' } },
 
-        { title: 'Teams', icon: '$vuetify.icons.teamsAlt', to: { name: 'teams' } },
-        { title: 'In-House Sport', icon: '$vuetify.icons.cupAlt', to: { name: 'in-house' } },
-        { title: 'Sports Records', icon: '$vuetify.icons.stopwatchAlt', to: { name: 'records' } },
+        { title: 'Teams', icon: '$vuetify.icons.teams-outline', to: { name: 'teams' } },
+        { title: 'In-House Sport', icon: '$vuetify.icons.in-house-outline', to: { name: 'in-house' } },
+        { title: 'Sports Records', icon: '$vuetify.icons.stopwatch-outline', to: { name: 'records' } },
         {
           title: 'Directory',
-          icon: 'mdi-information',
+          icon: '$vuetify.icons.directory-outline',
           to: { name: 'management-sports' },
           items: [
             { title: 'Sports Map', to: { name: 'directory-sports-map' } },
@@ -177,14 +178,14 @@ export default {
       ]
 
       const dashboard = (this.isLoggedIn)
-        ? { title: 'Sports Dashboard', icon: '$vuetify.icons.home', exact: true, to: { name: 'dashboard' } }
-        : { title: 'Sports Home', icon: '$vuetify.icons.home', exact: true, to: { name: 'home' } }
+        ? { title: 'Dashboard', icon: '$vuetify.icons.dashboard-outline', exact: true, to: { name: 'dashboard' } }
+        : { title: 'Home', icon: '$vuetify.icons.home-outline', exact: true, to: { name: 'home' } }
       menu.unshift(dashboard)
 
       if (this.canSeeOrganising) {
         menu.splice(3, 0, {
           title: 'Organising',
-          icon: '$vuetify.icons.organising',
+          icon: '$vuetify.icons.organising-outline',
           items: [
             { title: 'Today\'s Teams', to: { name: 'organising-todays-teams' } },
             { title: 'Confirm Fixtures', to: { name: 'organising-confirm-fixtures' } },
@@ -242,4 +243,7 @@ export default {
     padding-bottom: 8px
     border-radius: 0
     margin-bottom: 0!important
+
+.school-logo-nav
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8)!important
 </style>
