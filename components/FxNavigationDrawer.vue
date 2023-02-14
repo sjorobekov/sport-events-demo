@@ -76,6 +76,7 @@
             :exact="subitem.exact"
             active-class="active-link white--text"
             class="mb-0"
+            :ripple="false"
           >
             <v-list-item-icon class="ml-4 mr-3">
               <v-icon v-text="subitem.icon" />
