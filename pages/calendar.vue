@@ -1,14 +1,8 @@
 <template>
   <div>
-    <v-app-bar
-      elevation="0"
-      height="192"
-      fixed
-      color="background"
-      class="calendar-bar px-0"
-    >
+    <div class="calendar-bar">
       <v-container class="my-0 py-0 px-0 mt-4">
-        <div class="d-flex">
+        <div class="d-flex px-md-2">
           <FxDateRangePicker v-model="filter" :mobile="isMobile" class="ml-2" />
 
           <FxCalendarSportFilter v-model="filter.sports" style="max-width: 200px" :items="sports" class="hidden-md-and-down ml-2 mr-2" />
@@ -65,31 +59,29 @@
           />
         </div>
       </v-container>
-    </v-app-bar>
+    </div>
     <div class="calendar-content">
       <client-only>
-        <v-expand-transition>
-          <div v-if="showFilters">
-            <FxPill class="mb-4">
-              Filters
-            </FxPill>
+        <FxCalendarFilterDialog
+          v-model="showFilters"
+          :mobile="isMobile"
+          @click:clearAll="$refs.filter.clearAll()"
+        >
+          <FxPill v-if="!isMobile" class="mb-4">
+            Filters
+          </FxPill>
 
-            <v-row class="hidden-lg-and-up">
-              <v-col class=" mb-2">
-                <FxCalendarSportFilter v-model="filter.sports" :items="sports" />
-              </v-col>
-            </v-row>
-
-            <div class="d-flex" style="flex-wrap: wrap;gap: 8px;">
-              <FxCalendarStaffFilter v-model="filter.leadIds" :items="leadIds" />
-              <FxCalendarEventFilter v-model="filter.eventTypes" :items="eventTypes" :in-house-filter="containsInHouseEvents" />
-              <FxCalendarOpponentFilter v-model="filter.opponentIds" :items="opponentIds" />
-              <FxCalendarAgeFilter v-model="filter.ageGroups" :items="ageGroups" />
-              <FxCalendarLocationFilter v-model="filter.locations" />
-              <FxCalendarStatusFilter v-if="isLoggedIn" v-model="filter.privacy" />
-            </div>
-          </div>
-        </v-expand-transition>
+          <FxCalendarFilter
+            ref="filter"
+            v-model="filter"
+            :age-groups="ageGroups"
+            :event-types="eventTypes"
+            :opponent-ids="opponentIds"
+            :lead-ids="leadIds"
+            :contains-in-house-events="containsInHouseEvents"
+            :sports="sports"
+          />
+        </FxCalendarFilterDialog>
       </client-only>
       <client-only>
         <div
@@ -125,15 +117,11 @@ import FxCalendar from '@/components/FxCalendar/FxCalendar'
 import FxDateRangePicker from '@/components/FxDateRangePicker'
 import FxCalendarPill from '@/components/PageComponents/FxCalendarPage/FxCalendarPill'
 import FxPill from '@/components/FxPill/FxPill'
-import FxCalendarStaffFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarStaffFilter'
-import FxCalendarEventFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarEventFilter'
 import FxCalendarSportFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarSportFilter'
-import FxCalendarOpponentFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarOpponentFilter'
-import FxCalendarAgeFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarAgeFilter'
-import FxCalendarLocationFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarLocationFilter'
 import { EventLocationType, EventStatus } from '@/enum'
 import FxCalendarEvent from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent'
-import FxCalendarStatusFilter from '@/components/PageComponents/FxCalendarPage/FxCalendarStatusFilter'
+import FxCalendarFilterDialog from '~/components/PageComponents/FxCalendarPage/FxCalendarFilterDialog.vue'
+import FxCalendarFilter from '~/components/PageComponents/FxCalendarPage/FxCalendarFilter.vue'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
 
@@ -225,14 +213,10 @@ const filter = (item, filter) => {
 export default {
   name: 'CalendarPage',
   components: {
-    FxCalendarStatusFilter,
+    FxCalendarFilter,
+    FxCalendarFilterDialog,
     FxCalendarEvent,
-    FxCalendarLocationFilter,
-    FxCalendarAgeFilter,
-    FxCalendarOpponentFilter,
     FxCalendarSportFilter,
-    FxCalendarEventFilter,
-    FxCalendarStaffFilter,
     FxPill,
     FxCalendarPill,
     FxCalendar,
@@ -425,15 +409,16 @@ export default {
   z-index: 3;
   border-bottom: solid 8px var(--v-primary-base)!important;
   margin-left: 0;
-}
-.calendar-content {
-  margin-top: 180px;
+  height: 186px;
+  background: var(--v-background-base);
 }
 
 @media only screen and (min-width: 960px) {
   .calendar-bar {
+    position: fixed;
     top: 55px;
-    margin-left: 240px;
+    width: calc(100vw - 240px);
+    left: 240px;
   }
   .calendar-content {
     margin-top: 180px;
