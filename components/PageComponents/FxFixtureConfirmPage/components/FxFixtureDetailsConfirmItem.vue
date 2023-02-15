@@ -19,7 +19,7 @@
       </v-row>
       <v-row>
         <v-col cols="12" sm="6">
-          <FxTeamListItem :participant="meData" :icon-on-right="!isMobile" />
+          <FxTeamListItem :participant="meData" item-class="flex-row flex-md-row-reverse text-md-right" />
         </v-col>
         <v-col cols="12" sm="6">
           <FxTeamListItem :participant="opponent" />

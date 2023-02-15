@@ -77,18 +77,18 @@ export default {
 
 ::v-deep.bottom-menu.v-item-group.v-bottom-navigation {
   .v-btn.v-btn--active::before {
-  content:'';
-  position: absolute;
-  background-color: var(--v-primary-base);
-  height: 6px;
-  width: 50%;
-  top: 0;
-  left:0;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-  margin-left:auto;
-  margin-right:auto;
-  opacity: 1;
+    content:'';
+    position: absolute;
+    background-color: var(--v-primary-base);
+    height: 6px;
+    width: 50%;
+    top: 0;
+    left:0;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    margin-left:auto;
+    margin-right:auto;
+    opacity: 1;
   }
 }
 </style>

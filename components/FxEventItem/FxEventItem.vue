@@ -21,7 +21,7 @@
     </v-row>
     <v-row>
       <v-col cols="12" md="6" class="border-bottom">
-        <FxTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" :icon-on-right="!compact" />
+        <FxTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" item-class="flex-row flex-md-row-reverse text-md-right" />
       </v-col>
       <v-col cols="12" md="6" class="border-bottom">
         <FxTeamListItem v-if="event.eventType === EventType.FIXTURE" class="pl-0" :participant="opponent" :context-school-id="contextSchoolId" />
