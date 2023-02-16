@@ -29,7 +29,7 @@
                   </v-icon>
                 </v-btn>
               </template>
-              <v-list v-if="upcoming" class="grey lighten-3">
+              <v-list v-if="upcoming">
                 <v-list-item @click="remove(event)">
                   <v-list-item-content>
                     <v-list-item-title class="text--info text--darken-1">
@@ -126,7 +126,7 @@ export default {
         id: this.event.id,
       }).then(() => {
         this.$toast('Event has been removed')
-        this.$router.push({ name: 'teams-id', params: { id: team.id } })
+        this.$router.push({ name: 'teams-id', params: { schoolId: this.contextSchoolId, id: this.event.id } })
       }).catch(() => {
         this.$toast.error('Unknown Error')
       })
