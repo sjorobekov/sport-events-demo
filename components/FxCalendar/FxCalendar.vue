@@ -54,7 +54,7 @@ export default {
       default: () => [],
     },
     value: {
-      type: DateTime,
+      type: String,
       default: undefined,
     },
   },
@@ -68,7 +68,7 @@ export default {
         if (!this.value) {
           return null
         }
-        return this.itemsStrings.indexOf(this.value.toFormat('yyyy-MM-dd'))
+        return this.itemsStrings.indexOf(this.value)
       },
     },
 

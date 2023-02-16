@@ -1,10 +1,12 @@
 <template>
-  <div class="top-bar" :class="{ 'is-hidden': !showHeader }">
+  <div class="top-bar" :class="{ 'is-hidden': !showHeader }" :style="styles">
     <slot name="default" />
   </div>
 </template>
 
 <script>
+import { convertToUnit } from 'vuetify/src/util/helpers.ts'
+
 export default {
   name: 'FxTopBar',
 
@@ -14,6 +16,23 @@ export default {
     scrollOffset: 80,
   }),
 
+  computed: {
+    computedLeft () {
+      return this.$vuetify.application.left
+    },
+
+    computedRight () {
+      return this.$vuetify.application.right
+    },
+
+    styles () {
+      return {
+        left: convertToUnit(this.computedLeft),
+        right: convertToUnit(this.computedRight),
+      }
+    },
+  },
+
   mounted () {
     this.lastScrollPosition = window.pageYOffset
     window.addEventListener('scroll', this.onScroll)
@@ -22,7 +41,6 @@ export default {
   beforeDestroy () {
     window.removeEventListener('scroll', this.onScroll)
   },
-
   methods: {
     // Toggle if navigation is shown or hidden
     onScroll () {
@@ -49,14 +67,10 @@ export default {
   margin-left: 0
   transform: translateY(0)
   transition: transform 300ms linear
-  width: 100vw
-  left: 0
 
 @media #{map-get($display-breakpoints, 'md-and-up')}
   .top-bar
     top: 55px
-    width: calc(100vw - 240px)
-    left: 240px
 
 @media #{map-get($display-breakpoints, 'sm-and-down')}
   .top-bar.is-hidden

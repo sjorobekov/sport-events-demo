@@ -1,7 +1,7 @@
 <template>
   <div>
-    <FxTopBar class="my-0 py-0 px-0">
-      <div class="calendar-bar">
+    <FxTopBar>
+      <div class="calendar-bar pt-2">
         <v-container>
           <div class="d-flex px-md-2">
             <FxDateRangePicker v-model="filter" :mobile="isMobile" class="ml-2" />
@@ -256,7 +256,7 @@ export default {
         schoolId: this.contextSchoolId,
         params,
       }),
-      await this.$store.dispatch('api/inHouseMatches/getBySchool', {
+      this.$store.dispatch('api/inHouseMatches/getBySchool', {
         schoolId: this.contextSchoolId,
         params,
       }),
@@ -376,7 +376,7 @@ export default {
     onIntersect (date) {
       return (_entries, _observer, isIntersecting) => {
         if (isIntersecting) {
-          this.date = DateTime.fromFormat(date, DATE_FORMAT)
+          this.date = date
         }
       }
     },

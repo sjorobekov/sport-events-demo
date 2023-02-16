@@ -57,7 +57,15 @@ import FxCalendarStatusFilter from './FxCalendarStatusFilter'
 
 export default {
   name: 'FxCalendarFilter',
-  components: { FxCalendarStatusFilter, FxCalendarLocationFilter, FxCalendarAgeFilter, FxCalendarOpponentFilter, FxCalendarEventFilter, FxCalendarStaffFilter, FxCalendarSportFilter },
+  components: {
+    FxCalendarStatusFilter,
+    FxCalendarLocationFilter,
+    FxCalendarAgeFilter,
+    FxCalendarOpponentFilter,
+    FxCalendarEventFilter,
+    FxCalendarStaffFilter,
+    FxCalendarSportFilter,
+  },
   props: {
     value: {
       type: Object,
