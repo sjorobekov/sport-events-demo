@@ -88,7 +88,7 @@ export default {
 </script>
 
 <style scoped lang="sass">
-@import '../../../../node_modules/vuetify/src/styles/styles'
+@import '~vuetify/src/styles/styles'
 
 $scoreWidth: 170px
 $teamWidth: $scoreWidth / 2

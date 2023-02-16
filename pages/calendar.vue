@@ -1,65 +1,67 @@
 <template>
   <div>
-    <div class="calendar-bar">
-      <v-container class="my-0 py-0 px-0 mt-4">
-        <div class="d-flex px-md-2">
-          <FxDateRangePicker v-model="filter" :mobile="isMobile" class="ml-2" />
+    <FxTopBar class="my-0 py-0 px-0">
+      <div class="calendar-bar">
+        <v-container>
+          <div class="d-flex px-md-2">
+            <FxDateRangePicker v-model="filter" :mobile="isMobile" class="ml-2" />
 
-          <FxCalendarSportFilter v-model="filter.sports" style="max-width: 200px" :items="sports" class="hidden-md-and-down ml-2 mr-2" />
+            <FxCalendarSportFilter v-model="filter.sports" style="max-width: 200px" :items="sports" class="hidden-md-and-down ml-2 mr-2" />
 
-          <v-badge
-            class="hidden-md-and-down mr-2"
-            bordered
-            color="primary"
-            :content="desktopFilterBadges"
-            :value="desktopFilterBadges"
-            overlap
-          >
-            <v-btn height="40" outlined color="info lighten-1" style="background-color: white" @click="showFilters = !showFilters">
-              <v-icon>$vuetify.icons.settings</v-icon>
-              More Filters
+            <v-badge
+              class="hidden-md-and-down mr-2"
+              bordered
+              color="primary"
+              :content="desktopFilterBadges"
+              :value="desktopFilterBadges"
+              overlap
+            >
+              <v-btn height="40" outlined color="info lighten-1" style="background-color: white" @click="showFilters = !showFilters">
+                <v-icon>$vuetify.icons.settings</v-icon>
+                More Filters
+              </v-btn>
+            </v-badge>
+
+            <v-spacer />
+
+            <v-badge
+              class="hidden-lg-and-up mr-2"
+              bordered
+              color="primary"
+              :content="mobileFilterBadges"
+              :value="mobileFilterBadges"
+              overlap
+            >
+              <v-btn height="40" width="40" icon color="info lighten-1" @click="showFilters = !showFilters">
+                <v-icon>$vuetify.icons.settings</v-icon>
+              </v-btn>
+            </v-badge>
+
+            <v-btn
+              v-if="canCreateEvent"
+              height="40"
+              color="primary"
+              depressed
+              link
+              :to="{ name: 'events-add' }"
+            >
+              <v-icon class="mr-0 mr-md-2">
+                $vuetify.icons.calendarAdd
+              </v-icon><span class="hidden-xs-only">Create Event</span>
             </v-btn>
-          </v-badge>
-
-          <v-spacer />
-
-          <v-badge
-            class="hidden-lg-and-up mr-2"
-            bordered
-            color="primary"
-            :content="mobileFilterBadges"
-            :value="mobileFilterBadges"
-            overlap
-          >
-            <v-btn height="40" width="40" icon color="info lighten-1" @click="showFilters = !showFilters">
-              <v-icon>$vuetify.icons.settings</v-icon>
-            </v-btn>
-          </v-badge>
-
-          <v-btn
-            v-if="canCreateEvent"
-            height="40"
-            color="primary"
-            depressed
-            link
-            :to="{ name: 'events-add' }"
-          >
-            <v-icon class="mr-0 mr-md-2">
-              $vuetify.icons.calendarAdd
-            </v-icon><span class="hidden-xs-only">Create Event</span>
-          </v-btn>
-        </div>
-        <div class="mx-n4 mx-md-0 mt-1">
-          <FxCalendar
-            v-model="date"
-            :from="filter.startDate"
-            :to="filter.endDate"
-            :dots="dots"
-            @input="scrollTo"
-          />
-        </div>
-      </v-container>
-    </div>
+          </div>
+          <div class="mx-n4 mx-md-0 mt-1">
+            <FxCalendar
+              v-model="date"
+              :from="filter.startDate"
+              :to="filter.endDate"
+              :dots="dots"
+              @input="scrollTo"
+            />
+          </div>
+        </v-container>
+      </div>
+    </FxTopBar>
     <div class="calendar-content">
       <client-only>
         <FxCalendarFilterDialog
@@ -402,26 +404,14 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-.calendar-bar {
-  padding-top: 3px;
-  top: 92px;
-  z-index: 3;
-  border-bottom: solid 8px var(--v-primary-base)!important;
-  margin-left: 0;
-  height: 186px;
-  background: var(--v-background-base);
-}
+<style scoped lang="sass">
+$calendar-bar-height: 186px
 
-@media only screen and (min-width: 960px) {
-  .calendar-bar {
-    position: fixed;
-    top: 55px;
-    width: calc(100vw - 240px);
-    left: 240px;
-  }
-  .calendar-content {
-    margin-top: 180px;
-  }
-}
+.calendar-bar
+  border-bottom: solid 8px var(--v-primary-base)!important
+  height: $calendar-bar-height
+  background: var(--v-background-base)
+
+.calendar-content
+  margin-top: $calendar-bar-height
 </style>
