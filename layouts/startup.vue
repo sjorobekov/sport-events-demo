@@ -5,7 +5,7 @@
         <div class="school-panel d-flex flex-column align-center flex-shrink-1 justify-sm-space-between" :style="style">
           <div class="school-info">
             <div class="school-logo-container mb-5 mb-sm-5">
-              <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" />
+              <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" :size="size" />
             </div>
             <h1 class="text-sm-h1s text-h6 white--text text-center pb-5">
               {{ contextSchool.name }}
@@ -40,15 +40,46 @@ export default {
       return redirect({ name: 'login' })
     }
   },
+  data: () => ({
+    windowHeight: 600,
+  }),
   computed: {
     ...mapGetters({
       contextSchool: 'context/school',
+      isMobileDevice: 'context/isMobile',
     }),
 
     style () {
       return {
         background: this.contextSchool.color,
       }
+    },
+    size () {
+      if (process.server) {
+        return this.isMobileDevice ? '120' : '220'
+      }
+
+      if (this.$vuetify.breakpoint.name !== 'xs') {
+        return '220'
+      }
+      if (this.windowHeight > 667) {
+        return '200'
+      }
+      return '120'
+    },
+  },
+
+  mounted () {
+    window.addEventListener('resize', this.onResize, { passive: true })
+  },
+
+  beforeDestroy () {
+    window.removeEventListener('resize', this.onResize, { passive: true })
+  },
+
+  methods: {
+    onResize () {
+      this.windowHeight = window.innerHeight
     },
   },
 }
