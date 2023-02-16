@@ -6,7 +6,7 @@
           Teams
         </h1>
       </v-col>
-      <v-col v-else cols="7" sm="9" md="10">
+      <v-col v-else cols="7" sm="9" lg="10">
         <h1 class="text-h4s text-md-h3">
           Teams
         </h1>
@@ -26,7 +26,7 @@
           @change="onSeasonChange"
         />
       </v-col>
-      <v-col v-else cols="5" sm="3" md="2">
+      <v-col v-else cols="5" sm="3" lg="2">
         <v-select
           id="season"
           v-model="params.seasonId"
