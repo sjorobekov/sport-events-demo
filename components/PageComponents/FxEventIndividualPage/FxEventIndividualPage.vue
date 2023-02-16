@@ -126,7 +126,7 @@ export default {
         id: this.event.id,
       }).then(() => {
         this.$toast('Event has been removed')
-        this.$router.push({ name: 'teams' })
+        this.$router.push({ name: 'teams', params: { schoolId: this.teamId } })
       }).catch(() => {
         this.$toast.error('Unknown Error')
       })
