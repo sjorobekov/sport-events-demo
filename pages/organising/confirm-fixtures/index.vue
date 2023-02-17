@@ -7,7 +7,7 @@
     <v-card
       v-for="(item, index) in items"
       :key="`confirm-${index}`"
-      class="mb-3"
+      class="mb-3 card-has-hover"
     >
       <FxFixtureToConfirmItem
         :me="item.me"
