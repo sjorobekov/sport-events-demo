@@ -145,6 +145,7 @@ export const actions: ActionTree<RootState, RootState> = {
     root.style.setProperty('--v-primary-base', getters.school.color)
     root.style.setProperty('--v-accent-base', getters.school.color)
     root.style.setProperty('--v-primary-darken1', shadeColor(getters.school.color, -30))
+    root.style.setProperty('--v-primary-lighten1', shadeColor(getters.school.color, +30))
   },
 
   async signInAsSuperAdmin ({ dispatch }, { email, password }) {

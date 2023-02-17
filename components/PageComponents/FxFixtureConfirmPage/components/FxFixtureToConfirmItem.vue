@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex px-6">
     <div class="flex-grow-1">
-      <div class="pb-0 pt-3">
+      <div class="pb-0 pt-4">
         <FxTeamListItem v-if="opponent" class="px-0" :context-school-id="contextSchoolId" :participant="opponent">
           <template v-if="$slots.action" #action>
             <div class="hidden-md-and-up">
@@ -10,7 +10,7 @@
           </template>
         </FxTeamListItem>
       </div>
-      <div>
+      <div class="pb-4 ml-3">
         <div class="d-inline-block">
           <ListItem>
             <template #icon>
