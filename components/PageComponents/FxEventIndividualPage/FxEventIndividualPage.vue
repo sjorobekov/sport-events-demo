@@ -72,11 +72,6 @@ export default {
     FxEventMobileWrapper,
     FxEventScoreBoardCard,
   },
-
-  data: () => ({
-    dateNow: new Date(),
-  }),
-
   computed: {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
