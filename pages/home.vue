@@ -53,8 +53,8 @@
           </div>
         </div>
         <div v-else>
-          <div class="d-flex justify-space-between align-center">
-            <div class="mx-n4 custom-width">
+          <div class="d-flex justify-space-between align-center mr-4">
+            <div class="custom-width">
               <v-tabs v-model="tab" class="week-tabs" show-arrows>
                 <v-tabs-slider color="teal lighten-3" />
                 <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
@@ -87,7 +87,7 @@
             </v-card>
           </template>
           <template v-else-if="!$fetchState.pending">
-            <v-container class="d-flex flex-column justify-center align-center mt-12 mt-md-12">
+            <v-container class="d-flex flex-column justify-center align-center mt-12">
               <v-row>
                 <v-col class="d-flex flex-column justify-center align-center">
                   <v-img width="100" :src="calendar" class="mb-3" />
@@ -101,7 +101,8 @@
                     link
                     outlined
                     :to="{ name: 'calendar' }"
-                    class="text-p1 font-weight-bold info--text text--darken-1">
+                    class="text-p1 font-weight-bold info--text text--darken-1"
+                  >
                     Go to Calendar
                   </v-btn>
                 </v-col>
@@ -342,7 +343,6 @@ export default {
 </script>
 
 <style scoped>
-
 .custom-width {
   width: calc(100% - 15px);
 }
