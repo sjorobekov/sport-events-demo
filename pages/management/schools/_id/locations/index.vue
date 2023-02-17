@@ -47,24 +47,25 @@
         </GmapMap>
       </v-col>
       <v-col sm="4" class="text-p1 info--text text--darken-1">
-        <h4 class="font-weight-regular mb-2">
-          School Location
-        </h4>
-        <div class="text--darken-2 font-weight-bold">
-          {{ school.name }}
+        <div class="hidden-xs-only">
+          <h4 class="font-weight-regular mb-2">
+            School Location
+          </h4>
+          <div class="text--darken-2 font-weight-bold">
+            {{ school.name }}
+          </div>
+          <address class="mb-2">
+            {{ school.street }} <br>
+            {{ school.zip }} <br>
+            <span v-if="school.city">{{ school.city }}, </span><fx-country-name :code="school.country" />
+          </address>
+          <div v-if="school.website">
+            <v-icon size="20">
+              $vuetify.icons.link-1
+            </v-icon> <a target="_blank" :href="school.website"> School Website</a>
+          </div>
+          <v-divider class="mt-4" />
         </div>
-        <address class="mb-2">
-          {{ school.street }} <br>
-          {{ school.zip }} <br>
-          <span v-if="school.city">{{ school.city }}, </span><fx-country-name :code="school.country" />
-        </address>
-        <div v-if="school.website">
-          <v-icon size="20">
-            $vuetify.icons.link-1
-          </v-icon> <a target="_blank" :href="school.website"> School Website</a>
-        </div>
-
-        <v-divider class="mt-4" />
         <h4 class="text-p1 info--text text--darken-1 mt-3 mb-2">
           Sports Locations
         </h4>
