@@ -77,7 +77,7 @@ export default {
       this.school = this.participant.school || (await this.fetchSchool(this.participant.schoolId))
     }
 
-    if (this.isMySchool && this.participant.teamId) {
+    if ((this.isMySchool || !this.participant.schoolId) && this.participant.teamId) {
       this.team = this.participant.team || (await this.fetchTeam({
         schoolId: this.contextSchoolId,
         id: this.participant.teamId,

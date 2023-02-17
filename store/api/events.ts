@@ -104,7 +104,7 @@ export type EventUpdatePayload = {
   location: EventLocationType,
   sportLocationId: string
   otherLocation: string
-  info: string
+  info: string | null
   noNeedTransport: boolean
   transportTo: TransportType
   transportToOther?: string

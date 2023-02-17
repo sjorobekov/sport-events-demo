@@ -14,7 +14,7 @@
         style="cursor: pointer"
         :value="n"
         :active="active"
-        :has-events="hasEvents[n.toFormat('yyyy-MM-dd')]"
+        :has-events="hasEvents[n]"
         @click="toggle"
       />
     </v-slide-item>
@@ -68,7 +68,7 @@ export default {
         if (!this.value) {
           return null
         }
-        return this.itemsStrings.indexOf(this.value)
+        return this.items.indexOf(this.value)
       },
     },
 
@@ -91,23 +91,19 @@ export default {
       return this.toDate.diff(this.fromDate, 'days').days
     },
 
-    /** @return {DateTime[]} */
+    /** @return {String[]} */
     items () {
       const items = []
       let i = 0
       let date = DateTime.fromJSDate(this.from)
 
       do {
-        items.push(date)
+        items.push(date.toFormat('yyyy-MM-dd'))
         date = date.plus({ days: 1 })
         i++
       } while (i < this.diffDays)
 
       return items
-    },
-
-    itemsStrings () {
-      return this.items.map(item => item.toFormat('yyyy-MM-dd'))
     },
   },
 }
