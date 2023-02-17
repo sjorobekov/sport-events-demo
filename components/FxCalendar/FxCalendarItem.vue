@@ -17,12 +17,14 @@
 </template>
 
 <script>
+import { DateTime } from 'luxon'
+
 export default {
   name: 'FxCalendarItem',
   props: {
     value: {
-      type: Object,
-      default: () => ({}),
+      type: String,
+      default: '',
     },
     active: {
       type: Boolean,
@@ -36,7 +38,7 @@ export default {
 
   computed: {
     parsedDate () {
-      return this.value // DateTime.fromFormat(this.value, 'yyyy/MM/dd')
+      return DateTime.fromFormat(this.value, 'yyyy-MM-dd')
     },
 
     month () {

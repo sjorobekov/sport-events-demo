@@ -131,6 +131,21 @@
             </ListItem>
           </v-col>
         </v-row>
+        <v-row v-if="me.info">
+          <v-col class="pt-1 pb-0">
+            <ListItem>
+              <template #icon>
+                <v-icon>$vuetify.icons.directory-outline</v-icon>
+              </template>
+              <template #content>
+                <v-list-item-title class="text-p1 info--text">
+                  Further Information
+                </v-list-item-title>
+                <span class="text-p2 info--text text--darken-2">{{ me.info }}</span>
+              </template>
+            </ListItem>
+          </v-col>
+        </v-row>
       </v-container>
       <FxEventDateOrStartTimeChangeConfirmationModal ref="confirmationDialog" />
     </FxEventItemCard>
