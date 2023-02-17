@@ -57,7 +57,7 @@
     </v-card>
     <FxEventScoreBoardCard />
     <NuxtChild />
-</FxEventMobileWrapper>
+  </FxEventMobileWrapper>
 </template>
 
 <script>
