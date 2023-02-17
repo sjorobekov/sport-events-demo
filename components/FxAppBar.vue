@@ -16,7 +16,7 @@
         <v-list-item-content class="school-name d-block text-center">
           <client-only>
             <h1 v-balance-text class="school-name font-weight-bold">
-              {{ contextSchool.name }} {{ color }}
+              {{ contextSchool.name }}
             </h1>
           </client-only>
         </v-list-item-content>
