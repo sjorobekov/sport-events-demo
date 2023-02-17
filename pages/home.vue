@@ -5,11 +5,7 @@
         <div v-if="!isMobile">
           <v-card v-if="images.length">
             <v-carousel cycle hide-delimiters height="320px">
-              <v-carousel-item
-                v-for="(item,i) in images"
-                :key="i"
-                :src="item.image"
-              />
+              <v-carousel-item v-for="(item, i) in images" :key="i" :src="item.image" />
               <div class="gradient-footer" />
               <v-row class="image-footer">
                 <v-col>
@@ -51,19 +47,25 @@
                     </v-icon>
                   </v-btn>
                 </template>
-                <v-date-picker
-                  ref="picker"
-                  v-model="date"
-                  @change="onDateChange"
-                />
+                <v-date-picker ref="picker" v-model="date" @change="onDateChange" />
               </v-menu>
             </div>
           </div>
         </div>
         <div v-else>
-          <div class="d-flex justify-space-between">
-            <div class="text-h3">
-              Sports Portal
+          <div class="d-flex justify-space-between align-center mr-4">
+            <div class="custom-width">
+              <v-tabs v-model="tab" class="week-tabs" show-arrows>
+                <v-tabs-slider color="teal lighten-3" />
+                <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
+                  <div>
+                    {{ item.day }}
+                  </div>
+                  <div>
+                    {{ item.date }}
+                  </div>
+                </v-tab>
+              </v-tabs>
             </div>
             <v-dialog v-model="showCalendar">
               <template #activator="{ on }">
@@ -73,26 +75,8 @@
                   </v-icon>
                 </v-btn>
               </template>
-              <v-date-picker
-                ref="picker"
-                v-model="date"
-                full-width
-                @change="onDateChange"
-              />
+              <v-date-picker ref="picker" v-model="date" full-width @change="onDateChange" />
             </v-dialog>
-          </div>
-          <div class="mx-n4">
-            <v-tabs v-model="tab" class="week-tabs" show-arrows>
-              <v-tabs-slider color="teal lighten-3" />
-              <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
-                <div>
-                  {{ item.day }}
-                </div>
-                <div>
-                  {{ item.date }}
-                </div>
-              </v-tab>
-            </v-tabs>
           </div>
         </div>
 
@@ -103,7 +87,7 @@
             </v-card>
           </template>
           <template v-else-if="!$fetchState.pending">
-            <v-container class="d-flex flex-column justify-center align-center mt-6 mt-md-12">
+            <v-container class="d-flex flex-column justify-center align-center mt-12">
               <v-row>
                 <v-col class="d-flex flex-column justify-center align-center">
                   <v-img width="100" :src="calendar" class="mb-3" />
@@ -145,10 +129,7 @@
           class="mb-4"
           :options="mapOptions"
         >
-          <GmapMarker
-            clickable
-            :position="school.coordinates"
-          />
+          <GmapMarker clickable :position="school.coordinates" />
         </GmapMap>
         <div class="text--darken-2 font-weight-bold">
           {{ school.name }}
@@ -362,25 +343,30 @@ export default {
 </script>
 
 <style scoped>
+.custom-width {
+  width: calc(100% - 15px);
+}
 .image-footer {
   position: absolute;
   bottom: 0;
   color: white;
   padding: 1em;
 }
+
 .date-picker {
   width: calc(100% - 35px)
 }
+
 .gradient-footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 150px;
-  background: linear-gradient(to bottom,  rgba(137,255,241,0) 0%,rgba(0,0,0,1) 100%);
+  background: linear-gradient(to bottom, rgba(137, 255, 241, 0) 0%, rgba(0, 0, 0, 1) 100%);
 }
 </style>
 <style>
-.week-tabs.v-tabs > .v-tabs-bar {
+.week-tabs.v-tabs>.v-tabs-bar {
   background: none;
 }
 </style>
