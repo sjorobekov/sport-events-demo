@@ -135,7 +135,7 @@
           <v-col class="pt-1 pb-0">
             <ListItem>
               <template #icon>
-                <v-icon>mdi-information-outline</v-icon>
+                <v-icon>$vuetify.icons.directory-outline</v-icon>
               </template>
               <template #content>
                 <v-list-item-title class="text-p1 info--text">
