@@ -2,11 +2,11 @@
   <v-row :dense="$vuetify.breakpoint.mdAndDown">
     <v-col cols="6" sm="3">
       <v-card class="dashboard-card">
-        <v-list-item :to="{ name: 'organising-confirm-fixtures' }" class="px-5 px-lg-8 py-4" :ripple="false">
+        <v-list-item :to="{ name: 'organising-confirm-fixtures' }" class="px-5 px-lg-8 py-4 d-block d-lg-flex" :ripple="false">
           <v-icon size="40" color="primary lighten-1" class="mr-4">
             $vuetify.icons.scoreboard-1
           </v-icon>
-          <v-list-item-content class="dashboard-card-content">
+          <v-list-item-content class="pb-0 pb-lg-3">
             <v-list-item-title class="text-p2 info--text text--darken-4 font-weight-bold">
               {{ $tc('page.Dashboard.FIXTURES_TO_CONFIRM', fixturesToConfirm) }}
             </v-list-item-title>
@@ -19,11 +19,11 @@
     </v-col>
     <v-col cols="6" sm="3">
       <v-card class="dashboard-card">
-        <v-list-item :to="{ name: 'organising-missing-results' }" class="px-5 px-lg-8 py-4" :ripple="false">
+        <v-list-item :to="{ name: 'organising-missing-results' }" class="px-5 px-lg-8 py-4 d-block d-lg-flex" :ripple="false">
           <v-icon size="40" color="primary lighten-1" class="mr-4">
             $vuetify.icons.warning-1
           </v-icon>
-          <v-list-item-content>
+          <v-list-item-content class="pb-0 pb-lg-3">
             <v-list-item-title class="text-p2 info--text text--darken-4 font-weight-bold">
               {{ missingResults }}
             </v-list-item-title>
@@ -36,11 +36,11 @@
     </v-col>
     <v-col cols="6" sm="3">
       <v-card class="dashboard-card">
-        <v-list-item :to="{ name: 'organising-todays-teams' }" class="px-5 px-lg-8 py-4" :ripple="false">
+        <v-list-item :to="{ name: 'organising-todays-teams' }" class="px-5 px-lg-8 py-4 d-block d-lg-flex" :ripple="false">
           <v-icon size="40" color="primary lighten-1" class="mr-4">
             $vuetify.icons.teams-1
           </v-icon>
-          <v-list-item-content>
+          <v-list-item-content class="pb-0 pb-lg-3">
             <v-list-item-title class="text-p2 info--text text--darken-4 font-weight-bold">
               {{ $tc('page.Dashboard.TEAMS_TODAY', teamsToday) }}
             </v-list-item-title>
@@ -53,11 +53,11 @@
     </v-col>
     <v-col cols="6" sm="3">
       <v-card class="dashboard-card">
-        <v-list-item :to="{ name: 'organising-participation' }" class="px-5 px-lg-8 py-4" :ripple="false">
+        <v-list-item :to="{ name: 'organising-participation' }" class="px-5 px-lg-8 py-4 d-block d-lg-flex" :ripple="false">
           <v-icon size="40" color="primary lighten-1" class="mr-4">
             $vuetify.icons.participating-1
           </v-icon>
-          <v-list-item-content>
+          <v-list-item-content class="pb-0 pb-lg-3">
             <v-list-item-title class="text-p2 info--text text--darken-4 align-self-start font-weight-bold">
               {{ $tc('page.Dashboard.STUDENTS', weekStudents) }}
             </v-list-item-title>
@@ -139,11 +139,4 @@ export default {
 
 .theme--light.v-list-item:before, .theme--light.v-list-item:hover:before, .theme--light.v-list-item:focus:before
   opacity: 0
-
-@media #{map-get($display-breakpoints, 'md-and-down')}
-  .dashboard-card .v-list-item
-   display: block!important
-
-   .dashboard-card-content .v-list-item__content
-   padding-bottom: 0!important
 </style>
