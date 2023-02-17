@@ -21,9 +21,24 @@
             <v-btn icon class="hidden-sm-and-down">
               <v-icon>mdi-printer-outline</v-icon>
             </v-btn>
-            <v-btn v-if="isLoggedIn" icon>
-              <v-icon>mdi-dots-horizontal</v-icon>
-            </v-btn>
+            <v-menu>
+              <template #activator="{ on, attrs }">
+                <v-btn icon v-bind="attrs" v-on="on">
+                  <v-icon>
+                    $vuetify.icons.threeDots
+                  </v-icon>
+                </v-btn>
+              </template>
+              <v-list v-if="upcoming">
+                <v-list-item @click="remove(event)">
+                  <v-list-item-content>
+                    <v-list-item-title class="text--info text--darken-1">
+                      Delete Event
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-menu>
           </div>
         </v-list-item-action>
       </v-list-item>
@@ -47,6 +62,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { DateTime } from 'luxon'
 import FxEventScoreBoardCard from '@/components/PageComponents/FxEventIndividualPage/FxEventScoreBoardCard'
 import FxEventMobileWrapper from '~/components/FxEventMobileWrapper/index.vue'
 
@@ -56,7 +72,6 @@ export default {
     FxEventMobileWrapper,
     FxEventScoreBoardCard,
   },
-
   computed: {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
@@ -82,6 +97,34 @@ export default {
       }
 
       return this.isMobileDevice || this.isTabletDevice
+    },
+
+    today () {
+      return DateTime.now().toFormat('yyyy-MM-dd')
+    },
+
+    upcoming () {
+      return this.event.date >= this.today
+    },
+  },
+  methods: {
+    remove () {
+      const warning = 'Hey there! Just wanted to make sure you\'re aware that deleting this event will remove it for both schools. ' +
+        'If the event has been cancelled or postponed, it might be a good idea to update the status instead so everyone is in the loop. ' +
+        'Are you still sure you want to delete it?'
+      if (!confirm(warning)) {
+        return
+      }
+
+      this.$store.dispatch('api/events/remove', {
+        schoolId: this.contextSchoolId,
+        id: this.event.id,
+      }).then(() => {
+        this.$toast('Event has been removed')
+        this.$router.push({ name: 'teams-id', params: { id: this.myTeam.id } })
+      }).catch(() => {
+        this.$toast.error('Unknown Error')
+      })
     },
   },
 }
