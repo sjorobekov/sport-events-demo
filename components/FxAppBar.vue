@@ -16,7 +16,7 @@
         <v-list-item-content class="school-name d-block text-center">
           <client-only>
             <h1 v-balance-text class="school-name font-weight-bold">
-              {{ contextSchool.name }}
+              {{ contextSchool.name }} {{ color }}
             </h1>
           </client-only>
         </v-list-item-content>
@@ -123,6 +123,16 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  head () {
+    return {
+      meta: [
+        {
+          name: 'theme-color',
+          content: this.contextSchool.color,
+        },
+      ],
+    }
   },
   computed: {
     ...mapGetters({
