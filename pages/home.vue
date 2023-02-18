@@ -28,7 +28,7 @@
             <div class="date-picker">
               <v-tabs v-model="tab" fixed-tabs class="week-tabs" show-arrows>
                 <v-tabs-slider color="teal lighten-3" />
-                <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column" style="width: 135px;">
+                <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column" style="width: 135px;" :ripple="false">
                   <div>
                     {{ item.day }}
                   </div>
@@ -57,7 +57,7 @@
             <div class="custom-width">
               <v-tabs v-model="tab" class="week-tabs" show-arrows>
                 <v-tabs-slider color="teal lighten-3" />
-                <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column">
+                <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column" :ripple="false">
                   <div>
                     {{ item.day }}
                   </div>
@@ -368,5 +368,18 @@ export default {
 <style>
 .week-tabs.v-tabs>.v-tabs-bar {
   background: none;
+}
+.theme--light.v-tabs .v-tab:hover:before {
+    opacity: .00;
+}
+.v-tab:before, .v-tabs-slider {
+    background-color: currentColor;
+    max-width: 88px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.v-slide-group__next, .v-slide-group__prev {
+  min-width: 24px;
 }
 </style>

@@ -19,16 +19,16 @@
     <template v-else>
       <v-card flat color="white" class="pl-6 card-border">
         <v-tabs v-model="currentItem" class="mobile-tabs" :show-arrows="false" active-class="active-mobile-tab">
-          <v-tab v-if="$slots.results" class="font-weight-bold">
+          <v-tab v-if="$slots.results" class="font-weight-bold" :ripple="false">
             Result
           </v-tab>
-          <v-tab class="font-weight-bold">
+          <v-tab class="font-weight-bold" :ripple="false">
             Details
           </v-tab>
-          <v-tab class="font-weight-bold">
+          <v-tab class="font-weight-bold" :ripple="false">
             Team Sheet
           </v-tab>
-          <v-tab v-if="$slots.map" class="font-weight-bold">
+          <v-tab v-if="$slots.map" class="font-weight-bold" :ripple="false">
             Map
           </v-tab>
         </v-tabs>
@@ -98,10 +98,17 @@ export default {
 }
 
 .mobile-tabs /deep/ .v-tabs-slider {
-  border-radius: 2px 2px 0 0;
+  border-radius: 12px 12px 0 0;
 }
 
 .mobile-tabs /deep/ .v-tab--active:hover::before {
   opacity: 0;
+}
+
+.theme--light.v-tabs .v-tab:hover:before {
+    opacity: .00;
+}
+.v-tab:before, .v-tabs-slider {
+    background-color: currentColor;
 }
 </style>

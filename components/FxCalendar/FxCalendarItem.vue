@@ -1,5 +1,5 @@
 <template>
-  <div v-ripple class="text-p1 info--text text--darken-1 font-weight-bold text-center" style="height: 104px; width: 40px" role="radio" @click="$emit('click', $event)">
+  <div class="text-p1 info--text text--darken-1 font-weight-bold text-center" style="height: 104px; width: 40px" role="radio" @click="$emit('click', $event)">
     <div class="mb-2">
       {{ day }}
     </div>
@@ -72,7 +72,7 @@ export default {
 }
 .selected.active {
   background: var(--v-primary-base);
-  border-radius: 2px 2px 0 0 ;
+  border-radius: 8px 8px 0 0 ;
 }
 .hidden {
   visibility: hidden;

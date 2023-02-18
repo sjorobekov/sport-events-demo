@@ -190,8 +190,8 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 }
 
 .v-tabs-slider {
-  border-radius: 12px;
-  height: 4px !important;
+  border-radius: 16px 16px 0 0;
+  height: 8px !important;
   margin-top: -2px;
 }
 
@@ -226,4 +226,12 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 
 .card-has-shadow {
   box-shadow: 0px 0px 10px 0px #dadfe6!important;
+}
+
+.v-tab--active:hover::before {
+  opacity: 0;
+}
+
+.v-tabs-slider {
+  border-radius: 12px 12px 0 0;
 }
