@@ -80,7 +80,7 @@
                       <td class="pl-0">
                         <FxStudentListItem :student-id="studentId">
                           <template #icon>
-                            <v-icon color="info lighten-2">
+                            <v-icon color="info lighten-2" class="draggable">
                               $vuetify.icon.dragVertical
                             </v-icon>
                           </template>
@@ -236,4 +236,10 @@ export default {
   }
 }
 
+.draggable {
+    cursor: grab;
+}
+.draggable:active {
+    cursor: grabbing!important;
+}
 </style>
