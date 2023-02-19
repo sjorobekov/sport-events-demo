@@ -5,7 +5,7 @@
     hide-details
     multiple
     placeholder="Location"
-    prepend-inner-icon="mdi-map-marker-outline"
+    prepend-inner-icon="$vuetify.icons.location-small"
     :items="values"
     chips
     :value="value"

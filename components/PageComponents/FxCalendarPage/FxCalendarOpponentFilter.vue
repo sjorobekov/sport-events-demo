@@ -5,7 +5,7 @@
     hide-details
     multiple
     placeholder="Opponent"
-    prepend-inner-icon="mdi-filter-outline"
+    prepend-inner-icon="$vuetify.icons.school-small"
     :items="opponents"
     :item-text="name"
     item-value="id"

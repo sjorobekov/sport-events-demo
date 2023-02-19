@@ -9,7 +9,7 @@
     :item-text="fullname"
     item-value="id"
     :value="value"
-    prepend-inner-icon="mdi-account-filter-outline"
+    prepend-inner-icon="$vuetify.icons.user-small"
     :class="{ 'staff-filter': value.length > 0 }"
     @input="$emit('input', $event)"
   >

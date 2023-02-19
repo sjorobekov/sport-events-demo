@@ -5,7 +5,7 @@
     hide-details
     multiple
     placeholder="Sport"
-    prepend-inner-icon="$vuetify.icons.whistle"
+    prepend-inner-icon="$vuetify.icons.sports-small"
     :items="items"
     item-text="name"
     item-value="id"
