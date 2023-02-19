@@ -24,7 +24,7 @@
         <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
           <ListItem>
             <template #icon>
-              <v-icon>$vuetify.icons.calendar</v-icon>
+              <v-icon>$vuetify.icons.calendar-1</v-icon>
             </template>
             <template #title>
               <FxDateFormat :date="match.date" />
@@ -37,7 +37,7 @@
         <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
           <ListItem>
             <template #icon>
-              <v-icon>mdi-clock-outline</v-icon>
+              <v-icon>$vuetify.icons.clock-1</v-icon>
             </template>
             <template #content>
               <div>
@@ -77,7 +77,7 @@
         <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
           <ListItem>
             <template #icon>
-              <v-icon>mdi-map-marker</v-icon>
+              <v-icon>$vuetify.icons.location-1</v-icon>
             </template>
             <template #title>
               <FxInHouseLocationLabel :match="match" />
@@ -90,7 +90,7 @@
         <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
           <ListItem>
             <template #icon>
-              <v-icon>mdi-information-outline</v-icon>
+              <v-icon>$vuetify.icons.directory-outline</v-icon>
             </template>
             <template #title>
               Further Information
