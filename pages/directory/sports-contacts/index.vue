@@ -7,7 +7,7 @@
         </h1>
       </v-col>
       <v-col v-if="canCreateSportsContacts" cols="6" class="d-flex justify-end align-center">
-        <v-btn dark color="primary" :to="{ name: 'directory-sports-contacts-add' }">
+        <v-btn depressed dark color="primary" :to="{ name: 'directory-sports-contacts-add' }">
           <v-icon>$vuetify.icons.plusOutline</v-icon>Add Sports Contact
         </v-btn>
       </v-col>
