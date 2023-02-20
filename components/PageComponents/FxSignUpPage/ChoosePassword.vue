@@ -18,21 +18,18 @@
           placeholder="Password"
           @click:append="showPass1 = !showPass1"
         />
-
-        <div>
-          <label class="caption" for="password_confirm">Confirm Password</label>
-          <v-text-field
-            id="password_confirm"
-            v-model="confirm"
-            v-async-validate
-            :async-rules="[$rule.required, $rule.equal(formData.password)]"
-            :append-icon="showPass2 ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="showPass2 ? 'text' : 'password'"
-            outlined
-            placeholder="Confirm Password"
-            @click:append="showPass2 = !showPass2"
-          />
-        </div>
+        <label class="caption" for="password_confirm">Confirm Password</label>
+        <v-text-field
+          id="password_confirm"
+          v-model="confirm"
+          v-async-validate
+          :async-rules="[$rule.required, $rule.equal(formData.password)]"
+          :append-icon="showPass2 ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="showPass2 ? 'text' : 'password'"
+          outlined
+          placeholder="Confirm Password"
+          @click:append="showPass2 = !showPass2"
+        />
 
         <v-btn
           type="submit"
