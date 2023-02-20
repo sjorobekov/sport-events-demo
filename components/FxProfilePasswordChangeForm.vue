@@ -28,7 +28,7 @@
       @click:append="showPass = !showPass"
     />
 
-    <template v-if="!showPass">
+    <template>
       <label for="confirmPassword">Confirm New Password</label>
       <v-text-field
         id="confirmPassword"

@@ -19,7 +19,7 @@
           @click:append="showPass = !showPass"
         />
 
-        <div v-if="!showPass">
+        <div>
           <label class="caption" for="password_confirm">Confirm Password</label>
           <v-text-field
             id="password_confirm"
