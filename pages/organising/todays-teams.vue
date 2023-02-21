@@ -16,9 +16,9 @@
         </v-btn>
       </v-col>
     </v-row>
-    <v-card v-for="event in events" :key="event.id" class="mb-2">
+    <div v-for="event in events" :key="event.id" class="mb-2">
       <FxTeamsEventItem :value="event" />
-    </v-card>
+    </div>
   </div>
 </template>
 
