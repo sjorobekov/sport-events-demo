@@ -5,7 +5,7 @@
     hide-details
     multiple
     placeholder="Status"
-    prepend-inner-icon="$vuetify.icons.status"
+    prepend-inner-icon="$vuetify.icons.status-small"
     :items="items"
     chips
     :value="value"

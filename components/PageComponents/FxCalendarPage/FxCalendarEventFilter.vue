@@ -5,7 +5,7 @@
     hide-details
     multiple
     placeholder="Event"
-    prepend-inner-icon="$vuetify.icons.staff"
+    prepend-inner-icon="$vuetify.icons.events-small"
     :items="values"
     chips
     :value="value"

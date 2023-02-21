@@ -13,7 +13,7 @@
           dense
           style="width:250px"
           hide-details
-          prepend-inner-icon="$vuetify.icon.calendar"
+          prepend-inner-icon="$vuetify.icon.calendar-small"
           outlined
           :value="rangeFormatted"
           readonly
@@ -81,7 +81,7 @@
           dense
           style="width:250px"
           hide-details
-          prepend-inner-icon="$vuetify.icon.calendar"
+          prepend-inner-icon="$vuetify.icon.calendar-small"
           outlined
           :value="rangeFormatted"
           readonly

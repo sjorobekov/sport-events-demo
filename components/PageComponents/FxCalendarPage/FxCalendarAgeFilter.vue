@@ -5,7 +5,7 @@
     hide-details
     multiple
     placeholder="Age Groups"
-    prepend-inner-icon="$vuetify.icons.teams"
+    prepend-inner-icon="$vuetify.icons.students-small"
     :items="items"
     chips
     :value="value"

@@ -115,4 +115,13 @@ export default [
   'teams-outline',
   'dashboard-outline',
   'login-1',
+  'calendar-small',
+  'events-small',
+  'filter-small',
+  'location-small',
+  'school-small',
+  'sports-small',
+  'status-small',
+  'students-small',
+  'user-small',
 ]
