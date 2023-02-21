@@ -13,24 +13,23 @@
           v-async-validate
           :async-rules="[$rule.required, $rule.minLength(4)]"
           outlined
-          :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-          :type="showPass ? 'text' : 'password'"
+          :append-icon="showPass1 ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="showPass1 ? 'text' : 'password'"
           placeholder="Password"
-          @click:append="showPass = !showPass"
+          @click:append="showPass1 = !showPass1"
         />
-
-        <div v-if="!showPass">
-          <label class="caption" for="password_confirm">Confirm Password</label>
-          <v-text-field
-            id="password_confirm"
-            v-model="confirm"
-            v-async-validate
-            :async-rules="[$rule.required, $rule.equal(formData.password)]"
-            outlined
-            type="password"
-            placeholder="Confirm Password"
-          />
-        </div>
+        <label class="caption" for="password_confirm">Confirm Password</label>
+        <v-text-field
+          id="password_confirm"
+          v-model="confirm"
+          v-async-validate
+          :async-rules="[$rule.required, $rule.equal(formData.password)]"
+          :append-icon="showPass2 ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="showPass2 ? 'text' : 'password'"
+          outlined
+          placeholder="Confirm Password"
+          @click:append="showPass2 = !showPass2"
+        />
 
         <v-btn
           type="submit"
@@ -76,7 +75,8 @@ export default {
   data: () => ({
     loading: false,
     formData: {},
-    showPass: false,
+    showPass1: false,
+    showPass2: false,
     confirm: '',
   }),
 

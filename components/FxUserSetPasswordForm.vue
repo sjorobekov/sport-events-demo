@@ -15,21 +15,18 @@
       @input="update('password', $event)"
       @click:append="showPass = !showPass"
     />
-
-    <div v-if="!showPass">
-      <label class="caption" for="password_confirm">Confirm New Password</label>
-      <v-text-field
-        id="password_confirm"
-        v-model="formData.confirm"
-        v-async-validate
-        :async-rules="[$rule.required, $rule.equal(formData.password)]"
-        dense
-        outlined
-        height="56"
-        type="password"
-        placeholder="Confirm Password"
-      />
-    </div>
+    <label class="caption" for="password_confirm">Confirm New Password</label>
+    <v-text-field
+      id="password_confirm"
+      v-model="formData.confirm"
+      v-async-validate
+      :async-rules="[$rule.required, $rule.equal(formData.password)]"
+      dense
+      outlined
+      height="56"
+      type="password"
+      placeholder="Confirm Password"
+    />
   </v-form>
 </template>
 

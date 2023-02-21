@@ -8,11 +8,11 @@
     <v-text-field
       id="password"
       v-model="formData.currentPassword"
-      dense
       outlined
-      :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-      :type="showPass ? 'text' : 'password'"
-      @click:append="showPass = !showPass"
+      height="56"
+      :append-icon="showPass1 ? 'mdi-eye' : 'mdi-eye-off'"
+      :type="showPass1 ? 'text' : 'password'"
+      @click:append="showPass1 = !showPass1"
     />
 
     <label for="newPassword">New Password</label>
@@ -21,23 +21,25 @@
       v-model="formData.password"
       v-async-validate
       :async-rules="[$rule.required, $rule.minLength(4)]"
-      dense
       outlined
-      :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-      :type="showPass ? 'text' : 'password'"
-      @click:append="showPass = !showPass"
+      height="56"
+      :append-icon="showPass2 ? 'mdi-eye' : 'mdi-eye-off'"
+      :type="showPass2 ? 'text' : 'password'"
+      @click:append="showPass2 = !showPass2"
     />
 
-    <template v-if="!showPass">
+    <template>
       <label for="confirmPassword">Confirm New Password</label>
       <v-text-field
         id="confirmPassword"
         v-model="confirmPassword"
         v-async-validate
         :async-rules="[$rule.required, $rule.equal(formData.password)]"
-        dense
         outlined
-        type="password"
+        height="56"
+        :append-icon="showPass3 ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="showPass3 ? 'text' : 'password'"
+        @click:append="showPass3 = !showPass3"
       />
     </template>
     <v-btn class="float-right" depressed color="primary" @click="save()">
@@ -50,7 +52,9 @@
 export default {
   name: 'FxProfilePasswordChangeForm',
   data: () => ({
-    showPass: false,
+    showPass1: false,
+    showPass2: false,
+    showPass3: false,
     formData: {
       password: '',
       currentPassword: '',
