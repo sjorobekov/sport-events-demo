@@ -14,8 +14,8 @@
       </h1>
     </div>
 
-    <v-card v-else class="pb-8 px-6 pt-6">
-      <v-card-title class="px-0 text-p3 font-weight-bold pb-1">
+    <v-card v-else class="py-3 px-3 py-md-6 px-md-6">
+      <v-card-title class="px-0 text-p3 font-weight-bold pb-2">
         Profile Picture
       </v-card-title>
       <v-divider />
@@ -23,14 +23,14 @@
         <v-row>
           <v-col
             cols="12"
-            md="5"
+            lg="5"
             class="text-p2 info--text px-0"
           >
             Select profile picture for the user. Supported formats: jpeg, png, webp.
           </v-col>
           <v-col
             cols="12"
-            md="7"
+            lg="7"
           >
             <FxImageUploadForm :value="formData" :loading="uploading" @input="uploadAvatar">
               <template #icon>
@@ -46,7 +46,7 @@
         </v-row>
       </v-container>
 
-      <v-card-title class="px-0 text-p3 font-weight-bold pb-1">
+      <v-card-title class="px-0 text-p3 font-weight-bold pb-2">
         General Information
       </v-card-title>
       <v-divider />
@@ -54,21 +54,21 @@
         <v-row>
           <v-col
             cols="12"
-            md="5"
+            lg="5"
             class="text-p2 info--text px-0"
           >
             It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
           </v-col>
           <v-col
             cols="12"
-            md="7"
-            class="pr-0"
+            lg="7"
+            class="pr-0 px-0"
           >
             <FxProfileForm v-model="formData" :disabled="loading" disable-email disable-user-role />
           </v-col>
         </v-row>
       </v-container>
-      <v-card-actions class="pt-0 pr-0 mt-8">
+      <v-card-actions class="pt-0 pr-0 mt-8 px-0">
         <v-spacer />
         <v-btn
           depressed
@@ -81,7 +81,7 @@
           Update User
         </v-btn>
       </v-card-actions>
-      <v-card-title class="px-0 text-p3 font-weight-bold pb-1">
+      <v-card-title class="px-0 text-p3 font-weight-bold pb-2">
         Display at Sports Contact
       </v-card-title>
       <v-divider />
@@ -89,22 +89,22 @@
         <v-row>
           <v-col
             cols="12"
-            md="5"
+            lg="5"
             class="text-p2 info--text px-0"
           >
             It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
           </v-col>
           <v-col
             cols="12"
-            md="7"
-            class="pr-0"
+            lg="7"
+            class="px-0"
           >
             <FxAccountSportContactForm v-model="sportContactForm" :disabled="loading" @input="updateContactForm" />
           </v-col>
         </v-row>
       </v-container>
 
-      <v-card-title class="px-0 text-p3 font-weight-bold pb-1">
+      <v-card-title class="px-0 text-p3 font-weight-bold pb-2">
         Account Security
       </v-card-title>
       <v-divider />
@@ -112,15 +112,15 @@
         <v-row>
           <v-col
             cols="12"
-            md="5"
+            lg="5"
             class="text-p2 info--text px-0"
           >
             Short descriptive text to go here
           </v-col>
           <v-col
             cols="12"
-            md="7"
-            class="pr-0"
+            lg="7"
+            class="px-0"
           >
             <FxProfilePasswordChangeForm />
           </v-col>

@@ -8,7 +8,7 @@
       </v-list-item-content>
     </v-list-item>
 
-    <v-card class="pb-8 px-6 pt-6">
+    <v-card class="py-2 px-2 py-md-6 px-md-6">
       <v-card-title class="px-0 text-p3 font-weight-bold pb-1">
         Xportal
       </v-card-title>
@@ -17,14 +17,14 @@
         <v-row>
           <v-col
             cols="12"
-            md="5"
+            lg="5"
             class="text-p2 info--text px-0"
           >
             Set Xportal Integration
           </v-col>
           <v-col
             cols="12"
-            md="7"
+            lg="7"
             class="pr-0"
           >
             <FxXportalForm ref="form" v-model="formData" :disabled="loading" />

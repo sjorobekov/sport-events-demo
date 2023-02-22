@@ -7,7 +7,7 @@
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
-    <v-card>
+    <v-card class="py-2 px-2 py-md-6 px-md-6">
       <FxSchoolCustomisationPage
         :school="school"
         @updated="onUpdateHandler"
