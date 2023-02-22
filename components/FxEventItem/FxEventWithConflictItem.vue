@@ -40,15 +40,15 @@
       <template v-if="conflictsExist">
         <v-row>
           <v-col>
-            <FxEventConflictItem
-              v-for="conflict in conflicts"
-              :key="conflict.eventId"
-              v-model="override"
-              :item="conflict"
-              :context-school-id="contextSchoolId"
-              class="mb-2"
-              @updated="$root.$emit('conflict:updated')"
-            />
+            <FxFixtureConflictAlert v-for="(conflict, idx) in conflicts" :key="`conflict-${conflict.eventId}`" :conflict="conflict">
+              <FxFixtureConflictDialog :event-id="conflict.eventId" :conflict="conflict" @resolved="onConflictResolveHandler(idx)">
+                <template #activator="{ on, attrs }">
+                  <v-btn depressed v-bind="attrs" color="white" v-on="on">
+                    <span class="error--text">View Details</span>
+                  </v-btn>
+                </template>
+              </FxFixtureConflictDialog>
+            </FxFixtureConflictAlert>
           </v-col>
         </v-row>
       </template>
@@ -59,14 +59,18 @@
 <script>
 import FxEventItem from '@/components/FxEventItem/FxEventItem'
 import ListItem from '@/components/FxEventItem/ListItem'
-import FxEventConflictItem from '@/components/FxEventForm/FxEventConflictItem'
+import FxFixtureConflictDialog
+  from '~/components/PageComponents/FxFixtureConfirmPage/components/FxFixtureConflictDialog/FxFixtureConflictDialog.vue'
+import FxFixtureConflictAlert
+  from '~/components/PageComponents/FxFixtureConfirmPage/components/FxFixtureConflictAlert.vue'
 
 export default {
   name: 'FxEventWithConflictItem',
   components: {
+    FxFixtureConflictAlert,
+    FxFixtureConflictDialog,
     FxEventItem,
     ListItem,
-    FxEventConflictItem,
   },
   props: {
     event: {
@@ -141,6 +145,12 @@ export default {
 
     openForm () {
       this.isOpen = true
+    },
+
+    onConflictResolveHandler (idx) {
+      console.log('idx', idx)
+      console.log('this.conflicts', this.conflicts)
+      this.conflicts.splice(idx, 1)
     },
   },
 }

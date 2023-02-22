@@ -184,7 +184,7 @@ export default {
       page: 1,
       orderBy: 'date',
       orderDesc: true,
-      date: '',
+      date: null,
     },
     meta: { total: 0 },
     sports: [],

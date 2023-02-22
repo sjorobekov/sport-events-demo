@@ -28,20 +28,19 @@
       @click:append="showPass2 = !showPass2"
     />
 
-    <template>
-      <label for="confirmPassword">Confirm New Password</label>
-      <v-text-field
-        id="confirmPassword"
-        v-model="confirmPassword"
-        v-async-validate
-        :async-rules="[$rule.required, $rule.equal(formData.password)]"
-        outlined
-        height="56"
-        :append-icon="showPass3 ? 'mdi-eye' : 'mdi-eye-off'"
-        :type="showPass3 ? 'text' : 'password'"
-        @click:append="showPass3 = !showPass3"
-      />
-    </template>
+    <label for="confirmPassword">Confirm New Password</label>
+    <v-text-field
+      id="confirmPassword"
+      v-model="confirmPassword"
+      v-async-validate
+      :async-rules="[$rule.required, $rule.equal(formData.password)]"
+      outlined
+      height="56"
+      :append-icon="showPass3 ? 'mdi-eye' : 'mdi-eye-off'"
+      :type="showPass3 ? 'text' : 'password'"
+      @click:append="showPass3 = !showPass3"
+    />
+
     <v-btn class="float-right" depressed color="primary" @click="save()">
       Update Password
     </v-btn>

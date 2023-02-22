@@ -274,11 +274,11 @@ export default {
 
     showSportLocationAlert () {
       return this.isSportLocationEditable &&
-        ((this.formData.leadId === this.me?.leadId) || !this.leadIsAvailable)
+        ((this.formData.sportLocationId === this.event?.sportLocationId) || !this.sportLocationIsAvailable)
     },
 
     showUpdateButton () {
-      return this.showLeadAlert || this.showSportLocationAlert
+      return (this.isSportLocationEditable || this.isLeadEditable) && !this.conflictExist
     },
   },
 

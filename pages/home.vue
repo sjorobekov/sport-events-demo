@@ -87,27 +87,25 @@
             </v-card>
           </template>
           <template v-else-if="!$fetchState.pending">
-            <v-container class="d-flex flex-column justify-center align-center mt-12">
-              <v-row>
-                <v-col class="d-flex flex-column justify-center align-center">
-                  <v-img width="100" :src="calendar" class="mb-3" />
-                  <div class="text-p3 text-center info--text text--darken-3 mb-2">
-                    No Events Today
-                  </div>
-                  <div class="text-p2 text-center info--text text--darken-3 mb-4" style="width:120px">
-                    Try change the date or
-                  </div>
-                  <v-btn
-                    link
-                    outlined
-                    :to="{ name: 'calendar' }"
-                    class="text-p1 font-weight-bold info--text text--darken-1"
-                  >
-                    Go to Calendar
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-container>
+            <client-only>
+              <div class="mt-12 d-flex flex-column justify-center align-center">
+                <v-img width="100" :src="calendar" class="mb-3" />
+                <div class="text-p3 text-center info--text text--darken-3 mb-2">
+                  No Events Today
+                </div>
+                <div class="text-p2 text-center info--text text--darken-3 mb-4" style="width:120px">
+                  Try change the date or
+                </div>
+                <v-btn
+                  link
+                  outlined
+                  :to="{ name: 'calendar' }"
+                  class="text-p1 font-weight-bold info--text text--darken-1"
+                >
+                  Go to Calendar
+                </v-btn>
+              </div>
+            </client-only>
           </template>
         </div>
       </v-col>
