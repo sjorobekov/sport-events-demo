@@ -370,7 +370,7 @@ export default {
   background: none;
 }
 .theme--light.v-tabs .v-tab:hover:before {
-    opacity: .00;
+    opacity: 0;
 }
 .v-tab:before, .v-tabs-slider {
     background-color: currentColor;
