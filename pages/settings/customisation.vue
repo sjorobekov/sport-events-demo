@@ -7,12 +7,12 @@
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
-    <v-card class="py-2 px-2 py-md-6 px-md-6">
+    <div>
       <FxSchoolCustomisationPage
         :school="school"
         @updated="onUpdateHandler"
       />
-    </v-card>
+    </div>
   </div>
 </template>
 

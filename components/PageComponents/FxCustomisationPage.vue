@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-card class="py-2 px-2 py-md-6 px-md-6">
     <v-card-title class="text-p3 font-weight-bold">
       Home Page Images
     </v-card-title>
@@ -77,7 +77,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -199,7 +199,7 @@ export default {
 
 <style lang="scss">
 .school-logo {
-  border: var(--v-info-lighten2) 1px solid;
+  border: var(--v-neutral-lighten1) 1px solid;
   border-radius: 4px;
 }
 </style>
