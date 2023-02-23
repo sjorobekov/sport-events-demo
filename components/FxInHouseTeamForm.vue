@@ -64,7 +64,7 @@
             </FxInstructionItem>
           </v-col>
           <v-col
-            cols="12"
+            cols="9"
             md="5"
             lg="4"
             class="pt-8"

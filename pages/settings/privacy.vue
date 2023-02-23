@@ -46,9 +46,9 @@
         All pages in Fixturr Portal are password protected.
       </div>
     </v-alert>
-    <v-card>
+    <div>
       <FxSchoolPrivacyForm ref="form" v-model="formData" :loading="loading" @save="save" />
-    </v-card>
+    </div>
   </div>
 </template>
 
