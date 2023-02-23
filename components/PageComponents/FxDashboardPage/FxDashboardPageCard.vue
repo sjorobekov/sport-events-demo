@@ -10,7 +10,7 @@
             <v-list-item-title class="text-p2 info--text text--darken-4 font-weight-bold">
               {{ $tc('page.Dashboard.FIXTURES_TO_CONFIRM', fixturesToConfirm) }}
             </v-list-item-title>
-            <v-list-item-subtitle class="text-p1 info--text pt-1">
+            <v-list-item-subtitle class="text-p1 info--text pt-0 pt-lg-1">
               To Confirm
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -27,7 +27,7 @@
             <v-list-item-title class="text-p2 info--text text--darken-4 font-weight-bold">
               {{ missingResults }}
             </v-list-item-title>
-            <v-list-item-subtitle class="text-p1 info--text pt-1">
+            <v-list-item-subtitle class="text-p1 info--text pt-0 pt-lg-1">
               Missing Results
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -44,7 +44,7 @@
             <v-list-item-title class="text-p2 info--text text--darken-4 font-weight-bold">
               {{ $tc('page.Dashboard.TEAMS_TODAY', teamsToday) }}
             </v-list-item-title>
-            <v-list-item-subtitle class="text-p1 info--text pt-1">
+            <v-list-item-subtitle class="text-p1 info--text pt-0 pt-lg-1">
               Have Events Today
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -61,7 +61,7 @@
             <v-list-item-title class="text-p2 info--text text--darken-4 align-self-start font-weight-bold">
               {{ $tc('page.Dashboard.STUDENTS', weekStudents) }}
             </v-list-item-title>
-            <v-list-item-subtitle class="text-p1 info--text pt-1">
+            <v-list-item-subtitle class="text-p1 info--text pt-0 pt-lg-1">
               Participating (Week)
             </v-list-item-subtitle>
           </v-list-item-content>
