@@ -22,7 +22,6 @@ export default {
 
 <style scoped>
 .event-item-heading {
-  border-left: var(--v-primary-base) 8px solid;
   height: 77px;
 }
 </style>
