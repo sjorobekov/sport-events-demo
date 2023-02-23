@@ -69,7 +69,7 @@
               <FxUserItem class="px-4 py-2" :item="me" :subtitle="me.email" />
 
               <v-divider />
-              <v-list-item class="user-menu-item" :to="{ name: 'settings' }">
+              <v-list-item class="user-menu-item" :to="{ name: 'settings' }" :ripple="false">
                 <v-list-item-icon class="mr-3">
                   <v-icon>$vuetify.icons.settings</v-icon>
                 </v-list-item-icon>
@@ -79,7 +79,7 @@
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item class="user-menu-item" href="https://help.fixturr.com">
+              <v-list-item class="user-menu-item" href="https://help.fixturr.com" :ripple="false">
                 <v-list-item-icon class="mr-3">
                   <v-icon>$vuetify.icons.interrogationMark</v-icon>
                 </v-list-item-icon>
@@ -90,7 +90,7 @@
                 </v-list-item-content>
               </v-list-item>
               <v-divider />
-              <v-list-item class="user-menu-item" @click="logOut">
+              <v-list-item class="user-menu-item" :ripple="false" @click="logOut">
                 <v-list-item-content>
                   <v-list-item-title class="user-menu-text font-weight-bold error--text">
                     Log Out
