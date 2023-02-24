@@ -294,6 +294,7 @@
       <label>Location</label>
       <FxEventLocationTypeSelect
         :value="eventForm.location"
+        :show-opponent-confirms="hasPortalAlertVisible"
         @input="updateEvent('location', $event)"
       />
 

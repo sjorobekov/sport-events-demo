@@ -148,8 +148,6 @@ export default {
     },
 
     onConflictResolveHandler (idx) {
-      console.log('idx', idx)
-      console.log('this.conflicts', this.conflicts)
       this.conflicts.splice(idx, 1)
     },
   },

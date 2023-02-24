@@ -9,7 +9,7 @@
         {{ $t(`IN_HOUSE_EVENT_RESULT.${result.overallResult}`) }}
       </v-alert>
 
-      <v-btn depressed v-else-if="!hasResult && canAddOrEditResult" color="primary" @click="$vuetify.goTo(target, options)">
+      <v-btn v-else-if="!hasResult && canAddOrEditResult" depressed color="primary" @click="$vuetify.goTo(target, options)">
         <v-icon>mdi-plus-circle-outline</v-icon> Add Result
       </v-btn>
     </v-col>

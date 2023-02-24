@@ -1,13 +1,15 @@
 <template>
   <v-item-group
-    v-model="selected"
+    :value="value"
     mandatory
+    @change="$emit('input', $event)"
   >
     <FxSheetOption
       v-for="item in items"
       :key="item.value"
       :src="item.img"
       :text="item.text"
+      :value="item.value"
     />
   </v-item-group>
 </template>
@@ -32,17 +34,6 @@ export default {
         { value: EventLocationType.SPORTS_LOCATIONS, text: 'Sports Locations', img: sportsLocation },
         { value: EventLocationType.OTHER, text: 'Other', img: other },
       ],
-    },
-  },
-
-  computed: {
-    selected: {
-      set (val) {
-        this.$emit('input', this.items[val].value)
-      },
-      get () {
-        return this.items.findIndex(item => item.value === this.value)
-      },
     },
   },
 }
