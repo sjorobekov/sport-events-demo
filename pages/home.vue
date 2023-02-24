@@ -153,36 +153,7 @@
             View All
           </nuxt-link>
         </div>
-        <div v-for="contact in contacts" :key="contact.id" class="mb-6">
-          <div class="d-flex text-p1">
-            <FxAvatar :value="contact.avatar" class="mb-2" />
-
-            <div class="pa-2">
-              <div class="text--darken-1 font-weight-bold">
-                {{ contact.name }}
-              </div>
-              <div>{{ contact.role }}</div>
-            </div>
-          </div>
-          <div class="my-1">
-            <div v-if="contact.email" class="text-p1 mb-2">
-              <v-icon size="20" color="primary" class="mr-1">
-                $vuetify.icons.email-1
-              </v-icon>
-              <a class="info--text text--darken-2" :href="`mailto:${contact.email}`">
-                {{ contact.email }}
-              </a>
-            </div>
-            <div v-if="contact.phone" class="text-p1">
-              <v-icon size="20" color="primary" class="mr-1">
-                $vuetify.icons.phone-1
-              </v-icon>
-              <a class="info--text text--darken-2" :href="`tel:${contact.phone}`">
-                {{ contact.phone }}
-              </a>
-            </div>
-          </div>
-        </div>
+        <FxContactCard v-for="contact in contacts" :key="contact.id" :contact="contact" />
       </v-col>
     </v-row>
   </div>
@@ -192,15 +163,15 @@
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
 import { EventType, EventResult, EventStatus } from '~/enum'
-import FxAvatar from '@/components/FxAvatar/FxAvatar'
 import FxCalendarEvent from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent'
 import calendar from '@/components/PageComponents/FxDashboardPage/calendar.svg'
+import FxContactCard from '@/components/PageComponents/FxHomePage/FxContactCard'
 
 export default {
   name: 'PortalPage',
   components: {
-    FxAvatar,
     FxCalendarEvent,
+    FxContactCard,
   },
 
   middleware: ({ store, redirect }) => {

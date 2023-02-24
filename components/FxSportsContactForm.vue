@@ -61,10 +61,11 @@
         id="phone"
         v-async-validate
         :value="formData.phone"
-        :async-rules="[$rule.required]"
+        :async-rules="[$rule.required, $rule.phone]"
         dense
         outlined
         placeholder="Phone Number"
+        maxlength="15"
         @input="update('phone', $event)"
       />
     </FxSteppedFormCard>
