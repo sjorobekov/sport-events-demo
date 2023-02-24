@@ -17,14 +17,14 @@
         <v-row>
           <v-col
             cols="12"
-            md="5"
+            lg="5"
             class="text-p2 info--text px-0"
           >
             Set Xportal Integration
           </v-col>
           <v-col
             cols="12"
-            md="7"
+            lg="7"
             class="pr-0"
           >
             <FxXportalForm ref="form" v-model="formData" :disabled="loading" />

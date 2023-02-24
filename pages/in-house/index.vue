@@ -111,7 +111,7 @@ export default {
         this.competitionBySport[competition.sportId].push(competition)
         sports.push(competition.sport)
       })
-      this.sports = [...new Map(sports.map(v => [v.id, v])).values()]
+      this.sports = [...new Map(sports.map(v => [v.id, v])).values()].sort((a, b) => a.name.localeCompare(b.name))
     },
   },
 }

@@ -10,13 +10,15 @@
     </v-row>
     <v-row class="d-md-none">
       <v-col>
-        <v-tabs icons-and-text centered fixed-tabs>
+        <v-tabs icons-and-text centered class="settings-tabs">
           <v-tab
             v-for="(item, i) in tabItems"
             :key="i"
             link
             :to="item.to"
             :exact="item.exact"
+            :ripple="false"
+            class="mx-1 mb-0"
           >
             {{ item.text }}
             <v-icon color="info lighten-1" v-text="item.icon" />
@@ -30,6 +32,7 @@
               <v-tab
                 v-bind="attrs"
                 role="button"
+                :ripple="false"
                 v-on="on"
               >
                 More
@@ -45,6 +48,7 @@
                 :key="i"
                 link
                 :to="item.to"
+                :ripple="false"
               >
                 <v-list-item-icon>
                   <v-icon color="info lighten-1" v-text="item.icon" />
@@ -70,7 +74,8 @@
                 :to="item.to"
                 :exact="item.exact"
                 active-class="link-active deep"
-                class="py-2"
+                class="py-2 settings-menu-item"
+                :ripple="false"
               >
                 <v-list-item-icon class="mr-4">
                   <v-icon color="info lighten-1" v-text="item.icon" />
@@ -156,5 +161,29 @@ export default {
 }
 .settings-menu /deep/ .link-active  {
   box-shadow: inset -4px 0 0 0 var(--v-primary-base) !important;
+  background-color: var(--v-info-lighten4)!important;
+}
+.theme--light.v-tabs .v-tab:hover:before {
+    opacity: 0;
+}
+.v-tab:before, .v-tabs-slider {
+    background-color: currentColor;
+}
+
+.settings-tabs {
+  border: 1px solid #E4E9EF;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.settings-tabs /deep/ .v-slide-group__next,  .settings-tabs /deep/ .v-slide-group__prev{
+  display: none!important;
+}
+
+.settings-menu-item:hover {
+  background-color: var(--v-info-lighten5)!important;
+}
+.theme--light.v-list-item:before, .theme--light.v-list-item:hover:before, .theme--light.v-list-item:focus:before {
+  opacity: 0;
 }
 </style>

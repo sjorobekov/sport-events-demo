@@ -1,15 +1,15 @@
 <template>
-  <v-card outlined flat>
+  <v-card class="py-2 px-2 py-md-6 px-md-6">
     <v-card-title class="text-p3 font-weight-bold">
       Home Page Images
     </v-card-title>
     <v-divider />
     <v-container>
       <v-row>
-        <v-col cols="12" md="5" class="text-p2 info--text">
+        <v-col cols="12" lg="5" class="text-p2 info--text">
           JPEG, PNG and WEBP are recommended. SVG and GIF are also supported
         </v-col>
-        <v-col cols="12" md="7">
+        <v-col cols="12" lg="7">
           <label>Upload Image</label>
           <FxFileDragDrop
             :disabled="images.length >= 5"
@@ -36,11 +36,11 @@
     <v-divider />
     <v-container>
       <v-row>
-        <v-col cols="12" md="5" class="text-p2 info--text">
+        <v-col cols="12" lg="5" class="text-p2 info--text">
           Square images recommended <br>
           Transparent WEBP, PNG or SVG recommended. JPEG and GIF are also supported
         </v-col>
-        <v-col cols="12" md="7">
+        <v-col cols="12" lg="7">
           <FxImageUploadForm :value="logoFile" :loading="uploadingLogo" :stencil-props="stencil" :compression="compression" @input="uploadLogo">
             <template #icon>
               <v-avatar class="mr-6 school-logo" size="120">
@@ -63,10 +63,10 @@
     <v-divider />
     <v-container>
       <v-row>
-        <v-col cols="12" md="5" class="text-p2 info--text">
+        <v-col cols="12" lg="5" class="text-p2 info--text">
           It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
         </v-col>
-        <v-col cols="12" md="7">
+        <v-col cols="12" lg="7">
           <FxCustomizationSchoolColorForm
             ref="colorForm"
             v-model="colorForm.color"
@@ -199,7 +199,7 @@ export default {
 
 <style lang="scss">
 .school-logo {
-  border: var(--v-info-lighten2) 1px solid;
+  border: var(--v-neutral-lighten1) 1px solid;
   border-radius: 4px;
 }
 </style>

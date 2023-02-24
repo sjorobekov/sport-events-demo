@@ -109,7 +109,7 @@ export default {
         return
       }
       this.$store.dispatch('api/inHouseCompetitions/remove', this.inHouseCompetition).then(() => {
-        this.$router.push({ name: 'inHouseCompetitions' })
+        this.$router.push({ name: 'in-house' })
       }).catch(() => {
         this.$toast.error('Unknown Error')
       })
