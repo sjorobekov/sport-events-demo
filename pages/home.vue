@@ -209,6 +209,19 @@ export default {
     }
   },
 
+  async asyncData ({ store }) {
+    const schoolId = store.getters['context/schoolId']
+    const [images, contacts] = await Promise.all([
+      store.dispatch('api/schools/getImages', schoolId),
+      store.dispatch('api/sportsContacts/list', { schoolId }),
+    ])
+
+    return {
+      images,
+      contacts: contacts.slice(0, 3),
+    }
+  },
+
   data: () => ({
     EventType,
     EventResult,
@@ -226,15 +239,7 @@ export default {
   }),
 
   async fetch () {
-    const [images, contacts] = await Promise.all([
-      this.$store.dispatch('api/schools/getImages', this.school.id),
-      this.$store.dispatch('api/sportsContacts/list', {
-        schoolId: this.contextSchoolId,
-      }),
-      this.getEvents(this.today),
-    ])
-    this.images = images
-    this.contacts = contacts.slice(0, 3)
+    await this.getEvents(this.today)
   },
 
   computed: {
@@ -323,18 +328,28 @@ export default {
       return res
     },
     async getEvents (currentDate) {
-      const { data: events } = await this.$store.dispatch('api/events/getBySchool', {
-        schoolId: this.contextSchoolId,
-        params: {
-          limit: 2000,
-          orderDesc: 'false',
-          from: currentDate,
-          to: currentDate,
-          status: EventStatus.CONFIRMED,
-        },
-      })
+      const params = {
+        limit: 2000,
+        orderDesc: 'false',
+        from: currentDate,
+        to: currentDate,
+        status: EventStatus.CONFIRMED,
+      }
 
-      this.events = events
+      const [{ data: events }, { data: inHouseMatches }] = await Promise.all([
+        this.$store.dispatch('api/events/getBySchool', {
+          schoolId: this.contextSchoolId,
+          params,
+        }),
+        this.$store.dispatch('api/inHouseMatches/getBySchool', {
+          schoolId: this.contextSchoolId,
+          params,
+        }),
+      ])
+
+      this.events = [...events, ...inHouseMatches].sort((a, b) => {
+        return `${a.date}T${a.startTime}` > `${b.date}T${b.startTime}` ? 1 : -1
+      })
     },
   },
 }
