@@ -92,6 +92,7 @@
         :school-id="schoolId"
         :opponent-id="opponentForm.listedAsOpponentId"
         :opponent-school-id="opponentForm.schoolId"
+        :async-rules="[$rule.required]"
         @update:opponentId="updateOpponent('listedAsOpponentId', $event)"
         @update:opponentSchoolId="updateOpponent('schoolId', $event)"
       />
