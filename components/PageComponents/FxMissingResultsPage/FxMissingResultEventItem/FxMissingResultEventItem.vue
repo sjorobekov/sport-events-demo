@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row class="d-flex align-center">
       <v-col md="2" class="border-bottom pt-6">
         <div class="info--text text-caption time text-center">
           {{ event.startTime }}
