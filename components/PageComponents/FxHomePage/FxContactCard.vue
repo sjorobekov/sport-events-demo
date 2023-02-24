@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-6">
+  <div>
     <div class="d-flex text-p1">
       <FxAvatar :value="avatar" class="mb-2" />
 

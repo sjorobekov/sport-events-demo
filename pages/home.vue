@@ -153,7 +153,7 @@
             View All
           </nuxt-link>
         </div>
-        <FxContactCard v-for="contact in contacts" :key="contact.id" :contact="contact" />
+        <FxContactCard v-for="contact in contacts" :key="contact.id" :contact="contact" class="mb-6" />
       </v-col>
     </v-row>
   </div>
