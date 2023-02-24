@@ -68,7 +68,7 @@ export default {
 
   middleware: ({ store, redirect }) => {
     if (!store.getters['context/isLoggedIn']) {
-      return redirect({ name: 'portal' })
+      return redirect({ name: 'home' })
     }
   },
 

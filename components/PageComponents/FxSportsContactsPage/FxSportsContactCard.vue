@@ -6,7 +6,7 @@
           <div class="d-flex justify-space-between text-p1">
             <FxAvatar :value="avatar" class="border-avatar" />
             <v-chip
-              v-if="contact.main"
+              v-if="isMainContact"
               class="ma-2"
               color="primary"
             >
@@ -20,7 +20,7 @@
             <div class="text--darken-1 font-weight-bold">
               {{ name }}
             </div>
-            <div>{{ contact.role }}</div>
+            <div>{{ role }}</div>
           </div>
           <div class="text-p1">
             <v-icon>mdi-email-outline</v-icon>
@@ -83,6 +83,12 @@ export default {
     },
     name () {
       return this.contact.kind === 'SportsContact' ? this.contact.name : `${this.contact.firstname} ${this.contact.lastname}`
+    },
+    role () {
+      return this.contact.role || this.contact.jobRole || ''
+    },
+    isMainContact () {
+      return this.contact.main || this.contact.mainSportsContact || false
     },
   },
   methods: {
