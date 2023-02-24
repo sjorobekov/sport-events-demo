@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row class="d-flex align-center">
+    <v-row class="d-flex align-center border-bottom">
       <v-col md="2" class="pt-6" :class="{ 'border-bottom': compact }">
         <div class="info--text text-caption time text-center">
           {{ event.startTime }}
@@ -12,7 +12,7 @@
       <v-col cols="12" md="3" :class="{ 'border-bottom': compact }">
         <FxTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" item-class="flex-row flex-md-row-reverse text-md-right" />
       </v-col>
-      <v-col md="2" class="hidden-sm-and-down pt-5 text-center" :class="{ 'border-bottom': compact }">
+      <v-col md="2" class="hidden-sm-and-down text-center" :class="{ 'border-bottom': compact }">
         <div>
           <v-avatar rounded size="40" class="mr-2" color="#F1F5F9">
             -
@@ -26,7 +26,7 @@
         <FxTeamListItem v-if="event.eventType === EventType.FIXTURE" class="pl-0" :participant="opponent" :context-school-id="contextSchoolId" />
         <FxNonFixtureItem v-else :event-type="event.eventType" :name="event.name" />
       </v-col>
-      <v-col md="2" :class="{ 'border-bottom': compact }">
+      <v-col md="2">
         <v-btn link outlined :to="{ name: 'events-eventId', params: { eventId: event.id } }">
           Add Result
         </v-btn>
