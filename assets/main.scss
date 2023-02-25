@@ -91,7 +91,7 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 }
 
 .v-text-field--outlined fieldset {
-  border-color: var(--v-info-lighten2)!important;
+  border-color: var(--v-neutral-lighten1)!important;
 }
 
 .v-select .v-input__slot, .v-text-field .v-input__slot  {
@@ -234,4 +234,17 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 
 .v-tabs-slider {
   border-radius: 12px 12px 0 0;
+}
+
+.v-tab--active:hover::before {
+  opacity: 0;
+}
+
+.v-tabs-slider {
+  border-radius: 12px 12px 0 0;
+}
+
+.v-btn--outlined {
+  border: thin solid var(--v-neutral-lighten1);
+  background: white;
 }

@@ -52,7 +52,7 @@ export default {
 
 .border
   border-radius: 4px
-  box-shadow: 0 0 0 1px var(--v-info-lighten2)
+  box-shadow: 0 0 0 1px var(--v-neutral-lighten1)
   &.active
     box-shadow: 0 0 0 3px var(--v-primary-base)
   .label1
