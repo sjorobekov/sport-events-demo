@@ -219,6 +219,7 @@
           :value="eventForm.date"
           @input="updateEvent('date', $event)"
           @change="$refs.menu.save($event)"
+          class="disable-dbl-tap-zoom"
         />
       </v-menu>
 

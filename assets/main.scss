@@ -248,3 +248,6 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
   border: thin solid var(--v-neutral-lighten1);
   background: white;
 }
+.disable-dbl-tap-zoom {
+  touch-action: manipulation;
+}

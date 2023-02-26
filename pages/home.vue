@@ -54,7 +54,7 @@
         </div>
         <div v-else>
           <div class="d-flex justify-space-between align-center mr-4">
-            <div class="custom-width">
+            <div class="custom-width disable-dbl-tap-zoom">
               <v-tabs v-model="tab" class="week-tabs" show-arrows>
                 <v-tabs-slider color="teal lighten-3" />
                 <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column" :ripple="false">
@@ -75,7 +75,7 @@
                   </v-icon>
                 </v-btn>
               </template>
-              <v-date-picker ref="picker" v-model="date" full-width @change="onDateChange" />
+              <v-date-picker class="disable-dbl-tap-zoom" ref="picker" v-model="date" full-width @change="onDateChange" />
             </v-dialog>
           </div>
         </div>
