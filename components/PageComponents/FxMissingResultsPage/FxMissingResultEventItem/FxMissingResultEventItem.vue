@@ -91,13 +91,13 @@ export default {
     }
   }
   .time {
-  padding: 4px;
-  border: 1px solid var(--v-info-lighten1);
-  border-radius: 6px;
-  width: 44px;
-  height: 22px;
-  margin: auto;
-  line-height: 14px;
+    padding: 4px;
+    border: 1px solid var(--v-info-lighten1);
+    border-radius: 6px;
+    width: 44px;
+    height: 22px;
+    margin: auto;
+    line-height: 14px;
 }
 .custom-child-border:not(:nth-last-of-type(1)) {
   border-bottom: 1px solid var(--v-info-lighten4);
