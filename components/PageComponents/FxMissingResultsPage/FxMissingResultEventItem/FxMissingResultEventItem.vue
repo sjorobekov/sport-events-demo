@@ -1,6 +1,6 @@
 <template>
-  <v-container class="child-border">
-    <v-row align="center" class="child-border-break-sm-and-down">
+  <v-container class="custom-child-border">
+    <v-row align="center" class="custom-border-sm">
       <v-col md="2">
         <div class="info--text text-caption time text-center">
           {{ event.startTime }}
@@ -91,7 +91,17 @@ export default {
   line-height: 14px;
 }
 
-.child-border:not(:nth-last-of-type(1)) {
+.custom-child-border:not(:nth-last-of-type(1)) {
   border-bottom: 1px solid var(--v-info-lighten4);
+}
+</style>
+
+<style lang="scss">
+.custom-border-sm {
+  @media (max-width: 959px) {
+    > :not(:nth-last-of-type(1)) {
+      border-bottom: 1px var(--v-info-lighten4) solid;
+    }
+  }
 }
 </style>

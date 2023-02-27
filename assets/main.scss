@@ -128,12 +128,6 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
   }
 }
 
-.child-border-break-sm-and-down > div:not(:last-child) {
-  @media #{map-get($display-breakpoints, 'sm-and-down')} {
-    border-bottom: 1px var(--v-info-lighten4) solid;
-  }
-}
-
 .child-border-break-xs > div:not(:last-child) {
   @media #{map-get($display-breakpoints, 'xs-only')} {
     border-bottom: 1px var(--v-info-lighten4) solid;
