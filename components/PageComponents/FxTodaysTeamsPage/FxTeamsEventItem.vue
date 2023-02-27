@@ -20,6 +20,19 @@
         <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
           <ListItem>
             <template #icon>
+              <v-img width="24" height="24" :src="event.sport.icon" />
+            </template>
+            <template #title>
+              {{ event.sport.name }}
+            </template>
+            <template #subtitle>
+              Sport
+            </template>
+          </ListItem>
+        </v-col>
+        <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
+          <ListItem>
+            <template #icon>
               <v-icon>$vuetify.icons.calendar-1</v-icon>
             </template>
             <template #title>
