@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row align="center" class="border-bottom" :class="{ 'child-border': compact }">
+    <v-row align="center" class=" border-bottom child-border-break-sm-and-down">
       <v-col md="2">
         <div class="info--text text-caption time text-center">
           {{ event.startTime }}
