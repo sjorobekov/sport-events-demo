@@ -80,8 +80,17 @@ export default {
 }
 </script>
 
-<style scoped>
-.time {
+<style scoped lang="scss">
+  @import '~vuetify/src/styles/styles';
+
+  .custom-border-sm {
+    @media #{map-get($display-breakpoints, 'sm-and-down')} {
+      > :not(:nth-last-of-type(1)) {
+        border-bottom: 1px var(--v-info-lighten4) solid;
+      }
+    }
+  }
+  .time {
   padding: 4px;
   border: 1px solid var(--v-info-lighten1);
   border-radius: 6px;
@@ -90,18 +99,7 @@ export default {
   margin: auto;
   line-height: 14px;
 }
-
 .custom-child-border:not(:nth-last-of-type(1)) {
   border-bottom: 1px solid var(--v-info-lighten4);
-}
-</style>
-
-<style lang="scss" scoped>
-.custom-border-sm {
-  @media (max-width: 959px) {
-    > :not(:nth-last-of-type(1)) {
-      border-bottom: 1px var(--v-info-lighten4) solid;
-    }
-  }
 }
 </style>
