@@ -96,7 +96,7 @@ export default {
 }
 </style>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .custom-border-sm {
   @media (max-width: 959px) {
     > :not(:nth-last-of-type(1)) {
