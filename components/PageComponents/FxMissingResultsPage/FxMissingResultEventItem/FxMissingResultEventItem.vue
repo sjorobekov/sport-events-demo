@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <v-row align="center" class=" border-bottom child-border-break-sm-and-down">
+  <v-container class="child-border">
+    <v-row align="center" class="child-border-break-sm-and-down">
       <v-col md="2">
         <div class="info--text text-caption time text-center">
           {{ event.startTime }}
@@ -89,5 +89,9 @@ export default {
   height: 22px;
   margin: auto;
   line-height: 14px;
+}
+
+.child-border:not(:nth-last-of-type(1)) {
+  border-bottom: 1px solid var(--v-info-lighten4);
 }
 </style>
