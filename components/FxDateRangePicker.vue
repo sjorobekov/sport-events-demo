@@ -95,6 +95,7 @@
         full-width
         range
         scrollable
+        class="disable-dbl-tap-zoom"
       >
         <v-spacer />
         <v-btn
