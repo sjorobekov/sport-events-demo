@@ -18,8 +18,8 @@
     </template>
     <FxTimePicker
       :value="value"
-      @input="$emit('input', $event)"
       class="disable-dbl-tap-zoom"
+      @input="$emit('input', $event)"
     >
       <template #actions>
         <div class="mt-4">

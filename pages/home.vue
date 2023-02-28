@@ -75,7 +75,7 @@
                   </v-icon>
                 </v-btn>
               </template>
-              <v-date-picker class="disable-dbl-tap-zoom" ref="picker" v-model="date" full-width @change="onDateChange" />
+              <v-date-picker ref="picker" v-model="date" class="disable-dbl-tap-zoom" full-width @change="onDateChange" />
             </v-dialog>
           </div>
         </div>

@@ -217,9 +217,9 @@
         <v-date-picker
           ref="picker"
           :value="eventForm.date"
+          class="disable-dbl-tap-zoom"
           @input="updateEvent('date', $event)"
           @change="$refs.menu.save($event)"
-          class="disable-dbl-tap-zoom"
         />
       </v-menu>
 
