@@ -1,7 +1,7 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col md="2" class="border-bottom pt-6">
+  <v-container class="custom-child-border">
+    <v-row align="center" class="custom-border-sm">
+      <v-col md="2">
         <div class="info--text text-caption time text-center">
           {{ event.startTime }}
         </div>
@@ -9,10 +9,10 @@
           {{ date }}
         </div>
       </v-col>
-      <v-col cols="12" md="3" class="border-bottom">
+      <v-col cols="12" md="3">
         <FxTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" item-class="flex-row flex-md-row-reverse text-md-right" />
       </v-col>
-      <v-col md="2" class="hidden-sm-and-down pt-5 border-bottom text-center">
+      <v-col md="2" class="hidden-sm-and-down text-center">
         <div>
           <v-avatar rounded size="40" class="mr-2" color="#F1F5F9">
             -
@@ -22,11 +22,11 @@
           </v-avatar>
         </div>
       </v-col>
-      <v-col cols="12" md="3" class="border-bottom">
+      <v-col cols="12" md="3">
         <FxTeamListItem v-if="event.eventType === EventType.FIXTURE" class="pl-0" :participant="opponent" :context-school-id="contextSchoolId" />
         <FxNonFixtureItem v-else :event-type="event.eventType" :name="event.name" />
       </v-col>
-      <v-col md="2" class="border-bottom">
+      <v-col md="2">
         <v-btn link outlined :to="{ name: 'events-eventId', params: { eventId: event.id } }">
           Add Result
         </v-btn>
@@ -80,7 +80,17 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '~vuetify/src/styles/styles';
+
+.custom-border-sm {
+  @media #{map-get($display-breakpoints, 'sm-and-down')} {
+    > :not(:nth-last-of-type(1)) {
+      border-bottom: 1px var(--v-info-lighten4) solid;
+    }
+  }
+}
+
 .time {
   padding: 4px;
   border: 1px solid var(--v-info-lighten1);
@@ -89,5 +99,9 @@ export default {
   height: 22px;
   margin: auto;
   line-height: 14px;
+}
+
+.custom-child-border:not(:nth-last-of-type(1)) {
+  border-bottom: 1px solid var(--v-info-lighten4);
 }
 </style>
