@@ -415,5 +415,5 @@ $calendar-bar-height: 186px
   background: var(--v-background-base)
 
 .calendar-content
-  margin-top: $calendar-bar-height
+  margin-top: $calendar-bar-height + 32px
 </style>
