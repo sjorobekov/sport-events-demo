@@ -22,10 +22,10 @@
       </v-col>
       <v-col md="2" class="hidden-sm-and-down text-center">
         <div>
-          <v-avatar rounded size="40" color="#F1F5F9">
+          <v-avatar rounded size="40" class="mr-2" color="#F1F5F9">
             -
           </v-avatar>
-          <v-avatar rounded size="40" color="#F1F5F9">
+          <v-avatar rounded size="40" class="mr-2" color="#F1F5F9">
             -
           </v-avatar>
         </div>
@@ -35,10 +35,7 @@
         <FxNonFixtureItem v-else :event-type="event.eventType" :name="event.name" />
       </v-col>
       <v-col md="2">
-        <v-btn class="hidden-md-and-up" link block outlined :to="{ name: 'events-eventId', params: { eventId: event.id } }">
-          Add Result
-        </v-btn>
-        <v-btn class="hidden-sm-and-down" link outlined :to="{ name: 'events-eventId', params: { eventId: event.id } }">
+        <v-btn link :class="{'d-block pt-2': $vuetify.breakpoint.smAndDown}" outlined :to="{ name: 'events-eventId', params: { eventId: event.id } }">
           Add Result
         </v-btn>
       </v-col>
