@@ -1,7 +1,7 @@
 <template>
   <v-container class="custom-child-border">
     <v-row align="center">
-      <v-col v-if="!compact" md="2">
+      <v-col class="hidden-sm-and-down" md="2">
         <div class="info--text text-caption time text-center">
           {{ event.startTime }}
         </div>
@@ -9,7 +9,7 @@
           {{ date }}
         </div>
       </v-col>
-      <v-col v-else class="pl-5 pb-0">
+      <v-col class="hidden-md-and-up pl-5 pb-0">
         <div class="info--text text-caption">
           {{ event.startTime }}
         </div>
@@ -35,7 +35,10 @@
         <FxNonFixtureItem v-else :event-type="event.eventType" :name="event.name" />
       </v-col>
       <v-col md="2">
-        <v-btn link :block="compact ? 1 : 0" outlined :to="{ name: 'events-eventId', params: { eventId: event.id } }">
+        <v-btn class="hidden-md-and-up" link block outlined :to="{ name: 'events-eventId', params: { eventId: event.id } }">
+          Add Result
+        </v-btn>
+        <v-btn class="hidden-sm-and-down" link outlined :to="{ name: 'events-eventId', params: { eventId: event.id } }">
           Add Result
         </v-btn>
       </v-col>
@@ -64,10 +67,6 @@ export default {
     ...mapGetters({
       contextSchoolId: 'context/schoolId',
     }),
-    compact () {
-      return this.$vuetify.breakpoint.smAndDown
-    },
-
     event () {
       return this.value
     },
