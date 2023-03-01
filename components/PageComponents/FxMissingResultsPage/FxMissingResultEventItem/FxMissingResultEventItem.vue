@@ -34,8 +34,8 @@
         <FxTeamListItem v-if="event.eventType === EventType.FIXTURE" class="pl-0" :participant="opponent" :context-school-id="contextSchoolId" />
         <FxNonFixtureItem v-else :event-type="event.eventType" :name="event.name" />
       </v-col>
-      <v-col md="2">
-        <v-btn link :class="{'d-block pt-2': $vuetify.breakpoint.smAndDown}" outlined :to="{ name: 'events-eventId', params: { eventId: event.id } }">
+      <v-col md="2" class="text-center">
+        <v-btn link class="d-flex d-md-inline-flex" outlined :to="{ name: 'events-eventId', params: { eventId: event.id } }">
           Add Result
         </v-btn>
       </v-col>
