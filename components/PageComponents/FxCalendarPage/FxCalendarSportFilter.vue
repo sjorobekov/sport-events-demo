@@ -15,6 +15,13 @@
     deletable-chips
     @input="$emit('input', $event)"
   >
+    <template #selection="{ index }">
+      <v-chip v-show="index === 0">
+        {{ value.length }} selected <v-icon size="18" @click.stop="$emit('input', [])">
+          mdi-close-circle
+        </v-icon>
+      </v-chip>
+    </template>
     <template #item="{ item, on, attrs }">
       <v-list-item v-bind="attrs" v-on="on">
         <v-list-item-action class="mr-2">
