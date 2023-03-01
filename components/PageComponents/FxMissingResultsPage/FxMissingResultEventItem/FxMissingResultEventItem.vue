@@ -1,11 +1,19 @@
 <template>
   <v-container class="custom-child-border">
-    <v-row align="center" class="custom-border-sm">
-      <v-col md="2">
+    <v-row align="center">
+      <v-col v-if="!compact" md="2">
         <div class="info--text text-caption time text-center">
           {{ event.startTime }}
         </div>
         <div class="info--text text--darken-1 text-caption text-center mt-2 mx-auto">
+          {{ date }}
+        </div>
+      </v-col>
+      <v-col v-else class="pl-5 pb-0">
+        <div class="info--text text-caption">
+          {{ event.startTime }}
+        </div>
+        <div class="info--text text--darken-1 text-caption mt-2 mx-auto">
           {{ date }}
         </div>
       </v-col>
@@ -14,10 +22,10 @@
       </v-col>
       <v-col md="2" class="hidden-sm-and-down text-center">
         <div>
-          <v-avatar rounded size="40" class="mr-2" color="#F1F5F9">
+          <v-avatar rounded size="40" color="#F1F5F9">
             -
           </v-avatar>
-          <v-avatar rounded size="40" class="ml-2" color="#F1F5F9">
+          <v-avatar rounded size="40" color="#F1F5F9">
             -
           </v-avatar>
         </div>
@@ -27,7 +35,7 @@
         <FxNonFixtureItem v-else :event-type="event.eventType" :name="event.name" />
       </v-col>
       <v-col md="2">
-        <v-btn link outlined :to="{ name: 'events-eventId', params: { eventId: event.id } }">
+        <v-btn link :block="compact ? 1 : 0" outlined :to="{ name: 'events-eventId', params: { eventId: event.id } }">
           Add Result
         </v-btn>
       </v-col>
