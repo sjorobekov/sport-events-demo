@@ -2,40 +2,42 @@
   <v-card>
     <v-card-text>
       <v-row>
-        <v-col>
-          <div class="d-flex justify-space-between text-p1">
-            <FxAvatar :value="avatar" class="border-avatar" />
+        <v-col class="pa-4">
+          <div class="d-flex justify-space-between text-p2">
+            <FxAvatar :value="avatar" size="64" class="border-avatar" />
             <v-chip
-              v-if="contact.main"
-              class="ma-2"
+              v-if="isMainContact"
+              class="caption font-weight-bold"
               color="primary"
             >
-              <v-icon left small>
+              <v-icon left size="12" class="mr-1">
                 mdi-star
               </v-icon>
               Main Sports Contact
             </v-chip>
           </div>
-          <div class="py-2">
-            <div class="text--darken-1 font-weight-bold">
+          <div class="pt-4 pb-2">
+            <div class="text-p2 neutral--text text--darken-4 font-weight-bold contact-main-info">
               {{ name }}
             </div>
-            <div>{{ contact.role }}</div>
+            <div class="text-p2 neutral--text text--darken-3 contact-main-info">
+              {{ role }}
+            </div>
           </div>
-          <div class="text-p1">
-            <v-icon>mdi-email-outline</v-icon>
-            <a class="info--text text--darken-2" :href="`mailto:${contact.email}`">{{ contact.email }}</a>
+          <div v-if="contact.phone" class="text-p1 mb-1">
+              <v-icon color="primary lighten-1">$vuetify.icons.phone-fill</v-icon>
+              <a class="link" :href="`tel:${contact.phone}`">{{ contact.phone }}</a>
           </div>
 
           <div class="d-flex justify-space-between">
-            <div v-if="contact.phone" class="text-p1">
-              <v-icon>mdi-phone-in-talk</v-icon>
-              <a class="info--text text--darken-2" :href="`tel:${contact.phone}`">{{ contact.phone }}</a>
+            <div class="text-p1">
+            <v-icon color="primary lighten-1">$vuetify.icons.mail-fill</v-icon>
+            <a class="email" :href="`mailto:${contact.email}`">{{ contact.email }}</a>
             </div>
             <v-menu>
               <template v-if="canCreateSportsContacts && contact.kind === 'SportsContact'" #activator="{ on, attrs }">
                 <v-btn icon v-bind="attrs" v-on="on">
-                  <v-icon color="info lighten-1">
+                  <v-icon>
                     $vuetify.icons.threeDots
                   </v-icon>
                 </v-btn>
@@ -82,7 +84,13 @@ export default {
       return this.contact.user ? this.contact.user.avatar : this.contact.avatar
     },
     name () {
-      return this.contact.kind === 'SportsContact' ? this.contact.name : `${this.contact.firstname} ${this.contact.lastname}`
+      return this.contact.kind === 'SportsContact' ? this.contact.name : this.contact.displayName ? this.contact.displayName : `${this.contact.firstname} ${this.contact.lastname}`
+    },
+    role () {
+      return this.contact.role || this.contact.jobRole || ''
+    },
+    isMainContact () {
+      return this.contact.main || this.contact.mainSportsContact || false
     },
   },
   methods: {
@@ -104,7 +112,14 @@ export default {
 <style scoped>
 
 .border-avatar {
-  border: 1px solid #E2E8F0;
+  border: 1px solid var(--v-neutral-base);
 }
 
+.email {
+  color: var(--v-primary-lighten1)!important;
+}
+
+.contact-main-info {
+  line-height: 1.2;
+}
 </style>

@@ -1,13 +1,15 @@
 <template>
   <v-item-group
-    v-model="selected"
+    :value="value"
     mandatory
+    @change="$emit('input', $event)"
   >
     <FxSheetOption
       v-for="item in items"
       :key="item.value"
       :src="item.img"
       :text="item.text"
+      :value="item.value"
     />
   </v-item-group>
 </template>

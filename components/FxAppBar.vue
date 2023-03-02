@@ -44,7 +44,7 @@
               <div class="flex-shrink-1 flex-grow-0">
                 <v-list-item class="px-0 user-menu-handler" v-bind="attrs" :ripple="false" v-on="on">
                   <v-list-item-content class="text-right">
-                    <v-list-item-title class="menu-text font-weight-bold">
+                    <v-list-item-title class="menu-text font-weight-bold mb-0">
                       {{ me.firstname }} {{ me.lastname }}
                     </v-list-item-title>
                     <v-list-item-subtitle class="menu-text">
@@ -58,8 +58,8 @@
                     />
                   </v-list-item-avatar>
                   <v-list-item-icon class="ml-0">
-                    <v-icon color="#ababab" size="30">
-                      mdi-menu-down
+                    <v-icon color="neutral lighten1" size="24">
+                      $vuetify.icons.chevron-down
                     </v-icon>
                   </v-list-item-icon>
                 </v-list-item>
@@ -210,7 +210,7 @@ export default {
 }
 
 .menu-text {
-  color: #868686!important;
+  color: var(--v-neutral-darken1)!important;
   font-size: 14px;
 }
 
@@ -228,7 +228,6 @@ export default {
 
 .v-menu__content {
   box-shadow: 0 0 4px rgb(0 0 0 / 4%), 0 8px 16px rgb(0 0 0 / 8%);
-  border: 1px solid #E4E9EF;
 }
 
 .theme--light.v-divider {
@@ -236,7 +235,7 @@ export default {
 }
 
 .user-menu-item:hover {
-  background-color: var(--v-info-lighten5)!important;
+  background-color: var(--v-neutral-lighten2)!important;
 }
 .theme--light.v-list-item:before, .theme--light.v-list-item:hover:before, .theme--light.v-list-item:focus:before {
   opacity: 0;

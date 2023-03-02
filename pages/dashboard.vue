@@ -68,7 +68,7 @@ export default {
 
   middleware: ({ store, redirect }) => {
     if (!store.getters['context/isLoggedIn']) {
-      return redirect({ name: 'portal' })
+      return redirect({ name: 'home' })
     }
   },
 
@@ -79,25 +79,36 @@ export default {
   }),
 
   async fetch () {
-    const { data } = await this.$store.dispatch('api/events/getBySchool', {
-      schoolId: this.contextSchoolId,
-      params: {
-        limit: 2000,
-        orderDesc: 'false',
-        from: DateTime.now().toFormat('yyyy-MM-dd'),
-        to: DateTime.now().toFormat('yyyy-MM-dd'),
-        status: EventStatus.CONFIRMED,
-      },
-    })
+    const params = {
+      limit: 2000,
+      orderDesc: 'false',
+      from: DateTime.now().toFormat('yyyy-MM-dd'),
+      to: DateTime.now().toFormat('yyyy-MM-dd'),
+      status: EventStatus.CONFIRMED,
+    }
 
-    this.events = data
-    const teams = this.events
+    const [{ data: events }, { data: inHouseMatches }] = await Promise.all([
+      this.$store.dispatch('api/events/getBySchool', {
+        schoolId: this.contextSchoolId,
+        params,
+      }),
+      this.$store.dispatch('api/inHouseMatches/getBySchool', {
+        schoolId: this.contextSchoolId,
+        params,
+      }),
+    ])
+
+    const teams = events
       .flatMap(item => item.participants)
       .filter(item => item.team?.schoolId === this.contextSchoolId)
       .map(item => item.teamId)
     this.teamsToday = [...new Set(teams)].length
 
     this.teams = await this.getTeams()
+
+    this.events = [...events, ...inHouseMatches].sort((a, b) => {
+      return `${a.date}T${a.startTime}` > `${b.date}T${b.startTime}` ? 1 : -1
+    })
   },
 
   computed: {

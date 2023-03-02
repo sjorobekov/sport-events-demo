@@ -40,7 +40,7 @@ $headings: map-deep-merge(
         'weight': 600,
         'line-height': rem(40px),
         'letter-spacing': -0.04em,
-        'font-family': $heading-font-family,
+        'font-family': $title-font,
         'text-transform': false
       ),
       'h2': (

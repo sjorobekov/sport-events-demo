@@ -2,6 +2,7 @@
   <v-item
     v-slot="{ active, toggle }"
     class="d-inline-block mr-3 mb-3"
+    :value="value"
   >
     <v-sheet v-ripple width="156px" height="112" :class="active ? 'border active' : 'border'" @click="toggle">
       <v-container class="fill-height px-0">
@@ -39,6 +40,10 @@ export default {
       type: String,
       default: '',
     },
+    value: {
+      type: String,
+      required: true,
+    },
   },
 }
 </script>
@@ -47,7 +52,7 @@ export default {
 
 .border
   border-radius: 4px
-  box-shadow: 0 0 0 1px var(--v-info-lighten2)
+  box-shadow: 0 0 0 1px var(--v-neutral-lighten1)
   &.active
     box-shadow: 0 0 0 3px var(--v-primary-base)
   .label1

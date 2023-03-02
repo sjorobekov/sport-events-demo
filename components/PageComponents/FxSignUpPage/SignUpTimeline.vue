@@ -2,6 +2,7 @@
   <v-timeline
     light
     dense
+    class="signup-timeline"
   >
     <v-timeline-item
       v-for="(item, i) in items"
@@ -54,17 +55,15 @@ export default {
 }
 </script>
 
-<style>
-.theme--light.v-timeline::before {
-  background: var(--v-info-darken5);
-  margin-top: 50px;
-  height: calc(100% - 100px);
-}
+<style scoped lang="sass">
+::v-deep.signup-timeline.v-timeline::before
+  background: var(--v-info-darken5)
+  margin-top: 50px
+  height: calc(100% - 100px)
 
-.v-timeline-item__dot {
-  background: none!important;
-  box-shadow: none!important;
-  height: 45px;
-  width: 45px;
-}
+  .v-timeline-item__dot
+    background: none!important
+    box-shadow: none!important
+    height: 45px
+    width: 45px
 </style>

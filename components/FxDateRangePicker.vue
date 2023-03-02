@@ -90,21 +90,52 @@
         />
       </template>
 
-      <v-date-picker
-        v-model="mobileModel"
-        full-width
-        range
-        scrollable
-      >
-        <v-spacer />
-        <v-btn
-          depressed
-          color="primary"
-          @click="$refs.menu.save(mobileModel)"
+      <v-card>
+        <v-sheet dark color="primary" height="150" tile class="flex-row">
+          <h4 class="text-h6 px-5 pt-5">
+            Select Date Range
+          </h4>
+          <v-timeline
+            light
+            align-top
+            dense
+            class="date-range-timeline"
+          >
+            <v-timeline-item
+              color="primary"
+              small
+              class="selected-date d-flex align-center"
+            >
+              {{ startDateFormatted || 'Select Date' }}
+            </v-timeline-item>
+            <v-timeline-item
+              color="primary"
+              small
+              class="selected-date d-flex align-center"
+            >
+              {{ endDateFormatted || 'Select Date' }}
+            </v-timeline-item>
+          </v-timeline>
+        </v-sheet>
+
+        <v-date-picker
+          v-model="mobileModel"
+          full-width
+          range
+          scrollable
+          no-title
+          class="disable-dbl-tap-zoom"
         >
-          OK
-        </v-btn>
-      </v-date-picker>
+          <v-spacer />
+          <v-btn
+            depressed
+            color="primary"
+            @click="$refs.menu.save(mobileModel)"
+          >
+            OK
+          </v-btn>
+        </v-date-picker>
+      </v-card>
     </v-dialog>
   </div>
 </template>
@@ -216,17 +247,23 @@ export default {
 }
 </script>
 
-<style>
-.reportrange-text {
-  border: none!important;
-  background: none!important;
-  padding: 0!important;
-}
-.fx-date-range-picker td.active {
-  background-color: var(--v-primary-base)
-}
+<style scoped lang="sass">
+.selected-date
+  font-size: 1rem
+  line-height: 1rem
+.reportrange-text
+  border: none!important
+  background: none!important
+  padding: 0!important
 
-.fx-date-range-picker td.active:hover {
+.fx-date-range-picker td.active
+  background-color: var(--v-primary-base)
+
+.fx-date-range-picker td.active:hover
   background-color: var(--v-primary-darken1)
-}
+
+::v-deep.date-range-timeline.v-timeline::before
+  background: var(--v-info-darken5)
+  margin-top: 50px
+  height: calc(100% - 100px)
 </style>

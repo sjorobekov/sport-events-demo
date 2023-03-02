@@ -99,7 +99,7 @@ export default {
   background-size: contain!important
   margin-top: auto
   margin-bottom: auto
-  border-radius: 64px
+  border-radius: 32px
   margin-left: 2.5%
   box-shadow: 0px 0px 16px rgba(255, 255, 255, 0.8)!important
   padding-left: 32px
@@ -144,5 +144,5 @@ export default {
 @media #{map-get($display-breakpoints, 'sm-and-up')}
   .school-panel
     height: calc(100% - 48px)
-    max-width: 50vw
+    max-width: 40vw
 </style>

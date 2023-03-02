@@ -82,6 +82,7 @@
             :lead-ids="leadIds"
             :contains-in-house-events="containsInHouseEvents"
             :sports="sports"
+            class="mb-6"
           />
         </FxCalendarFilterDialog>
       </client-only>
@@ -96,6 +97,7 @@
               threshold: [1.0]
             }
           }"
+          class="pb-6"
         >
           <FxCalendarPill :value="key" class="my-4" />
 
@@ -413,5 +415,5 @@ $calendar-bar-height: 186px
   background: var(--v-background-base)
 
 .calendar-content
-  margin-top: $calendar-bar-height
+  margin-top: $calendar-bar-height + 32px
 </style>

@@ -97,6 +97,7 @@ export default {
         fixtureType: FixtureType.FRIENDLY,
         location: EventLocationType.SPORTS_LOCATIONS,
         repeats: false,
+        eventType: EventType.FIXTURE,
       },
       days: [],
     },

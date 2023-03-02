@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="text-center pa-6">
+    <div class="text-center">
       <slot name="content">
-        <v-icon size="40" color="info darken-1 mb-3">
-          mdi-lock
+        <v-icon size="40" color="info darken-1 mb-5">
+          $vuetify.icons.padlock
         </v-icon>
-        <div class="info--text text--darken-1 text-p1 mb-3">
+        <div class="font-weight-bold neutral--text text--darken-4 text-p2 mt-2 mb-3">
           <slot name="subtitle">
             This Team Sheet is Password Protected.
           </slot>
@@ -20,7 +20,7 @@
         hide-details
         background-color="white"
         placeholder="Enter Password"
-        :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+        :append-icon="showPass ? '$vuetify.icons.password-hide' : '$vuetify.icons.password-show'"
         :type="showPass ? 'text' : 'password'"
         @click:append="showPass = !showPass"
       />
@@ -40,11 +40,11 @@
         </slot>
       </v-btn>
       <template v-if="school.email">
-        <div class="info--text text--darken-1 text-p1">
+        <div class="neutral--text text--darken-3 text-p1">
           For password questions, please email:
         </div>
-        <div class="info--text text--darken-1">
-          <a class="text-p1 font-weight-bold primary--text" :href="`mailto:${school.email}`">{{ school.email }}</a>
+        <div class="info--text text--darken-1 email-link">
+          <a class="text-p1 primary--text" :href="`mailto:${school.email}`">{{ school.email }}</a>
         </div>
       </template>
     </div>
@@ -92,3 +92,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.email-link {
+  line-height: 1;
+}
+</style>

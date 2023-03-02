@@ -92,6 +92,7 @@
         :school-id="schoolId"
         :opponent-id="opponentForm.listedAsOpponentId"
         :opponent-school-id="opponentForm.schoolId"
+        :async-rules="[$rule.required]"
         @update:opponentId="updateOpponent('listedAsOpponentId', $event)"
         @update:opponentSchoolId="updateOpponent('schoolId', $event)"
       />
@@ -216,6 +217,7 @@
           <v-date-picker
             ref="picker"
             :value="eventForm.date"
+            class="disable-dbl-tap-zoom"
             @input="updateEvent('date', $event)"
             @change="$refs.menu.save($event)"
           />
@@ -429,6 +431,7 @@
       <label>Location</label>
       <FxEventLocationTypeSelect
         :value="eventForm.location"
+        :show-opponent-confirms="hasPortalAlertVisible"
         @input="updateEvent('location', $event)"
       />
 

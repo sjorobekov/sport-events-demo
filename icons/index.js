@@ -124,4 +124,12 @@ export default [
   'status-small',
   'students-small',
   'user-small',
+  'student-add',
+  'add-all',
+  'mail-fill',
+  'phone-fill',
+  'key',
+  'password-hide',
+  'password-show',
+  'chevron-down',
 ]

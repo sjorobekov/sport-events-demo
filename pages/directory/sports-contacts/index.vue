@@ -19,8 +19,8 @@
         cols="12"
         xs="6"
         sm="6"
-        md="3"
-        lg="3"
+        md="4"
+        lg="4"
       >
         <FxSportsContactCard :contact="contact" style="height: 100%" />
       </v-col>

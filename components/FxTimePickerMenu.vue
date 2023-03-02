@@ -18,6 +18,7 @@
     </template>
     <FxTimePicker
       :value="value"
+      class="disable-dbl-tap-zoom"
       @input="$emit('input', $event)"
     >
       <template #actions>

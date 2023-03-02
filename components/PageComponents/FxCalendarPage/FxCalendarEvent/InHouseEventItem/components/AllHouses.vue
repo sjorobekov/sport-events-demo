@@ -16,7 +16,7 @@
       </v-list-item>
 
       <div class="hidden-sm-and-down">
-        <AllInHouseTeamsProvider class="d-flex flex-nowrap justify-center">
+        <AllInHouseTeamsProvider class="d-flex flex-nowrap justify-center align-center" style="height: 56px">
           <template #default="{ teams }">
             <FxSchoolLogo v-for="team in teams" :key="team.id" :color="team.color" :alt="team.name" size="40" />
           </template>

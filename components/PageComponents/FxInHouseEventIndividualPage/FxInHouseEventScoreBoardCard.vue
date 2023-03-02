@@ -12,15 +12,23 @@
       </v-col>
     </v-row>
 
-    <div v-else class="pa-6 d-flex gap-md justify-center">
-      <FxTeam
-        v-for="team in teams"
-        :key="team.id"
-        class="pl-0"
-        :name="team.name"
-        :color="team.color"
-        :logo="team.logo"
-      />
+    <div v-else class="py-6 d-flex gap-md justify-center">
+      <v-slide-group
+        show-arrows
+      >
+        <v-slide-item
+          v-for="team in teams"
+          :key="team.id"
+        >
+          <FxTeam
+            class="mx-1 mx-md-2"
+            style="min-width: 110px"
+            :name="team.name"
+            :color="team.color"
+            :logo="team.logo"
+          />
+        </v-slide-item>
+      </v-slide-group>
     </div>
   </v-card>
 </template>

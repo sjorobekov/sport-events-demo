@@ -1,11 +1,18 @@
 <template>
-  <v-list-item v-slot="{ active, toggle }" class="px-0" :value="value" :active-class="activeClass" inactive>
-    <v-list-item-icon v-if="$slots.icon" class="mr-1 ml-0 student-icon">
+  <v-list-item
+    v-slot="{ active, toggle }"
+    class="px-0"
+    :value="value"
+    :active-class="activeClass"
+    inactive
+    :ripple="false"
+  >
+    <v-list-item-icon v-if="$slots.icon" class="mx-0 student-icon">
       <slot name="icon" />
     </v-list-item-icon>
-    <v-list-item-avatar class="mr-2">
-      <FxAvatar size="22" />
-    </v-list-item-avatar>
+    <v-icon size="24" class="ml-2 mr-3">
+      $vuetify.icons.user-1
+    </v-icon>
     <v-list-item-content>
       <v-list-item-title class="text-p1 info--text text--darken-3">
         {{ item.firstname }} {{ item.lastname }}
@@ -21,10 +28,8 @@
 </template>
 
 <script>
-import FxAvatar from '@/components/FxAvatar/FxAvatar'
 export default {
   name: 'FxStudentListItem',
-  components: { FxAvatar },
   props: {
     student: {
       type: Object,

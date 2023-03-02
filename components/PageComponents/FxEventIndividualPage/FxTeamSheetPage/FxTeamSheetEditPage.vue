@@ -73,8 +73,8 @@
                 </div>
                 <v-simple-table class="sheet-table">
                   <draggable v-model="sheet" ghost-class="ghost" tag="tbody" handle=".student-icon">
-                    <tr v-for="(studentId, i) in sheet" :key="`student-id-${studentId}`">
-                      <td style="width: 70px" class="text-center no-right-border">
+                    <tr v-for="(studentId, i) in sheet" :key="`student-id-${studentId}`" class="pa-1">
+                      <td style="width: 72px" class="text-center no-right-border">
                         <span class="info--text text-p3">{{ (i + 1).toString().padStart(2, '0') }}.</span>
                       </td>
                       <td class="pl-0">
@@ -85,7 +85,7 @@
                             </v-icon>
                           </template>
                           <template #action>
-                            <v-btn icon color="info lighten-1" @click="remove(i)">
+                            <v-btn icon color="info lighten-1" :ripple="false" class="remove-button" @click="remove(i)">
                               <v-icon>mdi-window-close</v-icon>
                             </v-btn>
                           </template>
@@ -218,12 +218,12 @@ export default {
 .sheet-table {
   td {
     border: 1px var(--v-info-lighten3) solid;
-    border-bottom: none;
+    border-bottom: none!important;
   }
 
   tr:last-child {
     td {
-      border-bottom: 1px var(--v-info-lighten3) solid;
+      border-bottom: 1px var(--v-info-lighten3) solid!important;
     }
   }
 
@@ -241,5 +241,9 @@ export default {
 }
 .draggable:active {
     cursor: grabbing!important;
+}
+
+.remove-button:hover {
+  color: var(--v-error-base)!important;
 }
 </style>

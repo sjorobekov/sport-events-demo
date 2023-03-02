@@ -1,5 +1,5 @@
 <template>
-  <div class="top-bar" :class="{ 'is-hidden': !showHeader }" :style="styles">
+  <div class="top-bar disable-dbl-tap-zoom" :class="{ 'is-hidden': !showHeader }" :style="styles">
     <slot name="default" />
   </div>
 </template>
