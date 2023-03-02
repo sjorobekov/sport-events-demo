@@ -9,7 +9,7 @@
           <v-icon>mdi-pencil</v-icon>Edit Team
         </v-btn>
       </template>
-      <GuestLoginForm v-if="!showTeamSheet" @signedIn="$fetch" />
+      <GuestLoginForm v-if="!showTeamSheet" class="pa-6" @signedIn="$fetch"/>
       <TeamSheet v-else :team-sheet="teamSheet" />
     </FxEventItemCard>
     <v-btn

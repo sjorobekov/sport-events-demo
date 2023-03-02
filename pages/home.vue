@@ -4,11 +4,11 @@
       <v-col lg="9">
         <div v-if="!isMobile">
           <v-card v-if="images.length">
-            <v-carousel cycle hide-delimiters height="320px">
+            <v-carousel cycle hide-delimiters height="300px">
               <v-carousel-item v-for="(item, i) in images" :key="i" :src="item.image" />
               <div class="gradient-footer" />
               <v-row class="image-footer">
-                <v-col>
+                <v-col class="pb-0">
                   <div class="text-h3">
                     Sports Portal
                   </div>
@@ -42,7 +42,7 @@
               <v-menu ref="menu" offset-y :close-on-content-click="true">
                 <template #activator="{ on }">
                   <v-btn icon v-on="on">
-                    <v-icon size="32" color="info lighten-1">
+                    <v-icon size="32" color="neutral darken-1">
                       $vuetify.icons.calendar-1
                     </v-icon>
                   </v-btn>
@@ -70,7 +70,7 @@
             <v-dialog v-model="showCalendar">
               <template #activator="{ on }">
                 <v-btn icon v-on="on">
-                  <v-icon size="32" color="info lighten1">
+                  <v-icon size="32" color="neutral darken-1">
                     $vuetify.icons.calendar-1
                   </v-icon>
                 </v-btn>
@@ -89,18 +89,19 @@
           <template v-else-if="!$fetchState.pending">
             <client-only>
               <div class="mt-12 d-flex flex-column justify-center align-center">
-                <v-img width="100" :src="calendar" class="mb-3" />
-                <div class="text-p3 text-center info--text text--darken-3 mb-2">
+                <v-img width="100" :src="calendar" class="mb-2" />
+                <div class="text-p2 font-weight-bold text-center neutral--text text--darken-3 mb-1">
                   No Events Today
                 </div>
-                <div class="text-p2 text-center info--text text--darken-3 mb-4" style="width:120px">
-                  Try change the date or
+                <div class="text-p1 text-center neutral--text text--darken-3 mb-2" style="width:320px">
+                  No events found on the selected day.<br> Please try changing the date or
                 </div>
                 <v-btn
                   link
                   outlined
                   :to="{ name: 'calendar' }"
-                  class="text-p1 font-weight-bold info--text text--darken-1"
+                  class="text-p1 font-weight-bold neutral--text text--darken-3"
+                  :ripple="false"
                 >
                   Go to Calendar
                 </v-btn>
@@ -110,12 +111,12 @@
         </div>
       </v-col>
 
-      <v-col lg="3" class="text-p1 info--text text--darken-1 hidden-md-and-down">
+      <v-col lg="3" class="text-p1 info--text text--info-lighten1 hidden-md-and-down">
         <div class="d-flex justify-space-between">
-          <h4 class="font-weight-regular mb-4">
+          <h4 class="font-weight-regular home-heading mb-2">
             School Location
           </h4>
-          <nuxt-link class="text-decoration-none" :to="{ name: 'directory-sports-map' }">
+          <nuxt-link class="text-decoration-none home-link" :to="{ name: 'directory-sports-map' }">
             View All
           </nuxt-link>
         </div>
@@ -123,37 +124,37 @@
           ref="mapRef"
           :center="mapCenter"
           :zoom="zoom"
-          style="height: 180px"
-          class="mb-4"
+          style="height: 160px"
+          class="mb-2 home-map"
           :options="mapOptions"
         >
           <GmapMarker clickable :position="school.coordinates" />
         </GmapMap>
-        <div class="text--darken-2 font-weight-bold">
+        <div class="font-weight-bold school-name-address">
           {{ school.name }}
         </div>
-        <address class="mb-2">
+        <address class="mb-2 school-address">
           {{ school.street }} <br>
           {{ school.zip }} <br>
           <span v-if="school.city">{{ school.city }}, </span><fx-country-name :code="school.country" />
         </address>
         <div v-if="school.website">
-          <v-icon size="20" color="primary">
+          <v-icon size="18" class="home-icon">
             $vuetify.icons.link-1
-          </v-icon> <a target="_blank" :href="school.website"> School Website</a>
+          </v-icon> <a target="_blank" :href="school.website" class="link"> School Website</a>
         </div>
 
-        <v-divider class="my-6" />
+        <v-divider class="my-5" />
 
         <div class="d-flex justify-space-between">
-          <h3 class="text-p1 info--text text--darken-1 mb-6">
+          <h3 class="text-p1 info--text mb-3 home-heading">
             Sports Contacts
           </h3>
-          <nuxt-link class="text-decoration-none" :to="{ name: 'directory-sports-contacts' }">
+          <nuxt-link class="text-decoration-none home-link" :to="{ name: 'directory-sports-contacts' }">
             View All
           </nuxt-link>
         </div>
-        <FxContactCard v-for="contact in contacts" :key="contact.id" :contact="contact" class="mb-6" />
+        <FxContactCard v-for="contact in contacts" :key="contact.id" :contact="contact" class="mb-5" />
       </v-col>
     </v-row>
   </div>
@@ -366,4 +367,38 @@ export default {
 .v-slide-group__next, .v-slide-group__prev {
   min-width: 24px;
 }
+
+.home-icon {
+  color: var(--v-primary-lighten1)!important;
+}
+
+.school-name-address {
+  color: var(--v-neutral-darken4);
+  margin-bottom: 2px;
+}
+
+.home-map {
+  border-radius: 6px;
+  overflow: hidden;
+  border: var(--v-neutral-lighten1) thin solid;
+}
+
+.school-address {
+  font-style: normal;
+  line-height: 1.3;
+  color: var(--v-neutral-darken2);
+}
+
+.home-heading {
+  color: var(--v-neutral-darken2);
+}
+
+.home-link {
+  color: var(--v-neutral-darken2)!important;
+}
+
+.home-link:hover {
+  color: var(--v-primary-base)!important;
+}
+
 </style>

@@ -1,24 +1,35 @@
 <template>
-  <div>
+  <div class="guest-form">
     <GuestLoginForm @signedIn="onSuccess">
       <template #content>
-        <v-icon class="mb-8" color="info lighten-1" size="80">
+        <v-icon class="mb-4" color="neutral darken-3" size="88">
           $vuetify.icons.padlock
         </v-icon>
-        <h1 class="heading-text font-weight-bold info--text text--darken-4 mb-8">
-          The Sports Portal is Password Protected
+        <h1 class="heading-text font-weight-bold neutral--text text--darken-5 mb-6">
+          The Sports Portal is <br> Password Protected
         </h1>
       </template>
       <template #buttonLabel>
         View Sports Portal
       </template>
     </GuestLoginForm>
-
-    <div class="text-center mt-10">
-      <nuxt-link class="signin-link font-weight-bold info--text text--darken-2" :to="{ name: 'signin', query: $route.query }">
-        Have an account? Log In
-      </nuxt-link>
-    </div>
+    <v-btn
+      depressed
+      outlined
+      color="neutral darken-3"
+      dark
+      :loading="loading"
+      block
+      height="50"
+      class="mt-5 return-to-login-button"
+      :ripple="false"
+      :to="{ name: 'signin', query: $route.query }"
+      >
+      <v-icon size="24" class="mr-2" color="neutral darken-1">
+            $vuetify.icons.key
+          </v-icon>
+      Have an account? Log In
+    </v-btn>
   </div>
 </template>
 
@@ -74,9 +85,11 @@ export default {
 .heading-text {
   font-size: 24px;
   line-height: 32px;
+  min-width: 320px;
 }
 
 .signin-link {
   font-size: 18px;
 }
+
 </style>

@@ -1,30 +1,32 @@
 <template>
   <div>
     <div class="d-flex text-p1">
-      <FxAvatar :value="avatar" class="mb-2" />
+      <FxAvatar :value="avatar" class="mb-1 mr-3" />
 
-      <div class="pa-2">
-        <div class="text--darken-1 font-weight-bold">
+      <div class="py-2">
+        <div class="contact-name font-weight-bold">
           {{ name }}
         </div>
-        <div>{{ role }}</div>
+        <div class="contact-role">
+          {{ role }}
+        </div>
       </div>
     </div>
     <div class="my-1">
-      <div v-if="contact.email" class="text-p1 mb-2">
-        <v-icon size="20" color="primary" class="mr-1">
-          $vuetify.icons.email-1
+      <div v-if="contact.phone" class="text-p1 mb-1">
+        <v-icon size="20" class="home-icon">
+          $vuetify.icons.phone-fill
         </v-icon>
-        <a class="info--text text--darken-2" :href="`mailto:${contact.email}`">
-          {{ contact.email }}
+        <a class="link" :href="`tel:${contact.phone}`">
+          {{ contact.phone }}
         </a>
       </div>
-      <div v-if="contact.phone" class="text-p1">
-        <v-icon size="20" color="primary" class="mr-1">
-          $vuetify.icons.phone-1
+      <div v-if="contact.email" class="text-p1">
+        <v-icon size="20" class="home-icon">
+          $vuetify.icons.mail-fill
         </v-icon>
-        <a class="info--text text--darken-2" :href="`tel:${contact.phone}`">
-          {{ contact.phone }}
+        <a class="link email" :href="`mailto:${contact.email}`">
+          {{ contact.email }}
         </a>
       </div>
     </div>
@@ -49,7 +51,7 @@ export default {
       return this.contact.avatar || this.contact.user?.avatar
     },
     name () {
-      return this.contact.name || `${this.contact.firstname} ${this.contact.lastname}`
+      return this.contact.displayName ? this.contact.displayName : `${this.contact.firstname} ${this.contact.lastname}`
     },
     role () {
       return this.contact.role || this.contact.jobRole || ''
@@ -60,3 +62,20 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.email {
+  color: var(--v-primary-lighten1)!important;
+}
+.theme--light.v-divider {
+  border-color: var(--v-neutral-lighten1);
+}
+
+.contact-name {
+  color: var(--v-neutral-darken4);
+}
+
+.contact-role {
+  color: var(--v-neutral-darken2);
+}
+</style>

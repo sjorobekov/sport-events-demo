@@ -1,6 +1,6 @@
 <template>
   <v-dialog fullscreen :value="true" :transition="false" persistent>
-    <v-card color="info lighten-3 mobile-dialog-card" tile>
+    <v-card color="background mobile-dialog-card" tile>
       <slot name="default" />
     </v-card>
   </v-dialog>
