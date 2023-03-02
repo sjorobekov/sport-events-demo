@@ -77,6 +77,7 @@ export default {
           lighten1: '#DADFE6',
           base: '#C4C9D0',
           darken1: '#8C929A',
+          darken2: '#5A5E63',
         },
       },
     },

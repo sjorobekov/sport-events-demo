@@ -124,5 +124,7 @@ export default [
   'status-small',
   'students-small',
   'user-small',
+  'student-add',
+  'add-all',
   'chevron-down',
 ]
