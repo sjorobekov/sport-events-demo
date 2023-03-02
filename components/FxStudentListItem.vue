@@ -1,10 +1,12 @@
 <template>
-  <v-list-item v-slot="{ active, toggle }"
+  <v-list-item
+    v-slot="{ active, toggle }"
     class="px-0"
     :value="value"
     :active-class="activeClass"
     inactive
-    :ripple="false">
+    :ripple="false"
+  >
     <v-list-item-icon v-if="$slots.icon" class="mx-0 student-icon">
       <slot name="icon" />
     </v-list-item-icon>
