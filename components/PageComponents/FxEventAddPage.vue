@@ -24,6 +24,7 @@
       :event.sync="formData.event"
       :me.sync="formData.me"
       :opponent.sync="formData.opponent"
+      :days.sync="formData.days"
       :hide-event-type="items.length > 0"
       @cancel="cancel"
       @save="save"
@@ -95,8 +96,9 @@ export default {
       event: {
         fixtureType: FixtureType.FRIENDLY,
         location: EventLocationType.SPORTS_LOCATIONS,
-        startTime: '09:00',
+        repeats: false,
       },
+      days: [],
     },
     items: [],
     override: [],
@@ -183,9 +185,23 @@ export default {
         }
 
         this.formVisible = false
-        this.items.push({
-          ...this.formData,
-        })
+        if (this.formData.event.eventType === EventType.TRAINING && this.formData.days.length > 1) {
+          this.items = this.formData.days.map((item) => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { days, ...data } = this.formData
+            return {
+              ...data,
+              event: {
+                ...data.event,
+                date: item.value,
+              },
+            }
+          })
+        } else {
+          this.items.push({
+            ...this.formData,
+          })
+        }
       } catch (e) {
         this.$toast.error('Unknown Error')
       } finally {
