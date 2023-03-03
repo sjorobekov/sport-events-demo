@@ -4,12 +4,13 @@
     grow
     app
     fixed
-    height="64px"
+    :height="height"
   >
     <v-btn
       v-for="(item, i) in items"
       :key="i"
       class="fx-bottom-menu mx-1 pt-3"
+      :class="{ 'pb-4': isPWA }"
       link
       :to="item.to"
       @click="item.onClick"
@@ -21,6 +22,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'FxBottomNav',
 
@@ -32,6 +35,9 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      isPWA: 'context/isPWA',
+    }),
     items () {
       return [
         { title: 'Calendar', icon: '$vuetify.icons.calendarRounded', to: { name: 'calendar' }, onClick: () => {} },
@@ -39,6 +45,9 @@ export default {
         { title: 'News', icon: '$vuetify.icons.bullhorn', to: { name: 'announcements' }, onClick: () => {} },
         { title: 'Menu', icon: 'mdi-menu', onClick: () => this.$emit('input', !this.value) },
       ]
+    },
+    height () {
+      return this.isPWA ? 80 : 64
     },
   },
 }

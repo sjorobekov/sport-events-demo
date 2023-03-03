@@ -87,6 +87,14 @@ export const getters: GetterTree<RootState, RootState> = {
   isTablet (state) {
     return state.device === DeviceType.TABLET
   },
+
+  isPWA () {
+    if (process.client) {
+      return window.matchMedia('(display-mode: standalone)').matches
+    }
+
+    return false
+  },
 }
 
 export const mutations: MutationTree<RootState> = {

@@ -24,10 +24,10 @@
       class="mt-5 return-to-login-button"
       :ripple="false"
       :to="{ name: 'signin', query: $route.query }"
-      >
+    >
       <v-icon size="24" class="mr-2" color="neutral darken-1">
-            $vuetify.icons.key
-          </v-icon>
+        $vuetify.icons.key
+      </v-icon>
       Have an account? Log In
     </v-btn>
   </div>

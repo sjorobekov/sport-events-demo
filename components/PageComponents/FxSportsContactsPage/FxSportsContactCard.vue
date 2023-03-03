@@ -25,14 +25,18 @@
             </div>
           </div>
           <div v-if="contact.phone" class="text-p1 mb-1">
-              <v-icon color="primary lighten-1">$vuetify.icons.phone-fill</v-icon>
-              <a class="link" :href="`tel:${contact.phone}`">{{ contact.phone }}</a>
+            <v-icon color="primary lighten-1">
+              $vuetify.icons.phone-fill
+            </v-icon>
+            <a class="link" :href="`tel:${contact.phone}`">{{ contact.phone }}</a>
           </div>
 
           <div class="d-flex justify-space-between">
             <div class="text-p1">
-            <v-icon color="primary lighten-1">$vuetify.icons.mail-fill</v-icon>
-            <a class="email" :href="`mailto:${contact.email}`">{{ contact.email }}</a>
+              <v-icon color="primary lighten-1">
+                $vuetify.icons.mail-fill
+              </v-icon>
+              <a class="email" :href="`mailto:${contact.email}`">{{ contact.email }}</a>
             </div>
             <v-menu>
               <template v-if="canCreateSportsContacts && contact.kind === 'SportsContact'" #activator="{ on, attrs }">
