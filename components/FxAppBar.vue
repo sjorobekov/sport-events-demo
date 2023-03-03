@@ -27,10 +27,8 @@
       <v-row align="center">
         <v-spacer />
 
-        <v-btn v-if="!me" outlined color="info darken-1" link :to="{ name: 'signin' }">
-          <v-icon size="14">
-            $vuetify.icons.signin
-          </v-icon> Log In
+        <v-btn v-if="!me" outlined color="neutral darken-2" link :to="{ name: 'signin' }">
+          Log In
         </v-btn>
 
         <template v-else>
@@ -173,7 +171,7 @@ export default {
     },
 
     height () {
-      return this.isMobile ? '92' : '56'
+      return this.isMobile ? '92' : '48'
     },
 
     color () {
@@ -202,7 +200,7 @@ export default {
 
 <style scoped>
 .shadow {
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.20)!important;
+  box-shadow: 0px 1px 0px  var(--v-neutral-lighten1)!important;
 }
 .school-name {
   font-size: 18px;
