@@ -67,6 +67,14 @@
                       Return Time
                     </v-list-item-subtitle>
                   </div>
+                  <div v-if="event.endTime && event.eventType === EventType.TRAINING" class="d-inline-block">
+                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                      {{ event.endTime }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle class="text-p1 info--text">
+                      End Time
+                    </v-list-item-subtitle>
+                  </div>
                 </div>
               </template>
             </ListItem>
@@ -166,7 +174,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { TransportType } from '@/enum'
+import { TransportType, EventType } from '@/enum'
 import ListItem from '@/components/FxEventItem/ListItem'
 import FxAvatar from '@/components/FxAvatar'
 import FxLocationLabel from '@/components/FxEventItem/FxLocationLabel'
@@ -189,6 +197,7 @@ export default {
     formVisible: false,
     formData: {},
     loading: false,
+    EventType,
   }),
 
   computed: {
@@ -227,6 +236,7 @@ export default {
       this.formData = {
         date: this.event.date,
         startTime: this.event.startTime,
+        endTime: this.event.endTime,
         meetTime: this.me.meetTime,
         returnTime: this.me.returnTime,
         leadId: this.me.leadId,
@@ -239,6 +249,7 @@ export default {
         transportToOther: this.me.transportToOther,
         transportFrom: this.me.transportFrom,
         transportFromOther: this.me.transportFromOther,
+        eventType: this.event.eventType,
       }
 
       this.formVisible = true

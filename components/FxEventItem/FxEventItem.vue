@@ -90,6 +90,14 @@
                   Return Time
                 </v-list-item-subtitle>
               </div>
+              <div v-if="event.endTime && event.eventType === EventType.TRAINING" class="d-inline-block">
+                <v-list-item-title class="text-p2 info--text text--darken-4">
+                  {{ event.endTime }}
+                </v-list-item-title>
+                <v-list-item-subtitle class="text-p1 info--text">
+                  End Time
+                </v-list-item-subtitle>
+              </div>
             </div>
           </template>
         </ListItem>

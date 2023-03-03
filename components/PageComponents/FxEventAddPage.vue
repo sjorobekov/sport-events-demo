@@ -24,7 +24,6 @@
       :event.sync="formData.event"
       :me.sync="formData.me"
       :opponent.sync="formData.opponent"
-      :days.sync="formData.days"
       :hide-event-type="items.length > 0"
       @cancel="cancel"
       @save="save"
@@ -60,6 +59,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
 import FxEventForm from '@/components/FxEventForm/FxEventForm'
 import { EventLocation, EventLocationType, EventType, FixtureType, TransportType } from '@/enum'
@@ -99,7 +99,6 @@ export default {
         repeats: false,
         eventType: EventType.FIXTURE,
       },
-      days: [],
     },
     items: [],
     override: [],
@@ -113,6 +112,9 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      occurrences: 'page/event/occurrences',
+    }),
     title () {
       if (this.formVisible) {
         return 'Create New Event'
@@ -186,14 +188,12 @@ export default {
         }
 
         this.formVisible = false
-        if (this.formData.event.eventType === EventType.TRAINING && this.formData.days.length > 1) {
-          this.items = this.formData.days.map((item) => {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { days, ...data } = this.formData
+        if (this.formData.event.eventType === EventType.TRAINING && this.occurrences.length > 1) {
+          this.items = this.occurrences.map((item) => {
             return {
-              ...data,
+              ...this.formData,
               event: {
-                ...data.event,
+                ...this.formData.event,
                 date: item.value,
               },
             }
