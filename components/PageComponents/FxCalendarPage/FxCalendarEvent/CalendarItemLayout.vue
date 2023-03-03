@@ -27,7 +27,7 @@
       <v-col cols="12" md="6" lg="4" class="border-right pt-1 pb-0 d-flex justify-center align-center">
         <ListItem>
           <template #icon>
-            <v-icon>mdi-clock-outline</v-icon>
+            <v-icon>$vuetify.icons.clock-1</v-icon>
           </template>
           <template #content>
             <slot name="time" />
@@ -47,7 +47,7 @@
       <v-col cols="12" md="6" lg="4" class="pt-1 pb-0 d-flex justify-center align-center">
         <ListItem>
           <template #icon>
-            <v-icon>mdi-map-marker</v-icon>
+            <v-icon>$vuetify.icons.location-1</v-icon>
           </template>
           <template #title>
             <slot name="location" />
