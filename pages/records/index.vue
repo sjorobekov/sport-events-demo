@@ -79,7 +79,7 @@
       <v-data-table
         :headers="headers"
         :items="items"
-        class="elevation-0"
+        class="elevation-0 border"
         :server-items-length="meta.total"
         hide-default-footer
         :sort-by.sync="query.orderBy"
@@ -296,3 +296,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.border {
+  border: solid 1px var(--v-neutral-lighten1)!important;
+  border-radius: 8px;
+}
+</style>

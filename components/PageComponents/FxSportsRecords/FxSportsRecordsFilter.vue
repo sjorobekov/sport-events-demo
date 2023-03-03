@@ -6,7 +6,7 @@
       :items="sports"
       item-text="name"
       item-value="id"
-      prepend-inner-icon="mdi-whistle-outline"
+      prepend-inner-icon="$vuetify.icons.sports-small"
       placeholder="Sport"
       :value="formData.sportId"
       hide-details
@@ -20,7 +20,7 @@
       :items="events"
       item-text="name"
       item-value="id"
-      prepend-inner-icon="mdi-clipboard-outline"
+      prepend-inner-icon="$vuetify.icons.events-small"
       placeholder="Events"
       :value="formData.sportsRecordEventId"
       hide-details
@@ -29,30 +29,6 @@
     />
 
     <FxRecordCategorySelect :value="formData.sportsRecordCategoryId" clearable @input="update('sportsRecordCategoryId', $event)" />
-
-    <v-menu ref="menu" offset-y :close-on-content-click="false">
-      <template #activator="{ on, attrs }">
-        <v-text-field
-          id="date"
-          :value="formattedDate"
-          readonly
-          outlined
-          dense
-          clearable
-          v-bind="attrs"
-          placeholder="Date"
-          prepend-inner-icon="mdi-clock-outline"
-          background-color="white"
-          hide-details
-          v-on="on"
-        />
-      </template>
-      <v-date-picker
-        ref="picker"
-        :value="formData.date"
-        @input="update('date', $event)"
-      />
-    </v-menu>
   </div>
 </template>
 
