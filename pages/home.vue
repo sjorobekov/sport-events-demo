@@ -28,7 +28,7 @@
             <div class="date-picker">
               <v-tabs v-model="tab" fixed-tabs class="week-tabs" show-arrows>
                 <v-tabs-slider color="teal lighten-3" />
-                <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column" style="width: 135px;" :ripple="false">
+                <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column home-tab" style="width: 135px;" :ripple="false">
                   <div>
                     {{ item.day }}
                   </div>
@@ -57,7 +57,7 @@
             <div class="custom-width disable-dbl-tap-zoom">
               <v-tabs v-model="tab" class="week-tabs" show-arrows>
                 <v-tabs-slider color="teal lighten-3" />
-                <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column" :ripple="false">
+                <v-tab v-for="item in dates" :key="item.text" class="d-flex flex-column home-tab" :ripple="false">
                   <div>
                     {{ item.day }}
                   </div>
@@ -359,7 +359,7 @@ export default {
 }
 .v-tab:before, .v-tabs-slider {
     background-color: currentColor;
-    max-width: 88px;
+    max-width: 64px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -401,4 +401,7 @@ export default {
   color: var(--v-primary-base)!important;
 }
 
+.home-tab:hover {
+  color: var(--v-primary-base)!important;
+}
 </style>
