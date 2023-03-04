@@ -4,8 +4,8 @@
       <FxAvatar :value="item.avatar" />
     </v-list-item-avatar>
     <v-list-item-content>
-      <v-list-item-title>{{ item.firstname }} {{ item.lastname }}</v-list-item-title>
-      <v-list-item-subtitle v-if="subtitle">
+      <v-list-item-title class="neutral--text text--darken-3 font-weight-bold">{{ item.firstname }} {{ item.lastname }}</v-list-item-title>
+      <v-list-item-subtitle class="neutral--text text--darken-2" v-if="subtitle">
         {{ subtitle }}
       </v-list-item-subtitle>
     </v-list-item-content>
