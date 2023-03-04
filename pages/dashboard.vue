@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h1 v-if="me" class="text-h4s text-md-h3 mb-6 mt-4 mt-md-n1">
+    <h1 v-if="me" class="text-h4s text-md-h3 mb-6 mt-4 mt-md-n1 neutral--text text--darken-4">
       👋 Welcome, {{ name }}
     </h1>
     <FxDashboardPageCard :teams-today="teamsToday" />
 
     <v-row class="mt-5">
       <v-col cols="12" md="9">
-        <h2 class="text-h4s mb-2">
+        <h2 class="text-h4s mb-2 neutral--text text--darken-4">
           Today's Events
         </h2>
         <section v-if="events.length > 0">
@@ -23,7 +23,7 @@
       </v-col>
 
       <v-col v-if="teams.length > 0">
-        <h2 class="text-h4s mb-2">
+        <h2 class="text-h4s mb-2 neutral--text text--darken-4">
           My Teams
         </h2>
         <v-card v-for="team in teams" :key="team.id" class="mb-2 card-has-hover" :to="{ name: 'teams-id', params: { id: team.id } }">
@@ -35,8 +35,8 @@
                     <v-img :src="team.sport.icon" />
                   </v-list-item-avatar>
                   <v-list-item-content>
-                    <v-list-item-title>{{ team.age }} {{ team.ability }}</v-list-item-title>
-                    <v-list-item-subtitle>
+                    <v-list-item-title class="neutral--text text--darken-4">{{ team.name }}</v-list-item-title>
+                    <v-list-item-subtitle class="neutral--text text--darken-3">
                       {{ team.sport.name }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
