@@ -5,9 +5,9 @@
         Details
       </template>
       <template #actions>
-        <v-btn v-if="canEditEvent && !formVisible" outlined @click="open">
-          <v-icon small>
-            mdi-pencil-outline
+        <v-btn v-if="canEditEvent && !formVisible" outlined color="neutral darken-3" :ripple="false" @click="open">
+          <v-icon color="neutral darken-1">
+            $vuetify.icons.pen
           </v-icon>Edit Details
         </v-btn>
       </template>
