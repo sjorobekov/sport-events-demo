@@ -39,32 +39,42 @@
               class="float-left"
               active-class="primary white--text"
             >
-              <v-chip class="info--text" :value="null">
+              <v-chip class="team-chip" :value="null">
                 All
               </v-chip>
 
-              <v-chip class="info--text" value="upcoming">
+              <v-chip class="team-chip" value="upcoming">
                 Upcoming
               </v-chip>
 
-              <v-chip class="info--text" value="past">
+              <v-chip class="team-chip" value="past">
                 Past
               </v-chip>
             </v-chip-group>
             <v-switch
               v-model="training"
-              class="ml-2 mt-0"
+              class="ml-2 mt-0 switch"
               style="width: 30px"
-              label="Show Training"
               inset
               hide-details
-            />
+            >
+              <template #label>
+                <span class="input__label">Show Training</span>
+              </template>
+            </v-switch>
 
             <v-spacer />
 
             <div class="pt-1">
-              <v-btn v-if="canEditTeam" class="hidden-sm-and-down" outlined link :to="{ name: 'teams-id-edit', params: { id: team.id } }">
-                <v-icon>$vuetify.icons.edit</v-icon>Edit Team
+              <v-btn v-if="canEditTeam"
+              class="hidden-sm-and-down"
+              color="neutral darken-3"
+              outlined
+              link
+              :to="{ name: 'teams-id-edit', params: { id: team.id } }">
+                <v-icon color="neutral darken-2">
+                  $vuetify.icons.edit
+                </v-icon>Edit Team
               </v-btn>
               <v-btn
                 v-if="canCreateEvent"
@@ -74,7 +84,9 @@
                 link
                 :to="{ name: 'events-add', query: { teamId: teamId, sportId: team.sportId, leadId: team.coachId, gender: team.gender, ability: team.ability, age: team.age }}"
               >
-                <v-icon>$vuetify.icons.plusOutline</v-icon>Add Event
+                <v-icon>
+                  $vuetify.icons.plusOutline
+                </v-icon>Add Event
               </v-btn>
 
               <v-menu v-if="canEditTeam || canCreateEvent">
@@ -100,7 +112,7 @@
         <v-row class="mt-0">
           <v-col class="pt-0">
             <template v-if="showUpcoming">
-              <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
+              <h2 class="text-p2 font-weight-bold mt-6 mb-2 neutral--text text--darken-4">
                 Upcoming
               </h2>
               <v-card v-for="event in upcoming" :key="`upcoming-${event.id}`" class="mb-2 card-has-hover">
@@ -111,7 +123,7 @@
             </template>
 
             <template v-if="showPast">
-              <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
+              <h2 class="text-p2 font-weight-bold mt-6 mb-2 neutral--text text--darken-4">
                 Past
               </h2>
               <v-card v-for="event in past" :key="`past-${event.id}`" class="mb-2 card-has-hover">
@@ -137,10 +149,14 @@
         </h3>
         <FxUserItem :item="coach" :subtitle="coach.jobRole" />
         <div v-if="coach.phone" class="text-p1 mb-1">
-          <v-icon size="20" color="primary lighten-1">$vuetify.icons.phone-fill</v-icon> <a class="link" :href="`tel:${coach.phone}`">{{ coach.phone }}</a>
+          <v-icon size="20" color="primary lighten-1">
+            $vuetify.icons.phone-fill
+          </v-icon> <a class="link" :href="`tel:${coach.phone}`">{{ coach.phone }}</a>
         </div>
         <div class="text-p1">
-          <v-icon size="20" color="primary lighten-1">$vuetify.icons.mail-fill</v-icon> <a class="link email" :href="`mailto:${coach.email}`">{{ coach.email }}</a>
+          <v-icon size="20" color="primary lighten-1">
+            $vuetify.icons.mail-fill
+          </v-icon> <a class="link email" :href="`mailto:${coach.email}`">{{ coach.email }}</a>
         </div>
       </v-col>
     </v-row>
@@ -286,5 +302,15 @@ export default {
 .theme--light.v-divider {
   border-color: #CCCCCC;
   box-shadow: 0 1px 0 #ffffff;
+}
+.theme--light.v-chip:not(.v-chip--active) {
+  background: var(--v-neutral-lighten1);
+}
+.team-chip {
+  color: var(--v-neutral-darken3);
+}
+.input__label {
+   color: var(--v-neutral-darken3);
+   font-size: 14px;
 }
 </style>
