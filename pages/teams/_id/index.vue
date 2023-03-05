@@ -124,24 +124,23 @@
         </v-row>
       </v-col>
       <v-col lg="3" class="hidden-md-and-down">
-        <h3 class="text-p1 info--text text--darken-1 mb-4">
+        <h3 class="text-p1 neutral--text text--darken-2 mb-2">
           Team Overview
         </h3>
 
         <FxWinRateBar v-if="showWinRate" class="mt-3" :won="team.won" :lost="team.lost" :drawn="team.drawn" />
 
-        <v-divider class="my-4" />
+        <v-divider class="my-5" />
 
-        <h3 class="text-p1 info--text text--darken-1 mb-4">
+        <h3 class="text-p1 neutral--text text--darken-2 mb-2">
           Team Coach
         </h3>
         <FxUserItem :item="coach" :subtitle="coach.jobRole" />
-
-        <div class="text-p1">
-          <v-icon>mdi-email-outline</v-icon> <a class="info--text text--darken-2" :href="`mailto:${coach.email}`">{{ coach.email }}</a>
+        <div v-if="coach.phone" class="text-p1 mb-1">
+          <v-icon size="20" color="primary lighten-1">$vuetify.icons.phone-fill</v-icon> <a class="link" :href="`tel:${coach.phone}`">{{ coach.phone }}</a>
         </div>
-        <div v-if="coach.phone" class="text-p1">
-          <v-icon>mdi-phone-in-talk</v-icon> <a class="info--text text--darken-2" :href="`tel:${coach.phone}`">{{ coach.phone }}</a>
+        <div class="text-p1">
+          <v-icon size="20" color="primary lighten-1">$vuetify.icons.mail-fill</v-icon> <a class="link email" :href="`mailto:${coach.email}`">{{ coach.email }}</a>
         </div>
       </v-col>
     </v-row>
@@ -280,5 +279,12 @@ export default {
 <style scoped>
 ::v-deep .no-photo {
   background: none;
+}
+.email {
+  color: var(--v-primary-lighten1)!important;
+}
+.theme--light.v-divider {
+  border-color: #CCCCCC;
+  box-shadow: 0 1px 0 #ffffff;
 }
 </style>
