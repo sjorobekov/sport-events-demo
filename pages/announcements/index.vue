@@ -45,8 +45,8 @@
 
     <v-row v-else>
       <v-col cols="12" md="5">
-        <v-card class="bt">
-          <template v-if="items.length">
+        <template v-if="items.length">
+          <v-card class="bt">
             <FxAnnouncementListItem
               v-for="item in items"
               :key="item.id"
@@ -59,22 +59,19 @@
                 </v-btn>
               </template>
             </FxAnnouncementListItem>
-          </template>
-          <template v-else>
-            <v-sheet height="120">
-              <v-row class="fill-height" justify="center" align="center">
-                <v-col>
-                  <h1 class="text-center text-h4 info--text text--lighten-4">
-                    No Announcements
-                  </h1>
-                </v-col>
-              </v-row>
-            </v-sheet>
-          </template>
-        </v-card>
+          </v-card>
+        </template>
       </v-col>
       <v-col class="hidden-sm-and-down" md="7">
         <NuxtChild @updated="updateHandler" @removed="removeHandler" />
+      </v-col>
+    </v-row>
+    <v-row v-if="!items.length">
+      <v-col class="d-flex flex-column justify-center align-center pt-4 pt-md-12">
+        <v-img width="100" :src="announcements" class="mb-3" />
+        <div class="text-p3 text-center info--text text--darken-3 mb-4">
+          No Announcements
+        </div>
       </v-col>
     </v-row>
   </div>
@@ -84,6 +81,7 @@
 import { mapGetters } from 'vuex'
 import FxAnnouncementListItem from '@/components/PageComponents/FxAnnouncementPage/FxAnnouncementListItem'
 import GuestLoginForm from '@/components/PageComponents/FxEventIndividualPage/FxEventTeamSheet/GuestLoginForm'
+import announcements from '@/components/PageComponents/FxAnnouncementPage/announcements.svg'
 
 export default {
   name: 'AnnouncementsPage',
@@ -96,6 +94,7 @@ export default {
     showAnnouncements: true,
     items: [],
     selectedItem: null,
+    announcements,
   }),
 
   async fetch () {
