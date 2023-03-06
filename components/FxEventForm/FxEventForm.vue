@@ -312,14 +312,13 @@
         <v-row>
           <v-col>
             <div class="info--text text--darken-1 text-h5s">
-              {{ occurrences.length }} occurrences of this event
+              {{ $tc('page.FxEventForm.OCCURRENCES', repeats.length) }}
             </div>
             <div>
               <FxOccurrencesChips
-                :repeats="eventForm.repeats"
-                :start-date="eventForm.date"
-                :end-date="eventForm.endDate"
-                :selected-days="selectedDays"
+                :params="repeatParams"
+                :occurrences="repeats"
+                @update:occurrences="updateRepeats($event)"
               />
             </div>
           </v-col>
@@ -645,6 +644,11 @@ export default {
       type: String,
       required: true,
     },
+
+    repeats: {
+      type: Array,
+      default: () => [],
+    },
   },
 
   data: () => ({
@@ -672,7 +676,6 @@ export default {
   computed: {
     ...mapGetters({
       currentSeason: 'seasons/current',
-      occurrences: 'page/event/occurrences',
     }),
     eventForm () {
       return this.event || {}
@@ -696,6 +699,14 @@ export default {
     },
     hasPortalAlertVisible () {
       return this.opponentSchool?.portal && this.meForm.eventLocation === EventLocation.AWAY
+    },
+    repeatParams () {
+      return {
+        repeats: this.eventForm.repeats,
+        startDate: DateTime.fromISO(this.eventForm.date),
+        endDate: DateTime.fromISO(this.eventForm.endDate),
+        selectedDays: this.selectedDays,
+      }
     },
   },
 
@@ -759,6 +770,9 @@ export default {
           this.opponentSchool = school
         })
       }
+    },
+    updateRepeats (value) {
+      this.$emit('update:repeats', value)
     },
   },
 }

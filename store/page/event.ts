@@ -1,5 +1,4 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex'
-import { DateTime } from 'luxon'
 import { Event, EventParticipant, EventParticipantResult } from '~/types'
 import { EventResult, EventType, UserRole } from '~/enum'
 import { EventUpdatePayload } from '~/store/api/events'
@@ -10,8 +9,6 @@ type ResultData = {
   resultNotes: string,
 }
 
-type Occurrence = { text: String, value: String}
-
 export const state = () => ({
   event: {} as Event,
   me: {} as EventParticipant,
@@ -19,7 +16,6 @@ export const state = () => ({
   result: {
     results: [] as Array<EventParticipantResult>,
   } as ResultData,
-  occurrences: [] as Array<Occurrence>,
 })
 
 export type RootState = ReturnType<typeof state>
@@ -40,10 +36,6 @@ export const mutations: MutationTree<RootState> = {
   result (state, result: ResultData) {
     state.result = result
   },
-
-  occurrences (state, occurrences: Array<Occurrence>) {
-    state.occurrences = occurrences
-  },
 }
 
 export const getters: GetterTree<RootState, RootState> = {
@@ -61,10 +53,6 @@ export const getters: GetterTree<RootState, RootState> = {
 
   opponent (state) {
     return state.opponent
-  },
-
-  occurrences (state) {
-    return state.occurrences
   },
 
   opponentTeam (state) {
@@ -182,36 +170,5 @@ export const actions: ActionTree<RootState, RootState> = {
     commit('event', event)
     commit('me', me)
     commit('opponent', opponent)
-  },
-
-  calculateOccurrences ({ commit }, {
-    repeats,
-    startDate,
-    endDate,
-    selectedDays,
-  }: {
-    repeats: Boolean,
-    startDate: DateTime,
-    endDate: DateTime,
-    selectedDays: Array<Number>,
-  }) {
-    const occurrences: Array<Occurrence> = []
-    if (!repeats && startDate) {
-      const text = startDate.toFormat('dd-MM-yyyy')
-      const value = startDate.toFormat('yyyy-MM-dd')
-      occurrences.push({ text, value })
-    }
-    if (selectedDays.length && startDate && endDate) {
-      let current = startDate
-      while (current <= endDate) {
-        if (selectedDays.includes(current.weekday)) {
-          const text = current.toFormat('dd-MM-yyyy')
-          const value = current.toFormat('yyyy-MM-dd')
-          occurrences.push({ text, value })
-        }
-        current = current.plus({ days: 1 })
-      }
-    }
-    commit('occurrences', occurrences)
   },
 }

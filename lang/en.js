@@ -106,5 +106,8 @@ export default {
       EVENTS: 'No Events | 1 Event | {count} Events',
       SPORTS: 'No Sports | 1 Sport | {count} Sports',
     },
+    FxEventForm: {
+      OCCURRENCES: 'No occurrences of this event | 1 occurrence of this event | {count} occurrences of this event',
+    },
   },
 }

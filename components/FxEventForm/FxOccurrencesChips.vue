@@ -1,12 +1,13 @@
 <template>
   <div>
     <v-chip
-      v-for="item in occurrences"
-      :key="item.value"
+      v-for="(item, index) in items"
+      :key="index"
       color="info"
       outlined
       dark
       class="ma-1"
+      @click="update(items)"
     >
       {{ item.text }}
     </v-chip>
@@ -14,55 +15,42 @@
 </template>
 
 <script>
-import { DateTime } from 'luxon'
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'FxOccurrencesChips',
   props: {
-    repeats: {
-      type: Boolean,
-      default: false,
-    },
-    startDate: {
-      type: String,
-      default: undefined,
-    },
-    endDate: {
-      type: String,
-      default: undefined,
-    },
-    selectedDays: {
-      type: Array,
+    params: {
+      type: Object,
       default: () => {},
     },
+    occurrences: {
+      type: Array,
+      default: () => [],
+    },
   },
 
-  computed: {
-    ...mapGetters({
-      occurrences: 'page/event/occurrences',
-    }),
-  },
+  data: () => ({
+    items: [],
+  }),
 
   watch: {
-    $props: {
-      handler () {
-        this.$store.dispatch('page/event/calculateOccurrences', {
-          repeats: this.repeats,
-          startDate: DateTime.fromISO(this.startDate),
-          endDate: DateTime.fromISO(this.endDate),
-          selectedDays: this.selectedDays,
-        })
+    params: {
+      async handler (value) {
+        this.items = await this.calculateOccurrences(value)
+        this.update(this.items)
       },
       deep: true,
-      immediate: true,
     },
   },
 
   methods: {
     ...mapActions({
-      calculateOccurrences: 'page/event/calculateOccurrences',
+      calculateOccurrences: 'api/events/calculateOccurrences',
     }),
+    update (value) {
+      this.$emit('update:occurrences', value)
+    },
   },
 }
 </script>
