@@ -48,22 +48,33 @@
                 @input="update('startTime', $event)"
               />
             </div>
-            <div class="mr-2" style="max-width: 137px">
-              <label for="meetTime">Meet Time</label>
+            <div v-if="formData.eventType === EventType.TRAINING" class="mr-2" style="max-width: 137px">
+              <label for="endTime">End Time</label>
               <FxTimePickerMenu
-                id="meetTime"
-                :value="formData.meetTime"
-                @input="update('meetTime', $event)"
+                id="endTime"
+                :async-rules="[$rule.required]"
+                :value="formData.endTime"
+                @input="update('endTime', $event)"
               />
             </div>
-            <div class="mr-2" style="max-width: 137px">
-              <label for="returnTime">Return Time</label>
-              <FxTimePickerMenu
-                id="returnTime"
-                :value="formData.returnTime"
-                @input="update('returnTime', $event)"
-              />
-            </div>
+            <section v-else>
+              <div class="mr-2" style="max-width: 137px">
+                <label for="meetTime">Meet Time</label>
+                <FxTimePickerMenu
+                  id="meetTime"
+                  :value="formData.meetTime"
+                  @input="update('meetTime', $event)"
+                />
+              </div>
+              <div class="mr-2" style="max-width: 137px">
+                <label for="returnTime">Return Time</label>
+                <FxTimePickerMenu
+                  id="returnTime"
+                  :value="formData.returnTime"
+                  @input="update('returnTime', $event)"
+                />
+              </div>
+            </section>
           </div>
         </v-col>
       </v-row>
@@ -253,7 +264,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { EventLocationType, TransportType } from '@/enum'
+import { EventLocationType, TransportType, EventType } from '@/enum'
 import FxInHouseEventLocationTypeSelect from '@/components/FxInHouseEventForm/FxEventLocationTypeSelect/FxInHouseEventLocationTypeSelect'
 import FxEventLocationTypeSelect from '@/components/FxEventForm/FxEventLocationTypeSelect/FxEventLocationTypeSelect'
 
@@ -274,6 +285,7 @@ export default {
   data: () => ({
     EventLocationType,
     TransportType,
+    EventType,
     FxInHouseEventLocationTypeSelect,
     locations: [],
   }),

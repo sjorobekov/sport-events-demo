@@ -1,4 +1,5 @@
 import { ActionTree, GetterTree } from 'vuex'
+import { DateTime } from 'luxon'
 import { PaginatedList, Event, CreateEventBatchPayload, Student } from '~/types'
 import { EventLocationType, EventResult, EventStatus, EventType, Gender, TransportType } from '@/enum'
 
@@ -115,6 +116,8 @@ export type EventUpdatePayload = {
 type StoreResultPayload = {
   results: Array<StoreResultItem>
 }
+
+type Occurrence = { text: String, value: String}
 
 export const actions: ActionTree<RootState, RootState> = {
   async getBySchool ({ commit }, { schoolId, params }: ListPayload): Promise<PaginatedList<Event>> {
@@ -245,5 +248,36 @@ export const actions: ActionTree<RootState, RootState> = {
     })
 
     return event
+  },
+
+  calculateOccurrences (_, {
+    repeats,
+    startDate,
+    endDate,
+    selectedDays,
+  }: {
+    repeats: Boolean,
+    startDate: DateTime,
+    endDate: DateTime,
+    selectedDays: Array<Number>,
+  }) {
+    const occurrences: Array<Occurrence> = []
+    if (!repeats && startDate) {
+      const text = startDate.toFormat('dd-MM-yyyy')
+      const value = startDate.toFormat('yyyy-MM-dd')
+      occurrences.push({ text, value })
+    }
+    if (selectedDays.length && startDate && endDate) {
+      let current = startDate
+      while (current <= endDate) {
+        if (selectedDays.includes(current.weekday)) {
+          const text = current.toFormat('dd-MM-yyyy')
+          const value = current.toFormat('yyyy-MM-dd')
+          occurrences.push({ text, value })
+        }
+        current = current.plus({ days: 1 })
+      }
+    }
+    return occurrences
   },
 }

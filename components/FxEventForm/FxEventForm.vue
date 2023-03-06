@@ -196,75 +196,205 @@
       <template #content>
         Select a Date and Time For this Event
       </template>
+      <section v-if="eventForm.eventType === EventType.TRAINING">
+        <v-row>
+          <v-col class="d-flex">
+            <span class="info--text text--darken-1 text-h5s mt-1">Recurring Event</span>
+            <span class="info--text text--darken-1 text-h5s ml-7 mt-1" :class="{'font-weight-bold': !eventForm.repeats}">No</span>
+            <v-switch
+              id="repeats"
+              v-model="eventForm.repeats"
+              class="mt-0 ml-4"
+              inset
+            />
+            <span class="info--text text--darken-1 text-h5s mt-1" :class="{'font-weight-bold': eventForm.repeats}">Yes</span>
+          </v-col>
+        </v-row>
+        <v-row v-if="eventForm.repeats">
+          <v-col class="d-flex">
+            <span class="info--text text--darken-1 text-h5s mt-5 mr-5">Days</span>
+            <div>
+              <v-checkbox
+                v-for="{ text, number } in weekdays"
+                :key="number"
+                v-model="selectedDays"
+                :label="text"
+                :value="number"
+                hide-details
+              />
+            </div>
+            <div>
+              <v-checkbox
+                v-for="{ text, number } in weekend"
+                :key="number"
+                v-model="selectedDays"
+                :label="text"
+                :value="number"
+                hide-details
+              />
+            </div>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <label for="date">Start Date</label>
+            <v-menu ref="menu" offset-y :close-on-content-click="false" min-width="auto">
+              <template #activator="{ on, attrs }">
+                <v-text-field
+                  id="date"
+                  v-async-validate
+                  :value="date"
+                  prepend-inner-icon="$vuetify.icons.calendarOutline"
+                  readonly
+                  outlined
+                  dense
+                  v-bind="attrs"
+                  placeholder="DD-MM-YYYY"
+                  :async-rules="[$rule.required]"
+                  v-on="on"
+                />
+              </template>
+              <v-date-picker
+                ref="picker"
+                :value="eventForm.date"
+                @input="updateEvent('date', $event)"
+                @change="$refs.menu.save($event)"
+              />
+            </v-menu>
+          </v-col>
+          <v-col v-if="eventForm.repeats">
+            <label for="endDate">End Date</label>
+            <v-menu ref="endMenu" offset-y :close-on-content-click="false" min-width="auto">
+              <template #activator="{ on, attrs }">
+                <v-text-field
+                  id="endDate"
+                  v-async-validate
+                  :value="endDate"
+                  prepend-inner-icon="$vuetify.icons.calendarOutline"
+                  readonly
+                  outlined
+                  dense
+                  v-bind="attrs"
+                  placeholder="DD-MM-YYYY"
+                  :async-rules="[$rule.required]"
+                  v-on="on"
+                />
+              </template>
+              <v-date-picker
+                ref="endPicker"
+                :value="eventForm.endDate"
+                @input="updateEvent('endDate', $event)"
+                @change="$refs.endMenu.save($event)"
+              />
+            </v-menu>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <label for="startTime">Start Time</label>
+            <FxTimePickerMenu
+              id="startTime"
+              :async-rules="[$rule.required]"
+              :value="eventForm.startTime"
+              @input="updateEvent('startTime', $event)"
+            />
+          </v-col>
+          <v-col>
+            <label for="endTime">Finish Time</label>
+            <FxTimePickerMenu
+              id="endTime"
+              :async-rules="[$rule.required]"
+              :value="eventForm.endTime"
+              @input="updateEvent('endTime', $event)"
+            />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <div class="info--text text--darken-1 text-h5s">
+              {{ $tc('page.FxEventForm.OCCURRENCES', repeats.length) }}
+            </div>
+            <div>
+              <FxOccurrencesChips
+                :params="repeatParams"
+                :occurrences="repeats"
+                @update:occurrences="updateRepeats($event)"
+              />
+            </div>
+          </v-col>
+        </v-row>
+      </section>
 
-      <label for="date">Date</label>
-      <v-menu ref="menu" offset-y :close-on-content-click="false" min-width="auto">
-        <template #activator="{ on, attrs }">
-          <v-text-field
-            id="date"
-            v-async-validate
-            :value="date"
-            prepend-inner-icon="$vuetify.icons.calendarOutline"
-            readonly
-            outlined
-            dense
-            v-bind="attrs"
-            placeholder="DD-MM-YYYY"
-            :async-rules="[$rule.required]"
-            v-on="on"
+      <section v-else>
+        <label for="date">Date</label>
+        <v-menu ref="menu" offset-y :close-on-content-click="false" min-width="auto">
+          <template #activator="{ on, attrs }">
+            <v-text-field
+              id="date"
+              v-async-validate
+              :value="date"
+              prepend-inner-icon="$vuetify.icons.calendarOutline"
+              readonly
+              outlined
+              dense
+              v-bind="attrs"
+              placeholder="DD-MM-YYYY"
+              :async-rules="[$rule.required]"
+              v-on="on"
+            />
+          </template>
+          <v-date-picker
+            ref="picker"
+            :value="eventForm.date"
+            class="disable-dbl-tap-zoom"
+            @input="updateEvent('date', $event)"
+            @change="$refs.menu.save($event)"
           />
-        </template>
-        <v-date-picker
-          ref="picker"
-          :value="eventForm.date"
-          class="disable-dbl-tap-zoom"
-          @input="updateEvent('date', $event)"
-          @change="$refs.menu.save($event)"
-        />
-      </v-menu>
+        </v-menu>
 
-      <v-row>
-        <v-col cols="6" sm="3">
-          <label for="startTime">Start Time</label>
+        <v-row>
+          <v-col cols="6" sm="3">
+            <label for="startTime">Start Time</label>
 
-          <FxTimePickerMenu
-            id="startTime"
-            :async-rules="[$rule.required]"
-            :value="eventForm.startTime"
-            @input="updateEvent('startTime', $event)"
-          />
-        </v-col>
-        <v-col cols="6" sm="3">
-          <label for="meetTime">Meet Time</label>
+            <FxTimePickerMenu
+              id="startTime"
+              :async-rules="[$rule.required]"
+              :value="eventForm.startTime"
+              @input="updateEvent('startTime', $event)"
+            />
+          </v-col>
+          <v-col cols="6" sm="3">
+            <label for="meetTime">Meet Time</label>
 
-          <FxTimePickerMenu
-            id="meetTime"
-            :value="meForm.meetTime"
-            @input="updateMe('meetTime', $event)"
-          />
-        </v-col>
+            <FxTimePickerMenu
+              id="meetTime"
+              :value="meForm.meetTime"
+              @input="updateMe('meetTime', $event)"
+            />
+          </v-col>
 
-        <v-col cols="6" sm="3">
-          <label for="endTime">End Time</label>
+          <v-col cols="6" sm="3">
+            <label for="endTime">End Time</label>
 
-          <FxTimePickerMenu
-            id="endTime"
-            :value="eventForm.endTime"
-            @input="updateEvent('endTime', $event)"
-          />
-        </v-col>
+            <FxTimePickerMenu
+              id="endTime"
+              :value="eventForm.endTime"
+              @input="updateEvent('endTime', $event)"
+            />
+          </v-col>
 
-        <v-col cols="6" sm="3">
-          <label for="returnTime">Return Time</label>
+          <v-col cols="6" sm="3">
+            <label for="returnTime">Return Time</label>
 
-          <FxTimePickerMenu
-            id="returnTime"
-            :async-rules="[$rule.required]"
-            :value="meForm.returnTime"
-            @input="updateMe('returnTime', $event)"
-          />
-        </v-col>
-      </v-row>
+            <FxTimePickerMenu
+              id="returnTime"
+              :async-rules="[$rule.required]"
+              :value="meForm.returnTime"
+              @input="updateMe('returnTime', $event)"
+            />
+          </v-col>
+        </v-row>
+      </section>
     </FxSteppedFormCard>
 
     <FxSteppedFormCard>
@@ -456,6 +586,7 @@ import FxTransportFromSelect from '@/components/FxEventForm/FxTransportFromSelec
 import FxFixtureTypeSelect from '@/components/FxEventForm/FxFixtureTypeSelect'
 import { TransportType, EventLocationType, EventType, EventLocation } from '@/enum'
 import FxOpponentSelect from '@/components/FxEventForm/FxOpponentSelect'
+import FxOccurrencesChips from '@/components/FxEventForm/FxOccurrencesChips'
 
 export default {
   name: 'FxEventForm',
@@ -471,6 +602,7 @@ export default {
     FxEventTypeSelect,
     FxGenderSelect,
     FxFixtureTypeSelect,
+    FxOccurrencesChips,
   },
   props: {
     value: {
@@ -512,6 +644,11 @@ export default {
       type: String,
       required: true,
     },
+
+    repeats: {
+      type: Array,
+      default: () => [],
+    },
   },
 
   data: () => ({
@@ -522,6 +659,18 @@ export default {
     EventType,
     opponentSchool: null,
     locations: [],
+    weekdays: [
+      { text: 'Monday', number: 1 },
+      { text: 'Tuesday', number: 2 },
+      { text: 'Wednesday', number: 3 },
+      { text: 'Thursday', number: 4 },
+      { text: 'Friday', number: 5 },
+    ],
+    weekend: [
+      { text: 'Saturday', number: 6 },
+      { text: 'Sunday', number: 7 },
+    ],
+    selectedDays: [],
   }),
 
   computed: {
@@ -545,8 +694,19 @@ export default {
     date () {
       return this.eventForm.date ? DateTime.fromISO(this.eventForm.date).toFormat('dd-MM-yyyy') : ''
     },
+    endDate () {
+      return this.eventForm.endDate ? DateTime.fromISO(this.eventForm.endDate).toFormat('dd-MM-yyyy') : ''
+    },
     hasPortalAlertVisible () {
       return this.opponentSchool?.portal && this.meForm.eventLocation === EventLocation.AWAY
+    },
+    repeatParams () {
+      return {
+        repeats: this.eventForm.repeats,
+        startDate: DateTime.fromISO(this.eventForm.date),
+        endDate: DateTime.fromISO(this.eventForm.endDate),
+        selectedDays: this.selectedDays,
+      }
     },
   },
 
@@ -610,6 +770,9 @@ export default {
           this.opponentSchool = school
         })
       }
+    },
+    updateRepeats (value) {
+      this.$emit('update:repeats', value)
     },
   },
 }
