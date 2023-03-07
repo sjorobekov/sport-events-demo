@@ -378,6 +378,7 @@
 
             <FxTimePickerMenu
               id="endTime"
+              :async-rules="[$rule.required]"
               :value="eventForm.endTime"
               @input="updateEvent('endTime', $event)"
             />

@@ -48,7 +48,7 @@
                 @input="update('startTime', $event)"
               />
             </div>
-            <div v-if="formData.eventType === EventType.TRAINING" class="mr-2" style="max-width: 137px">
+            <div class="mr-2" style="max-width: 137px">
               <label for="endTime">End Time</label>
               <FxTimePickerMenu
                 id="endTime"
@@ -57,24 +57,22 @@
                 @input="update('endTime', $event)"
               />
             </div>
-            <section v-else>
-              <div class="mr-2" style="max-width: 137px">
-                <label for="meetTime">Meet Time</label>
-                <FxTimePickerMenu
-                  id="meetTime"
-                  :value="formData.meetTime"
-                  @input="update('meetTime', $event)"
-                />
-              </div>
-              <div class="mr-2" style="max-width: 137px">
-                <label for="returnTime">Return Time</label>
-                <FxTimePickerMenu
-                  id="returnTime"
-                  :value="formData.returnTime"
-                  @input="update('returnTime', $event)"
-                />
-              </div>
-            </section>
+            <div v-if="!isTraining" class="mr-2" style="max-width: 137px">
+              <label for="meetTime">Meet Time</label>
+              <FxTimePickerMenu
+                id="meetTime"
+                :value="formData.meetTime"
+                @input="update('meetTime', $event)"
+              />
+            </div>
+            <div v-if="!isTraining" class="mr-2" style="max-width: 137px">
+              <label for="returnTime">Return Time</label>
+              <FxTimePickerMenu
+                id="returnTime"
+                :value="formData.returnTime"
+                @input="update('returnTime', $event)"
+              />
+            </div>
           </div>
         </v-col>
       </v-row>
@@ -315,6 +313,10 @@ export default {
       return Object.values(TransportType).map((type) => {
         return { value: type, text: this.$t(`TRANSPORT_FROM.${type}`) }
       })
+    },
+
+    isTraining () {
+      return this.formData.eventType === EventType.TRAINING
     },
   },
 
