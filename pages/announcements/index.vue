@@ -66,7 +66,7 @@
         <NuxtChild @updated="updateHandler" @removed="removeHandler" />
       </v-col>
     </v-row>
-    <v-row v-if="!items.length">
+    <v-row v-if="!$fetchState.pending && !items.length">
       <v-col class="d-flex flex-column justify-center align-center pt-4 pt-md-12">
         <v-img width="100" :src="announcements" class="mb-3" />
         <div class="text-p3 text-center info--text text--darken-3 mb-4">
