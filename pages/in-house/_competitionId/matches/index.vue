@@ -9,7 +9,7 @@
             :gradient="gradient"
             :src="inHouseCompetition.photo"
           >
-            <v-list-item :dark="hasPhoto">
+            <v-list-item :dark="hasPhoto" :class="{ 'pa-0': !hasPhoto }">
               <v-list-item-content>
                 <v-list-item-title class="text-h3">
                   {{ inHouseCompetition.name }}
