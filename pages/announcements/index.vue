@@ -45,7 +45,7 @@
 
     <v-row v-else>
       <v-col cols="12" md="5">
-        <template v-if="items.length">
+        <template v-if="!$fetchState.pending && items.length">
           <v-card class="bt">
             <FxAnnouncementListItem
               v-for="item in items"
