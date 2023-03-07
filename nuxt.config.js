@@ -29,7 +29,10 @@ export default {
   plugins: [
     '~/plugins/vuetify-async-validate.ts',
     '~/plugins/vuetify-toasts.ts',
-    '~/plugins/gmap-vue.js',
+    {
+      src: '~/plugins/gmap-vue.js',
+      mode: 'client',
+    },
     {
       src: '~/plugins/nuxt-client-init',
       mode: 'client',
