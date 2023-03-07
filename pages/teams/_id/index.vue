@@ -165,7 +165,7 @@ export default {
   },
   data: () => ({
     filter: null,
-    training: false,
+    training: true,
     team: {},
     sport: {},
     season: {},
