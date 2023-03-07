@@ -76,7 +76,16 @@
     </v-row>
     <FxSportsRecordDialog v-if="selectedItem" :item="selectedItem" :value="openDialog" @click:back="closeRecord" />
     <client-only>
+      <div v-if="!$fetchState.pending && !items.length" class="text-center pt-4 pt-md-16">
+        <v-col class="d-flex flex-column justify-center align-center">
+          <v-img width="100" :src="noData" class="mb-3" />
+          <div class="text-p3 text-center info--text text--darken-3 mb-4">
+            Sports Records are empty
+          </div>
+        </v-col>
+      </div>
       <v-data-table
+        v-else
         :headers="headers"
         :items="items"
         class="elevation-0 border"
@@ -160,6 +169,7 @@
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
 import pick from 'lodash/pick'
+import noData from './noData.svg'
 import FxSportsRecordsFilter from '@/components/PageComponents/FxSportsRecords/FxSportsRecordsFilter'
 import FxSportsRecordsFilterDialog from '@/components/PageComponents/FxSportsRecords/FxSportsRecordsFilterDialog'
 import FxSportsRecordDialog from '@/components/PageComponents/FxSportsRecords/FxSportsRecordDialog'
@@ -191,6 +201,7 @@ export default {
     events: [],
     selectedItem: null,
     openDialog: false,
+    noData,
   }),
 
   async fetch () {
