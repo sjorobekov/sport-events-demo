@@ -32,7 +32,7 @@
       </v-list-item-action>
     </v-list-item>
 
-    <div v-if="!showAnnouncements" class="mx-auto" style="max-width: 355px">
+    <div v-if="!$fetchState.pending && !showAnnouncements" class="mx-auto" style="max-width: 355px">
       <GuestLoginForm @signedIn="$fetch">
         <template #subtitle>
           Announcements are Password Protected.
@@ -43,30 +43,28 @@
       </GuestLoginForm>
     </div>
 
-    <v-row v-else>
+    <v-row v-else-if="!$fetchState.pending && items.length">
       <v-col cols="12" md="5">
-        <template v-if="!$fetchState.pending && items.length">
-          <v-card class="bt">
-            <FxAnnouncementListItem
-              v-for="item in items"
-              :key="item.id"
-              :to="{ name: 'announcements-id', params: { id: item.id } }"
-              :announcement="item"
-            >
-              <template #actions>
-                <v-btn depressed color="primary" class="mt-1 hidden-md-and-up" block>
-                  Read More
-                </v-btn>
-              </template>
-            </FxAnnouncementListItem>
-          </v-card>
-        </template>
+        <v-card class="bt">
+          <FxAnnouncementListItem
+            v-for="item in items"
+            :key="item.id"
+            :to="{ name: 'announcements-id', params: { id: item.id } }"
+            :announcement="item"
+          >
+            <template #actions>
+              <v-btn depressed color="primary" class="mt-1 hidden-md-and-up" block>
+                Read More
+              </v-btn>
+            </template>
+          </FxAnnouncementListItem>
+        </v-card>
       </v-col>
       <v-col class="hidden-sm-and-down" md="7">
         <NuxtChild @updated="updateHandler" @removed="removeHandler" />
       </v-col>
     </v-row>
-    <v-row v-if="!$fetchState.pending && !items.length">
+    <v-row v-else-if="!$fetchState.pending && !items.length">
       <v-col class="d-flex flex-column justify-center align-center pt-4 pt-md-12">
         <v-img width="100" :src="announcements" class="mb-3" />
         <div class="text-p3 text-center info--text text--darken-3 mb-4">
