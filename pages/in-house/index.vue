@@ -92,7 +92,6 @@ export default {
   }),
 
   async fetch () {
-    this.$fetchState.pending = true
     this.params = {
       seasonId: this.currentSeason.id,
     }
