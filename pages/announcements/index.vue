@@ -32,7 +32,7 @@
       </v-list-item-action>
     </v-list-item>
 
-    <div v-if="!$fetchState.pending && !showAnnouncements" class="mx-auto" style="max-width: 355px">
+    <div v-if="!showAnnouncements" class="mx-auto" style="max-width: 355px">
       <GuestLoginForm @signedIn="$fetch">
         <template #subtitle>
           Announcements are Password Protected.
@@ -43,7 +43,7 @@
       </GuestLoginForm>
     </div>
 
-    <v-row v-else-if="!$fetchState.pending && items.length">
+    <v-row v-else-if="items.length">
       <v-col cols="12" md="5">
         <v-card class="bt">
           <FxAnnouncementListItem
