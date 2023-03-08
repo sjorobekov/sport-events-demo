@@ -96,7 +96,6 @@ export default {
       seasonId: this.currentSeason.id,
     }
     await this.onSeasonChange()
-    this.$fetchState.pending = true
   },
 
   computed: {
