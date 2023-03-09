@@ -3,14 +3,15 @@
     <v-row>
       <v-col class="d-flex flex-column justify-center align-center">
         <v-img width="100" :src="calendar" class="mb-3" />
-        <div class="text-p3 text-center info--text text--darken-3 mb-4">
+        <div class="text-p3 text-center neutral--text text--darken-3 mb-4">
           No Events Today
         </div>
         <v-btn
           link
           outlined
           :to="{ name: 'calendar' }"
-          class="text-p1 font-weight-bold info--text text--darken-1"
+          :ripple="false"
+          class="text-p1 font-weight-bold neutral--text text--darken-3"
         >
           Go to Calendar
         </v-btn>
