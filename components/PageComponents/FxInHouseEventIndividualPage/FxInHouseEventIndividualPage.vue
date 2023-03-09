@@ -11,6 +11,7 @@
         <v-list-item-content class="text-center pl-md-4 pt-5">
           <v-list-item-title class="text-subheading mb-1">
             <FxDateFormat :date="match.date" output-format="cccc dd MMMM yyyy" />
+            <span v-if="inHouseEvent.name">&#x2022; {{ inHouseEvent.name }}</span>
           </v-list-item-title>
           <v-list-item-subtitle class="text-p2 white--text hidden-sm-and-down">
             {{ sport.name }} &#x2022; In-House Sport
