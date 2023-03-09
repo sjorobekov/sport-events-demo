@@ -123,13 +123,6 @@ export default {
     },
   },
 
-  created () {
-    this.params = {
-      seasonId: this.currentSeason.id,
-    }
-    this.onSeasonChange()
-  },
-
   methods: {
     async onSeasonChange () {
       const teams = await this.$store.dispatch('api/teams/list', {
