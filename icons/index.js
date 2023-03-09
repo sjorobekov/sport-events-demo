@@ -132,4 +132,5 @@ export default [
   'password-hide',
   'password-show',
   'chevron-down',
+  'pen',
 ]
