@@ -72,7 +72,7 @@
                   <v-icon>$vuetify.icons.settings</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title class="user-menu-text font-weight-bold info--text">
+                  <v-list-item-title class="user-menu-text font-weight-bold neutral--text text--darken-2">
                     Settings
                   </v-list-item-title>
                 </v-list-item-content>
@@ -82,7 +82,7 @@
                   <v-icon>$vuetify.icons.interrogationMark</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title class="user-menu-text font-weight-bold info--text">
+                  <v-list-item-title class="user-menu-text font-weight-bold neutral--text text--darken-2">
                     Help Center
                   </v-list-item-title>
                 </v-list-item-content>
