@@ -48,32 +48,43 @@
         </v-btn>
       </v-col>
     </v-row>
-    <FxSportExpansionPanel v-for="sport in sports" :key="sport.id" class="mb-4" :item="sport" :subtitle="subtitle(teamsBySport[sport.id].length)">
-      <v-list class="py-0">
-        <v-list-item v-for="team in teamsBySport[sport.id]" :key="team.id" style="border-bottom: 1px solid #F1F5F9">
-          <v-list-item-content>
-            <v-list-item-title class="info--text text--darken-2 text-h5s">
-              {{ team.name }}
-            </v-list-item-title>
-          </v-list-item-content>
-          <v-list-item-content>
-            <v-list-item-title class="info--text">
-              {{ team.coach.firstname }} {{ team.coach.lastname }}
-            </v-list-item-title>
-          </v-list-item-content>
-          <v-list-item-action>
-            <v-btn outlined link :to="{ name: 'teams-id', params: { id: team.id } }">
-              View Team
-            </v-btn>
-          </v-list-item-action>
-        </v-list-item>
-      </v-list>
-    </FxSportExpansionPanel>
+    <template v-if="!$fetchState.pending && !sports.length">
+      <v-col class="d-flex flex-column justify-center align-center pt-4 pt-md-12">
+        <v-img width="100" :src="noData" class="mb-3" />
+        <div class="text-p3 text-center info--text text--darken-3 mb-4">
+          No Teams
+        </div>
+      </v-col>
+    </template>
+    <template v-else>
+      <FxSportExpansionPanel v-for="sport in sports" :key="sport.id" class="mb-4" :item="sport" :subtitle="subtitle(teamsBySport[sport.id].length)">
+        <v-list class="py-0">
+          <v-list-item v-for="team in teamsBySport[sport.id]" :key="team.id" style="border-bottom: 1px solid #F1F5F9">
+            <v-list-item-content>
+              <v-list-item-title class="info--text text--darken-2 text-h5s">
+                {{ team.name }}
+              </v-list-item-title>
+            </v-list-item-content>
+            <v-list-item-content>
+              <v-list-item-title class="info--text">
+                {{ team.coach.firstname }} {{ team.coach.lastname }}
+              </v-list-item-title>
+            </v-list-item-content>
+            <v-list-item-action>
+              <v-btn outlined link :to="{ name: 'teams-id', params: { id: team.id } }">
+                View Team
+              </v-btn>
+            </v-list-item-action>
+          </v-list-item>
+        </v-list>
+      </FxSportExpansionPanel>
+    </template>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import noData from './noData.svg'
 
 export default {
   name: 'TeamsPage',
@@ -82,7 +93,15 @@ export default {
     params: {},
     sports: [],
     teamsBySport: {},
+    noData,
   }),
+
+  async fetch () {
+    this.params = {
+      seasonId: this.currentSeason.id,
+    }
+    await this.onSeasonChange()
+  },
 
   computed: {
     ...mapGetters({
