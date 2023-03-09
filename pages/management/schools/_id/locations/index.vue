@@ -21,52 +21,27 @@
     </v-list-item>
 
     <v-row>
-      <v-col sm="8">
-        <GmapMap
-          ref="mapRef"
-          :center="mapCenter"
-          :zoom="zoom"
-          style="height: 500px"
-          :options="mapOptions"
-        >
-          <gmap-info-window
-            v-if="selectedItem"
-            :position="selectedItem.coordinates"
-            :options="infoOptions"
-            opened
-          >
-            <strong class="text-p3 font-weight-bold white--text">{{ selectedItem.name }}</strong>
-          </gmap-info-window>
-          <GmapMarker
-            v-for="item in items"
-            :key="item.id"
-            clickable
-            :position="item.coordinates"
-            @click="toggleInfoWindow(item)"
-          />
-        </GmapMap>
-      </v-col>
-      <v-col sm="4" class="text-p1 info--text text--darken-1">
+      <v-col sm="4" class="text-p1 neutral--text text--darken-2">
         <div class="hidden-xs-only">
           <h4 class="font-weight-regular mb-2">
             School Location
           </h4>
-          <div class="text--darken-2 font-weight-bold">
+          <div class="font-weight-bold school-name-address">
             {{ school.name }}
           </div>
-          <address class="mb-2">
+          <address class="mb-2 school-address">
             {{ school.street }} <br>
             {{ school.zip }} <br>
             <span v-if="school.city">{{ school.city }}, </span><fx-country-name :code="school.country" />
           </address>
           <div v-if="school.website">
-            <v-icon size="20">
+            <v-icon size="20" class="lighten-icon">
               $vuetify.icons.link-1
-            </v-icon> <a target="_blank" :href="school.website"> School Website</a>
+            </v-icon> <a target="_blank" :href="school.website" class="link"> School Website</a>
           </div>
           <v-divider class="mt-4" />
         </div>
-        <h4 class="text-p1 info--text text--darken-1 mt-3 mb-2">
+        <h4 class="text-p1 neutral--text text--darken-2 mt-3 mb-2">
           Sports Locations
         </h4>
         <v-card v-for="item in items" :key="item.id" class="mb-3">
@@ -100,6 +75,32 @@
             </template>
           </FxLocationItem>
         </v-card>
+      </v-col>
+      <v-col sm="8">
+        <GmapMap
+          ref="mapRef"
+          :center="mapCenter"
+          :zoom="zoom"
+          style="height: 500px"
+          :options="mapOptions"
+          class="map"
+        >
+          <gmap-info-window
+            v-if="selectedItem"
+            :position="selectedItem.coordinates"
+            :options="infoOptions"
+            opened
+          >
+            <strong class="text-p3 font-weight-bold white--text">{{ selectedItem.name }}</strong>
+          </gmap-info-window>
+          <GmapMarker
+            v-for="item in items"
+            :key="item.id"
+            clickable
+            :position="item.coordinates"
+            @click="toggleInfoWindow(item)"
+          />
+        </GmapMap>
       </v-col>
     </v-row>
   </div>
@@ -216,5 +217,21 @@ export default {
 /deep/ .gm-style .gm-style-iw-tc::after {
   background: var(--v-primary-base);
 }
-
+.map {
+  border: 1px solid var(--v-neutral-lighten1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.school-name-address {
+  color: var(--v-neutral-darken4);
+  margin-bottom: 2px;
+}
+.school-address {
+  font-style: normal;
+  line-height: 1.3;
+  color: var(--v-neutral-darken2);
+}
+.lighten-icon {
+  color: var(--v-primary-lighten1)!important;
+}
 </style>
