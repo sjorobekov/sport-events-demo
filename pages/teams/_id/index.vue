@@ -97,7 +97,7 @@
           </div>
         </div>
 
-        <v-row class="mt-0">
+        <v-row v-if="upcoming.length || past.length" class="mt-0">
           <v-col class="pt-0">
             <template v-if="showUpcoming">
               <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
@@ -122,6 +122,14 @@
             </template>
           </v-col>
         </v-row>
+        <div v-else-if="!$fetchState.pending && !upcoming.length || !past.length">
+          <v-col class="d-flex flex-column justify-center align-center pt-12">
+            <v-img width="100" :src="noEvents" class="mb-3" />
+            <div class="text-p3 text-center info--text text--darken-3 mb-4">
+              Oops! No events for now...
+            </div>
+          </v-col>
+        </div>
       </v-col>
       <v-col lg="3" class="hidden-md-and-down">
         <h3 class="text-p1 info--text text--darken-1 mb-4">
@@ -151,6 +159,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
+import noEvents from './noEvents.svg'
 import FxEventItem from '@/components/PageComponents/FxTeamsPage/FxTeamEvent'
 import FxTeamPrivacyChipBig from '@/components/FxTeamPrivacyChipBig'
 import FxWinRateBar from '@/components/FxWinRateBar'
@@ -171,6 +180,7 @@ export default {
     season: {},
     coach: {},
     events: [],
+    noEvents,
   }),
 
   async fetch () {
