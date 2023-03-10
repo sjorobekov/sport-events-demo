@@ -122,7 +122,7 @@
             </template>
           </v-col>
         </v-row>
-        <div v-else-if="!$fetchState.pending && !upcoming.length || !past.length">
+        <div v-else-if="!$fetchState.pending && !upcoming.length && !past.length">
           <v-col class="d-flex flex-column justify-center align-center pt-12">
             <v-img width="100" :src="noEvents" class="mb-3" />
             <div class="text-p3 text-center info--text text--darken-3 mb-4">
