@@ -400,7 +400,10 @@ export default {
 .home-link:hover {
   color: var(--v-primary-base)!important;
 }
-
+.theme--light.v-divider {
+  border-color: var(--v-neutral-lighten1);
+  box-shadow: 0 1px 0 #ffffff;
+}
 .home-tab:hover {
   color: var(--v-primary-base)!important;
 }
