@@ -279,7 +279,7 @@ export default {
     }),
 
     hasEvents () {
-      return Object.keys(this.eventsGroupedByDate).length > 0
+      return this.filtered.length > 0
     },
 
     isMobile () {
