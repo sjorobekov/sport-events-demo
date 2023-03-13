@@ -86,19 +86,9 @@
           />
         </FxCalendarFilterDialog>
       </client-only>
-      <client-only>
-        <div
-          v-for="key in eventSortedDates"
-          :id="`date-${key}`"
-          :key="key"
-          v-intersect="{
-            handler: onIntersect(key),
-            options: {
-              threshold: [1.0]
-            }
-          }"
-          class="pb-6"
-        >
+
+      <client-only v-if="hasEvents">
+        <div v-for="key in eventSortedDates" :id="`date-${key}`" :key="key" v-intersect="{ handler: onIntersect(key), options: { threshold: [1.0] } }" class="pb-6">
           <FxCalendarPill :value="key" class="my-4" />
 
           <v-card v-for="event in eventsGroupedByDate[key]" :key="`event-${event.id}`" class="mb-2 card-has-hover">
@@ -106,17 +96,27 @@
           </v-card>
         </div>
       </client-only>
+      <template v-else-if="!$fetchState.pending">
+        <v-col class="d-flex flex-column justify-center align-center pt-0 pt-md-8">
+          <v-img width="100" :src="noEvents" class="mb-3" />
+          <div class="text-p3 text-center info--text text--darken-3 mb-4">
+            No Events For Now
+          </div>
+        </v-col>
+      </template>
     </div>
   </div>
 </template>
 
 <script>
+
 import groupBy from 'lodash/groupBy'
 import isString from 'lodash/isString'
 import uniq from 'lodash/uniq'
 import uniqBy from 'lodash/uniqBy'
 import { DateTime } from 'luxon'
 import { mapGetters } from 'vuex'
+import noEvents from '@/pages/teams/_id/noEvents.svg'
 import FxCalendar from '@/components/FxCalendar/FxCalendar'
 import FxDateRangePicker from '@/components/FxDateRangePicker'
 import FxCalendarPill from '@/components/PageComponents/FxCalendarPage/FxCalendarPill'
@@ -229,6 +229,7 @@ export default {
 
   data: () => ({
     date: null,
+    noEvents,
     items: [],
     filter: {
       startDate: new Date(),
@@ -275,6 +276,10 @@ export default {
       canCreateEvent: 'user/acl/canCreateEvent',
       isLoggedIn: 'context/isLoggedIn',
     }),
+
+    hasEvents () {
+      return this.filtered.length > 0
+    },
 
     isMobile () {
       return this.$vuetify.breakpoint.smAndDown
