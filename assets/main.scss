@@ -261,6 +261,9 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 .disable-dbl-tap-zoom {
   touch-action: manipulation;
 }
+.mobile-button {
+  min-height: 52px;
+}
 
 .theme--light.v-data-table > .v-data-table__wrapper > table > thead > tr:last-child > th {
   border-bottom: solid 1px var(--v-neutral-lighten1)!important;

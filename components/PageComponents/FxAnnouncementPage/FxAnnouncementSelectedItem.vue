@@ -1,24 +1,21 @@
 <template>
-  <v-card class="px-3 pt-3 pt-md-5 d-flex">
+  <v-card class="px-0 px-md-3 py-3 pt-md-5 d-flex">
     <div class="flex-shrink-1">
       <slot name="icon" />
     </div>
     <div class="flex-grow-1">
-      <v-card-title class="text-h4 font-weight-bold pt-0 mb-n4" style="word-break: break-word">
+      <v-card-title class="text-h4 font-weight-bold py-1 neutral--text text--darken-5" style="word-break: break-word">
         {{ item.subject }}
       </v-card-title>
 
       <v-card-text class="pb-0 d-flex justify-space-between justify-md-start">
         <div class="flex-shrink-1 flex-grow-0 pr-6">
           <v-list-item class="px-0">
-            <v-list-item-avatar size="20" class="mr-2">
+            <v-list-item-avatar size="24" class="mr-2">
               <FxAvatar size="24" :value="user.avatar" />
             </v-list-item-avatar>
             <v-list-item-content>
-              <v-list-item-title class="text-caption info--text hidden-sm-and-down">
-                {{ user.firstname }} {{ user.lastname }}
-              </v-list-item-title>
-              <v-list-item-title class="info--text custom-font-mobile hidden-md-and-up">
+              <v-list-item-title class="text-p1 neutral--text text--darken-2">
                 {{ user.firstname }} {{ user.lastname }}
               </v-list-item-title>
             </v-list-item-content>
@@ -27,16 +24,13 @@
 
         <div class="flex-shrink-1 flex-grow-0">
           <v-list-item class="px-0">
-            <v-list-item-icon size="20" class="mr-2">
-              <v-icon size="20">
-                $vuetify.icons.calendarOutline
+            <v-list-item-avatar size="24" class="mr-2 announcement-calendar-icon">
+              <v-icon size="24" color="neutral">
+                $vuetify.icons.calendar-small
               </v-icon>
-            </v-list-item-icon>
+            </v-list-item-avatar>
             <v-list-item-content>
-              <v-list-item-title class="text-caption info--text hidden-sm-and-down">
-                {{ date }}
-              </v-list-item-title>
-              <v-list-item-title class="info--text custom-font-mobile hidden-md-and-up">
+              <v-list-item-title class="text-p1 neutral--text text--darken-2">
                 {{ date }}
               </v-list-item-title>
             </v-list-item-content>
@@ -44,7 +38,7 @@
         </div>
       </v-card-text>
 
-      <v-card-text class="mt-n4 custom-font">
+      <v-card-text class="text-p2 neutral--text text--darken-3 py-1 announcement-text">
         {{ item.body }}
         <slot name="actions" />
       </v-card-text>
@@ -79,11 +73,10 @@ export default {
 </script>
 
 <style scoped>
-.custom-font {
-  font-size: 1rem;
+.announcement-calendar-icon {
+  border-radius: 0!important;
 }
-
-.custom-font-mobile {
-  font-size: 0.925rem;
+.announcement-text {
+  line-height: 1.5;
 }
 </style>

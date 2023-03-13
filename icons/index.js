@@ -132,6 +132,7 @@ export default [
   'password-hide',
   'password-show',
   'chevron-down',
+  'announcement-outline-small',
   'sevenDays',
   'participationEvents',
   'participationSports',

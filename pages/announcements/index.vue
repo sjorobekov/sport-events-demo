@@ -2,7 +2,7 @@
   <div class="mt-1 mt-md-n4  mb-3">
     <v-list-item class="px-0 mb-4">
       <v-list-item-content>
-        <h1 class="text-h4s text-md-h3">
+        <h1 class="text-h4s text-md-h3 neutral--text text--darken-5">
           Announcements
         </h1>
       </v-list-item-content>
@@ -11,18 +11,20 @@
           v-if="canCreateAnnouncement"
           class="hidden-xs-only"
           link
+          :ripple="false"
           :to="{ name: 'announcements-add' }"
           depressed
           color="primary"
           height="40"
         >
-          <v-icon>$vuetify.icons.bullhorn</v-icon>Create Announcement
+          <v-icon>$vuetify.icons.announcement-outline-small</v-icon>Create Announcement
         </v-btn>
         <v-btn
           v-if="canCreateAnnouncement"
           class="hidden-sm-and-up"
           small
           link
+          :ripple="false"
           :to="{ name: 'announcements-add' }"
           depressed
           color="primary"
@@ -44,7 +46,7 @@
     </div>
 
     <v-row v-else-if="items.length">
-      <v-col cols="12" md="5">
+      <v-col cols="12" md="4">
         <v-card class="bt">
           <FxAnnouncementListItem
             v-for="item in items"
@@ -53,14 +55,14 @@
             :announcement="item"
           >
             <template #actions>
-              <v-btn depressed color="primary" class="mt-1 hidden-md-and-up" block>
+              <v-btn depressed :ripple="false" color="primary" class="mt-1 hidden-md-and-up mobile-button" block>
                 Read More
               </v-btn>
             </template>
           </FxAnnouncementListItem>
         </v-card>
       </v-col>
-      <v-col class="hidden-sm-and-down" md="7">
+      <v-col class="hidden-sm-and-down" md="8">
         <NuxtChild @updated="updateHandler" @removed="removeHandler" />
       </v-col>
     </v-row>

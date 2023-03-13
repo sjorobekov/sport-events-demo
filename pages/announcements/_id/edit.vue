@@ -13,19 +13,20 @@
             depressed
             color="primary"
             dark
+            :ripple="false"
             :loading="loading"
-            class="mb-3"
+            class="mb-3 mobile-button"
             @click="save"
           >
-            <v-icon size="20" class="hidden-sm-and-down mx-2">
-              mdi-content-save
-            </v-icon>Update Announcement
+            Update Announcement
           </v-btn>
 
           <v-btn
             depressed
             color="error"
+            class="mobile-button"
             outlined
+            :ripple="false"
             block
             @click="removeHandler()"
           >
@@ -37,26 +38,26 @@
     <v-container class="mt-4 mb-8">
       <v-row>
         <v-spacer />
-        <v-btn outlined class="hidden-sm-and-down" @click="$router.back()">
+        <v-btn outlined :ripple="false" class="hidden-sm-and-down" @click="$router.back()">
           Cancel
         </v-btn>
         <v-btn
           depressed
           color="primary"
           dark
+          :ripple="false"
           class="ml-2 hidden-sm-and-down"
           :loading="loading"
           @click="save"
         >
-          <v-icon size="20" class="hidden-sm-and-down mx-2">
-            mdi-content-save
-          </v-icon>Update Announcement
+          Update Announcement
         </v-btn>
 
         <v-btn
           class="hidden-md-and-up"
           depressed
           color="error"
+          :ripple="false"
           outlined
           block
           @click="$emit('click:remove', selectedItem.id)"

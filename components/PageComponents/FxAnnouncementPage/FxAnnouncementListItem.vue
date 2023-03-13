@@ -1,32 +1,27 @@
 <template>
-  <nuxt-link v-ripple exact class="d-block text-decoration-none py-6 px-3 px-md-8 fx-announcement-item" :to="to">
+  <nuxt-link :ripple="false" exact class="d-block text-decoration-none pt-4 pb-2 px-3 px-md-4 fx-announcement-item" :to="to">
     <div class="d-flex">
-      <div class="flex-shrink-1 pr-2 hidden-md-and-up">
-        <v-icon color="#adadad">
-          $vuetify.icons.bullhorn
-        </v-icon>
-      </div>
       <div class="flex-grow-1">
-        <div class="custom-font-size font-weight-bold info--text text--darken-3 line-clamp-2 mb-2 f">
+        <div class="text-p2 font-weight-bold neutral--text text--darken-4 line-clamp-2 mb-2 f">
           {{ announcement.subject }}
         </div>
-        <div class="custom-font-size info--text line-clamp-2 text-fade">
+        <div class="text-p1 neutral--text text--darken-2 line-clamp-2 text-fade">
           {{ announcement.body }}
         </div>
       </div>
     </div>
 
-    <v-list-item class="px-0 mb-n2">
-      <v-list-item-avatar size="20" class="mr-2">
+    <v-list-item class="px-0 mb-0 py-0">
+      <v-list-item-avatar size="20" class="mr-2 py-0">
         <FxAvatar size="20" :value="announcement.user.avatar" />
       </v-list-item-avatar>
-      <v-list-item-content>
-        <v-list-item-title class="custom-font-size info--text">
+      <v-list-item-content class="py-0">
+        <v-list-item-title class="text-caption neutral--text text--darken-2 py-0">
           {{ announcement.user.firstname }} {{ announcement.user.lastname }}
         </v-list-item-title>
       </v-list-item-content>
       <v-list-item-action>
-        <v-list-item-action-text class="custom-font-size info--text text-capitalize">
+        <v-list-item-action-text class="text-caption neutral--text text--darken-2 text-capitalize py-0">
           {{ date }}
         </v-list-item-action-text>
       </v-list-item-action>
@@ -80,11 +75,13 @@ export default {
 <style>
 .fx-announcement-item.nuxt-link-active {
   box-shadow: inset -4px 0 0 0 var(--v-primary-base);
-  background: var(--v-info-lighten3);
+  background: var(--v-neutral-lighten2);
 }
-
+.fx-announcement-item:hover {
+  background: var(--v-neutral-lighten2);
+}
 .custom-font-size {
-  font-size: 0.975rem;
+  font-size: 0.875rem;
   line-height: 1.25rem
 }
 </style>
