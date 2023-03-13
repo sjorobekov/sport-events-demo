@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-md-n9">
+  <div>
     <v-row>
       <v-col lg="9">
         <div v-if="!isMobile">
