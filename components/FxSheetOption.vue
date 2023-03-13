@@ -4,14 +4,14 @@
     class="d-inline-block mr-3 mb-3"
     :value="value"
   >
-    <v-sheet v-ripple width="156px" height="112" :class="active ? 'border active' : 'border'" @click="toggle">
+    <v-sheet width="156px" height="112" :class="active ? 'border active' : 'border'" @click="toggle">
       <v-container class="fill-height px-0">
         <v-row
           align="center"
           justify="center"
           class="px-0"
         >
-          <v-col class="pb-0 pt-0 text-center">
+          <v-col class="pb-0 pt-0 text-center select-box">
             <v-img class="mx-auto text--primary mb-4" width="50" :src="src" />
             <div class="label1">
               {{ text }}
@@ -19,7 +19,7 @@
           </v-col>
         </v-row>
       </v-container>
-      <v-btn class="float-right" icon style="position: relative; bottom: 105px;">
+      <v-btn class="float-right" icon :ripple="false" style="position: relative; bottom: 105px;">
         <v-icon v-if="active" dark color="primary">
           $vuetify.icons.tickFilled
         </v-icon>
@@ -54,7 +54,7 @@ export default {
   border-radius: 4px
   box-shadow: 0 0 0 1px var(--v-neutral-lighten1)
   &.active
-    box-shadow: 0 0 0 3px var(--v-primary-base)
+    box-shadow: 0 0 0 2px var(--v-primary-base)
   .label1
     font-size: 1rem
     line-height: 1rem
@@ -63,4 +63,8 @@ export default {
     display: flex
     justify-content: center
     align-items: center
+.select-box
+  cursor: pointer
+.theme--light.v-btn.v-btn--icon:before
+  opacity: 0
 </style>
