@@ -97,7 +97,7 @@
           </div>
         </div>
 
-        <v-row v-if="upcoming.length || past.length" class="mt-0">
+        <v-row v-if="hasEvents" class="mt-0">
           <v-col class="pt-0">
             <template v-if="showUpcoming">
               <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
@@ -221,6 +221,10 @@ export default {
       canCreateEvent: 'user/acl/canCreateEvent',
       canEditTeam: 'user/acl/canCreateTeam',
     }),
+
+    hasEvents () {
+      return this.upcoming.length > 0 || this.past.length > 0
+    },
 
     teamId () {
       return this.$route.params.id
