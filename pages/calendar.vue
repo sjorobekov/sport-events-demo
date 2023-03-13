@@ -86,18 +86,17 @@
           />
         </FxCalendarFilterDialog>
       </client-only>
-      <template v-if="hasEvents">
-        <client-only>
-          <div v-for="key in eventSortedDates" :id="`date-${key}`" :key="key" v-intersect="{ handler: onIntersect(key), options: { threshold: [1.0] } }" class="pb-6">
-            <FxCalendarPill :value="key" class="my-4" />
 
-            <v-card v-for="event in eventsGroupedByDate[key]" :key="`event-${event.id}`" class="mb-2 card-has-hover">
-              <FxCalendarEvent :value="event" />
-            </v-card>
-          </div>
-        </client-only>
-      </template>
-      <template v-else-if="!$fetchState.pending && !hasEvents">
+      <client-only v-if="hasEvents">
+        <div v-for="key in eventSortedDates" :id="`date-${key}`" :key="key" v-intersect="{ handler: onIntersect(key), options: { threshold: [1.0] } }" class="pb-6">
+          <FxCalendarPill :value="key" class="my-4" />
+
+          <v-card v-for="event in eventsGroupedByDate[key]" :key="`event-${event.id}`" class="mb-2 card-has-hover">
+            <FxCalendarEvent :value="event" />
+          </v-card>
+        </div>
+      </client-only>
+      <template v-else-if="!$fetchState.pending">
         <v-col class="d-flex flex-column justify-center align-center pt-0 pt-md-8">
           <v-img width="100" :src="noEvents" class="mb-3" />
           <div class="text-p3 text-center info--text text--darken-3 mb-4">
