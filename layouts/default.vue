@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <AppBar v-model="drawer" />
-    <v-main>
-      <FxNavigationDrawer v-model="drawer" :permanent="drawerPermanent" :right="isMobile" :hide-logo="isMobile" />
+    <v-main :class="isMobile ? 'padding-top-92' : 'pt-12'">
+      <FxNavigationDrawer v-model="drawer" :permanent="drawerPermanent" :mini-variant="false" :right="isMobile" :hide-logo="isMobile" />
       <v-container>
         <nuxt />
       </v-container>
@@ -56,3 +56,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.padding-top-92 {
+  padding-top: 92px!important;
+}
+</style>
