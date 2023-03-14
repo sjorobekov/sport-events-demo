@@ -2,7 +2,7 @@
   <v-app>
     <AppBar v-model="drawer" />
     <v-main :class="isMobile ? 'padding-top-92' : 'pt-12'">
-      <FxNavigationDrawer v-model="drawer" :permanent="drawerPermanent" :mini-variant="false" :right="isMobile" :hide-logo="isMobile" />
+      <FxNavigationDrawer v-model="drawer" :permanent="drawerPermanent" :right="isMobile" :hide-logo="isMobile" />
       <v-container>
         <nuxt />
       </v-container>
