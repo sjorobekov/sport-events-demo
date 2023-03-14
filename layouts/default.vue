@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <AppBar v-model="drawer" />
-    <v-main :class="isMobile ? 'padding-top-92' : 'pt-12'">
+    <v-main>
       <FxNavigationDrawer v-model="drawer" :permanent="drawerPermanent" :right="isMobile" :hide-logo="isMobile" />
       <v-container>
         <nuxt />
@@ -57,8 +57,12 @@ export default {
 }
 </script>
 
-<style scoped>
-.padding-top-92 {
-  padding-top: 92px!important;
-}
+<style scoped lang="sass">
+@import '~vuetify/src/styles/styles'
+.v-main
+  padding-top: 92px!important
+
+@media #{map-get($display-breakpoints, 'md-and-up')}
+  .v-main
+    padding-top: 48px!important
 </style>
