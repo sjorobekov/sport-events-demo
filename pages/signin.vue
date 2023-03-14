@@ -14,6 +14,7 @@
         class="mt-8 mb-4 email-field"
         label="Email"
         placeholder="name@school.com"
+        type="email"
       />
       <v-text-field
         v-model="formData.password"
