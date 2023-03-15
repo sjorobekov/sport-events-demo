@@ -32,6 +32,9 @@
 import { mapGetters } from 'vuex'
 import FxSchoolLogo from '@/components/FxSchoolLogo/FxSchoolLogo'
 
+const imgSizeDesktop = '220'
+const imgSizeLMobile = '200'
+const imgSizeSMobile = '120'
 export default {
   name: 'StartUpLayout',
   components: { FxSchoolLogo },
@@ -41,7 +44,7 @@ export default {
     }
   },
   data: () => ({
-    windowHeight: 600,
+    windowHeight: 800,
   }),
   computed: {
     ...mapGetters({
@@ -56,25 +59,26 @@ export default {
     },
     size () {
       if (process.server) {
-        return this.isMobileDevice ? '120' : '220'
+        return this.isMobileDevice ? imgSizeLMobile : imgSizeDesktop
       }
 
       if (this.$vuetify.breakpoint.name !== 'xs') {
-        return '220'
+        return imgSizeDesktop
       }
       if (this.windowHeight > 667) {
-        return '200'
+        return imgSizeLMobile
       }
-      return '120'
+      return imgSizeSMobile
     },
   },
 
   mounted () {
-    window.addEventListener('resize', this.onResize, { passive: true })
+    this.onResize()
+    window.addEventListener('resize', this.onResize)
   },
 
   beforeDestroy () {
-    window.removeEventListener('resize', this.onResize, { passive: true })
+    window.removeEventListener('resize', this.onResize)
   },
 
   methods: {
