@@ -223,7 +223,7 @@ export default {
     }),
 
     hasEvents () {
-      return this.upcoming.length > 0 && this.past.length > 0
+      return this.upcoming.length > 0 || this.past.length > 0
     },
 
     teamId () {
