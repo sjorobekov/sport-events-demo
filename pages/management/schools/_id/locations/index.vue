@@ -76,7 +76,7 @@
           </FxLocationItem>
         </v-card>
       </v-col>
-      <v-col sm="8">
+      <v-col v-if="hasLocations" sm="8">
         <GmapMap
           ref="mapRef"
           :center="mapCenter"
@@ -102,12 +102,19 @@
           />
         </GmapMap>
       </v-col>
+      <v-col v-else class="d-flex flex-column justify-center align-center pt-12">
+        <v-img width="150" contain :src="noLocations" class="mb-3" />
+        <div class="text-p3 text-center info--text text--darken-3 mb-4">
+          Oops! No locations for now...
+        </div>
+      </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import noLocations from './noLocations.svg'
 
 export default {
   name: 'AdminSchoolEventsPage',
@@ -127,6 +134,7 @@ export default {
     currentMidx: null,
     mapCenter: { lng: 0, lat: 0 },
     zoom: 5,
+    noLocations,
   }),
 
   async fetch () {
@@ -164,6 +172,10 @@ export default {
         return 'management-schools-id-locations-locationId'
       }
       return 'directory-sports-map-locationId'
+    },
+
+    hasLocations () {
+      return this.items.length
     },
   },
 
