@@ -141,10 +141,10 @@
         </template>
       </v-col>
     </v-row>
-    <v-row v-else>
-      <v-col class="d-flex flex-column justify-center align-center pt-12">
+    <v-row v-else-if="!$fetchState.pending">
+      <v-col class="d-flex flex-column align-center">
         <v-img width="150" :src="noEvents" class="mb-3" />
-        <div class="text-p3 text-center info--text text--darken-3 mb-4">
+        <div class="text-p3 info--text text--darken-3 mb-4">
           Oops! No in-house events for now...
         </div>
       </v-col>

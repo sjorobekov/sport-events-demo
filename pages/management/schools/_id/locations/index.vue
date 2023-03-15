@@ -102,9 +102,9 @@
           />
         </GmapMap>
       </v-col>
-      <v-col v-else class="d-flex flex-column justify-center align-center pt-12">
+      <v-col v-else-if="!$fetchState.pending" class="d-flex flex-column align-center">
         <v-img width="150" contain :src="noLocations" class="mb-3" />
-        <div class="text-p3 text-center info--text text--darken-3 mb-4">
+        <div class="text-p3 info--text text--darken-3 mb-4">
           Oops! No locations for now...
         </div>
       </v-col>
