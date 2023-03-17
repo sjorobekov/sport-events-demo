@@ -5,7 +5,7 @@
         <v-col cols="12" class="border-bottom pt-1 pb-0 hidden-sm-and-down">
           <v-list-item class="px-0">
             <v-list-item-content>
-              <v-list-item-title class="text-p2 info--text text--darken-4">
+              <v-list-item-title class="text-p2 neutral--text text--darken-5">
                 Sports Contacts
               </v-list-item-title>
             </v-list-item-content>
@@ -17,13 +17,13 @@
               <FxAvatar size="22" />
             </v-list-item-avatar>
             <v-list-item-content>
-              <v-list-item-title class="text-p2 info--text text--darken-4">
+              <v-list-item-title class="text-p2 neutral--text text--darken-4">
                 {{ contact.displayName }}
                 <v-icon v-if="contact.main">
                   mdi-star
                 </v-icon>
               </v-list-item-title>
-              <v-list-item-subtitle class="text-p1 info--text">
+              <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                 {{ contact.jobRole }}
               </v-list-item-subtitle>
             </v-list-item-content>
@@ -33,9 +33,10 @@
                 color="primary"
                 link
                 icon
+                :ripple="false"
               >
                 <a class="text-decoration-none" :href="`tel:${contact.phone}`">
-                  <v-icon>mdi-phone-in-talk</v-icon>
+                  <v-icon>$vuetify.icons.phone-fill</v-icon>
                 </a>
               </v-btn>
             </v-list-item-action>
@@ -45,9 +46,10 @@
                 color="primary"
                 link
                 icon
+                :ripple="false"
               >
                 <a class="text-decoration-none" :href="`mailto:${contact.email}`">
-                  <v-icon>mdi-email-outline</v-icon>
+                  <v-icon>$vuetify.icons.mail-fill</v-icon>
                 </a>
               </v-btn>
             </v-list-item-action>
