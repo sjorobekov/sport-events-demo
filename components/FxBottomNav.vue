@@ -16,7 +16,7 @@
       @click="item.onClick"
     >
       <span class="text-p1 mb-1 menu-title">{{ item.title }}</span>
-      <v-icon class="mr-0 menu-icon" size="28" v-text="item.icon" />
+      <v-icon class="mr-0 menu-icon" size="24" v-text="item.icon" />
     </v-btn>
   </v-bottom-navigation>
 </template>
@@ -40,10 +40,10 @@ export default {
     }),
     items () {
       return [
-        { title: 'Calendar', icon: '$vuetify.icons.calendarRounded', to: { name: 'calendar' }, onClick: () => {} },
-        { title: 'Teams', icon: '$vuetify.icons.teamsAlt', to: { name: 'teams' }, onClick: () => {} },
-        { title: 'News', icon: '$vuetify.icons.bullhorn', to: { name: 'announcements' }, onClick: () => {} },
-        { title: 'Menu', icon: 'mdi-menu', onClick: () => this.$emit('input', !this.value) },
+        { title: 'Calendar', icon: '$vuetify.icons.calendar-outline', to: { name: 'calendar' }, onClick: () => {} },
+        { title: 'Teams', icon: '$vuetify.icons.teams-outline', to: { name: 'teams' }, onClick: () => {} },
+        { title: 'News', icon: '$vuetify.icons.announcements-outline', to: { name: 'announcements' }, onClick: () => {} },
+        { title: 'Menu', icon: '$vuetify.icons.menu-outline', onClick: () => this.$emit('input', !this.value) },
       ]
     },
     height () {
@@ -56,12 +56,12 @@ export default {
 <style scoped lang="scss">
 .fx-bottom-menu {
   .menu-icon {
-    color: var(--v-info-lighten1)!important;
-    padding-bottom: 4px!important
+    color: var(--v-neutral-darken1)!important;
+    margin-bottom: 4px!important
   }
 
   .menu-title {
-    color: var(--v-info-lighten1)!important;
+    color: var(--v-neutral-darken2)!important;
   }
 
   &.v-btn--active {
@@ -99,5 +99,8 @@ export default {
     margin-right:auto;
     opacity: 1;
   }
+}
+.bottom-menu {
+  border-top: solid 1px var(--v-neutral-lighten1);
 }
 </style>

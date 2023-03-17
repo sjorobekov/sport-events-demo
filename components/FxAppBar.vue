@@ -21,7 +21,9 @@
           </client-only>
         </v-list-item-content>
       </v-list-item>
-      <v-app-bar-nav-icon @click="$emit('input', !value)" />
+      <v-app-bar-nav-icon @click="$emit('input', !value)">
+        <v-icon>$vuetify.icons.menu-solid</v-icon>
+      </v-app-bar-nav-icon>
     </template>
     <v-container v-else>
       <v-row align="center">

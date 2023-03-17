@@ -137,4 +137,6 @@ export default [
   'participationEvents',
   'participationSports',
   'pen',
+  'menu-outline',
+  'menu-solid',
 ]
