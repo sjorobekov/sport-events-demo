@@ -132,7 +132,7 @@ export default {
 @import '~vuetify/src/styles/styles'
 
 .dashboard-card
-  transition-duration: 0.3s!important
+  transition: border-color .2s ease-in-out
 
 .dashboard-card:hover
   border-color:  var(--v-primary-lighten1)!important
