@@ -70,7 +70,7 @@ export default {
 
 @media #{map-get($display-breakpoints, 'md-and-up')}
   .top-bar
-    top: 55px
+    top: 48px
 
 @media #{map-get($display-breakpoints, 'sm-and-down')}
   .top-bar.is-hidden

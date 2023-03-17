@@ -16,8 +16,17 @@
               :value="desktopFilterBadges"
               overlap
             >
-              <v-btn height="40" outlined color="info lighten-1" style="background-color: white" @click="showFilters = !showFilters">
-                <v-icon>$vuetify.icons.settings</v-icon>
+              <v-btn
+                height="40"
+                outlined
+                color="neutral darken-2"
+                :ripple="false"
+                style="background-color: white"
+                @click="showFilters = !showFilters"
+              >
+                <v-icon color="neutral darken-1">
+                  $vuetify.icons.settings
+                </v-icon>
                 More Filters
               </v-btn>
             </v-badge>
