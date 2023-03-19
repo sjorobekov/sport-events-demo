@@ -2,7 +2,7 @@
   <div>
     <v-row class="mb-2 mt-1 mt-md-n4 align-center">
       <v-col v-if="canCreateTeam" cols="12" sm="5" md="5">
-        <h1 class="text-h4s text-md-h3">
+        <h1 class="neutral--text text--darken-4 text-h4s text-md-h3">
           In-House Sport
         </h1>
       </v-col>
@@ -61,12 +61,12 @@
         <v-list class="py-0">
           <v-list-item v-for="competition in competitionBySport[sport.id]" :key="competition.id" style="border-bottom: 1px solid #F1F5F9">
             <v-list-item-content>
-              <v-list-item-title class="info--text text--darken-2 text-h5s">
+              <v-list-item-title class="neutral--text text--darken-4 text-h5s">
                 {{ competition.name }}
               </v-list-item-title>
             </v-list-item-content>
             <v-list-item-action>
-              <v-btn outlined link :to="{ name: 'in-house-competitionId-matches', params: { competitionId: competition.id } }">
+              <v-btn outlined :ripple="false" class="neutral--text text--darken-2" link :to="{ name: 'in-house-competitionId-matches', params: { competitionId: competition.id } }">
                 View Competition
               </v-btn>
             </v-list-item-action>

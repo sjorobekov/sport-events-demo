@@ -28,7 +28,7 @@
     <v-container class="mt-4 mb-8">
       <v-row>
         <v-spacer />
-        <v-btn :ripple="false" outlined @click="$router.back()" class="neutral--text text--darken-3">
+        <v-btn :ripple="false" outlined class="neutral--text text--darken-3" @click="$router.back()">
           Cancel
         </v-btn>
         <v-btn
