@@ -186,4 +186,9 @@ export default {
     },
     langDir: 'lang/',
   },
+
+  server: {
+    port: process.env.PORT || '3000',
+    host: '0.0.0.0',
+  },
 }
