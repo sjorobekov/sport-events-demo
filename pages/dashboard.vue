@@ -35,7 +35,9 @@
                     <v-img :src="team.sport.icon" />
                   </v-list-item-avatar>
                   <v-list-item-content>
-                    <v-list-item-title class="neutral--text text--darken-4">{{ team.name }}</v-list-item-title>
+                    <v-list-item-title class="neutral--text text--darken-4">
+                      {{ team.name }}
+                    </v-list-item-title>
                     <v-list-item-subtitle class="neutral--text text--darken-3">
                       {{ team.sport.name }}
                     </v-list-item-subtitle>

@@ -28,7 +28,7 @@
           <td class="text-center team-name px-2 px-md-6">
             <wrapped-component :wrap="!!myTeam">
               <template #wrapper>
-                <nuxt-link class="text-decoration-none" :to="{ name: 'teams-id', params: { id: myTeamId } }" />
+                <nuxt-link class="text-decoration-none neutral--text text--darken-4" :to="{ name: 'teams-id', params: { id: myTeamId } }" />
               </template>
               <span>{{ leftLabel }}</span>
             </wrapped-component>
@@ -36,9 +36,9 @@
           <td class="text-center team-name px-2 px-md-6">
             <wrapped-component :wrap="!!opponentLink">
               <template #wrapper>
-                <a :href="opponentLink" class="text-decoration-none" />
+                <a :href="opponentLink" class="text-decoration-none neutral--text text--darken-4" />
               </template>
-              <span>{{ rightLabel }}</span>
+              <span class="neutral--text text--darken-4">{{ rightLabel }}</span>
             </wrapped-component>
           </td>
         </tr>

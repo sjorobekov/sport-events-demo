@@ -6,10 +6,10 @@
       </v-list-item-icon>
       <v-list-item-content>
         <slot name="content">
-          <v-list-item-title class="text-p2 info--text text--darken-4">
+          <v-list-item-title class="text-p2 neutral--text text--darken-4">
             <slot name="title" />
           </v-list-item-title>
-          <v-list-item-subtitle class="text-p1 info--text">
+          <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
             <slot name="subtitle" />
           </v-list-item-subtitle>
         </slot>

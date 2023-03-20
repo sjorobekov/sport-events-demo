@@ -44,34 +44,34 @@
               <template #content>
                 <div>
                   <div v-if="me.meetTime" class="d-inline-block pr-8">
-                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                    <v-list-item-title class="text-p2 neutral--text text--darken-4">
                       {{ me.meetTime }}
                     </v-list-item-title>
-                    <v-list-item-subtitle class="text-p1 info--text">
+                    <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                       Meet Time
                     </v-list-item-subtitle>
                   </div>
                   <div class="d-inline-block pr-8">
-                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                    <v-list-item-title class="text-p2 neutral--text text--darken-4">
                       {{ event.startTime }}
                     </v-list-item-title>
-                    <v-list-item-subtitle class="text-p1 info--text">
+                    <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                       Start Time
                     </v-list-item-subtitle>
                   </div>
                   <div v-if="me.returnTime" class="d-inline-block pr-8">
-                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                    <v-list-item-title class="text-p2 neutral--text text--darken-4">
                       {{ me.returnTime }}
                     </v-list-item-title>
-                    <v-list-item-subtitle class="text-p1 info--text">
+                    <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                       Return Time
                     </v-list-item-subtitle>
                   </div>
                   <div v-if="event.endTime" class="d-inline-block">
-                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                    <v-list-item-title class="text-p2 neutral--text text--darken-4">
                       {{ event.endTime }}
                     </v-list-item-title>
-                    <v-list-item-subtitle class="text-p1 info--text">
+                    <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                       End Time
                     </v-list-item-subtitle>
                   </div>
@@ -119,18 +119,18 @@
               <template #content>
                 <div>
                   <div class="d-inline-block pr-8">
-                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                    <v-list-item-title class="text-p2 neutral--text text--darken-4">
                       {{ transportTo }}
                     </v-list-item-title>
-                    <v-list-item-subtitle class="text-p1 info--text">
+                    <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                       Transport To
                     </v-list-item-subtitle>
                   </div>
                   <div class="d-inline-block">
-                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                    <v-list-item-title class="text-p2 neutral--text text--darken-4">
                       {{ transportFrom }}
                     </v-list-item-title>
-                    <v-list-item-subtitle class="text-p1 info--text">
+                    <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                       Transport From
                     </v-list-item-subtitle>
                   </div>
@@ -146,10 +146,10 @@
                 <v-icon>$vuetify.icons.directory-outline</v-icon>
               </template>
               <template #content>
-                <v-list-item-title class="text-p1 info--text">
+                <v-list-item-title class="text-p1 neutral--text text--darken-2">
                   Further Information
                 </v-list-item-title>
-                <span class="text-p2 info--text text--darken-2">{{ me.info }}</span>
+                <span class="text-p2 neutral--text text--darken-3">{{ me.info }}</span>
               </template>
             </ListItem>
           </v-col>
