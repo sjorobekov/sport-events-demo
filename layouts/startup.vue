@@ -7,7 +7,7 @@
             <div class="school-logo-container mb-5 mb-sm-5">
               <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" :size="size" />
             </div>
-            <h1 class="text-sm-h1s text-h6 white--text text-center pb-5">
+            <h1 v-balance-text class="text-sm-h1s text-h6 white--text text-center pb-5 font-weight-bold">
               {{ contextSchool.name }}
             </h1>
           </div>
