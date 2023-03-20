@@ -5,8 +5,7 @@
         <v-row>
           <v-col
             cols="12"
-            md="6"
-            lg="4"
+            lg="5"
           >
             <FxInstructionItem>
               <template #number>
@@ -22,8 +21,7 @@
           </v-col>
           <v-col
             cols="12"
-            md="6"
-            lg="8"
+            lg="7"
             class="pt-8"
           >
             <v-row>
@@ -70,8 +68,7 @@
         <v-row>
           <v-col
             cols="12"
-            md="6"
-            lg="4"
+            lg="5"
           >
             <FxInstructionItem>
               <template #number>
@@ -87,8 +84,7 @@
           </v-col>
           <v-col
             cols="12"
-            md="6"
-            lg="8"
+            lg="7"
             class="pt-8"
           >
             <v-row>
@@ -117,8 +113,7 @@
         <v-row>
           <v-col
             cols="12"
-            md="6"
-            lg="4"
+            lg="5"
           >
             <FxInstructionItem>
               <template #number>
@@ -134,8 +129,7 @@
           </v-col>
           <v-col
             cols="12"
-            md="6"
-            lg="8"
+            lg="7"
             class="pt-8"
           >
             <v-row>
@@ -154,8 +148,7 @@
         <v-row>
           <v-col
             cols="12"
-            md="6"
-            lg="4"
+            lg="5"
           >
             <FxInstructionItem>
               <template #number>
@@ -171,8 +164,7 @@
           </v-col>
           <v-col
             cols="12"
-            md="6"
-            lg="8"
+            lg="7"
             class="pt-8"
           >
             <v-row>
@@ -203,8 +195,7 @@
         <v-row>
           <v-col
             cols="12"
-            md="6"
-            lg="4"
+            lg="5"
           >
             <FxInstructionItem>
               <template #number>
@@ -220,8 +211,7 @@
           </v-col>
           <v-col
             cols="12"
-            md="6"
-            lg="8"
+            lg="7"
             class="pt-8"
           >
             <v-row>
