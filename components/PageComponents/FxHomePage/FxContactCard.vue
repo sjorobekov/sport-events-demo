@@ -51,7 +51,7 @@ export default {
       return this.contact.avatar || this.contact.user?.avatar
     },
     name () {
-      return this.contact.displayName ? this.contact.displayName : `${this.contact.firstname} ${this.contact.lastname}`
+      return this.contact.kind === 'SportsContact' ? this.contact.name : this.contact.displayName ? this.contact.displayName : `${this.contact.firstname} ${this.contact.lastname}`
     },
     role () {
       return this.contact.role || this.contact.jobRole || ''

@@ -7,10 +7,10 @@
             <v-img :src="item.icon" />
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title class="info--text text--darken-2 text-h5s">
+            <v-list-item-title class="neutral--text text--darken-4 text-h5s">
               {{ item.name }}
             </v-list-item-title>
-            <v-list-item-subtitle v-if="subtitle">
+            <v-list-item-subtitle v-if="subtitle" class="neutral--text text--darken-2">
               {{ subtitle }}
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -55,4 +55,7 @@ export default {
   border: 1px solid #E4E9EF
   overflow: hidden
   border-radius: 8px
+
+.theme--light.v-expansion-panels .v-expansion-panel-header .v-expansion-panel-header__icon .v-icon
+  color: var(--v-neutral-darken1)
 </style>

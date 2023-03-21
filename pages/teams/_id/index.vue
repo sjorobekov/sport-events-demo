@@ -10,7 +10,7 @@
             :gradient="gradient"
           >
             <div class="d-flex">
-              <v-list-item :dark="hasPhoto">
+              <v-list-item :dark="hasPhoto" :class="{ 'pa-0': !hasPhoto }">
                 <v-list-item-content>
                   <v-list-item-title class="text-h3">
                     {{ team.name }}
@@ -109,7 +109,7 @@
           </div>
         </div>
 
-        <v-row class="mt-0">
+        <v-row v-if="hasEvents" class="mt-0">
           <v-col class="pt-0">
             <template v-if="showUpcoming">
               <h2 class="text-p2 font-weight-bold mt-6 mb-2 neutral--text text--darken-4">
@@ -134,6 +134,14 @@
             </template>
           </v-col>
         </v-row>
+        <div v-else-if="!$fetchState.pending">
+          <v-col class="d-flex flex-column justify-center align-center pt-12">
+            <v-img width="100" :src="noEvents" class="mb-3" />
+            <div class="text-p3 text-center info--text text--darken-3 mb-4">
+              Oops! No events for now...
+            </div>
+          </v-col>
+        </div>
       </v-col>
       <v-col lg="3" class="hidden-md-and-down">
         <h3 class="text-p1 neutral--text text--darken-2 mb-2">
@@ -166,6 +174,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
+import noEvents from './noEvents.svg'
 import FxEventItem from '@/components/PageComponents/FxTeamsPage/FxTeamEvent'
 import FxTeamPrivacyChipBig from '@/components/FxTeamPrivacyChipBig'
 import FxWinRateBar from '@/components/FxWinRateBar'
@@ -180,12 +189,13 @@ export default {
   },
   data: () => ({
     filter: null,
-    training: false,
+    training: true,
     team: {},
     sport: {},
     season: {},
     coach: {},
     events: [],
+    noEvents,
   }),
 
   async fetch () {
@@ -226,6 +236,10 @@ export default {
       canCreateEvent: 'user/acl/canCreateEvent',
       canEditTeam: 'user/acl/canCreateTeam',
     }),
+
+    hasEvents () {
+      return this.upcoming.length > 0 || this.past.length > 0
+    },
 
     teamId () {
       return this.$route.params.id

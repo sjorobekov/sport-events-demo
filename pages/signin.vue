@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-sm-h1 text-h6 text-center mt-2 mt-sm-6 neutral--text text--darken-5">
+    <h1 class="text-sm-h1 text-h6 text-center mt-2 mt-sm-6 neutral--text text--darken-5 font-weight-bold">
       Welcome
     </h1>
     <v-form ref="form" v-async-form :disabled="loading" class="log-in-form" @submit.prevent="submit">
@@ -14,6 +14,7 @@
         class="mt-8 mb-4 email-field"
         label="Email"
         placeholder="name@school.com"
+        type="email"
       />
       <v-text-field
         v-model="formData.password"
@@ -59,7 +60,6 @@
         outlined
         color="neutral darken-3"
         dark
-        :loading="loading"
         block
         height="50"
         class="mt-4"

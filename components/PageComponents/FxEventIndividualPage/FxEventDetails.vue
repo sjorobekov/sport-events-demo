@@ -5,9 +5,9 @@
         Details
       </template>
       <template #actions>
-        <v-btn v-if="canEditEvent && !formVisible" outlined @click="open">
-          <v-icon small>
-            mdi-pencil-outline
+        <v-btn v-if="canEditEvent && !formVisible" outlined color="neutral darken-3" :ripple="false" @click="open">
+          <v-icon color="neutral darken-1">
+            $vuetify.icons.pen
           </v-icon>Edit Details
         </v-btn>
       </template>
@@ -44,27 +44,35 @@
               <template #content>
                 <div>
                   <div v-if="me.meetTime" class="d-inline-block pr-8">
-                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                    <v-list-item-title class="text-p2 neutral--text text--darken-4">
                       {{ me.meetTime }}
                     </v-list-item-title>
-                    <v-list-item-subtitle class="text-p1 info--text">
+                    <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                       Meet Time
                     </v-list-item-subtitle>
                   </div>
                   <div class="d-inline-block pr-8">
-                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                    <v-list-item-title class="text-p2 neutral--text text--darken-4">
                       {{ event.startTime }}
                     </v-list-item-title>
-                    <v-list-item-subtitle class="text-p1 info--text">
+                    <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                       Start Time
                     </v-list-item-subtitle>
                   </div>
-                  <div v-if="me.returnTime" class="d-inline-block">
-                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                  <div v-if="me.returnTime" class="d-inline-block pr-8">
+                    <v-list-item-title class="text-p2 neutral--text text--darken-4">
                       {{ me.returnTime }}
                     </v-list-item-title>
-                    <v-list-item-subtitle class="text-p1 info--text">
+                    <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                       Return Time
+                    </v-list-item-subtitle>
+                  </div>
+                  <div v-if="event.endTime" class="d-inline-block">
+                    <v-list-item-title class="text-p2 neutral--text text--darken-4">
+                      {{ event.endTime }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
+                      End Time
                     </v-list-item-subtitle>
                   </div>
                 </div>
@@ -111,18 +119,18 @@
               <template #content>
                 <div>
                   <div class="d-inline-block pr-8">
-                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                    <v-list-item-title class="text-p2 neutral--text text--darken-4">
                       {{ transportTo }}
                     </v-list-item-title>
-                    <v-list-item-subtitle class="text-p1 info--text">
+                    <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                       Transport To
                     </v-list-item-subtitle>
                   </div>
                   <div class="d-inline-block">
-                    <v-list-item-title class="text-p2 info--text text--darken-4">
+                    <v-list-item-title class="text-p2 neutral--text text--darken-4">
                       {{ transportFrom }}
                     </v-list-item-title>
-                    <v-list-item-subtitle class="text-p1 info--text">
+                    <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                       Transport From
                     </v-list-item-subtitle>
                   </div>
@@ -138,10 +146,10 @@
                 <v-icon>$vuetify.icons.directory-outline</v-icon>
               </template>
               <template #content>
-                <v-list-item-title class="text-p1 info--text">
+                <v-list-item-title class="text-p1 neutral--text text--darken-2">
                   Further Information
                 </v-list-item-title>
-                <span class="text-p2 info--text text--darken-2">{{ me.info }}</span>
+                <span class="text-p2 neutral--text text--darken-3">{{ me.info }}</span>
               </template>
             </ListItem>
           </v-col>
@@ -166,7 +174,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { TransportType } from '@/enum'
+import { TransportType, EventType } from '@/enum'
 import ListItem from '@/components/FxEventItem/ListItem'
 import FxAvatar from '@/components/FxAvatar'
 import FxLocationLabel from '@/components/FxEventItem/FxLocationLabel'
@@ -189,6 +197,7 @@ export default {
     formVisible: false,
     formData: {},
     loading: false,
+    EventType,
   }),
 
   computed: {
@@ -227,6 +236,7 @@ export default {
       this.formData = {
         date: this.event.date,
         startTime: this.event.startTime,
+        endTime: this.event.endTime,
         meetTime: this.me.meetTime,
         returnTime: this.me.returnTime,
         leadId: this.me.leadId,
@@ -239,6 +249,7 @@ export default {
         transportToOther: this.me.transportToOther,
         transportFrom: this.me.transportFrom,
         transportFromOther: this.me.transportFromOther,
+        eventType: this.event.eventType,
       }
 
       this.formVisible = true

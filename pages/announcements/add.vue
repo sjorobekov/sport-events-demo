@@ -28,7 +28,7 @@
     <v-container class="mt-4 mb-8">
       <v-row>
         <v-spacer />
-        <v-btn outlined @click="$router.back()">
+        <v-btn :ripple="false" outlined class="neutral--text text--darken-3" @click="$router.back()">
           Cancel
         </v-btn>
         <v-btn
@@ -36,11 +36,12 @@
           color="primary"
           dark
           class="ml-2"
+          :ripple="false"
           :loading="loading"
           @click="save"
         >
-          <v-icon size="20">
-            mdi-bullhorn
+          <v-icon>
+            $vuetify.icons.announcement-outline-small
           </v-icon>Post Announcement
         </v-btn>
       </v-row>

@@ -8,7 +8,7 @@
               <FxSchoolLogo :value="school.logo" :color="school.color" :size="44" />
             </v-list-item-avatar>
             <v-list-item-content>
-              <v-list-item-title class="text-p2 info--text text--darken-4">
+              <v-list-item-title class="text-p2 neutral--text text--darken-5">
                 {{ name }}
               </v-list-item-title>
             </v-list-item-content>
@@ -17,11 +17,11 @@
                 v-if="school && school.portal"
                 depressed
                 outlined
-                color="primary"
+                color="neutral darken-2"
                 link
                 :href="school.portalUrl"
+                :ripple="false"
               >
-                <v-icon>mdi-link-variant</v-icon>
                 Sports Portal
               </v-btn>
             </v-list-item-action>
@@ -30,7 +30,7 @@
         <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
           <v-list-item class="px-0">
             <v-list-item-icon class="mr-3">
-              <v-icon>mdi-map-marker</v-icon>
+              <v-icon>$vuetify.icons.location-1</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="text-p2 info--text text--darken-4">
@@ -45,7 +45,7 @@
         <v-col v-if="school" cols="12" class="border-bottom pt-1 pb-0">
           <v-list-item class="px-0">
             <v-list-item-icon class="mr-3">
-              <v-icon>mdi-link-variant</v-icon>
+              <v-icon>$vuetify.icons.link-1</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="text-p2 info--text text--darken-4">

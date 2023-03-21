@@ -56,3 +56,13 @@ export default {
   },
 }
 </script>
+
+<style scoped lang="sass">
+@import '~vuetify/src/styles/styles'
+.v-main
+  padding-top: 92px!important
+
+@media #{map-get($display-breakpoints, 'md-and-up')}
+  .v-main
+    padding-top: 48px!important
+</style>

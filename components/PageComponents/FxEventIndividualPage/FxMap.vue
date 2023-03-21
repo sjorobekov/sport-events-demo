@@ -3,7 +3,6 @@
     <template #title>
       Map
     </template>
-    <v-card>
       <v-container>
         <GmapMap
           ref="mapRef"
@@ -11,6 +10,7 @@
           :zoom="zoom"
           style="height: 250px"
           :options="mapOptions"
+          class="event-map"
         >
           <GmapMarker
             clickable
@@ -18,7 +18,6 @@
           />
         </GmapMap>
       </v-container>
-    </v-card>
   </FxEventItemCard>
 </template>
 
@@ -55,3 +54,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.event-map {
+  border-radius: 8px;
+  overflow: hidden;
+}
+</style>

@@ -8,13 +8,13 @@
 
     <v-row class="mt-5">
       <v-col cols="12" sm="6" md="3" class="py-0">
-        <FxYearGroupSelect clearable icon="$vuetify.icon.filter" @input="update('yearGroup', $event)" />
+        <FxYearGroupSelect clearable icon="$vuetify.icons.students-small" @input="update('yearGroup', $event)" />
       </v-col>
       <v-col cols="12" sm="6" md="3" class="py-0">
         <FxGenderSelect clearable icon="$vuetify.icon.gender" @input="update('gender', $event)" />
       </v-col>
       <v-col cols="12" sm="6" md="3" class="py-0">
-        <FxSportSelect clearable icon="$vuetify.icon.whistleAlert" @input="update('sportId', $event)" />
+        <FxSportSelect clearable icon="$vuetify.icon.sports-small" @input="update('sportId', $event)" />
       </v-col>
       <v-col cols="12" sm="6" md="3" class="py-0">
         <v-text-field
@@ -27,7 +27,7 @@
       </v-col>
     </v-row>
 
-    <v-card flat outlined>
+    <v-card>
       <v-data-table
         :headers="headers"
         :items="items"

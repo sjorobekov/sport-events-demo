@@ -9,7 +9,7 @@
             :gradient="gradient"
             :src="inHouseCompetition.photo"
           >
-            <v-list-item :dark="hasPhoto">
+            <v-list-item :dark="hasPhoto" :class="{ 'pa-0': !hasPhoto }">
               <v-list-item-content>
                 <v-list-item-title class="text-h3">
                   {{ inHouseCompetition.name }}
@@ -90,7 +90,7 @@
         </div>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="hasEvents">
       <v-col lg="9">
         <template v-if="showUpcoming">
           <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
@@ -141,12 +141,21 @@
         </template>
       </v-col>
     </v-row>
+    <v-row v-else-if="!$fetchState.pending">
+      <v-col class="d-flex flex-column align-center">
+        <v-img width="150" :src="noEvents" class="mb-3" />
+        <div class="text-p3 info--text text--darken-3 mb-4">
+          Oops! No in-house events for now...
+        </div>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
+import noEvents from './noEvents.svg'
 import FxInHouseEventItem from '@/components/FxInHouseEventItem/FxInHouseEventItem'
 
 export default {
@@ -161,6 +170,7 @@ export default {
     season: {},
     lead: {},
     matches: [],
+    noEvents,
   }),
 
   async fetch () {
@@ -247,6 +257,10 @@ export default {
 
     gradient () {
       return this.hasPhoto ? 'to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)' : null
+    },
+
+    hasEvents () {
+      return this.upcoming.length || this.past.length
     },
   },
 }

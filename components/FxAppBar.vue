@@ -21,7 +21,9 @@
           </client-only>
         </v-list-item-content>
       </v-list-item>
-      <v-app-bar-nav-icon @click="$emit('input', !value)" />
+      <v-app-bar-nav-icon @click="$emit('input', !value)">
+        <v-icon>$vuetify.icons.menu-solid</v-icon>
+      </v-app-bar-nav-icon>
     </template>
     <v-container v-else>
       <v-row align="center">
@@ -72,7 +74,7 @@
                   <v-icon>$vuetify.icons.settings</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title class="user-menu-text font-weight-bold info--text">
+                  <v-list-item-title class="user-menu-text font-weight-bold neutral--text text--darken-2">
                     Settings
                   </v-list-item-title>
                 </v-list-item-content>
@@ -82,7 +84,7 @@
                   <v-icon>$vuetify.icons.interrogationMark</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title class="user-menu-text font-weight-bold info--text">
+                  <v-list-item-title class="user-menu-text font-weight-bold neutral--text text--darken-2">
                     Help Center
                   </v-list-item-title>
                 </v-list-item-content>

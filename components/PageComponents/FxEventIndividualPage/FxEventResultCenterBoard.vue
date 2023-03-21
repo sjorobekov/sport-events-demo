@@ -4,19 +4,19 @@
       <FxEventResult :result="result.overallResult" size="big" />
     </div>
 
-    <v-alert v-else-if="hasScore" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0" color="#F1F5F9">
+    <v-alert v-else-if="hasScore" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0 neutral--text text--darken-4" color="#edf0f3">
       {{ score }} - {{ opponentScore }}
     </v-alert>
 
-    <v-alert v-else-if="isCancelled" color="error darken-1" class="ma-0 score-alert font-weight-bold" outlined>
+    <v-alert v-else-if="isCancelled" color="error lighten-4" class="ma-0 score-alert font-weight-bold error--text text--darken-2">
       Cancelled
     </v-alert>
 
-    <v-alert v-else-if="isPostponed" color="warning lighten-2" outlined class="ma-0 score-alert font-weight-bold">
-      <span class="error--text">Postponed</span>
+    <v-alert v-else-if="isPostponed" color="warning lighten-4" class="ma-0 score-alert font-weight-bold">
+      <span class="warning--text text--darken-2">Postponed</span>
     </v-alert>
 
-    <v-alert v-else-if="hasResult" color="#F1F5F9" class="ma-0 score-alert font-weight-bold">
+    <v-alert v-else-if="hasResult" color="#edf0f3" class="ma-0 score-alert font-weight-bold neutral--text text--darken-4">
       {{ $t(`EVENT_RESULT.${result.overallResult}`) }}
     </v-alert>
 

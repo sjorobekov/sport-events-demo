@@ -4,8 +4,8 @@
       <v-row>
         <v-col
           cols="12"
-          md="6"
-          lg="4"
+          md="12"
+          lg="5"
           class="hidden-xs-only"
         >
           <FxInstructionItem>
@@ -22,9 +22,9 @@
         </v-col>
         <v-col
           cols="24"
-          md="6"
+          md="12"
           lg="7"
-          class="pt-8"
+          class="pt-2 pt-lg-8"
         >
           <v-row>
             <v-col>

@@ -4,11 +4,11 @@
       <v-row>
         <v-col class="d-flex pt-3 pb-0 px-6">
           <v-icon class="mr-9">
-            $vuetify.icons.calendar
+            $vuetify.icons.calendar-1
           </v-icon>
           <div style="max-width: 137px">
             <label for="date">Date</label>
-            <v-menu ref="menu" offset-y :close-on-content-click="false">
+            <v-menu ref="menu" offset-y :close-on-content-click="true">
               <template #activator="{ on, attrs }">
                 <v-text-field
                   id="date"
@@ -35,7 +35,7 @@
       <v-row>
         <v-col class="pt-1 pb-0 d-flex px-6">
           <v-icon class="mr-9">
-            mdi-clock-outline
+            $vuetify.icons.clock-1
           </v-icon>
 
           <div class="d-flex flex-column flex-sm-row">
@@ -49,6 +49,15 @@
               />
             </div>
             <div class="mr-2" style="max-width: 137px">
+              <label for="endTime">End Time</label>
+              <FxTimePickerMenu
+                id="endTime"
+                :async-rules="[$rule.required]"
+                :value="formData.endTime"
+                @input="update('endTime', $event)"
+              />
+            </div>
+            <div v-if="!isTraining" class="mr-2" style="max-width: 137px">
               <label for="meetTime">Meet Time</label>
               <FxTimePickerMenu
                 id="meetTime"
@@ -56,7 +65,7 @@
                 @input="update('meetTime', $event)"
               />
             </div>
-            <div class="mr-2" style="max-width: 137px">
+            <div v-if="!isTraining" class="mr-2" style="max-width: 137px">
               <label for="returnTime">Return Time</label>
               <FxTimePickerMenu
                 id="returnTime"
@@ -70,7 +79,7 @@
       <v-row>
         <v-col class="pt-1 pb-0 d-flex px-6">
           <v-icon class="mr-9">
-            mdi-account-circle-outline
+            $vuetify.icons.user-1
           </v-icon>
 
           <div>
@@ -89,7 +98,52 @@
       <v-row>
         <v-col class="pt-1 pb-0 d-flex px-6">
           <v-icon class="mr-9">
-            $vuetify.icons.direction
+            $vuetify.icons.location-1
+          </v-icon>
+
+          <div>
+            <label>Location</label>
+            <FxEventLocationTypeSelect
+              :value="formData.location"
+              @input="update('location', $event)"
+            />
+
+            <template v-if="formData.location === EventLocationType.SPORTS_LOCATIONS">
+              <label for="sportLocation">Sports Location</label>
+              <v-autocomplete
+                id="sportLocation"
+                v-async-validate
+                :async-rules="[$rule.required]"
+                outlined
+                dense
+                :value="formData.sportLocationId"
+                :items="locations"
+                item-text="name"
+                item-value="id"
+                placeholder="Select Sports Location"
+                @input="update('sportLocationId', $event)"
+              />
+            </template>
+            <template v-else-if="formData.location === EventLocationType.OTHER">
+              <label for="locationOther">Sports Location</label>
+              <v-text-field
+                id="locationOther"
+                v-async-validate
+                dense
+                outlined
+                placeholder="Enter Address"
+                :async-rules="[$rule.required]"
+                :value="formData.otherLocation"
+                @input="update('otherLocation', $event)"
+              />
+            </template>
+          </div>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col class="pt-1 pb-0 d-flex px-6">
+          <v-icon class="mr-9">
+            $vuetify.icons.transport-1
           </v-icon>
 
           <div class="flex-grow-1" style="max-width: 428px">
@@ -169,57 +223,10 @@
           </div>
         </v-col>
       </v-row>
-
-      <v-row>
-        <v-col class="pt-1 pb-0 d-flex px-6">
-          <v-icon class="mr-9">
-            mdi-map-marker
-          </v-icon>
-
-          <div>
-            <label>Location</label>
-            <FxEventLocationTypeSelect
-              :value="formData.location"
-              @input="update('location', $event)"
-            />
-
-            <template v-if="formData.location === EventLocationType.SPORTS_LOCATIONS">
-              <label for="sportLocation">Sports Location</label>
-              <v-autocomplete
-                id="sportLocation"
-                v-async-validate
-                :async-rules="[$rule.required]"
-                outlined
-                dense
-                :value="formData.sportLocationId"
-                :items="locations"
-                item-text="name"
-                item-value="id"
-                placeholder="Select Sports Location"
-                @input="update('sportLocationId', $event)"
-              />
-            </template>
-            <template v-else-if="formData.location === EventLocationType.OTHER">
-              <label for="locationOther">Sports Location</label>
-              <v-text-field
-                id="locationOther"
-                v-async-validate
-                dense
-                outlined
-                placeholder="Enter Address"
-                :async-rules="[$rule.required]"
-                :value="formData.otherLocation"
-                @input="update('otherLocation', $event)"
-              />
-            </template>
-          </div>
-        </v-col>
-      </v-row>
-
       <v-row>
         <v-col class="pt-1 pb-0 d-flex  px-6">
           <v-icon class="mr-9">
-            mdi-information-outline
+            $vuetify.icons.directory-outline
           </v-icon>
 
           <div class="flex-grow-1" style="max-width: 462px">
@@ -239,10 +246,10 @@
         <v-col class="d-flex">
           <v-spacer />
 
-          <v-btn outlined class="mr-2" @click="$emit('cancel')">
+          <v-btn outlined :ripple="false" class="mr-2" color="neutral darken-3" @click="$emit('cancel')">
             Cancel
           </v-btn>
-          <v-btn depressed color="primary" type="submit">
+          <v-btn depressed :ripple="false" color="primary" type="submit">
             Confirm
           </v-btn>
         </v-col>
@@ -253,7 +260,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { EventLocationType, TransportType } from '@/enum'
+import { EventLocationType, TransportType, EventType } from '@/enum'
 import FxInHouseEventLocationTypeSelect from '@/components/FxInHouseEventForm/FxEventLocationTypeSelect/FxInHouseEventLocationTypeSelect'
 import FxEventLocationTypeSelect from '@/components/FxEventForm/FxEventLocationTypeSelect/FxEventLocationTypeSelect'
 
@@ -274,6 +281,7 @@ export default {
   data: () => ({
     EventLocationType,
     TransportType,
+    EventType,
     FxInHouseEventLocationTypeSelect,
     locations: [],
   }),
@@ -303,6 +311,10 @@ export default {
       return Object.values(TransportType).map((type) => {
         return { value: type, text: this.$t(`TRANSPORT_FROM.${type}`) }
       })
+    },
+
+    isTraining () {
+      return this.formData.eventType === EventType.TRAINING
     },
   },
 

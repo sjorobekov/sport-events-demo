@@ -24,6 +24,7 @@
       :event.sync="formData.event"
       :me.sync="formData.me"
       :opponent.sync="formData.opponent"
+      :repeats.sync="formData.repeats"
       :hide-event-type="items.length > 0"
       @cancel="cancel"
       @save="save"
@@ -95,8 +96,10 @@ export default {
       event: {
         fixtureType: FixtureType.FRIENDLY,
         location: EventLocationType.SPORTS_LOCATIONS,
+        repeats: false,
         eventType: EventType.FIXTURE,
       },
+      repeats: [],
     },
     items: [],
     override: [],
@@ -183,9 +186,21 @@ export default {
         }
 
         this.formVisible = false
-        this.items.push({
-          ...this.formData,
-        })
+        if (this.formData.event.eventType === EventType.TRAINING && this.formData.repeats.length > 1) {
+          this.items = this.formData.repeats.map((item) => {
+            return {
+              ...this.formData,
+              event: {
+                ...this.formData.event,
+                date: item.value,
+              },
+            }
+          })
+        } else {
+          this.items.push({
+            ...this.formData,
+          })
+        }
       } catch (e) {
         this.$toast.error('Unknown Error')
       } finally {

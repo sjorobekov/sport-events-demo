@@ -19,10 +19,11 @@
               v-bind="attrs"
               v-on="on"
             >
-              <v-icon>mdi-dots-horizontal</v-icon>
+              <v-icon color="neutral darken-1">
+                mdi-dots-horizontal
+              </v-icon>
             </v-btn>
           </template>
-
           <v-list>
             <v-list-item
               :to="{
@@ -30,19 +31,19 @@
                 params: { id: selectedItem.id },
               }"
             >
-              <v-list-item-title>Edit</v-list-item-title>
+              <v-list-item-title>Edit Announcement</v-list-item-title>
             </v-list-item>
             <v-list-item @click="removeHandler">
-              <v-list-item-title>Delete</v-list-item-title>
+              <v-list-item-title>Delete Announcement</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
         <v-btn
           v-if="canEditOrRemoveAnnouncement(selectedItem)"
           depressed
-          color="primary"
+          color="neutral darken-3"
           outlined
-          class="hidden-md-and-up mt-4"
+          class="hidden-md-and-up mt-4 mobile-button"
           block
           :to="{
             name: 'announcements-id-edit',
