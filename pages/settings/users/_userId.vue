@@ -10,7 +10,7 @@
       </h1>
     </div>
 
-    <v-card v-else flat outlined class="pb-8 px-6 pt-6">
+    <v-card v-else class="pb-8 px-6 pt-6">
       <v-card-title class="px-0 text-p3 font-weight-bold pb-1">
         Profile Picture
       </v-card-title>
@@ -19,14 +19,14 @@
         <v-row>
           <v-col
             cols="12"
-            md="5"
+            lg="5"
             class="text-p2 info--text px-0"
           >
             Select profile picture for the user. Supported formats: jpeg, png, webp.
           </v-col>
           <v-col
             cols="12"
-            md="7"
+            lg="7"
           >
             <FxImageUploadForm :value="formData" :loading="uploading" @input="uploadAvatar">
               <template #icon>
@@ -50,14 +50,14 @@
         <v-row>
           <v-col
             cols="12"
-            md="5"
+            lg="5"
             class="text-p2 info--text px-0"
           >
             It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
           </v-col>
           <v-col
             cols="12"
-            md="7"
+            lg="7"
             class="pr-0"
           >
             <FxProfileForm v-model="formData" :disabled="loading" />
@@ -73,14 +73,14 @@
         <v-row>
           <v-col
             cols="12"
-            md="5"
+            lg="5"
             class="text-p2 info--text px-0"
           >
             It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
           </v-col>
           <v-col
             cols="12"
-            md="7"
+            lg="7"
             class="pr-0"
           >
             <FxAccountSportContactForm v-model="formData" :disabled="loading" />
@@ -96,14 +96,14 @@
         <v-row>
           <v-col
             cols="12"
-            md="5"
+            lg="5"
             class="text-p2 info--text px-0"
           >
             Short descriptive text to go here
           </v-col>
           <v-col
             cols="12"
-            md="7"
+            lg="7"
             class="text-right pr-0"
           >
             <v-btn color="info darken-1" outlined @click="reset()">
