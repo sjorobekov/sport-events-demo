@@ -2,8 +2,8 @@
   <div>
     <v-row>
       <v-col>
-        <h3>{{ school.name }}</h3>
-        <div class="subtitle-1">
+        <h3 class="neutral--text text--darken-4">{{ school.name }}</h3>
+        <div class="subtitle-1 neutral--text text--darken-3">
           {{ location }}
         </div>
       </v-col>
@@ -21,7 +21,7 @@
             class="mx-1 mb-0"
           >
             {{ item.text }}
-            <v-icon color="info lighten-1" v-text="item.icon" />
+            <v-icon color="neutral darken-1" v-text="item.icon" />
           </v-tab>
 
           <v-menu
@@ -34,9 +34,10 @@
                 role="button"
                 :ripple="false"
                 v-on="on"
+                class="mb-0"
               >
                 More
-                <v-icon color="info lighten-1">
+                <v-icon color="neutral darken-1">
                   $vuetify.icons.chevronDown
                 </v-icon>
               </v-tab>
@@ -51,10 +52,10 @@
                 :ripple="false"
               >
                 <v-list-item-icon>
-                  <v-icon color="info lighten-1" v-text="item.icon" />
+                  <v-icon color="neutral darken-1" v-text="item.icon" />
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title class="text--info text--darken-1" v-text="item.text" />
+                  <v-list-item-title class="neutral--text text--darken-3" v-text="item.text" />
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -78,10 +79,10 @@
                 :ripple="false"
               >
                 <v-list-item-icon class="mr-4">
-                  <v-icon color="info lighten-1" v-text="item.icon" />
+                  <v-icon color="neutral darken-1" v-text="item.icon" />
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title class="text--info text--darken-1" v-text="item.text" />
+                  <v-list-item-title class="neutral--text text--darken-3" v-text="item.text" />
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -161,7 +162,7 @@ export default {
 }
 .settings-menu /deep/ .link-active  {
   box-shadow: inset -4px 0 0 0 var(--v-primary-base) !important;
-  background-color: var(--v-info-lighten4)!important;
+  background-color: var(--v-neutral-lighten2)!important;
 }
 .theme--light.v-tabs .v-tab:hover:before {
     opacity: 0;
@@ -181,7 +182,7 @@ export default {
 }
 
 .settings-menu-item:hover {
-  background-color: var(--v-info-lighten5)!important;
+  background-color: var(--v-neutral-lighten2)!important;
 }
 .theme--light.v-list-item:before, .theme--light.v-list-item:hover:before, .theme--light.v-list-item:focus:before {
   opacity: 0;
