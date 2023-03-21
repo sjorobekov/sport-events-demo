@@ -2,7 +2,7 @@
   <div>
     <v-row>
       <v-col>
-        <h3 class="neutral--text text--darken-4">{{ school.name }}</h3>
+        <h3 class="neutral--text text--darken-4 font-weight-bold school-name">{{ school.name }}</h3>
         <div class="subtitle-1 neutral--text text--darken-3">
           {{ location }}
         </div>
@@ -186,5 +186,8 @@ export default {
 }
 .theme--light.v-list-item:before, .theme--light.v-list-item:hover:before, .theme--light.v-list-item:focus:before {
   opacity: 0;
+}
+.school-name {
+  line-height: 1;
 }
 </style>
