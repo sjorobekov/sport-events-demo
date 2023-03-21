@@ -32,7 +32,7 @@
           :value="formData.results[0].score"
           @input="update('results[0].score', $event)"
         />
-        <v-btn height="52" block depressed @click="increaseScore">
+        <v-btn height="52" block depressed @click="increaseScore" class="disable-dbl-tap-zoom">
           +1
         </v-btn>
       </v-col>
@@ -49,7 +49,7 @@
           :value="formData.results[0].opponentScore"
           @input="update('results[0].opponentScore', $event)"
         />
-        <v-btn height="52" block depressed @click="increaseOpponentScore">
+        <v-btn height="52" block depressed @click="increaseOpponentScore" class="disable-dbl-tap-zoom">
           +1
         </v-btn>
       </v-col>
