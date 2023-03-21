@@ -247,6 +247,7 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 .v-btn--outlined {
   border: thin solid var(--v-neutral-lighten1);
   background: white;
+  transition: border ease 0.2s;
 }
 
 .link {
@@ -276,4 +277,16 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 }
 .theme--light.v-data-table .v-data-footer {
   border-top: solid 1px var(--v-neutral-lighten1)!important;
+}
+.v-btn--outlined:hover {
+  border-color: var(--v-primary-base);
+}
+.v-btn--outlined::before {
+  display: none;
+}
+.v-btn:hover {
+  box-shadow: 0 2px 1px 0 rgba(0,0,0,.05);
+}
+.theme--light.v-btn:hover::before {
+  opacity: 0.2;
 }
