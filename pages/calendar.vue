@@ -41,7 +41,7 @@
               :value="mobileFilterBadges"
               overlap
             >
-              <v-btn height="40" width="40" icon color="info lighten-1" @click="showFilters = !showFilters">
+              <v-btn height="40" width="40" icon color="neutral darken-1" @click="showFilters = !showFilters">
                 <v-icon>$vuetify.icons.settings</v-icon>
               </v-btn>
             </v-badge>
