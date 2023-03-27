@@ -3,7 +3,7 @@
     <template #title>
       <ListItem>
         <template #title>
-          {{ me.team.name }}
+          {{ name }}
         </template>
         <template v-if="opponent && opponent.school" #subtitle>
           vs {{ opponent.school.name }}
@@ -184,6 +184,9 @@ export default {
     },
     lead () {
       return this.me.lead
+    },
+    name () {
+      return this.me.team?.name
     },
     transportTo () {
       if (this.me.transportTo === TransportType.OTHER) {

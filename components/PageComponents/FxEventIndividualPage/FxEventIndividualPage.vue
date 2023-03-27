@@ -18,7 +18,7 @@
 
         <v-list-item-action>
           <div>
-            <v-btn icon class="hidden-sm-and-down">
+            <v-btn icon class="hidden-sm-and-down d-print-none" @click="print()">
               <v-icon>mdi-printer-outline</v-icon>
             </v-btn>
             <v-menu>
@@ -125,6 +125,13 @@ export default {
       }).catch(() => {
         this.$toast.error('Unknown Error')
       })
+    },
+    print () {
+      if (navigator.userAgent.match(/safari/i)) {
+        document.execCommand('print', false, null)
+      } else {
+        window.print()
+      }
     },
   },
 }

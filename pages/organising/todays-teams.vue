@@ -9,8 +9,8 @@
       <v-col cols="12" sm="6" md="5">
         <FxDateRangePicker v-model="filter" />
       </v-col>
-      <v-col md="7" class="text-right hidden-sm-and-down">
-        <v-btn outlined style="background: white;" color="info base">
+      <v-col md="7" class="text-right hidden-sm-and-down d-print-none">
+        <v-btn outlined style="background: white;" color="info base" @click="print()">
           <v-icon>mdi-printer-outline</v-icon>
           Print Team Sheets
         </v-btn>
@@ -88,6 +88,15 @@ export default {
       startDate: DateTime.fromFormat(this.$route.query.startDate || DateTime.now().toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
       endDate: DateTime.fromFormat(this.$route.query.endDate || DateTime.now().plus({ month: 1 }).toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
     }
+  },
+  methods: {
+    print () {
+      if (navigator.userAgent.match(/safari/i)) {
+        document.execCommand('print', false, null)
+      } else {
+        window.print()
+      }
+    },
   },
 }
 </script>

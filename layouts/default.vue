@@ -1,13 +1,13 @@
 <template>
   <v-app>
-    <AppBar v-model="drawer" />
+    <AppBar v-model="drawer" class="d-print-none" />
     <v-main>
-      <FxNavigationDrawer v-model="drawer" :permanent="drawerPermanent" :right="isMobile" :hide-logo="isMobile" />
+      <FxNavigationDrawer v-model="drawer" :permanent="drawerPermanent" :right="isMobile" :hide-logo="isMobile" class="d-print-none" />
       <v-container>
         <nuxt />
       </v-container>
 
-      <FxBottomNav v-if="isMobile" v-model="drawer" />
+      <FxBottomNav v-if="isMobile" v-model="drawer" class="d-print-none" />
     </v-main>
   </v-app>
 </template>
@@ -65,4 +65,7 @@ export default {
 @media #{map-get($display-breakpoints, 'md-and-up')}
   .v-main
     padding-top: 48px!important
+@media print
+  .v-main
+    padding: 0!important
 </style>
