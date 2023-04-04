@@ -277,6 +277,9 @@ export default {
     this.items = [...events, ...inHouseMatches].sort((a, b) => {
       return `${a.date}T${a.startTime}` > `${b.date}T${b.startTime}` ? 1 : -1
     })
+
+    const date = this.dots.find(item => item >= DateTime.now().toFormat(DATE_FORMAT)) || this.dots[this.dots.length - 1]
+    this.$nextTick(() => this.scrollTo(date))
   },
 
   computed: {
@@ -284,6 +287,7 @@ export default {
       contextSchoolId: 'context/schoolId',
       canCreateEvent: 'user/acl/canCreateEvent',
       isLoggedIn: 'context/isLoggedIn',
+      currentSeason: 'seasons/current',
     }),
 
     hasEvents () {
@@ -381,8 +385,8 @@ export default {
       opponentIds: this.applyQuery(this.$route.query.opponentIds),
       ageGroups: this.applyQuery(this.$route.query.ageGroups),
       locations: this.applyQuery(this.$route.query.locations),
-      startDate: DateTime.fromFormat(this.$route.query.startDate || DateTime.now().toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
-      endDate: DateTime.fromFormat(this.$route.query.endDate || DateTime.now().plus({ month: 1 }).toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
+      startDate: DateTime.fromFormat(this.$route.query.startDate || this.currentSeason.start, DATE_FORMAT).toJSDate(),
+      endDate: DateTime.fromFormat(this.$route.query.endDate || this.currentSeason.end, DATE_FORMAT).toJSDate(),
     }
 
     this.showFilters = this.filter.leadIds.length || this.filter.eventTypes.length || this.filter.opponentIds.length || this.filter.ageGroups.length || this.filter.locations.length
@@ -402,8 +406,7 @@ export default {
         return
       }
       try {
-        const date = val.toFormat(DATE_FORMAT)
-        this.$vuetify.goTo(`#date-${date}`, { offset: 190 })
+        this.$vuetify.goTo(`#date-${val}`, { offset: 190 })
       } catch (e) {
 
       }
