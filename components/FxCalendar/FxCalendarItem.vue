@@ -1,5 +1,5 @@
 <template>
-  <div class="text-p1 info--text text--darken-1 font-weight-bold text-center" style="height: 104px; width: 40px" role="radio" @click="$emit('click', $event)">
+  <div class="text-p1 neutral--text text--darken-2 font-weight-bold text-center date-text" style="height: 104px; width: 40px" role="radio" @click="$emit('click', $event)">
     <div class="mb-2">
       {{ day }}
     </div>
@@ -9,7 +9,7 @@
     <div class="">
       {{ month }}
     </div>
-    <v-icon color="error" class="mt-1 mr-1" x-small :class="{ hidden: !hasEvents }">
+    <v-icon color="error" class="mt-1" x-small :class="{ hidden: !hasEvents }">
       $vuetify.icons.ellipse
     </v-icon>
     <div class="selected mt-1" :class="{ active }" />
@@ -76,5 +76,11 @@ export default {
 }
 .hidden {
   visibility: hidden;
+}
+.date-text {
+  transition: color ease .2s;
+}
+.date-text:hover {
+  color: var(--v-primary-base)!important;
 }
 </style>

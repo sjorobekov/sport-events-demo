@@ -20,12 +20,12 @@
     </v-slide-item>
 
     <template #next>
-      <v-icon class="pb-7" x-large color="info lighten-2">
+      <v-icon class="pb-7" x-large color="neutral">
         mdi-chevron-right
       </v-icon>
     </template>
     <template #prev>
-      <v-icon class="pb-7" x-large color="info lighten-2">
+      <v-icon class="pb-7" x-large color="neutral">
         mdi-chevron-left
       </v-icon>
     </template>
