@@ -21,7 +21,7 @@
             <v-btn icon class="hidden-sm-and-down d-print-none" @click="print()">
               <v-icon>mdi-printer-outline</v-icon>
             </v-btn>
-            <v-menu>
+            <v-menu v-if="isLoggedIn">
               <template #activator="{ on, attrs }">
                 <v-btn icon v-bind="attrs" v-on="on">
                   <v-icon>
