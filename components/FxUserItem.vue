@@ -1,6 +1,6 @@
 <template>
   <v-list-item v-bind="$props" class="px-0">
-    <v-list-item-avatar>
+    <v-list-item-avatar class="mr-3 mb-1">
       <FxAvatar :value="item.avatar" />
     </v-list-item-avatar>
     <v-list-item-content>

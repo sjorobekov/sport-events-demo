@@ -2,34 +2,34 @@
   <div>
     <v-row>
       <v-col cols="3">
-        <div class="text-center text-p1 info--text text--darken-1">
+        <div class="text-center text-p1 neutral--text text--darken-3">
           Played
         </div>
-        <div class="text-center text-p3 info--text text--darken-3">
+        <div class="text-center text-p3 neutral--text text--darken-4">
           {{ totalGames }}
         </div>
       </v-col>
       <v-col cols="3">
-        <div class="text-center text-p1 info--text text--darken-1">
+        <div class="text-center text-p1 neutral--text text--darken-3">
           Won
         </div>
-        <div class="text-center text-p3 info--text text--darken-3">
+        <div class="text-center text-p3 neutral--text text--darken-4">
           {{ won }}
         </div>
       </v-col>
       <v-col cols="3">
-        <div class="text-center text-p1 info--text text--darken-1">
+        <div class="text-center text-p1 neutral--text text--darken-3">
           Drawn
         </div>
-        <div class="text-center text-p3 info--text text--darken-3">
+        <div class="text-center text-p3 neutral--text text--darken-4">
           {{ drawn }}
         </div>
       </v-col>
       <v-col cols="3">
-        <div class="text-center text-p1 info--text text--darken-1">
+        <div class="text-center text-p1 neutral--text text--darken-3">
           Lost
         </div>
-        <div class="text-center text-p3 info--text text--darken-3">
+        <div class="text-center text-p3 neutral--text text--darken-4">
           {{ lost }}
         </div>
       </v-col>
