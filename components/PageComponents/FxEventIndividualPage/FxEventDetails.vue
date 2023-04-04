@@ -223,7 +223,7 @@ export default {
         return this.me.transportFromOther
       }
 
-      return this.$t(`TRANSPORT_FROM.${this.me.transportTo}`)
+      return this.$t(`TRANSPORT_FROM.${this.me.transportFrom}`)
     },
 
     dateOrStartTimeChanged () {
