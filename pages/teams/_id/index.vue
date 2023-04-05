@@ -66,12 +66,14 @@
             <v-spacer />
 
             <div class="pt-1">
-              <v-btn v-if="canEditTeam"
-              class="hidden-sm-and-down"
-              color="neutral darken-3"
-              outlined
-              link
-              :to="{ name: 'teams-id-edit', params: { id: team.id } }">
+              <v-btn
+                v-if="canEditTeam"
+                class="hidden-sm-and-down"
+                color="neutral darken-3"
+                outlined
+                link
+                :to="{ name: 'teams-id-edit', params: { id: team.id } }"
+              >
                 <v-icon color="neutral darken-2">
                   $vuetify.icons.edit
                 </v-icon>Edit Team
@@ -262,9 +264,9 @@ export default {
     },
 
     upcoming () {
-      return this.trainingFilter.filter((event) => {
-        return event.date >= this.today
-      })
+      return this.trainingFilter
+        .filter(event => event.date >= this.today)
+        .reverse()
     },
 
     past () {
