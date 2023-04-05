@@ -86,7 +86,7 @@ export default {
   created () {
     this.filter = {
       startDate: DateTime.fromFormat(this.$route.query.startDate || DateTime.now().toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
-      endDate: DateTime.fromFormat(this.$route.query.endDate || DateTime.now().plus({ month: 1 }).toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
+      endDate: DateTime.fromFormat(this.$route.query.endDate || DateTime.now().toFormat(DATE_FORMAT), DATE_FORMAT).toJSDate(),
     }
   },
   methods: {
