@@ -104,8 +104,8 @@
             </template>
           </ListItem>
         </v-col>
-        <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
-          <ListItem v-if="!me.noNeedTransport">
+        <v-col v-if="!me.noNeedTransport" cols="12" class="border-bottom border-right pt-1 pb-0">
+          <ListItem>
             <template #icon>
               <v-icon>$vuetify.icons.transport-1</v-icon>
             </template>
