@@ -2,7 +2,7 @@
   <div>
     <v-row class="mt-2 mt-md-8">
       <v-col cols="12" sm="12" lg="9">
-        <v-card :flat="!hasPhoto" :class="!hasPhoto ? 'no-photo' : null">
+        <v-card :flat="!hasPhoto" :class="!hasPhoto && 'no-photo'">
           <v-img
             class="white--text align-end"
             :height="photoHeight"
@@ -12,10 +12,10 @@
             <div class="d-flex">
               <v-list-item :dark="hasPhoto" :class="{ 'pa-0': !hasPhoto }">
                 <v-list-item-content>
-                  <v-list-item-title class="text-h3">
+                  <v-list-item-title class="text-h3" :class="!hasPhoto && 'neutral--text text--darken-4'">
                     {{ team.name }}
                   </v-list-item-title>
-                  <v-list-item-subtitle class="text-subheading font-weight-bold">
+                  <v-list-item-subtitle class="text-subheading font-weight-bold" :class="!hasPhoto && 'neutral--text text--darken-3'">
                     {{ sport.name }} &bull; {{ season.name }}
                   </v-list-item-subtitle>
                 </v-list-item-content>
