@@ -290,3 +290,8 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 .theme--light.v-btn:hover::before {
   opacity: 0.2;
 }
+
+.v-menu__content {
+  box-shadow: 0 0 4px rgba(0,0,0,.04), 0 8px 16px rgba(0,0,0,.08)!important;
+  border-radius: 6px!important;
+}
