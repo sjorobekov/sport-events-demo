@@ -1,7 +1,7 @@
 <template>
   <FxCalendarItem :sport="sport" :lead="lead" :to="{ name: 'in-house-competitionId-matches-matchId', params: { matchId: value.id, competitionId: competition.id } }">
     <template #subtitle>
-      <span class="text-p2 info--text text--lighten-1">In-House {{ competition.name }}</span>
+      <span class="text-p2 neutral--text text--darken-2">({{ competition.name }})</span>
     </template>
     <template v-if="value.overallResult" #status>
       <FxInHouseMatchStatus :overall-result="value.overallResult" />
@@ -9,7 +9,7 @@
     <template #center>
       <v-list-item class="text-md-right">
         <v-list-item-content>
-          <v-list-item-title class="font-weight-bold info--text text--darken-3">
+          <v-list-item-title class="font-weight-bold neutral--text text--darken-4">
             All Houses
           </v-list-item-title>
         </v-list-item-content>
@@ -25,7 +25,7 @@
 
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="text-p2 font-weight-bold info--text text--darken-3">
+          <v-list-item-title class="text-p2 font-weight-bold neutral--text text--darken-4">
             {{ event.name || competition.name }}
           </v-list-item-title>
         </v-list-item-content>
@@ -34,18 +34,18 @@
     <template #time>
       <div>
         <div v-if="value.startTime" class="d-inline-block pr-8">
-          <v-list-item-title class="text-p2 info--text text--darken-4">
+          <v-list-item-title class="text-p2 neutral--text text--darken-4">
             {{ value.startTime }}
           </v-list-item-title>
-          <v-list-item-subtitle class="text-p1 info--text">
+          <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
             Start Time
           </v-list-item-subtitle>
         </div>
         <div class="d-inline-block pr-8">
-          <v-list-item-title class="text-p2 info--text text--darken-4">
+          <v-list-item-title class="text-p2 neutral--text text--darken-4">
             {{ value.finishTime }}
           </v-list-item-title>
-          <v-list-item-subtitle class="text-p1 info--text">
+          <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
             Finish Time
           </v-list-item-subtitle>
         </div>

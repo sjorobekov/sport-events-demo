@@ -3,21 +3,21 @@
     <template #status>
       <v-chip
         v-if="me.overallResult === EventResult.TO_BE_PLAYED && isMobile"
-        color="info lighten-2"
+        color="neutral lighten-1"
         outlined
         dark
         label
-        class="pr-3 radius-6 height-24"
+        class="pr-3 radius-16 height-24"
       >
-        <span class="info--text">{{ event.startTime }}</span>
+        <span class="neutral--text text--darken-3">{{ event.startTime }}</span>
       </v-chip>
       <FxEventStatus v-else-if="me.overallResult && canSeeResults" :overall-result="me.overallResult" />
     </template>
     <template #left>
       <FxTeamListItem class="px-0" :participant="me" :context-school-id="contextSchoolId" item-class="flex-row flex-md-row-reverse text-md-right">
         <template #action>
-          <v-list-item-avatar rounded width="60" class="mr-2 hidden-md-and-up" color="info lighten-4">
-            {{ left }}
+          <v-list-item-avatar rounded width="60" class="mr-2 hidden-md-and-up" color="neutral lighten-2">
+            <span class="score-text">{{ left }}</span>
           </v-list-item-avatar>
         </template>
       </FxTeamListItem>
@@ -30,15 +30,15 @@
     <template #right>
       <FxTeamListItem v-if="event.eventType === EventType.FIXTURE" class="px-0" :participant="opponent" :context-school-id="contextSchoolId">
         <template #action>
-          <v-list-item-avatar rounded width="60" class="mr-2 hidden-md-and-up" color="info lighten-4">
-            {{ right }}
+          <v-list-item-avatar rounded width="60" class="mr-2 hidden-md-and-up" color="neutral lighten-2">
+            <span class="score-text">{{ right }}</span>
           </v-list-item-avatar>
         </template>
       </FxTeamListItem>
       <FxNonFixtureItem v-else :event-type="event.eventType" :name="event.name">
         <template #action>
-          <v-list-item-avatar rounded width="60" class="mr-2 hidden-md-and-up" color="info lighten-4">
-            -
+          <v-list-item-avatar rounded width="60" class="mr-2 hidden-md-and-up" color="neutral lighten-2">
+            <span class="score-text">-</span>
           </v-list-item-avatar>
         </template>
       </FxNonFixtureItem>
@@ -46,26 +46,26 @@
     <template #time>
       <div>
         <div v-if="me.meetTime" class="d-inline-block pr-2">
-          <v-list-item-title class="text-p2 info--text text--darken-4">
+          <v-list-item-title class="text-p2 neutral--text text--darken-4">
             {{ me.meetTime }}
           </v-list-item-title>
-          <v-list-item-subtitle class="text-p1 info--text">
+          <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
             Meet Time
           </v-list-item-subtitle>
         </div>
         <div class="d-inline-block pr-2">
-          <v-list-item-title class="text-p2 info--text text--darken-4">
+          <v-list-item-title class="text-p2 neutral--text text--darken-4">
             {{ event.startTime }}
           </v-list-item-title>
-          <v-list-item-subtitle class="text-p1 info--text">
+          <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
             Start Time
           </v-list-item-subtitle>
         </div>
         <div v-if="me.returnTime" class="d-inline-block">
-          <v-list-item-title class="text-p2 info--text text--darken-4">
+          <v-list-item-title class="text-p2 neutral--text text--darken-4">
             {{ me.returnTime }}
           </v-list-item-title>
-          <v-list-item-subtitle class="text-p1 info--text">
+          <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
             Return Time
           </v-list-item-subtitle>
         </div>
@@ -193,3 +193,11 @@ export default {
   },
 }
 </script>
+<style lang="scss" scoped>
+.radius-16 {
+  border-radius: 16px!important;
+}
+.score-text {
+  color: var(--v-neutral-darken4);
+}
+</style>

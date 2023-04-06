@@ -1,6 +1,6 @@
 <template>
   <div v-if="!hasResults">
-    <v-avatar rounded height="40" width="60" color="info lighten-4">
+    <v-avatar rounded height="40" width="60" color="neutral lighten-2">
       ―
     </v-avatar>
   </div>
@@ -33,8 +33,9 @@ export default {
 .result {
   height: 40px;
   line-height: 40px;
-  background: var(--v-info-lighten4);
+  background: var(--v-neutral-lighten2);
   text-align: center;
   min-width: 60px;
+  color: var(--v-neutral-darken4);
 }
 </style>

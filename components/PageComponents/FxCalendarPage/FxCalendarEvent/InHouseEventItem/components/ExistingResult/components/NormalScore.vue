@@ -1,10 +1,10 @@
 <template>
   <div class="d-flex justify-center">
-    <v-avatar rounded height="40" width="60" class="mr-2" color="#F1F5F9">
-      {{ home }}
+    <v-avatar rounded height="40" width="60" class="mr-2" color="neutral lighten-2">
+      <span class="in-house-score">{{ home }}</span>
     </v-avatar>
-    <v-avatar rounded height="40" width="60" class="ml-2" color="#F1F5F9">
-      {{ away }}
+    <v-avatar rounded height="40" width="60" class="ml-2" color="neutral lighten-2">
+      <span class="in-house-score">{{ away }}</span>
     </v-avatar>
   </div>
 </template>
@@ -29,3 +29,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.in-house-score {
+  color: var(--v-neutral-darken4);
+}
+</style>

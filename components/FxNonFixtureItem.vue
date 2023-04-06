@@ -1,10 +1,10 @@
 <template>
   <v-list-item class="px-0">
-    <v-list-item-avatar class="mx-1">
+    <v-list-item-avatar class="mx-1 non-fixture-icon">
       <v-icon v-text="icon" />
     </v-list-item-avatar>
     <v-list-item-content>
-      <v-list-item-title class="text-p2 font-weight-bold pl-2 pl-md-0" v-text="title" />
+      <v-list-item-title class="text-p2 font-weight-bold pl-2 pl-md-0 neutral--text text--darken-4" v-text="title" />
     </v-list-item-content>
 
     <slot name="action" />
@@ -49,3 +49,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.non-fixture-icon {
+  border-radius: 0%!important;
+}
+</style>

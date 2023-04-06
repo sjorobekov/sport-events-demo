@@ -37,7 +37,7 @@
       <v-col cols="12" lg="4" class="hidden-md-and-down border-right pt-1 pb-0 d-lg-flex justify-center align-center">
         <ListItem v-if="lead">
           <template #icon>
-            <FxAvatar :size="24" :value="lead.avatar" />
+            <v-icon>$vuetify.icons.user-1</v-icon>
           </template>
           <template #title>
             {{ lead.firstname }} {{ lead.lastname }}
@@ -61,12 +61,10 @@
 <script>
 import EventContainer from './EventContainer.vue'
 import ListItem from '~/components/FxEventItem/ListItem.vue'
-import FxAvatar from '~/components/FxAvatar/FxAvatar.vue'
 
 export default {
   name: 'FxCalendarItemLayout',
   components: {
-    FxAvatar,
     ListItem,
     EventContainer,
   },

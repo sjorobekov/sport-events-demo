@@ -8,7 +8,7 @@
               <v-img :src="sport.icon" />
             </v-list-item-avatar>
             <v-list-item-content>
-              <v-list-item-title class="text-p2">
+              <v-list-item-title class="text-p2 neutral--text text--darken-2">
                 {{ sport.name }}
                 <slot name="subtitle" />
               </v-list-item-title>

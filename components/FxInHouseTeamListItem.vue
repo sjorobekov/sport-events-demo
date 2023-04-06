@@ -4,7 +4,7 @@
       <FxSchoolLogo :alt="participant.name" :color="participant.color" />
     </v-list-item-avatar>
     <v-list-item-content>
-      <v-list-item-title class="text-p2 font-weight-bold px-2">
+      <v-list-item-title class="text-p2 font-weight-bold px-2 neutral--text text--darken-4">
         {{ participant.name }}
       </v-list-item-title>
     </v-list-item-content>

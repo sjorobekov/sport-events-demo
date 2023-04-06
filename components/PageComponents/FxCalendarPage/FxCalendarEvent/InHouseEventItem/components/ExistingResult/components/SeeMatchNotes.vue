@@ -1,5 +1,5 @@
 <template>
-  <v-sheet color="#F1F5F9" height="40">
+  <v-sheet color="neutral lighten-1" height="40">
     <div style="line-height: 40px" class="text-no-wrap px-2">
       See Match Notes
     </div>
