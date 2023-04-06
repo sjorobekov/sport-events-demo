@@ -116,7 +116,7 @@ export default {
   background-color: white
   width: 220px
   height: 220px
-  box-shadow: 0px 1px 16px 5px rgba(255, 255, 255, 0.15)
+  border: 1px solid var(--v-neutral-lighten1)
 
 .school-info
   margin-top: auto
