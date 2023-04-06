@@ -3,21 +3,21 @@
     <template #title>
       Map
     </template>
-      <v-container>
-        <GmapMap
-          ref="mapRef"
-          :center="mapCenter"
-          :zoom="zoom"
-          style="height: 250px"
-          :options="mapOptions"
-          class="event-map"
-        >
-          <GmapMarker
-            clickable
-            :position="coordinates"
-          />
-        </GmapMap>
-      </v-container>
+    <v-container>
+      <GmapMap
+        ref="mapRef"
+        :center="mapCenter"
+        :zoom="zoom"
+        style="height: 250px"
+        :options="mapOptions"
+        class="event-map"
+      >
+        <GmapMarker
+          clickable
+          :position="coordinates"
+        />
+      </GmapMap>
+    </v-container>
   </FxEventItemCard>
 </template>
 

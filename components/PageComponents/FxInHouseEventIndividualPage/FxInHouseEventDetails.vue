@@ -64,7 +64,7 @@
         <v-col cols="12" class="border-bottom pt-1 pb-0">
           <ListItem>
             <template #icon>
-              <FxAvatar :size="24" :value="lead.avatar" />
+              <v-icon>$vuetify.icons.user-1</v-icon>
             </template>
             <template #title>
               {{ lead.firstname }} {{ lead.lastname }}
@@ -108,14 +108,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import ListItem from '@/components/FxEventItem/ListItem'
-import FxAvatar from '@/components/FxAvatar'
 import FxInHouseLocationLabel from '@/components/FxInHouseEventItem/FxInHouseLocationLabel'
 
 export default {
   name: 'FxInHouseEventDetails',
   components: {
     ListItem,
-    FxAvatar,
     FxInHouseLocationLabel,
   },
   data: () => ({

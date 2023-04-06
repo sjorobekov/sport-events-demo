@@ -84,7 +84,7 @@
           <v-col cols="12" class="pt-1 pb-0">
             <ListItem>
               <template #icon>
-                <FxAvatar :size="24" :value="lead.avatar" />
+                <v-icon>$vuetify.icons.user-1</v-icon>
               </template>
               <template #title>
                 {{ lead.firstname }} {{ lead.lastname }}
@@ -176,7 +176,6 @@
 import { mapGetters } from 'vuex'
 import { TransportType, EventType } from '@/enum'
 import ListItem from '@/components/FxEventItem/ListItem'
-import FxAvatar from '@/components/FxAvatar'
 import FxLocationLabel from '@/components/FxEventItem/FxLocationLabel'
 import FxEventItemCard from '@/components/FxEventItemCard'
 import FxEventDetailsEditForm from '@/components/FxEventDetailsEditForm'
@@ -189,7 +188,6 @@ export default {
     FxEventDetailsEditForm,
     FxEventItemCard,
     ListItem,
-    FxAvatar,
     FxLocationLabel,
   },
 

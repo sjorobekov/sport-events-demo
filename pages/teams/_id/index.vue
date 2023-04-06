@@ -67,11 +67,11 @@
 
             <div class="pt-1">
               <v-btn v-if="canEditTeam"
-              class="hidden-sm-and-down"
-              color="neutral darken-3"
-              outlined
-              link
-              :to="{ name: 'teams-id-edit', params: { id: team.id } }">
+                class="hidden-sm-and-down"
+                color="neutral darken-3"
+                outlined
+                link
+                :to="{ name: 'teams-id-edit', params: { id: team.id } }">
                 <v-icon color="neutral darken-2">
                   $vuetify.icons.edit
                 </v-icon>Edit Team

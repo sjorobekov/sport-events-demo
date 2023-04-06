@@ -2,7 +2,9 @@
   <div>
     <v-row>
       <v-col>
-        <h3 class="neutral--text text--darken-4 font-weight-bold school-name">{{ school.name }}</h3>
+        <h3 class="neutral--text text--darken-4 font-weight-bold school-name">
+          {{ school.name }}
+        </h3>
         <div class="subtitle-1 neutral--text text--darken-3">
           {{ location }}
         </div>
@@ -33,8 +35,8 @@
                 v-bind="attrs"
                 role="button"
                 :ripple="false"
-                v-on="on"
                 class="mb-0"
+                v-on="on"
               >
                 More
                 <v-icon color="neutral darken-1">
