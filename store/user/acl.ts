@@ -67,6 +67,10 @@ export const getters: GetterTree<RootState, RootState> = {
     return rootGetters['context/role']
   },
 
+  school (_, _getters, _rootState, rootGetters) {
+    return rootGetters['context/school']
+  },
+
   canCreateInHouseEvent (_, getters) {
     return [UserRole.ADMIN, UserRole.SPORTS_USER].includes(getters.role)
   },
