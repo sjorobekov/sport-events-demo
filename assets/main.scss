@@ -290,3 +290,6 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 .theme--light.v-btn:hover::before {
   opacity: 0.2;
 }
+.v-ripple__container {
+  display:none !important;
+}
