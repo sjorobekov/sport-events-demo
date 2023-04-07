@@ -15,7 +15,7 @@
 
     <div v-for="(item, i) in formData.results" :key="i">
       <div class="d-flex mt-6">
-        <div class="text-p1 info--text pr-3 line-height">
+        <div class="text-p1 neutral--text text--darken-2 pr-3 line-height">
           {{ matchLabel(i) }}
         </div>
         <v-divider class="my-4" />
@@ -30,8 +30,10 @@
 
     <v-divider class="my-4" />
 
-    <v-btn text block color="info" @click="add()">
-      <v-icon>mdi-plus-circle</v-icon> Add Another Match
+    <v-btn text block color="neutral darken-3" :ripple="false" @click="add()">
+      <v-icon color="neutral darken-1">
+        $vuetify.icons.add-all
+      </v-icon> Add Another Match
     </v-btn>
     <v-row>
       <v-col>
