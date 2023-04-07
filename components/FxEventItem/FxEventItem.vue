@@ -3,11 +3,11 @@
     <v-row v-if="!compact">
       <v-col cols="12" class="border-bottom pt-1 pb-0">
         <v-list-item class="px-0">
-          <v-list-item-avatar class="mr-3" tile size="22">
+          <v-list-item-avatar class="mr-2" tile size="24">
             <v-img :src="sport.icon" />
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title class="text-p2" v-text="sport.name" />
+            <v-list-item-title class="text-p2 neutral--text text--darken-3" v-text="sport.name" />
           </v-list-item-content>
           <v-spacer />
           <slot name="actions" />
@@ -49,7 +49,7 @@
       <v-col cols="12" sm="12" lg="4" class="border-bottom border-right pt-1 pb-0">
         <ListItem>
           <template #icon>
-            <v-icon>$vuetify.icons.calendar</v-icon>
+            <v-icon>$vuetify.icons.calendar-1</v-icon>
           </template>
           <template #title>
             <FxDateFormat :date="event.date" />
@@ -62,39 +62,39 @@
       <v-col cols="12" lg="4" class="border-bottom border-right pt-1 pb-0">
         <ListItem>
           <template #icon>
-            <v-icon>mdi-clock-outline</v-icon>
+            <v-icon>$vuetify.icons.clock-1</v-icon>
           </template>
           <template #content>
             <div>
               <div v-if="me.meetTime" class="d-inline-block pr-8">
-                <v-list-item-title class="text-p2 info--text text--darken-4">
+                <v-list-item-title class="text-p2 neutral--text text--darken-4">
                   {{ me.meetTime }}
                 </v-list-item-title>
-                <v-list-item-subtitle class="text-p1 info--text">
+                <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                   Meet Time
                 </v-list-item-subtitle>
               </div>
               <div class="d-inline-block pr-8">
-                <v-list-item-title class="text-p2 info--text text--darken-4">
+                <v-list-item-title class="text-p2 neutral--text text--darken-4">
                   {{ event.startTime }}
                 </v-list-item-title>
-                <v-list-item-subtitle class="text-p1 info--text">
+                <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                   Start Time
                 </v-list-item-subtitle>
               </div>
               <div v-if="me.returnTime" class="d-inline-block pr-8">
-                <v-list-item-title class="text-p2 info--text text--darken-4">
+                <v-list-item-title class="text-p2 neutral--text text--darken-4">
                   {{ me.returnTime }}
                 </v-list-item-title>
-                <v-list-item-subtitle class="text-p1 info--text">
+                <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                   Return Time
                 </v-list-item-subtitle>
               </div>
               <div v-if="event.endTime" class="d-inline-block">
-                <v-list-item-title class="text-p2 info--text text--darken-4">
+                <v-list-item-title class="text-p2 neutral--text text--darken-4">
                   {{ event.endTime }}
                 </v-list-item-title>
-                <v-list-item-subtitle class="text-p1 info--text">
+                <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                   End Time
                 </v-list-item-subtitle>
               </div>
@@ -105,7 +105,7 @@
       <v-col cols="12" lg="4" class="border-bottom pt-1 pb-0">
         <ListItem>
           <template #icon>
-            <FxAvatar :size="24" :value="user.avatar" />
+            <v-icon>$vuetify.icons.user-1</v-icon>
           </template>
           <template #title>
             {{ user.firstname }} {{ user.lastname }}
@@ -120,7 +120,7 @@
       <v-col cols="12" md="6" class="border-bottom border-right pt-1 pb-0">
         <ListItem>
           <template #icon>
-            <v-icon>mdi-map-marker</v-icon>
+            <v-icon>$vuetify.icons.location-1</v-icon>
           </template>
           <template #title>
             <FxLocationLabel :event="event" :me="me" />
@@ -133,23 +133,23 @@
       <v-col cols="12" sm="12" md="6" class="pt-1 pb-0">
         <ListItem v-if="!me.noNeedTransport">
           <template #icon>
-            <v-icon>$vuetify.icons.direction</v-icon>
+            <v-icon>$vuetify.icons.transport-1</v-icon>
           </template>
           <template #content>
             <div>
               <div class="d-inline-block pr-8">
-                <v-list-item-title class="text-p2 info--text text--darken-4">
+                <v-list-item-title class="text-p2 neutral--text text--darken-4">
                   {{ transportTo }}
                 </v-list-item-title>
-                <v-list-item-subtitle class="text-p1 info--text">
+                <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                   Transport To
                 </v-list-item-subtitle>
               </div>
               <div class="d-inline-block">
-                <v-list-item-title class="text-p2 info--text text--darken-4">
+                <v-list-item-title class="text-p2 neutral--text text--darken-4">
                   {{ transportFrom }}
                 </v-list-item-title>
-                <v-list-item-subtitle class="text-p1 info--text">
+                <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                   Transport From
                 </v-list-item-subtitle>
               </div>
@@ -164,7 +164,6 @@
 
 <script>
 import { TransportType, EventType } from '@/enum'
-import FxAvatar from '@/components/FxAvatar/FxAvatar'
 import ListItem from '@/components/FxEventItem/ListItem'
 import FxLocationLabel from '@/components/FxEventItem/FxLocationLabel'
 
@@ -173,7 +172,6 @@ export default {
   components: {
     FxLocationLabel,
     ListItem,
-    FxAvatar,
   },
   props: {
     event: {

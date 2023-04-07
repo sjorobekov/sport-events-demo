@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-h3 mb-6" v-text="title" />
+    <h3 class="text-h3 mb-6 neutral--text text--darken-4" v-text="title" />
     <v-form ref="confirmForm" lazy-validation>
       <v-card
         v-for="(item, index) in items"
@@ -33,13 +33,13 @@
     <v-container v-else class="mt-4 mb-8">
       <v-row>
         <v-spacer />
-        <v-btn outlined @click="goBack">
+        <v-btn outlined class="neutral--text text--darken-3" @click="goBack">
           Go Back
         </v-btn>
         <v-btn
           v-if="formData.event.eventType === EventType.FIXTURE"
           outlined
-          class="ml-2"
+          class="ml-2 neutral--text text--darken-3"
           @click="addOneMore"
         >
           Add Another Fixture

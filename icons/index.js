@@ -139,4 +139,6 @@ export default [
   'pen',
   'menu-outline',
   'menu-solid',
+  'tick-circle',
+  'warning',
 ]
