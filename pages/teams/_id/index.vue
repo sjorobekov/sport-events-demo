@@ -87,7 +87,7 @@
                 :to="{ name: 'events-add', query: { teamId: teamId, sportId: team.sportId, leadId: team.coachId, gender: team.gender, ability: team.ability, age: team.age }}"
               >
                 <v-icon>
-                  $vuetify.icons.plusOutline
+                  $vuetify.icons.add-all
                 </v-icon>Add Event
               </v-btn>
 
