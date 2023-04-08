@@ -124,6 +124,6 @@ export enum DeviceType {
 }
 
 export enum TariffPlanPeriod {
-  MONTH = 'MONTH',
-  YEAR = 'YEAR',
+  MONTH = 'month',
+  YEAR = 'year',
 }

@@ -9,10 +9,11 @@
         <v-list-item class="text-right px-0 mb-4">
           <v-list-item-content class="py-0">
             <v-list-item-title class="text-p2 font-weight-bold">
-              &#163;{{ plan.price }} - {{ $t(`TariffPlanPeriod.${plan.period}`) }}
+              &#163;{{ plan.price.GBP }} - {{ $t(`TariffPlanPeriod.${plan.period}`) }}
             </v-list-item-title>
             <v-list-item-subtitle class="text-p2">
-              Next Payment: {{ nextPayment }}
+              <span v-if="nextPayment"> Next Payment: {{ nextPayment }}</span>
+              <span v-else>&nbsp;</span>
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -39,6 +40,9 @@ export default {
 
   computed: {
     nextPayment () {
+      if (!this.details?.next_payment) {
+        return
+      }
       return DateTime.fromFormat(this.details.next_payment.date, 'yyyy-MM-dd').toFormat('dd/MM/yyyy')
     },
   },

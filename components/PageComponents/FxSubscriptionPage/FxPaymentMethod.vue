@@ -20,7 +20,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-btn class="float-right" outlined :href="details.update_url" target="_blank">
+        <v-btn v-if="details.update_url" class="float-right" outlined :href="details.update_url" target="_blank">
           Change Payment Method
         </v-btn>
       </v-col>

@@ -48,7 +48,7 @@
             <v-list-item>
               <v-list-item-content class="text-right">
                 <v-list-item-title class="text-h4">
-                  &#163;{{ plan.price }}
+                  &#163;{{ plan.price.GBP }}
                 </v-list-item-title>
                 <v-list-item-subtitle>{{ plan.period === TariffPlanPeriod.MONTH ? 'per month' : 'annually' }}</v-list-item-subtitle>
               </v-list-item-content>

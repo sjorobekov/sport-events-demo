@@ -44,6 +44,9 @@
               Date
             </th>
             <th class="text-left">
+              Details
+            </th>
+            <th class="text-left">
               Amount
             </th>
             <th class="text-right">
@@ -57,6 +60,7 @@
             :key="item.order_id"
           >
             <td><FxDateFormat :date="item.created_at" input-format="yyyy-MM-dd hh:mm:ss" output-format="dd/MM/yyyy" /></td>
+            <td>{{ item.plan.name }}, <span class="text-lowercase">{{ $t(`TariffPlanPeriod.${item.plan.period}`) }}</span></td>
             <td>&#163;{{ item.amount }}</td>
             <td class="text-right">
               <v-btn text :href="item.receipt_url" target="_blank">
@@ -86,20 +90,22 @@ export default {
 
   async asyncData ({ store }) {
     const school = store.getters['context/school']
-    const paymentDetails = await store.dispatch('api/schools/getPaymentDetails', school.id)
-    const plan = await store.dispatch('api/tariffPlans/get', school.tariffPlanId)
-    const transactions = await store.dispatch('api/schools/getTransactions', school.id)
+    const plan = school.tariffPlanId ? await store.dispatch('api/tariffPlans/get', school.tariffPlanId) : null
     return {
-      paymentDetails,
       plan,
-      transactions,
     }
   },
 
   data: () => ({
     paymentDetails: {},
     transactions: [],
+    plan: {},
   }),
+
+  async fetch () {
+    this.transactions = await this.$store.dispatch('api/schools/getTransactions', this.school.id)
+    this.paymentDetails = await this.$store.dispatch('api/schools/getPaymentDetails', this.school.id)
+  },
 
   head () {
     return {

@@ -14,10 +14,6 @@ export const actions: ActionTree<RootState, RootState> = {
     return this.$axios.$get('/api/v1/tariff_plans')
   },
 
-  create (_, payload: TariffPlan): Promise<TariffPlan> {
-    return this.$axios.$post('/api/v1/tariff_plans', payload)
-  },
-
   update (_, payload: TariffPlan): Promise<TariffPlan> {
     const { id, ...data } = payload
     return this.$axios.$put(`/api/v1/tariff_plans/${id}`, data)
@@ -29,5 +25,9 @@ export const actions: ActionTree<RootState, RootState> = {
 
   remove (_, id): Promise<void> {
     return this.$axios.$delete(`api/v1/tariff_plans/${id}`)
+  },
+
+  refresh (): Promise<TariffPlan[]> {
+    return this.$axios.$post('/api/v1/tariff_plans/refresh')
   },
 }
