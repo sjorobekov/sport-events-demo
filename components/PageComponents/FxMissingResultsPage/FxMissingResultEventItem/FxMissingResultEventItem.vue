@@ -2,18 +2,18 @@
   <v-container class="custom-child-border">
     <v-row align="center">
       <v-col class="hidden-sm-and-down" md="2">
-        <div class="info--text text-caption time text-center">
+        <div class="neutral--text text--darken-2 text-caption time text-center">
           {{ event.startTime }}
         </div>
-        <div class="info--text text--darken-1 text-caption text-center mt-2 mx-auto">
+        <div class="neutral--text text--darken-2 text-caption text-center mt-2 mx-auto">
           {{ date }}
         </div>
       </v-col>
       <v-col class="hidden-md-and-up pl-5 pb-0">
-        <div class="info--text text-caption">
+        <div class="neutral--text text--darken-2 text-caption">
           {{ event.startTime }}
         </div>
-        <div class="info--text text--darken-1 text-caption mt-2 mx-auto">
+        <div class="neutral--text text--darken-2 text-caption mt-2 mx-auto">
           {{ date }}
         </div>
       </v-col>
@@ -22,11 +22,11 @@
       </v-col>
       <v-col md="2" class="hidden-sm-and-down text-center">
         <div>
-          <v-avatar rounded size="40" class="mr-2" color="#F1F5F9">
-            -
+          <v-avatar rounded size="40" class="mr-2" color="background">
+            <span class="neutral--text text--darken-3">-</span>
           </v-avatar>
-          <v-avatar rounded size="40" class="mr-2" color="#F1F5F9">
-            -
+          <v-avatar rounded size="40" class="mr-2" color="background">
+            <span class="neutral--text text--darken-3">-</span>
           </v-avatar>
         </div>
       </v-col>
@@ -35,7 +35,7 @@
         <FxNonFixtureItem v-else :event-type="event.eventType" :name="event.name" />
       </v-col>
       <v-col md="2" class="text-center">
-        <v-btn link class="d-flex d-md-inline-flex" outlined :to="{ name: 'events-eventId', params: { eventId: event.id } }">
+        <v-btn link class="d-flex d-md-inline-flex neutral--text text--darken-2" outlined :to="{ name: 'events-eventId', params: { eventId: event.id } }">
           Add Result
         </v-btn>
       </v-col>
@@ -97,7 +97,7 @@ export default {
 
 .time {
   padding: 4px;
-  border: 1px solid var(--v-info-lighten1);
+  border: 1px solid var(--v-neutral-lighten1);
   border-radius: 6px;
   width: 44px;
   height: 22px;
