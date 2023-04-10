@@ -52,7 +52,7 @@ label {
   color: var(--v-neutral-darken1);
 }
 
-tr:hover{ background-color: var(--v-info-lighten5)!important; }
+tr:hover{ background-color: var(--v-neutral-lighten3)!important; }
 
 // Reversed input variant
 .v-input--reverse .v-input__slot {
@@ -289,4 +289,7 @@ tr:hover{ background-color: var(--v-info-lighten5)!important; }
 }
 .theme--light.v-btn:hover::before {
   opacity: 0.2;
+}
+.v-ripple__container {
+  display:none !important;
 }

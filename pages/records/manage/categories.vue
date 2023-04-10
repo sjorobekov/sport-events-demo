@@ -1,8 +1,8 @@
 <template>
-  <v-card flat outlined>
+  <v-card>
     <v-list-item>
       <v-list-item-content>
-        <v-list-item-title class="text-h4">
+        <v-list-item-title class="text-h4 neutral--text text--darken-4">
           Categories
         </v-list-item-title>
         <v-list-item-subtitle />
@@ -13,9 +13,10 @@
           dark
           color="primary"
           link
+          :ripple="false"
           :to="{ name: 'records-categories-add' }"
         >
-          <v-icon>$vuetify.icons.plusOutline</v-icon>Add New Record Category
+          <v-icon>$vuetify.icons.add-all</v-icon>Add New Record Category
         </v-btn>
       </v-list-item-action>
     </v-list-item>
@@ -29,23 +30,23 @@
         <template #item.action="{ item }">
           <v-menu>
             <template #activator="{ on, attrs }">
-              <v-btn icon v-bind="attrs" v-on="on">
-                <v-icon color="info lighten-1">
+              <v-btn icon v-bind="attrs" v-on="on" :ripple="false">
+                <v-icon color="neutral darken-1">
                   $vuetify.icons.threeDots
                 </v-icon>
               </v-btn>
             </template>
             <v-list class="grey lighten-3">
-              <v-list-item link :to="{ name: 'records-categories-id', params: { id: item.id } }">
+              <v-list-item link :to="{ name: 'records-categories-id', params: { id: item.id } }" :ripple="false">
                 <v-list-item-content>
-                  <v-list-item-title class="text--info text--darken-1">
+                  <v-list-item-title class="neutral--text text--darken-3">
                     Edit Category
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item @click="remove(item)">
+              <v-list-item @click="remove(item)" :ripple="false">
                 <v-list-item-content>
-                  <v-list-item-title class="text--info text--darken-1">
+                  <v-list-item-title class="neutral--text text--darken-3">
                     Delete Category
                   </v-list-item-title>
                 </v-list-item-content>

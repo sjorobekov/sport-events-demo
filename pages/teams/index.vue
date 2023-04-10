@@ -7,7 +7,7 @@
         </h1>
       </v-col>
       <v-col v-else cols="7" sm="9" lg="10">
-        <h1 class="text-h4s text-md-h3">
+        <h1 class="text-h4s text-md-h3 neutral--text text--darken-4">
           Teams
         </h1>
       </v-col>
@@ -42,8 +42,8 @@
         />
       </v-col>
       <v-col v-if="canCreateTeam" cols="6" sm="4" md="4" class="text-right">
-        <v-btn depressed color="primary" link :to="{ name: 'teams-add' }">
-          <v-icon>$vuetify.icons.plusOutline</v-icon>
+        <v-btn depressed color="primary" :ripple="false" link :to="{ name: 'teams-add' }">
+          <v-icon>$vuetify.icons.add-all</v-icon>
           Add Team
         </v-btn>
       </v-col>
@@ -51,7 +51,7 @@
     <template v-if="!$fetchState.pending && !sports.length">
       <v-col class="d-flex flex-column justify-center align-center pt-4 pt-md-12">
         <v-img width="100" :src="noData" class="mb-3" />
-        <div class="text-p3 text-center info--text text--darken-3 mb-4">
+        <div class="text-p3 text-center neutral--text text--darken-3 mb-4">
           No Teams
         </div>
       </v-col>

@@ -147,7 +147,7 @@
         <v-divider class="my-5" />
 
         <div class="d-flex justify-space-between">
-          <h3 class="text-p1 info--text mb-3 home-heading">
+          <h3 class="text-p1 mb-3 home-heading">
             Sports Contacts
           </h3>
           <nuxt-link class="text-decoration-none home-link" :to="{ name: 'directory-sports-contacts' }">

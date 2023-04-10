@@ -42,18 +42,18 @@
             <template #content>
               <div>
                 <div class="d-inline-block pr-8">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
+                  <v-list-item-title class="text-p2 neutral--text text--darken-4">
                     {{ match.startTime }}
                   </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
+                  <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                     Start Time
                   </v-list-item-subtitle>
                 </div>
                 <div v-if="match.finishTime" class="d-inline-block">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
+                  <v-list-item-title class="text-p2 neutral--text text--darken-4">
                     {{ match.finishTime }}
                   </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
+                  <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                     Finish Time
                   </v-list-item-subtitle>
                 </div>

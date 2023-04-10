@@ -40,10 +40,17 @@
 
           <template #actions>
             <div>
-              <v-btn outlined link exact @click="$router.back()">
+              <v-btn
+                outlined
+                link
+                exact
+                class="neutral--text text--darken-3"
+                :ripple="false"
+                @click="$router.back()"
+              >
                 Cancel
               </v-btn>
-              <v-btn depressed color="primary" @click="save()">
+              <v-btn depressed color="primary" :ripple="false" @click="save()">
                 Confirm
               </v-btn>
             </div>
@@ -52,7 +59,7 @@
           <v-container>
             <v-row>
               <v-col cols="12" class="pt-6">
-                <v-sheet v-if="!sheet.length" height="216" color="info lighten-5">
+                <v-sheet v-if="!sheet.length" height="216" color="background" class="radius-8">
                   <v-row
                     align="center"
                     justify="center"
@@ -63,11 +70,11 @@
                       cols="12"
                     >
                       <div class="mb-4">
-                        <v-icon size="88" color="info darken-2">
-                          mdi-account-group
+                        <v-icon size="64" color="neutral darken-2">
+                          $vuetify.icons.user-search
                         </v-icon>
                       </div>
-                      <div class="text-p2 info--text text--darken-2 font-weight-bold mb-2">
+                      <div class="text-p2 neutral--text text--darken-4 font-weight-bold mb-2">
                         No Students Selected
                       </div>
                     </v-col>
@@ -75,7 +82,7 @@
                 </v-sheet>
 
                 <template v-else>
-                  <div class="text-center text-p2 font-weight-bold info--text text--darken-2 py-4">
+                  <div class="text-center text-p2 font-weight-bold neutral--text text--darken-4 py-4">
                     {{ $tc('page.FxTeamSheetEditPage.STUDENTS_SELECTED', sheet.length) }}
                   </div>
                   <v-simple-table class="sheet-table">
@@ -87,12 +94,12 @@
                         <td class="pl-0">
                           <FxStudentListItem :student-id="studentId">
                             <template #icon>
-                              <v-icon color="info lighten-2">
+                              <v-icon color="neutral" class="draggable">
                                 $vuetify.icon.dragVertical
                               </v-icon>
                             </template>
                             <template #action>
-                              <v-btn icon color="info lighten-1" @click="remove(i)">
+                              <v-btn icon color="neutral" class="remove-button" @click="remove(i)">
                                 <v-icon>mdi-window-close</v-icon>
                               </v-btn>
                             </template>
@@ -111,10 +118,10 @@
       <template #actions>
         <div class="d-flex px-2 pb-4">
           <v-spacer />
-          <v-btn outlined class="mr-2" @click="$router.back()">
+          <v-btn outlined color="neutral darken-3" class="mr-2" :ripple="false" @click="$router.back()">
             Cancel
           </v-btn>
-          <v-btn depressed color="primary" @click="save()">
+          <v-btn depressed color="primary" :ripple="false" @click="save()">
             Confirm
           </v-btn>
         </div>
@@ -249,5 +256,16 @@ export default {
     border-right: none;
   }
 }
-
+.radius-8 {
+  border-radius: 8px!important;
+}
+.remove-button:hover {
+  color: var(--v-error-base)!important;
+}
+.draggable {
+    cursor: grab;
+}
+.draggable:active {
+    cursor: grabbing!important;
+}
 </style>

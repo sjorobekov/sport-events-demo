@@ -1,16 +1,16 @@
 <template>
   <div class="mt-4 mt-md-n1">
-    <h1 class="text-h4s text-md-h3">
+    <h1 class="text-h4s text-md-h3 neutral--text text--darken-4">
       Missing Results
     </h1>
-    <p class="text-p3 info--text text--darken-1 mb-6">
+    <p class="text-p3 neutral--text text--darken-3 mb-6">
       {{ $tc('page.MissingResults.MISSING_RESULTS', count) }}
     </p>
     <FxSportExpansionPanel v-for="sport in sports" :key="sport.id" class="mb-4" :item="sport">
       <FxMissingResultEventItem v-for="event in eventsBySport[sport.id]" :key="event.id" :value="event" />
 
       <template #actions>
-        <div class="text-p2 info--text text-right">
+        <div class="text-p2 neutral--text text--darken-2 text-right">
           {{ $tc('page.MissingResults.MISSING_RESULTS', eventsBySport[sport.id].length) }}
         </div>
       </template>

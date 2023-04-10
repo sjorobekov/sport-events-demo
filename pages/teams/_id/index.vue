@@ -2,7 +2,7 @@
   <div>
     <v-row class="mt-2 mt-md-8">
       <v-col cols="12" sm="12" lg="9">
-        <v-card :flat="!hasPhoto" :class="!hasPhoto ? 'no-photo' : null">
+        <v-card :flat="!hasPhoto" :class="!hasPhoto && 'no-photo'">
           <v-img
             class="white--text align-end"
             :height="photoHeight"
@@ -12,10 +12,10 @@
             <div class="d-flex">
               <v-list-item :dark="hasPhoto" :class="{ 'pa-0': !hasPhoto }">
                 <v-list-item-content>
-                  <v-list-item-title class="text-h3">
+                  <v-list-item-title class="text-h3" :class="!hasPhoto && 'neutral--text text--darken-4'">
                     {{ team.name }}
                   </v-list-item-title>
-                  <v-list-item-subtitle class="text-subheading font-weight-bold">
+                  <v-list-item-subtitle class="text-subheading font-weight-bold" :class="!hasPhoto && 'neutral--text text--darken-3'">
                     {{ sport.name }} &bull; {{ season.name }}
                   </v-list-item-subtitle>
                 </v-list-item-content>
@@ -66,12 +66,14 @@
             <v-spacer />
 
             <div class="pt-1">
-              <v-btn v-if="canEditTeam"
+              <v-btn
+                v-if="canEditTeam"
                 class="hidden-sm-and-down"
                 color="neutral darken-3"
                 outlined
                 link
-                :to="{ name: 'teams-id-edit', params: { id: team.id } }">
+                :to="{ name: 'teams-id-edit', params: { id: team.id } }"
+              >
                 <v-icon color="neutral darken-2">
                   $vuetify.icons.edit
                 </v-icon>Edit Team
@@ -85,23 +87,23 @@
                 :to="{ name: 'events-add', query: { teamId: teamId, sportId: team.sportId, leadId: team.coachId, gender: team.gender, ability: team.ability, age: team.age }}"
               >
                 <v-icon>
-                  $vuetify.icons.plusOutline
+                  $vuetify.icons.add-all
                 </v-icon>Add Event
               </v-btn>
 
               <v-menu v-if="canEditTeam || canCreateEvent">
                 <template #activator="{ on, attrs }">
                   <v-btn class="hidden-md-and-up" icon v-bind="attrs" v-on="on">
-                    <v-icon>mdi-dots-vertical</v-icon>
+                    <v-icon color="neutral darken-1">mdi-dots-vertical</v-icon>
                   </v-btn>
                 </template>
 
                 <v-list>
                   <v-list-item v-if="canCreateEvent" link :to="{ name: 'events-add', query: { teamId: teamId, sportId: team.sportId, leadId: team.coachId, gender: team.gender, ability: team.ability, age: team.age }}">
-                    <v-list-item-title>Create Event</v-list-item-title>
+                    <v-list-item-title class="neutral--text text--darken-3">Create Event</v-list-item-title>
                   </v-list-item>
                   <v-list-item v-if="canEditTeam" link :to="{ name: 'teams-id-edit', params: { id: team.id } }">
-                    <v-list-item-title>Edit Team</v-list-item-title>
+                    <v-list-item-title class="neutral--text text--darken-3">Edit Team</v-list-item-title>
                   </v-list-item>
                 </v-list>
               </v-menu>
@@ -137,7 +139,7 @@
         <div v-else-if="!$fetchState.pending">
           <v-col class="d-flex flex-column justify-center align-center pt-12">
             <v-img width="100" :src="noEvents" class="mb-3" />
-            <div class="text-p3 text-center info--text text--darken-3 mb-4">
+            <div class="text-p3 text-center neutral--text text--darken-3 mb-4">
               Oops! No events for now...
             </div>
           </v-col>
@@ -262,9 +264,9 @@ export default {
     },
 
     upcoming () {
-      return this.trainingFilter.filter((event) => {
-        return event.date >= this.today
-      })
+      return this.trainingFilter
+        .filter(event => event.date >= this.today)
+        .reverse()
     },
 
     past () {
