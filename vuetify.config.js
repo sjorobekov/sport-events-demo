@@ -73,6 +73,7 @@ export default {
           darken4: '#991B1B',
         },
         neutral: {
+          lighten3: '#f7f8fa',
           lighten2: '#EDF0F3',
           lighten1: '#DADFE6',
           base: '#C4C9D0',

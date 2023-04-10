@@ -5,8 +5,10 @@
         Team Sheet <FxTeamSheetPrivacyChip v-if="canManageTeamSheet" :protected="teamSheetProtected" />
       </template>
       <template v-if="canManageTeamSheet && teamSheet.length" #actions>
-        <v-btn outlined link :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }">
-          <v-icon>mdi-pencil</v-icon>Edit Team
+        <v-btn outlined link :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }" color="neutral darken-3" :ripple="false">
+          <v-icon color="neutral darken-1">
+            $vuetify.icons.pen
+          </v-icon>Edit Team
         </v-btn>
       </template>
       <GuestLoginForm v-if="!showTeamSheet" class="pa-6" @signedIn="$fetch" />

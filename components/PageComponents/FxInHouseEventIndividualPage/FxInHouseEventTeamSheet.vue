@@ -12,8 +12,12 @@
           matchId: inHouseMatch.id,
           teamId: team.id,
         }}"
+        color="neutral darken-3"
+        :ripple="false"
       >
-        <v-icon>mdi-pencil</v-icon>Edit Team
+        <v-icon color="neutral darken-1">
+          $vuetify.icons.pen
+        </v-icon>Edit Team
       </v-btn>
     </template>
     <v-container v-if="!sheet.length">
@@ -28,7 +32,7 @@
       </v-row>
       <v-row>
         <v-col cols="12" class="pt-3">
-          <v-sheet height="216" color="info lighten-5">
+          <v-sheet height="216" color="background" class="radius-8">
             <v-row
               align="center"
               justify="center"
@@ -39,11 +43,11 @@
                 cols="12"
               >
                 <div class="mb-4">
-                  <v-icon size="88" color="info darken-2">
-                    mdi-account-group
+                  <v-icon size="64" color="neutral darken-2">
+                    $vuetify.icons.user-search
                   </v-icon>
                 </div>
-                <div class="text-p2 info--text text--darken-2 font-weight-bold mb-2">
+                <div class="text-p2 neutral--text text--darken-4 font-weight-bold mb-3">
                   No Students Selected
                 </div>
                 <v-btn
@@ -56,8 +60,9 @@
                     matchId: inHouseMatch.id,
                     teamId: team.id,
                   }}"
+                  :ripple="false"
                 >
-                  <v-icon>mdi-plus-circle-outline</v-icon>Add Students
+                  <v-icon>$vuetify.icons.add-all</v-icon>Add Students
                 </v-btn>
               </v-col>
             </v-row>
@@ -87,12 +92,12 @@
 
       <v-simple-table>
         <thead>
-          <tr style="background-color: var(--v-info-lighten4)">
+          <tr style="background-color: var(--v-neutral-lighten3)">
             <th />
-            <th class="text-left text-p2 info--text text--darken-1">
+            <th class="text-left text-p2 neutral--text text--darken-4">
               Name
             </th>
-            <th class="text-left text-p2 info--text text--darken-1">
+            <th class="text-left text-p2 neutral--text text--darken-4">
               Year
             </th>
           </tr>
@@ -102,13 +107,13 @@
             v-for="(item, i) in sheet"
             :key="item.id"
           >
-            <td class="text-right text-p2 info--text text--darken-1">
+            <td class="text-right text-p2 neutral--text text--darken-3">
               {{ i + 1 }}.
             </td>
-            <td class="text-p2 info--text text--darken-2">
+            <td class="text-p2 neutral--text text--darken-3">
               {{ item.firstname }} {{ item.lastname }}
             </td>
-            <td class="text-p2 info--text text--darken-1">
+            <td class="text-p2 neutral--text text--darken-3">
               <span v-if="item.yearGroup">Year {{ item.yearGroup }}</span>
             </td>
           </tr>
@@ -147,3 +152,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.radius-8 {
+  border-radius: 8px!important;
+}
+</style>
