@@ -8,13 +8,13 @@
     <template #actions>
       <v-alert v-if="!conflictsExist" dense elevation="0" class="mb-0 float-right">
         <v-icon color="success darken-2">
-          mdi-checkbox-marked-circle-outline
+          $vuetify.icons.tick-circle
         </v-icon>
-        <span class="success--text text--darken-2 text-p1">No Event Conflict</span>
+        <span class="success--text text--darken-2 text-p1 font-weight-bold">No Event Conflict</span>
       </v-alert>
       <v-alert v-else dense class="mb-0 float-right">
         <v-icon color="error">
-          mdi-alert-circle-outline
+          $vuetify.icons.warning
         </v-icon>
         <span class="error--text text--darken-1 text-p1 font-weight-bold">Event Conflict</span>
       </v-alert>
@@ -25,13 +25,13 @@
           <v-col class="py-0 border-bottom">
             <ListItem>
               <template #icon>
-                <v-icon>mdi-information-outline</v-icon>
+                <v-icon>$vuetify.icons.info-1</v-icon>
               </template>
               <template #content>
-                <v-list-item-title class="text-p1 info--text">
+                <v-list-item-title class="text-p1 neutral--text text--darken-2">
                   Further Information
                 </v-list-item-title>
-                <span class="text-p2 info--text text--darken-2">{{ me.info }}</span>
+                <span class="text-p2 neutral--text text--darken-4">{{ me.info }}</span>
               </template>
             </ListItem>
           </v-col>
