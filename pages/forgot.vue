@@ -46,7 +46,20 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'LoginPage',
+  name: 'ForgotPage',
+
+  beforeRouteEnter (to, from, next) {
+    if (to.query.redirectTo) {
+      return next()
+    }
+
+    next(({ $router }) => {
+      if (from.query.redirectTo) {
+        $router.replace({ query: { redirectTo: from.query.redirectTo } })
+      }
+    })
+  },
+
   layout: 'startup',
 
   data: () => ({
