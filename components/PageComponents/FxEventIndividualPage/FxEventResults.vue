@@ -5,9 +5,9 @@
         {{ title }}
       </template>
       <template #actions>
-        <v-btn v-if="!formVisible && canAddOrEditResult" outlined @click="formVisible = true">
-          <v-icon small>
-            mdi-pencil-outline
+        <v-btn v-if="!formVisible && canAddOrEditResult" outlined color="neutral darken-3" :ripple="false" @click="formVisible = true">
+          <v-icon color="neutral darken-1">
+            $vuetify.icons.pen
           </v-icon>Edit Result
         </v-btn>
       </template>
@@ -36,11 +36,11 @@
       outlined
       block
       height="50"
-      class="mt-4 hidden-md-and-up"
+      class="mt-4 hidden-md-and-up neutral--text text--darken-3"
       @click="formVisible = true"
     >
-      <v-icon small>
-        mdi-pencil-outline
+      <v-icon color="neutral darken-1">
+        $vuetify.icons.pen
       </v-icon>Edit Result
     </v-btn>
   </div>
