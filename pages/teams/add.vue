@@ -4,7 +4,14 @@
       Create New Team
     </h3>
 
-    <FxTeamForm ref="form" v-model="formData" :disabled="loading" :sports="sports" :school-id="schoolId" />
+    <FxTeamForm
+      ref="form"
+      v-model="formData"
+      :disabled="loading"
+      :sports="sports"
+      :school-id="schoolId"
+      :can-create-team="canCreateTeam"
+    />
 
     <v-container class="mt-4 mb-8">
       <v-row>
@@ -15,9 +22,9 @@
         <v-btn
           depressed
           color="primary"
-          dark
           class="ml-2"
           :loading="loading"
+          :disabled="!canCreateTeam"
           @click="save"
         >
           <v-icon>$vuetify.icons.save</v-icon>Save
@@ -41,6 +48,7 @@ export default {
     formData: { seasonId: null },
     loading: false,
     sports: [],
+    canCreateTeam: true,
   }),
 
   head: () => ({
@@ -58,9 +66,19 @@ export default {
     }),
   },
 
+  watch: {
+    formData (newVal, oldVal) {
+      if (newVal.seasonId !== oldVal.seasonId) {
+        this.checkLimitations(newVal.seasonId)
+      }
+    },
+  },
+
   async beforeMount () {
     this.sports = await this.$store.dispatch('api/sports/list')
-    this.formData.seasonId = this.currentSeason.id
+    this.formData = {
+      seasonId: this.currentSeason.id,
+    }
   },
 
   methods: {
@@ -88,6 +106,15 @@ export default {
       }).finally(() => {
         this.loading = false
       })
+    },
+
+    async checkLimitations (seasonId) {
+      const { canCreateTeam } = await this.$store.dispatch('api/schools/getLimitations', {
+        schoolId: this.schoolId,
+        seasonId,
+      })
+
+      this.canCreateTeam = canCreateTeam
     },
   },
 }

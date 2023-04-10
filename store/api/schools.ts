@@ -88,6 +88,17 @@ export const actions: ActionTree<RootState, RootState> = {
     return this.$axios.$get(`api/v1/schools/${id}/transactions`)
   },
 
+  getLimitations (_, { schoolId, seasonId }): Promise<{
+    canCreateTeam: boolean,
+    canCreateUser: boolean,
+    canCreateCompetition: boolean,
+    canCreateIntegrations: boolean,
+  }> {
+    return this.$axios.$get(`api/v1/schools/${schoolId}/limitations`, {
+      params: { seasonId },
+    })
+  },
+
   async fetch ({ state, commit, dispatch }, id): Promise<School> {
     if (!state.indexed[id]) {
       const data = await dispatch('get', id)

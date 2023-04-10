@@ -65,6 +65,10 @@
       </v-container>
     </v-card>
 
+    <v-alert v-if="!canCreateCompetition" type="info">
+      You have reached limit of Competitions in selected season
+    </v-alert>
+
     <v-card class="fx-card-border-top-primary mb-3">
       <v-container>
         <v-row>
@@ -287,6 +291,10 @@ export default {
     },
     schoolId: {
       type: String,
+      required: true,
+    },
+    canCreateCompetition: {
+      type: Boolean,
       required: true,
     },
   },

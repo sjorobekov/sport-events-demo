@@ -8,6 +8,10 @@
       </v-list-item-content>
     </v-list-item>
 
+    <v-alert v-if="!canCreateIntegrations" type="info">
+      You need to upgrade plan to use integrations
+    </v-alert>
+
     <v-card class="py-2 px-2 py-md-6 px-md-6">
       <v-card-title class="px-0 text-p3 font-weight-bold pb-1">
         Xportal
@@ -27,7 +31,7 @@
             lg="7"
             class="pr-0"
           >
-            <FxXportalForm ref="form" v-model="formData" :disabled="loading" />
+            <FxXportalForm ref="form" v-model="formData" :disabled="loading || !canCreateIntegrations" />
           </v-col>
         </v-row>
       </v-container>
@@ -36,9 +40,9 @@
         <v-btn
           depressed
           color="primary"
-          dark
           class="ml-2"
           :loading="loading"
+          :disabled="!canCreateIntegrations"
           @click="save"
         >
           Save
@@ -77,16 +81,23 @@ export default {
     original: {},
     loading: false,
     school: {},
+    canCreateIntegrations: true,
   }),
 
   computed: {
     ...mapGetters({
       schoolId: 'context/schoolId',
+      season: 'seasons/current',
     }),
   },
 
   async created () {
     this.school = await this.$store.dispatch('api/schools/getXportal', this.schoolId)
+    const { canCreateIntegrations } = await this.$store.dispatch('api/schools/getLimitations', {
+      schoolId: this.schoolId,
+      seasonId: this.season.id,
+    })
+    this.canCreateIntegrations = canCreateIntegrations
     this.formData = { ...this.school, id: this.schoolId }
     this.original = { ...this.formData }
   },

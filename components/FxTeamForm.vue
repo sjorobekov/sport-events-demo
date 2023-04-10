@@ -65,6 +65,10 @@
       </v-container>
     </v-card>
 
+    <v-alert v-if="!canCreateTeam" type="info">
+      You have reached limit of Teams in selected season
+    </v-alert>
+
     <v-card class="fx-card-border-top-primary mb-3">
       <v-container>
         <v-row>
@@ -303,6 +307,10 @@ export default {
       type: String,
       required: true,
     },
+    canCreateTeam: {
+      type: Boolean,
+      required: true,
+    },
   },
 
   data: () => ({
@@ -335,9 +343,11 @@ export default {
     ...mapActions({
       readBlob: 'helper/readBlob',
     }),
+
     validateAsync () {
       return this.$refs.form.validateAsync()
     },
+
     update (key, value) {
       this.$emit('input', { ...this.formData, [key]: value })
     },
