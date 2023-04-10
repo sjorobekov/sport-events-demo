@@ -1,6 +1,6 @@
 <template>
   <!-- eslint-disable vue/no-v-html -->
-  <div class="px-3" v-html="notes" />
+  <div class="px-3 py-3 text-p2 neutral--text text--darken-3" v-html="notes" />
 </template>
 
 <script>

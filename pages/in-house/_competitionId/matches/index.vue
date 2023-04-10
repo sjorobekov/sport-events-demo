@@ -44,8 +44,8 @@
           <v-spacer />
 
           <div class="pt-1">
-            <v-btn v-if="canEditCompetition" class="hidden-sm-and-down" outlined link :to="{ name: 'in-house-competitionId-matches-edit', params: { competitionId: inHouseCompetitionId }}">
-              <v-icon>$vuetify.icons.edit</v-icon>Edit Comp
+            <v-btn v-if="canEditCompetition" class="hidden-sm-and-down neutral--text text--darken-3" outlined link :to="{ name: 'in-house-competitionId-matches-edit', params: { competitionId: inHouseCompetitionId }}">
+              <v-icon color="neutral darken-2">$vuetify.icons.edit</v-icon>Edit Comp
             </v-btn>
             <v-btn
               v-if="canCreateInHouseEvent"
@@ -55,21 +55,21 @@
               link
               :to="{ name: 'in-house-competitionId-matches-add', params: { competitionId: inHouseCompetitionId }}"
             >
-              <v-icon>$vuetify.icons.plusOutline</v-icon>Add Event
+              <v-icon>$vuetify.icons.add-all</v-icon>Add Event
             </v-btn>
 
             <v-menu>
               <template #activator="{ on, attrs }">
                 <v-btn class="hidden-md-and-up" icon v-bind="attrs" v-on="on">
-                  <v-icon>mdi-dots-vertical</v-icon>
+                  <v-icon color="neutral darken-1">mdi-dots-vertical</v-icon>
                 </v-btn>
               </template>
               <v-list>
                 <v-list-item v-if="canEditCompetition" link :to="{ name: 'in-house-competitionId-matches-edit', params: { competitionId: inHouseCompetitionId }}">
-                  <v-list-item-title>Edit Competition</v-list-item-title>
+                  <v-list-item-title class="neutral--text text--darken-3">Edit Competition</v-list-item-title>
                 </v-list-item>
                 <v-list-item v-if="canCreateInHouseEvent" link :to="{ name: 'in-house-competitionId-matches-add', params: { competitionId: inHouseCompetitionId }}">
-                  <v-list-item-title>Add Event</v-list-item-title>
+                  <v-list-item-title class="neutral--text text--darken-3">Add Event</v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-menu>
@@ -77,23 +77,27 @@
         </div>
       </v-col>
       <v-col lg="3" class="hidden-md-and-down">
-        <h3 class="text-p1 info--text text--darken-1 mb-4">
+        <h3 class="text-p1 neutral--text text--darken-2 mb-2">
           Lead Staff Member
         </h3>
         <FxUserItem :item="lead" :subtitle="lead.jobRole" />
 
-        <div class="text-p1">
-          <v-icon>mdi-email-outline</v-icon> <a class="info--text text--darken-2" :href="`mailto:${lead.email}`">{{ lead.email }}</a>
+        <div class="text-p1 mb-1">
+          <v-icon size="20" color="primary lighten-1">
+            $vuetify.icons.phone-fill
+          </v-icon> <a class="link" :href="`tel:${lead.phone}`">{{ lead.phone }}</a>
         </div>
         <div v-if="lead.phone" class="text-p1">
-          <v-icon>mdi-phone-in-talk</v-icon> <a class="info--text text--darken-2" :href="`tel:${lead.phone}`">{{ lead.phone }}</a>
+          <v-icon size="20" color="primary lighten-1">
+            $vuetify.icons.mail-fill
+          </v-icon> <a class="link email" :href="`mailto:${lead.email}`">{{ lead.email }}</a>
         </div>
       </v-col>
     </v-row>
     <v-row v-if="hasEvents">
       <v-col lg="9">
         <template v-if="showUpcoming">
-          <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
+          <h2 class="text-p2 font-weight-bold mt-6 mb-2 neutral--text text--darken-4">
             Upcoming
           </h2>
           <v-card v-for="match in upcoming" :key="`upcoming-${match.id}`" class="mb-2 card-has-hover">
@@ -117,7 +121,7 @@
         </template>
 
         <template v-if="showPast">
-          <h2 class="text-p2 font-weight-bold mt-6 mb-2 info--text text--darken-3">
+          <h2 class="text-p2 font-weight-bold mt-6 mb-2 neutral--text text--darken-4">
             Past
           </h2>
           <v-card v-for="match in past" :key="`past-${match.id}`" class="mb-2 card-has-hover">
@@ -144,7 +148,7 @@
     <v-row v-else-if="!$fetchState.pending">
       <v-col class="d-flex flex-column align-center">
         <v-img width="150" :src="noEvents" class="mb-3" />
-        <div class="text-p3 info--text text--darken-3 mb-4">
+        <div class="text-p3 neutral--text text--darken-3 mb-4">
           Oops! No in-house events for now...
         </div>
       </v-col>
@@ -269,5 +273,8 @@ export default {
 <style scoped>
 ::v-deep .no-photo {
   background: none;
+}
+.email {
+  color: var(--v-primary-lighten1)!important;
 }
 </style>

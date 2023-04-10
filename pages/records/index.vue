@@ -2,7 +2,7 @@
   <div>
     <v-list-item class="px-0 mt-1 mt-md-n4">
       <v-list-item-content>
-        <h1 class="text-h4s text-md-h3">
+        <h1 class="text-h4s text-md-h3 neutral--text text--darken-4">
           Sports Records
         </h1>
       </v-list-item-content>
@@ -20,10 +20,10 @@
                 v-bind="attrs"
                 rounded
                 outlined
-                color="info"
+                color="neutral darken-3"
                 v-on="on"
               >
-                <v-icon>mdi-filter-outline</v-icon>
+                <v-icon color="neutral darken-1">$vuetify.icons.settings</v-icon>
                 Filters
               </v-btn>
             </v-badge>
@@ -40,12 +40,12 @@
           <v-list>
             <v-list-item :to="{ name: 'records-manage-events' }">
               <v-list-item-content>
-                <v-list-item-title>Manage</v-list-item-title>
+                <v-list-item-title class="neutral--text text--darken-3">Manage</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
             <v-list-item :to="{ name: 'records-add' }">
               <v-list-item-content>
-                <v-list-item-title>Add Sports Record</v-list-item-title>
+                <v-list-item-title class="neutral--text text--darken-3">Add Sports Record</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -55,7 +55,7 @@
     <v-row class="mb-2 hidden-sm-and-down">
       <v-col v-if="canManageSportsRecords" sm="12" md="5">
         <div class="d-flex justify-end">
-          <v-btn class="mr-2" outlined link :to="{ name: 'records-manage-events' }">
+          <v-btn class="mr-2 neutral--text text--darken-3" :ripple="false" outlined link :to="{ name: 'records-manage-events' }">
             Manage
           </v-btn>
           <v-btn
@@ -63,9 +63,10 @@
             dark
             color="primary"
             link
+            :ripple="false"
             :to="{ name: 'records-add' }"
           >
-            <v-icon>mdi-plus-circle-outline</v-icon>
+            <v-icon>$vuetify.icons.add-all</v-icon>
             Add Sports Record
           </v-btn>
         </div>
@@ -79,7 +80,7 @@
       <div v-if="!$fetchState.pending && !items.length" class="text-center pt-4 pt-md-16">
         <v-col class="d-flex flex-column justify-center align-center">
           <v-img width="100" :src="noData" class="mb-3" />
-          <div class="text-p3 text-center info--text text--darken-3 mb-4">
+          <div class="text-p3 text-center neutral--text text--darken-3 mb-4">
             Sports Records are empty
           </div>
         </v-col>
@@ -132,7 +133,7 @@
           <v-menu>
             <template #activator="{ on, attrs }">
               <v-btn icon v-bind="attrs" v-on="on">
-                <v-icon color="info lighten-1">
+                <v-icon color="neutral darken-1">
                   $vuetify.icons.threeDots
                 </v-icon>
               </v-btn>
@@ -140,14 +141,14 @@
             <v-list class="grey lighten-3">
               <v-list-item link :to="{ name: 'records-id', params: { id: item.id } }">
                 <v-list-item-content>
-                  <v-list-item-title class="text--info text--darken-1">
+                  <v-list-item-title class="neutral text--darken-3">
                     Edit Record
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item @click="remove(item)">
                 <v-list-item-content>
-                  <v-list-item-title class="text--info text--darken-1">
+                  <v-list-item-title class="neutral text--darken-3">
                     Delete Record
                   </v-list-item-title>
                 </v-list-item-content>

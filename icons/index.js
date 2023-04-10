@@ -139,6 +139,7 @@ export default [
   'pen',
   'menu-outline',
   'menu-solid',
+  'user-search',
   'tick-circle',
   'warning',
 ]

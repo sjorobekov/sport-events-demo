@@ -87,23 +87,23 @@
                 :to="{ name: 'events-add', query: { teamId: teamId, sportId: team.sportId, leadId: team.coachId, gender: team.gender, ability: team.ability, age: team.age }}"
               >
                 <v-icon>
-                  $vuetify.icons.plusOutline
+                  $vuetify.icons.add-all
                 </v-icon>Add Event
               </v-btn>
 
               <v-menu v-if="canEditTeam || canCreateEvent">
                 <template #activator="{ on, attrs }">
                   <v-btn class="hidden-md-and-up" icon v-bind="attrs" v-on="on">
-                    <v-icon>mdi-dots-vertical</v-icon>
+                    <v-icon color="neutral darken-1">mdi-dots-vertical</v-icon>
                   </v-btn>
                 </template>
 
                 <v-list>
                   <v-list-item v-if="canCreateEvent" link :to="{ name: 'events-add', query: { teamId: teamId, sportId: team.sportId, leadId: team.coachId, gender: team.gender, ability: team.ability, age: team.age }}">
-                    <v-list-item-title>Create Event</v-list-item-title>
+                    <v-list-item-title class="neutral--text text--darken-3">Create Event</v-list-item-title>
                   </v-list-item>
                   <v-list-item v-if="canEditTeam" link :to="{ name: 'teams-id-edit', params: { id: team.id } }">
-                    <v-list-item-title>Edit Team</v-list-item-title>
+                    <v-list-item-title class="neutral--text text--darken-3">Edit Team</v-list-item-title>
                   </v-list-item>
                 </v-list>
               </v-menu>
@@ -139,7 +139,7 @@
         <div v-else-if="!$fetchState.pending">
           <v-col class="d-flex flex-column justify-center align-center pt-12">
             <v-img width="100" :src="noEvents" class="mb-3" />
-            <div class="text-p3 text-center info--text text--darken-3 mb-4">
+            <div class="text-p3 text-center neutral--text text--darken-3 mb-4">
               Oops! No events for now...
             </div>
           </v-col>

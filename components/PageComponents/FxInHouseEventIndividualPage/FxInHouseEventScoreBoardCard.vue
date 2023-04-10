@@ -1,5 +1,5 @@
 <template>
-  <v-card class="rounded-t-0" height="152">
+  <v-card class="rounded-t-0 score-card" height="152">
     <v-row v-if="inHouseEvent.eventType === InHouseEventType.HOUSE_VS_HOUSE" no-gutters class="pa-6">
       <v-col cols="4">
         <FxTeam :color="myTeam.color" :logo="myTeam.logo" :name="myTeam.name" />
@@ -62,3 +62,11 @@ export default {
   },
 }
 </script>
+<style scoped lang="sass">
+@import '~vuetify/src/styles/styles.sass'
+
+@media #{map-get($display-breakpoints, 'sm-and-down')}
+  .score-card.v-card
+    border-radius: 0!important
+    border: 0!important
+</style>

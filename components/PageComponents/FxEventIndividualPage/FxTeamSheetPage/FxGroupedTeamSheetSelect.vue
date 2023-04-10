@@ -6,12 +6,11 @@
         :key="group"
         no-action
         :ripple="false"
-
         class="list-border"
       >
         <template #activator>
           <v-list-item-content>
-            <v-list-item-title class="text-p1 font-weight-bold info--text text--darken-3">
+            <v-list-item-title class="text-p1 font-weight-bold neutral--text text--darken-4">
               <template v-if="group === 'null'">
                 No Year Group
               </template>
