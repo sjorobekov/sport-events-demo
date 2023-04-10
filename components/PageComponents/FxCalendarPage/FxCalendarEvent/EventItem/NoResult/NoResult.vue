@@ -1,14 +1,35 @@
 <template>
   <div>
-    <v-btn v-if="datePassed && canAddMissingResults && canHaveResult" outlined link :to="{ name: 'events-eventId', params: { eventId: event.id } }">
+    <v-btn
+      v-if="datePassed && canAddMissingResults && canHaveResult"
+      outlined
+      class="neutral--text text--darken-3"
+      :ripple="false"
+      link
+      :to="{ name: 'events-eventId', params: { eventId: event.id } }"
+    >
       Add Result
     </v-btn>
 
-    <v-btn v-else-if="!me.sheet && canManageTeamSheet" outlined link :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }">
+    <v-btn
+      v-else-if="!me.sheet && canManageTeamSheet"
+      outlined
+      class="neutral--text text--darken-3"
+      :ripple="false"
+      link
+      :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }"
+    >
       Add Team
     </v-btn>
 
-    <v-btn v-else-if="canManageTeamSheet" outlined link :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }">
+    <v-btn
+      v-else-if="canManageTeamSheet"
+      outlined
+      class="neutral--text text--darken-3"
+      :ripple="false"
+      link
+      :to="{ name: 'events-eventId-sheet', params: { eventId: event.id } }"
+    >
       Manage Team
     </v-btn>
 

@@ -1,10 +1,24 @@
 <template>
   <div>
-    <v-btn v-if="datePassed && canAddMissingResults" outlined link :to="{ name: 'in-house-competitionId-matches-matchId', params: { matchId: match.id, competitionId: competition.id } }">
+    <v-btn
+      v-if="datePassed && canAddMissingResults"
+      outlined
+      class="neutral--text text--darken-3"
+      :ripple="false"
+      link
+      :to="{ name: 'in-house-competitionId-matches-matchId', params: { matchId: match.id, competitionId: competition.id } }"
+    >
       Add Result
     </v-btn>
 
-    <v-btn v-else-if="canManageTeams" outlined link :to="{ name: 'in-house-competitionId-matches-matchId', params: { matchId: match.id, competitionId: competition.id } }">
+    <v-btn
+      v-else-if="canManageTeams"
+      outlined
+      class="neutral--text text--darken-3"
+      :ripple="false"
+      link
+      :to="{ name: 'in-house-competitionId-matches-matchId', params: { matchId: match.id, competitionId: competition.id } }"
+    >
       Manage Teams
     </v-btn>
 

@@ -1,6 +1,6 @@
 <template>
   <v-list-item class="px-0">
-    <v-list-item-avatar class="mx-1">
+    <v-list-item-avatar class="mx-1 non-fixture-icon">
       <v-icon v-text="icon" />
     </v-list-item-avatar>
     <v-list-item-content>
@@ -49,3 +49,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.non-fixture-icon {
+  border-radius: 0%!important;
+}
+</style>

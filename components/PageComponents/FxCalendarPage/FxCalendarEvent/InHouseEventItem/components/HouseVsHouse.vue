@@ -1,7 +1,7 @@
 <template>
   <FxCalendarItem :sport="sport" :lead="lead" :to="{ name: 'in-house-competitionId-matches-matchId', params: { matchId: value.id, competitionId: competition.id } }">
     <template #subtitle>
-      <span class="text-p2 info--text text--lighten-1">In-House {{ competition.name }}</span>
+      <span class="text-p2 neutral--text text--darken-2">({{ competition.name }})</span>
     </template>
     <template #status>
       <FxInHouseMatchStatus v-if="value.overallResult" :overall-result="value.overallResult" />
@@ -9,8 +9,8 @@
     <template #left>
       <FxInHouseTeamListItem class="px-0" :participant="value.homeTeam" item-class="flex-row flex-md-row-reverse text-md-right">
         <template #action>
-          <v-list-item-avatar rounded width="60" class="mr-2 hidden-md-and-up" color="info lighten-4">
-            {{ homeScore }}
+          <v-list-item-avatar rounded width="60" class="mr-2 hidden-md-and-up" color="neutral lighten-2">
+            <span class="in-house-score">{{ homeScore }}</span>
           </v-list-item-avatar>
         </template>
       </FxInHouseTeamListItem>
@@ -18,8 +18,8 @@
     <template #right>
       <FxInHouseTeamListItem class="px-0" :participant="value.awayTeam">
         <template #action>
-          <v-list-item-avatar rounded width="60" class="mr-2 hidden-md-and-up" color="info lighten-4">
-            {{ awayScore }}
+          <v-list-item-avatar rounded width="60" class="mr-2 hidden-md-and-up" color="neutral lighten-2">
+            <span class="in-house-score">{{ awayScore }}</span>
           </v-list-item-avatar>
         </template>
       </FxInHouseTeamListItem>
@@ -31,18 +31,18 @@
     <template #time>
       <div>
         <div v-if="value.startTime" class="d-inline-block pr-8">
-          <v-list-item-title class="text-p2 info--text text--darken-4">
+          <v-list-item-title class="text-p2 neutral--text text--darken-4">
             {{ value.startTime }}
           </v-list-item-title>
-          <v-list-item-subtitle class="text-p1 info--text">
+          <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
             Start Time
           </v-list-item-subtitle>
         </div>
         <div class="d-inline-block pr-8">
-          <v-list-item-title class="text-p2 info--text text--darken-4">
+          <v-list-item-title class="text-p2 neutral--text text--darken-4">
             {{ value.finishTime }}
           </v-list-item-title>
-          <v-list-item-subtitle class="text-p1 info--text">
+          <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
             Finish Time
           </v-list-item-subtitle>
         </div>
@@ -115,3 +115,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.in-house-score {
+  color: var(--v-neutral-darken4);
+}
+</style>
