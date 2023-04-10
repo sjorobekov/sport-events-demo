@@ -6,12 +6,11 @@
         :key="group"
         no-action
         :ripple="false"
-
         class="list-border"
       >
         <template #activator>
           <v-list-item-content>
-            <v-list-item-title class="text-p1 font-weight-bold info--text text--darken-3">
+            <v-list-item-title class="text-p1 font-weight-bold neutral--text text--darken-4">
               <template v-if="group === 'null'">
                 No Year Group
               </template>
@@ -107,7 +106,7 @@ export default {
     items: {
       handler () {
         this.grouped = groupBy(this.items, 'yearGroup')
-        this.groups = Object.keys(this.grouped).sort()
+        this.groups = Object.keys(this.grouped).sort((a, b) => a - b)
         this.grouped.recent = this.recent
         this.groups.unshift('recent')
       },

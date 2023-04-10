@@ -3,7 +3,7 @@
     <div v-for="(item, i) in result.results" :key="i" class="pl-3 pr-4">
       <div class="hidden-md-and-up">
         <v-list-item class="px-0" style="height: 24px; min-height: initial">
-          <v-list-item-content class="text-caption pa-0">
+          <v-list-item-content class="text-caption pa-0 neutral--text text--darken-2">
             {{ $t(`FIXTURE_TYPE.${event.fixtureType}`) }}
           </v-list-item-content>
           <v-list-item-action v-if="canSeeResults">
@@ -17,12 +17,12 @@
           <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" :alt="myTeam.name" />
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title class="text-p2">
+          <v-list-item-title class="text-p2 neutral--text text--darken-3">
             {{ myTeam.name }}
           </v-list-item-title>
         </v-list-item-content>
         <v-list-item-action>
-          <v-avatar height="40" width="60" rounded color="#F1F5F9">
+          <v-avatar height="40" width="60" rounded color="neutral lighten-2" class="neutral--text text--darken-4">
             {{ item.score }}
           </v-avatar>
         </v-list-item-action>
@@ -32,12 +32,12 @@
           <FxSchoolLogo :value="opponentTeam.logo" :color="opponentTeam.color" :alt="opponentTeam.name" />
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title class="text-p2">
+          <v-list-item-title class="text-p2 neutral--text text--darken-3">
             {{ opponentTeam.name }}
           </v-list-item-title>
         </v-list-item-content>
         <v-list-item-action>
-          <v-avatar height="40" width="60" rounded color="#F1F5F9">
+          <v-avatar height="40" width="60" rounded color="neutral lighten-2" class="neutral--text text--darken-4">
             {{ item.opponentScore }}
           </v-avatar>
         </v-list-item-action>
@@ -45,12 +45,12 @@
     </div>
     <template v-if="result.resultNotes">
       <v-list-item class="border-top pt-4" style="height: 24px; min-height: initial">
-        <v-list-item-content class="text-caption pa-0">
+        <v-list-item-content class="text-caption pa-0 neutral--text text--darken-2">
           Notes
         </v-list-item-content>
       </v-list-item>
       <v-list-item>
-        <v-list-item-content class="text-p2">
+        <v-list-item-content class="text-p2 neutral--text text--darken-3">
           {{ result.resultNotes }}
         </v-list-item-content>
       </v-list-item>

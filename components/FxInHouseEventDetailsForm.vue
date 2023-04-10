@@ -4,7 +4,7 @@
       <v-col cols="12" class="border-bottom pt-1 pb-0">
         <v-row>
           <v-col cols="1" class="d-flex">
-            <v-icon>$vuetify.icons.calendar</v-icon>
+            <v-icon>$vuetify.icons.calendar-1</v-icon>
           </v-col>
           <v-col cols="3">
             <label for="date">Date</label>
@@ -35,7 +35,7 @@
       <v-col cols="12" class="border-bottom pt-1 pb-0">
         <v-row>
           <v-col cols="1" class="d-flex">
-            <v-icon>mdi-clock-outline</v-icon>
+            <v-icon>$vuetify.icons.clock-1</v-icon>
           </v-col>
           <v-col cols="4">
             <label for="startTime">Start Time</label>
@@ -59,7 +59,7 @@
       <v-col cols="12" class="border-bottom pt-1 pb-0">
         <v-row>
           <v-col cols="1" class="d-flex">
-            <v-icon>mdi-account-circle-outline</v-icon>
+            <v-icon>$vuetify.icons.user-1</v-icon>
           </v-col>
           <v-col cols="4">
             <label for="lead">Lead Staff Member</label>
@@ -76,7 +76,7 @@
       <v-col cols="12" class="border-bottom pt-1 pb-0">
         <v-row>
           <v-col cols="1" class="d-flex">
-            <v-icon>mdi-clock-outline</v-icon>
+            <v-icon>$vuetify.icons.location-1</v-icon>
           </v-col>
           <v-col cols="11">
             <label>Location</label>
@@ -120,7 +120,7 @@
       <v-col cols="12" class="border-bottom pt-1 pb-0">
         <v-row>
           <v-col cols="1" class="d-flex">
-            <v-icon>mdi-information-outline</v-icon>
+            <v-icon>$vuetify.icons.directory-outline</v-icon>
           </v-col>
           <v-col cols="11">
             <label for="info">Further Information</label>

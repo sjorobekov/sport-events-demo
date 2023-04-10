@@ -10,10 +10,10 @@
       <v-spacer />
       <v-list-item-action>
         <div>
-          <v-btn outlined class="mr-2" @click="$emit('cancel')">
+          <v-btn outlined class="neutral--text text--darken-3 mr-2" :ripple="false" @click="$emit('cancel')">
             Cancel
           </v-btn>
-          <v-btn depressed color="primary" type="submit">
+          <v-btn depressed color="primary" :ripple="false" type="submit">
             Confirm
           </v-btn>
         </div>

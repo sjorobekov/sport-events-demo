@@ -58,7 +58,7 @@ export default {
   .label1
     font-size: 1rem
     line-height: 1rem
-    color: var(--v-info-darken1)
+    color: var(--v-neutral-darken3)
     height: 1rem
     display: flex
     justify-content: center

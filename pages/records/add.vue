@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-h3 mb-6">
+    <h3 class="text-h3 mb-6 neutral--text text--darken-4">
       Add Sports Record
     </h3>
     <FxRecordForm
@@ -16,7 +16,7 @@
     <v-container class="mt-4 mb-8">
       <v-row>
         <v-spacer />
-        <v-btn outlined @click="cancel">
+        <v-btn outlined :ripple="false" @click="cancel" color="neutral darken-3">
           Cancel
         </v-btn>
         <v-btn
@@ -25,6 +25,7 @@
           dark
           class="ml-2"
           :loading="loading"
+          :ripple="false"
           @click="save"
         >
           <v-icon>$vuetify.icons.save</v-icon>Save

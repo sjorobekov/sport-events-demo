@@ -243,7 +243,4 @@ export default {
     padding-bottom: 8px
     border-radius: 0
     margin-bottom: 0!important
-
-.school-logo-nav
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8)!important
 </style>

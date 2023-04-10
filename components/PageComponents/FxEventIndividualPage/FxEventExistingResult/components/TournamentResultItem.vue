@@ -17,11 +17,11 @@
           <FxSchoolLogo size="32" :value="contextSchool.logo" :color="contextSchool.color" :alt="myTeam.name" />
         </v-list-item-avatar>
         <v-list-item-content class="mr-4">
-          <v-list-item-title class="text-p2">
+          <v-list-item-title class="text-p2 neutral--text text--darken-3">
             {{ myTeam.name }}
           </v-list-item-title>
         </v-list-item-content>
-        <v-list-item-avatar class="order-last" height="40" width="60" rounded color="#F1F5F9">
+        <v-list-item-avatar class="order-last neutral--text text--darken-4" height="40" width="60" rounded color="neutral lighten-2">
           {{ item.score }}
         </v-list-item-avatar>
       </v-list-item>
@@ -38,11 +38,11 @@
           <FxSchoolLogo size="32" :value="logo" :color="color" :alt="opponentName" />
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title class="text-p2">
+          <v-list-item-title class="text-p2 neutral--text text--darken-3">
             {{ opponentName }}
           </v-list-item-title>
         </v-list-item-content>
-        <v-list-item-avatar class="order-last order-md-first mr-md-4" height="40" width="60" rounded color="#F1F5F9">
+        <v-list-item-avatar class="order-last order-md-first mr-md-4 neutral--text text--darken-4" height="40" width="60" rounded color="neutral lighten-2">
           {{ item.opponentScore }}
         </v-list-item-avatar>
       </v-list-item>

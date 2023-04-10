@@ -14,10 +14,10 @@
       $vuetify.icons.user-1
     </v-icon>
     <v-list-item-content>
-      <v-list-item-title class="text-p1 info--text text--darken-3">
+      <v-list-item-title class="text-p1 neutral--text text--darken-3">
         {{ item.firstname }} {{ item.lastname }}
       </v-list-item-title>
-      <v-list-item-subtitle v-if="item.yearGroup" class="text-p1 info--text text--lighten-1">
+      <v-list-item-subtitle v-if="item.yearGroup" class="text-p1 neutral--text text--darken-2">
         Year {{ item.yearGroup }}
       </v-list-item-subtitle>
     </v-list-item-content>
