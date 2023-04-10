@@ -1,14 +1,14 @@
 <template>
   <v-chip
-    color="info lighten-2"
+    color="neutral lighten-1"
     outlined
     dark
     label
-    class="pl-1 pr-3 radius-6 height-24"
+    class="ml-1 pl-1 pr-2 radius-16 height-24"
   >
-    <v-icon :color="color" class="mr-1" small>
+    <v-icon :color="color" small>
       $vuetify.icons.ellipse
-    </v-icon><span class="info--text text--darken-2 text-caption">{{ label }}</span>
+    </v-icon><span class="neutral--text text--darken-3 text-caption">{{ label }}</span>
   </v-chip>
 </template>
 
@@ -41,8 +41,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.radius-6 {
-  border-radius: 6px!important;
+.radius-16 {
+  border-radius: 16px!important;
 }
 .height-24 {
   height: 24px!important;
