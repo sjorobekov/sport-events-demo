@@ -2,13 +2,34 @@
   <v-radio-group class="mt-0 pt-0" hide-details :value="value" @change="$emit('input', $event)">
     <v-row>
       <v-col cols="4">
-        <v-radio on-icon="mdi-check-circle" color="success" class="win radio rounded-l rounded-r px-2" :value="EventResult.WIN" label="Win" />
+        <v-radio
+          on-icon="mdi-check-circle"
+          color="success"
+          class="win radio rounded-l rounded-r px-2"
+          :ripple="false"
+          :value="EventResult.WIN"
+          label="Win"
+        />
       </v-col>
       <v-col cols="4">
-        <v-radio on-icon="mdi-check-circle" color="info lighten-2" class="draw radio rounded-l rounded-r py-4 px-2" :value="EventResult.DRAW" label="Draw" />
+        <v-radio
+          on-icon="mdi-check-circle"
+          color="neutral"
+          class="draw radio rounded-l rounded-r py-4 px-2"
+          :ripple="false"
+          :value="EventResult.DRAW"
+          label="Draw"
+        />
       </v-col>
       <v-col cols="4">
-        <v-radio on-icon="mdi-check-circle" color="error" class="lost radio rounded-l rounded-r py-4 px-2" :value="EventResult.LOST" label="Loss" />
+        <v-radio
+          on-icon="mdi-check-circle"
+          color="error"
+          class="lost radio rounded-l rounded-r py-4 px-2"
+          :ripple="false"
+          :value="EventResult.LOST"
+          label="Loss"
+        />
       </v-col>
     </v-row>
   </v-radio-group>
@@ -34,7 +55,7 @@ export default {
 <style scoped lang="scss">
 .radio {
   height: 52px;
-  box-shadow: 0 0 0 1px var(--v-info-lighten2);
+  box-shadow: 0 0 0 1px var(--v-neutral-lighten1);
 }
 
 .radio.v-item--active {
@@ -42,7 +63,7 @@ export default {
     box-shadow: 0 0 0 2px var(--v-success-base);
   }
   &.draw {
-    box-shadow: 0 0 0 2px var(--v-info-lighten1);
+    box-shadow: 0 0 0 2px var(--v-neutral-base);
   }
   &.lost {
     box-shadow: 0 0 0 2px var(--v-error-base);

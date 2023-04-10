@@ -7,7 +7,7 @@
         </v-list-item-content>
       </v-list-item>
       <v-list-item class="border-bottom">
-        <v-list-item-content class="text-p2">
+        <v-list-item-content class="text-p2 neutral--text text--darken-3">
           {{ result.resultNotes }}
         </v-list-item-content>
       </v-list-item>

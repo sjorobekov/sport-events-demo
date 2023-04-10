@@ -1,16 +1,16 @@
 <template>
-  <v-card outlined>
+  <v-card>
     <v-list class="py-0">
       <FxListGroup
         v-for="(group) in groups"
         :key="group"
         no-action
-
+        :ripple="false"
         class="child-border"
       >
         <template #activator>
           <v-list-item-content>
-            <v-list-item-title class="text-p1 font-weight-bold info--text text--darken-3">
+            <v-list-item-title class="text-p1 font-weight-bold neutral--text text--darken-4">
               <template v-if="group === 'null'">
                 No Year Group
               </template>
@@ -24,8 +24,10 @@
           </v-list-item-content>
 
           <v-list-item-action>
-            <v-btn outlined @click.stop="addAll(group)">
-              <v-icon>$vuetify.icons.studentAdd</v-icon>Add All
+            <v-btn color="var(--v-neutral-darken2)" outlined :ripple="false" @click.stop="addAll(group)">
+              <v-icon color="var(--v-neutral-darken1)">
+                $vuetify.icons.add-all
+              </v-icon>Add All
             </v-btn>
           </v-list-item-action>
         </template>
@@ -34,7 +36,6 @@
           :value="value"
           multiple
           prepend-icon="mdi-chevron-down"
-          class="box-shadow"
           @change="$emit('input', $event)"
         >
           <template v-for="(item, i) in grouped[group]">
@@ -47,12 +48,16 @@
               class="px-2"
             >
               <template #action="{ active, toggle }">
-                <v-btn color="info darken-1" outlined @click.stop="toggle">
+                <v-btn color="neutral darken-2" outlined :ripple="false" @click.stop="toggle">
                   <template v-if="active">
-                    <v-icon>mdi-check</v-icon> Student Added
+                    <v-icon color="var(--v-success-base)">
+                      mdi-check
+                    </v-icon>Added
                   </template>
                   <template v-else>
-                    <v-icon>$vuetify.icons.studentAdd</v-icon> Add Student To Event
+                    <v-icon color="var(--v-neutral-darken1)">
+                      $vuetify.icons.student-add
+                    </v-icon> Add
                   </template>
                 </v-btn>
               </template>
@@ -123,9 +128,6 @@ export default {
 </script>
 
 <style scoped>
-.box-shadow {
-  box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.14);
-}
 
 .child-border:not(:nth-last-of-type(1)) {
   border-bottom: 1px solid var(--v-info-lighten3);

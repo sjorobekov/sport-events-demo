@@ -139,4 +139,5 @@ export default [
   'pen',
   'menu-outline',
   'menu-solid',
+  'user-search',
 ]

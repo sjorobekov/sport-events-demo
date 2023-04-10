@@ -23,10 +23,10 @@ export default {
     transform: rotate(90deg)
 
 .v-list-group--active > .v-list-group__header
-  background-color: var(--v-info-lighten4)
+  background-color: var(--v-neutral-lighten2)
 
 .v-list-group__header:hover
-  background-color: var(--v-info-lighten4)
+  background-color: var(--v-neutral-lighten2)
 
 .theme--light.v-list .v-list-group__header:hover:before
     opacity: 0
