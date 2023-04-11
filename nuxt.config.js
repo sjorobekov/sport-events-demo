@@ -37,6 +37,10 @@ export default {
       src: '~/plugins/nuxt-client-init',
       mode: 'client',
     },
+    {
+      src: '~/plugins/datetimepicker',
+      mode: 'client',
+    },
     '~/plugins/wrapped-component.js',
     '~/plugins/device.server.ts',
     '~/plugins/vue-balance-text.js',

@@ -88,6 +88,16 @@ export const actions: ActionTree<RootState, RootState> = {
     return this.$axios.$get(`api/v1/schools/${id}/transactions`)
   },
 
+  getTrialExpire (_, { id }): Promise<{ trialExpire: string }> {
+    return this.$axios.$get(`api/v1/schools/${id}/trial_expire`)
+  },
+
+  setTrialExpire (_, { id, trialExpire }): Promise<{ trialExpire: string }> {
+    return this.$axios.$put(`api/v1/schools/${id}/trial_expire`, {
+      trialExpire,
+    })
+  },
+
   getLimitations (_, { schoolId, seasonId }): Promise<{
     canCreateTeam: boolean,
     canCreateUser: boolean,
