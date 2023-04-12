@@ -6,7 +6,7 @@ import {
   FixtureType,
   TransportType,
   InHouseEventResult,
-  UserRole, InHouseEventType,
+  UserRole, InHouseEventType, TariffPlanPeriod,
 } from '~/enum'
 
 export default {
@@ -85,6 +85,11 @@ export default {
     [UserRole.ADMIN]: 'Admin',
     [UserRole.SPORTS_USER]: 'Sports User',
     [UserRole.VIEW_ONLY]: 'View Only',
+  },
+
+  TariffPlanPeriod: {
+    [TariffPlanPeriod.YEAR]: 'Yearly',
+    [TariffPlanPeriod.MONTH]: 'Monthly',
   },
 
   page: {

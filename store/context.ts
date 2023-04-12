@@ -95,6 +95,10 @@ export const getters: GetterTree<RootState, RootState> = {
 
     return false
   },
+
+  showUpgradePlanButton (_state, getters, _rootState, rootGetters) {
+    return rootGetters['user/acl/canManageSubscription'] && (getters.school.isFreePlan || getters.school.isTrialActive)
+  },
 }
 
 export const mutations: MutationTree<RootState> = {
@@ -127,6 +131,10 @@ export const mutations: MutationTree<RootState> = {
       zip: school.zip,
       website: school.website,
       coordinates: school.coordinates,
+      isTrialActive: school.isTrialActive,
+      isFreePlan: school.isFreePlan,
+      trialExpire: school.trialExpire,
+      tariffPlanId: school.tariffPlanId,
     }
   },
 

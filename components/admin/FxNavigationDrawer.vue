@@ -36,6 +36,7 @@ export default {
       { title: 'Schools', icon: '$vuetify.icons.school', to: { name: 'management-schools' } },
       { title: 'Events', icon: '$vuetify.icons.calendar', to: { name: 'management-events' } },
       { title: 'Sports', icon: '$vuetify.icons.whistle', to: { name: 'management-sports' } },
+      { title: 'Tariff Plans', icon: 'mdi-currency-gbp', to: { name: 'management-tariff-plans' } },
     ],
   }),
 }

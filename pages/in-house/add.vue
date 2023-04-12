@@ -4,7 +4,14 @@
       Create In-House Competition
     </h3>
 
-    <FxInHouseCompetitionForm ref="form" v-model="formData" :disabled="loading" :sports="sports" :school-id="schoolId" />
+    <FxInHouseCompetitionForm
+      ref="form"
+      v-model="formData"
+      :disabled="loading"
+      :sports="sports"
+      :school-id="schoolId"
+      :can-create-competition="canCreateCompetition"
+    />
 
     <v-container class="mt-4 mb-8">
       <v-row>
@@ -15,9 +22,9 @@
         <v-btn
           depressed
           color="primary"
-          dark
           class="ml-2"
           :loading="loading"
+          :disabled="!canCreateCompetition"
           @click="save"
         >
           <v-icon>$vuetify.icons.save</v-icon>Save
@@ -40,6 +47,7 @@ export default {
     formData: { },
     loading: false,
     sports: [],
+    canCreateCompetition: true,
   }),
   head: () => ({
     title: 'Create New Competition',
@@ -51,12 +59,24 @@ export default {
 
   computed: {
     ...mapGetters({
+      currentSeason: 'seasons/current',
       schoolId: 'context/schoolId',
     }),
   },
 
+  watch: {
+    formData (newVal, oldVal) {
+      if (newVal.seasonId !== oldVal.seasonId) {
+        this.checkLimitations(newVal.seasonId)
+      }
+    },
+  },
+
   async beforeMount () {
     this.sports = await this.$store.dispatch('api/sports/list')
+    this.formData = {
+      seasonId: this.currentSeason.id,
+    }
   },
 
   methods: {
@@ -78,6 +98,15 @@ export default {
       }).finally(() => {
         this.loading = false
       })
+    },
+
+    async checkLimitations (seasonId) {
+      const { canCreateCompetition } = await this.$store.dispatch('api/schools/getLimitations', {
+        schoolId: this.schoolId,
+        seasonId,
+      })
+
+      this.canCreateCompetition = canCreateCompetition
     },
   },
 }

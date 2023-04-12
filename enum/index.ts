@@ -122,3 +122,8 @@ export enum DeviceType {
   TABLET = 'TABLET',
   DESKTOP = 'DESKTOP',
 }
+
+export enum TariffPlanPeriod {
+  MONTH = 'month',
+  YEAR = 'year',
+}

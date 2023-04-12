@@ -4,11 +4,16 @@
       <v-list-item class="px-0">
         <v-list-item-content>
           <v-list-item-title class="text-h3">
-            Invite User {{ $store.getters['user/acl/canInviteUser'] }}
+            Invite User
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <UserInviteForm ref="form" v-model="formData" :disabled="loading" />
+
+      <v-alert v-if="!canCreateUser" type="info">
+        You have reached limit of Users
+      </v-alert>
+
+      <UserInviteForm ref="form" v-model="formData" :disabled="loading || !canCreateUser" />
       <v-container class="mt-4 mb-8">
         <v-row>
           <v-spacer />
@@ -17,10 +22,10 @@
           </v-btn>
           <v-btn
             depressed
-            color="brand"
-            dark
+            color="primary"
             class="ml-2"
             :loading="loading"
+            :disabled="!canCreateUser"
             @click="save"
           >
             <v-icon>$vuetify.icons.save</v-icon>Save
@@ -41,9 +46,22 @@ export default {
   meta: {
     isAllowed: ({ getters }) => getters['user/acl/canInviteUser'],
   },
+
+  async asyncData ({ store }) {
+    const schoolId = store.getters['context/schoolId']
+    const currentSeason = store.getters['seasons/current']
+    const { canCreateUser } = await store.dispatch('api/schools/getLimitations', {
+      schoolId,
+      seasonId: currentSeason.id,
+    })
+    return {
+      canCreateUser,
+    }
+  },
   data: () => ({
     formData: {},
     loading: false,
+    canCreateUser: true,
   }),
 
   head: () => ({
@@ -71,6 +89,12 @@ export default {
         ...this.formData,
       }).then((res) => {
         this.$router.push({ name: 'settings-users-userId', params: { userId: res.id } })
+      }).catch(({ response }) => {
+        if (response?.data?.code === 'TARIFF_LIMIT') {
+          this.$toast.error(response.data.message)
+        } else {
+          this.$toast.error('Unknown Error')
+        }
       }).finally(() => {
         this.loading = false
       })

@@ -28,12 +28,15 @@
     <v-container v-else>
       <v-row align="center">
         <v-spacer />
-
         <v-btn v-if="!me" outlined color="neutral darken-2" link :to="{ name: 'signin' }">
           Log In
         </v-btn>
 
         <template v-else>
+          <v-btn v-if="showUpgradePlanButton" :to="{ name: 'settings-subscription' }" depressed color="primary">
+            <v-icon>mdi-rocket-launch</v-icon>
+            Upgrade Now
+          </v-btn>
           <v-menu
             left
             bottom
@@ -140,6 +143,7 @@ export default {
       isMobileDevice: 'context/isMobile',
       isTabletDevice: 'context/isTablet',
       contextSchool: 'context/school',
+      showUpgradePlanButton: 'context/showUpgradePlanButton',
     }),
     items () {
       return [

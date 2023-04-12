@@ -6,7 +6,7 @@ import {
   SeasonStatus,
   RepeatPeriod,
   FixtureType,
-  Gender, UserRole, EventStatus, EventResult,
+  Gender, UserRole, EventStatus, EventResult, TariffPlanPeriod,
 } from '@/enum'
 
 export type Plan = {
@@ -37,6 +37,10 @@ export interface School {
   password?: string
   color?: string
   emailDomains?: Array<string>,
+  readonly isTrialActive?: boolean,
+  readonly isFreePlan?: boolean,
+  readonly trialExpire?: string,
+  readonly tariffPlanId?: string,
   coordinates?: {
     lng: number,
     lat: number,
@@ -398,6 +402,19 @@ export interface SportsContact {
   phone: string
   main: string
   file?: File,
+  readonly createdAt: string
+  readonly updatedAt: string
+}
+
+export interface TariffPlan {
+  readonly id: number
+  name: string
+  price: number
+  period: TariffPlanPeriod
+  numberOfUsers: number | null
+  numberOfTeamsPerSeason: number | null
+  numberOfCompetitionsPerSeason: number | null
+  integrations: boolean
   readonly createdAt: string
   readonly updatedAt: string
 }
