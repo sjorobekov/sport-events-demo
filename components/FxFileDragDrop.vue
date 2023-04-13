@@ -20,6 +20,13 @@
         <slot v-bind="{ isHover, openSelectFile }" />
       </v-col>
     </v-row>
+    <v-snackbar v-model="snackbar" color="info" min-width="200">
+      Loading image...
+      <v-progress-circular
+        indeterminate
+        color="brand"
+      />
+    </v-snackbar>
   </v-sheet>
 </template>
 
@@ -46,14 +53,23 @@ export default {
       type: Boolean,
       default: false,
     },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data: () => ({
-    loading: false,
     isHover: false,
     preview: null,
     file: null,
   }),
+
+  computed: {
+    snackbar () {
+      return this.loading
+    },
+  },
 
   methods: {
     drop (ev) {

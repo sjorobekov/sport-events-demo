@@ -14,6 +14,13 @@
       </v-btn>
       <slot name="actions" />
       <FxImageCropModal ref="cropper" :stencil="stencilProps" />
+      <v-snackbar v-model="snackbar" color="info" min-width="200">
+        Loading image...
+        <v-progress-circular
+          indeterminate
+          color="brand"
+        />
+      </v-snackbar>
     </v-col>
   </v-row>
 </template>
@@ -64,6 +71,9 @@ export default {
       set (val) {
         this.$emit('input', val)
       },
+    },
+    snackbar () {
+      return this.loading
     },
   },
 

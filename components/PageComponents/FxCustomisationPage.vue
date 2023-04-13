@@ -12,6 +12,7 @@
         <v-col cols="12" lg="7">
           <label>Upload Image</label>
           <FxFileDragDrop
+            :loading="imageUploading"
             :disabled="images.length >= 5"
             @select="uploadImageHandler"
           >
@@ -171,6 +172,7 @@ export default {
       this.$store.dispatch('api/schools/uploadImage', { id: this.school.id, file })
         .then((res) => {
           this.images = res
+          this.$toast('Image has been uploaded!')
         })
         .catch(() => {
           this.$toast.error('Unknown error')
