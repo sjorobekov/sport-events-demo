@@ -21,7 +21,7 @@ export const getters: GetterTree<RootState, RootState> = {
   ]),
 
   eventTypesCanHaveResults () {
-    return [EventType.FIXTURE, EventType.MULTI_EVENT, EventType.TOURNAMENT]
+    return [EventType.FIXTURE, EventType.MULTI_EVENT, EventType.TOURNAMENT, EventType.TRAINING]
   },
 }
 

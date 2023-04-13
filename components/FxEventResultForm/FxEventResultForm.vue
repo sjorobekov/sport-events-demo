@@ -64,6 +64,7 @@ export default {
       [EventType.FIXTURE]: 'FxEventFixtureResultForm',
       [EventType.MULTI_EVENT]: 'FxEventMultiResultForm',
       [EventType.TOURNAMENT]: 'FxEventTournamentResultForm',
+      [EventType.TRAINING]: 'FxEventTrainingResultForm',
     },
   }),
 
