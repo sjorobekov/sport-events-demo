@@ -45,7 +45,9 @@
 
           <div class="pt-1">
             <v-btn v-if="canEditCompetition" class="hidden-sm-and-down neutral--text text--darken-3" outlined link :to="{ name: 'in-house-competitionId-matches-edit', params: { competitionId: inHouseCompetitionId }}">
-              <v-icon color="neutral darken-2">$vuetify.icons.edit</v-icon>Edit Comp
+              <v-icon color="neutral darken-2">
+                $vuetify.icons.edit
+              </v-icon>Edit Comp
             </v-btn>
             <v-btn
               v-if="canCreateInHouseEvent"
@@ -61,15 +63,21 @@
             <v-menu>
               <template #activator="{ on, attrs }">
                 <v-btn class="hidden-md-and-up" icon v-bind="attrs" v-on="on">
-                  <v-icon color="neutral darken-1">mdi-dots-vertical</v-icon>
+                  <v-icon color="neutral darken-1">
+                    mdi-dots-vertical
+                  </v-icon>
                 </v-btn>
               </template>
               <v-list>
                 <v-list-item v-if="canEditCompetition" link :to="{ name: 'in-house-competitionId-matches-edit', params: { competitionId: inHouseCompetitionId }}">
-                  <v-list-item-title class="neutral--text text--darken-3">Edit Competition</v-list-item-title>
+                  <v-list-item-title class="neutral--text text--darken-3">
+                    Edit Competition
+                  </v-list-item-title>
                 </v-list-item>
                 <v-list-item v-if="canCreateInHouseEvent" link :to="{ name: 'in-house-competitionId-matches-add', params: { competitionId: inHouseCompetitionId }}">
-                  <v-list-item-title class="neutral--text text--darken-3">Add Event</v-list-item-title>
+                  <v-list-item-title class="neutral--text text--darken-3">
+                    Add Event
+                  </v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-menu>

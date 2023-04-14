@@ -54,6 +54,7 @@
           </v-chip>
         </div>
       </div>
+      <FxConfirm ref="confirm" />
     </v-card>
     <FxEventScoreBoardCard />
     <NuxtChild />
@@ -108,11 +109,12 @@ export default {
     },
   },
   methods: {
-    remove () {
+    async remove () {
       const warning = 'Hey there! Just wanted to make sure you\'re aware that deleting this event will remove it for both schools. ' +
         'If the event has been cancelled or postponed, it might be a good idea to update the status instead so everyone is in the loop. ' +
         'Are you still sure you want to delete it?'
-      if (!confirm(warning)) {
+
+      if (!await this.$refs.confirm.open(warning, 'Delete Event', 'Yes, Delete Event')) {
         return
       }
 

@@ -33,7 +33,7 @@
         <template #item.action="{ item }">
           <v-menu>
             <template #activator="{ on, attrs }">
-              <v-btn icon v-bind="attrs" v-on="on" :ripple="false">
+              <v-btn icon v-bind="attrs" :ripple="false" v-on="on">
                 <v-icon color="neutral darken-1">
                   $vuetify.icons.threeDots
                 </v-icon>
@@ -47,7 +47,7 @@
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item @click="remove(item)" :ripple="false">
+              <v-list-item :ripple="false" @click="remove(item)">
                 <v-list-item-content>
                   <v-list-item-title class="neutral--text text--darken-3">
                     Delete Event

@@ -23,7 +23,9 @@
                 color="neutral darken-3"
                 v-on="on"
               >
-                <v-icon color="neutral darken-1">$vuetify.icons.settings</v-icon>
+                <v-icon color="neutral darken-1">
+                  $vuetify.icons.settings
+                </v-icon>
                 Filters
               </v-btn>
             </v-badge>
@@ -40,12 +42,16 @@
           <v-list>
             <v-list-item :to="{ name: 'records-manage-events' }">
               <v-list-item-content>
-                <v-list-item-title class="neutral--text text--darken-3">Manage</v-list-item-title>
+                <v-list-item-title class="neutral--text text--darken-3">
+                  Manage
+                </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
             <v-list-item :to="{ name: 'records-add' }">
               <v-list-item-content>
-                <v-list-item-title class="neutral--text text--darken-3">Add Sports Record</v-list-item-title>
+                <v-list-item-title class="neutral--text text--darken-3">
+                  Add Sports Record
+                </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list>
