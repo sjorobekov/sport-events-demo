@@ -1,7 +1,7 @@
 <template>
   <div>
     <FxTopBar>
-      <div class="calendar-bar pt-2">
+      <div class="calendar-bar pt-2" :class="{ 'height-auto': showFilters }">
         <v-container>
           <div class="d-flex px-md-2">
             <FxDateRangePicker v-model="filter" :mobile="isMobile" class="ml-2" />
@@ -68,34 +68,33 @@
               @input="scrollTo"
             />
           </div>
+          <client-only>
+            <FxCalendarFilterDialog
+              v-model="showFilters"
+              :mobile="isMobile"
+              @click:clearAll="$refs.filter.clearAll()"
+            >
+              <FxPill v-if="!isMobile" class="mb-4">
+                Filters
+              </FxPill>
+
+              <FxCalendarFilter
+                ref="filter"
+                v-model="filter"
+                :age-groups="ageGroups"
+                :event-types="eventTypes"
+                :opponent-ids="opponentIds"
+                :lead-ids="leadIds"
+                :contains-in-house-events="containsInHouseEvents"
+                :sports="sports"
+                class="mb-6"
+              />
+            </FxCalendarFilterDialog>
+          </client-only>
         </v-container>
       </div>
     </FxTopBar>
     <div class="calendar-content">
-      <client-only>
-        <FxCalendarFilterDialog
-          v-model="showFilters"
-          :mobile="isMobile"
-          @click:clearAll="$refs.filter.clearAll()"
-        >
-          <FxPill v-if="!isMobile" class="mb-4">
-            Filters
-          </FxPill>
-
-          <FxCalendarFilter
-            ref="filter"
-            v-model="filter"
-            :age-groups="ageGroups"
-            :event-types="eventTypes"
-            :opponent-ids="opponentIds"
-            :lead-ids="leadIds"
-            :contains-in-house-events="containsInHouseEvents"
-            :sports="sports"
-            class="mb-6"
-          />
-        </FxCalendarFilterDialog>
-      </client-only>
-
       <client-only v-if="hasEvents">
         <div v-for="key in eventSortedDates" :id="`date-${key}`" :key="key" v-intersect="{ handler: onIntersect(key), options: { threshold: [1.0] } }" class="pb-6">
           <FxCalendarPill :value="key" class="my-4" />
@@ -430,6 +429,8 @@ $calendar-bar-height: 186px
   border-bottom: solid 8px var(--v-primary-base)!important
   height: $calendar-bar-height
   background: var(--v-background-base)
+  &.height-auto
+    height: auto
 
 .calendar-content
   margin-top: $calendar-bar-height + 32px
