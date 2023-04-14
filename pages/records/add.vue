@@ -16,7 +16,7 @@
     <v-container class="mt-4 mb-8">
       <v-row>
         <v-spacer />
-        <v-btn outlined :ripple="false" @click="cancel" color="neutral darken-3">
+        <v-btn outlined :ripple="false" color="neutral darken-3" @click="cancel">
           Cancel
         </v-btn>
         <v-btn

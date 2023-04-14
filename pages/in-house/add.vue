@@ -10,8 +10,13 @@
       :disabled="loading"
       :sports="sports"
       :school-id="schoolId"
-      :can-create-competition="canCreateCompetition"
-    />
+    >
+      <template #alert>
+        <v-alert v-if="!canCreateCompetition" type="info">
+          You have reached limit of Competitions in selected season
+        </v-alert>
+      </template>
+    </FxInHouseCompetitionForm>
 
     <v-container class="mt-4 mb-8">
       <v-row>

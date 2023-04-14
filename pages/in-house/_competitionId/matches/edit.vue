@@ -30,6 +30,7 @@
         </v-btn>
       </v-row>
     </v-container>
+    <FxConfirm ref="confirm" />
   </div>
 </template>
 
@@ -101,13 +102,15 @@ export default {
         this.loading = false
       })
     },
-    remove () {
+    async remove () {
       const warning = 'Warning: Continuing will permanently delete this competition. ' +
                       'However, events linked to this competition will still be retained in the database. ' +
                       'Are you sure you want to proceed?'
-      if (!confirm(warning)) {
+
+      if (!await this.$refs.confirm.open(warning, 'Delete Competition', 'Yes, Delete Competition')) {
         return
       }
+
       this.$store.dispatch('api/inHouseCompetitions/remove', this.inHouseCompetition).then(() => {
         this.$router.push({ name: 'in-house' })
       }).catch(() => {
