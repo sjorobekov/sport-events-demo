@@ -21,7 +21,7 @@
                 $vuetify.icons.image
               </v-icon>
               <br>
-              <v-btn text class="text-p2 info--text" @click="openSelectFile">
+              <v-btn text class="text-p2 info--text" :loading="imageUploading" @click="openSelectFile">
                 Upload Image
               </v-btn>
             </template>
