@@ -16,7 +16,9 @@
           :ripple="false"
           :to="{ name: 'records-events-add' }"
         >
-          <v-icon>$vuetify.icons.add-all</v-icon>
+          <v-icon class="mr-0 mr-md-1">
+            $vuetify.icons.add-all
+          </v-icon>
           <span class="hidden-sm-and-down">Add New Record Event</span>
         </v-btn>
       </v-list-item-action>
