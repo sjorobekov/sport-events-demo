@@ -2,7 +2,7 @@
   <v-card>
     <v-list-item>
       <v-list-item-content>
-        <v-list-item-title class="text-h4 neutral--text text--darken-4">
+        <v-list-item-title class="text-h5 text-md-h4 neutral--text text--darken-4">
           Sports & Events
         </v-list-item-title>
         <v-list-item-subtitle />
@@ -16,7 +16,8 @@
           :ripple="false"
           :to="{ name: 'records-events-add' }"
         >
-          <v-icon>$vuetify.icons.add-all</v-icon>Add New Record Event
+          <v-icon>$vuetify.icons.add-all</v-icon>
+          <span class="hidden-sm-and-down">Add New Record Event</span>
         </v-btn>
       </v-list-item-action>
     </v-list-item>
