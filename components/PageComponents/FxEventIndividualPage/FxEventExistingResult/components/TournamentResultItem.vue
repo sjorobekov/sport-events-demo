@@ -11,42 +11,44 @@
       </v-list-item>
     </div>
 
-    <div class="d-md-inline-block">
-      <v-list-item class="px-0">
-        <v-list-item-avatar size="32" class="order-md-1 mr-2">
-          <FxSchoolLogo size="32" :value="contextSchool.logo" :color="contextSchool.color" :alt="myTeam.name" />
-        </v-list-item-avatar>
-        <v-list-item-content class="mr-4">
-          <v-list-item-title class="text-p2 neutral--text text--darken-3">
-            {{ myTeam.name }}
-          </v-list-item-title>
-        </v-list-item-content>
-        <v-list-item-avatar class="order-last neutral--text text--darken-4" height="40" width="60" rounded color="neutral lighten-2">
-          {{ item.score }}
-        </v-list-item-avatar>
-      </v-list-item>
-    </div>
+    <div class="d-md-flex justify-center">
+      <div class="d-md-inline-block">
+        <v-list-item class="px-0">
+          <v-list-item-avatar size="32" class="order-md-1 mr-2">
+            <FxSchoolLogo size="32" :value="contextSchool.logo" :color="contextSchool.color" :alt="myTeam.name" />
+          </v-list-item-avatar>
+          <v-list-item-content class="mr-4">
+            <v-list-item-title class="text-p2 neutral--text text--darken-3">
+              {{ myTeam.name }}
+            </v-list-item-title>
+          </v-list-item-content>
+          <v-list-item-avatar class="order-last neutral--text text--darken-4" height="40" width="60" rounded color="neutral lighten-2">
+            {{ item.score }}
+          </v-list-item-avatar>
+        </v-list-item>
+      </div>
 
-    <FxOpponentProvider
-      v-slot="{ opponentName, logo, color }"
-      class="d-md-inline-block"
-      :opponent-school-id="item.opponentSchoolId"
-      :opponent-id="item.opponentId"
-    >
-      <v-list-item class="px-0">
-        <v-list-item-avatar size="32" class="mr-2">
-          <FxSchoolLogo size="32" :value="logo" :color="color" :alt="opponentName" />
-        </v-list-item-avatar>
-        <v-list-item-content>
-          <v-list-item-title class="text-p2 neutral--text text--darken-3">
-            {{ opponentName }}
-          </v-list-item-title>
-        </v-list-item-content>
-        <v-list-item-avatar class="order-last order-md-first mr-md-4 neutral--text text--darken-4" height="40" width="60" rounded color="neutral lighten-2">
-          {{ item.opponentScore }}
-        </v-list-item-avatar>
-      </v-list-item>
-    </FxOpponentProvider>
+      <FxOpponentProvider
+        v-slot="{ opponentName, logo, color }"
+        class="d-md-inline-block"
+        :opponent-school-id="item.opponentSchoolId"
+        :opponent-id="item.opponentId"
+      >
+        <v-list-item class="px-0">
+          <v-list-item-avatar size="32" class="mr-2">
+            <FxSchoolLogo size="32" :value="logo" :color="color" :alt="opponentName" />
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title class="text-p2 neutral--text text--darken-3">
+              {{ opponentName }}
+            </v-list-item-title>
+          </v-list-item-content>
+          <v-list-item-avatar class="order-last order-md-first mr-md-4 neutral--text text--darken-4" height="40" width="60" rounded color="neutral lighten-2">
+            {{ item.opponentScore }}
+          </v-list-item-avatar>
+        </v-list-item>
+      </FxOpponentProvider>
+    </div>
   </div>
 </template>
 
