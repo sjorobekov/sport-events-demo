@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'FxSportSelect',
@@ -48,7 +49,13 @@ export default {
   }),
 
   async fetch () {
-    this.sports = await this.$store.dispatch('api/sports/list')
+    this.sports = await this.$store.dispatch('api/sports/listParticipation', { schoolId: this.schoolId })
+  },
+
+  computed: {
+    ...mapGetters({
+      schoolId: 'context/schoolId',
+    }),
   },
 }
 </script>
