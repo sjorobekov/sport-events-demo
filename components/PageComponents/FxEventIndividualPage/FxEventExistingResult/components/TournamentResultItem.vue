@@ -11,7 +11,7 @@
       </v-list-item>
     </div>
 
-    <div class="d-md-flex justify-center">
+    <div class="scores">
       <div class="d-md-inline-block">
         <v-list-item class="px-0">
           <v-list-item-avatar size="32" class="order-md-1 mr-2">
@@ -22,7 +22,7 @@
               {{ myTeam.name }}
             </v-list-item-title>
           </v-list-item-content>
-          <v-list-item-avatar class="order-last neutral--text text--darken-4" height="40" width="60" rounded color="neutral lighten-2">
+          <v-list-item-avatar class="order-last mr-md-4 neutral--text text--darken-4" height="40" width="60" rounded color="neutral lighten-2">
             {{ item.score }}
           </v-list-item-avatar>
         </v-list-item>
@@ -75,6 +75,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '~vuetify/src/styles/styles';
+
 .result-box {
   border-radius: 6px;
   padding: 2px 8px 2px 8px;
@@ -92,6 +94,15 @@ export default {
   &.lost {
     color: var(--v-error-darken2);
     box-shadow: 0 0 0 1px var(--v-error-base);
+  }
+}
+
+@media #{map-get($display-breakpoints, 'md-and-up')} {
+  .scores {
+    display: flex;
+    > div {
+      width: 50%;
+    }
   }
 }
 </style>
