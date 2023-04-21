@@ -16,7 +16,7 @@
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class="text-p1 neutral--text text--darken-2">
-                {{ user.firstname }} {{ user.lastname }}
+                <FxUserDisplayName :user="user" />
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>

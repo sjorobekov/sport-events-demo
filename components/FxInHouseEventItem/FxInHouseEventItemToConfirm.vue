@@ -74,7 +74,7 @@
             <FxAvatar :size="24" :value="user.avatar" />
           </template>
           <template #title>
-            {{ user.firstname }} {{ user.lastname }}
+            <FxUserDisplayName :user="user" />
           </template>
         </ListItem>
       </v-col>

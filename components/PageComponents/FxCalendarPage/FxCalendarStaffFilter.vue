@@ -6,7 +6,6 @@
     multiple
     placeholder="Staff"
     :items="users"
-    :item-text="fullname"
     item-value="id"
     :value="value"
     prepend-inner-icon="$vuetify.icons.user-small"
@@ -29,7 +28,9 @@
           <FxAvatar size="24" :value="item.avatar" />
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title>{{ item.firstname }} {{ item.lastname }}</v-list-item-title>
+          <v-list-item-title>
+            <FxUserDisplayName :user="item" />
+          </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </template>
@@ -76,10 +77,6 @@ export default {
   },
 
   methods: {
-    fullname (item) {
-      return `${item.firstname} ${item.lastname}`
-    },
-
     async fetchItems () {
       this.users = await Promise.all(this.items.filter(id => !!id).map((id) => {
         return this.$store.dispatch('api/users/fetch', {
