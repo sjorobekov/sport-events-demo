@@ -32,24 +32,9 @@
       </v-list-item>
     </template>
     <template #time>
-      <div>
-        <div v-if="value.startTime" class="d-inline-block pr-8">
-          <v-list-item-title class="text-p2 neutral--text text--darken-4">
-            {{ value.startTime }}
-          </v-list-item-title>
-          <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
-            Start Time
-          </v-list-item-subtitle>
-        </div>
-        <div class="d-inline-block pr-8">
-          <v-list-item-title class="text-p2 neutral--text text--darken-4">
-            {{ value.finishTime }}
-          </v-list-item-title>
-          <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
-            Finish Time
-          </v-list-item-subtitle>
-        </div>
-      </div>
+      <v-list-item-title class="text-p2 neutral--text text--darken-4">
+        {{ value.startTime }} - {{ value.finishTime }}
+      </v-list-item-title>
     </template>
     <template #location>
       <span>{{ locationLabel }}</span>
