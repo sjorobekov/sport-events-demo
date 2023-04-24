@@ -4,8 +4,8 @@
       <div class="fill-height d-sm-flex flex-column flex-sm-row justify-center align-center">
         <div class="school-panel d-flex flex-column align-center flex-shrink-1 justify-sm-space-between" :style="style">
           <div class="school-info">
-            <div class="school-logo-container mb-5 mb-sm-5">
-              <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" :size="size" />
+            <div class="mb-5 mb-sm-5">
+              <FxSchoolLogo class="school-logo-container" :value="contextSchool.logo" :color="contextSchool.color" />
             </div>
             <h1 v-balance-text class="text-sm-h1s text-h6 white--text text-center pb-5 font-weight-bold">
               {{ contextSchool.name }}
@@ -32,9 +32,6 @@
 import { mapGetters } from 'vuex'
 import FxSchoolLogo from '@/components/FxSchoolLogo/FxSchoolLogo'
 
-const imgSizeDesktop = '220'
-const imgSizeLMobile = '200'
-const imgSizeSMobile = '120'
 export default {
   name: 'StartUpLayout',
   components: { FxSchoolLogo },
@@ -43,9 +40,6 @@ export default {
       return redirect({ name: 'login' })
     }
   },
-  data: () => ({
-    windowHeight: 800,
-  }),
   computed: {
     ...mapGetters({
       contextSchool: 'context/school',
@@ -56,34 +50,6 @@ export default {
       return {
         background: this.contextSchool.color,
       }
-    },
-    size () {
-      if (process.server) {
-        return this.isMobileDevice ? imgSizeLMobile : imgSizeDesktop
-      }
-
-      if (this.$vuetify.breakpoint.name !== 'xs') {
-        return imgSizeDesktop
-      }
-      if (this.windowHeight > 667) {
-        return imgSizeLMobile
-      }
-      return imgSizeSMobile
-    },
-  },
-
-  mounted () {
-    this.onResize()
-    window.addEventListener('resize', this.onResize)
-  },
-
-  beforeDestroy () {
-    window.removeEventListener('resize', this.onResize)
-  },
-
-  methods: {
-    onResize () {
-      this.windowHeight = window.innerHeight
     },
   },
 }
@@ -105,9 +71,10 @@ export default {
   margin-bottom: auto
   border-radius: 32px
   margin-left: 2.5%
-  box-shadow: 0px 0px 16px rgba(255, 255, 255, 0.8)!important
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.8)!important
   padding-left: 32px
   padding-right: 32px
+
 .school-logo-container
   display: block
   margin: 0 auto
