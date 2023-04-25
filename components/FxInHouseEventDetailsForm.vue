@@ -47,7 +47,7 @@
                 @input="update('startTime', $event)"
               />
             </div>
-            <div class="mr-2 max-width-137" style="max-width: 137px">
+            <div class="mr-2 max-width-137">
               <label for="finishTime">Finish Time</label>
               <FxTimePickerMenu
                 id="finishTime"
