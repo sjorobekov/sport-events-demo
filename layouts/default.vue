@@ -3,7 +3,7 @@
     <AppBar v-model="drawer" class="d-print-none" />
     <v-main>
       <FxNavigationDrawer v-model="drawer" :permanent="drawerPermanent" :right="isMobile" :hide-logo="isMobile" class="d-print-none" />
-      <v-container>
+      <v-container class="px-md-8">
         <nuxt />
       </v-container>
 
