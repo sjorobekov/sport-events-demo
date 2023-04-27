@@ -17,6 +17,23 @@
       @input="update('name', $event)"
     />
 
+    <label for="location_name">Search Location</label>
+    <GmapAutocomplete
+      v-slot="{ attrs, listeners }"
+      :set-fields-to="setFieldsTo"
+      :component-restrictions="componentRestrictions"
+      @place_changed="onPlaceChange"
+    >
+      <v-text-field
+        id="location_name"
+        ref="input"
+        outlined
+        dense
+        v-bind="attrs"
+        v-on="listeners"
+      />
+    </GmapAutocomplete>
+
     <label for="street">Street</label>
     <v-text-field
       id="street"
@@ -308,6 +325,15 @@ export default {
         disableDefaultUi: true,
       }
     },
+
+    componentRestrictions () {
+      return {}
+    },
+
+    setFieldsTo () {
+      return ['address_components', 'geometry.location']
+    },
+
   },
 
   watch: {
@@ -372,6 +398,68 @@ export default {
       return this.$refs.mapRef.$mapPromise.then((map) => {
         return map.panTo(location)
       })
+    },
+
+    onPlaceChange (val) {
+      const address = this.getAddressObject(val.address_components)
+
+      this.$emit('input', {
+        ...this.formData,
+        city: address.city,
+        country: address.country,
+        street: `${address.home} ${address.street}`,
+        zip: address.postal_code,
+        coordinates: {
+          lat: val.geometry?.location.lat(),
+          lng: val.geometry?.location.lng(),
+        },
+      })
+    },
+
+    getAddressObject (addressComponents) {
+      const ShouldBeComponent = {
+        home: ['street_number'],
+        postal_code: ['postal_code'],
+        street: ['street_address', 'route'],
+        region: [
+          'administrative_area_level_1',
+          'administrative_area_level_2',
+          'administrative_area_level_3',
+          'administrative_area_level_4',
+          'administrative_area_level_5',
+        ],
+        city: [
+          'locality',
+          'sublocality',
+          'sublocality_level_1',
+          'sublocality_level_2',
+          'sublocality_level_3',
+          'sublocality_level_4',
+        ],
+        country: ['country'],
+      }
+
+      const address = {
+        home: '',
+        postal_code: '',
+        street: '',
+        region: '',
+        city: '',
+        country: '',
+      }
+
+      addressComponents.forEach((component) => {
+        for (const shouldBe in ShouldBeComponent) {
+          if (ShouldBeComponent[shouldBe].includes(component.types[0])) {
+            if (shouldBe === 'country') {
+              address[shouldBe] = component.short_name
+            } else {
+              address[shouldBe] = component.long_name
+            }
+          }
+        }
+      })
+      return address
     },
   },
 }
