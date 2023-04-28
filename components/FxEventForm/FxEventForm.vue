@@ -449,15 +449,34 @@
       </template>
       <template v-else-if="eventForm.location === EventLocationType.OTHER">
         <label for="locationOther">Sports Location</label>
+
+        <GmapAutocomplete
+          v-if="!eventForm.otherLocation"
+          v-slot="{ attrs, listeners }"
+          :set-fields-to="setFieldsTo"
+          :component-restrictions="componentRestrictions"
+          @place_changed="onPlaceChange"
+        >
+          <v-text-field
+            id="locationOther"
+            ref="input"
+            v-async-validate
+            :async-rules="[$rule.required]"
+            placeholder="Enter Address"
+            outlined
+            dense
+            v-bind="attrs"
+            v-on="listeners"
+          />
+        </GmapAutocomplete>
         <v-text-field
-          id="locationOther"
-          v-async-validate
-          dense
+          v-else
           outlined
-          placeholder="Enter Address"
-          :async-rules="[$rule.required]"
+          dense
+          readonly
           :value="eventForm.otherLocation"
-          @input="updateEvent('otherLocation', $event)"
+          append-icon="mdi-pencil"
+          @click:append="editOtherLocation"
         />
       </template>
     </FxSteppedFormCard>
@@ -641,11 +660,6 @@ export default {
       default: false,
     },
 
-    schoolId: {
-      type: String,
-      required: true,
-    },
-
     repeats: {
       type: Array,
       default: () => [],
@@ -677,6 +691,8 @@ export default {
   computed: {
     ...mapGetters({
       currentSeason: 'seasons/current',
+      contextSchool: 'context/school',
+      schoolId: 'context/schoolId',
     }),
     eventForm () {
       return this.event || {}
@@ -708,6 +724,15 @@ export default {
         endDate: DateTime.fromISO(this.eventForm.endDate),
         selectedDays: this.selectedDays,
       }
+    },
+    componentRestrictions () {
+      return {
+        country: this.contextSchool.country,
+      }
+    },
+
+    setFieldsTo () {
+      return ['address_components', 'name']
     },
   },
 
@@ -774,6 +799,70 @@ export default {
     },
     updateRepeats (value) {
       this.$emit('update:repeats', value)
+    },
+
+    onPlaceChange ({ address_components: addressComponents, name }) {
+      const { home, street, city } = this.getAddressObject(addressComponents)
+
+      if (name) {
+        this.updateEvent('otherLocation', `${name}, ${city}`)
+        return
+      }
+
+      this.updateEvent('otherLocation', `${home} ${street}, ${city}`)
+    },
+
+    editOtherLocation () {
+      this.updateEvent('otherLocation', null)
+      this.$nextTick(() => {
+        this.$refs.input.focus()
+      })
+    },
+
+    getAddressObject (addressComponents) {
+      const ShouldBeComponent = {
+        home: ['street_number'],
+        postal_code: ['postal_code'],
+        street: ['street_address', 'route'],
+        region: [
+          'administrative_area_level_1',
+          'administrative_area_level_2',
+          'administrative_area_level_3',
+          'administrative_area_level_4',
+          'administrative_area_level_5',
+        ],
+        city: [
+          'locality',
+          'sublocality',
+          'sublocality_level_1',
+          'sublocality_level_2',
+          'sublocality_level_3',
+          'sublocality_level_4',
+        ],
+        country: ['country'],
+      }
+
+      const address = {
+        home: '',
+        postal_code: '',
+        street: '',
+        region: '',
+        city: '',
+        country: '',
+      }
+
+      addressComponents.forEach((component) => {
+        for (const shouldBe in ShouldBeComponent) {
+          if (ShouldBeComponent[shouldBe].includes(component.types[0])) {
+            if (shouldBe === 'country') {
+              address[shouldBe] = component.short_name
+            } else {
+              address[shouldBe] = component.long_name
+            }
+          }
+        }
+      })
+      return address
     },
   },
 }
