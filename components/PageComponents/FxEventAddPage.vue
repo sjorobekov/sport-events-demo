@@ -20,7 +20,6 @@
     <FxEventForm
       v-if="formVisible"
       ref="form"
-      :school-id="contextSchoolId"
       :event.sync="formData.event"
       :me.sync="formData.me"
       :opponent.sync="formData.opponent"

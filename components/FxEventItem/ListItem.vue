@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-list-item class="px-0 d-inline-flex">
+  <div style="max-width: 100%;">
+    <v-list-item class="px-0 d-inline-flex" style="max-width: 100%;">
       <v-list-item-icon class="mr-3 flex-grow-0 flex-shrink-1">
         <slot name="icon" />
       </v-list-item-icon>
