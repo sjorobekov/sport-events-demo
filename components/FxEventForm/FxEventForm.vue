@@ -448,7 +448,7 @@
         />
       </template>
       <template v-else-if="eventForm.location === EventLocationType.OTHER">
-        <label for="locationOther">Sports Location</label>
+        <label for="locationOther">Search Locations</label>
 
         <GmapAutocomplete
           v-if="!eventForm.otherLocation"
