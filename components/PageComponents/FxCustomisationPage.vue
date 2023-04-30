@@ -1,13 +1,14 @@
 <template>
   <v-card class="py-2 px-2 py-md-6 px-md-6">
-    <v-card-title class="text-p3 font-weight-bold">
+    <v-card-title class="text-p3 font-weight-bold px-0 pb-2">
       Home Page Images
     </v-card-title>
     <v-divider />
     <v-container>
       <v-row>
-        <v-col cols="12" lg="5" class="text-p2 info--text">
-          JPEG, PNG and WEBP are recommended. SVG and GIF are also supported
+        <v-col cols="12" lg="5" class="text-p2 neutral--text text--darken-3 px-0 pr-5">
+          Upload images for the homepage of your portal.<br>
+          We recommend using JPEG, PNG, or WEBP formats, but SVG and GIF formats are also supported.
         </v-col>
         <v-col cols="12" lg="7">
           <label>Upload Image</label>
@@ -17,11 +18,11 @@
             @select="uploadImageHandler"
           >
             <template #default="{ openSelectFile }">
-              <v-icon size="30" color="info">
+              <v-icon size="30" color="neutral-darken-2">
                 $vuetify.icons.image
               </v-icon>
               <br>
-              <v-btn text class="text-p2 info--text" :loading="imageUploading" @click="openSelectFile">
+              <v-btn text class="text-p2 neutral--text text--darken-3 upload-button" :loading="imageUploading" @click="openSelectFile">
                 Upload Image
               </v-btn>
             </template>
@@ -31,26 +32,26 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-card-title class="text-p3 font-weight-bold">
+    <v-card-title class="text-p3 font-weight-bold px-0 pb-2">
       School Logo
     </v-card-title>
     <v-divider />
     <v-container>
       <v-row>
-        <v-col cols="12" lg="5" class="text-p2 info--text">
-          Square images recommended <br>
-          Transparent WEBP, PNG or SVG recommended. JPEG and GIF are also supported
+        <v-col cols="12" lg="5" class="text-p2 neutral--text text--darken-3 px-0 pr-4">
+          Customise your sports portal by uploading your school logo.<br>
+          We recommend using square images in transparent WEBP, PNG, or SVG formats. JPEG and GIF formats are also supported.
         </v-col>
         <v-col cols="12" lg="7">
           <FxImageUploadForm :value="logoFile" :loading="uploadingLogo" :stencil-props="stencil" :compression="compression" @input="uploadLogo">
             <template #icon>
               <v-avatar class="mr-6 school-logo" size="120">
                 <v-img v-if="school.logo" :src="school.logo" />
-                <span v-else class="info--text lighten-2">No Logo</span>
+                <span v-else class="neutral--text darken-2">No Logo</span>
               </v-avatar>
             </template>
             <template #actions>
-              <v-btn text color="info darken-1" :disabled="uploadingLogo" @click="removeLogo">
+              <v-btn text outlined color="neutral darken-3" :disabled="uploadingLogo" @click="removeLogo">
                 Delete Logo
               </v-btn>
             </template>
@@ -58,14 +59,14 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-card-title class="text-p3 font-weight-bold">
+    <v-card-title class="text-p3 font-weight-bold px-0 pb-2">
       School Colour
     </v-card-title>
     <v-divider />
     <v-container>
       <v-row>
-        <v-col cols="12" lg="5" class="text-p2 info--text">
-          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+        <v-col cols="12" lg="5" class="text-p2 neutral--text text--darken-3 px-0 pr-5">
+          Customise your sports portal by selecting your school colour.
         </v-col>
         <v-col cols="12" lg="7">
           <FxCustomizationSchoolColorForm
@@ -199,9 +200,18 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .school-logo {
   border: var(--v-neutral-lighten1) 1px solid;
   border-radius: 4px;
+}
+
+.v-btn:before {
+  opacity: 0!important
+}
+
+.upload-button:hover {
+  box-shadow: none!important;
+  color: var(--v-primary-base)!important;
 }
 </style>

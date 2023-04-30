@@ -2,13 +2,13 @@
   <div>
     <v-list-item class="px-0">
       <v-list-item-content>
-        <v-list-item-title class="text-h4">
+        <v-list-item-title class="text-h4 neutral--text text--darken-4">
           Students
         </v-list-item-title>
       </v-list-item-content>
       <v-list-item-action>
         <v-btn depressed dark color="primary" :to="{ name: 'settings-students-add' }" link>
-          <v-icon>$vuetify.icons.plusOutline</v-icon>Add Student
+          <v-icon>$vuetify.icons.add-all</v-icon>Add Student
         </v-btn>
       </v-list-item-action>
     </v-list-item>

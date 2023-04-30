@@ -36,7 +36,7 @@ export default {
     },
     color: {
       type: String,
-      default: 'info lighten-5',
+      default: 'neutral lighten-3',
     },
     accept: {
       type: String,
@@ -97,9 +97,10 @@ export default {
 
 <style scoped>
 .border {
-  border: 1px dashed var(--v-info-lighten2);
+  border: 1px dashed var(--v-neutral-base);
+  border-radius: 8px;
 }
 .border.hover {
-  border: 2px dashed var(--v-info-lighten1);
+  border: 2px dashed var(--v-neutral-base);
 }
 </style>

@@ -137,4 +137,10 @@ export default {
 .theme--light.v-tabs-items {
   background: none;
 }
+.v-tab:before {
+  opacity: 0!important;
+}
+.v-tab:hover {
+  color: var(--v-primary-base)!important;
+}
 </style>

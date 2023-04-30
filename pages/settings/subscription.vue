@@ -2,7 +2,7 @@
   <div>
     <v-list-item class="px-0">
       <v-list-item-content>
-        <v-list-item-title class="text-h4">
+        <v-list-item-title class="text-h4 neutral--text text--darken-4">
           Subscription
         </v-list-item-title>
       </v-list-item-content>
@@ -63,7 +63,7 @@
             <td>{{ item.plan.name }}, <span class="text-lowercase">{{ $t(`TariffPlanPeriod.${item.plan.period}`) }}</span></td>
             <td>&#163;{{ item.amount }}</td>
             <td class="text-right">
-              <v-btn text :href="item.receipt_url" target="_blank">
+              <v-btn text color="neutral darken-3" :href="item.receipt_url" target="_blank">
                 Receipt - {{ item.created_at }}
               </v-btn>
             </td>
@@ -123,3 +123,12 @@ export default {
   },
 }
 </script>
+<style scoped>
+.v-btn:before {
+  opacity: 0!important;
+}
+.v-btn:hover {
+  color: var(--v-primary-base)!important;
+  box-shadow: none!important;
+}
+</style>

@@ -142,4 +142,6 @@ export default [
   'user-search',
   'tick-circle',
   'warning',
+  'resetPassword',
+  'upload-button',
 ]

@@ -10,7 +10,7 @@
         @change="selected"
       />
       <v-btn depressed color="primary" class="mr-2" :loading="loading" @click="reselect">
-        <v-icon>$vuetify.icons.upload</v-icon>Upload
+        <v-icon>$vuetify.icons.upload-button</v-icon>Upload
       </v-btn>
       <slot name="actions" />
       <FxImageCropModal ref="cropper" :stencil="stencilProps" />

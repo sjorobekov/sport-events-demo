@@ -2,7 +2,7 @@
   <v-form :disabled="disabled">
     <v-row class="fill-height" align="center" justify="center" no-gutters>
       <v-col>
-        <label for="displaySportsContact"><strong>{{ formData.displaySportsContact ? 'Displayed' : 'Not displayed' }}</strong> as a Sports Contact</label>
+        <label for="displaySportsContact" class="neutral--text text--darken-3"><strong>{{ formData.displaySportsContact ? 'Displayed' : 'Not displayed' }}</strong> as a Sports Contact</label>
       </v-col>
       <v-col>
         <v-switch
@@ -18,7 +18,7 @@
 
     <v-row class="fill-height" align="center" justify="center" no-gutters>
       <v-col>
-        <label for="mainSportsContact">Main Sports Contact</label>
+        <label for="mainSportsContact" class="neutral--text text--darken-3">Main Sports Contact</label>
       </v-col>
       <v-col>
         <v-checkbox
