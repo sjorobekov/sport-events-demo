@@ -34,6 +34,7 @@ $box-shadow: 0 1px 4px 0 rgb(0 0 0 / 15%);
 .v-btn {
   font-weight: 400!important;
   font-family: ProximaNova-Semibold, sans-serif;
+  border-radius: 6px!important;
 }
 
 body {
@@ -166,12 +167,12 @@ tr:hover{ background-color: var(--v-neutral-lighten3)!important; }
 }
 
 .card-has-hover {
-  transition: border-color ease .3s!important;
+  transition: box-shadow ease .3s!important;
   box-shadow: 0px 0px 10px 0px #dadfe6!important;
-  border: 1px solid white!important;
+  border: none!important;
 }
 .card-has-hover:hover {
-  border: 1px solid var(--v-primary-base)!important;
+  box-shadow: 0px 0px 10px 0px #dadfe6, 0px 0px 16px 0px #dadfe6!important;
 }
 
 .dialog-toolbar {
@@ -248,7 +249,8 @@ tr:hover{ background-color: var(--v-neutral-lighten3)!important; }
 .v-btn--outlined {
   border: thin solid var(--v-neutral-lighten1);
   background: white;
-  transition: border ease 0.2s;
+  transition-property: box-shadow, border, opacity!important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)!important;
 }
 
 .link {
@@ -286,7 +288,7 @@ tr:hover{ background-color: var(--v-neutral-lighten3)!important; }
   display: none;
 }
 .v-btn:hover {
-  box-shadow: 0 2px 1px 0 rgba(0,0,0,.05);
+  box-shadow: 0px 10px 20px -15px rgb(0 0 0 / 50%)!important;
 }
 .theme--light.v-btn:hover::before {
   opacity: 0.2;
@@ -298,4 +300,7 @@ tr:hover{ background-color: var(--v-neutral-lighten3)!important; }
 }
 .v-ripple__container {
   display:none !important;
+}
+.v-btn:not(.v-btn--outlined).primary {
+  border: 2px solid rgba(255,255,255,0.25)!important
 }
