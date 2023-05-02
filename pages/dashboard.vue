@@ -29,7 +29,7 @@
         <v-card v-for="team in teams" :key="team.id" class="mb-2 card-has-hover" :to="{ name: 'teams-id', params: { id: team.id } }">
           <v-container :style="style(team.sport)" class="rounded">
             <v-row>
-              <v-col class="border-bottom pt-1 pb-0">
+              <v-col class="pt-1 pb-0">
                 <v-list-item class="px-0">
                   <v-list-item-avatar tile>
                     <v-img :src="team.sport.icon" />
