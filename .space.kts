@@ -80,14 +80,28 @@ job("Get Dev docker logs") {
 job("Remove docker image") {
   container(displayName = "Remove docker image from registry", image = "gradle") {
     kotlinScript { api ->
-      api.space().projects.packages.repositories.packages.versions.getAllPackageVersions(
+      val packages = api.space().projects.packages.repositories.packages.versions.getAllPackageVersions(
         project = ProjectIdentifier.Id("1ZmVug10EbUO"),
         repository = PackageRepositoryIdentifier.Id("3HYY8J34LUxD"),
         packageName = "ui",
         query = "",
         sortColumn = PackagesSortColumn.LastAccessed,
         sortOrder = ColumnSortOrder.ASC
-      )
+      ).data
+
+      for (item in packages) {
+        val branch = api.gitBranch().split('/')[2]
+        val found = item.tags?.find { tag -> branch.equals(tag) }
+        if (found != null) {
+		      api.space().projects.packages.repositories.packages.versions.deletePackageVersion(
+            project = ProjectIdentifier.Id("1ZmVug10EbUO"),
+            repository = PackageRepositoryIdentifier.Id("3HYY8J34LUxD"),
+            packageName = "ui",
+            packageVersion = item.version
+          )
+          break
+        }
+      }
     }
   }
 }
