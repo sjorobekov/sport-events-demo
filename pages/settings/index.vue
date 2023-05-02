@@ -2,7 +2,7 @@
   <div>
     <v-list-item class="px-0">
       <v-list-item-content>
-        <v-list-item-title class="text-h4">
+        <v-list-item-title class="text-h4 neutral--text text--darken-4">
           Profile
         </v-list-item-title>
       </v-list-item-content>
@@ -24,9 +24,9 @@
           <v-col
             cols="12"
             lg="5"
-            class="text-p2 info--text px-0"
+            class="text-p2 neutral--text text--darken-2 px-0 pr-5"
           >
-            Select profile picture for the user. Supported formats: jpeg, png, webp.
+            Choose a profile picture for your account. You can upload a file in jpeg, png, or webp format.
           </v-col>
           <v-col
             cols="12"
@@ -55,9 +55,9 @@
           <v-col
             cols="12"
             lg="5"
-            class="text-p2 info--text px-0"
+            class="text-p2 neutral--text text--darken-2 px-0 pr-5"
           >
-            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+            Manage your user information here. You can edit your name, display name, phone number, job role, and user role.
           </v-col>
           <v-col
             cols="12"
@@ -90,9 +90,9 @@
           <v-col
             cols="12"
             lg="5"
-            class="text-p2 info--text px-0"
+            class="text-p2 neutral--text text--darken-2 px-0 pr-5"
           >
-            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+            You can choose whether to make this user visible as a sports contact, and whether to display them as the main sports contact.
           </v-col>
           <v-col
             cols="12"
@@ -113,9 +113,9 @@
           <v-col
             cols="12"
             lg="5"
-            class="text-p2 info--text px-0"
+            class="text-p2 neutral--text text--darken-2 px-0 pr-5"
           >
-            Short descriptive text to go here
+            To reset your account password, please enter your current password followed by your new password, and then confirm your new password.
           </v-col>
           <v-col
             cols="12"

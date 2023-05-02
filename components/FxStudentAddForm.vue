@@ -16,7 +16,7 @@
                 Student Name
               </template>
               <template #content>
-                Enter first and last name of the student
+                Please provide the first and last name of the student.
               </template>
             </FxInstructionItem>
           </v-col>
@@ -77,7 +77,7 @@
                 Student Information
               </template>
               <template #content>
-                Enter student information
+                Enter the required details for the student.
               </template>
             </FxInstructionItem>
           </v-col>

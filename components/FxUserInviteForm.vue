@@ -8,7 +8,7 @@
         Name & Role
       </template>
       <template #content>
-        Select the sport and event for this sports record.
+        Please enter the name and job role for this user.
       </template>
 
       <v-row>
@@ -61,7 +61,7 @@
         Contact Information
       </template>
       <template #content>
-        Select the sport and event for this sports record.
+        Please enter the email address of the user. They will receive a link to activate their account and set up a password.
       </template>
       <label for="email">Email Address</label>
       <v-text-field
@@ -85,7 +85,10 @@
         User Role
       </template>
       <template #content>
-        Select the sport and event for this sports record.
+        Set the account role for this user.<br>
+        <br>Admin users have full control over all tasks.<br>
+        <br>Sports users can create and manage events and teams, but cannot modify settings.<br>
+        <br>View-only users are limited to viewing information in the portal.
       </template>
       <label for="email">Select User Role</label>
       <FxUserRoleSelect :value="formData.userRole" @input="update('userRole', $event)" />

@@ -3,21 +3,28 @@
     <v-col>
       <v-list-item class="px-0">
         <v-list-item-content>
-          <v-list-item-title class="text-h3">
+          <v-list-item-title class="text-h4 neutral--text text--darken-4">
             Invite User
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
-      <v-alert v-if="!canCreateUser" type="info">
-        You have reached limit of Users
+      <v-alert v-if="!canCreateUser" class="alert">
+        <template #prepend>
+          <div class="alert-icon mr-3">
+            <v-icon size="18" color="white" class="pa-1">
+              mdi-alert-circle-outline
+            </v-icon>
+          </div>
+        </template>
+        You have reached the user limit for your current plan. To add more users, please upgrade your plan.
       </v-alert>
 
       <UserInviteForm ref="form" v-model="formData" :disabled="loading || !canCreateUser" />
       <v-container class="mt-4 mb-8">
         <v-row>
           <v-spacer />
-          <v-btn outlined @click="$router.back()">
+          <v-btn outlined color="neutral darken-3" @click="$router.back()">
             Cancel
           </v-btn>
           <v-btn
@@ -102,3 +109,18 @@ export default {
   },
 }
 </script>
+<style scoped>
+.alert {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 8px;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1)!important;
+  background-color: #e7eff9!important;
+  border-color: #9dbaee!important;
+}
+.alert-icon {
+  background-color: #2D69DA;
+  border-radius: 6px;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1);
+}
+</style>

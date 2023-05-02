@@ -74,7 +74,7 @@
               <v-divider />
               <v-list-item class="user-menu-item" :to="{ name: 'settings' }" :ripple="false">
                 <v-list-item-icon class="mr-3">
-                  <v-icon>$vuetify.icons.settings</v-icon>
+                  <v-icon color="neutral darken-1">$vuetify.icons.settings</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title class="user-menu-text font-weight-bold neutral--text text--darken-2">

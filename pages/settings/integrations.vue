@@ -2,19 +2,26 @@
   <div>
     <v-list-item class="px-0">
       <v-list-item-content>
-        <v-list-item-title class="text-h4">
+        <v-list-item-title class="text-h4 neutral--text text--darken-4">
           Integrations
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
 
-    <v-alert v-if="!canCreateIntegrations" type="info">
-      You need to upgrade plan to use integrations
+    <v-alert v-if="!canCreateIntegrations" class="alert">
+      <template #prepend>
+        <div class="alert-icon mr-3">
+          <v-icon size="18" color="white" class="pa-1">
+            mdi-alert-circle-outline
+         </v-icon>
+        </div>
+      </template>
+      Integrations are not supported on this plan. To access integrations, please upgrade your plan.
     </v-alert>
 
     <v-card class="py-2 px-2 py-md-6 px-md-6">
       <v-card-title class="px-0 text-p3 font-weight-bold pb-1">
-        Xportal
+        Xporter
       </v-card-title>
       <v-divider />
       <v-container>
@@ -22,9 +29,9 @@
           <v-col
             cols="12"
             lg="5"
-            class="text-p2 info--text px-0"
+            class="text-p2 neutral--text text--darken-3 px-0 pr-5"
           >
-            Set Xportal Integration
+            To import data from your school MIS system, please enter your Xporter information. If you require assistance, please Contact Support.
           </v-col>
           <v-col
             cols="12"
@@ -126,3 +133,18 @@ export default {
   },
 }
 </script>
+<style scoped>
+.alert {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 8px;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1)!important;
+  background-color: #e7eff9!important;
+  border-color: #9dbaee!important;
+}
+.alert-icon {
+  background-color: #2D69DA;
+  border-radius: 6px;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1);
+}
+</style>

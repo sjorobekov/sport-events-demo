@@ -2,47 +2,53 @@
   <div>
     <v-list-item class="px-0">
       <v-list-item-content>
-        <v-list-item-title class="text-h4">
+        <v-list-item-title class="text-h4 neutral--text text--darken-4">
           Privacy
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
 
-    <v-alert v-if="partiallyPublic" color="#E8EDFB" style="color: #173EAD">
+    <v-alert v-if="partiallyPublic" color="#E8EDFB" class="alert partial-alert">
       <template #prepend>
-        <v-icon class="mr-3" size="18" color="#6183E4">
-          mdi-alert-circle-outline
-        </v-icon>
+        <div class="partial-alert-icon mr-3">
+          <v-icon class="pa-1" size="18" color="white">
+            mdi-alert-circle-outline
+          </v-icon>
+        </div>
       </template>
-      <div class="text-p1 font-weight-bold">
+      <div class="text-p2 neutral--text text--darken-4">
         The Fixturr Portal is Public.
       </div>
-      <div v-if="school.teamSheetsProtected" class="text-p1 font-weight-bold">
+      <div v-if="school.teamSheetsProtected" class="text-p2 neutral--text text--darken-4">
         Team Sheets are Password Protected.
       </div>
-      <div v-if="school.announcementsProtected" class="text-p1 font-weight-bold">
+      <div v-if="school.announcementsProtected" class="text-p2 neutral--text text--darken-4">
         Announcements are Password Protected.
       </div>
     </v-alert>
 
-    <v-alert v-else-if="fullyPublic" color="success" text>
+    <v-alert v-else-if="fullyPublic" color="success" text class="alert public-alert">
       <template #prepend>
-        <v-icon class="mr-3" size="18" color="success darken-1">
-          mdi-alert-circle-outline
-        </v-icon>
+        <div class="public-alert-icon mr-3">
+          <v-icon size="18" color="white" class="pa-1">
+            mdi-alert-circle-outline
+          </v-icon>
+        </div>
       </template>
-      <div class="text-p1 font-weight-bold success--text text--darken-1">
+      <div class="text-p2 neutral--text text--darken-4">
         All pages in the Fixturr Portal are public.
       </div>
     </v-alert>
 
-    <v-alert v-else-if="private" color="error" text>
+    <v-alert v-else-if="private" color="error" text class="alert private-alert">
       <template #prepend>
-        <v-icon class="mr-3" size="18" color="error darken-1">
-          mdi-alert-circle-outline
-        </v-icon>
+        <div class="private-alert-icon mr-3">
+          <v-icon size="18" color="white" class="pa-1">
+            mdi-alert-circle-outline
+          </v-icon>
+        </div>
       </template>
-      <div class="text-p1 font-weight-bold error-text text--darken-1">
+      <div class="text-p2 neutral--text text--darken-4">
         All pages in Fixturr Portal are password protected.
       </div>
     </v-alert>
@@ -144,3 +150,41 @@ export default {
 
 }
 </script>
+<style scoped>
+.alert {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 8px;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1)!important;
+}
+.public-alert {
+  background-color: #edf7ef!important;
+  border-color: #b6deb9;
+}
+
+.public-alert-icon {
+  background-color: #52AA59;
+  border-radius: 6px;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1);
+}
+
+.private-alert {
+  background-color: #F7EEEB!important;
+  border-color: #F1B6B3;
+}
+.private-alert-icon {
+  background-color: #CC443D;
+  border-radius: 6px;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1);
+}
+
+.partial-alert {
+  background-color: #e7eff9!important;
+  border-color: #9dbaee!important;
+}
+.partial-alert-icon {
+  background-color: #2D69DA;
+  border-radius: 6px;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1);
+}
+</style>
