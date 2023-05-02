@@ -28,7 +28,7 @@
                 hide-details
                 return-object
                 height="56"
-                :prepend-inner-icon="prependInnerIcon"
+                prepend-inner-icon="mdi-magnify"
                 color="brandgreen"
               >
                 <template #item="{ item }">
@@ -137,12 +137,6 @@ export default {
         return
       }
       this.school = this.selected
-    },
-  },
-  props: {
-    prependInnerIcon: {
-      type: String,
-      default: 'mdi-magnify',
     },
   },
 }
