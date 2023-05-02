@@ -22,6 +22,10 @@ export const actions: ActionTree<RootState, RootState> = {
     return this.$axios.$get('/api/v1/sports')
   },
 
+  listParticipation (_, { schoolId }): Promise<Array<Sport>> {
+    return this.$axios.$get(`api/v1/schools/${schoolId}/sports`)
+  },
+
   save ({ getters }, payload: Sport): Promise<Sport> {
     const formData = new FormData()
 

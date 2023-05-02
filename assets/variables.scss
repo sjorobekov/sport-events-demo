@@ -223,3 +223,11 @@ $headings: map-deep-merge(
     $headings
 );
 $text-field-outlined-fieldset-border: 1px solid var(--v-neutral-darken2) !important;
+
+$grid-breakpoints: (
+  'xs': 0,
+  'sm': 600px,
+  'md': 960px,
+  'lg': 1280px - 24px,
+  'xl': 1280px - 24px
+);

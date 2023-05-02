@@ -14,7 +14,7 @@
         <FxSchoolLogo :value="contextSchool.logo" color="primary" />
       </v-avatar>
 
-      <h1 class="text-p3 font-weight-bold white--text text-center px-2">
+      <h1 v-balance-text class="text-p3 font-weight-bold white--text text-center px-2">
         {{ contextSchool.name }}
       </h1>
 

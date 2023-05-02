@@ -11,9 +11,9 @@
         <v-list-item-content class="text-center pl-md-4 pt-5">
           <v-list-item-title class="text-subheading mb-1">
             <FxDateFormat :date="match.date" output-format="cccc dd MMMM yyyy" />
-            <span v-if="inHouseEvent.name">&#x2022; {{ inHouseEvent.name }}</span>
           </v-list-item-title>
           <v-list-item-subtitle class="text-p2 white--text hidden-sm-and-down">
+            <span v-if="inHouseEvent.name">{{ inHouseEvent.name }} - </span>
             {{ sport.name }} &#x2022; In-House Sport
           </v-list-item-subtitle>
         </v-list-item-content>
@@ -33,7 +33,7 @@
       <div class="hidden-md-and-up">
         <div class="d-flex px-3 pb-3">
           <v-chip outlined class="event-header-chip">
-            {{ sport.name }}
+            <span v-if="inHouseEvent.name">{{ inHouseEvent.name }} -&nbsp;</span>{{ sport.name }}
           </v-chip>
           <v-spacer />
           <v-chip outlined class="event-header-chip">

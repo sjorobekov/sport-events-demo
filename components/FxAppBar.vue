@@ -48,7 +48,7 @@
                 <v-list-item class="px-0 user-menu-handler" v-bind="attrs" :ripple="false" v-on="on">
                   <v-list-item-content class="text-right">
                     <v-list-item-title class="menu-text font-weight-bold mb-0">
-                      {{ me.firstname }} {{ me.lastname }}
+                      <FxUserDisplayName :user="me" />
                     </v-list-item-title>
                     <v-list-item-subtitle class="menu-text">
                       {{ me.jobRole }}
@@ -74,7 +74,7 @@
               <v-divider />
               <v-list-item class="user-menu-item" :to="{ name: 'settings' }" :ripple="false">
                 <v-list-item-icon class="mr-3">
-                  <v-icon>$vuetify.icons.settings</v-icon>
+                  <v-icon color="neutral darken-1">$vuetify.icons.settings</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title class="user-menu-text font-weight-bold neutral--text text--darken-2">

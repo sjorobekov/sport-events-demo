@@ -108,7 +108,7 @@
             <v-icon>$vuetify.icons.user-1</v-icon>
           </template>
           <template #title>
-            {{ user.firstname }} {{ user.lastname }}
+            <FxUserDisplayName :user="user" />
           </template>
           <template #subtitle>
             Lead Staff Member

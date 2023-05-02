@@ -49,6 +49,7 @@ export default {
     this.count = events.length
 
     this.sports = uniqBy(events.map(event => event.sport), 'id')
+      .sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }))
     this.eventsBySport = groupBy(events, 'sportId')
   },
 

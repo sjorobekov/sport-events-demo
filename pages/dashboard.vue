@@ -6,7 +6,7 @@
     <FxDashboardPageCard :teams-today="teamsToday" />
 
     <v-row class="mt-5">
-      <v-col cols="12" md="9">
+      <v-col cols="12" :lg="teams.length > 0 ? 9 : 12">
         <h2 class="text-h4s mb-2 neutral--text text--darken-4">
           Today's Events
         </h2>
@@ -22,14 +22,14 @@
         </section>
       </v-col>
 
-      <v-col v-if="teams.length > 0">
+      <v-col v-if="teams.length > 0" cols="12" lg="3">
         <h2 class="text-h4s mb-2 neutral--text text--darken-4">
           My Teams
         </h2>
         <v-card v-for="team in teams" :key="team.id" class="mb-2 card-has-hover" :to="{ name: 'teams-id', params: { id: team.id } }">
           <v-container :style="style(team.sport)" class="rounded">
             <v-row>
-              <v-col class="border-bottom pt-1 pb-0">
+              <v-col class="pt-1 pb-0">
                 <v-list-item class="px-0">
                   <v-list-item-avatar tile>
                     <v-img :src="team.sport.icon" />

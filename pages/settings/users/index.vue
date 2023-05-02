@@ -2,13 +2,13 @@
   <div>
     <v-list-item class="px-0">
       <v-list-item-content>
-        <v-list-item-title class="text-h4">
+        <v-list-item-title class="text-h4 neutral--text text--darken-4">
           Users
         </v-list-item-title>
       </v-list-item-content>
       <v-list-item-action>
         <v-btn depressed color="primary" :to="{ name: 'settings-users-invite' }" link>
-          <v-icon>$vuetify.icons.plusOutline</v-icon>Invite User
+          <v-icon>$vuetify.icons.add-all</v-icon>Invite User
         </v-btn>
       </v-list-item-action>
     </v-list-item>
@@ -49,21 +49,21 @@
               <v-list class="grey lighten-3">
                 <v-list-item link>
                   <v-list-item-content>
-                    <v-list-item-title class="text--info text--darken-1">
+                    <v-list-item-title class="neutral--text text--darken-3">
                       Send Password Reset
                     </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item link :to="{ name: 'settings-users-userId', params: { userId: item.id } }">
                   <v-list-item-content>
-                    <v-list-item-title class="text--info text--darken-1">
+                    <v-list-item-title class="neutral--text text--darken-3">
                       Edit User
                     </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item link>
                   <v-list-item-content>
-                    <v-list-item-title class="text--info text--darken-1">
+                    <v-list-item-title class="neutral--text text--darken-3">
                       Delete User
                     </v-list-item-title>
                   </v-list-item-content>

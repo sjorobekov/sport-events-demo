@@ -102,7 +102,7 @@
                   />
                 </template>
                 <template #title>
-                  {{ me.lead.firstname }} {{ me.lead.lastname }}
+                  <FxUserDisplayName :user="me.lead" />
                 </template>
                 <template #subtitle>
                   Lead Staff Member

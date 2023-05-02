@@ -16,7 +16,7 @@
                 Team Name
               </template>
               <template #content>
-                Select the name for this team
+                Please enter a name for this in-house team.
               </template>
             </FxInstructionItem>
           </v-col>
@@ -59,7 +59,7 @@
                 Team Colour
               </template>
               <template #content>
-                Select the colour for this team.
+                Choose a color for this in-house team.
               </template>
             </FxInstructionItem>
           </v-col>

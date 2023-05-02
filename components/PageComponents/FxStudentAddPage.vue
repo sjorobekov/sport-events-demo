@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-h3 mb-6">
+    <h3 class="text-h4 my-3 neutral--text text--darken-4">
       Add Student
     </h3>
 
@@ -9,7 +9,7 @@
     <v-container class="mt-4 mb-8">
       <v-row>
         <v-spacer />
-        <v-btn outlined @click="$router.back()">
+        <v-btn outlined color="neutral darken-3" @click="$router.back()">
           Cancel
         </v-btn>
         <v-btn

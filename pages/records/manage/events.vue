@@ -1,11 +1,10 @@
 <template>
-  <v-card>
-    <v-list-item>
+  <div>
+    <v-list-item class="px-0">
       <v-list-item-content>
-        <v-list-item-title class="text-h4 neutral--text text--darken-4">
+        <v-list-item-title class="text-h4">
           Sports & Events
         </v-list-item-title>
-        <v-list-item-subtitle />
       </v-list-item-content>
       <v-list-item-action>
         <v-btn
@@ -16,50 +15,55 @@
           :ripple="false"
           :to="{ name: 'records-events-add' }"
         >
-          <v-icon>$vuetify.icons.add-all</v-icon>Add New Record Event
+          <v-icon class="mr-0 mr-md-1">
+            $vuetify.icons.add-all
+          </v-icon>
+          <span class="hidden-sm-and-down">Add New Record Event</span>
         </v-btn>
       </v-list-item-action>
     </v-list-item>
-    <client-only>
-      <v-data-table
-        :headers="headers"
-        :items="items"
-        hide-default-footer
-        disable-pagination
-      >
-        <template #item.sport="{ item }">
-          <FxSportName :sport-id="item.sportId" />
-        </template>
-        <template #item.action="{ item }">
-          <v-menu>
-            <template #activator="{ on, attrs }">
-              <v-btn icon v-bind="attrs" :ripple="false" v-on="on">
-                <v-icon color="neutral darken-1">
-                  $vuetify.icons.threeDots
-                </v-icon>
-              </v-btn>
-            </template>
-            <v-list class="grey lighten-3">
-              <v-list-item link :to="{ name: 'records-events-id', params: { id: item.id } }" :ripple="false">
-                <v-list-item-content>
-                  <v-list-item-title class="neutral--text text--darken-3">
-                    Edit Event
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item :ripple="false" @click="remove(item)">
-                <v-list-item-content>
-                  <v-list-item-title class="neutral--text text--darken-3">
-                    Delete Event
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </template>
-      </v-data-table>
-    </client-only>
-  </v-card>
+    <v-card>
+      <client-only>
+        <v-data-table
+          :headers="headers"
+          :items="items"
+          hide-default-footer
+          disable-pagination
+        >
+          <template #item.sport="{ item }">
+            <FxSportName :sport-id="item.sportId" />
+          </template>
+          <template #item.action="{ item }">
+            <v-menu>
+              <template #activator="{ on, attrs }">
+                <v-btn icon v-bind="attrs" :ripple="false" v-on="on">
+                  <v-icon color="neutral darken-1">
+                    $vuetify.icons.threeDots
+                  </v-icon>
+                </v-btn>
+              </template>
+              <v-list class="grey lighten-3">
+                <v-list-item link :to="{ name: 'records-events-id', params: { id: item.id } }" :ripple="false">
+                  <v-list-item-content>
+                    <v-list-item-title class="neutral--text text--darken-3">
+                      Edit Event
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-list-item :ripple="false" @click="remove(item)">
+                  <v-list-item-content>
+                    <v-list-item-title class="neutral--text text--darken-3">
+                      Delete Event
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </template>
+        </v-data-table>
+      </client-only>
+    </v-card>
+  </div>
 </template>
 
 <script>

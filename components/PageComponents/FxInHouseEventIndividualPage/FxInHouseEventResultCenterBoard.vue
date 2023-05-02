@@ -1,19 +1,17 @@
 <template>
-  <v-row class="fill-height" justify="center" align="center">
-    <v-col>
-      <v-alert v-if="hasScore" class="text-h1" color="#F1F5F9">
-        {{ score }} - {{ opponentScore }}
-      </v-alert>
+  <div class="text-center">
+    <v-alert v-if="hasScore" class="pa-2 px-md-5 py-md-2 score-result font-weight-bold ma-0 neutral--text text--darken-4" color="#edf0f3">
+      {{ score }} - {{ opponentScore }}
+    </v-alert>
 
-      <v-alert v-else-if="hasResult" class="text-h1" color="#F1F5F9">
-        {{ $t(`IN_HOUSE_EVENT_RESULT.${result.overallResult}`) }}
-      </v-alert>
+    <v-alert v-else-if="hasResult" class="ma-0 score-alert font-weight-bold neutral--text text--darken-4" color="#edf0f3">
+      {{ $t(`IN_HOUSE_EVENT_RESULT.${result.overallResult}`) }}
+    </v-alert>
 
-      <v-btn v-else-if="!hasResult && canAddOrEditResult" depressed color="primary" @click="$vuetify.goTo(target, options)">
-        <v-icon>mdi-plus-circle-outline</v-icon> Add Result
-      </v-btn>
-    </v-col>
-  </v-row>
+    <v-btn v-else-if="!hasResult && canAddOrEditResult" color="primary" @click="$vuetify.goTo(target, options)">
+      <v-icon>mdi-plus-circle-outline</v-icon> Add Result
+    </v-btn>
+  </div>
 </template>
 
 <script>
@@ -58,3 +56,18 @@ export default {
   },
 }
 </script>
+
+<style scoped lang="sass">
+@import '~vuetify/src/styles/styles.sass'
+
+.score-result
+  font-size: 2rem
+
+.score-alert
+  font-size: clamp(1rem, 2vw, 1.5rem)
+
+@media #{map-get($display-breakpoints, 'sm-and-down')}
+  .score-result
+    font-size: 1rem
+
+</style>

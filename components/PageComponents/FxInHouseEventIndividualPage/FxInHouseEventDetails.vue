@@ -5,7 +5,7 @@
         Details
       </template>
       <template #actions>
-        <v-btn v-if="canEditEvent && !formVisible" outlined @click="formVisible = true">
+        <v-btn v-if="canEditEvent && !formVisible" outlined @click="open">
           <v-icon small>
             mdi-pencil-outline
           </v-icon>Edit Details
@@ -15,7 +15,6 @@
         v-if="formVisible"
         ref="form"
         v-model="formData"
-        class="px-6"
         :disabled="loading"
         @submit="save"
         @cancel="formVisible = false"
@@ -68,7 +67,7 @@
                 <v-icon>$vuetify.icons.user-1</v-icon>
               </template>
               <template #title>
-                {{ lead.firstname }} {{ lead.lastname }}
+                <FxUserDisplayName :user="lead" />
               </template>
               <template #subtitle>
                 Lead Staff Member

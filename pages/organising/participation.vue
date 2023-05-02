@@ -37,6 +37,7 @@
         :sort-by.sync="query.orderBy"
         :sort-desc.sync="query.orderDesc"
         :page.sync="query.page"
+        :items-per-page.sync="query.limit"
       >
         <template #item.firstname="{ item }">
           {{ item.firstname }} {{ item.lastname }}

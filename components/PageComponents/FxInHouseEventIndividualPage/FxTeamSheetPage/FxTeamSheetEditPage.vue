@@ -35,7 +35,7 @@
       <template #sorting>
         <FxEventItemCard>
           <template #title>
-            Team Sheet
+            {{ team.name }} Team Sheet
           </template>
 
           <template #actions>

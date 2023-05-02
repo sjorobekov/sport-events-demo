@@ -301,6 +301,13 @@ tr:hover{ background-color: var(--v-neutral-lighten3)!important; }
 .v-ripple__container {
   display:none !important;
 }
+.v-card__title {
+  color: var(--v-neutral-darken4)!important;
+}
+
+.theme--light.v-divider {
+  border-color: #e4e9ef!important;
+}
 .v-btn:not(.v-btn--outlined).primary {
   border: 2px solid rgba(255,255,255,0.25)!important
 }

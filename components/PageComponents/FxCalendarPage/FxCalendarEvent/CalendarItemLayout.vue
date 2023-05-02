@@ -40,7 +40,7 @@
             <v-icon>$vuetify.icons.user-1</v-icon>
           </template>
           <template #title>
-            {{ lead.firstname }} {{ lead.lastname }}
+            <FxUserDisplayName :user="lead" />
           </template>
         </ListItem>
       </v-col>

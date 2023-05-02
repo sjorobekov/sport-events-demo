@@ -45,30 +45,9 @@
     </template>
     <template #time>
       <div>
-        <div v-if="me.meetTime" class="d-inline-block pr-2">
-          <v-list-item-title class="text-p2 neutral--text text--darken-4">
-            {{ me.meetTime }}
-          </v-list-item-title>
-          <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
-            Meet Time
-          </v-list-item-subtitle>
-        </div>
-        <div class="d-inline-block pr-2">
-          <v-list-item-title class="text-p2 neutral--text text--darken-4">
-            {{ event.startTime }}
-          </v-list-item-title>
-          <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
-            Start Time
-          </v-list-item-subtitle>
-        </div>
-        <div v-if="me.returnTime" class="d-inline-block">
-          <v-list-item-title class="text-p2 neutral--text text--darken-4">
-            {{ me.returnTime }}
-          </v-list-item-title>
-          <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
-            Return Time
-          </v-list-item-subtitle>
-        </div>
+        <v-list-item-title class="text-p2 neutral--text text--darken-4">
+          {{ me.meetTime || event.startTime }} - {{ me.returnTime || event.endTime }}
+        </v-list-item-title>
       </div>
     </template>
     <template #location>

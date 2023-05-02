@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="info--text text--darken-3 text-h4 mb-6">
+    <h1 class="neutral--text text--darken-4 text-h4 py-3">
       Edit User
     </h1>
 
@@ -20,9 +20,9 @@
           <v-col
             cols="12"
             lg="5"
-            class="text-p2 info--text px-0"
+            class="text-p2 neutral--text text--darken-3 px-0 pr-5"
           >
-            Select profile picture for the user. Supported formats: jpeg, png, webp.
+            Choose a profile picture for this user. You can upload a file in jpeg, png, or webp format.
           </v-col>
           <v-col
             cols="12"
@@ -33,7 +33,7 @@
                 <FxAvatar class="mr-2" size="80" :value="user.avatar" />
               </template>
               <template #actions>
-                <v-btn depressed outlined :disabled="uploading" @click="removeAvatar">
+                <v-btn depressed outlined color="neutral darken-3" :disabled="uploading" @click="removeAvatar">
                   Remove
                 </v-btn>
               </template>
@@ -51,9 +51,9 @@
           <v-col
             cols="12"
             lg="5"
-            class="text-p2 info--text px-0"
+            class="text-p2 neutral--text text--darken-3 px-0 pr-5"
           >
-            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+            Manage user information here. You can edit the name, display name, email address, phone number, job role, and account role.
           </v-col>
           <v-col
             cols="12"
@@ -74,9 +74,9 @@
           <v-col
             cols="12"
             lg="5"
-            class="text-p2 info--text px-0"
+            class="text-p2 neutral--text text--darken-3 px-0 pr-5"
           >
-            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+            You can choose whether to make this user visible as a sports contact, and whether to display them as the main sports contact.
           </v-col>
           <v-col
             cols="12"
@@ -97,19 +97,19 @@
           <v-col
             cols="12"
             lg="5"
-            class="text-p2 info--text px-0"
+            class="text-p2 neutral--text text--darken-3 px-0 pr-5"
           >
-            Short descriptive text to go here
+          To reset the password for this user's account, click 'Send Password Reset'. They will receive an email with instructions on how to reset their password.
           </v-col>
           <v-col
             cols="12"
             lg="7"
             class="text-right pr-0"
           >
-            <v-btn color="info darken-1" outlined @click="reset()">
-              <v-icon color="info darken-3">
-                $vuetify.icons.shield
-              </v-icon> Send Reset Password
+            <v-btn color="neutral darken-3" outlined @click="reset()">
+              <v-icon color="neutral darken-1">
+                $vuetify.icons.resetPassword
+              </v-icon> Send Password Reset
             </v-btn>
           </v-col>
         </v-row>
@@ -130,16 +130,16 @@
       </v-card-actions>
     </v-card>
 
-    <h3 class="text-p3 font-weight-bold info--text text--darken-3 mt-8">
+    <h3 class="text-p3 font-weight-bold neutral--text text--darken-4 mt-8 px-6 py-3">
       Delete User
     </h3>
-    <v-divider />
+    <v-divider class="mx-6" />
     <v-list-item class="px-0">
-      <v-list-item-content class="info--text text-p2">
-        Short descriptive text to go here
+      <v-list-item-content class="neutral--text text--darken-3 text-p2 pr-5 px-6">
+        Delete this user. Please note that this action cannot be undone.
       </v-list-item-content>
       <v-list-item-action>
-        <v-btn color="error darken-1" depressed @click="remove">
+        <v-btn color="error darken-1" class="mx-6" depressed @click="remove">
           Delete User
         </v-btn>
       </v-list-item-action>

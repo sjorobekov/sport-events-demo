@@ -17,7 +17,7 @@
       </v-list-item-avatar>
       <v-list-item-content class="py-0">
         <v-list-item-title class="text-caption neutral--text text--darken-2 py-0">
-          {{ announcement.user.firstname }} {{ announcement.user.lastname }}
+          <FxUserDisplayName :user="announcement.user" />
         </v-list-item-title>
       </v-list-item-content>
       <v-list-item-action>
