@@ -57,7 +57,7 @@ export default {
       if (this.image) {
         return {
           backgroundImage: `url(${this.image.image})`,
-          boxShadow: 'inset 0 0 0 1000px rgba(0,0,0,.8)',
+          boxShadow: `inset 0 0 0 1000px ${this.contextSchool.color}66`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }
