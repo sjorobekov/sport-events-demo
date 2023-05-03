@@ -30,6 +30,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import backgroundIcon from '../assets/img/fixturr-bg-icon.svg'
 import FxSchoolLogo from '@/components/FxSchoolLogo/FxSchoolLogo'
 
 export default {
@@ -40,6 +41,12 @@ export default {
       return redirect({ name: 'login' })
     }
   },
+  data: () => ({
+    image: null,
+  }),
+  async fetch () {
+    this.image = (await this.$store.dispatch('api/schools/getImages', this.contextSchool.id))[0]
+  },
   computed: {
     ...mapGetters({
       contextSchool: 'context/school',
@@ -47,8 +54,20 @@ export default {
     }),
 
     style () {
+      if (this.image) {
+        return {
+          backgroundImage: `url(${this.image.image})`,
+          boxShadow: 'inset 0 0 0 1000px rgba(0,0,0,.8)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }
+      }
+
       return {
-        background: this.contextSchool.color,
+        backgroundColor: this.contextSchool.color,
+        backgroundImage: `url(${backgroundIcon})`,
+        backgroundSize: 'contain',
+        backgroundPosition: '100% 95%',
       }
     },
   },
@@ -63,15 +82,12 @@ export default {
 
 .school-panel
   width: calc(100% - 48px)
-  background-image: url('../assets/img/fixturr-bg-icon.svg')!important
   background-repeat: no-repeat!important
-  background-position: 100% 95%!important
-  background-size: contain!important
   margin-top: auto
   margin-bottom: auto
   border-radius: 32px
   margin-left: 2.5%
-  box-shadow: 0 0 16px rgba(255, 255, 255, 0.8)!important
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.8)
   padding-left: 32px
   padding-right: 32px
 
