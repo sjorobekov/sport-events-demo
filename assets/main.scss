@@ -31,7 +31,7 @@ $box-shadow: 0 1px 4px 0 rgb(0 0 0 / 15%);
   padding-right: 12px;
 }
 
-.v-btn {
+.v-btn:not(.v-btn--fab) {
   font-weight: 400!important;
   font-family: ProximaNova-Semibold, sans-serif;
   border-radius: 6px!important;

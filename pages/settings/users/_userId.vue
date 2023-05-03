@@ -99,7 +99,7 @@
             lg="5"
             class="text-p2 neutral--text text--darken-3 px-0 pr-5"
           >
-          To reset the password for this user's account, click 'Send Password Reset'. They will receive an email with instructions on how to reset their password.
+            To reset the password for this user's account, click 'Send Password Reset'. They will receive an email with instructions on how to reset their password.
           </v-col>
           <v-col
             cols="12"

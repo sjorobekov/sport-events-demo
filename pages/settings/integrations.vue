@@ -13,7 +13,7 @@
         <div class="alert-icon mr-3">
           <v-icon size="18" color="white" class="pa-1">
             mdi-alert-circle-outline
-         </v-icon>
+          </v-icon>
         </div>
       </template>
       Integrations are not supported on this plan. To access integrations, please upgrade your plan.

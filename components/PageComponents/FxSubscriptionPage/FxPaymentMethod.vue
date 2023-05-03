@@ -20,13 +20,14 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-btn v-if="details.update_url && !hideChangePaymentButton"
+        <v-btn
+          v-if="details.update_url && !hideChangePaymentButton"
           class="float-right"
           color="neutral darken-3"
           outlined
           :href="details.update_url"
           target="_blank"
-          >
+        >
           Change Payment Method
         </v-btn>
       </v-col>

@@ -42,35 +42,49 @@
         </v-col>
       </v-row>
 
-      <v-btn
-        type="submit"
-        depressed
-        color="primary"
-        dark
-        :loading="loading"
-        block
-        height="50"
-        class="font-weight-bold mt-2"
-        :ripple="false"
-      >
-        Log In
-      </v-btn>
-      <v-btn
-        depressed
-        outlined
-        color="neutral darken-3"
-        dark
-        block
-        height="50"
-        class="mt-4"
-        :ripple="false"
-        :to="{ name: 'schoolPass', query: $route.query }"
-      >
-        <v-icon size="24" class="mr-2" color="neutral darken-1">
-          $vuetify.icons.key
-        </v-icon>
-        View Portal with School Password
-      </v-btn>
+      <div class="d-flex flex-column align-center">
+        <v-btn
+          type="submit"
+          depressed
+          color="primary"
+          dark
+          :loading="loading"
+          block
+          height="50"
+          class="font-weight-bold mt-2"
+          :ripple="false"
+        >
+          Log In
+        </v-btn>
+        <v-btn
+          depressed
+          outlined
+          color="neutral darken-3"
+          dark
+          block
+          height="50"
+          class="mt-4"
+          :ripple="false"
+          :to="{ name: 'schoolPass', query: $route.query }"
+        >
+          <v-icon size="24" class="mr-2" color="neutral darken-1">
+            $vuetify.icons.key
+          </v-icon>
+          View Portal with School Password
+        </v-btn>
+
+        <v-btn
+          fab
+          elevation="0"
+          style="opacity: 0.5"
+          dark
+          color="neutral darken-2"
+          class="mt-4 hidden-sm-and-up"
+          @click="$router.back()"
+        >
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </div>
     </v-form>
   </div>
 </template>
