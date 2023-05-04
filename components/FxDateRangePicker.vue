@@ -266,4 +266,9 @@ export default {
   background: var(--v-info-darken5)
   margin-top: 50px
   height: calc(100% - 100px)
+
+::v-deep.fx-date-range-picker .form-control
+  display: none
+::v-deep.fx-date-range-picker .daterangepicker
+  margin-top: 0
 </style>
