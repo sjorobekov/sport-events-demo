@@ -78,6 +78,7 @@ export default {
 
 .v-item-group.v-bottom-navigation .v-btn.v-btn--active {
   color: white;
+  box-shadow: none!important;
 }
 
 .theme--light.v-bottom-navigation .v-btn:not(.v-btn--active) {
@@ -95,6 +96,8 @@ export default {
     left:0;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
     margin-left:auto;
     margin-right:auto;
     opacity: 1;
