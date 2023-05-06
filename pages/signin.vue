@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-sm-h1 text-h6 text-center mt-2 mt-sm-6 neutral--text text--darken-5 font-weight-bold">
+    <h1 class="text-sm-h2 text-h3s text-center mt-2 mt-sm-6 neutral--text text--darken-4 font-weight-bold">
       Welcome
     </h1>
     <v-form ref="form" v-async-form :disabled="loading" class="log-in-form" @submit.prevent="submit">
@@ -11,7 +11,7 @@
         :async-rules="[$rule.required, $rule.email]"
         hide-details
         height="56"
-        class="mt-8 mb-4 email-field"
+        class="mt-4 mt-md-8 mb-4 email-field"
         label="Email"
         placeholder="name@school.com"
         type="email"
@@ -33,7 +33,7 @@
 
       <v-row no-gutters>
         <v-col>
-          <v-checkbox class="mt-0 remember-checkbox" label="Remember me" :ripple="false" />
+          <v-checkbox class="mt-0 ma-0 remember-checkbox shrink" label="Remember me" :ripple="false" />
         </v-col>
         <v-col class="text-right">
           <nuxt-link :to="{ name: 'forgot' }" class="text-p1 neutral--text text--darken-3">
@@ -158,7 +158,6 @@ export default {
 }
 </script>
 <style scoped lang="sass">
-
 ::v-deep .remember-checkbox .v-label
   font-size: 0.875rem!important
   color: var(--v-neutral-darken3)!important
@@ -181,6 +180,9 @@ export default {
   border-color: var(--v-primary-base)
   color: var(--v-primary-base)!important
 
-.email-field input::placeholder
-  color: red!important
+::v-deep .remember-checkbox .v-icon
+  font-size: 20px!important
+
+.v-application--is-ltr .v-input--selection-controls__input
+  margin-right: 20px!important
 </style>

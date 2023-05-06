@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1 class="text-md-h1 text-h3s font-weight-bold text-center mt-6 neutral--text text--darken-5 mb-2">
+    <h1 class="text-md-h3 text-h3s font-weight-bold text-center mt-6 neutral--text text--darken-4 mb-2">
       Forgot Password?
     </h1>
-    <h2 class="text-p3 text-center neutral--text text--darken-2 mb-8">
+    <h2 class="text-p3 text-center neutral--text text--darken-2 mb-4 mb-sm-8">
       No worries, we will send you reset instructions.
     </h2>
     <v-form ref="form" v-async-form class="mx-sm-auto forgot-form" :disabled="loading" @submit.prevent="submit">
@@ -98,11 +98,15 @@ export default {
   },
 }
 </script>
-<style scoped>
-.forgot-form {
-  max-width: 320px;
-}
-.return-to-login {
-  color: var(--v-neutral-darken3)!important;
-}
+<style scoped lang="sass">
+@import '~vuetify/src/styles/styles'
+.forgot-form
+  max-width: 320px
+.return-to-login
+  color: var(--v-neutral-darken3)!important
+
+@media #{map-get($display-breakpoints, 'xs-only')}
+  .forgot-form
+    max-width: none
+
 </style>

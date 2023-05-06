@@ -4,17 +4,17 @@
       <div class="fill-height d-sm-flex flex-column flex-sm-row justify-center align-center">
         <div class="school-panel d-flex flex-column align-center flex-shrink-1 justify-sm-space-between" :style="style">
           <div class="school-info">
-            <div class="mb-5 mb-sm-5">
+            <div class="mb-3 mb-sm-5">
               <FxSchoolLogo class="school-logo-container" :value="contextSchool.logo" :color="contextSchool.color" />
             </div>
-            <h1 v-balance-text class="text-sm-h1s text-h6 white--text text-center pb-5 font-weight-bold">
+            <h1 v-balance-text class="text-sm-h1s text-h6 white--text text-center pb-5 font-weight-bold school-name">
               {{ contextSchool.name }}
             </h1>
           </div>
 
           <div>
             <div class="hidden-xs-only">
-              <v-img class="mb-5" width="185" :src="require('/static/logo.svg')" />
+              <v-img class="mb-5" width="185" :src="require('/static/fixturr_logo_white.svg')" />
             </div>
           </div>
         </div>
@@ -30,7 +30,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import backgroundIcon from '../assets/img/fixturr-bg-icon.svg'
 import FxSchoolLogo from '@/components/FxSchoolLogo/FxSchoolLogo'
 
 export default {
@@ -57,7 +56,7 @@ export default {
       if (this.image) {
         return {
           backgroundImage: `url(${this.image.image})`,
-          boxShadow: `inset 0 0 0 1000px ${this.contextSchool.color}66`,
+          boxShadow: `inset 0 0 0 1000px ${this.contextSchool.color}e0`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }
@@ -65,9 +64,6 @@ export default {
 
       return {
         backgroundColor: this.contextSchool.color,
-        backgroundImage: `url(${backgroundIcon})`,
-        backgroundSize: 'contain',
-        backgroundPosition: '100% 95%',
       }
     },
   },
@@ -81,13 +77,8 @@ export default {
   padding-top: 0!important
 
 .school-panel
-  width: calc(100% - 48px)
+  width: 100%
   background-repeat: no-repeat!important
-  margin-top: auto
-  margin-bottom: auto
-  border-radius: 32px
-  margin-left: 2.5%
-  box-shadow: 0 0 16px rgba(255, 255, 255, 0.8)
   padding-left: 32px
   padding-right: 32px
 
@@ -105,13 +96,11 @@ export default {
   margin-top: auto
   margin-bottom: auto
 
+.school-name
+  max-width: 480px
+
 @media #{map-get($display-breakpoints, 'xs-only')}
-  .school-panel
-    width: calc(100% - 24px)
-    margin-top: 12px
-    margin-left: auto
-    margin-right: auto
-    border-radius: 32px
+
   .school-logo-container
     width: 200px
     height: 200px
@@ -130,6 +119,6 @@ export default {
 
 @media #{map-get($display-breakpoints, 'sm-and-up')}
   .school-panel
-    height: calc(100% - 48px)
-    max-width: 40vw
+    height: 100%
+    max-width: 50vw
 </style>

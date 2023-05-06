@@ -5,7 +5,7 @@
         <v-icon class="mb-4" color="neutral darken-3" size="88">
           $vuetify.icons.padlock
         </v-icon>
-        <h1 class="heading-text font-weight-bold neutral--text text--darken-5 mb-6">
+        <h1 class="heading-text font-weight-bold neutral--text text--darken-4 mb-6">
           The Sports Portal is <br> Password Protected
         </h1>
       </template>
