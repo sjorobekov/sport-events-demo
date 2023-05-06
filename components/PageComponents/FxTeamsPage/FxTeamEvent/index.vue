@@ -3,7 +3,7 @@
     <template #date>
       <v-list-item class="px-0">
         <v-list-item-content>
-          <v-list-item-title class="text-p2">
+          <v-list-item-title class="text-p2 neutral--text text--darken-3">
             <FxDateFormat :date="event.date" output-format="cccc dd MMMM yyyy" />
           </v-list-item-title>
         </v-list-item-content>
@@ -11,13 +11,13 @@
         <v-list-item-action>
           <v-chip
             v-if="me.overallResult === EventResult.TO_BE_PLAYED"
-            color="info lighten-2"
+            color="neutral lighten-1"
             outlined
             dark
             label
-            class="pr-3 radius-6 height-24"
+            class="pr-3 radius-16 height-24"
           >
-            <span class="info--text">{{ event.startTime }}</span>
+            <span class="neutral--text text--darken-3">{{ event.startTime }}</span>
           </v-chip>
           <FxEventStatus v-else-if="me.overallResult && canSeeResults" :overall-result="me.overallResult" />
         </v-list-item-action>
@@ -30,11 +30,11 @@
           <FxSchoolLogo :value="contextSchool.logo" :alt="contextSchool.name" :color="contextSchool.color" />
         </v-list-item-avatar>
         <v-list-item-content class="text-md-right">
-          <v-list-item-title class="text-p2 font-weight-bold  pl-2 pl-md-0">
+          <v-list-item-title class="text-p2 font-weight-bold  pl-2 pl-md-0 neutral--text text--darken-4">
             {{ me.team.name }}
           </v-list-item-title>
         </v-list-item-content>
-        <v-list-item-avatar rounded width="60" class="mr-2 hidden-md-and-up" color="info lighten-4">
+        <v-list-item-avatar rounded width="60" class="mr-2 hidden-md-and-up neutral--text text--darken-4" color="neutral lighten-3">
           {{ left }}
         </v-list-item-avatar>
       </v-list-item>
@@ -46,17 +46,17 @@
           <FxSchoolLogo :value="opponentSchool.logo" :alt="opponentName" :color="opponentSchool.color" />
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title class="text-p2 font-weight-bold  pl-2 pl-md-0">
+          <v-list-item-title class="text-p2 font-weight-bold  pl-2 pl-md-0 neutral--text text--darken-4">
             {{ opponentName }}
           </v-list-item-title>
         </v-list-item-content>
-        <v-list-item-avatar rounded width="60" class="mr-2 hidden-md-and-up" color="info lighten-4">
+        <v-list-item-avatar rounded width="60" class="mr-2 hidden-md-and-up neutral--text text--darken-4" color="neutral lighten-3">
           {{ right }}
         </v-list-item-avatar>
       </v-list-item>
       <FxNonFixtureItem v-else :event-type="event.eventType" :name="event.name">
         <template #action>
-          <v-list-item-avatar rounded width="60" class="mr-2 hidden-md-and-up" color="info lighten-4">
+          <v-list-item-avatar rounded width="60" class="mr-2 hidden-md-and-up neutral--text text--darken-4" color="neutral lighten-3">
             -
           </v-list-item-avatar>
         </template>
@@ -72,26 +72,26 @@
     <template #time>
       <div>
         <div v-if="me.meetTime" class="d-inline-block pr-8">
-          <v-list-item-title class="text-p2 info--text text--darken-4">
+          <v-list-item-title class="text-p2 neutral--text text--darken-4">
             {{ me.meetTime }}
           </v-list-item-title>
-          <v-list-item-subtitle class="text-p1 info--text">
+          <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
             Meet Time
           </v-list-item-subtitle>
         </div>
         <div class="d-inline-block pr-8">
-          <v-list-item-title class="text-p2 info--text text--darken-4">
+          <v-list-item-title class="text-p2 neutral--text text--darken-4">
             {{ event.startTime }}
           </v-list-item-title>
-          <v-list-item-subtitle class="text-p1 info--text">
+          <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
             Start Time
           </v-list-item-subtitle>
         </div>
         <div v-if="me.returnTime" class="d-inline-block">
-          <v-list-item-title class="text-p2 info--text text--darken-4">
+          <v-list-item-title class="text-p2 neutral--text text--darken-4">
             {{ me.returnTime }}
           </v-list-item-title>
-          <v-list-item-subtitle class="text-p1 info--text">
+          <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
             Return Time
           </v-list-item-subtitle>
         </div>
@@ -207,3 +207,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.v-chip--label {
+  border-radius: 16px!important;
+}
+</style>
