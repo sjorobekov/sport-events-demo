@@ -5,9 +5,9 @@
         Results
       </template>
       <template #actions>
-        <v-btn v-if="!formVisible && canAddOrEditResult" outlined @click="formVisible = true">
-          <v-icon small>
-            mdi-pencil-outline
+        <v-btn v-if="!formVisible && canAddOrEditResult" color="neutral darken-3" outlined @click="formVisible = true">
+          <v-icon color="neutral darken-1">
+            $vuetify.icons.pen
           </v-icon>Edit Result
         </v-btn>
       </template>
