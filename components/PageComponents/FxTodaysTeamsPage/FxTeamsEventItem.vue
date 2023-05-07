@@ -51,26 +51,26 @@
             <template #content>
               <div>
                 <div v-if="me.meetTime" class="d-inline-block pr-8">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
+                  <v-list-item-title class="text-p2 neutral--text text--darken-4">
                     {{ me.meetTime }}
                   </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
+                  <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                     Meet Time
                   </v-list-item-subtitle>
                 </div>
                 <div class="d-inline-block pr-8">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
+                  <v-list-item-title class="text-p2 neutral--text text--darken-4">
                     {{ event.startTime }}
                   </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
+                  <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                     Start Time
                   </v-list-item-subtitle>
                 </div>
                 <div v-if="me.returnTime" class="d-inline-block">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
+                  <v-list-item-title class="text-p2 neutral--text text--darken-4">
                     {{ me.returnTime }}
                   </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
+                  <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                     Return Time
                   </v-list-item-subtitle>
                 </div>
@@ -81,7 +81,7 @@
         <v-col cols="12" class="border-bottom border-right pt-1 pb-0">
           <ListItem>
             <template #icon>
-              <FxAvatar :size="24" :value="lead.avatar" />
+              <v-icon>$vuetify.icons.user-1</v-icon>
             </template>
             <template #title>
               <FxUserDisplayName :user="lead" />
@@ -112,18 +112,18 @@
             <template #content>
               <div>
                 <div class="d-inline-block pr-8">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
+                  <v-list-item-title class="text-p2 neutral--text text--darken-4">
                     {{ transportTo }}
                   </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
+                  <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                     Transport To
                   </v-list-item-subtitle>
                 </div>
                 <div class="d-inline-block">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
+                  <v-list-item-title class="text-p2 neutral--text text--darken-4">
                     {{ transportFrom }}
                   </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
+                  <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                     Transport From
                   </v-list-item-subtitle>
                 </div>
@@ -152,7 +152,6 @@
 <script>
 import { TransportType } from '@/enum'
 import ListItem from '@/components/FxEventItem/ListItem'
-import FxAvatar from '@/components/FxAvatar/FxAvatar'
 import FxLocationLabel from '@/components/FxEventItem/FxLocationLabel'
 import FxTeamsEventTeamSheet from '@/components/PageComponents/FxTodaysTeamsPage/FxTeamsEventTeamSheet'
 import FxTeamsEventItemCard from '@/components/PageComponents/FxTodaysTeamsPage/FxTeamsEventItemCard'
@@ -160,7 +159,6 @@ import FxTeamsEventItemCard from '@/components/PageComponents/FxTodaysTeamsPage/
 export default {
   name: 'FxTeamsEventItem',
   components: {
-    FxAvatar,
     ListItem,
     FxLocationLabel,
     FxTeamsEventTeamSheet,
