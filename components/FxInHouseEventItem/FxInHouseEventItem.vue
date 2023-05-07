@@ -2,16 +2,16 @@
   <v-container :style="style" class="rounded">
     <v-row>
       <v-col cols="12" class="border-bottom pt-1 pb-0">
-        <v-list-item class="px-0">
+        <v-list-item class="px-0 neutral--text text--darken-3">
           <v-list-item-content>
             <v-list-item-title class="text-p2">
               {{ date }}
-              <span class="info--text text--lighten-1">{{ event.name }}</span>
+              <span class="neutral--text text--darken-2">{{ event.name }}</span>
             </v-list-item-title>
           </v-list-item-content>
 
           <slot name="actions">
-            <span class="in-house-event-time" style="font-size: 12px; line-height: 18px" v-text="time" />
+            <span class="in-house-event-time neutral--text text--darken-3" v-text="time" />
           </slot>
         </v-list-item>
       </v-col>
@@ -123,11 +123,11 @@ export default {
 
 <style lang="scss" scoped>
 .in-house-event-time {
-  border: 1px solid var(--v-info-base);
-  border-radius: 5px;
+  border: 1px solid var(--v-neutral-lighten1);
+  border-radius: 16px;
   color: var(--v-info-base);
   padding: 0.2em 1em;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 18px
 }
 </style>
