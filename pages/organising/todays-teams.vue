@@ -2,16 +2,16 @@
   <div class="mt-4 mt-md-n4">
     <v-row class="mb-2">
       <v-col cols="12">
-        <h1 class="text-h4s text-md-h3">
-          Today's Team
+        <h1 class="text-h4s text-md-h3 neutral--text text--darken-4">
+          Today's Teams
         </h1>
       </v-col>
       <v-col cols="12" sm="6" md="5">
         <FxDateRangePicker v-model="filter" />
       </v-col>
       <v-col md="7" class="text-right hidden-sm-and-down d-print-none">
-        <v-btn outlined style="background: white;" color="info base" @click="print()">
-          <v-icon>mdi-printer-outline</v-icon>
+        <v-btn outlined style="background: white;" color="neutral darken-3" @click="print()">
+          <v-icon color="neutral darken-1">$vuetify.icons.printer</v-icon>
           Print Team Sheets
         </v-btn>
       </v-col>

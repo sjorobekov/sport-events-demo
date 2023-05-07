@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h1 class="text-h4s text-md-h3 mt-16 mb-6">
+    <h1 class="text-h4s text-md-h3 mt-16 mb-6 neutral--text text--darken-4">
       Fixtures To Confirm
     </h1>
 
     <v-card
       v-for="(item, index) in items"
       :key="`confirm-${index}`"
-      class="mb-3 card-has-hover"
+      class="mb-3 fixture-to-confirm-card"
     >
       <FxFixtureToConfirmItem
         :me="item.me"
@@ -15,7 +15,7 @@
         :event="items[index]"
       >
         <template #action>
-          <v-btn outlined color="info darken-1" height="34" link :to="{ name: 'organising-confirm-fixtures-eventId', params: { eventId: item.id } }">
+          <v-btn outlined color="neutral darken-3" height="34" link :to="{ name: 'organising-confirm-fixtures-eventId', params: { eventId: item.id } }">
             View Event
           </v-btn>
         </template>
@@ -27,7 +27,7 @@
     </p>
 
     <template v-if="rejected.length">
-      <h1 class="text-h3 mt-9 mb-6">
+      <h1 class="text-h3 mt-9 mb-6 neutral--text text--darken-4">
         Rejected Fixtures
       </h1>
 
@@ -110,3 +110,9 @@ export default {
   },
 }
 </script>
+<style scoped>
+.fixture-to-confirm-card {
+  box-shadow: 0px 0px 10px 0px #dadfe6 !important;
+  border: none!important;
+}
+</style>

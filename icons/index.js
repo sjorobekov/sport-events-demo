@@ -144,4 +144,5 @@ export default [
   'warning',
   'resetPassword',
   'upload-button',
+  'printer',
 ]

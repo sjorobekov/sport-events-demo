@@ -1,6 +1,6 @@
 <template>
   <div class="mt-4 mt-md-n1">
-    <h1 class="text-h4s text-md-h3 mb-6 mt-16">
+    <h1 class="text-h4s text-md-h3 mb-6 mt-16 neutral--text text--darken-4">
       Confirm Fixture Details
     </h1>
 
@@ -24,7 +24,7 @@
           Reject Fixture
         </v-btn>
         <v-spacer />
-        <v-btn outlined color="info darken-1" class="mr-3" height="41" @click="$router.back()">
+        <v-btn outlined color="neutral darken-3" class="mr-3" height="41" @click="$router.back()">
           Cancel
         </v-btn>
         <v-btn depressed color="primary" width="89" height="41" @click="validate">
@@ -51,7 +51,7 @@
 
       <div class="d-flex mt-8">
         <v-spacer />
-        <v-btn outlined color="info darken-1" class="mr-3" height="41" @click="step = 1">
+        <v-btn outlined color="neutral darken-3" class="mr-3" height="41" @click="step = 1">
           Cancel
         </v-btn>
         <v-btn depressed color="primary" width="89" height="41" @click="accept">

@@ -3,8 +3,8 @@
     <v-container :style="style" class="rounded child-border">
       <v-row>
         <v-col class="pt-1 pb-0">
-          <v-list-item class="px-0">
-            <v-list-item-avatar class="mr-3" tile size="22">
+          <v-list-item class="px-0 neutral--text text--darken-3">
+            <v-list-item-avatar class="mr-2" tile size="22">
               <v-img :src="sport.icon" />
             </v-list-item-avatar>
             <v-list-item-content class="my-n4">
@@ -47,26 +47,26 @@
             <template #content>
               <div>
                 <div v-if="formData.meetTime" class="d-inline-block pr-2">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
+                  <v-list-item-title class="text-p2 neutral--text text--darken-4">
                     {{ formData.meetTime }}
                   </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
+                  <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                     Meet Time
                   </v-list-item-subtitle>
                 </div>
                 <div class="d-inline-block pr-2">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
+                  <v-list-item-title class="text-p2 neutral--text text--darken-4">
                     {{ event.startTime }}
                   </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
+                  <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                     Start Time
                   </v-list-item-subtitle>
                 </div>
                 <div v-if="formData.returnTime" class="d-inline-block">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
+                  <v-list-item-title class="text-p2 neutral--text text--darken-4">
                     {{ formData.returnTime }}
                   </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
+                  <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                     Return Time
                   </v-list-item-subtitle>
                 </div>
@@ -111,18 +111,18 @@
             <template #content>
               <div>
                 <div class="d-inline-block pr-8">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
+                  <v-list-item-title class="text-p2 neutral--text text--darken-4">
                     <FxTransportToLabel :transport-to="formData.transportTo" :transport-to-other="formData.transportToOther" />
                   </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
+                  <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                     Transport To
                   </v-list-item-subtitle>
                 </div>
                 <div class="d-inline-block">
-                  <v-list-item-title class="text-p2 info--text text--darken-4">
+                  <v-list-item-title class="text-p2 neutral--text text--darken-4">
                     <FxTransportFromLabel :transport-from="formData.transportFrom" :transport-from-other="formData.transportFromOther" />
                   </v-list-item-title>
-                  <v-list-item-subtitle class="text-p1 info--text">
+                  <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                     Transport From
                   </v-list-item-subtitle>
                 </div>
@@ -138,10 +138,10 @@
               <v-icon>mdi-information-outline</v-icon>
             </template>
             <template #content>
-              <v-list-item-title class="text-p1 info--text">
+              <v-list-item-title class="text-p1 neutral--text text--darken-2">
                 Further Information
               </v-list-item-title>
-              <span class="text-p2 info--text text--darken-2">{{ formData.info }}</span>
+              <span class="text-p2 neutral--text text--darken-4">{{ formData.info }}</span>
             </template>
           </ListItem>
         </v-col>

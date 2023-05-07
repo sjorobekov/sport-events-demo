@@ -1,6 +1,6 @@
 <template>
   <v-container class="mt-1 mt-md-n4">
-    <h1 class="text-h4s text-md-h3 mb-6">
+    <h1 class="text-h4s text-md-h3 mb-6 neutral--text text--darken-4">
       Participation
     </h1>
 

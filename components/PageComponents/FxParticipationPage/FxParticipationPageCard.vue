@@ -7,10 +7,10 @@
             $vuetify.icons.participationSports
           </v-icon>
           <v-list-item-content class="pb-0 pb-lg-3">
-            <v-list-item-title class="text-p2 info--text text--darken-4 font-weight-bold">
+            <v-list-item-title class="text-p2 neutral--text text--darken-4 font-weight-bold">
               {{ $tc('page.Participation.SPORTS', statistics.sports) }}
             </v-list-item-title>
-            <v-list-item-subtitle class="text-p1 info--text pt-0 pt-lg-1">
+            <v-list-item-subtitle class="text-p1 neutral--text text--darken-2 pt-0 pt-lg-1">
               This Week
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -24,10 +24,10 @@
             $vuetify.icons.participationEvents
           </v-icon>
           <v-list-item-content class="pb-0 pb-lg-3">
-            <v-list-item-title class="text-p2 info--text text--darken-4 font-weight-bold">
+            <v-list-item-title class="text-p2 neutral--text text--darken-4 font-weight-bold">
               {{ $tc('page.Participation.EVENTS', statistics.events) }}
             </v-list-item-title>
-            <v-list-item-subtitle class="text-p1 info--text pt-0 pt-lg-1">
+            <v-list-item-subtitle class="text-p1 neutral--text text--darken-2 pt-0 pt-lg-1">
               This Week
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -41,10 +41,10 @@
             $vuetify.icons.sevenDays
           </v-icon>
           <v-list-item-content class="pb-0 pb-lg-3">
-            <v-list-item-title class="text-p2 info--text text--darken-4 font-weight-bold">
+            <v-list-item-title class="text-p2 neutral--text text--darken-4 font-weight-bold">
               {{ $tc('page.Dashboard.STUDENTS', statistics.weekStudents) }}
             </v-list-item-title>
-            <v-list-item-subtitle class="text-p1 info--text pt-0 pt-lg-1">
+            <v-list-item-subtitle class="text-p1 neutral--text text--darken-2 pt-0 pt-lg-1">
               Participating (Week)
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -58,10 +58,10 @@
             $vuetify.icons.participating-1
           </v-icon>
           <v-list-item-content class="pb-0 pb-lg-3">
-            <v-list-item-title class="text-p2 info--text text--darken-4 font-weight-bold">
+            <v-list-item-title class="text-p2 neutral--text text--darken-4 font-weight-bold">
               {{ $tc('page.Dashboard.STUDENTS', statistics.monthStudents) }}
             </v-list-item-title>
-            <v-list-item-subtitle class="text-p1 info--text pt-0 pt-lg-1">
+            <v-list-item-subtitle class="text-p1 neutral--text text--darken-2 pt-0 pt-lg-1">
               Participating (Month)
             </v-list-item-subtitle>
           </v-list-item-content>
