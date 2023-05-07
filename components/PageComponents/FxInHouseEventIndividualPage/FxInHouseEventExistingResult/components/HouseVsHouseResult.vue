@@ -6,12 +6,12 @@
           <FxSchoolLogo :value="myTeam.logo" :color="myTeam.color" :alt="myTeam.name" />
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title class="text-p2">
+          <v-list-item-title class="text-p2 neutral--text text--darken-3">
             {{ myTeam.name }}
           </v-list-item-title>
         </v-list-item-content>
         <v-list-item-action>
-          <v-avatar width="60" rounded color="#F1F5F9">
+          <v-avatar width="60" rounded color="neutral lighten-2" class="neutral--text text--darken-4">
             {{ result.homeScore }}
           </v-avatar>
         </v-list-item-action>
@@ -21,12 +21,12 @@
           <FxSchoolLogo :value="opponentTeam.logo" :color="opponentTeam.color" :alt="opponentTeam.name" />
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title class="text-p2">
+          <v-list-item-title class="text-p2 neutral--text text--darken-3">
             {{ opponentTeam.name }}
           </v-list-item-title>
         </v-list-item-content>
         <v-list-item-action>
-          <v-avatar width="60" rounded color="#F1F5F9">
+          <v-avatar width="60" rounded color="neutral lighten-2" class="neutral--text text--darken-4">
             {{ result.awayScore }}
           </v-avatar>
         </v-list-item-action>
