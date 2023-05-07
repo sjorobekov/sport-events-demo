@@ -2,8 +2,8 @@
   <v-form ref="form" v-async-form :disabled="loading">
     <FxModernFormCard>
       <template #icon>
-        <v-icon size="24" color="info lighten-1">
-          $vuetify.icons.footballUniform
+        <v-icon size="24">
+          $vuetify.icons.teams-outline
         </v-icon>
       </template>
       <template #title>
@@ -48,7 +48,7 @@
 
     <FxModernFormCard>
       <template #icon>
-        <v-icon size="24" color="info lighten-1">
+        <v-icon size="24">
           $vuetify.icons.calendarRoundedOutline
         </v-icon>
       </template>
@@ -68,7 +68,7 @@
             id="date"
             :value="event.date"
             prepend-inner-icon="$vuetify.icons.calendarOutline"
-            background-color="info lighten-4"
+            background-color="neutral lighten-3"
             outlined
             dense
             disabled
@@ -110,7 +110,7 @@
             outlined
             dense
             append-icon="mdi-clock-outline"
-            background-color="info lighten-4"
+            background-color="neutral lighten-3"
           />
         </v-col>
 
@@ -129,7 +129,7 @@
 
     <FxModernFormCard>
       <template #icon>
-        <v-icon size="24" color="info lighten-1">
+        <v-icon size="24">
           $vuetify.icons.locationOutline
         </v-icon>
       </template>
@@ -167,7 +167,7 @@
             disabled
             outlined
             dense
-            background-color="info lighten-4"
+            background-color="neutral lighten-3"
           />
         </v-col>
       </v-row>
@@ -175,7 +175,7 @@
 
     <FxModernFormCard>
       <template #icon>
-        <v-icon size="24" color="info lighten-1">
+        <v-icon size="24">
           $vuetify.icons.travel
         </v-icon>
       </template>
@@ -249,7 +249,7 @@
 
     <FxModernFormCard>
       <template #icon>
-        <v-icon size="24" color="info lighten-1">
+        <v-icon size="24">
           mdi-information-outline
         </v-icon>
       </template>

@@ -11,12 +11,12 @@
               <slot name="icon" />
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title class="info--text text--darken-2 text-subheading font-weight-bold">
+              <v-list-item-title class="neutral--text text--darken-4 text-subheading font-weight-bold">
                 <slot name="title" />
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <div class="text-p1 info--text text--darken-1 mt-1">
+          <div class="text-p2 neutral--text text--darken-3 mt-1">
             <slot name="content" />
           </div>
         </v-col>

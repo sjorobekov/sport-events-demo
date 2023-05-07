@@ -35,7 +35,7 @@
         <FxNonFixtureItem v-else :event-type="event.eventType" :name="event.name" />
       </v-col>
       <v-col md="2" class="text-center">
-        <v-btn link class="d-flex d-md-inline-flex neutral--text text--darken-2" outlined :to="{ name: 'events-eventId', params: { eventId: event.id } }">
+        <v-btn link class="d-flex d-md-inline-flex neutral--text text--darken-3" outlined :to="{ name: 'events-eventId', params: { eventId: event.id } }">
           Add Result
         </v-btn>
       </v-col>
