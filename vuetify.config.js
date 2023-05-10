@@ -24,6 +24,9 @@ export default {
         brand2: '#75DDDD',
         brand3: '#4368FA',
         background: '#F7F7F7',
+        brandgreen: '#69c774',
+        brandblue: '#47a6ea',
+        branddark: '#333c4e',
         info: {
           lighten5: '#F8FAFC',
           lighten4: '#F1F5F9',
