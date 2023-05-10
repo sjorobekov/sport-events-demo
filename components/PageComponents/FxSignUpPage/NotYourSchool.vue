@@ -1,8 +1,8 @@
 <template>
-  <div style="max-width: 506px" class="mx-auto">
+  <div style="max-width: 506px" class="ma-7 mx-sm-auto">
     <v-img class="mx-auto mb-4" :src="img" width="58" />
 
-    <h1 class="text-h1 text-center mb-2">
+    <h1 class="text-h3 text-center mb-2">
       Not Your School?
     </h1>
 

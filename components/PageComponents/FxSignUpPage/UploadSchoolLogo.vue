@@ -1,12 +1,14 @@
 <template>
   <div>
-    <h1 class="text-h1 text-center primary--text mt-6">
-      Upload Your School Logo
-    </h1>
-    <h2 class="text-p2 text-center primary--text mb-6">
-      SVG, WEBP, PNG, JPG and GIF files are allowed
-    </h2>
-    <v-form class="mx-sm-auto sign-in-form" @submit.prevent="submitHandler">
+    <div class="mx-7">
+      <h1 v-balance-text class="text-h3 text-center primary--text mt-6">
+        Upload Your School Logo
+      </h1>
+      <h2 class="text-p2 text-center primary--text mb-6">
+        SVG, WEBP, PNG, JPG and GIF files are allowed
+      </h2>
+    </div>
+    <v-form class="mx-7 mx-sm-auto sign-in-form" @submit.prevent="submitHandler">
       <FxFileDragDrop v-if="!file" height="165" color="white" @select="select">
         <template #default="{ openSelectFile }">
           <v-icon size="30">

@@ -1,10 +1,10 @@
 <template>
-  <div class="text-center">
+  <div class="text-center ma-7">
     <v-icon color="success" size="70">
       mdi-check-circle
     </v-icon>
 
-    <h1 class="text-h1 primary--text mt-3">
+    <h1 class="text-h3 primary--text mt-3">
       Welcome to Fixturr
     </h1>
 

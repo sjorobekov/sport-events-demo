@@ -1,12 +1,14 @@
 <template>
   <div>
-    <h1 class="text-h1 text-center primary--text mt-6">
-      Choose Your School Colour
-    </h1>
-    <h2 class="text-p2 text-center primary--text mb-6">
-      Customise fixturr with your school colour.
-    </h2>
-    <v-form ref="form" v-async-form class="mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">
+    <div class="mx-7">
+      <h1 v-balance-text class="text-h3 text-center primary--text mt-6">
+        Choose Your School Colour
+      </h1>
+      <h2 class="text-p2 text-center primary--text mb-6">
+        Customise fixturr with your school colour.
+      </h2>
+    </div>
+    <v-form ref="form" v-async-form class="mx-7 mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">
       <FxColorPicker
         v-model="color"
       >

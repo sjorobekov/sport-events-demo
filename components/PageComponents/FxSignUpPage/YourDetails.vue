@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h1 class="text-h1 primary--text text-center mt-6">
+    <h1 v-balance-text class="text-h3 primary--text text-center mt-6">
       Your Details
     </h1>
     <h2 class="text-p2 text-center primary--text mb-6">
       We just need your name and email to get started.
     </h2>
-    <v-form ref="form" v-async-form class="mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">
+    <v-form ref="form" v-async-form class="mx-7 mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">
       <v-row>
-        <v-col>
+        <v-col cols="12" sm="6" class="pb-0">
           <label for="firstname">First Name</label>
           <v-text-field
             id="firstname"

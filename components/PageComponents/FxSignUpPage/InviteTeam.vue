@@ -1,12 +1,14 @@
 <template>
   <div>
-    <h1 class="text-h1 text-center primary--text mt-6 mb-9">
-      Invite Your Team
-    </h1>
-    <h2 class="text-p2 text-center primary--text mb-6">
-      Insert some text here about how it’s better with a team.
-    </h2>
-    <div class="mx-sm-auto sign-in-form">
+    <div class="mx-7">
+      <h1 class="text-h3 text-center primary--text mt-6">
+        Invite Your Team
+      </h1>
+      <h2 class="text-p2 text-center primary--text mb-6">
+        Insert some text here about how it’s better with a team.
+      </h2>
+    </div>
+    <div class="mx-7 mx-sm-auto sign-in-form">
       <v-form ref="form" v-async-form class="mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">
         <v-row>
           <v-col cols="7">

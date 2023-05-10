@@ -1,12 +1,14 @@
 <template>
   <div>
-    <h1 class="text-h1 text-center primary--text mt-6">
-      Create School Profile
-    </h1>
-    <h2 class="text-p2 text-center primary--text mb-6">
-      We couldn't match your email to a school in our database
-    </h2>
-    <v-form ref="form" v-async-form class="mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">
+    <div class="mx-7">
+      <h1 class="text-h3 text-center primary--text mt-6">
+        Create School Profile
+      </h1>
+      <h2 class="text-p2 text-center primary--text mb-6">
+        We couldn't match your email to a school in our database
+      </h2>
+    </div>
+    <v-form ref="form" v-async-form class="mx-7 mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">
       <label for="school_name">School Name</label>
       <v-text-field
         id="school_name"

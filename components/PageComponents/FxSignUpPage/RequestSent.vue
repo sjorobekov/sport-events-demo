@@ -1,6 +1,6 @@
 <template>
-  <div class="custom-width width">
-    <h1 class="text-h1 primary--text text-center mt-6">
+  <div class="custom-width width px-7">
+    <h1 class="text-h3 primary--text text-center mt-6">
       Request Sent
     </h1>
 

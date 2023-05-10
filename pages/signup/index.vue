@@ -1,5 +1,14 @@
 <template>
   <v-app>
+    <v-app-bar
+      fixed
+      class="d-md-none"
+      color="primary"
+      dark
+      flat
+    >
+      <v-img class="mx-auto" max-width="150" :src="require('/static/logo_new.svg')" />
+    </v-app-bar>
     <v-main>
       <v-container fluid class="fill-height pa-0">
         <v-row class="fill-height" no-gutters>
@@ -9,7 +18,7 @@
             md="5"
             lg="4"
             xl="3"
-            class="school-panel pa-0"
+            class="d-none d-md-flex school-panel pa-0"
           >
             <v-row class="fill-height" no-gutters>
               <v-col class="pt-16">
@@ -24,12 +33,14 @@
           </v-col>
           <v-col
             cols="12"
-            sm="7"
+            sm="12"
             md="7"
             lg="8"
             xl="9"
-            style="padding-top: 150px"
+            class="form-container"
           >
+            <SignUpStepper v-model="timelineStep[step]" class="d-md-none mt-14" />
+
             <v-tabs-items v-model="step" style="background: none" touchless>
               <v-tab-item>
                 <YourDetails v-model="formData.user" @input="checkSchoolByEmailDomain()" />
@@ -70,6 +81,9 @@
           </v-col>
         </v-row>
       </v-container>
+      <v-container fluid class="d-none pt-16">
+        <SignUpStepper />
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -86,6 +100,7 @@ import SignUpComplete from '@/components/PageComponents/FxSignUpPage/SignUpCompl
 import IsThisYourSchool from '@/components/PageComponents/FxSignUpPage/IsThisYourSchool'
 import RequestSent from '@/components/PageComponents/FxSignUpPage/RequestSent'
 import NotYourSchool from '@/components/PageComponents/FxSignUpPage/NotYourSchool'
+import SignUpStepper from '~/components/PageComponents/FxSignUpPage/SignUpStepper'
 
 const STEP = Object.freeze({
   YOUR_DETAILS: 0,
@@ -114,6 +129,7 @@ export default {
     CreateSchoolProfile,
     SignUpTimeline,
     YourDetails,
+    SignUpStepper,
   },
   layout: 'empty',
 
@@ -197,10 +213,15 @@ export default {
 }
 </style>
 
-<style scoped>
+<style lang="sass" scoped>
+@import '~vuetify/src/styles/styles.sass'
 
-.theme--light.v-application {
-    background: #F1F4FB;
-}
+.theme--light.v-application
+  background: #F1F4FB
+.form-container
+  padding-top: 0
 
+@media #{map-get($display-breakpoints, 'md-and-up')}
+  .form-container
+    padding-top: 150px!important
 </style>

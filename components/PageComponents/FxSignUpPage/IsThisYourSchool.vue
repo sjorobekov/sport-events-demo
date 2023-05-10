@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-h1 primary--text text-center mt-6">
+    <h1 class="text-h3 primary--text text-center mt-6">
       {{ title }}
     </h1>
 
@@ -8,7 +8,7 @@
       {{ subtitle }}
     </h2>
 
-    <div class="sign-in-form mx-auto">
+    <div class="sign-in-form mx-7 mx-sm-auto">
       <v-card class="py-8 px-12">
         <v-list-item>
           <v-list-item-avatar>
