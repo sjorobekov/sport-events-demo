@@ -16,14 +16,9 @@
               </v-row>
             </v-carousel>
           </v-card>
-          <v-row v-else>
-            <v-col cols="3" xl="2">
-              <div class="text-h3">
-                Sports Portal
-              </div>
-            </v-col>
-          </v-row>
-
+          <div v-else class="text-h3">
+            Sports Portal
+          </div>
           <div class="d-flex align-center mt-2 pt-sm-4">
             <div class="date-picker">
               <v-tabs v-model="tab" fixed-tabs class="week-tabs" show-arrows>
