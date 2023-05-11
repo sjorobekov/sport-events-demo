@@ -154,6 +154,7 @@ export interface Season {
   readonly start: string
   readonly end: string
   readonly status: SeasonStatus
+  readonly schoolId: string
   readonly createdAt: string
   readonly updatedAt: string
 }
