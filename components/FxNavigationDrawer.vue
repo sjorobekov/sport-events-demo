@@ -29,7 +29,7 @@
       class="px-0 nav-list"
     >
       <template v-if="hideLogo && isLoggedIn">
-        <FxUserItem :item="me" class="px-5" :to="{ name: 'settings' } " />
+        <FxUserItem :item="me" class="px-5" :to="{ name: 'settings' } " dark />
       </template>
       <template
         v-for="(item, i) in items"
