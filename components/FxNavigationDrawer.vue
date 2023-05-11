@@ -11,7 +11,7 @@
   >
     <template v-if="!hideLogo">
       <v-avatar size="144" color="white" class="mt-10 mb-6 mx-auto d-block school-logo-nav">
-        <FxSchoolLogo :value="contextSchool.logo" color="primary" />
+        <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" />
       </v-avatar>
 
       <h1 v-balance-text class="text-p3 font-weight-bold white--text text-center px-2">

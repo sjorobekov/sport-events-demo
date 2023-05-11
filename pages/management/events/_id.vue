@@ -6,7 +6,7 @@
           <v-row>
             <v-col class="d-flex justify-center align-center">
               <div class="text-center">
-                <FxSchoolLogo class="mx-auto" size="53" :value="left.school.logo" />
+                <FxSchoolLogo class="mx-auto" size="53" :value="left.school.logo" :color="left.school.color" />
                 <h5 class="text-h5 font-weight-bold">
                   {{ left.school.name }}
                 </h5>
@@ -27,7 +27,7 @@
             </v-col>
             <v-col>
               <div class="text-center">
-                <FxSchoolLogo class="mx-auto" size="53" :value="right.school.logo" />
+                <FxSchoolLogo class="mx-auto" size="53" :value="right.school.logo" :color="right.school.color" />
                 <h5 class="text-h5 font-weight-bold">
                   {{ right.school.name }}
                 </h5>

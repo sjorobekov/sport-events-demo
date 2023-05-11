@@ -41,7 +41,7 @@
                 </v-list-item-subtitle>
               </v-list-item-content>
               <v-list-item-avatar>
-                <FxSchoolLogo :value="item.participants[0].school.logo" />
+                <FxSchoolLogo :value="item.participants[0].school.logo" :color="item.participants[0].school.color" />
               </v-list-item-avatar>
             </v-list-item>
           </template>
@@ -55,7 +55,7 @@
           <template #item.school2="{ item }">
             <v-list-item v-if="item.participants[1] && item.participants[1].school" class="px-0">
               <v-list-item-avatar>
-                <FxSchoolLogo :value="item.participants[1].school.logo" />
+                <FxSchoolLogo :value="item.participants[1].school.logo" :color="item.participants[1].school.color" />
               </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title>
