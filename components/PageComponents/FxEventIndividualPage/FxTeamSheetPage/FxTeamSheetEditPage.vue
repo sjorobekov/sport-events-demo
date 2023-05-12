@@ -176,7 +176,7 @@ export default {
   async created () {
     const { data } = await this.$store.dispatch('api/students/list', {
       schoolId: this.contextSchoolId,
-      params: { limit: -1 },
+      params: { limit: -1, orderBy: 'firstname', orderDesc: false },
     })
 
     this.recentTeamSheet = await this.$store.dispatch('api/teams/getLastSheet', {
