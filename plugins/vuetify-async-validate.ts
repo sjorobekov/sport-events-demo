@@ -83,6 +83,9 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
 
     isSubdomainAvailable (id: string) {
       return async (portalAddress: string): AsyncReturnType => {
+        if (!portalAddress) {
+          return true
+        }
         const { available } = await $axios.$post('/api/v1/validation/check_portal', { portalAddress, id })
         return available || 'Address is unavailable'
       }
@@ -90,6 +93,9 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
 
     isRecordCategoryAvailable (schoolId: string) {
       return async (name: string): AsyncReturnType => {
+        if (!name) {
+          return true
+        }
         const { available } = await $axios.$post('/api/v1/validation/check_sports_record_category', { name, schoolId })
         return available || 'Category already exists'
       }
@@ -97,6 +103,9 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
 
     isRecordEventAvailable (schoolId: string, sportId: string) {
       return async (name: string): AsyncReturnType => {
+        if (!name) {
+          return true
+        }
         const { available } = await $axios.$post('/api/v1/validation/check_sports_record_event', { name, schoolId, sportId })
           .catch(() => { return 'Event already exists' })
         return available || 'Event already exists'
