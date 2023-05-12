@@ -39,7 +39,6 @@ export default {
   data: () => ({
     formData: { },
     loading: false,
-    inHouseTeams: [],
   }),
 
   head: () => ({
