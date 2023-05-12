@@ -2,7 +2,7 @@
   <v-stepper
     light
     dense
-    color="info darken-5"
+    color="neutral"
   >
     <v-stepper-header>
       <template
@@ -12,6 +12,7 @@
           :key="i"
           :step="i+1"
           :complete="i < value"
+          color="brandgreen"
         >
           {{ item.title }}
         </v-stepper-step>
@@ -45,3 +46,15 @@ export default {
   },
 }
 </script>
+<style scoped>
+.v-stepper__header{
+  box-shadow: none!important;
+  background-color: #333C4D!important;
+}
+.v-sheet.v-stepper:not(.v-sheet--outlined) {
+  box-shadow: none!important;
+}
+.theme--light.v-stepper {
+  border-radius: 0!important;
+}
+</style>

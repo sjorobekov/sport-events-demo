@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="mx-7">
-      <h1 class="text-h3 text-center primary--text mt-6">
+    <div class="mx-4">
+      <h1 class="text-h3 text-center branddark--text mt-6 mb-2">
         Create School Profile
       </h1>
-      <h2 class="text-p2 text-center primary--text mb-6">
+      <h2 class="text-p3 text-center branddark--text text--lighten-1 mb-6">
         We couldn't match your email to a school in our database
       </h2>
     </div>
-    <v-form ref="form" v-async-form class="mx-7 mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">
+    <v-form ref="form" v-async-form class="mx-4 mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">
       <label for="school_name">School Name</label>
       <v-text-field
         id="school_name"
@@ -41,9 +41,9 @@
 
       <v-btn
         type="submit"
-        class="mt-4"
+        class="mt-4 mb-4 sign-up-button"
         depressed
-        color="brand3"
+        color="brandgreen"
         dark
         height="50"
         :loading="loading"
