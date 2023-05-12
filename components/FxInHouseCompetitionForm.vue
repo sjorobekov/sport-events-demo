@@ -192,7 +192,7 @@
       </v-container>
     </v-card>
 
-    <v-card class="fx-card-border-top-primary mb-3">
+    <v-card class="d-none fx-card-border-top-primary mb-3">
       <v-container>
         <v-row>
           <v-col
