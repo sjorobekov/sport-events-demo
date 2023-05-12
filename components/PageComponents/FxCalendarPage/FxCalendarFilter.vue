@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @focusout="$emit('focusout')">
     <v-row class="hidden-lg-and-up">
       <v-col class="mb-2">
         <FxCalendarSportFilter

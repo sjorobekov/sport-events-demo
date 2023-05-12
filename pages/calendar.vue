@@ -88,6 +88,7 @@
                 :contains-in-house-events="containsInHouseEvents"
                 :sports="sports"
                 class="mb-6"
+                @focusout="showFilters = false"
               />
             </FxCalendarFilterDialog>
           </client-only>
