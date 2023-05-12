@@ -29,7 +29,7 @@
         maxlength="50"
       />
 
-      <label class="caption" for="portal_address">Fixturr Portal Address</label>
+      <label for="portal_address">Fixturr Portal Address</label>
       <v-text-field
         id="portal_address"
         v-model="formData.portalAddress"
