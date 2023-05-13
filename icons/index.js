@@ -145,4 +145,8 @@ export default [
   'resetPassword',
   'upload-button',
   'printer',
+  'score-dashboard',
+  'dashboard-warning',
+  'dashboard-today',
+  'dashboard-chart',
 ]
