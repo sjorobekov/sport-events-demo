@@ -26,7 +26,7 @@
         <v-list-item-action class="mr-2">
           <v-checkbox :value="attrs.inputValue" />
         </v-list-item-action>
-        <v-list-item-icon size="24" class="mr-2">
+        <v-list-item-icon size="24" class="mr-2 align-self-center">
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
@@ -59,10 +59,10 @@ export default {
 
   data: () => ({
     icons: {
-      [EventType.TRAINING]: '$vuetify.icons.training',
-      [EventType.MULTI_EVENT]: '$vuetify.icons.multievent',
-      [EventType.TOURNAMENT]: '$vuetify.icons.tournament',
-      [EventType.FIXTURE]: '$vuetify.icons.whistle',
+      [EventType.TRAINING]: '$vuetify.icons.filter-training',
+      [EventType.MULTI_EVENT]: '$vuetify.icons.filter-multi',
+      [EventType.TOURNAMENT]: '$vuetify.icons.filter-tournament',
+      [EventType.FIXTURE]: '$vuetify.icons.filter-fixture',
     },
   }),
 
@@ -76,7 +76,7 @@ export default {
             text: this.$t(`EVENT_TYPE.${value}`),
           }
         }),
-        ...(this.inHouseFilter ? [{ value: 'InHouseEventMatch', icon: '$vuetify.icons.inHouseEvent', text: 'In-House Sport' }] : []),
+        ...(this.inHouseFilter ? [{ value: 'InHouseEventMatch', icon: '$vuetify.icons.filter-in-house', text: 'In-House Sport' }] : []),
       ]
     },
   },

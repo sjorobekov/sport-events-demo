@@ -145,4 +145,9 @@ export default [
   'resetPassword',
   'upload-button',
   'printer',
+  'filter-fixture',
+  'filter-multi',
+  'filter-tournament',
+  'filter-training',
+  'filter-in-house',
 ]
