@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-h4s text-md-h3 mt-16 mb-6 neutral--text text--darken-4">
+    <h1 class="text-h4s text-md-h3 mb-6 neutral--text text--darken-4">
       Fixtures To Confirm
     </h1>
 
@@ -22,7 +22,7 @@
       </FxFixtureToConfirmItem>
     </v-card>
 
-    <p v-if="!items.length" class="text--disabled">
+    <p v-if="!items.length" class="text-p3 neutral--text text--darken-3 mt-n4">
       Nothing to Confirm
     </p>
 

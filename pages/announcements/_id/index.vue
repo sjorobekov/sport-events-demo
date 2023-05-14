@@ -43,7 +43,7 @@
           depressed
           color="neutral darken-3"
           outlined
-          class="hidden-md-and-up mt-4 mobile-button"
+          class="hidden-md-and-up mt-4 mobile-button-100"
           block
           :to="{
             name: 'announcements-id-edit',

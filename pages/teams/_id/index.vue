@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row class="mt-2 mt-md-8">
+    <v-row class="">
       <v-col cols="12" sm="12" lg="9">
         <v-card :flat="!hasPhoto" :class="!hasPhoto && 'no-photo'">
           <v-img

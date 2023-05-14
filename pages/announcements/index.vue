@@ -1,15 +1,15 @@
 <template>
-  <div class="mt-1 mt-md-n4  mb-3">
-    <v-list-item class="px-0 mb-4">
-      <v-list-item-content>
-        <h1 class="text-h4s text-md-h3 neutral--text text--darken-5">
+  <div class="mb-3">
+    <v-row class="">
+      <v-col cols="12" sm="6">
+        <h1 class="text-h4s text-md-h3 neutral--text text--darken-4">
           Announcements
         </h1>
-      </v-list-item-content>
-      <v-list-item-action>
+      </v-col>
+      <v-col v-if="canCreateAnnouncement" cols="12" sm="6" class="d-flex justify-end align-center">
         <v-btn
           v-if="canCreateAnnouncement"
-          class="hidden-xs-only"
+          class="mobile-button-100"
           link
           :ripple="false"
           :to="{ name: 'announcements-add' }"
@@ -19,21 +19,8 @@
         >
           <v-icon>$vuetify.icons.announcement-outline-small</v-icon>Create Announcement
         </v-btn>
-        <v-btn
-          v-if="canCreateAnnouncement"
-          class="hidden-sm-and-up"
-          small
-          link
-          :ripple="false"
-          :to="{ name: 'announcements-add' }"
-          depressed
-          color="primary"
-        >
-          New Announcement
-        </v-btn>
-      </v-list-item-action>
-    </v-list-item>
-
+      </v-col>
+    </v-row>
     <div v-if="!showAnnouncements" class="mx-auto" style="max-width: 355px">
       <GuestLoginForm @signedIn="$fetch">
         <template #subtitle>
@@ -55,7 +42,7 @@
             :announcement="item"
           >
             <template #actions>
-              <v-btn depressed :ripple="false" color="primary" class="mt-1 hidden-md-and-up mobile-button" block>
+              <v-btn depressed :ripple="false" color="primary" class="mt-1 hidden-md-and-up mobile-button-100" block>
                 Read More
               </v-btn>
             </template>

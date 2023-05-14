@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row class="d-flex mt-4 mt-md-n1">
+    <v-row class="d-flex">
       <v-col cols="12" sm="5" md="5">
         <h1 class="text-h4s text-md-h3">
           Opponents
@@ -13,6 +13,7 @@
           outlined
           color="primary"
           link
+          class="mobile-button-49"
           :to="{ name: 'directory-custom-add' }"
         >
           <v-icon>mdi-plus-circle-outline</v-icon>
@@ -23,7 +24,7 @@
           dark
           color="primary"
           link
-          class="ml-2"
+          class="ml-2 mobile-button-49"
           :to="{ name: 'directory-request-add' }"
         >
           <v-icon>mdi-plus-circle-outline</v-icon>

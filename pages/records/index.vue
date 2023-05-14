@@ -1,12 +1,12 @@
 <template>
   <div>
-    <v-list-item class="px-0 mt-1 mt-md-n4">
-      <v-list-item-content>
-        <h1 class="text-h4s text-md-h3 neutral--text text--darken-4">
+    <v-list-item class="px-0 pt-0">
+      <v-list-item-content class="pt-0">
+        <h1 class="text-h4s text-md-h3 neutral--text text--darken-4 pt-0">
           Sports Records
         </h1>
       </v-list-item-content>
-      <v-list-item-action class="hidden-md-and-up">
+      <v-list-item-action class="hidden-md-and-up mt-0">
         <FxSportsRecordsFilterDialog v-model="query" :events="events" :sports="sports" @click:clear="clearAll">
           <template #activator="{ on, attrs }">
             <v-badge
@@ -32,7 +32,7 @@
           </template>
         </FxSportsRecordsFilterDialog>
       </v-list-item-action>
-      <v-list-item-action v-if="canManageSportsRecords" class="hidden-md-and-up">
+      <v-list-item-action v-if="canManageSportsRecords" class="hidden-md-and-up mt-0">
         <v-menu>
           <template #activator="{ on, attrs }">
             <v-icon v-bind="attrs" v-on="on">

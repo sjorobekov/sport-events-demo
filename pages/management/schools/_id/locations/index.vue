@@ -1,25 +1,25 @@
 <template>
   <div>
-    <v-list-item class="px-0 mt-md-n4">
-      <v-list-item-content>
+    <v-row class="">
+      <v-col cols="12" sm="6">
         <h1 class="text-h4s text-md-h3">
           Sports Map
         </h1>
-      </v-list-item-content>
-      <v-list-item-action>
+      </v-col>
+      <v-col v-if="canManageSportLocation" cols="12" sm="6" class="d-flex justify-end align-center">
         <v-btn
           v-if="canManageSportLocation"
           depressed
           dark
           color="primary"
           link
+          class="mobile-button-100"
           :to="{ name: editLink, params: { locationId: 'add' } }"
         >
           <v-icon>$vuetify.icons.plusOutline</v-icon> Add Sports Location
         </v-btn>
-      </v-list-item-action>
-    </v-list-item>
-
+      </v-col>
+    </v-row>
     <v-row>
       <v-col sm="4" class="text-p1 neutral--text text--darken-2">
         <div class="hidden-xs-only">

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <v-row class="mt-1 mt-md-n4">
-      <v-col cols="6">
+    <v-row class="">
+      <v-col cols="12" sm="6">
         <h1 class="text-h4s text-md-h3">
           Sports Contacts
         </h1>
       </v-col>
-      <v-col v-if="canCreateSportsContacts" cols="6" class="d-flex justify-end align-center">
-        <v-btn depressed dark color="primary" :to="{ name: 'directory-sports-contacts-add' }">
+      <v-col v-if="canCreateSportsContacts" cols="12" sm="6" class="d-flex justify-end align-center">
+        <v-btn depressed class="mobile-button-100" dark color="primary" :to="{ name: 'directory-sports-contacts-add' }">
           <v-icon>$vuetify.icons.plusOutline</v-icon>Add Sports Contact
         </v-btn>
       </v-col>
@@ -50,3 +50,10 @@ export default {
   },
 }
 </script>
+<style scoped lang="sass">
+@import '~vuetify/src/styles/styles'
+
+@media #{map-get($display-breakpoints, 'xs-only')}
+  .mobile-button
+    width: 100%!important
+</style>

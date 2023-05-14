@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-4 mt-md-n4">
+  <div class="">
     <v-row class="mb-2">
       <v-col cols="12">
         <h1 class="text-h4s text-md-h3 neutral--text text--darken-4">

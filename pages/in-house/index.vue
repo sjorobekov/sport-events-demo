@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row class="mb-2 mt-1 mt-md-n4 align-center">
+    <v-row class="mb-2 align-center">
       <v-col v-if="canCreateTeam" cols="12" sm="5" md="5">
         <h1 class="neutral--text text--darken-4 text-h4s text-md-h3">
           In-House Sport
@@ -42,7 +42,7 @@
         />
       </v-col>
       <v-col v-if="canCreateTeam" cols="6" sm="4" md="4" class="text-right">
-        <v-btn depressed color="primary" link :to="{ name: 'in-house-add' }">
+        <v-btn depressed color="primary" class="mobile-button-100" link :to="{ name: 'in-house-add' }">
           <v-icon>$vuetify.icons.add-all</v-icon>
           Add Competition
         </v-btn>
