@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="isOpen" max-width="750">
     <v-form v-async-form :disabled="loading" @submit.prevent="save">
-      <v-card>
+      <v-card class="conflict-dialog-card">
         <FxFixtureConflictDialogToolbar :has-conflicts="conflictExist" @click:close="close" />
         <v-skeleton-loader
           v-if="$fetchState.pending"
@@ -31,26 +31,26 @@
                 <template #content>
                   <div>
                     <div v-if="me.meetTime" class="d-inline-block pr-2">
-                      <v-list-item-title class="text-p2 info--text text--darken-4">
+                      <v-list-item-title class="text-p2 neutral--text text--darken-4">
                         {{ me.meetTime }}
                       </v-list-item-title>
-                      <v-list-item-subtitle class="text-p1 info--text">
+                      <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                         Meet Time
                       </v-list-item-subtitle>
                     </div>
                     <div class="d-inline-block pr-2">
-                      <v-list-item-title class="text-p2 info--text text--darken-4">
+                      <v-list-item-title class="text-p2 neutral--text text--darken-4">
                         {{ event.startTime }}
                       </v-list-item-title>
-                      <v-list-item-subtitle class="text-p1 info--text">
+                      <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                         Start Time
                       </v-list-item-subtitle>
                     </div>
                     <div v-if="me.returnTime" class="d-inline-block">
-                      <v-list-item-title class="text-p2 info--text text--darken-4">
+                      <v-list-item-title class="text-p2 neutral--text text--darken-4">
                         {{ me.returnTime }}
                       </v-list-item-title>
-                      <v-list-item-subtitle class="text-p1 info--text">
+                      <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                         Return Time
                       </v-list-item-subtitle>
                     </div>
@@ -153,7 +153,7 @@
           <template v-if="showUpdateButton">
             <v-menu offset-y>
               <template #activator="{ on, attrs }">
-                <v-btn outlined color="info" v-bind="attrs" v-on="on">
+                <v-btn outlined color="neutral darken1" v-bind="attrs" v-on="on">
                   Actions
                 </v-btn>
               </template>
@@ -179,8 +179,8 @@
               Override Conflict
             </v-btn>
             <v-spacer />
-            <v-btn outlined color="info lighten-3" @click="postpone">
-              <span class="info--text text--darken-3">Postpone Event</span>
+            <v-btn outlined @click="postpone">
+              <span class="neutral--text text--darken-3">Postpone Event</span>
             </v-btn>
             <v-btn outlined color="error" @click="cancel">
               Cancel Event
@@ -381,3 +381,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.conflict-dialog-card {
+  border: none!important;
+}
+</style>

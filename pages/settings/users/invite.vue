@@ -17,7 +17,9 @@
             </v-icon>
           </div>
         </template>
-        You have reached the user limit for your current plan. To add more users, please upgrade your plan.
+        <div class="text-p2 neutral--text text--darken-4">
+          You have reached the user limit for your current plan. To add more users, please upgrade your plan.
+        </div>
       </v-alert>
 
       <UserInviteForm ref="form" v-model="formData" :disabled="loading || !canCreateUser" />
@@ -109,18 +111,3 @@ export default {
   },
 }
 </script>
-<style scoped>
-.alert {
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 8px;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1)!important;
-  background-color: #e7eff9!important;
-  border-color: #9dbaee!important;
-}
-.alert-icon {
-  background-color: #2D69DA;
-  border-radius: 6px;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1);
-}
-</style>

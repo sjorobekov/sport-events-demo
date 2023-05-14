@@ -1,8 +1,8 @@
 <template>
-  <v-alert prominent dark color="error">
+  <v-alert class="alert conflict-alert">
     <v-row align="center">
       <v-col class="grow">
-        <span class="text-h5s">This event is currently conflicting with another event due to a <strong v-text="label" /> clash.</span>
+        <span class="text-p2">This event is currently conflicting with another event due to a <strong v-text="label" /> clash.</span>
       </v-col>
       <v-col class="shrink">
         <slot name="default" />
@@ -45,3 +45,9 @@ export default {
   },
 }
 </script>
+<style scoped>
+.conflict-alert {
+  background-color: #fbdada!important;
+  border-color: #F1B6B3!important;
+}
+</style>

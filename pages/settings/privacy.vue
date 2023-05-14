@@ -159,7 +159,7 @@ export default {
 }
 .public-alert {
   background-color: #edf7ef!important;
-  border-color: #b6deb9;
+  border-color: #b6deb9!important;
 }
 
 .public-alert-icon {
@@ -169,8 +169,8 @@ export default {
 }
 
 .private-alert {
-  background-color: #F7EEEB!important;
-  border-color: #F1B6B3;
+  background-color: #fbdada!important;
+  border-color: #F1B6B3!important;
 }
 .private-alert-icon {
   background-color: #CC443D;

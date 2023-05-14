@@ -63,8 +63,17 @@
       </v-container>
     </v-card>
 
-    <v-alert v-if="!canCreateTeam" type="info">
-      You have reached limit of Teams in selected season
+    <v-alert v-if="!canCreateTeam" class="alert">
+      <template #prepend>
+        <div class="alert-icon mr-3">
+          <v-icon size="18" color="white" class="pa-1">
+            mdi-alert-circle-outline
+          </v-icon>
+        </div>
+      </template>
+          <div class="text-p2 neutral--text text--darken-4">
+            Team limit reached. Upgrade your plan to add more teams.
+          </div>
     </v-alert>
 
     <v-card class="fx-card-border-top-primary mb-3">

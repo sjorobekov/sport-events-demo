@@ -414,12 +414,18 @@
         :value="meForm.eventLocation"
         @input="updateMe('eventLocation', $event)"
       />
-
-      <v-alert v-if="hasPortalAlertVisible" color="#ECFDF5" icon="mdi-checkbox-marked-circle-outline" class="success--text text--darken-2">
-        <div class="text-p1 font-weight-bold">
+      <v-alert v-if="hasPortalAlertVisible" color="success" text class="alert fixturr-alert">
+        <template #prepend>
+          <div class="fixturr-alert-icon mr-3">
+            <v-icon size="18" color="white" class="pa-1">
+              mdi-checkbox-marked-circle-outline
+            </v-icon>
+          </div>
+        </template>
+        <div class="text-p2 font-weight-bold neutral--text text--darken-4">
           {{ opponentSchool.name }} also uses Fixturr.
         </div>
-        <div class="text-p1">
+        <div class="text-p1 neutral--text text--darken-4">
           You can request they set the location for this event.
         </div>
       </v-alert>
@@ -867,3 +873,15 @@ export default {
   },
 }
 </script>
+<style scoped>
+.fixturr-alert {
+  background-color: #edf7ef!important;
+  border-color: #b6deb9!important;
+}
+
+.fixturr-alert-icon {
+  background-color: #52AA59;
+  border-radius: 6px;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1);
+}
+</style>
