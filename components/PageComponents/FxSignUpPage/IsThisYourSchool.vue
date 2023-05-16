@@ -1,24 +1,24 @@
 <template>
   <div>
-    <h1 class="text-h3 primary--text text-center mt-6">
+    <h1 class="text-h3 branddark--text text-center mt-6 mb-2">
       {{ title }}
     </h1>
 
-    <h2 class="text-p2 text-center primary--text mb-6">
+    <h2 class="text-p3 text-center branddark--text text--lighten-1 mb-6">
       {{ subtitle }}
     </h2>
 
-    <div class="sign-in-form mx-7 mx-sm-auto">
+    <div class="sign-in-form mx-4 mx-sm-auto">
       <v-card class="py-8 px-12">
         <v-list-item>
           <v-list-item-avatar>
             <FxSchoolLogo :color="school.color" :value="school.logo" size="60" />
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title class="text-p3 font-weight-bold info--text text--darken-2">
+            <v-list-item-title class="text-p3 font-weight-bold branddark--text mb-1">
               {{ school.name }}
             </v-list-item-title>
-            <v-list-item-subtitle class="text-p2 info--text text--darken-2">
+            <v-list-item-subtitle class="text-p2 branddark--text text--lighten-1">
               {{ school.city }},
               <FxCountryName :code="school.country" />
             </v-list-item-subtitle>
@@ -30,10 +30,10 @@
         :loading="loading"
         depressed
         block
-        color="brand3"
+        color="brandgreen"
         dark
         height="56"
-        class="mt-10"
+        class="mt-10 mb-4 sign-up-button"
         @click="submitHandler"
       >
         {{ acceptButtonTitle }}
