@@ -16,7 +16,7 @@
     @input="$emit('input', $event)"
   >
     <template #selection="{ item }">
-      <FxUserDisplayName :user="item" />
+      {{ item.displayName || `${item.firstname} ${item.lastname}` }}
     </template>
     <template #item="{ item }">
       <FxUserItem :item="item" />
