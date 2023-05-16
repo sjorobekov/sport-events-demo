@@ -177,7 +177,7 @@
                   outlined
                   dense
                   :prepend-icon="null"
-                  prepend-inner-icon="mdi-camera"
+                  prepend-inner-icon="$vuetify.icons.upload-button"
                   @change="uploadHandler"
                 />
                 <v-img
