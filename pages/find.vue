@@ -54,7 +54,7 @@
               </v-btn>
             </template>
             <template v-else>
-              <div class="mb-5 text-center">
+              <div class="mb-5 mt-4 text-center">
                 <FxSchoolLogo class="d-inline-block" :value="school.logo" :color="school.color" :alt="school.name" size="160" />
               </div>
               <h1 class="text-h3 branddark--text text-center">
@@ -149,7 +149,7 @@ export default {
   max-width: 492px;
   width: 100%;
   position: relative;
-  min-height: 492px;
+  min-height: 521px;
 }
 
 .logo-container {
