@@ -26,7 +26,6 @@ export default {
         background: '#F7F7F7',
         brandgreen: '#69c774',
         brandblue: '#47a6ea',
-        branddark: '#333c4e',
         info: {
           lighten5: '#F8FAFC',
           lighten4: '#F1F5F9',
@@ -85,6 +84,10 @@ export default {
           darken3: '#5A5E63',
           darken4: '#393939',
           darken5: '#333333',
+        },
+        branddark: {
+          lighten1: '#59606E',
+          base: '#333c4e',
         },
       },
     },

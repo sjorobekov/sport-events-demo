@@ -84,8 +84,10 @@
         </v-col>
       </v-row>
       <v-row class="pa-3">
-        <v-btn text block color="info" @click="add()">
-          <v-icon>mdi-plus-circle</v-icon> Add Another Match
+        <v-btn text block color="neutral darken-3" @click="add()">
+          <v-icon color="neutral darken-1">
+            $vuetify.icons.add-all
+          </v-icon> Add Another Match
         </v-btn>
       </v-row>
     </FxSteppedFormCard>
@@ -238,7 +240,7 @@
     <v-container class="mt-4 mb-8">
       <v-row>
         <v-spacer />
-        <v-btn outlined @click="$emit('cancel')">
+        <v-btn outlined class="neutral--text text--darken-3" @click="$emit('cancel')">
           Cancel
         </v-btn>
         <v-btn

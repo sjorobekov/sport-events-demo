@@ -1,23 +1,23 @@
 <template>
   <div>
-    <div class="mx-7">
-      <h1 v-balance-text class="text-h3 text-center primary--text mt-6">
+    <div class="mx-4">
+      <h1 v-balance-text class="text-h3 text-center branddark--text mt-6 mb-2">
         Upload Your School Logo
       </h1>
-      <h2 class="text-p2 text-center primary--text mb-6">
+      <h2 class="text-p2 text-center branddark--text text--lighten-1 mb-6">
         SVG, WEBP, PNG, JPG and GIF files are allowed
       </h2>
     </div>
-    <v-form class="mx-7 mx-sm-auto sign-in-form" @submit.prevent="submitHandler">
-      <FxFileDragDrop v-if="!file" height="165" color="white" @select="select">
+    <v-form class="mx-4 mx-sm-auto sign-in-form" @submit.prevent="submitHandler">
+      <FxFileDragDrop v-if="!file" height="165" color="white upload-logo-box" @select="select">
         <template #default="{ openSelectFile }">
           <v-icon size="30">
-            mdi-cloud-upload-outline
+            $vuetify.icons.upload
           </v-icon>
-          <div class="text-p2 font-weight-bold info--text text--darken-1">
+          <div class="text-p2 font-weight-bold neutral--text text--darken-3">
             Drag file here <br> or
           </div>
-          <v-btn color="#2972F3" text class="text-p2" @click="openSelectFile">
+          <v-btn color="brandgreen" text class="text-p2" @click="openSelectFile">
             browse
           </v-btn>
         </template>
@@ -41,7 +41,7 @@
         class="mt-8"
         type="submit"
         depressed
-        color="brand3"
+        color="brandgreen sign-up-button"
         dark
         height="50"
         :loading="loading"
@@ -50,7 +50,7 @@
         Next
       </v-btn>
 
-      <v-btn class="mt-3" text color="info" block @click="addLaterHandler">
+      <v-btn class="mt-3" text color="neutral darken-3" block @click="addLaterHandler">
         Add School Logo Later
       </v-btn>
     </v-form>
@@ -128,3 +128,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.upload-logo-box {
+  border-radius: 8px!important;
+}
+</style>

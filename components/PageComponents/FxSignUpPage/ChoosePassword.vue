@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1 v-balance-text class="text-h3 text-center primary--text mt-6 mb-9 mx-7">
+    <h1 v-balance-text class="text-h3 text-center branddark--text mt-6 mb-6 mx-7">
       Choose a Password
     </h1>
 
-    <div class="mx-7 mx-sm-auto sign-in-form">
+    <div class="mx-4 mx-sm-auto sign-in-form">
       <v-form ref="form" v-async-form class="mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">
         <label class="caption" for="password">Password</label>
         <v-text-field
@@ -13,7 +13,7 @@
           v-async-validate
           :async-rules="[$rule.required, $rule.minLength(4)]"
           outlined
-          :append-icon="showPass1 ? 'mdi-eye' : 'mdi-eye-off'"
+          :append-icon="showPass1 ? '$vuetify.icons.password-hide' : '$vuetify.icons.password-show'"
           :type="showPass1 ? 'text' : 'password'"
           placeholder="Password"
           @click:append="showPass1 = !showPass1"
@@ -24,7 +24,7 @@
           v-model="confirm"
           v-async-validate
           :async-rules="[$rule.required, $rule.equal(formData.password)]"
-          :append-icon="showPass2 ? 'mdi-eye' : 'mdi-eye-off'"
+          :append-icon="showPass2 ? '$vuetify.icons.password-hide' : '$vuetify.icons.password-show'"
           :type="showPass2 ? 'text' : 'password'"
           outlined
           placeholder="Confirm Password"
@@ -34,30 +34,16 @@
         <v-btn
           type="submit"
           depressed
-          color="brand3"
+          color="brandgreen"
           dark
           height="50"
           :loading="loading"
           block
+          class="sign-up-button mt-4 mb-4"
         >
           Next
         </v-btn>
       </v-form>
-
-      <v-row class="mt-16">
-        <v-col>
-          <ul class="text-p2 info--text text--lighten-1">
-            <li>8 characters minimum</li>
-            <li>One number</li>
-          </ul>
-        </v-col>
-        <v-col>
-          <ul class="text-p2 info--text text--lighten-1">
-            <li>One uppercase character</li>
-            <li>One lowercase character</li>
-          </ul>
-        </v-col>
-      </v-row>
     </div>
   </div>
 </template>

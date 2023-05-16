@@ -1,14 +1,14 @@
 <template>
   <div class="custom-width width px-7">
-    <h1 class="text-h3 primary--text text-center mt-6">
+    <h1 class="text-h3 branddark--text text-center mt-6 mb-2">
       Request Sent
     </h1>
 
-    <h2 class="text-p2 text-center primary--text mb-6">
+    <h2 class="text-p3 text-center branddark--text text--lighten-1 mb-6">
       Your request to join Fixturr has been sent.
     </h2>
 
-    <p class="text-p2 info--text text-center">
+    <p class="text-p2 branddark--text text--lighten-1 text-center">
       The admin for {{ school.name }} has been sent a request to create an account for you.
       <br>
       <br>
