@@ -1,5 +1,5 @@
 <template>
-  <span>{{ name }}</span>
+  <span class="neutral--text text--darken-4">{{ name }}</span>
 </template>
 
 <script>

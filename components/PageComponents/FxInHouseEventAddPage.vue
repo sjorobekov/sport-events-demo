@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-h3 mb-6" v-text="title" />
+    <h3 class="text-h3 mb-6 neutral--text text--darken-4" v-text="title" />
     <v-form v-if="!formVisible" ref="confirmForm" lazy-validation>
       <v-card v-for="(match, index) in formData.matches" :key="index" class="mb-3">
         <FxInHouseEventWithConflictItem
@@ -25,7 +25,7 @@
     <v-container v-else class="mt-4 mb-8">
       <v-row>
         <v-spacer />
-        <v-btn outlined @click="goBack">
+        <v-btn outlined class="neutral--text text--darken-3" @click="goBack">
           Go Back
         </v-btn>
         <v-btn
