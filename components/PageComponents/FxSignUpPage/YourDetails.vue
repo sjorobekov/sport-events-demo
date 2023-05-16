@@ -48,6 +48,58 @@
         </v-col>
       </v-row>
 
+      <v-row>
+        <v-col cols="12" class="pb-0 pt-0">
+          <v-checkbox v-model="accept" v-async-validate :async-rules="[$rule.required]">
+            <template #label>
+              <div>
+                You have read and agree to
+                <v-tooltip bottom>
+                  <template #activator="{ on }">
+                    <a
+                      target="_blank"
+                      href="https://fixturr.com/terms_of_service"
+                      @click.stop
+                      v-on="on"
+                    >
+                      Fixturr's Terms of Service
+                    </a>
+                  </template>
+                  Opens in new window
+                </v-tooltip>,
+                <v-tooltip bottom>
+                  <template #activator="{ on }">
+                    <a
+                      target="_blank"
+                      href="https://fixturr.com/privacy_policy"
+                      @click.stop
+                      v-on="on"
+                    >
+                      Privacy Policy
+                    </a>
+                  </template>
+                  Opens in new window
+                </v-tooltip>
+                and
+                <v-tooltip bottom>
+                  <template #activator="{ on }">
+                    <a
+                      target="_blank"
+                      href="https://fixturr.com/data_protection_policy"
+                      @click.stop
+                      v-on="on"
+                    >
+                      Data Protection Policy
+                    </a>
+                  </template>
+                  Opens in new window
+                </v-tooltip>
+              </div>
+            </template>
+          </v-checkbox>
+        </v-col>
+      </v-row>
+
       <v-btn
         type="submit"
         depressed
@@ -82,6 +134,7 @@ export default {
       lastname: '',
       password: '',
     },
+    accept: false,
   }),
 
   created () {
