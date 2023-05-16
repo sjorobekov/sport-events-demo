@@ -11,7 +11,10 @@
           </v-list-item-content>
 
           <slot name="actions">
-            <span class="in-house-event-time neutral--text text--darken-3" v-text="time" />
+            <template v-if="match.overallResult">
+              <FxInHouseMatchStatus :overall-result="match.overallResult" />
+            </template>
+            <span v-else class="in-house-event-time neutral--text text--darken-3" v-text="time" />
           </slot>
         </v-list-item>
       </v-col>
@@ -48,7 +51,7 @@
 
 <script>
 import { DateTime } from 'luxon'
-import { EventType, InHouseEventType } from '@/enum'
+import { EventType, InHouseEventType, InHouseEventResult } from '@/enum'
 import AllInHouseTeamsProvider
   from '@/components/PageComponents/FxCalendarPage/FxCalendarEvent/InHouseEventItem/components/AllInHouseTeamsProvider'
 
@@ -84,6 +87,7 @@ export default {
 
   data: () => ({
     EventType,
+    InHouseEventResult,
   }),
 
   computed: {

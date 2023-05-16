@@ -4,7 +4,17 @@
       <span class="text-p2 neutral--text text--darken-2">({{ competition.name }})</span>
     </template>
     <template #status>
-      <FxInHouseMatchStatus v-if="value.overallResult" :overall-result="value.overallResult" />
+      <v-chip
+        v-if="value.overallResult === InHouseEventResult.TO_BE_PLAYED && isMobile"
+        color="neutral lighten-1"
+        outlined
+        dark
+        label
+        class="pr-3 radius-16 height-24"
+      >
+        <span class="neutral--text text--darken-3">{{ value.startTime }}</span>
+      </v-chip>
+      <FxInHouseMatchStatus v-else-if="value.overallResult" :overall-result="value.overallResult" />
     </template>
     <template #left>
       <FxInHouseTeamListItem class="px-0" :participant="value.homeTeam" item-class="flex-row flex-md-row-reverse text-md-right">
@@ -56,6 +66,10 @@ export default {
     },
   },
 
+  data: () => ({
+    InHouseEventResult,
+  }),
+
   computed: {
     event () {
       return this.value.inHouseEvent
@@ -96,6 +110,10 @@ export default {
       }
 
       return this.value.otherLocation
+    },
+
+    isMobile () {
+      return this.$vuetify.breakpoint.smAndDown
     },
   },
 }

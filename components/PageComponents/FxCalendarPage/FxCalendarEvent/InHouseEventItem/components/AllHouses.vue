@@ -4,7 +4,17 @@
       <span class="text-p2 neutral--text text--darken-2">({{ competition.name }})</span>
     </template>
     <template v-if="value.overallResult" #status>
-      <FxInHouseMatchStatus :overall-result="value.overallResult" />
+      <v-chip
+        v-if="value.overallResult === InHouseEventResult.TO_BE_PLAYED && isMobile"
+        color="neutral lighten-1"
+        outlined
+        dark
+        label
+        class="pr-3 radius-16 height-24"
+      >
+        <span class="neutral--text text--darken-3">{{ value.startTime }}</span>
+      </v-chip>
+      <FxInHouseMatchStatus v-else :overall-result="value.overallResult" />
     </template>
     <template #center>
       <v-list-item class="text-md-right">
@@ -47,6 +57,7 @@ import FxCalendarItem from '~/components/PageComponents/FxCalendarPage/FxCalenda
 import AllInHouseTeamsProvider
   from '~/components/PageComponents/FxCalendarPage/FxCalendarEvent/InHouseEventItem/components/AllInHouseTeamsProvider.vue'
 import FxSchoolLogo from '~/components/FxSchoolLogo/FxSchoolLogo.vue'
+import { InHouseEventResult } from '~/enum'
 
 export default {
   name: 'AllHouses',
@@ -57,6 +68,10 @@ export default {
       required: true,
     },
   },
+
+  data: () => ({
+    InHouseEventResult,
+  }),
 
   computed: {
     event () {
@@ -81,6 +96,10 @@ export default {
       }
 
       return this.value.otherLocation
+    },
+
+    isMobile () {
+      return this.$vuetify.breakpoint.smAndDown
     },
   },
 }
