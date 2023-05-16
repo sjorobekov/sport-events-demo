@@ -85,7 +85,7 @@
               </ListItem>
             </div>
 
-            <div class="d-flex justify-space-between px-6 align-center">
+            <div class="d-flex justify-space-between px-6 align-center" style="gap: 8px">
               <ListItem>
                 <template #icon>
                   <v-icon>$vuetify.icons.userOutline</v-icon>
@@ -116,7 +116,7 @@
               </div>
             </div>
 
-            <div class="d-flex justify-space-between px-6 align-center">
+            <div class="d-flex justify-space-between px-6 align-center" style="gap: 8px">
               <ListItem>
                 <template #icon>
                   <v-icon>$vuetify.icons.locationOutline</v-icon>
@@ -126,6 +126,7 @@
                   <FxSportLocationSelect
                     id="location"
                     v-model="formData.sportLocationId"
+                    hide-details
                     @input="sportLocationUpdateHandler"
                   />
                 </template>

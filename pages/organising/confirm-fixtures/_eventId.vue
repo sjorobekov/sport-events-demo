@@ -81,21 +81,24 @@ export default {
 
   async asyncData ({ store, route }) {
     const schoolId = store.getters['context/schoolId']
-    const currentSeason = store.getters['seasons/current']
 
-    const [{ me, opponent, ...event }, teams, sportLocations] = await Promise.all([
+    const [{ me, opponent, ...event }, sportLocations] = await Promise.all([
       store.dispatch('api/events/get', {
         schoolId,
         id: route.params.eventId,
       }),
-      store.dispatch('api/teams/list', {
-        schoolId,
-        params: { seasonId: currentSeason.id },
-      }),
+
       store.dispatch('api/locations/list', {
         schoolId,
       }),
     ])
+
+    const season = store.getters['seasons/byDate'](event.date)
+
+    const teams = await store.dispatch('api/teams/list', {
+      schoolId,
+      params: { seasonId: season.id },
+    })
 
     return {
       event,

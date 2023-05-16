@@ -32,7 +32,7 @@
         </v-card-text>
         <v-card-actions class="px-4">
           <v-spacer />
-          <v-btn text @click="logOut">
+          <v-btn text class="neutral--text text--darken-3" @click="logOut">
             Not You?
           </v-btn>
           <v-btn

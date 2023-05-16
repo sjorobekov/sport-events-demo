@@ -7,11 +7,17 @@
     dense
     :value="value"
     :items="locations"
+    :hide-details="hideDetails"
     item-text="name"
     item-value="id"
+    :class="className"
     placeholder="Select Sports Location"
     @input="$emit('input', $event)"
-  />
+  >
+    <template #selection="{ item }">
+      {{ item.name }}
+    </template>
+  </v-autocomplete>
 </template>
 
 <script>
@@ -32,6 +38,10 @@ export default {
     asyncRules: {
       type: Array,
       default: () => [],
+    },
+    hideDetails: {
+      type: Boolean,
+      default: false,
     },
   },
 

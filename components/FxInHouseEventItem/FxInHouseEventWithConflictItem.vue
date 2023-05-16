@@ -12,13 +12,13 @@
           <v-col class="py-0 border-bottom">
             <ListItem>
               <template #icon>
-                <v-icon>mdi-information-outline</v-icon>
+                <v-icon>$vuetify.icons.info-1</v-icon>
               </template>
               <template #content>
-                <v-list-item-title class="text-p1 info--text">
+                <v-list-item-title class="text-p1 neutral--text text--darken-2">
                   Further Information
                 </v-list-item-title>
-                <span class="text-p2 info--text text--darken-2">{{ event.info }}</span>
+                <span class="text-p2 neutral--text text--darken-4">{{ event.info }}</span>
               </template>
             </ListItem>
           </v-col>

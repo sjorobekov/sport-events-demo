@@ -16,7 +16,7 @@
               </v-row>
             </v-carousel>
           </v-card>
-          <div v-else class="text-h3">
+          <div v-else class="text-h3 neutral--text text--darken-4">
             Sports Portal
           </div>
           <div class="d-flex align-center mt-2 pt-sm-4">

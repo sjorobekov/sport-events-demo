@@ -145,4 +145,13 @@ export default [
   'resetPassword',
   'upload-button',
   'printer',
+  'score-dashboard',
+  'dashboard-warning',
+  'dashboard-today',
+  'dashboard-chart',
+  'filter-fixture',
+  'filter-multi',
+  'filter-tournament',
+  'filter-training',
+  'filter-in-house',
 ]

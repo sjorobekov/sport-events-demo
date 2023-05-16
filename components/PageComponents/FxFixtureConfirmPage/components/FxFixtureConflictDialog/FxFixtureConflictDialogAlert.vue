@@ -5,7 +5,7 @@
         $vuetify.icons.alert
       </v-icon>
     </v-list-item-icon>
-    <v-list-item-content>
+    <v-list-item-content class="hidden-xs-only">
       <v-list-item-title class="error--text text--darken-1 text-p2 font-weight-bold">
         <slot name="default" />
       </v-list-item-title>
@@ -19,8 +19,10 @@ export default {
 }
 </script>
 
-<style scoped>
-.alert {
-  width: 167px;
-}
+<style scoped lang="sass">
+@import '~vuetify/src/styles/styles'
+
+@media #{map-get($display-breakpoints, 'sm-and-up')}
+  .alert
+    width: 167px
 </style>

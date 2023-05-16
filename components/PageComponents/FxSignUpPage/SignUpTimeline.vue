@@ -7,23 +7,23 @@
     <v-timeline-item
       v-for="(item, i) in items"
       :key="i"
-      color="primary"
+      color="branddark"
       fill-dot
     >
       <template #icon>
-        <v-icon size="40" :color="i <= value ? 'brand2' : 'info darken-5'">
+        <v-icon size="40" :color="i <= value ? 'brandgreen' : 'neutral darken-1'">
           mdi-adjust
         </v-icon>
       </template>
       <v-row class="pt-1">
-        <v-col>
+        <v-col class="py-5">
           <strong
-            class="text-subheading font-weight-bold info--text"
-            :class="i <= value ? 'white--text' : 'text--darken-5'"
+            class="text-subheading font-weight-bold neutral--text"
+            :class="i <= value ? 'white--text' : 'text--darken-1'"
           >{{ item.title }}</strong>
           <div
-            class="text-p3 info--text"
-            :class="i <= value ? 'white--text' : 'text--darken-5'"
+            class="text-p3 neutral--text"
+            :class="i <= value ? 'white--text' : 'text--darken-1'"
           >
             {{ item.caption }}
           </div>
@@ -57,7 +57,7 @@ export default {
 
 <style scoped lang="sass">
 ::v-deep.signup-timeline.v-timeline::before
-  background: var(--v-info-darken5)
+  background: #ffffff30
   margin-top: 50px
   height: calc(100% - 100px)
 
