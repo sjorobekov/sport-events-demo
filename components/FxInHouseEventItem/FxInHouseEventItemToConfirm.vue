@@ -29,11 +29,20 @@
       <v-col cols="12" md="4" class="border-bottom d-flex align-center">
         <FxDateFormat class="text-p2" :date="match.date" output-format="cccc dd MMMM yyyy" />
       </v-col>
-      <v-col cols="12" md="8" class="border-bottom d-flex align-center">
+      <v-col cols="12" md="4" class="border-bottom d-flex align-center">
         <ListItem>
           <template #content>
             <v-list-item-title class="text-p2 neutral--text text--darken-4 font-weight-bold">
               All Houses
+            </v-list-item-title>
+          </template>
+        </ListItem>
+      </v-col>
+      <v-col cols="12" md="4" class="border-bottom d-flex align-center">
+        <ListItem>
+          <template #content>
+            <v-list-item-title class="text-p2 neutral--text text--darken-4">
+              {{ event.name }}
             </v-list-item-title>
           </template>
         </ListItem>
