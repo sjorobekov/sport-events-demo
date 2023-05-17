@@ -191,6 +191,7 @@ export default {
             { title: 'Confirm Fixtures', to: { name: 'organising-confirm-fixtures' } },
             { title: 'Missing Results', to: { name: 'organising-missing-results' } },
             { title: 'Participation', to: { name: 'organising-participation' } },
+            { title: 'Create New Event', to: { name: 'events-add' } },
           ],
         })
       }
