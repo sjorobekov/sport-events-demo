@@ -1,5 +1,5 @@
 <template>
-  <span class="neutral--text text--darken-4">{{ name }}</span>
+  <span class="neutral--text" :class="dark ? 'text--lighten-3' : 'text--darken-4'">{{ name }}</span>
 </template>
 
 <script>
@@ -9,6 +9,10 @@ export default {
     user: {
       type: Object,
       required: true,
+    },
+    dark: {
+      type: Boolean,
+      default: false,
     },
   },
 
