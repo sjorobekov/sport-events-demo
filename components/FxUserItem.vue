@@ -5,7 +5,7 @@
     </v-list-item-avatar>
     <v-list-item-content>
       <v-list-item-title class="font-weight-bold">
-        <FxUserDisplayName :user="item" dark />
+        <FxUserDisplayName :user="item" :dark="dark" />
       </v-list-item-title>
       <v-list-item-subtitle v-if="subtitle" class="neutral--text text--darken-2">
         {{ subtitle }}
@@ -43,6 +43,10 @@ export default {
     subtitle: {
       type: String,
       default: undefined,
+    },
+    dark: {
+      type: Boolean,
+      default: false,
     },
   },
 }
