@@ -231,3 +231,13 @@ $grid-breakpoints: (
   'lg': 1280px - 24px,
   'xl': 1280px - 24px
 );
+
+$container-max-widths: () !default;
+$container-max-widths: map-deep-merge(
+  (
+    'md': 1177px,
+    'lg': 1177px,
+    'xl': 1177px
+  ),
+  $container-max-widths
+);

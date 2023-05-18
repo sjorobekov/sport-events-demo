@@ -106,4 +106,7 @@ export default {
 .bottom-menu {
   border-top: solid 1px var(--v-neutral-lighten1);
 }
+.v-btn:hover {
+box-shadow: none!important;
+}
 </style>
