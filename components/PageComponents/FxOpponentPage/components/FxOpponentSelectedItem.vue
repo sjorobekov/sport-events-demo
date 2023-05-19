@@ -8,7 +8,7 @@
         :alt="name"
         :color="color"
       />
-      <div class="team-name text-center px-2 px-md-6">
+      <div class="team-name text-center px-2 px-md-6 neutral--text text--darken-4">
         <span>{{ name }}</span>
       </div>
     </v-card>

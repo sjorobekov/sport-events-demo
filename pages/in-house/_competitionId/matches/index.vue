@@ -46,8 +46,8 @@
           <div class="pt-1">
             <v-btn v-if="canEditCompetition" class="hidden-sm-and-down neutral--text text--darken-3" outlined link :to="{ name: 'in-house-competitionId-matches-edit', params: { competitionId: inHouseCompetitionId }}">
               <v-icon color="neutral darken-2">
-                $vuetify.icons.edit
-              </v-icon>Edit Comp
+                $vuetify.icons.pen
+              </v-icon>Edit Competition
             </v-btn>
             <v-btn
               v-if="canCreateInHouseEvent"

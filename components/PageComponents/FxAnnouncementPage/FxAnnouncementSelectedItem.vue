@@ -4,7 +4,7 @@
       <slot name="icon" />
     </div>
     <div class="flex-grow-1">
-      <v-card-title class="text-h4 font-weight-bold py-1 neutral--text text--darken-5" style="word-break: break-word">
+      <v-card-title class="text-h4 font-weight-bold py-1 neutral--text text--darken-4" style="word-break: break-word">
         {{ item.subject }}
       </v-card-title>
 

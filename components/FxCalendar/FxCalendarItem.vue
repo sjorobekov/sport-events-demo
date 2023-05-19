@@ -68,7 +68,7 @@ export default {
   line-height: 24px;
 }
 .selected {
-  height: 4px;
+  height: 6px;
 }
 .selected.active {
   background: var(--v-primary-base);

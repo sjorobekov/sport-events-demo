@@ -1,6 +1,6 @@
 <template>
   <v-chip
-    color="info lighten-2"
+    color="neutral lighten-1"
     outlined
     dark
     label
@@ -8,7 +8,7 @@
   >
     <v-icon :color="color" class="mr-0" small>
       $vuetify.icons.ellipse
-    </v-icon><span class="info--text text--darken-2 text-caption">{{ $t(`IN_HOUSE_EVENT_RESULT.${overallResult}`) }}</span>
+    </v-icon><span class="neutral--text text--darken-3 text-caption">{{ $t(`IN_HOUSE_EVENT_RESULT.${overallResult}`) }}</span>
   </v-chip>
 </template>
 

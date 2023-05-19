@@ -1,8 +1,8 @@
 <template>
   <v-dialog v-model="isOpen" width="588">
     <v-card flat>
-      <v-toolbar flat color="primary" dark>
-        <v-toolbar-title>{{ title }}</v-toolbar-title>
+      <v-toolbar flat color="error" dark>
+        <v-toolbar-title class="font-weight-bold">{{ title }}</v-toolbar-title>
         <v-spacer />
         <v-toolbar-items>
           <v-btn icon @click="cancel">
@@ -10,15 +10,15 @@
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
-      <v-card-text class="mt-6 info--text text--darken-2">
+      <v-card-text class="mt-6 neutral--text text--darken-3">
         {{ message }}
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn outlined @click="cancel">
+        <v-btn outlined class="neutral--text text--darken-3" @click="cancel">
           Cancel
         </v-btn>
-        <v-btn depressed color="primary" @click="confirm">
+        <v-btn depressed color="error" @click="confirm">
           {{ confirmButtonLabel }}
         </v-btn>
       </v-card-actions>

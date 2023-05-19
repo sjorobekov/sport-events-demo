@@ -21,7 +21,7 @@
         <v-list-item-action>
           <div>
             <v-btn icon class="hidden-sm-and-down">
-              <v-icon>mdi-printer-outline</v-icon>
+              <v-icon>$vuetify.icons.printer</v-icon>
             </v-btn>
             <v-btn v-if="isLoggedIn" icon>
               <v-icon>mdi-dots-horizontal</v-icon>

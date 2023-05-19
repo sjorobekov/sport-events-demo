@@ -19,7 +19,7 @@
               <v-btn
                 height="40"
                 outlined
-                color="neutral darken-2"
+                color="neutral darken-3"
                 :ripple="false"
                 style="background-color: white"
                 @click="showFilters = !showFilters"
@@ -423,7 +423,7 @@ export default {
 </script>
 
 <style scoped lang="sass">
-$calendar-bar-height: 186px
+$calendar-bar-height: 188px
 
 .calendar-bar
   border-bottom: solid 8px var(--v-primary-base)!important

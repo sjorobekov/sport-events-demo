@@ -154,4 +154,5 @@ export default [
   'filter-tournament',
   'filter-training',
   'filter-in-house',
+  'calendar-2',
 ]

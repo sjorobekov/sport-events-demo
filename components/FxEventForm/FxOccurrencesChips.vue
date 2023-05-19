@@ -3,7 +3,7 @@
     <v-chip
       v-for="(item, index) in items"
       :key="index"
-      color="info"
+      color="neutral darken-3"
       outlined
       dark
       class="ma-1"

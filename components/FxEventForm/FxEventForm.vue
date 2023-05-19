@@ -199,20 +199,20 @@
       <section v-if="eventForm.eventType === EventType.TRAINING">
         <v-row>
           <v-col class="d-flex">
-            <span class="info--text text--darken-1 text-h5s mt-1">Recurring Event</span>
-            <span class="info--text text--darken-1 text-h5s ml-7 mt-1" :class="{'font-weight-bold': !eventForm.repeats}">No</span>
+            <span class="neutral--text text--darken-3 text-h5s mt-1">Recurring Event</span>
+            <span class="neutral--text text--darken-3 text-h5s ml-7 mt-1" :class="{'font-weight-bold': !eventForm.repeats}">No</span>
             <v-switch
               id="repeats"
               v-model="eventForm.repeats"
               class="mt-0 ml-4"
               inset
             />
-            <span class="info--text text--darken-1 text-h5s mt-1" :class="{'font-weight-bold': eventForm.repeats}">Yes</span>
+            <span class="neutral--text text--darken-3 text-h5s mt-1" :class="{'font-weight-bold': eventForm.repeats}">Yes</span>
           </v-col>
         </v-row>
         <v-row v-if="eventForm.repeats">
           <v-col class="d-flex">
-            <span class="info--text text--darken-1 text-h5s mt-5 mr-5">Days</span>
+            <span class="neutral--text text--darken-3 text-h5s mt-5 mr-5">Days</span>
             <div>
               <v-checkbox
                 v-for="{ text, number } in weekdays"
@@ -311,7 +311,7 @@
         </v-row>
         <v-row>
           <v-col>
-            <div class="info--text text--darken-1 text-h5s">
+            <div class="neutral--text text--darken-3 text-h5s">
               {{ $tc('page.FxEventForm.OCCURRENCES', repeats.length) }}
             </div>
             <div>
@@ -580,7 +580,7 @@
     <v-container class="mt-4 mb-8">
       <v-row>
         <v-spacer />
-        <v-btn outlined @click="$emit('cancel')">
+        <v-btn outlined class="neutral--text text--darken-3" @click="$emit('cancel')">
           Cancel
         </v-btn>
         <v-btn

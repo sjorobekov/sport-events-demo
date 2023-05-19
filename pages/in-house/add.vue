@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-h3 mb-6">
+    <h3 class="text-h3 mb-6 neutral--text text--darken-4">
       Create In-House Competition
     </h3>
 
@@ -30,7 +30,7 @@
     <v-container class="mt-4 mb-8">
       <v-row>
         <v-spacer />
-        <v-btn outlined @click="$router.back()">
+        <v-btn outlined class="neutral--text text--darken-3" @click="$router.back()">
           Cancel
         </v-btn>
         <v-btn

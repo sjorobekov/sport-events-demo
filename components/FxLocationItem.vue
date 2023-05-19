@@ -6,10 +6,10 @@
       </v-icon>
     </v-list-item-avatar>
     <v-list-item-content>
-      <v-list-item-title class="text-p1 font-weight-bold">
+      <v-list-item-title class="text-p1 font-weight-bold neutral--text text--darken-4">
         {{ item.name }}
       </v-list-item-title>
-      <v-list-item-subtitle class="text-p1 info--text">
+      <v-list-item-subtitle class="text-p1 neutral--text text--darken-3">
         {{ item.address }}
       </v-list-item-subtitle>
     </v-list-item-content>

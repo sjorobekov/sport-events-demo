@@ -38,7 +38,7 @@
                 <template #activator="{ on }">
                   <v-btn icon v-on="on">
                     <v-icon size="32" color="neutral darken-1">
-                      $vuetify.icons.calendar-1
+                      $vuetify.icons.calendar-2
                     </v-icon>
                   </v-btn>
                 </template>
@@ -66,7 +66,7 @@
               <template #activator="{ on }">
                 <v-btn icon v-on="on">
                   <v-icon size="32" color="neutral darken-1">
-                    $vuetify.icons.calendar-1
+                    $vuetify.icons.calendar-2
                   </v-icon>
                 </v-btn>
               </template>

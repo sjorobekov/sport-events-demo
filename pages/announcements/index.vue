@@ -2,7 +2,7 @@
   <div class="mt-1 mt-md-n4  mb-3">
     <v-list-item class="px-0 mb-4">
       <v-list-item-content>
-        <h1 class="text-h4s text-md-h3 neutral--text text--darken-5">
+        <h1 class="text-h4s text-md-h3 neutral--text text--darken-4">
           Announcements
         </h1>
       </v-list-item-content>
@@ -68,8 +68,8 @@
     </v-row>
     <v-row v-else-if="!$fetchState.pending && !items.length">
       <v-col class="d-flex flex-column justify-center align-center pt-4 pt-md-12">
-        <v-img width="100" :src="announcements" class="mb-3" />
-        <div class="text-p3 text-center info--text text--darken-3 mb-4">
+        <v-img width="100" :src="announcements" class="mb-4" />
+        <div class="text-p3 text-center neutral--text text--darken-3 mb-4">
           No Announcements
         </div>
       </v-col>

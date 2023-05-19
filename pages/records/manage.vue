@@ -2,7 +2,7 @@
   <div>
     <v-row>
       <v-col>
-        <h2>Sports Records</h2>
+        <h2 class="neutral--text text--darken-4">Sports Records</h2>
       </v-col>
     </v-row>
     <v-row class="d-md-none">
