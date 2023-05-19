@@ -200,8 +200,7 @@ export default {
 }
 
 .find-school-button {
-  border: 2px solid rgba(255,255,255,0.25)!important;
-  border-radius: 8px;
-  box-shadow: 0px 10px 20px -15px rgb(0 0 0 / 50%)!important;
+  border-radius: 8px!important;
+  font-size: 1.125rem!important;
 }
 </style>

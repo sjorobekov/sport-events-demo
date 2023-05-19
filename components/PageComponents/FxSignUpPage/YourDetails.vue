@@ -50,15 +50,16 @@
 
       <v-row>
         <v-col cols="12" class="pb-0 pt-0">
-          <v-checkbox v-model="accept" v-async-validate :async-rules="[$rule.required]">
+          <v-checkbox v-model="accept" v-async-validate :async-rules="[$rule.required]" color="brandgreen">
             <template #label>
-              <div>
+              <div class="branddark--text">
                 You have read and agree to
                 <v-tooltip bottom>
                   <template #activator="{ on }">
                     <a
                       target="_blank"
-                      href="https://fixturr.com/terms_of_service"
+                      href="https://fixturr.com/legal/terms-of-service/"
+                      class="policy-link"
                       @click.stop
                       v-on="on"
                     >
@@ -71,7 +72,8 @@
                   <template #activator="{ on }">
                     <a
                       target="_blank"
-                      href="https://fixturr.com/privacy_policy"
+                      href="https://fixturr.com/legal/privacy-policy/"
+                      class="policy-link"
                       @click.stop
                       v-on="on"
                     >
@@ -85,7 +87,8 @@
                   <template #activator="{ on }">
                     <a
                       target="_blank"
-                      href="https://fixturr.com/data_protection_policy"
+                      href="https://fixturr.com/legal/data-protection-policy/"
+                      class="policy-link"
                       @click.stop
                       v-on="on"
                     >
@@ -159,3 +162,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.policy-link {
+  color: var(--v-branddark-base)
+}
+</style>

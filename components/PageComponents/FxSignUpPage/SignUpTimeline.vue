@@ -66,4 +66,8 @@ export default {
     box-shadow: none!important
     height: 45px
     width: 45px
+
+::v-deep.signup-timeline.v-timeline .v-timeline-item__dot
+  background: #ffffff00!important
+
 </style>
