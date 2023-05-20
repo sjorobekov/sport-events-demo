@@ -135,14 +135,14 @@ export default {
     items () {
       return [
         { text: 'Profile', icon: '$vuetify.icons.user-1', exact: true, to: { name: 'settings' } },
-        ...(this.canManageInHouseTeams ? [{ text: 'In-House Sport', icon: '$vuetify.icons.in-house-sport-1', to: { name: 'settings-in-house-teams' } }] : []),
-        ...(this.canManageStudents ? [{ text: 'Students', icon: '$vuetify.icons.students-1', to: { name: 'settings-students' } }] : []),
-        ...(this.canManageSchoolPrivacy ? [{ text: 'Privacy', icon: '$vuetify.icons.privacy-1', to: { name: 'settings-privacy' } }] : []),
         ...(this.canManageUsers ? [{ text: 'Users', icon: '$vuetify.icons.users-1', to: { name: 'settings-users' } }] : []),
+        ...(this.canManageStudents ? [{ text: 'Students', icon: '$vuetify.icons.students-1', to: { name: 'settings-students' } }] : []),
+        ...(this.canManageInHouseTeams ? [{ text: 'In-House Sport', icon: '$vuetify.icons.in-house-sport-1', to: { name: 'settings-in-house-teams' } }] : []),
+        ...(this.canManageSchoolPrivacy ? [{ text: 'Privacy', icon: '$vuetify.icons.privacy-1', to: { name: 'settings-privacy' } }] : []),
+        ...(this.canManageSeasons ? [{ text: 'Seasons', icon: '$vuetify.icons.seasons', to: { name: 'settings-seasons' } }] : []),
         ...(this.canCustomizeSchool ? [{ text: 'Customisation', icon: '$vuetify.icons.customise-1', to: { name: 'settings-customisation' } }] : []),
         ...(this.canManageSubscription ? [{ text: 'Subscription', icon: '$vuetify.icons.subscription-1', to: { name: 'settings-subscription' } }] : []),
         ...(this.canManageIntegrations ? [{ text: 'Integrations', icon: '$vuetify.icons.integrations-1', to: { name: 'settings-integrations' } }] : []),
-        ...(this.canManageSeasons ? [{ text: 'Seasons', icon: 'mdi-calendar-text-outline', to: { name: 'settings-seasons' } }] : []),
       ]
     },
 
