@@ -18,7 +18,7 @@ export default {
     options: { customProperties: true },
     themes: {
       light: {
-        brand: '#193F66',
+        brand: '#333c4e',
         primary: '#333c4e',
         secondary: '#1FC1C3',
         brand2: '#75DDDD',
