@@ -1,7 +1,7 @@
 <template>
   <v-list-item class="px-2 py-2" @click="$emit('click', item)">
     <v-list-item-avatar class="mr-2">
-      <v-icon color="primary" size="40">
+      <v-icon color="primary lighten-1" size="40">
         $vuetify.icons.sports-location-1
       </v-icon>
     </v-list-item-avatar>
