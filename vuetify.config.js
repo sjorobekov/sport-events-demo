@@ -19,7 +19,7 @@ export default {
     themes: {
       light: {
         brand: '#193F66',
-        primary: '#27325E',
+        primary: '#333c4e',
         secondary: '#1FC1C3',
         brand2: '#75DDDD',
         brand3: '#4368FA',

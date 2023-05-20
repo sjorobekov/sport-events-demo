@@ -49,7 +49,7 @@
               text
               color="neutral darken-3"
               height="54"
-              class="mt-6 mb-6 dash"
+              class="mt-6 mb-6 dash invite-button"
               block
               @click="addMore"
             >
@@ -72,7 +72,7 @@
         </v-row>
       </v-form>
 
-      <v-btn class="mt-3 mb-4" text color="neutral darken-3" block @click="addLater">
+      <v-btn class="mt-3 mb-4 invite-button" text color="neutral darken-3" block @click="addLater">
         Invite Team Later
       </v-btn>
     </div>
@@ -152,5 +152,13 @@ export default {
   border-style: dashed!important;
   border-width: 1px;
   border-color: var(--v-neutral-darken1);
+}
+.v-btn:before {
+  opacity: 0!important
+}
+
+.invite-button:hover {
+  box-shadow: none!important;
+  color: var(--v-brandblue-base)!important;
 }
 </style>
