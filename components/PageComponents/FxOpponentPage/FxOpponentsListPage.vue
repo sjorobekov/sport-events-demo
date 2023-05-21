@@ -13,7 +13,7 @@
           outlined
           color="primary"
           link
-          class="mobile-button-49"
+          class="mobile-button-two"
           :to="{ name: 'directory-custom-add' }"
         >
           <v-icon>mdi-plus-circle-outline</v-icon>
@@ -24,7 +24,7 @@
           dark
           color="primary"
           link
-          class="ml-2 mobile-button-49"
+          class="ml-2 mobile-button-two"
           :to="{ name: 'directory-request-add' }"
         >
           <v-icon>mdi-plus-circle-outline</v-icon>
