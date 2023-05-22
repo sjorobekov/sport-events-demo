@@ -84,8 +84,8 @@
         </v-col>
       </v-row>
       <v-row class="pa-3">
-        <v-btn text block color="neutral darken-3" @click="add()">
-          <v-icon color="neutral darken-1">
+        <v-btn text block color="neutral darken-3" class="add-another-match-button" @click="add()">
+          <v-icon>
             $vuetify.icons.add-all
           </v-icon> Add Another Match
         </v-btn>
@@ -376,3 +376,12 @@ export default {
   },
 }
 </script>
+<style scoped>
+.v-btn:before {
+  opacity: 0!important
+}
+.add-another-match-button:hover {
+  box-shadow: none!important;
+  color: var(--v-primary-base)!important;
+}
+</style>

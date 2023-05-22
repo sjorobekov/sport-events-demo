@@ -155,3 +155,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.theme--light.v-list-item:hover::before {
+  opacity: 0!important;
+}
+</style>

@@ -10,7 +10,7 @@
       v-model="formData.currentPassword"
       outlined
       height="56"
-      :append-icon="showPass1 ? 'mdi-eye' : 'mdi-eye-off'"
+      :append-icon="showPass1 ? '$vuetify.icons.password-hide' : '$vuetify.icons.password-show'"
       :type="showPass1 ? 'text' : 'password'"
       @click:append="showPass1 = !showPass1"
     />
@@ -23,7 +23,7 @@
       :async-rules="[$rule.required, $rule.minLength(4)]"
       outlined
       height="56"
-      :append-icon="showPass2 ? 'mdi-eye' : 'mdi-eye-off'"
+      :append-icon="showPass2 ? '$vuetify.icons.password-hide' : '$vuetify.icons.password-show'"
       :type="showPass2 ? 'text' : 'password'"
       @click:append="showPass2 = !showPass2"
     />
@@ -36,7 +36,7 @@
       :async-rules="[$rule.required, $rule.equal(formData.password)]"
       outlined
       height="56"
-      :append-icon="showPass3 ? 'mdi-eye' : 'mdi-eye-off'"
+      :append-icon="showPass3 ? '$vuetify.icons.password-hide' : '$vuetify.icons.password-show'"
       :type="showPass3 ? 'text' : 'password'"
       @click:append="showPass3 = !showPass3"
     />
