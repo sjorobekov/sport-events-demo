@@ -292,6 +292,7 @@ tr:hover{ background-color: var(--v-neutral-lighten3)!important; }
 }
 .theme--light.v-btn:hover::before {
   opacity: 0.2;
+  border-radius: 4px;
 }
 
 .v-menu__content {

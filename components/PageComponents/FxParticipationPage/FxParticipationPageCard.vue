@@ -1,10 +1,10 @@
 <template>
   <v-row :dense="$vuetify.breakpoint.mdAndDown">
     <v-col cols="6" sm="3">
-      <v-card>
+      <v-card class="participation-card">
         <v-list-item class="px-5 px-lg-8 py-4 d-block d-lg-flex">
-          <v-icon size="40" color="primary lighten-1" class="mr-4">
-            $vuetify.icons.participationSports
+          <v-icon size="56" class="participation-icon mr-4 pa-2">
+            $vuetify.icons.participation-sports
           </v-icon>
           <v-list-item-content class="pb-0 pb-lg-3">
             <v-list-item-title class="text-p2 neutral--text text--darken-4 font-weight-bold">
@@ -18,10 +18,10 @@
       </v-card>
     </v-col>
     <v-col cols="6" sm="3">
-      <v-card>
+      <v-card class="participation-card">
         <v-list-item class="px-5 px-lg-8 py-4 d-block d-lg-flex">
-          <v-icon size="40" color="primary lighten-1" class="mr-4">
-            $vuetify.icons.participationEvents
+          <v-icon size="56" class="participation-icon mr-4 pa-2">
+            $vuetify.icons.dashboard-today
           </v-icon>
           <v-list-item-content class="pb-0 pb-lg-3">
             <v-list-item-title class="text-p2 neutral--text text--darken-4 font-weight-bold">
@@ -35,10 +35,10 @@
       </v-card>
     </v-col>
     <v-col cols="6" sm="3">
-      <v-card>
+      <v-card class="participation-card">
         <v-list-item class="px-5 px-lg-8 py-4 d-block d-lg-flex">
-          <v-icon size="40" color="primary lighten-1" class="mr-4">
-            $vuetify.icons.sevenDays
+          <v-icon size="56" class="participation-icon mr-4 pa-2">
+            $vuetify.icons.participation-students
           </v-icon>
           <v-list-item-content class="pb-0 pb-lg-3">
             <v-list-item-title class="text-p2 neutral--text text--darken-4 font-weight-bold">
@@ -52,10 +52,10 @@
       </v-card>
     </v-col>
     <v-col cols="6" sm="3">
-      <v-card>
+      <v-card class="participation-card">
         <v-list-item class="px-5 px-lg-8 py-4 d-block d-lg-flex">
-          <v-icon size="40" color="primary lighten-1" class="mr-4">
-            $vuetify.icons.participating-1
+          <v-icon size="56" class="participation-icon mr-4 pa-2">
+            $vuetify.icons.dashboard-chart
           </v-icon>
           <v-list-item-content class="pb-0 pb-lg-3">
             <v-list-item-title class="text-p2 neutral--text text--darken-4 font-weight-bold">
@@ -109,3 +109,23 @@ export default {
   },
 }
 </script>
+<style scoped lang="sass">
+@import '~vuetify/src/styles/styles'
+
+.participation-card
+  transition: all .2s ease-in-out
+  box-shadow: 0px 0px 10px 0px #dadfe6 !important
+  border: none !important
+
+.participation-icon
+  background-color: var(--v-neutral-lighten3)
+  border-radius: 10px
+  border: solid thin #E4E9EF
+  color: var(--v-primary-lighten1)
+  transition: all .3s ease-in-out
+
+.participation-card:hover .participation-icon
+  color: white!important
+  background-color: var(--v-primary-lighten1)
+  border-color: var(--v-primary-lighten1)
+</style>

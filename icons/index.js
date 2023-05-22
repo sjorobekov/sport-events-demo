@@ -155,5 +155,7 @@ export default [
   'filter-training',
   'filter-in-house',
   'calendar-2',
+  'participation-sports',
+  'participation-students',
   'seasons',
 ]
