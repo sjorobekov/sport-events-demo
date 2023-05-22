@@ -1,5 +1,5 @@
 <template>
-  <span class="neutral--text" :class="dark ? 'text--lighten-3' : 'text--darken-4'">{{ name }}</span>
+  <span class="neutral--text" :class="dark ? 'text--lighten-3' : 'text--darken-2'">{{ name }}</span>
 </template>
 
 <script>

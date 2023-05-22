@@ -80,7 +80,7 @@
       <v-checkbox
         :input-value="formData.main"
         label="Display this contact as the Main Sports Contact"
-        class="info--text"
+        class="neutral--text"
         hide-details
         @change="update('main', $event)"
       />

@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card class="hidden-md-and-up" tile color="white">
-      <h1 class="py-3 px-3 text-h6 info--text text--darken-2">
+      <h1 class="py-3 px-3 text-h6 neutral--text text--darken-4">
         {{ team.name }} Team Sheet
       </h1>
     </v-card>

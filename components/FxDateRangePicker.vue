@@ -11,7 +11,7 @@
         <v-text-field
           background-color="white"
           dense
-          style="width:250px"
+          style="width:256px"
           hide-details
           prepend-inner-icon="$vuetify.icon.calendar-small"
           outlined

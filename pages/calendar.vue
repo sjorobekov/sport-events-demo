@@ -107,7 +107,7 @@
       <template v-else-if="!$fetchState.pending">
         <v-col class="d-flex flex-column justify-center align-center pt-0 pt-md-8">
           <v-img width="100" :src="noEvents" class="mb-3" />
-          <div class="text-p3 text-center info--text text--darken-3 mb-4">
+          <div class="text-p3 text-center neutral--text text--darken-3 mb-4">
             No Events For Now
           </div>
         </v-col>

@@ -481,7 +481,7 @@
           dense
           readonly
           :value="eventForm.otherLocation"
-          append-icon="mdi-pencil"
+          append-icon="$vuetify.icons.pen"
           @click:append="editOtherLocation"
         />
       </template>
@@ -501,7 +501,7 @@
       <v-checkbox
         :input-value="meForm.noNeedTransport"
         label="This event doesn't need transport information"
-        class="info--text"
+        class="neutral--text"
         hide-details
         @change="updateMe('noNeedTransport', $event)"
       />

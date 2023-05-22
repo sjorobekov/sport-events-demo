@@ -152,7 +152,7 @@
                 <v-checkbox
                   :input-value="formData.noNeedTransport"
                   label="This event doesn't need transport information"
-                  class="info--text mb-6"
+                  class="neutral--text mb-6"
                   hide-details
                   @change="update('noNeedTransport', $event)"
                 />

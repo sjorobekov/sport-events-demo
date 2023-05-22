@@ -106,7 +106,7 @@
         </div>
       </v-col>
 
-      <v-col lg="3" class="text-p1 info--text text--info-lighten1 hidden-md-and-down">
+      <v-col lg="3" class="text-p1 hidden-md-and-down">
         <div class="d-flex justify-space-between">
           <h4 class="font-weight-regular home-heading mb-2">
             School Location

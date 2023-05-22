@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="12" lg="9">
+      <v-col cols="12" lg="9" class="pb-0">
         <v-card :flat="!hasPhoto" :class="!hasPhoto ? 'no-photo' : null">
           <v-img
             class="white--text align-end"
@@ -103,7 +103,7 @@
       </v-col>
     </v-row>
     <v-row v-if="hasEvents">
-      <v-col lg="9">
+      <v-col lg="9" class="pt-0">
         <template v-if="showUpcoming">
           <h2 class="text-p2 font-weight-bold mt-6 mb-2 neutral--text text--darken-4">
             Upcoming
