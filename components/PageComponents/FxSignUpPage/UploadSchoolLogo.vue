@@ -17,7 +17,7 @@
           <div class="text-p2 font-weight-bold neutral--text text--darken-3">
             Drag file here <br> or
           </div>
-          <v-btn color="brandgreen" text class="text-p2" @click="openSelectFile">
+          <v-btn color="brandgreen" text class="text-p2 upload-button" @click="openSelectFile">
             browse
           </v-btn>
         </template>
@@ -50,7 +50,7 @@
         Next
       </v-btn>
 
-      <v-btn class="mt-3" text color="neutral darken-3" block @click="addLaterHandler">
+      <v-btn class="mt-3 upload-button" text color="neutral darken-3" block @click="addLaterHandler">
         Add School Logo Later
       </v-btn>
     </v-form>
@@ -131,5 +131,13 @@ export default {
 <style scoped>
 .upload-logo-box {
   border-radius: 8px!important;
+}
+.v-btn:before {
+  opacity: 0!important
+}
+
+.upload-button:hover {
+  box-shadow: none!important;
+  color: var(--v-brandblue-base)!important;
 }
 </style>
