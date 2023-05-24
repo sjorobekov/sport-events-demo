@@ -61,36 +61,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   name: 'FxContactsCard',
   props: {
-  },
-
-  data: () => ({
-    contacts: [],
-  }),
-
-  async fetch () {
-    const { opponentSchoolId } = await this.$store.dispatch('api/opponents/fetch', { schoolId: this.contextSchoolId, id: this.$route.params.opponentId })
-
-    if (opponentSchoolId) {
-      this.contacts = await this.$store.dispatch('api/sportsContacts/list', {
-        schoolId: opponentSchoolId,
-      })
-    }
-  },
-
-  computed: {
-    ...mapGetters({
-      contextSchoolId: 'context/schoolId',
-    }),
-  },
-
-  watch: {
-    '$route.params.opponentId' () {
-      this.$fetch()
+    contacts: {
+      type: Array,
+      default: () => [],
     },
   },
 }
