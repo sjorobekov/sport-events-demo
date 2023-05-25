@@ -18,13 +18,15 @@
 
         <v-list-item-action>
           <div>
-            <v-btn icon class="hidden-sm-and-down d-print-none" @click="print()">
-              <v-icon>$vuetify.icons.printer</v-icon>
+            <v-btn icon class="d-print-none" :outlined="!isMobile" @click="print()">
+              <v-icon :color="!isMobile ? 'neutral darken-1' : ''">
+                $vuetify.icons.printer
+              </v-icon>
             </v-btn>
             <v-menu v-if="isLoggedIn">
               <template #activator="{ on, attrs }">
-                <v-btn icon v-bind="attrs" v-on="on">
-                  <v-icon>
+                <v-btn icon :outlined="!isMobile" v-bind="attrs" v-on="on">
+                  <v-icon :color="!isMobile ? 'neutral darken-1' : ''">
                     $vuetify.icons.threeDots
                   </v-icon>
                 </v-btn>
