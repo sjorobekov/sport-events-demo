@@ -71,9 +71,9 @@
           </v-icon>
         </div>
       </template>
-          <div class="text-p2 neutral--text text--darken-4">
-            Team limit reached. Upgrade your plan to add more teams.
-          </div>
+      <div class="text-p2 neutral--text text--darken-4">
+        Team limit reached. Upgrade your plan to add more teams.
+      </div>
     </v-alert>
 
     <v-card class="fx-card-border-top-primary mb-3">
@@ -308,7 +308,7 @@ export default {
     },
     canCreateTeam: {
       type: Boolean,
-      required: true,
+      default: true,
     },
   },
 

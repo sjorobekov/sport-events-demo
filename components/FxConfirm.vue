@@ -2,7 +2,9 @@
   <v-dialog v-model="isOpen" width="588">
     <v-card flat>
       <v-toolbar flat color="error" dark>
-        <v-toolbar-title class="font-weight-bold">{{ title }}</v-toolbar-title>
+        <v-toolbar-title class="font-weight-bold">
+          {{ title }}
+        </v-toolbar-title>
         <v-spacer />
         <v-toolbar-items>
           <v-btn icon @click="cancel">

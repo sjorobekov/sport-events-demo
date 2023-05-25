@@ -1,8 +1,12 @@
 <template>
   <div>
     <v-tabs v-model="tab">
-      <v-tab class="font-weight-bold">Yearly Billing</v-tab>
-      <v-tab class="font-weight-bold">Monthly Billing</v-tab>
+      <v-tab class="font-weight-bold">
+        Yearly Billing
+      </v-tab>
+      <v-tab class="font-weight-bold">
+        Monthly Billing
+      </v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab" class="mt-5">
@@ -20,26 +24,42 @@
             <v-list>
               <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-title class="neutral--text text--darken-4">{{ plan.numberOfUsers || 'Unlimited' }}</v-list-item-title>
-                  <v-list-item-subtitle class="neutral--text text--darken-3">Users</v-list-item-subtitle>
+                  <v-list-item-title class="neutral--text text--darken-4">
+                    {{ plan.numberOfUsers || 'Unlimited' }}
+                  </v-list-item-title>
+                  <v-list-item-subtitle class="neutral--text text--darken-3">
+                    Users
+                  </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-title class="neutral--text text--darken-4">{{ plan.numberOfTeamsPerSeason || 'Unlimited' }}</v-list-item-title>
-                  <v-list-item-subtitle class="neutral--text text--darken-3">Teams</v-list-item-subtitle>
+                  <v-list-item-title class="neutral--text text--darken-4">
+                    {{ plan.numberOfTeamsPerSeason || 'Unlimited' }}
+                  </v-list-item-title>
+                  <v-list-item-subtitle class="neutral--text text--darken-3">
+                    Teams
+                  </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-title class="neutral--text text--darken-4">{{ plan.numberOfCompetitionsPerSeason || 'Unlimited' }}</v-list-item-title>
-                  <v-list-item-subtitle class="neutral--text text--darken-3">Competitions</v-list-item-subtitle>
+                  <v-list-item-title class="neutral--text text--darken-4">
+                    {{ plan.numberOfCompetitionsPerSeason || 'Unlimited' }}
+                  </v-list-item-title>
+                  <v-list-item-subtitle class="neutral--text text--darken-3">
+                    Competitions
+                  </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-title class="neutral--text text--darken-4">{{ plan.integrations ? 'Yes' : 'No' }}</v-list-item-title>
-                  <v-list-item-subtitle class="neutral--text text--darken-3">Integrations</v-list-item-subtitle>
+                  <v-list-item-title class="neutral--text text--darken-4">
+                    {{ plan.integrations ? 'Yes' : 'No' }}
+                  </v-list-item-title>
+                  <v-list-item-subtitle class="neutral--text text--darken-3">
+                    Integrations
+                  </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -50,7 +70,9 @@
                 <v-list-item-title class="text-h4 neutral--text text--darken-4">
                   &#163;{{ plan.price.GBP }}
                 </v-list-item-title>
-                <v-list-item-subtitle class="neutral--text text--darken-3">{{ plan.period === TariffPlanPeriod.MONTH ? 'per month' : 'annually' }}</v-list-item-subtitle>
+                <v-list-item-subtitle class="neutral--text text--darken-3">
+                  {{ plan.period === TariffPlanPeriod.MONTH ? 'per month' : 'annually' }}
+                </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
 

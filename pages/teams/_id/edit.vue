@@ -14,7 +14,7 @@
         <v-spacer />
         <v-btn color="error darken-1" outlined @click="remove()">
           Delete Team
-       </v-btn>
+        </v-btn>
         <v-btn outlined class="neutral--text text--darken-3 ml-2" @click="$router.back()">
           Cancel
         </v-btn>
