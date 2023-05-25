@@ -18,8 +18,8 @@
 
         <v-list-item-action>
           <div>
-            <v-btn icon class="d-print-none" :outlined="!isMobile" @click="print()">
-              <v-icon :color="!isMobile ? 'neutral darken-1' : ''">
+            <v-btn v-if="!isMobile" icon class="d-print-none" outlined @click="print()">
+              <v-icon color="neutral darken-1">
                 $vuetify.icons.printer
               </v-icon>
             </v-btn>
