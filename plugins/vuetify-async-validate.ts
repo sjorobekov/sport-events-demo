@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { Plugin } from '@nuxt/types'
 import VuetifyAsyncValidation from 'vuetify-async-validation'
 import validator from 'validator'
+import { PUBLIC_DOMAINS } from '~/common'
 import { Primitive } from '~/types'
 import isMobilePhone = validator.isMobilePhone
 import isURL = validator.isURL
@@ -26,6 +27,8 @@ declare module 'vue/types/vue' {
       equal: Function,
       alphaNumeric: Function,
       isSubdomainAvailable: Function,
+      nonAssociatedEmailDomain: Function,
+      nonStudentEmail: Function,
     }
     validateAsync: Function,
   }
@@ -61,6 +64,32 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
 
     alphaNumeric (v: string): ReturnType {
       return (!v || isAlphanumeric(v)) || 'Must contain only letters and numbers'
+    },
+
+    nonAssociatedEmailDomain (v: string): ReturnType {
+      if (!v) {
+        return true
+      }
+
+      const [, domain] = v.split('@')
+      if (!domain) {
+        return true
+      }
+
+      return !(PUBLIC_DOMAINS.includes(domain)) || 'Please use your corporate e-mail'
+    },
+
+    nonStudentEmail (v: string): ReturnType {
+      if (!v) {
+        return true
+      }
+
+      const [, domain] = v.split('@')
+      if (!domain) {
+        return true
+      }
+
+      return !(domain.includes('student')) || 'Invalid e-mail'
     },
 
     minLength (len: number) {
