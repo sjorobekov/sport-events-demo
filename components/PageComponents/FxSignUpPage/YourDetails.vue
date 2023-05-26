@@ -43,7 +43,7 @@
             outlined
             placeholder="name@school.com"
             maxlength="120"
-            :async-rules="[$rule.required, $rule.email, $rule.isEmailAvailable()]"
+            :async-rules="[$rule.required, $rule.email, $rule.nonAssociatedEmailDomain, $rule.nonStudentEmail, $rule.isEmailAvailable()]"
           />
         </v-col>
       </v-row>
