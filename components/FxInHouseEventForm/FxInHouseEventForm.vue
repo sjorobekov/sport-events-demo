@@ -49,40 +49,47 @@
         Select what team this event is for
       </template>
 
-      <v-row v-for="(match, i) in matchItems" :key="i">
-        <v-col cols="6">
-          <label for="home-team">House Team</label>
-          <v-autocomplete
-            id="home-team"
-            v-async-validate
-            :async-rules="[$rule.required]"
-            outlined
-            dense
-            :value="match.homeTeamId"
-            :items="filteredTeams"
-            item-text="name"
-            item-value="id"
-            placeholder="Select House Team"
-            @input="updateMatch(i, { homeTeamId: $event })"
-          />
-        </v-col>
-        <v-col cols="6">
-          <label for="away-team">House Team</label>
-          <v-autocomplete
-            id="away-team"
-            v-async-validate
-            :async-rules="[$rule.required]"
-            outlined
-            dense
-            :value="match.awayTeamId"
-            :items="filteredTeams"
-            item-text="name"
-            item-value="id"
-            placeholder="Select House Team"
-            @input="updateMatch(i, { awayTeamId: $event })"
-          />
-        </v-col>
-      </v-row>
+      <template v-for="(match, i) in matchItems">
+        <div v-if="matchItems.length > 1" :key="`${i}-match`" class="text-line">
+          <span class="neutral--text text--darken-3 text-h6s font-weight-bold">
+            Match {{ parseToWords(i+1) }}
+          </span>
+        </div>
+        <v-row :key="i">
+          <v-col cols="6">
+            <label for="home-team">House Team</label>
+            <v-autocomplete
+              id="home-team"
+              v-async-validate
+              :async-rules="[$rule.required]"
+              outlined
+              dense
+              :value="match.homeTeamId"
+              :items="filteredTeams"
+              item-text="name"
+              item-value="id"
+              placeholder="Select House Team"
+              @input="updateMatch(i, { homeTeamId: $event })"
+            />
+          </v-col>
+          <v-col cols="6">
+            <label for="away-team">House Team</label>
+            <v-autocomplete
+              id="away-team"
+              v-async-validate
+              :async-rules="[$rule.required]"
+              outlined
+              dense
+              :value="match.awayTeamId"
+              :items="filteredTeams"
+              item-text="name"
+              item-value="id"
+              placeholder="Select House Team"
+              @input="updateMatch(i, { awayTeamId: $event })"
+            />
+          </v-col>
+        </v-row>
+      </template>
       <v-row class="pa-3">
         <v-btn text block color="neutral darken-3" class="add-another-match-button" @click="add()">
           <v-icon>
@@ -103,51 +110,68 @@
         Select a Date and Time For this Event
       </template>
 
+      <v-checkbox
+        v-if="matchItems.length > 1"
+        v-model="isSameDate"
+        label="All Events Have The Same Time and Date"
+        class="neutral--text mb-6"
+        hide-details
+      />
       <section v-for="(match, i) in matchItems" :key="i">
-        <label for="date">Date</label>
-        <v-menu ref="menu" offset-y :close-on-content-click="false" min-width="auto">
-          <template #activator="{ on, attrs }">
-            <v-text-field
-              id="date"
-              v-async-validate
-              :value="formatDate(match.date)"
-              prepend-inner-icon="$vuetify.icons.calendarOutline"
-              readonly
-              outlined
-              dense
-              v-bind="attrs"
-              placeholder="DD-MM-YYYY"
-              :async-rules="[$rule.required]"
-              v-on="on"
-            />
-          </template>
-          <v-date-picker
-            ref="picker"
-            :value="match.date"
-            @input="updateMatch(i, { date: $event })"
-            @change="$refs.menu[i].save(event)"
-          />
-        </v-menu>
+        <template v-if="!isSameDate || i === 0">
+          <div v-if="matchItems.length > 1" class="text-line">
+            <span class="neutral--text text--darken-3 text-h6s font-weight-bold">
+              Match {{ parseToWords(i+1) }}
+              <span v-if="match.homeTeamId">&nbsp;- {{ filteredTeamsMap.get(match.homeTeamId) }}</span>
+              <span v-if="match.awayTeamId">&nbsp;vs {{ filteredTeamsMap.get(match.awayTeamId) }}</span>
+            </span>
+          </div>
 
-        <v-row>
-          <v-col cols="4">
-            <label for="startTime">Start Time</label>
-            <FxTimePickerMenu
-              id="startTime"
-              :async-rules="[$rule.required]"
-              :value="match.startTime"
-              @input="updateMatch(i, { startTime: $event })"
+          <label for="date">Date</label>
+          <v-menu ref="menu" offset-y :close-on-content-click="false" min-width="auto">
+            <template #activator="{ on, attrs }">
+              <v-text-field
+                id="date"
+                v-async-validate
+                :value="formatDate(match.date)"
+                prepend-inner-icon="$vuetify.icons.calendarOutline"
+                readonly
+                outlined
+                dense
+                v-bind="attrs"
+                placeholder="DD-MM-YYYY"
+                :async-rules="[$rule.required]"
+                v-on="on"
+              />
+            </template>
+            <v-date-picker
+              ref="picker"
+              :value="match.date"
+              @input="updateMatch(i, { date: $event })"
+              @change="$refs.menu[i].save(event)"
             />
-          </v-col>
-          <v-col cols="4">
-            <label for="finishTime">Finish Time</label>
-            <FxTimePickerMenu
-              id="finishTime"
-              :value="match.finishTime"
-              @input="updateMatch(i, { finishTime: $event })"
-            />
-          </v-col>
-        </v-row>
+          </v-menu>
+
+          <v-row>
+            <v-col cols="4">
+              <label for="startTime">Start Time</label>
+              <FxTimePickerMenu
+                id="startTime"
+                :async-rules="[$rule.required]"
+                :value="match.startTime"
+                @input="updateMatch(i, { startTime: $event })"
+              />
+            </v-col>
+            <v-col cols="4">
+              <label for="finishTime">Finish Time</label>
+              <FxTimePickerMenu
+                id="finishTime"
+                :value="match.finishTime"
+                @input="updateMatch(i, { finishTime: $event })"
+              />
+            </v-col>
+          </v-row>
+        </template>
       </section>
     </FxSteppedFormCard>
 
@@ -162,41 +186,58 @@
         Select Event Location
       </template>
 
+      <v-checkbox
+        v-if="matchItems.length > 1"
+        v-model="isSameLocation"
+        label="All Events Have The Same Location"
+        class="neutral--text mb-6"
+        hide-details
+      />
       <div v-for="(match, i) in matchItems" :key="i">
-        <label>Location</label>
-        <FxInHouseEventLocationTypeSelect
-          :value="match.location"
-          @input="updateMatch(i, { location: $event })"
-        />
+        <template v-if="!isSameLocation || i === 0">
+          <div v-if="matchItems.length > 1" class="text-line">
+            <span class="neutral--text text--darken-3 text-h6s font-weight-bold">
+              Match {{ parseToWords(i+1) }}
+              <span v-if="match.homeTeamId">&nbsp;- {{ filteredTeamsMap.get(match.homeTeamId) }}</span>
+              <span v-if="match.awayTeamId">&nbsp;vs {{ filteredTeamsMap.get(match.awayTeamId) }}</span>
+            </span>
+          </div>
 
-        <template v-if="match.location === EventLocationType.SPORTS_LOCATIONS">
-          <label :for="`sportLocation-${match.number}`">Sports Location</label>
-          <v-autocomplete
-            :id="`sportLocation-${match.number}`"
-            v-async-validate
-            :async-rules="[$rule.required]"
-            outlined
-            dense
-            :value="match.sportLocationId"
-            :items="locations"
-            item-text="name"
-            item-value="id"
-            placeholder="Select Sports Location"
-            @input="updateMatch(i, { sportLocationId: $event })"
+          <label>Location</label>
+          <FxInHouseEventLocationTypeSelect
+            :value="match.location"
+            @input="updateMatch(i, { location: $event })"
           />
-        </template>
-        <template v-else-if="match.location === EventLocationType.OTHER">
-          <label :for="`locationOther-${match.number}`">Sports Location</label>
-          <v-text-field
-            :id="`locationOther-${match.number}`"
-            v-async-validate
-            dense
-            outlined
-            placeholder="Enter Address"
-            :async-rules="[$rule.required]"
-            :value="match.otherLocation"
-            @input="updateMatch(i, { otherLocation: $event })"
-          />
+
+          <template v-if="match.location === EventLocationType.SPORTS_LOCATIONS">
+            <label :for="`sportLocation-${match.number}`">Sports Location</label>
+            <v-autocomplete
+              :id="`sportLocation-${match.number}`"
+              v-async-validate
+              :async-rules="[$rule.required]"
+              outlined
+              dense
+              :value="match.sportLocationId"
+              :items="locations"
+              item-text="name"
+              item-value="id"
+              placeholder="Select Sports Location"
+              @input="updateMatch(i, { sportLocationId: $event })"
+            />
+          </template>
+          <template v-else-if="match.location === EventLocationType.OTHER">
+            <label :for="`locationOther-${match.number}`">Sports Location</label>
+            <v-text-field
+              :id="`locationOther-${match.number}`"
+              v-async-validate
+              dense
+              outlined
+              placeholder="Enter Address"
+              :async-rules="[$rule.required]"
+              :value="match.otherLocation"
+              @input="updateMatch(i, { otherLocation: $event })"
+            />
+          </template>
         </template>
       </div>
     </FxSteppedFormCard>
@@ -264,6 +305,7 @@ import cloneDeep from 'lodash/cloneDeep'
 import set from 'lodash/set'
 import { mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
+import numberToWords from 'number-to-words'
 import FxSteppedFormCard from '@/components/FxSteppedFormCard'
 import FxEventTypeSelect from '@/components/FxInHouseEventForm/FxEventTypeSelect/FxEventTypeSelect'
 import FxInHouseEventLocationTypeSelect from '@/components/FxInHouseEventForm/FxEventLocationTypeSelect/FxInHouseEventLocationTypeSelect'
@@ -315,6 +357,8 @@ export default {
     InHouseEventType,
     opponentSchool: null,
     locations: [],
+    isSameDate: false,
+    isSameLocation: false,
   }),
 
   computed: {
@@ -331,6 +375,9 @@ export default {
       return this.teams.filter((team) => {
         return team.sportId === this.eventForm.sportId
       })
+    },
+    filteredTeamsMap () {
+      return new Map(this.filteredTeams.map(item => [item.id, item.name]))
     },
   },
 
@@ -356,9 +403,16 @@ export default {
     },
 
     updateMatch (key, value) {
-      this.$emit('update:matches', tap(cloneDeep(this.matchItems), (v) => {
-        return set(v, key, { ...this.matchItems[key], ...value })
-      }))
+      const updatedKey = Object.keys(value)[0]
+      const sameDate = this.isSameDate && ['date', 'startTime', 'finishTime'].includes(updatedKey)
+      const sameLocation = this.isSameLocation && ['sportLocationId', 'otherLocation'].includes(updatedKey)
+      if (sameDate || sameLocation) {
+        this.$emit('update:matches', cloneDeep(this.matchItems).map(item => ({ ...item, ...value })))
+      } else {
+        this.$emit('update:matches', tap(cloneDeep(this.matchItems), (v) => {
+          return set(v, key, { ...this.matchItems[key], ...value })
+        }))
+      }
     },
 
     add () {
@@ -373,6 +427,10 @@ export default {
     formatDate (date) {
       return date ? DateTime.fromISO(date).toFormat('dd-MM-yyyy') : ''
     },
+
+    parseToWords (num) {
+      return numberToWords.toWords(num)
+    },
   },
 }
 </script>
@@ -383,5 +441,17 @@ export default {
 .add-another-match-button:hover {
   box-shadow: none!important;
   color: var(--v-primary-base)!important;
+}
+.text-line > span {
+  display: flex;
+  flex-direction: row;
+  text-transform: capitalize;
+}
+.text-line > span:after {
+  margin: auto;
+  margin-left: 10px;
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px solid;
 }
 </style>
