@@ -76,7 +76,7 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
         return true
       }
 
-      return !(PUBLIC_DOMAINS.includes(domain)) || 'Please use your corporate e-mail'
+      return !(PUBLIC_DOMAINS.includes(domain)) || 'Please enter your school email address'
     },
 
     nonStudentEmail (v: string): ReturnType {
