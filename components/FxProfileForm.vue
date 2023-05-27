@@ -119,7 +119,7 @@ export default {
     userRoleOptions () {
       return [
         { value: UserRole.ADMIN, text: 'Admin' },
-        { value: UserRole.SPORTS_USER, text: 'Sports User' },
+        { value: UserRole.SPORTS_USER, text: 'Team Member' },
         { value: UserRole.VIEW_ONLY, text: 'View Only' },
       ]
     },
