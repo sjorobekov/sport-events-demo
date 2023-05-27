@@ -22,7 +22,7 @@
                 $vuetify.icons.image
               </v-icon>
               <br>
-              <v-btn text class="text-p2 neutral--text text--darken-3 upload-button" :loading="imageUploading" @click="openSelectFile">
+              <v-btn text class="text-p2 upload-button" :loading="imageUploading" @click="openSelectFile">
                 Upload Image
               </v-btn>
             </template>
@@ -209,7 +209,9 @@ export default {
 .v-btn:before {
   opacity: 0!important
 }
-
+.upload-button {
+  color: var(--v-neutral-darken3)!important;
+}
 .upload-button:hover {
   box-shadow: none!important;
   color: var(--v-primary-base)!important;
