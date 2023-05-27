@@ -34,7 +34,7 @@
                     <v-text-field
                       id="start"
                       :value="start"
-                      prepend-inner-icon="$vuetify.icons.calendarOutline"
+                      prepend-inner-icon="$vuetify.icons.calendar-small"
                       readonly
                       outlined
                       dense
@@ -58,7 +58,7 @@
                     <v-text-field
                       id="end"
                       :value="end"
-                      prepend-inner-icon="$vuetify.icons.calendarOutline"
+                      prepend-inner-icon="$vuetify.icons.calendar-small"
                       readonly
                       outlined
                       dense

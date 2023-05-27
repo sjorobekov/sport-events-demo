@@ -37,7 +37,7 @@
                 <FxAvatar class="mr-2" size="80" :value="user.avatar" />
               </template>
               <template #actions>
-                <v-btn depressed outlined :disabled="uploading" @click="removeAvatar">
+                <v-btn depressed class="neutral--text text--darken-3" outlined :disabled="uploading" @click="removeAvatar">
                   Remove
                 </v-btn>
               </template>

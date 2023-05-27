@@ -43,7 +43,7 @@
             <v-menu>
               <template #activator="{ on, attrs }">
                 <v-btn icon v-bind="attrs" v-on="on">
-                  <v-icon color="info lighten-1">
+                  <v-icon color="neutral darken-1">
                     $vuetify.icons.threeDots
                   </v-icon>
                 </v-btn>
@@ -51,14 +51,14 @@
               <v-list class="grey lighten-3">
                 <v-list-item link :to="{ name: 'settings-students-studentId', params: { studentId: item.id } }">
                   <v-list-item-content>
-                    <v-list-item-title class="text--info text--darken-1">
+                    <v-list-item-title class="neutral--text text--darken-3">
                       Edit Student
                     </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item @click="remove(item)">
                   <v-list-item-content>
-                    <v-list-item-title class="text--info text--darken-1">
+                    <v-list-item-title class="neutral--text text--darken-3">
                       Delete Student
                     </v-list-item-title>
                   </v-list-item-content>
@@ -163,3 +163,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.theme--light.v-data-table {
+  color: var(--v-neutral-darken3);
+}
+</style>

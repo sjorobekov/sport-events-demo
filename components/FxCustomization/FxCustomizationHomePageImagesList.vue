@@ -9,7 +9,7 @@
       <v-icon
         x-small
         class="remove-button ml-n3 mb-n3 d-block elevation-0"
-        color="info"
+        color="neutral darken-3"
         @click="$emit('remove', item.id)"
       >
         mdi-close
@@ -58,7 +58,7 @@ export default {
   z-index: 1;
   background-color: white;
   border-radius: 50%;
-  border: 1px solid var(--v-info-lighten2);
+  border: 1px solid var(--v-neutral-base);
   width: 20px;
   height: 20px;
   padding-left: 1px;

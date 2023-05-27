@@ -1,5 +1,5 @@
 <template>
-  <span>{{ roleName }}</span>
+  <span class="neutral--text text--darken-3">{{ roleName }}</span>
 </template>
 
 <script lang="ts">

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-h3 mb-6">
+    <h3 class="text-h4 my-3 neutral--text text--darken-4">
       Edit In-House Team
     </h3>
 
