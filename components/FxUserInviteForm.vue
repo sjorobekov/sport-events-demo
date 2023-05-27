@@ -87,7 +87,7 @@
       <template #content>
         Set the account role for this user.<br>
         <br>Admin users have full control over all tasks.<br>
-        <br>Sports users can create and manage events and teams, but cannot modify settings.<br>
+        <br>Team Members can create and manage events and teams, but cannot modify settings.<br>
         <br>View-only users are limited to viewing information in the portal.
       </template>
       <label for="email">Select User Role</label>

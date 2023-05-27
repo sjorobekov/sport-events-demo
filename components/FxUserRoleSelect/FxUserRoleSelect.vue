@@ -32,7 +32,7 @@ export default {
       type: Array,
       default: () => [
         { value: UserRole.ADMIN, text: 'Admin', img: admin },
-        { value: UserRole.SPORTS_USER, text: 'Sports User', img: whistle },
+        { value: UserRole.SPORTS_USER, text: 'Team Member', img: whistle },
         { value: UserRole.VIEW_ONLY, text: 'View Only', img: view },
       ],
     },
