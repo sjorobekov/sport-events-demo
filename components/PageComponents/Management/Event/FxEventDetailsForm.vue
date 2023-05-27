@@ -9,7 +9,7 @@
               id="date"
               v-async-validate
               :value="formData.date"
-              prepend-inner-icon="$vuetify.icons.calendarOutline"
+              prepend-inner-icon="$vuetify.icons.calendar-small"
               readonly
               outlined
               dense

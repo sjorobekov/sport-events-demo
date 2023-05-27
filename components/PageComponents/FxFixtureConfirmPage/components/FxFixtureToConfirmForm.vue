@@ -67,7 +67,7 @@
           <v-text-field
             id="date"
             :value="event.date"
-            prepend-inner-icon="$vuetify.icons.calendarOutline"
+            prepend-inner-icon="$vuetify.icons.calendar-small"
             background-color="neutral lighten-3"
             outlined
             dense

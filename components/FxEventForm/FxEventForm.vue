@@ -244,7 +244,7 @@
                   id="date"
                   v-async-validate
                   :value="date"
-                  prepend-inner-icon="$vuetify.icons.calendarOutline"
+                  prepend-inner-icon="$vuetify.icons.calendar-small"
                   readonly
                   outlined
                   dense
@@ -270,7 +270,7 @@
                   id="endDate"
                   v-async-validate
                   :value="endDate"
-                  prepend-inner-icon="$vuetify.icons.calendarOutline"
+                  prepend-inner-icon="$vuetify.icons.calendar-small"
                   readonly
                   outlined
                   dense
@@ -333,7 +333,7 @@
               id="date"
               v-async-validate
               :value="date"
-              prepend-inner-icon="$vuetify.icons.calendarOutline"
+              prepend-inner-icon="$vuetify.icons.calendar-small"
               readonly
               outlined
               dense

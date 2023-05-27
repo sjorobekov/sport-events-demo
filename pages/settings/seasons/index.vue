@@ -32,7 +32,7 @@
             <v-menu>
               <template #activator="{ on, attrs }">
                 <v-btn icon v-bind="attrs" v-on="on">
-                  <v-icon color="info lighten-1">
+                  <v-icon color="neutral darken-1">
                     $vuetify.icons.threeDots
                   </v-icon>
                 </v-btn>
@@ -40,7 +40,7 @@
               <v-list class="grey lighten-3">
                 <v-list-item link :to="{ name: 'settings-seasons-seasonId', params: { seasonId: item.id } }">
                   <v-list-item-content>
-                    <v-list-item-title class="text--info text--darken-1">
+                    <v-list-item-title class="neutral--text text--darken-3">
                       Edit Season
                     </v-list-item-title>
                   </v-list-item-content>
@@ -83,3 +83,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.theme--light.v-data-table {
+  color: var(--v-neutral-darken3);
+}
+</style>

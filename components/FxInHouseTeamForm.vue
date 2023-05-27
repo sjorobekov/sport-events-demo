@@ -5,7 +5,6 @@
         <v-row>
           <v-col
             cols="12"
-            md="5"
             lg="5"
           >
             <FxInstructionItem>
@@ -22,8 +21,7 @@
           </v-col>
           <v-col
             cols="12"
-            md="7"
-            lg="4"
+            lg="7"
             class="pt-8"
           >
             <label for="team_name">Team Name</label>
@@ -48,7 +46,6 @@
         <v-row>
           <v-col
             cols="12"
-            md="5"
             lg="5"
           >
             <FxInstructionItem>
@@ -65,7 +62,6 @@
           </v-col>
           <v-col
             cols="9"
-            md="5"
             lg="4"
             class="pt-8"
           >
