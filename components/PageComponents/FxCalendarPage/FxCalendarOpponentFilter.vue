@@ -72,7 +72,7 @@ export default {
         return this.$store.dispatch('api/opponents/fetch', {
           id,
           schoolId: this.schoolId,
-        })
+        }).catch(() => null)
       }))
     },
   },
