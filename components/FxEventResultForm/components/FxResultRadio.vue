@@ -1,31 +1,31 @@
 <template>
   <v-radio-group class="mt-0 pt-0" hide-details :value="value" @change="$emit('input', $event)">
     <v-row>
-      <v-col cols="4">
+      <v-col cols="4" class="pl-lg-0 pr-2">
         <v-radio
           on-icon="mdi-check-circle"
           color="success"
-          class="win radio rounded-l rounded-r px-2"
+          class="win radio rounded-l rounded-r pl-1 pr-2"
           :ripple="false"
           :value="EventResult.WIN"
           label="Win"
         />
       </v-col>
-      <v-col cols="4">
+      <v-col cols="4" class="pl-0 pr-2">
         <v-radio
           on-icon="mdi-check-circle"
           color="neutral"
-          class="draw radio rounded-l rounded-r py-4 px-2"
+          class="draw radio rounded-l rounded-r py-4 pl-1 pr-2"
           :ripple="false"
           :value="EventResult.DRAW"
           label="Draw"
         />
       </v-col>
-      <v-col cols="4">
+      <v-col cols="4" class="pl-0 pr-3">
         <v-radio
           on-icon="mdi-check-circle"
           color="error"
-          class="lost radio rounded-l rounded-r py-4 px-2"
+          class="lost radio rounded-l rounded-r py-4 pl-1 pr-2"
           :ripple="false"
           :value="EventResult.LOST"
           label="Loss"

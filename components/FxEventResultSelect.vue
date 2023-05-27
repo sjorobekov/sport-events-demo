@@ -4,7 +4,6 @@
     v-async-validate
     :async-rules="asyncRules"
     outlined
-    dense
     :value="value"
     :items="items"
     :hide-details="hideDetails"
