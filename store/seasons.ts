@@ -25,4 +25,9 @@ export const actions: ActionTree<RootState, RootState> = {
     const seasons = await dispatch('api/seasons/list', {}, { root: true })
     commit('seasons', seasons)
   },
+
+  async getBySchoolDate ({ dispatch }, { schoolId, date }) {
+    const seasons = await dispatch('api/seasons/getBySchool', { schoolId }, { root: true })
+    return seasons.find((season: Season) => season.start <= date && season.end >= date)
+  },
 }

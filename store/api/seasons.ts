@@ -30,4 +30,8 @@ export const actions: ActionTree<RootState, RootState> = {
   get (_, { schoolId, id }): Promise<Season> {
     return this.$axios.$get(`api/v1/schools/${schoolId}/seasons/${id}`)
   },
+
+  getBySchool (_, { schoolId }): Promise<Array<Season>> {
+    return this.$axios.$get(`api/v1/schools/${schoolId}/seasons`)
+  },
 }
