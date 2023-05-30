@@ -8,7 +8,11 @@
         Event Type
       </template>
       <template #content>
-        Select event type
+        Choose the type of event you are organising:
+        <br><b>Fixture</b>A match against another school.
+        <br><b>Tournament</b>A series of matches happening on the same day.
+        <br><b>Multi-Event</b>An event with various activities, like athletics meets and swim galas.
+        <br><b>Training</b>A session for training purposes.
       </template>
 
       <label>Select Event Type</label>
@@ -21,10 +25,10 @@
         2
       </template>
       <template #title>
-        Select Team
+        Team
       </template>
       <template #content>
-        Select what team this event is for
+        Select the team participating in this event and the staff member in charge.
       </template>
 
       <v-row>
@@ -80,10 +84,14 @@
         3
       </template>
       <template #title>
-        Select Opponent
+        Opponent
       </template>
       <template #content>
-        Select what team this event is against
+        Specify the opposing school and team for this event, along with the type of fixture.
+        <br>
+        <br>If the school is not listed, you can request to add it to our database on the opponents page.
+        <br>
+        <br>Additionally, any custom opponents you have added will be displayed here.
       </template>
 
       <label for="opponent">Opponent</label>
@@ -144,7 +152,7 @@
         Tournament Name
       </template>
       <template #content>
-        Enter tournament name
+        Enter the name of the tournament.
       </template>
 
       <label for="tournament">Tournament Name</label>
@@ -169,7 +177,7 @@
         Event Name
       </template>
       <template #content>
-        Enter event name
+        Enter the name of the event.
       </template>
 
       <label for="tournament">Event Name</label>
@@ -194,7 +202,7 @@
         Time & Date
       </template>
       <template #content>
-        Select a Date and Time For this Event
+        Choose the date and time for the event.
       </template>
       <section v-if="eventForm.eventType === EventType.TRAINING">
         <v-row>
@@ -406,7 +414,9 @@
         Location
       </template>
       <template #content>
-        Select Event Location
+        Select the venue where the event will take place.
+        <br>
+        <br>You can add sports locations on the 'Sports Map' page.
       </template>
 
       <label>Select Event Location</label>
@@ -495,7 +505,7 @@
         Transport
       </template>
       <template #content>
-        Enter Transport Information
+        Provide transportation information related to this event.
       </template>
 
       <v-checkbox
@@ -563,7 +573,7 @@
         Further Information
       </template>
       <template #content>
-        Enter Other Information
+        Include any additional details or notes about the event.
       </template>
 
       <label for="info">Further Information</label>
@@ -883,5 +893,9 @@ export default {
   background-color: #52AA59;
   border-radius: 6px;
   box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1);
+}
+
+b {
+  margin-top: 8px;
 }
 </style>
