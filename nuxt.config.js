@@ -271,14 +271,18 @@ export default {
   router: {
     middleware: ['checkPortalPrivacy', 'permissions'],
     scrollBehavior: (_to, _from, savedPosition) => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve({
-            ...(savedPosition || { y: 0 }),
-            behavior: 'smooth',
-          })
-        }, savedPosition ? 500 : 0)
-      })
+      if (savedPosition) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve({
+              ...savedPosition,
+              behavior: 'smooth',
+            })
+          }, 500)
+        })
+      } else {
+        return { x: 0, y: 0 }
+      }
     },
     extendRoutes (routes) {
       routes.push({ name: 'directory-sports-map', path: '/directory/sports-map', component: '@/pages/management/schools/_id/locations/index.vue' })
