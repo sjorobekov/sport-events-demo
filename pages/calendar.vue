@@ -122,6 +122,7 @@ import groupBy from 'lodash/groupBy'
 import isString from 'lodash/isString'
 import uniq from 'lodash/uniq'
 import uniqBy from 'lodash/uniqBy'
+import sortBy from 'lodash/sortBy'
 import { DateTime } from 'luxon'
 import { mapGetters } from 'vuex'
 import noEvents from '@/pages/teams/_id/noEvents.svg'
@@ -322,7 +323,7 @@ export default {
     },
 
     sports () {
-      return uniqBy(this.items.map(item => adapt(item).sport), a => a.id)
+      return sortBy(uniqBy(this.items.map(item => adapt(item).sport), a => a.id), ['name'])
     },
 
     opponentIds () {
