@@ -66,10 +66,3 @@ export default {
   },
 }
 </script>
-<style scoped lang="sass">
-@import '~vuetify/src/styles/styles'
-
-@media #{map-get($display-breakpoints, 'xs-only')}
-  .mobile-button
-    width: 100%!important
-</style>
