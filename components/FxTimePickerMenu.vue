@@ -11,7 +11,7 @@
         :placeholder="placeholder"
         dense
         :async-rules="asyncRules"
-        append-icon="mdi-clock-outline"
+        append-icon="$vuetify.icons.clock-1"
         :hide-details="hideDetails"
         v-on="on"
       />

@@ -18,15 +18,14 @@ export default {
     options: { customProperties: true },
     themes: {
       light: {
-        brand: '#193F66',
-        primary: '#27325E',
+        brand: '#333c4e',
+        primary: '#333c4e',
         secondary: '#1FC1C3',
         brand2: '#75DDDD',
         brand3: '#4368FA',
         background: '#F7F7F7',
-        brandgreen: '#69c774',
-        brandblue: '#47a6ea',
-        branddark: '#333c4e',
+        brandgreen: '#17D6A6',
+        brandblue: '#3FB4FB',
         info: {
           lighten5: '#F8FAFC',
           lighten4: '#F1F5F9',
@@ -85,6 +84,10 @@ export default {
           darken3: '#5A5E63',
           darken4: '#393939',
           darken5: '#333333',
+        },
+        branddark: {
+          lighten1: '#59606E',
+          base: '#333c4e',
         },
       },
     },

@@ -43,7 +43,7 @@
         <div class="neutral--text text--darken-3 text-p1">
           For password questions, please email:
         </div>
-        <div class="info--text text--darken-1 email-link">
+        <div class="neutral--text text--darken-3 email-link">
           <a class="text-p1 primary--text" :href="`mailto:${school.email}`">{{ school.email }}</a>
         </div>
       </template>

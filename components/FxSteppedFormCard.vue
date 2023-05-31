@@ -1,5 +1,5 @@
 <template>
-  <v-card class="fx-card-border-top-primary mb-3">
+  <v-card class="fx-card-border-top-primary mb-5">
     <v-container>
       <v-row>
         <v-col
@@ -22,7 +22,7 @@
         <v-col
           cols="12"
           lg="7"
-          class="pt-10"
+          class="py-4"
         >
           <slot name="default" />
         </v-col>

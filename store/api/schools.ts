@@ -80,6 +80,10 @@ export const actions: ActionTree<RootState, RootState> = {
     return this.$axios.$get(`api/v1/schools/${id}`)
   },
 
+  remove (_, id): Promise<void> {
+    return this.$axios.$delete(`api/v1/schools/${id}`)
+  },
+
   getPaymentDetails (_, id) {
     return this.$axios.$get(`api/v1/schools/${id}/payment_details`)
   },

@@ -27,9 +27,9 @@
             </v-col>
             <v-col>
               <div class="text-center">
-                <FxSchoolLogo class="mx-auto" size="53" :value="right.school.logo" :color="right.school.color" />
+                <FxSchoolLogo class="mx-auto" size="53" :value="rightLogo" :color="rightColor" />
                 <h5 class="text-h5 font-weight-bold">
-                  {{ right.school.name }}
+                  {{ rightName }}
                 </h5>
                 <v-text-field
                   v-model="rightScore"
@@ -76,7 +76,7 @@
 
       <v-col cols="12" md="6">
         <v-card>
-          <v-card-title>{{ right.school.name }}</v-card-title>
+          <v-card-title>{{ rightName }}</v-card-title>
           <v-divider />
           <FxEventParticipantForm ref="rightParticipant" v-model="right" class="px-4 py-3" :teams="rightTeams" />
         </v-card>
@@ -110,16 +110,20 @@ export default {
   async asyncData ({ store, route }) {
     const event = await store.dispatch('api/management/events/get', route.params.id)
 
-    const seasonId = event.seasonId || store.getters['seasons/current'].id
-
-    const [leftTeams, rightTeams] = await Promise.all(event.participants.map(({ schoolId }) => {
-      return store.dispatch('api/teams/list', { schoolId, params: { seasonId } })
+    const seasons = await Promise.all(event.participants.map((participant) => {
+      if (!participant.schoolId) { return null }
+      return store.dispatch('seasons/getBySchoolDate', { schoolId: participant.schoolId, date: event.date })
     }))
+
+    const promises = seasons.filter(item => item).map(({ schoolId, id: seasonId }) => {
+      return store.dispatch('api/teams/list', { schoolId, params: { seasonId } })
+    })
+    const [leftTeams, rightTeams] = await Promise.all(promises)
 
     return {
       event,
       leftTeams: leftTeams.filter(team => team.sportId === event.sportId),
-      rightTeams: rightTeams.filter(team => team.sportId === event.sportId),
+      rightTeams: rightTeams?.filter(team => team.sportId === event.sportId) || [],
     }
   },
 
@@ -183,6 +187,15 @@ export default {
     },
     sport () {
       return this.event.sport
+    },
+    rightName () {
+      return this.right?.school?.name || ''
+    },
+    rightLogo () {
+      return this.right?.school?.logo || ''
+    },
+    rightColor () {
+      return this.right?.school?.color || 'primary'
     },
   },
 

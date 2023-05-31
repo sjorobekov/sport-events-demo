@@ -49,14 +49,14 @@
               <v-list class="grey lighten-3">
                 <v-list-item link :to="{ name: 'directory-sports-contacts-id', params: { id: contact.id } }">
                   <v-list-item-content>
-                    <v-list-item-title class="text--info text--darken-1">
+                    <v-list-item-title class="neutral--text text--darken-3">
                       Edit Contact
                     </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item @click="remove()">
                   <v-list-item-content>
-                    <v-list-item-title class="text--info text--darken-1">
+                    <v-list-item-title class="neutral--text text--darken-3">
                       Delete Contact
                     </v-list-item-title>
                   </v-list-item-content>

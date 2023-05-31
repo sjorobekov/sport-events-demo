@@ -6,7 +6,7 @@
     <FxDashboardPageCard :teams-today="teamsToday" />
 
     <v-row class="mt-5">
-      <v-col cols="12" :lg="teams.length > 0 ? 9 : 12">
+      <v-col cols="12" :md="teams.length > 0 ? 9 : 12">
         <h2 class="text-h4s mb-2 neutral--text text--darken-4">
           Today's Events
         </h2>
@@ -22,7 +22,7 @@
         </section>
       </v-col>
 
-      <v-col v-if="teams.length > 0" cols="12" lg="3">
+      <v-col v-if="teams.length > 0" cols="12" md="3">
         <h2 class="text-h4s mb-2 neutral--text text--darken-4">
           My Teams
         </h2>

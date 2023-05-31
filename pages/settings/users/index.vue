@@ -41,7 +41,7 @@
             <v-menu>
               <template #activator="{ on, attrs }">
                 <v-btn icon v-bind="attrs" v-on="on">
-                  <v-icon color="info lighten-1">
+                  <v-icon color="neutral darken-1">
                     $vuetify.icons.threeDots
                   </v-icon>
                 </v-btn>
@@ -155,3 +155,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.theme--light.v-list-item:hover::before {
+  opacity: 0!important;
+}
+</style>

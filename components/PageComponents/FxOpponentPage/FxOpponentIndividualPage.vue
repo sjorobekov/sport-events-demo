@@ -24,7 +24,7 @@ export default {
   }),
 
   async fetch () {
-    this.opponent = await this.$store.dispatch('api/opponents/fetch', { schoolId: this.contextSchoolId, id: this.opponentId })
+    await this.$store.dispatch('page/opponent/fetchData', this.opponentId)
   },
 
   computed: {

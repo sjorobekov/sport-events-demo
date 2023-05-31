@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-h3 mb-6">
+    <h3 class="text-h3 mb-6 neutral--text text--darken-4">
       Create In-House Competition
     </h3>
 
@@ -12,8 +12,17 @@
       :school-id="schoolId"
     >
       <template #alert>
-        <v-alert v-if="!canCreateCompetition" type="info">
-          You have reached limit of Competitions in selected season
+        <v-alert v-if="!canCreateCompetition" class="alert">
+          <template #prepend>
+            <div class="alert-icon mr-3">
+              <v-icon size="18" color="white" class="pa-1">
+                mdi-alert-circle-outline
+              </v-icon>
+            </div>
+          </template>
+          <div class="text-p2 neutral--text text--darken-4">
+            In-House Competition limit reached. Upgrade your plan to add more competitions.
+          </div>
         </v-alert>
       </template>
     </FxInHouseCompetitionForm>
@@ -21,7 +30,7 @@
     <v-container class="mt-4 mb-8">
       <v-row>
         <v-spacer />
-        <v-btn outlined @click="$router.back()">
+        <v-btn outlined class="neutral--text text--darken-3" @click="$router.back()">
           Cancel
         </v-btn>
         <v-btn

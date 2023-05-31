@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card class="hidden-md-and-up" tile color="white">
-      <h1 class="py-3 px-3 text-h6 info--text text--darken-2">
+      <h1 class="py-3 px-3 text-h6 neutral--text text--darken-4">
         {{ team.name }} Team Sheet
       </h1>
     </v-card>
@@ -89,7 +89,7 @@
                     <draggable v-model="sheet" ghost-class="ghost" tag="tbody" handle=".student-icon">
                       <tr v-for="(studentId, i) in sheet" :key="studentId">
                         <td style="width: 70px" class="text-center no-right-border">
-                          <span class="info--text text-p3">{{ (i + 1).toString().padStart(2, '0') }}.</span>
+                          <span class="neutral--text text--darken-1 text-p3">{{ (i + 1).toString().padStart(2, '0') }}.</span>
                         </td>
                         <td class="pl-0">
                           <FxStudentListItem :student-id="studentId">

@@ -34,7 +34,6 @@
 
         <template v-else>
           <v-btn v-if="showUpgradePlanButton" :to="{ name: 'settings-subscription' }" depressed color="primary">
-            <v-icon>mdi-rocket-launch</v-icon>
             Upgrade Now
           </v-btn>
           <v-menu

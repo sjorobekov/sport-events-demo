@@ -6,7 +6,7 @@
         @click:back="$emit('click:back', $event)"
       />
     </template>
-    <FxOpponentSelectedItem :item="item">
+    <FxOpponentSelectedItem>
       <template v-if="!modal" #actions>
         <slot name="actions" />
       </template>

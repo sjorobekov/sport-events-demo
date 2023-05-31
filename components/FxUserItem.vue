@@ -4,8 +4,8 @@
       <FxAvatar :value="item.avatar" />
     </v-list-item-avatar>
     <v-list-item-content>
-      <v-list-item-title class="font-weight-bold" :class="{ 'neutral--text text--darken-3': !dark }">
-        <FxUserDisplayName :user="item" />
+      <v-list-item-title class="font-weight-bold">
+        <FxUserDisplayName :user="item" :dark="dark" />
       </v-list-item-title>
       <v-list-item-subtitle v-if="subtitle" class="neutral--text text--darken-2">
         {{ subtitle }}

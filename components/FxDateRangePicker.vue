@@ -11,7 +11,7 @@
         <v-text-field
           background-color="white"
           dense
-          style="width:250px"
+          style="width:256px"
           hide-details
           prepend-inner-icon="$vuetify.icon.calendar-small"
           outlined
@@ -48,6 +48,7 @@
           <v-list
             nav
             dense
+            class="rounded-6"
           >
             <v-list-item-group
               color="primary"
@@ -271,4 +272,9 @@ export default {
   display: none
 ::v-deep.fx-date-range-picker .daterangepicker
   margin-top: 0
+  border-radius: 6px
+
+.rounded-6
+  border-radius: 6px
+
 </style>

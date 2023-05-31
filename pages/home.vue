@@ -16,7 +16,7 @@
               </v-row>
             </v-carousel>
           </v-card>
-          <div v-else class="text-h3">
+          <div v-else class="text-h3 neutral--text text--darken-4">
             Sports Portal
           </div>
           <div class="d-flex align-center mt-2 pt-sm-4">
@@ -38,7 +38,7 @@
                 <template #activator="{ on }">
                   <v-btn icon v-on="on">
                     <v-icon size="32" color="neutral darken-1">
-                      $vuetify.icons.calendar-1
+                      $vuetify.icons.calendar-2
                     </v-icon>
                   </v-btn>
                 </template>
@@ -66,7 +66,7 @@
               <template #activator="{ on }">
                 <v-btn icon v-on="on">
                   <v-icon size="32" color="neutral darken-1">
-                    $vuetify.icons.calendar-1
+                    $vuetify.icons.calendar-2
                   </v-icon>
                 </v-btn>
               </template>
@@ -106,7 +106,7 @@
         </div>
       </v-col>
 
-      <v-col lg="3" class="text-p1 info--text text--info-lighten1 hidden-md-and-down">
+      <v-col lg="3" class="text-p1 hidden-md-and-down">
         <div class="d-flex justify-space-between">
           <h4 class="font-weight-regular home-heading mb-2">
             School Location

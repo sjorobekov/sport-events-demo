@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h3 class="text-h3 mb-6">
-      Request Add School
+    <h3 class="text-h3 mb-6 neutral--text text--darken-4">
+      Add School Request
     </h3>
 
     <FxRequestSchoolForm ref="form" v-model="formData" :disabled="loading" />
@@ -9,7 +9,7 @@
     <v-container class="mt-4 mb-8">
       <v-row>
         <v-spacer />
-        <v-btn outlined @click="$router.back()">
+        <v-btn outlined class="neutral--text text--darken-3" @click="$router.back()">
           Cancel
         </v-btn>
         <v-btn
@@ -20,9 +20,7 @@
           :loading="loading"
           @click="save"
         >
-          <v-icon size="20">
-            mdi-content-save-outline
-          </v-icon>Save
+          Request To Add School
         </v-btn>
       </v-row>
     </v-container>

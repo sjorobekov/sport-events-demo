@@ -1,5 +1,5 @@
 <template>
-  <span>{{ timeAgo }}</span>
+  <span class="neutral--text text--darken-3">{{ timeAgo }}</span>
 </template>
 
 <script>

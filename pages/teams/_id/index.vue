@@ -75,7 +75,7 @@
                 :to="{ name: 'teams-id-edit', params: { id: team.id } }"
               >
                 <v-icon color="neutral darken-2">
-                  $vuetify.icons.edit
+                  $vuetify.icons.pen
                 </v-icon>Edit Team
               </v-btn>
               <v-btn

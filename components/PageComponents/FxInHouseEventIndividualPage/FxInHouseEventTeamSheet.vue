@@ -23,7 +23,7 @@
     <v-container v-if="!sheet.length">
       <v-row no-gutters>
         <v-col>
-          <v-list-item class="px-0 text-h5 hidden-md-and-up info--text text--darken-2">
+          <v-list-item class="px-0 text-h5 hidden-md-and-up neutral--text text--darken-4">
             <v-list-item-content>
               <v-list-item-title>{{ name }} Team Sheet</v-list-item-title>
             </v-list-item-content>
@@ -71,7 +71,7 @@
       </v-row>
     </v-container>
     <template v-else>
-      <v-list-item class="px-3 text-h5 hidden-md-and-up info--text text--darken-2">
+      <v-list-item class="px-3 text-h5 hidden-md-and-up neutral--text text--darken-4">
         <v-list-item-content>
           <v-list-item-title>{{ name }} Team Sheet</v-list-item-title>
         </v-list-item-content>

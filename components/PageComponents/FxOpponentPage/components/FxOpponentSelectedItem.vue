@@ -8,16 +8,16 @@
         :alt="name"
         :color="color"
       />
-      <div class="team-name text-center px-2 px-md-6">
+      <div class="team-name text-center px-2 px-md-6 neutral--text text--darken-4">
         <span>{{ name }}</span>
       </div>
     </v-card>
-    <FxOpponentTabulatedContent :show-tabs="isMobile">
+    <FxOpponentTabulatedContent :show-tabs="isMobile" :show-contacts="contacts.length">
       <template #details>
-        <FxOpponentCard :opponent="item" :school="school" />
+        <FxOpponentCard :opponent="opponent" :school="school" />
       </template>
       <template #contacts>
-        <FxContactsCard />
+        <FxContactsCard :contacts="contacts" />
       </template>
       <template #map>
         <FxMapCard :coordinates="coordinates" />
@@ -60,25 +60,15 @@ export default {
     FxOpponentTabulatedContent,
     FxSchoolLogo,
   },
-  props: {
-    item: {
-      type: Object,
-      default: () => {},
-    },
-  },
 
   computed: {
     ...mapGetters({
       isMobileDevice: 'context/isMobile',
+      opponent: 'page/opponent/opponent',
+      contacts: 'page/opponent/contacts',
     }),
-    opponentId () {
-      return this.$route.params.opponentId
-    },
     school () {
-      return this.item?.opponentSchool || null
-    },
-    schoolId () {
-      return this.school?.id
+      return this.opponent?.opponentSchool || null
     },
     coordinates () {
       return this.school?.coordinates || null
@@ -90,7 +80,7 @@ export default {
       return this.isMobileDevice
     },
     name () {
-      return this.school?.name
+      return this.school ? this.school.name : this.opponent?.name
     },
     logo () {
       return this.school?.logo

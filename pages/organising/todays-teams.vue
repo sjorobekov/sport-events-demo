@@ -11,7 +11,9 @@
       </v-col>
       <v-col md="7" class="text-right hidden-sm-and-down d-print-none">
         <v-btn outlined style="background: white;" color="neutral darken-3" @click="print()">
-          <v-icon color="neutral darken-1">$vuetify.icons.printer</v-icon>
+          <v-icon color="neutral darken-1">
+            $vuetify.icons.printer
+          </v-icon>
           Print Team Sheets
         </v-btn>
       </v-col>

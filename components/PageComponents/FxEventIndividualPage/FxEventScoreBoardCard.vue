@@ -30,7 +30,7 @@
               <template #wrapper>
                 <nuxt-link class="text-decoration-none neutral--text text--darken-4" :to="{ name: 'teams-id', params: { id: myTeamId } }" />
               </template>
-              <span>{{ leftLabel }}</span>
+              <span v-balance-text>{{ leftLabel }}</span>
             </wrapped-component>
           </td>
           <td class="text-center team-name px-2 px-md-6">
@@ -38,7 +38,7 @@
               <template #wrapper>
                 <a :href="opponentLink" class="text-decoration-none neutral--text text--darken-4" />
               </template>
-              <span class="neutral--text text--darken-4">{{ rightLabel }}</span>
+              <span v-balance-text class="neutral--text text--darken-4">{{ rightLabel }}</span>
             </wrapped-component>
           </td>
         </tr>

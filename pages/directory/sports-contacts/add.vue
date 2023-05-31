@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-h3 mb-6">
+    <h3 class="text-h3 mb-6 neutral--text text--darken-4">
       Add Sports Contact
     </h3>
     <FxSportsContactForm ref="form" v-model="formData" :disabled="loading" />
@@ -8,7 +8,7 @@
     <v-container class="mt-4 mb-8">
       <v-row>
         <v-spacer />
-        <v-btn outlined @click="cancel">
+        <v-btn outlined class="neutral--text text--darken-3" @click="cancel">
           Cancel
         </v-btn>
         <v-btn

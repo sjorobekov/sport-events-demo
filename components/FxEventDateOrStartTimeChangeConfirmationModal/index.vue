@@ -8,14 +8,14 @@
       <v-card-text class="text-center pt-16">
         <v-img class="d-inline-block mx-auto mb-8" width="120" :src="icon" />
 
-        <p class="text-h3 info--text text--darken-3">
+        <p class="text-h3 neutral--text text--darken-4">
           Update event time or date?
         </p>
-        <p class="text-h4s info--text font-weight-medium">
+        <p class="text-h4s neutral--text text--darken-3 font-weight-medium">
           You will change this event for you and the opponent school.
         </p>
       </v-card-text>
-      <v-card-actions class="pb-10 justify-center">
+      <v-card-actions class="pb-10 justify-center neutral--text text--darken-3">
         <v-btn outlined @click="cancel">
           No, Cancel Changes
         </v-btn>

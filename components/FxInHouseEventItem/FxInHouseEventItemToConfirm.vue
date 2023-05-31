@@ -3,11 +3,11 @@
     <v-row>
       <v-col cols="12" class="border-bottom pt-1 pb-0">
         <v-list-item class="px-0">
-          <v-list-item-avatar class="mr-3" tile size="22">
+          <v-list-item-avatar class="mr-2" tile size="24">
             <v-img :src="sport.icon" />
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title class="text-p2" v-text="sport.name" />
+            <v-list-item-title class="text-p2 neutral--text text--darken-3" v-text="sport.name" />
           </v-list-item-content>
           <v-spacer />
           <slot name="actions" />
@@ -16,7 +16,7 @@
     </v-row>
     <v-row v-if="!isAllHouseEvent">
       <v-col cols="12" md="3" class="border-bottom d-flex align-center">
-        <FxDateFormat class="text-p2" :date="match.date" output-format="cccc dd MMMM yyyy" />
+        <FxDateFormat class="text-p2 neutral--text text--darken-4" :date="match.date" output-format="cccc dd MMMM yyyy" />
       </v-col>
       <v-col v-if="me" cols="12" md="4" class="border-bottom">
         <FxInHouseTeamListItem class="pl-0" :participant="me" :context-school-id="contextSchoolId" item-class="flex-row flex-md-row-reverse text-md-right" />
@@ -29,13 +29,21 @@
       <v-col cols="12" md="4" class="border-bottom d-flex align-center">
         <FxDateFormat class="text-p2" :date="match.date" output-format="cccc dd MMMM yyyy" />
       </v-col>
-      <v-col cols="12" md="8" class="border-bottom d-flex justify-center">
+      <v-col cols="12" md="4" class="border-bottom d-flex align-center">
         <ListItem>
-          <template #icon>
-            <v-img class="text--primary" width="40" :src="allHousesImg" />
-          </template>
           <template #content>
-            All Houses
+            <v-list-item-title class="text-p2 neutral--text text--darken-4 font-weight-bold">
+              All Houses
+            </v-list-item-title>
+          </template>
+        </ListItem>
+      </v-col>
+      <v-col cols="12" md="4" class="border-bottom d-flex align-center">
+        <ListItem>
+          <template #content>
+            <v-list-item-title class="text-p2 neutral--text text--darken-4">
+              {{ event.name }}
+            </v-list-item-title>
           </template>
         </ListItem>
       </v-col>
@@ -44,23 +52,23 @@
       <v-col cols="12" md="4" class="border-right border-bottom pt-1 pb-0">
         <ListItem>
           <template #icon>
-            <v-icon>mdi-clock-outline</v-icon>
+            <v-icon>$vuetify.icons.clock-1</v-icon>
           </template>
           <template #content>
             <div class="d-flex">
               <div class="pr-8">
-                <v-list-item-title class="text-p2 info--text text--darken-4">
+                <v-list-item-title class="text-p2 neutral--text text--darken-4">
                   {{ match.startTime }}
                 </v-list-item-title>
-                <v-list-item-subtitle class="text-p1 info--text">
+                <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                   Start Time
                 </v-list-item-subtitle>
               </div>
               <div v-if="match.finishTime" class="">
-                <v-list-item-title class="text-p2 info--text text--darken-4">
+                <v-list-item-title class="text-p2 neutral--text text--darken-4">
                   {{ match.finishTime }}
                 </v-list-item-title>
-                <v-list-item-subtitle class="text-p1 info--text">
+                <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                   Finish Time
                 </v-list-item-subtitle>
               </div>
@@ -71,7 +79,7 @@
       <v-col cols="12" md="4" class="border-right border-bottom pt-1 pb-0 d-flex justify-center align-center">
         <ListItem>
           <template #icon>
-            <FxAvatar :size="24" :value="user.avatar" />
+            <v-icon>$vuetify.icons.user-1</v-icon>
           </template>
           <template #title>
             <FxUserDisplayName :user="user" />
@@ -81,7 +89,7 @@
       <v-col cols="12" md="4" class="border-bottom pt-1 pb-0 d-flex justify-center align-center">
         <ListItem>
           <template #icon>
-            <v-icon>mdi-map-marker</v-icon>
+            <v-icon>$vuetify.icons.location-1</v-icon>
           </template>
           <template #title>
             <FxInHouseLocationLabel :match="match" />

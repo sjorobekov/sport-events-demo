@@ -2,7 +2,7 @@
   <div>
     <v-row class="d-flex">
       <v-col cols="12" sm="5" md="5">
-        <h1 class="text-h4s text-md-h3">
+        <h1 class="text-h4s text-md-h3 neutral--text text--darken-4">
           Opponents
         </h1>
       </v-col>
@@ -16,7 +16,7 @@
           class="mobile-button-two"
           :to="{ name: 'directory-custom-add' }"
         >
-          <v-icon>mdi-plus-circle-outline</v-icon>
+          <v-icon>$vuetify.icons.add-all</v-icon>
           Custom Opponent
         </v-btn>
         <v-btn
@@ -27,7 +27,7 @@
           class="ml-2 mobile-button-two"
           :to="{ name: 'directory-request-add' }"
         >
-          <v-icon>mdi-plus-circle-outline</v-icon>
+          <v-icon>$vuetify.icons.add-all</v-icon>
           Add School
         </v-btn>
       </v-col>
@@ -38,7 +38,9 @@
           <v-list dense class="py-0">
             <v-list-item>
               <v-list-item-content>
-                <v-list-item-title>Select Opponent</v-list-item-title>
+                <v-list-item-title class="neutral--text text--darken-3">
+                  Select Opponent
+                </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
             <v-list-item
@@ -52,7 +54,7 @@
                 <FxSchoolLogo v-else :size="44" />
               </v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title class="text--info text--darken-1">
+                <v-list-item-title class="neutral--text text--darken-4">
                   {{ item.opponentSchool ? item.opponentSchool.name : item.name }}
                 </v-list-item-title>
               </v-list-item-content>

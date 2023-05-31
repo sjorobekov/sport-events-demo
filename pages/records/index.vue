@@ -147,14 +147,14 @@
             <v-list class="grey lighten-3">
               <v-list-item link :to="{ name: 'records-id', params: { id: item.id } }">
                 <v-list-item-content>
-                  <v-list-item-title class="neutral text--darken-3">
+                  <v-list-item-title class="neutral--text text--darken-3">
                     Edit Record
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item @click="remove(item)">
                 <v-list-item-content>
-                  <v-list-item-title class="neutral text--darken-3">
+                  <v-list-item-title class="neutral--text text--darken-3">
                     Delete Record
                   </v-list-item-title>
                 </v-list-item-content>

@@ -19,7 +19,7 @@
               <v-btn
                 height="40"
                 outlined
-                color="neutral darken-2"
+                color="neutral darken-3"
                 :ripple="false"
                 style="background-color: white"
                 @click="showFilters = !showFilters"
@@ -107,7 +107,7 @@
       <template v-else-if="!$fetchState.pending">
         <v-col class="d-flex flex-column justify-center align-center pt-0 pt-md-8">
           <v-img width="100" :src="noEvents" class="mb-3" />
-          <div class="text-p3 text-center info--text text--darken-3 mb-4">
+          <div class="text-p3 text-center neutral--text text--darken-3 mb-4">
             No Events For Now
           </div>
         </v-col>
@@ -122,6 +122,7 @@ import groupBy from 'lodash/groupBy'
 import isString from 'lodash/isString'
 import uniq from 'lodash/uniq'
 import uniqBy from 'lodash/uniqBy'
+import sortBy from 'lodash/sortBy'
 import { DateTime } from 'luxon'
 import { mapGetters } from 'vuex'
 import noEvents from '@/pages/teams/_id/noEvents.svg'
@@ -322,7 +323,7 @@ export default {
     },
 
     sports () {
-      return uniqBy(this.items.map(item => adapt(item).sport), a => a.id)
+      return sortBy(uniqBy(this.items.map(item => adapt(item).sport), a => a.id), ['name'])
     },
 
     opponentIds () {
@@ -423,7 +424,7 @@ export default {
 </script>
 
 <style scoped lang="sass">
-$calendar-bar-height: 186px
+$calendar-bar-height: 188px
 
 .calendar-bar
   border-bottom: solid 8px var(--v-primary-base)!important

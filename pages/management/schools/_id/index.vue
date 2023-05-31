@@ -57,11 +57,16 @@
       </v-container>
     </v-card-text>
     <v-card-actions>
+      <v-btn depressed color="error" dark @click="remove">
+        Delete
+      </v-btn>
+
       <v-spacer />
       <v-btn depressed color="brand" dark class="ml-2" @click="save">
         <v-icon>$vuetify.icons.save</v-icon>Save
       </v-btn>
     </v-card-actions>
+    <FxAdditionalSecurityModal ref="additionalSecurityModal" />
   </v-card>
 </template>
 
@@ -116,6 +121,21 @@ export default {
         })
         .finally(() => {
           this.loading = false
+        })
+    },
+
+    remove () {
+      if (!confirm('Are you sure?')) {
+        return
+      }
+
+      this.$store.dispatch('api/schools/remove', this.school.id)
+        .then(() => {
+          this.$toast('The school has been removed successfully')
+          this.$router.push({ name: 'management-schools' })
+        })
+        .catch(() => {
+          this.$toast.error('Error while removing the school')
         })
     },
   },

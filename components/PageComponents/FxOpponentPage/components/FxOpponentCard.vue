@@ -33,10 +33,10 @@
               <v-icon>$vuetify.icons.location-1</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title class="text-p2 info--text text--darken-4">
+              <v-list-item-title class="text-p2 neutral--text text--darken-3">
                 {{ opponent.address }}
               </v-list-item-title>
-              <v-list-item-subtitle class="text-p1 info--text">
+              <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                 Address
               </v-list-item-subtitle>
             </v-list-item-content>
@@ -48,10 +48,10 @@
               <v-icon>$vuetify.icons.link-1</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title class="text-p2 info--text text--darken-4">
+              <v-list-item-title class="text-p2 neutral--text text--darken-3">
                 {{ school.website }}
               </v-list-item-title>
-              <v-list-item-subtitle class="text-p1 info--text">
+              <v-list-item-subtitle class="text-p1 neutral--text text--darken-2">
                 Website
               </v-list-item-subtitle>
             </v-list-item-content>

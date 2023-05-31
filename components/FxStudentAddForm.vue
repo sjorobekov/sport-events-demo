@@ -5,8 +5,7 @@
         <v-row>
           <v-col
             cols="12"
-            md="6"
-            lg="4"
+            lg="5"
           >
             <FxInstructionItem>
               <template #number>
@@ -22,8 +21,7 @@
           </v-col>
           <v-col
             cols="12"
-            md="6"
-            lg="6"
+            lg="7"
             class="pt-8"
           >
             <v-row>
@@ -66,8 +64,7 @@
         <v-row>
           <v-col
             cols="12"
-            md="6"
-            lg="4"
+            lg="5"
           >
             <FxInstructionItem>
               <template #number>
@@ -83,8 +80,7 @@
           </v-col>
           <v-col
             cols="12"
-            md="6"
-            lg="6"
+            lg="7"
             class="pt-8"
           >
             <v-row>
@@ -95,7 +91,7 @@
                     <v-text-field
                       id="birthday"
                       :value="birthday"
-                      prepend-inner-icon="$vuetify.icons.calendarOutline"
+                      prepend-inner-icon="$vuetify.icons.calendar-small"
                       readonly
                       outlined
                       dense

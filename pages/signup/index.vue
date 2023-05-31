@@ -3,11 +3,12 @@
     <v-app-bar
       fixed
       class="d-md-none"
-      color="primary"
+      color="branddark"
       dark
       flat
+      height="80"
     >
-      <v-img class="mx-auto" max-width="150" :src="require('/static/logo_new.svg')" />
+      <v-img class="mx-auto" max-width="150" :src="require('/static/fixturr_logo_colour_white.svg')" />
     </v-app-bar>
     <v-main>
       <v-container fluid class="fill-height pa-0">
@@ -16,14 +17,12 @@
             cols="12"
             sm="5"
             md="5"
-            lg="4"
-            xl="3"
             class="d-none d-md-flex school-panel pa-0"
           >
             <v-row class="fill-height" no-gutters>
-              <v-col class="pt-16">
+              <v-col class="pt-16 sign-up-sidebar">
                 <div>
-                  <v-img class="mx-auto" width="185" :src="require('/static/logo_new.svg')" />
+                  <v-img class="ml-8" width="204" :src="require('/static/fixturr_logo_colour_white.svg')" />
                 </div>
                 <div class="pt-16">
                   <SignUpTimeline v-model="timelineStep[step]" />
@@ -35,8 +34,6 @@
             cols="12"
             sm="12"
             md="7"
-            lg="8"
-            xl="9"
             class="form-container"
           >
             <SignUpStepper v-model="timelineStep[step]" class="d-md-none mt-14" />
@@ -208,7 +205,7 @@ export default {
     background: var(--v-primary-base);
   }
   .sign-in-form {
-    max-width: 400px
+    max-width: 520px
   }
 }
 </style>
@@ -216,12 +213,18 @@ export default {
 <style lang="sass" scoped>
 @import '~vuetify/src/styles/styles.sass'
 
+.sign-up-sidebar
+  background-image: linear-gradient(rgba(51,60,78,0.90),rgba(51,60,78,0.90)),url(@/assets/img/sign-up-background.png)!important
+  background-size: auto,cover!important
+  background-color: #333c4e!important
+  background-position: center!important
+  background-repeat: no-repeat!important
 .theme--light.v-application
-  background: #F1F4FB
+  background: #f2f2f2
 .form-container
   padding-top: 0
 
 @media #{map-get($display-breakpoints, 'md-and-up')}
   .form-container
-    padding-top: 150px!important
+    padding-top: 20vh!important
 </style>

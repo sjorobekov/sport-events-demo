@@ -68,7 +68,7 @@ export default {
     items () {
       return [
         ...this.formData.participants.map((participant) => {
-          return { value: participant.id, text: participant.school.name }
+          return { value: participant.id, text: participant.school?.name || '' }
         }),
         { value: EventLocation.NEUTRAL, text: 'Neutral' },
       ]
@@ -79,7 +79,7 @@ export default {
 
       if (this.homeTeam === left.id) {
         return this.leftLocations
-      } else if (this.homeTeam === right.id) {
+      } else if (right && this.homeTeam === right.id) {
         return this.rightLocations
       }
 
@@ -95,7 +95,7 @@ export default {
           return this.formData.participants[0].id
         }
 
-        if (this.formData.participants[1].eventLocation === EventLocation.HOME) {
+        if (this.formData.participants[1] && this.formData.participants[1].eventLocation === EventLocation.HOME) {
           return this.formData.participants[1].id
         }
 
@@ -126,14 +126,14 @@ export default {
   },
 
   async created () {
-    const schoolIds = this.formData.participants.map(a => a.schoolId)
+    const schoolIds = this.formData.participants.map(a => a.schoolId).filter(a => a)
 
     const [leftLocations, rightLocations] = await Promise.all(schoolIds.map((schoolId) => {
       return this.$store.dispatch('api/locations/list', { schoolId })
     }))
 
     this.leftLocations = leftLocations
-    this.rightLocations = rightLocations
+    this.rightLocations = rightLocations || []
   },
 
   methods: {

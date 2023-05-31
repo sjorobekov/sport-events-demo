@@ -3,7 +3,7 @@
     <template #activator="{ on, attrs }">
       <slot name="activator" v-bind="{ on, attrs }" />
     </template>
-    <v-card color="info lighten-3">
+    <v-card color="background" class="mobile-dialog-card">
       <v-toolbar dark color="primary" flat height="72">
         <v-btn icon dark @click="$emit('click:back', $event)">
           <v-icon>mdi-arrow-left</v-icon>
@@ -38,3 +38,11 @@ export default {
   },
 }
 </script>
+<style scoped lang="sass">
+@import '~vuetify/src/styles/styles'
+
+@media #{map-get($display-breakpoints, 'sm-and-down')}
+  .mobile-dialog-card.v-card
+    border: 0!important
+    overflow: visible!important
+</style>

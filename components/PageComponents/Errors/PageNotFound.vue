@@ -1,13 +1,13 @@
 <template>
   <div class="error-container text-center d-flex justify-center align-center">
     <div>
-      <h1 class="error-title mb-8">
+      <h1 class="error-title mb-8 neutral--text text--darken-4">
         Oops, <br><span class="primary--text">nothing</span> here...
       </h1>
-      <p class="subtitle mb-2 info--text text--darken-1">
+      <p class="subtitle mb-2 neutral--text text--darken-3">
         Sorry, the page you're looking for can't be found.
       </p>
-      <p class="subtitle mb-8 info--text text--darken-1">
+      <p class="subtitle mb-8 neutral--text text--darken-3">
         Try going back to the home page.
       </p>
 

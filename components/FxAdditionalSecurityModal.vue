@@ -32,7 +32,7 @@
         </v-card-text>
         <v-card-actions class="px-4">
           <v-spacer />
-          <v-btn text @click="logOut">
+          <v-btn text class="not-you-button" @click="logOut">
             Not You?
           </v-btn>
           <v-btn
@@ -122,3 +122,16 @@ export default {
   },
 }
 </script>
+<style scoped>
+.not-you-button {
+  color: var(--v-neutral-darken3);
+}
+.not-you-button:hover {
+  color: var(--v-primary-base);
+  box-shadow: none!important;
+}
+.v-btn:before {
+  opacity: 0!important
+}
+
+</style>

@@ -3,7 +3,7 @@
     <v-list-item class="my-0 pl-0 pl-lg-2">
       <v-list-item-avatar class="my-0" height="24" min-width="24" width="24">
         <v-avatar color="primary">
-          <span class="white--text instruction-number">
+          <span class="white--text instruction-number font-weight-bold">
             <slot name="number" />
           </span>
         </v-avatar>
@@ -18,7 +18,7 @@
 
     <v-list-item class="my-0 pl-0 pl-lg-2 helper-list-item ">
       <v-list-item-avatar class="py-1 my-0" height="17" min-width="24" width="24" />
-      <v-list-item-content class="py-1 text-p1 neutral--text text--darken-3">
+      <v-list-item-content class="py-1 text-p2 pt-0 neutral--text text--darken-3">
         <slot name="content" />
       </v-list-item-content>
     </v-list-item>
@@ -42,6 +42,6 @@ export default {
 }
 
 .instruction-number {
-  font-size: 16px;
+  font-size: 14px;
 }
 </style>

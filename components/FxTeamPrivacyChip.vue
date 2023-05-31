@@ -1,6 +1,6 @@
 <template>
   <v-chip
-    color="info lighten-2"
+    color="neutral lighten-2"
     outlined
     dark
     label
@@ -8,7 +8,7 @@
   >
     <v-icon :color="color" class="mr-1" small>
       $vuetify.icons.ellipse
-    </v-icon><span class="info--text text--darken-2 text-caption">{{ label }}</span>
+    </v-icon><span class="neutral--text text--darken-2 text-caption">{{ label }}</span>
   </v-chip>
 </template>
 

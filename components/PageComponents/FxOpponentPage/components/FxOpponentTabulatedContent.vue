@@ -10,10 +10,10 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" lg="6">
+        <v-col v-if="showContacts" cols="12" lg="6">
           <slot name="contacts" />
         </v-col>
-        <v-col cols="12" lg="6">
+        <v-col cols="12" :lg="showContacts ? 6 : 12">
           <slot name="map" />
         </v-col>
       </v-row>
@@ -25,7 +25,7 @@
           <v-tab class="font-weight-bold">
             Details
           </v-tab>
-          <v-tab class="font-weight-bold">
+          <v-tab v-if="showContacts" class="font-weight-bold">
             Contacts
           </v-tab>
           <v-tab v-if="$slots.map" class="font-weight-bold">
@@ -41,7 +41,7 @@
         <v-tab-item class="px-2 pb-2 mt-2">
           <slot name="details" />
         </v-tab-item>
-        <v-tab-item class="px-2 pb-2 mt-2">
+        <v-tab-item v-if="showContacts" class="px-2 pb-2 mt-2">
           <slot name="contacts" />
         </v-tab-item>
         <v-tab-item v-if="$slots.map" class="px-2 pb-2 mt-2">
@@ -61,6 +61,10 @@ export default {
   name: 'FxOpponentTabulatedContent',
   props: {
     showTabs: {
+      type: Boolean,
+      default: false,
+    },
+    showContacts: {
       type: Boolean,
       default: false,
     },

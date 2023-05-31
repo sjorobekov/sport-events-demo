@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { Plugin } from '@nuxt/types'
 import VuetifyAsyncValidation from 'vuetify-async-validation'
 import validator from 'validator'
+import { PUBLIC_DOMAINS } from '~/common'
 import { Primitive } from '~/types'
 import isMobilePhone = validator.isMobilePhone
 import isURL = validator.isURL
@@ -26,6 +27,8 @@ declare module 'vue/types/vue' {
       equal: Function,
       alphaNumeric: Function,
       isSubdomainAvailable: Function,
+      nonAssociatedEmailDomain: Function,
+      nonStudentEmail: Function,
     }
     validateAsync: Function,
   }
@@ -63,6 +66,32 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
       return (!v || isAlphanumeric(v)) || 'Must contain only letters and numbers'
     },
 
+    nonAssociatedEmailDomain (v: string): ReturnType {
+      if (!v) {
+        return true
+      }
+
+      const [, domain] = v.split('@')
+      if (!domain) {
+        return true
+      }
+
+      return !(PUBLIC_DOMAINS.includes(domain)) || 'Please enter your school email address'
+    },
+
+    nonStudentEmail (v: string): ReturnType {
+      if (!v) {
+        return true
+      }
+
+      const [, domain] = v.split('@')
+      if (!domain) {
+        return true
+      }
+
+      return !(domain.includes('student')) || 'Invalid e-mail'
+    },
+
     minLength (len: number) {
       return (val: string): ReturnType => {
         if (!val) {
@@ -83,6 +112,9 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
 
     isSubdomainAvailable (id: string) {
       return async (portalAddress: string): AsyncReturnType => {
+        if (!portalAddress) {
+          return true
+        }
         const { available } = await $axios.$post('/api/v1/validation/check_portal', { portalAddress, id })
         return available || 'Address is unavailable'
       }
@@ -90,6 +122,9 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
 
     isRecordCategoryAvailable (schoolId: string) {
       return async (name: string): AsyncReturnType => {
+        if (!name) {
+          return true
+        }
         const { available } = await $axios.$post('/api/v1/validation/check_sports_record_category', { name, schoolId })
         return available || 'Category already exists'
       }
@@ -97,6 +132,9 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
 
     isRecordEventAvailable (schoolId: string, sportId: string) {
       return async (name: string): AsyncReturnType => {
+        if (!name) {
+          return true
+        }
         const { available } = await $axios.$post('/api/v1/validation/check_sports_record_event', { name, schoolId, sportId })
           .catch(() => { return 'Event already exists' })
         return available || 'Event already exists'

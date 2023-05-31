@@ -1,13 +1,10 @@
 <template>
   <div>
     <div class="d-flex">
-      <h3 class="text-h3 mb-6">
+      <h3 class="text-h3 mb-6 neutral--text text--darken-4">
         {{ team.name }}
       </h3>
       <v-spacer />
-      <v-btn color="error darken-1" outlined @click="remove()">
-        <v-icon>mdi-delete</v-icon>Delete Team
-      </v-btn>
     </div>
 
     <FxTeamForm ref="form" v-model="formData" :disabled="loading" :sports="sports" :school-id="schoolId" />
@@ -15,7 +12,10 @@
     <v-container class="mt-4 mb-8">
       <v-row>
         <v-spacer />
-        <v-btn outlined @click="$router.back()">
+        <v-btn color="error darken-1" outlined @click="remove()">
+          Delete Team
+        </v-btn>
+        <v-btn outlined class="neutral--text text--darken-3 ml-2" @click="$router.back()">
           Cancel
         </v-btn>
         <v-btn
@@ -30,6 +30,7 @@
         </v-btn>
       </v-row>
     </v-container>
+    <FxConfirm ref="confirm" />
   </div>
 </template>
 
@@ -107,11 +108,11 @@ export default {
         this.loading = false
       })
     },
-    remove () {
+    async remove () {
       const warning = 'Warning: Continuing will permanently delete this team. ' +
                       'However, events linked to this team will still be retained in the database. ' +
                       'Are you sure you want to proceed?'
-      if (!confirm(warning)) {
+      if (!await this.$refs.confirm.open(warning, 'Delete Team', 'Yes, Delete Team')) {
         return
       }
       this.$store.dispatch('api/teams/remove', this.team).then(() => {

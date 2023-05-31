@@ -54,7 +54,7 @@
               </v-btn>
             </template>
             <template v-else>
-              <div class="mb-5 text-center">
+              <div class="mb-5 mt-4 text-center">
                 <FxSchoolLogo class="d-inline-block" :value="school.logo" :color="school.color" :alt="school.name" size="160" />
               </div>
               <h1 class="text-h3 branddark--text text-center">
@@ -149,7 +149,7 @@ export default {
   max-width: 492px;
   width: 100%;
   position: relative;
-  min-height: 492px;
+  min-height: 521px;
 }
 
 .logo-container {
@@ -200,8 +200,7 @@ export default {
 }
 
 .find-school-button {
-  border: 2px solid rgba(255,255,255,0.25)!important;
-  border-radius: 8px;
-  box-shadow: 0px 10px 20px -15px rgb(0 0 0 / 50%)!important;
+  border-radius: 8px!important;
+  font-size: 1.125rem!important;
 }
 </style>

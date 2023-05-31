@@ -80,7 +80,7 @@
       <v-checkbox
         :input-value="formData.main"
         label="Display this contact as the Main Sports Contact"
-        class="info--text"
+        class="neutral--text"
         hide-details
         @change="update('main', $event)"
       />
@@ -99,7 +99,7 @@
         outlined
         dense
         :prepend-icon="null"
-        prepend-inner-icon="mdi-camera"
+        prepend-inner-icon="$vuetify.icons.upload-button"
         @change="uploadHandler"
       />
       <v-img

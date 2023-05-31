@@ -29,7 +29,7 @@
       class="px-0 nav-list"
     >
       <template v-if="hideLogo && isLoggedIn">
-        <FxUserItem :item="me" class="px-5" :to="{ name: 'settings' } " dark />
+        <FxUserItem :item="me" class="px-5" :to="{ name: 'settings' }" dark />
       </template>
       <template
         v-for="(item, i) in items"
@@ -191,6 +191,7 @@ export default {
             { title: 'Confirm Fixtures', to: { name: 'organising-confirm-fixtures' } },
             { title: 'Missing Results', to: { name: 'organising-missing-results' } },
             { title: 'Participation', to: { name: 'organising-participation' } },
+            { title: 'Create New Event', to: { name: 'events-add' } },
           ],
         })
       }

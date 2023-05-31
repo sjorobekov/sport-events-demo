@@ -1,5 +1,5 @@
 <template>
-  <span>{{ roleName }}</span>
+  <span class="neutral--text text--darken-3">{{ roleName }}</span>
 </template>
 
 <script lang="ts">
@@ -7,7 +7,7 @@ import Vue from 'vue'
 
 const role = {
   ADMIN: 'Admin',
-  SPORTS_USER: 'Sports User',
+  SPORTS_USER: 'Team Member',
   VIEW_ONLY: 'View Only',
 } as {[key: string]: string;}
 

@@ -10,7 +10,7 @@
       </v-col>
     </v-row>
 
-    <div class="d-flex flex-column flex-md-row flex-md-wrap" style="gap: 8px;">
+    <div class="d-flex flex-column flex-md-row flex-md-wrap filters">
       <FxCalendarStaffFilter
         :value="formData.leadIds"
         :items="leadIds"
@@ -128,3 +128,10 @@ export default {
   },
 }
 </script>
+
+<style lang="sass" scoped>
+.filters
+  gap: 8px
+  > div
+    flex-basis: calc(33.3% - 8px)
+</style>

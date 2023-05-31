@@ -41,7 +41,7 @@
             <v-text-field
               id="birthday"
               :value="birthday"
-              prepend-inner-icon="$vuetify.icons.calendarOutline"
+              prepend-inner-icon="$vuetify.icons.calendar-small"
               readonly
               outlined
               dense

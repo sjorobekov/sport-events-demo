@@ -43,7 +43,7 @@
             <FxFixtureConflictAlert v-for="(conflict, idx) in conflicts" :key="`conflict-${conflict.eventId}`" :conflict="conflict">
               <FxFixtureConflictDialog :event-id="conflict.eventId" :conflict="conflict" @resolved="onConflictResolveHandler(idx)">
                 <template #activator="{ on, attrs }">
-                  <v-btn depressed v-bind="attrs" color="white" v-on="on">
+                  <v-btn outlined v-bind="attrs" color="white" class="view-conflict-button" v-on="on">
                     <span class="error--text">View Details</span>
                   </v-btn>
                 </template>
@@ -153,3 +153,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.view-conflict-button {
+  border-color: #F1B6B3!important;
+}
+</style>

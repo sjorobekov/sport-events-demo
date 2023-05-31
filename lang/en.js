@@ -83,7 +83,7 @@ export default {
 
   USER_ROLE: {
     [UserRole.ADMIN]: 'Admin',
-    [UserRole.SPORTS_USER]: 'Sports User',
+    [UserRole.SPORTS_USER]: 'Team Member',
     [UserRole.VIEW_ONLY]: 'View Only',
   },
 

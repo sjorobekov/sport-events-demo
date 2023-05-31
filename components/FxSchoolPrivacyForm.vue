@@ -117,7 +117,7 @@
               :async-rules="[$rule.minLength(4)]"
               dense
               outlined
-              :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+              :append-icon="showPass ? '$vuetify.icons.password-hide' : '$vuetify.icons.password-show'"
               :type="showPass ? 'text' : 'password'"
               maxlength="32"
               @input="update('password', $event)"

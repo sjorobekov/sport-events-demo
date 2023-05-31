@@ -7,6 +7,7 @@
         :zoom="zoom"
         style="height: 250px"
         :options="mapOptions"
+        class="map"
       >
         <GmapMarker
           clickable
@@ -49,3 +50,9 @@ export default {
   },
 }
 </script>
+<style scoped>
+.map {
+  border-radius: 10px;
+  overflow: hidden;
+}
+</style>

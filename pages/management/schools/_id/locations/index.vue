@@ -2,7 +2,7 @@
   <div>
     <v-row class="">
       <v-col cols="12" sm="6">
-        <h1 class="text-h4s text-md-h3">
+        <h1 class="text-h4s text-md-h3 neutral--text text--darken-4">
           Sports Map
         </h1>
       </v-col>
@@ -16,7 +16,7 @@
           class="mobile-button-100"
           :to="{ name: editLink, params: { locationId: 'add' } }"
         >
-          <v-icon>$vuetify.icons.plusOutline</v-icon> Add Sports Location
+          <v-icon>$vuetify.icons.add-all</v-icon> Add Sports Location
         </v-btn>
       </v-col>
     </v-row>
@@ -50,7 +50,7 @@
               <v-menu>
                 <template #activator="{ on, attrs }">
                   <v-btn icon v-bind="attrs" v-on="on">
-                    <v-icon color="info lighten-1">
+                    <v-icon color="neutral darken-1">
                       $vuetify.icons.threeDots
                     </v-icon>
                   </v-btn>
@@ -58,14 +58,14 @@
                 <v-list class="grey lighten-3">
                   <v-list-item link :to="{ name: editLink, params: { locationId: item.id } }">
                     <v-list-item-content>
-                      <v-list-item-title class="text--info text--darken-1">
+                      <v-list-item-title class="neutral--text text--darken-3">
                         Edit Location
                       </v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
                   <v-list-item @click="remove(item)">
                     <v-list-item-content>
-                      <v-list-item-title class="text--info text--darken-1">
+                      <v-list-item-title class="neutral--text text--darken-3">
                         Delete Location
                       </v-list-item-title>
                     </v-list-item-content>
@@ -104,7 +104,7 @@
       </v-col>
       <v-col v-else-if="!$fetchState.pending" class="d-flex flex-column align-center">
         <v-img width="150" contain :src="noLocations" class="mb-3" />
-        <div class="text-p3 info--text text--darken-3 mb-4">
+        <div class="text-p3 neutral--text text--darken-3 mb-4">
           Oops! No locations for now...
         </div>
       </v-col>

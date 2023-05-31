@@ -31,10 +31,14 @@
                 params: { id: selectedItem.id },
               }"
             >
-              <v-list-item-title>Edit Announcement</v-list-item-title>
+              <v-list-item-title class="neutral--text text--darken-3">
+                Edit Announcement
+              </v-list-item-title>
             </v-list-item>
             <v-list-item @click="removeHandler">
-              <v-list-item-title>Delete Announcement</v-list-item-title>
+              <v-list-item-title class="neutral--text text--darken-3">
+                Delete Announcement
+              </v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
