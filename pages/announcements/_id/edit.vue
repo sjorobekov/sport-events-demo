@@ -15,7 +15,8 @@
             dark
             :ripple="false"
             :loading="loading"
-            class="mb-3 mobile-button-100"
+            class="mb-3"
+            :x-large="isMobile"
             @click="save"
           >
             Update Announcement
@@ -24,10 +25,10 @@
           <v-btn
             depressed
             color="error"
-            class="mobile-button-100"
             outlined
             :ripple="false"
             block
+            :x-large="isMobile"
             @click="removeHandler()"
           >
             Delete Announcement

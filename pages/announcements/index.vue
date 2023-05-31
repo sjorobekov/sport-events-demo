@@ -9,13 +9,13 @@
       <v-col v-if="canCreateAnnouncement" cols="12" sm="6" class="d-flex justify-end align-center">
         <v-btn
           v-if="canCreateAnnouncement"
-          class="mobile-button-100"
           link
+          :block="isMobile"
+          :x-large="isMobile"
           :ripple="false"
           :to="{ name: 'announcements-add' }"
           depressed
           color="primary"
-          height="40"
         >
           <v-icon>$vuetify.icons.announcement-outline-small</v-icon>Create Announcement
         </v-btn>
@@ -42,7 +42,14 @@
             :announcement="item"
           >
             <template #actions>
-              <v-btn depressed :ripple="false" color="primary" class="mt-1 hidden-md-and-up mobile-button-100" block>
+              <v-btn
+                depressed
+                :ripple="false"
+                color="primary"
+                class="mt-1 hidden-md-and-up"
+                block
+                x-large
+              >
                 Read More
               </v-btn>
             </template>
@@ -99,7 +106,7 @@ export default {
 
     const { id } = this.$route.params
     if (!id) {
-      if (this.items[0] && !this.isMobile) {
+      if (this.items[0] && !this.isTabletMobile) {
         await this.$router.replace({ name: 'announcements-id', params: { id: this.items[0].id } })
       }
     }
@@ -111,8 +118,12 @@ export default {
       canCreateAnnouncement: 'user/acl/canCreateAnnouncement',
     }),
 
-    isMobile () {
+    isTabletMobile () {
       return this.$vuetify.breakpoint.smAndDown
+    },
+
+    isMobile () {
+      return this.$vuetify.breakpoint.xsOnly
     },
   },
 

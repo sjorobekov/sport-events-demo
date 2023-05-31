@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row class="mb-2 align-center">
-      <v-col v-if="canCreateTeam" cols="12" sm="5" md="5">
+      <v-col v-if="canCreateTeam" cols="7" sm="5" md="5">
         <h1 class="neutral--text text--darken-4 text-h4s text-md-h3">
           In-House Sport
         </h1>
@@ -11,7 +11,7 @@
           In-House Sport
         </h1>
       </v-col>
-      <v-col v-if="canCreateTeam" cols="6" sm="3" md="3">
+      <v-col v-if="canCreateTeam" cols="5" sm="3" class="d-flex" :class="{ 'justify-end': isMobile }">
         <v-select
           id="season"
           v-model="params.seasonId"
@@ -41,8 +41,15 @@
           @change="onSeasonChange"
         />
       </v-col>
-      <v-col v-if="canCreateTeam" cols="6" sm="4" md="4" class="text-right">
-        <v-btn depressed color="primary" class="mobile-button-100" link :to="{ name: 'in-house-add' }">
+      <v-col v-if="canCreateTeam" cols="12" sm="4" md="4" class="text-right">
+        <v-btn
+          depressed
+          color="primary"
+          link
+          :block="isMobile"
+          :x-large="isMobile"
+          :to="{ name: 'in-house-add' }"
+        >
           <v-icon>$vuetify.icons.add-all</v-icon>
           Add Competition
         </v-btn>
@@ -104,7 +111,16 @@ export default {
       seasons: 'seasons/all',
       currentSeason: 'seasons/current',
       canCreateTeam: 'user/acl/canCreateTeam',
+      isMobileDevice: 'context/isMobile',
     }),
+
+    isMobile () {
+      if (process.client) {
+        return this.$vuetify.breakpoint.xsOnly
+      }
+
+      return this.isMobileDevice
+    },
   },
 
   created () {

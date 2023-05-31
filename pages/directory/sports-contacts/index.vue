@@ -7,7 +7,14 @@
         </h1>
       </v-col>
       <v-col v-if="canCreateSportsContacts" cols="12" sm="6" class="d-flex justify-end align-center">
-        <v-btn depressed class="mobile-button-100" dark color="primary" :to="{ name: 'directory-sports-contacts-add' }">
+        <v-btn
+          depressed
+          dark
+          color="primary"
+          :block="isMobile"
+          :x-large="isMobile"
+          :to="{ name: 'directory-sports-contacts-add' }"
+        >
           <v-icon>$vuetify.icons.plusOutline</v-icon>Add Sports Contact
         </v-btn>
       </v-col>
@@ -46,7 +53,16 @@ export default {
     ...mapGetters({
       schoolId: 'context/schoolId',
       canCreateSportsContacts: 'user/acl/canCreateSportsContacts',
+      isMobileDevice: 'context/isMobile',
     }),
+
+    isMobile () {
+      if (process.client) {
+        return this.$vuetify.breakpoint.xsOnly
+      }
+
+      return this.isMobileDevice
+    },
   },
 }
 </script>

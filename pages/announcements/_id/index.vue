@@ -47,8 +47,9 @@
           depressed
           color="neutral darken-3"
           outlined
-          class="hidden-md-and-up mt-4 mobile-button-100"
+          class="hidden-md-and-up mt-4"
           block
+          :x-large="isMobile"
           :to="{
             name: 'announcements-id-edit',
             params: { id: selectedItem.id },

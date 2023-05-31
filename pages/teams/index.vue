@@ -1,17 +1,17 @@
 <template>
   <div>
     <v-row class="mb-2 align-center">
-      <v-col v-if="canCreateTeam" cols="6" sm="6">
+      <v-col v-if="canCreateTeam" cols="5">
         <h1 class="neutral--text text--darken-4 text-h4s text-md-h3">
           Teams
         </h1>
       </v-col>
-      <v-col v-else cols="7" sm="9" md="10">
+      <v-col v-else cols="7" sm="9">
         <h1 class="text-h4s text-md-h3 neutral--text text--darken-4">
           Teams
         </h1>
       </v-col>
-      <v-col v-if="canCreateTeam" cols="6" sm="3">
+      <v-col v-if="canCreateTeam" cols="7" sm="3" class="d-flex" :class="{ 'justify-end': isMobile }">
         <v-select
           id="season"
           v-model="params.seasonId"
@@ -41,12 +41,13 @@
           @change="onSeasonChange"
         />
       </v-col>
-      <v-col v-if="canCreateTeam" cols="12" sm="3" class="text-right">
+      <v-col v-if="canCreateTeam" cols="12" sm="4" class="text-right">
         <v-btn
           depressed
           color="primary"
-          class="mobile-button-100"
           link
+          :block="isMobile"
+          :x-large="isMobile"
           :to="{ name: 'teams-add' }"
         >
           <v-icon>$vuetify.icons.add-all</v-icon>
@@ -115,6 +116,7 @@ export default {
       seasons: 'seasons/all',
       currentSeason: 'seasons/current',
       canCreateTeam: 'user/acl/canCreateTeam',
+      isMobileDevice: 'context/isMobile',
     }),
 
     subtitle: () => (number) => {
@@ -126,6 +128,14 @@ export default {
       }
 
       return 'No Teams'
+    },
+
+    isMobile () {
+      if (process.client) {
+        return this.$vuetify.breakpoint.xsOnly
+      }
+
+      return this.isMobileDevice
     },
   },
 

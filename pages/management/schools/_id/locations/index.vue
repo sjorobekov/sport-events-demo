@@ -13,7 +13,6 @@
           dark
           color="primary"
           link
-          class="mobile-button-100"
           :to="{ name: editLink, params: { locationId: 'add' } }"
         >
           <v-icon>$vuetify.icons.add-all</v-icon> Add Sports Location

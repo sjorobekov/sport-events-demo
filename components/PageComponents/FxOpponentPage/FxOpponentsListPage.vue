@@ -7,13 +7,12 @@
         </h1>
       </v-col>
       <v-spacer />
-      <v-col v-if="canCreateOpponent" class="d-flex">
+      <v-col v-if="canCreateOpponent" class="d-none d-sm-flex">
         <v-btn
           depressed
           outlined
           color="primary"
           link
-          class="mobile-button-two"
           :to="{ name: 'directory-custom-add' }"
         >
           <v-icon>$vuetify.icons.add-all</v-icon>
@@ -24,7 +23,37 @@
           dark
           color="primary"
           link
-          class="ml-2 mobile-button-two"
+          class="ml-2"
+          :to="{ name: 'directory-request-add' }"
+        >
+          <v-icon>$vuetify.icons.add-all</v-icon>
+          Add School
+        </v-btn>
+      </v-col>
+    </v-row>
+    <v-row v-if="canCreateOpponent" no-gutters class="d-sm-none mt-5">
+      <v-col cols="6">
+        <v-btn
+          block
+          depressed
+          outlined
+          color="primary"
+          link
+          x-large
+          :to="{ name: 'directory-custom-add' }"
+        >
+          <v-icon>$vuetify.icons.add-all</v-icon>
+          Custom Opponent
+        </v-btn>
+      </v-col>
+      <v-col cols="6" class="pl-2">
+        <v-btn
+          block
+          depressed
+          dark
+          color="primary"
+          link
+          x-large
           :to="{ name: 'directory-request-add' }"
         >
           <v-icon>$vuetify.icons.add-all</v-icon>
