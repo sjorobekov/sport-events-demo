@@ -348,3 +348,15 @@ select:-webkit-autofill:focus {
 .v-alert--text:before {
   opacity: 0!important;
 }
+
+.theme--light {
+  .v-input {
+    input, textarea {
+      color: var(--v-neutral-darken4)!important;
+
+      &::placeholder {
+        color: var(--v-neutral-darken1)!important;
+      }
+    }
+  }
+}
