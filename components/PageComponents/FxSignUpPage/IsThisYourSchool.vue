@@ -43,8 +43,8 @@
         :loading="loading"
         block
         text
-        color="info"
-        class="mt-1"
+        color="neutral darken-3"
+        class="mt-1 not-school-button"
         height="56"
         @click="$emit('decline')"
       >
@@ -119,3 +119,13 @@ export default {
   },
 }
 </script>
+<style scoped>
+.v-btn:before {
+  opacity: 0!important
+}
+
+.not-school-button:hover {
+  box-shadow: none!important;
+  color: var(--v-brandblue-base)!important;
+}
+</style>
