@@ -1,6 +1,6 @@
 <template>
-  <div class="text-center ma-4">
-    <v-icon color="brandgreen" size="64">
+  <div class="text-center ma-3">
+    <v-icon color="brandgreen" size="64" class="my-5">
       mdi-check-circle
     </v-icon>
 
@@ -8,9 +8,11 @@
       Welcome to Fixturr
     </h1>
 
-    <div class="text-p3 branddark--text text--lighten-1 mt-1 mb-8">
-      Sign Up Complete. <br>
-      We have sent you an email, please check inbox
+    <div class="text-p3 branddark--text text--lighten-1 mt-1 mb-2">
+      Sign Up Complete.
+    </div>
+    <div class="text-p2 branddark--text text--lighten-1 mt-1 mb-8">
+      We have sent you an email, please check your inbox.
     </div>
 
     <div class="mx-sm-auto sign-in-form">

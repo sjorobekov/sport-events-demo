@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1 v-balance-text class="text-h3 text-center branddark--text mt-6 mb-6 mx-7">
+    <h1 v-balance-text class="text-h3 text-center branddark--text mt-6 mb-6 mx-3">
       Choose a Password
     </h1>
 
-    <div class="mx-4 mx-sm-auto sign-in-form">
+    <div class="mx-3 mx-sm-auto sign-in-form">
       <v-form ref="form" v-async-form class="mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">
         <label class="caption" for="password">Password</label>
         <v-text-field

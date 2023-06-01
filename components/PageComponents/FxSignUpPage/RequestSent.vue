@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-width width px-7">
+  <div class="custom-width width px-3">
     <h1 class="text-h3 branddark--text text-center mt-6 mb-2">
       Request Sent
     </h1>

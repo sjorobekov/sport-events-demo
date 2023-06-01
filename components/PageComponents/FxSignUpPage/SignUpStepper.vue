@@ -1,28 +1,30 @@
 <template>
-  <v-stepper
-    light
-    dense
-    color="neutral"
-  >
-    <v-stepper-header>
-      <template
-        v-for="(item, i) in items"
-      >
-        <v-stepper-step
-          :key="i"
-          :step="i+1"
-          :complete="i < value"
-          color="brandgreen"
+  <div class="stepper-container">
+    <v-stepper
+      light
+      dense
+      color="neutral"
+    >
+      <v-stepper-header>
+        <template
+          v-for="(item, i) in items"
         >
-          {{ item.title }}
-        </v-stepper-step>
-        <v-divider
-          v-if="i + 1 !== items.length"
-          :key="`${i}-divider`"
-        />
-      </template>
-    </v-stepper-header>
-  </v-stepper>
+          <v-stepper-step
+            :key="i"
+            :step="i+1"
+            :complete="i < value"
+            color="brandgreen"
+          >
+            {{ item.title }}
+          </v-stepper-step>
+          <v-divider
+            v-if="i + 1 !== items.length"
+            :key="`${i}-divider`"
+          />
+        </template>
+      </v-stepper-header>
+    </v-stepper>
+  </div>
 </template>
 
 <script>
@@ -56,5 +58,10 @@ export default {
 }
 .theme--light.v-stepper {
   border-radius: 0!important;
+}
+.stepper-container {
+  position: sticky;
+  top: 64px;
+  z-index: 1;
 }
 </style>

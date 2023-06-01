@@ -3,10 +3,10 @@
     <h1 v-balance-text class="text-h3 branddark--text text-center mt-6 mb-2">
       Your Details
     </h1>
-    <h2 class="text-p3 text-center branddark--text text--lighten-1 mb-6">
+    <h2 class="text-p3 text-center branddark--text text--lighten-1 mb-6 px-3">
       We just need your name and email to get started.
     </h2>
-    <v-form ref="form" v-async-form class="mx-4 mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">
+    <v-form ref="form" v-async-form class="mx-3 mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">
       <v-row>
         <v-col cols="12" sm="6" class="pb-0 pt-0">
           <label for="firstname">First Name</label>

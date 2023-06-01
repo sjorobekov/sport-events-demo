@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h1 class="text-h3 branddark--text text-center mt-6 mb-2">
+    <h1 class="text-h3 branddark--text text-center mt-6 mb-2 mx-3">
       {{ title }}
     </h1>
 
-    <h2 class="text-p3 text-center branddark--text text--lighten-1 mb-6">
+    <h2 class="text-p3 text-center branddark--text text--lighten-1 mb-6 mx-3">
       {{ subtitle }}
     </h2>
 
-    <div class="sign-in-form mx-4 mx-sm-auto">
+    <div class="sign-in-form mx-3 mx-sm-auto">
       <v-card class="py-8 px-12">
         <v-list-item>
           <v-list-item-avatar>
@@ -43,7 +43,7 @@
         :loading="loading"
         block
         text
-        color="info"
+        color="neutral darken-3"
         class="mt-1"
         height="56"
         @click="$emit('decline')"

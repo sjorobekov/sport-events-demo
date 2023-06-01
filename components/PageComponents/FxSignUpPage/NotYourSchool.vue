@@ -1,5 +1,5 @@
 <template>
-  <div style="max-width: 506px" class="ma-7 mx-sm-auto">
+  <div style="max-width: 506px" class="ma-7 mx-3 mx-sm-auto">
     <h1 class="text-h3 text-center branddark--text mb-2 mt-6">
       Not Your School?
     </h1>

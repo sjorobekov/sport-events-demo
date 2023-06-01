@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mx-7">
+    <div class="mx-3">
       <h1 class="text-h3 text-center branddark--text mt-6 mb-2">
         Invite Your Team
       </h1>
@@ -8,7 +8,7 @@
         Insert some text here about how it’s better with a team.
       </h2>
     </div>
-    <div class="mx-4 mx-sm-auto sign-in-form">
+    <div class="mx-3 mx-sm-auto sign-in-form">
       <v-form ref="form" v-async-form class="mx-sm-auto sign-in-form" :disabled="loading" @submit.prevent="submitHandler">
         <v-row>
           <v-col cols="7" class="pb-0 pr-1">
