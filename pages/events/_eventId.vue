@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-8">
+  <div class="pt-0">
     <FxEventIndividualPage />
   </div>
 </template>

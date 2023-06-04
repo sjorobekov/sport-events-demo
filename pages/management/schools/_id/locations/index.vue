@@ -2,7 +2,7 @@
   <div>
     <v-row class="">
       <v-col cols="12" sm="6">
-        <h1 class="text-h4s text-md-h3 neutral--text text--darken-4">
+        <h1 class="text-h4 text-md-h3 neutral--text text--darken-4 font-weight-bold">
           Sports Map
         </h1>
       </v-col>
