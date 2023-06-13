@@ -224,6 +224,7 @@ export default {
     manifest: {
       name: 'Fixturr',
       short_name: 'Fixturr',
+      start_url: '',
       lang: 'en',
       useWebmanifestExtension: false,
       background_color: '#4368FA',
