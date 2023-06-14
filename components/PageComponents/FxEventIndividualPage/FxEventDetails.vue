@@ -87,7 +87,7 @@
                 <v-icon>$vuetify.icons.user-1</v-icon>
               </template>
               <template #title>
-                <FxUserDisplayName :user="lead" />
+                <FxUserDisplayName :user="lead" class="neutral--text text--darken-4" />
               </template>
               <template #subtitle>
                 Lead Staff Member
