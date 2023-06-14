@@ -11,7 +11,7 @@
           <h2 class="text-h4s mb-2 neutral--text text--darken-4">
             Today's Events
           </h2>
-          <v-btn color="primary" outlined @click="filterEvents">
+          <v-btn color="primary" outlined @click="toggleMyEvents">
             <v-icon v-if="onlyMyEvents">
               $vuetify.icons.tick
             </v-icon>
@@ -154,7 +154,7 @@ export default {
     style (sport) {
       return { borderLeft: `${sport?.color} 8px solid` }
     },
-    filterEvents () {
+    toggleMyEvents () {
       this.onlyMyEvents = !this.onlyMyEvents
     },
   },
