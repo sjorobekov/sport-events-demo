@@ -34,14 +34,14 @@
               <v-list class="grey lighten-3">
                 <v-list-item link :to="{ name: 'settings-in-house-teams-teamId', params: { teamId: item.id } }">
                   <v-list-item-content>
-                    <v-list-item-title class="text--info text--darken-1">
+                    <v-list-item-title class="neutral text--darken-3">
                       Edit Team
                     </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item @click="remove(item)">
                   <v-list-item-content>
-                    <v-list-item-title class="text--info text--darken-1">
+                    <v-list-item-title class="neutral text--darken-3">
                       Delete Team
                     </v-list-item-title>
                   </v-list-item-content>
@@ -108,3 +108,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.theme--light.v-data-table {
+  color: var(--v-neutral-darken3);
+}
+</style>

@@ -34,7 +34,7 @@
               <v-list v-if="upcoming">
                 <v-list-item @click="remove(event)">
                   <v-list-item-content>
-                    <v-list-item-title class="text--info text--darken-1">
+                    <v-list-item-title class="neutral text--darken-3">
                       Delete Event
                     </v-list-item-title>
                   </v-list-item-content>
