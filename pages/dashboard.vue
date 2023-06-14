@@ -7,11 +7,19 @@
 
     <v-row class="mt-5">
       <v-col cols="12" :md="teams.length > 0 ? 9 : 12">
-        <h2 class="text-h4s mb-2 neutral--text text--darken-4">
-          Today's Events
-        </h2>
+        <div class="d-flex justify-space-between mb-2">
+          <h2 class="text-h4s mb-2 neutral--text text--darken-4">
+            Today's Events
+          </h2>
+          <v-btn color="primary" outlined @click="filterEvents">
+            <v-icon v-if="onlyMyEvents">
+              $vuetify.icons.tick
+            </v-icon>
+            My Events
+          </v-btn>
+        </div>
         <section v-if="events.length > 0">
-          <v-card v-for="event in events" :key="`event-${event.id}`" class="mb-2 card-has-hover">
+          <v-card v-for="event in filteredEvents" :key="`event-${event.id}`" class="mb-2 card-has-hover">
             <nuxt-link class="text-decoration-none" :to="{ name: 'events-eventId', params: { eventId: event.id } }">
               <FxCalendarEvent :value="event" />
             </nuxt-link>
@@ -78,6 +86,7 @@ export default {
     events: [],
     teams: [],
     teamsToday: 0,
+    onlyMyEvents: false,
   }),
 
   async fetch () {
@@ -119,8 +128,20 @@ export default {
       me: 'context/me',
       currentSeason: 'seasons/current',
     }),
+
     name () {
       return this.me.displayName ? this.me.displayName : `${this.me.firstname} ${this.me.lastname}`
+    },
+
+    filteredEvents () {
+      if (!this.onlyMyEvents) {
+        return this.events
+      }
+      return this.events.filter((item) => {
+        const isMyEvent = item.kind === 'Event' && item.me.leadId === this.me.id
+        const isMyInHouseEvent = item.kind === 'InHouseEventMatch' && item.inHouseEvent.leadId === this.me.id
+        return isMyEvent || isMyInHouseEvent
+      })
     },
   },
   methods: {
@@ -132,6 +153,9 @@ export default {
     },
     style (sport) {
       return { borderLeft: `${sport?.color} 8px solid` }
+    },
+    filterEvents () {
+      this.onlyMyEvents = !this.onlyMyEvents
     },
   },
 }
