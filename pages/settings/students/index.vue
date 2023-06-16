@@ -165,6 +165,6 @@ export default {
 </script>
 <style scoped>
 .theme--light.v-data-table {
-  color: var(--v-neutral-darken3);
+  color: var(--v-neutral-darken4);
 }
 </style>
