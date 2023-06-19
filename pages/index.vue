@@ -10,7 +10,7 @@
 export default {
   name: 'IndexPage',
   layout: 'empty',
-  middleware: ({ redirect, store, error }) => {
+  middleware: ({ redirect, store, error, route }) => {
     if (store.getters['context/isPortalSite']) {
       if (store.getters['context/isLoggedIn']) {
         return redirect({ name: 'dashboard' })
@@ -28,6 +28,10 @@ export default {
 
     if (store.getters['context/isSuperAdminSite']) {
       return redirect({ name: 'management' })
+    }
+
+    if (store.getters['context/isCheckoutSite']) {
+      return redirect({ name: 'checkout', query: route.query })
     }
 
     error({ statusCode: 404, message: 'Page not found' })
