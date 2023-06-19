@@ -153,8 +153,7 @@ export default {
     },
     getCheckoutUrl () {
       const url = new URL(this.$config.PORTAL_WILDCARD.replace('*', 'checkout'))
-      url.searchParams.set('schoolId', window.location.hostname.split('.')[0])
-      url.searchParams.set('path', window.location.pathname)
+      url.searchParams.set('url', encodeURI(window.location.href))
       return url.href
     },
   },
