@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row>
-      <v-col lg="9">
+      <v-col lg="9" class="pt-0">
         <div v-if="!isMobile">
           <v-card v-if="images.length">
             <v-carousel cycle hide-delimiters height="300px">
@@ -106,7 +106,7 @@
         </div>
       </v-col>
 
-      <v-col lg="3" class="text-p1 hidden-md-and-down">
+      <v-col lg="3" class="text-p1 hidden-md-and-down pt-0">
         <div class="d-flex justify-space-between">
           <h4 class="font-weight-regular home-heading mb-2">
             School Location

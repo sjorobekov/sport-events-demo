@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 v-if="me" class="text-h4s text-md-h3 mb-6 neutral--text text--darken-4">
+    <h1 v-if="me" class="text-h4 text-md-h3 mb-6 neutral--text text--darken-4 font-weight-bold">
       👋 Welcome, {{ name }}
     </h1>
     <FxDashboardPageCard :teams-today="teamsToday" />

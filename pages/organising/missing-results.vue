@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <h1 class="text-h4s text-md-h3 neutral--text text--darken-4 mb-2">
+    <h1 class="text-h4 text-md-h3 neutral--text text--darken-4 mb-2 font-weight-bold">
       Missing Results
     </h1>
     <p class="text-p3 neutral--text text--darken-3 mb-6">

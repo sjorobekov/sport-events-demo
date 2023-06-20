@@ -3,7 +3,7 @@
     <v-col>
       <v-list-item class="px-0">
         <v-list-item-content>
-          <v-list-item-title class="text-h4 neutral--text text--darken-4">
+          <v-list-item-title class="text-h4 neutral--text text--darken-4 font-weight-bold">
             Invite User
           </v-list-item-title>
         </v-list-item-content>

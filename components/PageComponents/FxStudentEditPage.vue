@@ -7,7 +7,7 @@
     </div>
 
     <div v-else>
-      <h3 class="text-h4 py-3 neutral--text text--darken-4">
+      <h3 class="text-h4 py-3 neutral--text text--darken-4 font-weight-bold">
         {{ student.firstname }} {{ student.lastname }}
       </h3>
       <v-card class="px-6 pt-6 pb-8">

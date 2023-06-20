@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-h3 mb-6 neutral--text text--darken-4" v-text="title" />
+    <h3 class="text-h4 text-md-h3 mb-6 neutral--text text--darken-4 font-weight-bold" v-text="title" />
     <v-form ref="confirmForm" lazy-validation>
       <v-card
         v-for="(item, index) in items"

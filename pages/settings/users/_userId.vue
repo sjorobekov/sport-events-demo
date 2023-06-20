@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="neutral--text text--darken-4 text-h4 py-3">
+    <h1 class="neutral--text text--darken-4 text-h4 py-3 font-weight-bold">
       Edit User
     </h1>
 

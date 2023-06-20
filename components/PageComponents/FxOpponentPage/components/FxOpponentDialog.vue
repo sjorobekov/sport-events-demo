@@ -6,7 +6,7 @@
           <v-icon>mdi-arrow-left</v-icon>
         </v-btn>
         <v-spacer />
-        <v-toolbar-title class="text-h6 pr-11">
+        <v-toolbar-title class="text-h6 pr-11 font-weight-bold">
           {{ title }}
         </v-toolbar-title>
         <v-spacer />
