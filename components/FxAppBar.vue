@@ -33,7 +33,7 @@
         </v-btn>
 
         <template v-else>
-          <v-btn v-if="showUpgradePlanButton" :to="{ name: 'settings-subscription' }" depressed color="primary">
+          <v-btn v-if="showUpgradePlanButton" :to="{ name: 'settings-subscription' }" depressed color="primary" class="mr-14">
             Upgrade Now
           </v-btn>
           <v-menu

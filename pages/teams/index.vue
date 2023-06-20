@@ -2,12 +2,12 @@
   <div>
     <v-row class="mb-2 align-center">
       <v-col v-if="canCreateTeam" cols="5">
-        <h1 class="neutral--text text--darken-4 text-h4s text-md-h3">
+        <h1 class="neutral--text text--darken-4 text-h4 text-md-h3 font-weight-bold">
           Teams
         </h1>
       </v-col>
       <v-col v-else cols="7" sm="9">
-        <h1 class="text-h4s text-md-h3 neutral--text text--darken-4">
+        <h1 class="text-h4 text-md-h3 neutral--text text--darken-4 font-weight-bold">
           Teams
         </h1>
       </v-col>
@@ -58,8 +58,11 @@
     <template v-if="!$fetchState.pending && !sports.length">
       <v-col class="d-flex flex-column justify-center align-center pt-4 pt-md-12">
         <v-img width="100" :src="noData" class="mb-3" />
-        <div class="text-p3 text-center neutral--text text--darken-3 mb-4">
-          No Teams
+        <div class="text-p3 text-center neutral--text text--darken-3 mb-2 mt-2">
+          No Teams Found For The Selected Season.
+        </div>
+        <div class="text-p2 text-center neutral--text text--darken-3 mb-2" style="width:320px">
+          Try selecting a different season.
         </div>
       </v-col>
     </template>

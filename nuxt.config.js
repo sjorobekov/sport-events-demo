@@ -257,6 +257,11 @@ export default {
     icon: {
       source: '~/static/icon.png',
     },
+    workbox: {
+      importScripts: [
+        'custom-sw.js',
+      ],
+    },
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

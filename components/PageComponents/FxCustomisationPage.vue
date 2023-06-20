@@ -7,8 +7,8 @@
     <v-container>
       <v-row>
         <v-col cols="12" lg="5" class="text-p2 neutral--text text--darken-3 px-0 pr-5">
-          Upload images for the homepage of your portal.<br>
-          We recommend using JPEG, PNG, or WEBP formats, but SVG and GIF formats are also supported.
+          Upload images for the homepage of your portal. The first image will also double as the log-in page background.<br>
+          <br>We recommend using JPEG, PNG, or WEBP formats, but SVG and GIF formats are also supported.
         </v-col>
         <v-col cols="12" lg="7">
           <label>Upload Image</label>
@@ -40,7 +40,7 @@
       <v-row>
         <v-col cols="12" lg="5" class="text-p2 neutral--text text--darken-3 px-0 pr-4">
           Customise your sports portal by uploading your school logo.<br>
-          We recommend using square images in transparent WEBP, PNG, or SVG formats. JPEG and GIF formats are also supported.
+          <br>We recommend using square images in transparent WEBP, PNG, or SVG formats. JPEG and GIF formats are also supported.
         </v-col>
         <v-col cols="12" lg="7">
           <FxImageUploadForm :value="logoFile" :loading="uploadingLogo" :stencil-props="stencil" :compression="compression" @input="uploadLogo">

@@ -3,8 +3,8 @@
     <v-row>
       <v-col class="d-flex flex-column justify-center align-center">
         <v-img width="100" :src="calendar" class="mb-3" />
-        <div class="text-p3 text-center neutral--text text--darken-3 mb-4">
-          No Events Today
+        <div class="text-p3 text-center neutral--text text--darken-3 mb-4 mt-2">
+          No Events Scheduled For Today.
         </div>
         <v-btn
           link

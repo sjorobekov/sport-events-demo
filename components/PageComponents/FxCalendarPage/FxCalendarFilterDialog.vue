@@ -21,20 +21,23 @@
             <v-icon>mdi-close</v-icon>
           </v-btn>
           <v-spacer />
-          <v-toolbar-title>Filter</v-toolbar-title>
+          <v-toolbar-title class="neutral--text text--darken-4 font-weight-bold ml-8">
+            Filter
+          </v-toolbar-title>
           <v-spacer />
           <v-toolbar-items>
             <v-btn
               text
+              color="neutral darken-3"
+              class="clear-all-button"
               @click="$emit('click:clearAll')"
             >
               Clear All
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-        <v-divider />
 
-        <div class="px-2 pt-6">
+        <div class="px-2 pt-4">
           <slot name="default" />
         </div>
 
@@ -43,6 +46,7 @@
             color="primary"
             depressed
             block
+            x-large
             @click="close()"
           >
             Apply Filter
@@ -79,5 +83,12 @@ export default {
 <style scoped>
 ::v-deep .dialog-margin-top {
   margin-top: 93px;
+}
+.v-btn:before {
+  opacity: 0!important
+}
+.clear-all-button:hover {
+  color: var(--v-primary-base);
+  box-shadow: none!important;
 }
 </style>

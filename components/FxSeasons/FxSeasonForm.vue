@@ -5,25 +5,23 @@
         <v-row>
           <v-col
             cols="12"
-            md="6"
-            lg="4"
+            lg="5"
           >
             <FxInstructionItem>
               <template #number>
                 1
               </template>
               <template #title>
-                Season's Start and End
+                Season Duration
               </template>
               <template #content>
-                Enter dates when season starts and ends
+                Select the start and end dates for the season.
               </template>
             </FxInstructionItem>
           </v-col>
           <v-col
             cols="12"
-            md="6"
-            lg="6"
+            lg="7"
             class="pt-8"
           >
             <v-row>
@@ -86,8 +84,7 @@
         <v-row>
           <v-col
             cols="12"
-            md="6"
-            lg="4"
+            lg="5"
           >
             <FxInstructionItem>
               <template #number>
@@ -97,14 +94,13 @@
                 Season Name
               </template>
               <template #content>
-                Please provide the name of the season.
+                Enter the name of the season.
               </template>
             </FxInstructionItem>
           </v-col>
           <v-col
             cols="12"
-            md="6"
-            lg="6"
+            lg="7"
             class="pt-8"
           >
             <v-row>

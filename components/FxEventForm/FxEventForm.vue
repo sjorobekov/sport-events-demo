@@ -32,6 +32,23 @@
       </template>
 
       <v-row>
+        <v-col>
+          <label for="season">Season</label>
+          <v-select
+            id="season"
+            v-model="seasonId"
+            outlined
+            dense
+            :items="seasons"
+            item-text="name"
+            item-value="id"
+            placeholder="Select Season"
+            hide-details
+            @change="onSeasonChange"
+          />
+        </v-col>
+      </v-row>
+      <v-row>
         <v-col cols="6">
           <label for="sport">Sport</label>
           <v-autocomplete
@@ -702,10 +719,12 @@ export default {
       { text: 'Sunday', number: 7 },
     ],
     selectedDays: [],
+    seasonId: '',
   }),
 
   computed: {
     ...mapGetters({
+      seasons: 'seasons/all',
       currentSeason: 'seasons/current',
       contextSchool: 'context/school',
       schoolId: 'context/schoolId',
@@ -753,13 +772,8 @@ export default {
   },
 
   async beforeMount () {
-    this.teams = await this.$store.dispatch('api/teams/list', {
-      schoolId: this.schoolId,
-      params: { seasonId: this.currentSeason.id },
-    })
-
-    const sports = this.teams.map(team => team.sport)
-    this.sports = [...new Map(sports.map(v => [v.id, v])).values()]
+    this.seasonId = this.currentSeason.id
+    await this.onSeasonChange()
 
     this.locations = await this.$store.dispatch('api/locations/list', {
       schoolId: this.schoolId,
@@ -767,6 +781,15 @@ export default {
   },
 
   methods: {
+    async onSeasonChange () {
+      this.teams = await this.$store.dispatch('api/teams/list', {
+        schoolId: this.schoolId,
+        params: { seasonId: this.seasonId },
+      })
+
+      const sports = this.teams.map(team => team.sport)
+      this.sports = [...new Map(sports.map(v => [v.id, v])).values()]
+    },
     validateAsync () {
       return this.$refs.form.validateAsync()
     },

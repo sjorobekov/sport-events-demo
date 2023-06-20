@@ -2,7 +2,7 @@
   <div class="">
     <v-row class="mb-2">
       <v-col cols="12">
-        <h1 class="text-h4s text-md-h3 neutral--text text--darken-4">
+        <h1 class="text-h4 text-md-h3 neutral--text text--darken-4 font-weight-bold">
           Today's Teams
         </h1>
       </v-col>

@@ -2,7 +2,7 @@
   <div>
     <v-list-item class="px-0 pt-0">
       <v-list-item-content class="pt-0">
-        <h1 class="text-h4s text-md-h3 neutral--text text--darken-4 pt-0">
+        <h1 class="text-h4 text-md-h3 neutral--text text--darken-4 pt-0 font-weight-bold">
           Sports Records
         </h1>
       </v-list-item-content>
@@ -86,8 +86,8 @@
       <div v-if="!$fetchState.pending && !items.length" class="text-center pt-4 pt-md-16">
         <v-col class="d-flex flex-column justify-center align-center">
           <v-img width="100" :src="noData" class="mb-3" />
-          <div class="text-p3 text-center neutral--text text--darken-3 mb-4">
-            Sports Records are empty
+          <div class="text-p3 text-center neutral--text text--darken-3 mb-4 mt-2">
+            Currently, There Are No Sports Records To Display
           </div>
         </v-col>
       </div>
@@ -95,7 +95,7 @@
         v-else
         :headers="headers"
         :items="items"
-        class="elevation-0 border"
+        class="elevation-0 border hide-overflow"
         :server-items-length="meta.total"
         hide-default-footer
         :sort-by.sync="query.orderBy"
@@ -111,8 +111,8 @@
               <v-img :src="item.sport.icon" />
             </v-list-item-avatar>
             <v-list-item-content>
-              <v-list-item-title v-text="item.sportsRecordEvent.name" />
-              <v-list-item-subtitle v-text="item.sport.name" />
+              <v-list-item-title class="neutral--text text--darken-4" v-text="item.sportsRecordEvent.name" />
+              <v-list-item-subtitle class="neutral--text text--darken-3" v-text="item.sport.name" />
             </v-list-item-content>
           </v-list-item>
         </template>
@@ -123,8 +123,8 @@
           <v-list-item class="px-0">
             <v-list-item-content>
               <v-list-item-title>
-                <span v-if="item.student">{{ item.student.firstname }} {{ item.student.lastname }}</span>
-                <span v-else>{{ item.studentName }}</span>
+                <span class="neutral--text text--darken-4" v-if="item.student">{{ item.student.firstname }} {{ item.student.lastname }}</span>
+                <span class="neutral--text text--darken-4" v-else>{{ item.studentName }}</span>
               </v-list-item-title>
               <v-list-item-subtitle v-if="isMobile">
                 {{ item.sportsRecordCategory.name }}
@@ -319,5 +319,11 @@ export default {
 .border {
   border: solid 1px var(--v-neutral-lighten1)!important;
   border-radius: 8px;
+}
+.hide-overflow {
+  overflow: hidden;
+}
+.theme--light.v-data-table {
+  color: var(--v-neutral-darken3);
 }
 </style>

@@ -2,7 +2,7 @@
   <div>
     <v-row class="d-flex">
       <v-col cols="12" sm="5" md="5">
-        <h1 class="text-h4s text-md-h3 neutral--text text--darken-4">
+        <h1 class="text-h4 text-md-h3 neutral--text text--darken-4 font-weight-bold">
           Opponents
         </h1>
       </v-col>

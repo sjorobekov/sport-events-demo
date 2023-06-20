@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row>
-      <v-col lg="9">
+      <v-col lg="9" class="pt-0">
         <div v-if="!isMobile">
           <v-card v-if="images.length">
             <v-carousel cycle hide-delimiters height="300px">
@@ -85,11 +85,11 @@
             <client-only>
               <div class="mt-12 d-flex flex-column justify-center align-center">
                 <v-img width="100" :src="calendar" class="mb-2" />
-                <div class="text-p2 font-weight-bold text-center neutral--text text--darken-3 mb-1">
-                  No Events Today
+                <div class="text-p3 text-center neutral--text text--darken-3 mb-2 mt-2">
+                  No Events Scheduled On The Selected Day.
                 </div>
-                <div class="text-p1 text-center neutral--text text--darken-3 mb-2" style="width:320px">
-                  No events found on the selected day.<br> Please try changing the date or
+                <div class="text-p2 text-center neutral--text text--darken-3 mb-2" style="width:320px">
+                  Try changing the date or
                 </div>
                 <v-btn
                   link
@@ -106,7 +106,7 @@
         </div>
       </v-col>
 
-      <v-col lg="3" class="text-p1 hidden-md-and-down">
+      <v-col lg="3" class="text-p1 hidden-md-and-down pt-0">
         <div class="d-flex justify-space-between">
           <h4 class="font-weight-regular home-heading mb-2">
             School Location

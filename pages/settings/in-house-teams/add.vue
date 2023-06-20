@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-h4 py-3 neutral--text text--darken-4">
+    <h3 class="text-h4 py-3 neutral--text text--darken-4 font-weight-bold">
       Create In-House Team
     </h3>
 

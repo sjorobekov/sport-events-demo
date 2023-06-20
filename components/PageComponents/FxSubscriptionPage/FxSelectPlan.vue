@@ -144,12 +144,17 @@ export default {
       if (confirmed) {
         const { url } = await this.$store.dispatch('api/paddle/generatePayLink', {
           planId,
-          returnUrl: window.location.href,
+          returnUrl: this.getCheckoutUrl(),
         })
         window.open(url, '_self')
       }
 
       this.loading = false
+    },
+    getCheckoutUrl () {
+      const url = new URL(this.$config.PORTAL_WILDCARD.replace('*', 'checkout'))
+      url.searchParams.set('url', encodeURI(window.location.href))
+      return url.href
     },
   },
 }
