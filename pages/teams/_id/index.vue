@@ -143,10 +143,10 @@
           </v-col>
         </v-row>
         <div v-else-if="!$fetchState.pending">
-          <v-col class="d-flex flex-column justify-center align-center pt-12">
+          <v-col class="d-flex flex-column justify-center align-center pt-14 mt-10">
             <v-img width="100" :src="noEvents" class="mb-3" />
-            <div class="text-p3 text-center neutral--text text--darken-3 mb-4">
-              Oops! No events for now...
+            <div class="text-p3 text-center neutral--text text--darken-3 mb-4 mt-2">
+              Currently, There Are No Events For This Team.
             </div>
           </v-col>
         </div>

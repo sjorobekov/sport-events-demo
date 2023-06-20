@@ -17,20 +17,23 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <v-spacer />
-        <v-toolbar-title>Filter</v-toolbar-title>
+        <v-toolbar-title class="neutral--text text--darken-4 font-weight-bold ml-8">
+          Filter
+        </v-toolbar-title>
         <v-spacer />
         <v-toolbar-items>
           <v-btn
             text
+            color="neutral darken-3"
+            class="clear-all-button"
             @click="$emit('click:clear', $event)"
           >
             Clear All
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
-      <v-divider />
 
-      <div class="px-4 pt-3">
+      <div class="px-4 pt-4">
         <FxSportsRecordsFilter
           :value="value"
           :sports="sports"
@@ -43,6 +46,8 @@
           color="primary"
           depressed
           block
+          x-large
+          class="mt-8"
           @click="close()"
         >
           Apply Filter
@@ -87,5 +92,12 @@ export default {
 <style scoped>
 /deep/ .dialog-margin-top {
   margin-top: 93px;
+}
+.v-btn:before {
+  opacity: 0!important
+}
+.clear-all-button:hover {
+  color: var(--v-primary-base);
+  box-shadow: none!important;
 }
 </style>

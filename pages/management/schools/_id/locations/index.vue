@@ -103,8 +103,8 @@
       </v-col>
       <v-col v-else-if="!$fetchState.pending" class="d-flex flex-column align-center">
         <v-img width="150" contain :src="noLocations" class="mb-3" />
-        <div class="text-p3 neutral--text text--darken-3 mb-4">
-          Oops! No locations for now...
+        <div class="text-p3 neutral--text text--darken-3 mb-4 mt-2">
+          Currently, There Are No Sports Locations To Display
         </div>
       </v-col>
     </v-row>

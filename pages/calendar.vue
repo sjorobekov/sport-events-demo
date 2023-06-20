@@ -107,8 +107,11 @@
       <template v-else-if="!$fetchState.pending">
         <v-col class="d-flex flex-column justify-center align-center pt-0 pt-md-8">
           <v-img width="100" :src="noEvents" class="mb-3" />
-          <div class="text-p3 text-center neutral--text text--darken-3 mb-4">
-            No Events For Now
+          <div class="text-p3 text-center neutral--text text--darken-3 mb-2 mt-2">
+            No Events Found.
+          </div>
+          <div class="text-p2 text-center neutral--text text--darken-3 mb-2" style="width:320px">
+            Try changing the selected date range.
           </div>
         </v-col>
       </template>

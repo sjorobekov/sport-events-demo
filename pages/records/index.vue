@@ -86,8 +86,8 @@
       <div v-if="!$fetchState.pending && !items.length" class="text-center pt-4 pt-md-16">
         <v-col class="d-flex flex-column justify-center align-center">
           <v-img width="100" :src="noData" class="mb-3" />
-          <div class="text-p3 text-center neutral--text text--darken-3 mb-4">
-            Sports Records are empty
+          <div class="text-p3 text-center neutral--text text--darken-3 mb-4 mt-2">
+            Currently, There Are No Sports Records To Display
           </div>
         </v-col>
       </div>
