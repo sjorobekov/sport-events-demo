@@ -91,9 +91,9 @@
         />
       </template>
 
-      <v-card>
+      <v-card class="date-range-card">
         <v-sheet dark color="primary" height="150" tile class="flex-row">
-          <h4 class="text-h6 px-5 pt-5">
+          <h4 class="text-h6 px-5 pt-5 font-weight-bold">
             Select Date Range
           </h4>
           <v-timeline
@@ -277,4 +277,6 @@ export default {
 .rounded-6
   border-radius: 6px
 
+.date-range-card
+  border: none!important
 </style>
