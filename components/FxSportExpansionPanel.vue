@@ -58,4 +58,7 @@ export default {
 
 .theme--light.v-expansion-panels .v-expansion-panel-header .v-expansion-panel-header__icon .v-icon
   color: var(--v-neutral-darken1)
+
+.v-list-item__content
+  overflow: visible!important
 </style>
