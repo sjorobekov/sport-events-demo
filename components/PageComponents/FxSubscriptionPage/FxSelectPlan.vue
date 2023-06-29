@@ -11,13 +11,14 @@
 
     <v-tabs-items v-model="tab" class="mt-5">
       <v-tab-item v-for="i in [0, 1]" :key="i">
-        <div class="d-flex" style="gap: 12px">
+        <div class="d-block d-sm-flex" style="gap: 12px">
           <v-card
             v-for="plan in grouped[i]"
             :key="plan.id"
             width="300"
+            class="mb-4 mb-md-0"
           >
-            <v-card-title class="text-h4">
+            <v-card-title class="text-h4 font-weight-bold">
               {{ plan.name }}
             </v-card-title>
 
@@ -67,7 +68,7 @@
             <v-divider />
             <v-list-item>
               <v-list-item-content class="text-right">
-                <v-list-item-title class="text-h4 neutral--text text--darken-4">
+                <v-list-item-title class="text-h4 neutral--text text--darken-4 font-weight-bold">
                   &#163;{{ plan.price.GBP }}
                 </v-list-item-title>
                 <v-list-item-subtitle class="neutral--text text--darken-3">
