@@ -143,18 +143,25 @@ export default {
         })
 
       if (confirmed) {
-        const { url } = await this.$store.dispatch('api/paddle/generatePayLink', {
+        const signedUrl = await this.$store.dispatch('api/paddle/makePayLinkSignedUrl', {
           planId,
-          returnUrl: this.getCheckoutUrl(),
+          returnUrl: this.getCheckoutUrl({ redirectTo: encodeURI(window.location.href) }),
         })
-        window.open(url, '_self')
+
+        const { url: override } = await this.$store.dispatch('api/paddle/generatePayLink', signedUrl)
+        window.open(this.getCheckoutUrl({ override }), '_self')
       }
 
       this.loading = false
     },
-    getCheckoutUrl () {
+    getCheckoutUrl ({ override, redirectTo }) {
       const url = new URL(this.$config.PORTAL_WILDCARD.replace('*', 'checkout'))
-      url.searchParams.set('url', encodeURI(window.location.href))
+      if (override) {
+        url.searchParams.set('override', override)
+      }
+      if (redirectTo) {
+        url.searchParams.set('redirectTo', redirectTo)
+      }
       return url.href
     },
   },

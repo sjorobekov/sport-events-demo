@@ -2,6 +2,8 @@ export default {
   publicRuntimeConfig: {
     GMAPS_KEY: process.env.GMAPS_KEY,
     PORTAL_WILDCARD: process.env.PORTAL_WILDCARD,
+    PADDLE_SANDBOX: process.env.PADDLE_SANDBOX,
+    PADDLE_VENDOR_ID: process.env.PADDLE_VENDOR_ID,
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -14,6 +16,9 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
     ],
+    script: [{
+      src: 'https://cdn.paddle.com/paddle/paddle.js',
+    }],
     link: [
       { rel: 'apple-touch-icon', sizes: '128x128', href: '/apple-touch-icon.png' },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

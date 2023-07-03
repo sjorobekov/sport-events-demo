@@ -25,8 +25,17 @@ export default {
     if (!store.getters['context/isCheckoutSite']) {
       error({ statusCode: 404, message: 'Page not found' })
     }
-    if (process.server && route.query.url) {
-      redirect(route.query.url)
+    if (process.server && route.query.redirectTo) {
+      redirect(route.query.redirectTo)
+    }
+  },
+  mounted () {
+    if (this.$route.query.override) {
+      if (this.$config.PADDLE_SANDBOX) {
+        Paddle.Environment.set('sandbox')
+      }
+      Paddle.Setup({ vendor: this.$config.PADDLE_VENDOR_ID })
+      Paddle.Checkout.open({ override: this.$route.query.override })
     }
   },
 }
