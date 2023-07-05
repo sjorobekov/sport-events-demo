@@ -29,13 +29,24 @@ export default {
       redirect(route.query.redirectTo)
     }
   },
-  mounted () {
-    if (this.$route.query.override) {
+  head () {
+    return {
+      script: [
+        {
+          src: 'https://cdn.paddle.com/paddle/paddle.js',
+        },
+      ],
+    }
+  },
+  async mounted () {
+    if (this.$route.query.signedUrl) {
       if (this.$config.PADDLE_SANDBOX) {
         Paddle.Environment.set('sandbox')
       }
       Paddle.Setup({ vendor: this.$config.PADDLE_VENDOR_ID })
-      Paddle.Checkout.open({ override: this.$route.query.override })
+
+      const { url: override } = await this.$store.dispatch('api/paddle/generatePayLink', this.$route.query.signedUrl)
+      Paddle.Checkout.open({ override })
     }
   },
 }

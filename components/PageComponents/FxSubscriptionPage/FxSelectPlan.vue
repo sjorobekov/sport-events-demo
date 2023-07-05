@@ -147,17 +147,15 @@ export default {
           planId,
           returnUrl: this.getCheckoutUrl({ redirectTo: encodeURI(window.location.href) }),
         })
-
-        const { url: override } = await this.$store.dispatch('api/paddle/generatePayLink', signedUrl)
-        window.open(this.getCheckoutUrl({ override }), '_self')
+        window.open(this.getCheckoutUrl({ signedUrl }), '_self')
       }
 
       this.loading = false
     },
-    getCheckoutUrl ({ override, redirectTo }) {
+    getCheckoutUrl ({ signedUrl, redirectTo }) {
       const url = new URL(this.$config.PORTAL_WILDCARD.replace('*', 'checkout'))
-      if (override) {
-        url.searchParams.set('override', override)
+      if (signedUrl) {
+        url.searchParams.set('signedUrl', signedUrl)
       }
       if (redirectTo) {
         url.searchParams.set('redirectTo', redirectTo)

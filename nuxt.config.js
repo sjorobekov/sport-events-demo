@@ -16,9 +16,6 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
     ],
-    script: [{
-      src: 'https://cdn.paddle.com/paddle/paddle.js',
-    }],
     link: [
       { rel: 'apple-touch-icon', sizes: '128x128', href: '/apple-touch-icon.png' },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
