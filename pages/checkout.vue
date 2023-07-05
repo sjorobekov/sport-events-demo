@@ -29,17 +29,8 @@ export default {
       redirect(route.query.redirectTo)
     }
   },
-  head () {
-    return {
-      script: [
-        {
-          src: 'https://cdn.paddle.com/paddle/paddle.js',
-        },
-      ],
-    }
-  },
-  async mounted () {
-    if (this.$route.query.signedUrl) {
+  async fetch () {
+    if (process.client && this.$route.query.signedUrl) {
       if (this.$config.PADDLE_SANDBOX) {
         Paddle.Environment.set('sandbox')
       }
@@ -47,6 +38,16 @@ export default {
 
       const { url: override } = await this.$store.dispatch('api/paddle/generatePayLink', this.$route.query.signedUrl)
       Paddle.Checkout.open({ override })
+    }
+  },
+  fetchOnServer: false,
+  head () {
+    return {
+      script: [
+        {
+          src: 'https://cdn.paddle.com/paddle/paddle.js',
+        },
+      ],
     }
   },
 }
