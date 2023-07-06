@@ -40,7 +40,7 @@
             <v-icon>$vuetify.icons.user-1</v-icon>
           </template>
           <template #title>
-            <FxUserDisplayName :user="lead" />
+            <FxUserDisplayName class="calendar-user-name" :user="lead" />
           </template>
         </ListItem>
       </v-col>
@@ -93,6 +93,9 @@ $teamWidth: $scoreWidth / 2
 
 .score-cell
   display: none
+
+.neutral--text.calendar-user-name
+  color: var(--v-neutral-darken4) !important
 
 @media #{map-get($display-breakpoints, 'md-and-up')}
   .score-cell
