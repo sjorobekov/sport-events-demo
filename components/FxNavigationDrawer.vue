@@ -10,8 +10,8 @@
     @input="$emit('input', $event)"
   >
     <template v-if="!hideLogo">
-      <v-avatar size="144" color="white" class="mt-10 mb-6 mx-auto d-block school-logo-nav">
-        <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" />
+      <v-avatar size="144" class="mt-10 mb-6 mx-auto d-block school-logo-nav">
+        <FxSchoolLogo class="logo" :value="contextSchool.logo" :color="contextSchool.color" />
       </v-avatar>
 
       <h1 v-balance-text class="text-p3 font-weight-bold white--text text-center px-2">
@@ -244,4 +244,9 @@ export default {
     padding-bottom: 8px
     border-radius: 0
     margin-bottom: 0!important
+.school-logo-nav
+  overflow: visible!important
+.logo
+  overflow: visible!important
+  filter: drop-shadow(0px 0px  #FFF)
 </style>

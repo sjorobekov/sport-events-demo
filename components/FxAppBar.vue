@@ -10,8 +10,8 @@
   >
     <template v-if="isMobile">
       <v-list-item class="pl-0">
-        <v-list-item-avatar color="white" size="44">
-          <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" :size="44" />
+        <v-list-item-avatar size="44" class="overflow-visible">
+          <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" class="overflow-visible" :size="44" />
         </v-list-item-avatar>
         <v-list-item-content class="school-name d-block text-center">
           <client-only>
@@ -244,5 +244,8 @@ export default {
 }
 .theme--light.v-list-item:before, .theme--light.v-list-item:hover:before, .theme--light.v-list-item:focus:before {
   opacity: 0;
+}
+.overflow-visible {
+  overflow: visible;
 }
 </style>
