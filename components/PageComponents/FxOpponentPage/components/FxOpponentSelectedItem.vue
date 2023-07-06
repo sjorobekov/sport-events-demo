@@ -9,7 +9,7 @@
         :color="color"
       />
       <div class="team-name text-center px-2 px-md-6 neutral--text text--darken-4">
-        <span>{{ name }}</span>
+        <span v-balance-text>{{ name }}</span>
       </div>
     </v-card>
     <FxOpponentTabulatedContent :show-tabs="isMobile" :show-contacts="contacts.length">
@@ -32,8 +32,8 @@
               color="neutral darken-3"
               link
               :href="school.portalUrl"
-              class="full-width-btn"
               height="56"
+              block
             >
               <v-icon color="neutral darken-1">
                 $vuetify.icons.link-1
