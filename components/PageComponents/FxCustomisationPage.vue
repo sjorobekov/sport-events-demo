@@ -40,12 +40,12 @@
       <v-row>
         <v-col cols="12" lg="5" class="text-p2 neutral--text text--darken-3 px-0 pr-4">
           Customise your sports portal by uploading your school logo.<br>
-          <br>We recommend using square images in transparent WEBP, PNG, or SVG formats. JPEG and GIF formats are also supported.
+          <br>We recommend using transparent images in WEBP, PNG, or SVG formats. JPEG and GIF formats are also supported.
         </v-col>
         <v-col cols="12" lg="7">
           <FxImageUploadForm :value="logoFile" :loading="uploadingLogo" :stencil-props="stencil" :compression="compression" @input="uploadLogo">
             <template #icon>
-              <v-avatar class="mr-6 school-logo" size="120">
+              <v-avatar class="mr-3 mr-md-2 school-logo mb-2 mb-sm-0" size="120">
                 <v-img v-if="school.logo" :src="school.logo" />
                 <span v-else class="neutral--text darken-2">No Logo</span>
               </v-avatar>
