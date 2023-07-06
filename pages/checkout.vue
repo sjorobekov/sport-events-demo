@@ -7,9 +7,21 @@
             <v-img class="fixturr-logo" :src="require('@/assets/img/logo_light.svg')" width="180" />
           </div>
           <div class="content py-4 mt-4">
-            <h1 class="text-h3 branddark--text text-center">
+            <div class="d-flex icon-container align-center justify-center mb-4">
+              <v-icon size="40" color="#17d6a6" class="fa fa-spinner">
+                $vuetify.icons.checkout-loading
+              </v-icon>
+            </div>
+            <h1 class="text-h3 branddark--text text-center mb-2">
               Checkout
             </h1>
+            <div class="text-center sub-text mb-4">
+              The Checkout is loading, please wait a few seconds.
+            </div>
+            <div class="text-center support-text">
+              If you encounter any problems, please don't hesitate to reach out to us for assistance. You can contact our support team at
+              <a href="mailto:support@fixturr.com" class="support-link">help@fixturr.com</a>.
+            </div>
           </div>
         </div>
       </div>
@@ -92,5 +104,35 @@ export default {
   border-radius: 8px;
   border: solid 2px #ebebeb;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.08), 0px 0px 4px rgba(0, 0, 0, 0.04);
+}
+
+.fa-spinner {
+  animation: spin 2.5s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.sub-text {
+  color: rgba(51,60,78,.8);
+  font-size: 18px;
+}
+
+.support-text {
+  color: rgba(51,60,78,.8);
+  font-size: 18px;
+}
+.support-link{
+  text-decoration-color: #17d6a6;
+  transition: ease all 0.2s;
+}
+.support-link:hover{
+  color: #17d6a6;
 }
 </style>

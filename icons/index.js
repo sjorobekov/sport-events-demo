@@ -158,4 +158,5 @@ export default [
   'participation-sports',
   'participation-students',
   'seasons',
+  'checkout-loading',
 ]
