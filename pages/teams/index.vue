@@ -6,7 +6,7 @@
           Teams
         </h1>
       </v-col>
-      <v-col v-else cols="7" sm="9">
+      <v-col v-else cols="7" lg="10" sm="9">
         <h1 class="text-h4 text-md-h3 neutral--text text--darken-4 font-weight-bold">
           Teams
         </h1>
