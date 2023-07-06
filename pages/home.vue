@@ -62,7 +62,7 @@
                 </v-tab>
               </v-tabs>
             </div>
-            <v-dialog v-model="showCalendar">
+            <v-dialog v-model="showCalendar" content-class="mobile-date-dialog">
               <template #activator="{ on }">
                 <v-btn icon v-on="on">
                   <v-icon size="32" color="neutral darken-1">
@@ -70,7 +70,7 @@
                   </v-icon>
                 </v-btn>
               </template>
-              <v-date-picker ref="picker" v-model="date" class="disable-dbl-tap-zoom" full-width @change="onDateChange" />
+              <v-date-picker ref="picker" v-model="date" class="mb-3 disable-dbl-tap-zoom" full-width @change="onDateChange" />
             </v-dialog>
           </div>
         </div>

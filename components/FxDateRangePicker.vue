@@ -75,6 +75,7 @@
       transition="scale-transition"
       offset-y
       min-width="auto"
+      content-class="mobile-date-dialog"
     >
       <template #activator="{ on, attrs }">
         <v-text-field
@@ -94,7 +95,7 @@
       <v-card class="date-range-card">
         <v-sheet dark color="primary" height="150" tile class="flex-row">
           <h4 class="text-h6 px-5 pt-5 font-weight-bold">
-            Select Date Range
+            Select Date Range1
           </h4>
           <v-timeline
             light

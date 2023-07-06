@@ -360,3 +360,28 @@ select:-webkit-autofill:focus {
     }
   }
 }
+
+.mobile-date-dialog {
+  border-radius: 12px!important;
+  background-color: white;
+}
+
+.v-date-picker-header__value button {
+  font-family: 'ProximaNova-Semibold';
+  font-weight: 400!important;
+}
+.v-date-picker-table th {
+  font-family: 'ProximaNova-Semibold';
+  font-weight: 400!important;
+}
+
+th {
+  font-family: 'ProximaNova-Semibold';
+  font-weight: 400!important;
+}
+
+.v-data-table__mobile-row__header {
+  font-family: 'ProximaNova-Semibold';
+  font-weight: 400!important;
+  color: var(--v-neutral-darken3);
+}
