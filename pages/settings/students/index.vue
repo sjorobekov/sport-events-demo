@@ -67,13 +67,14 @@
             </v-menu>
           </template>
         </v-data-table>
-        <v-pagination
+      </client-only>
+    </v-card>
+    <v-pagination
           v-if="meta.total > 20"
           v-model.lazy="query.page"
           :length="meta.lastPage"
+          class="my-3"
         />
-      </client-only>
-    </v-card>
   </div>
 </template>
 
