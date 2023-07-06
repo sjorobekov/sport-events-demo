@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-md-h1 text-h3s text-center mt-6">
+    <h1 class="text-md-h1 text-h3s text-center mt-6 font-weight-bold">
       Set New Password
     </h1>
     <FxUserSetPasswordForm ref="form" v-model="formData" :disabled="loading" />

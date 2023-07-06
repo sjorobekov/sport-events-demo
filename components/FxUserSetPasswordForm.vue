@@ -6,12 +6,13 @@
       v-async-validate
       :value="formData.password"
       :async-rules="[$rule.required, $rule.minLength(4)]"
-      dense
+      hide-details
       outlined
       :append-icon="showPass ? '$vuetify.icons.password-hide' : '$vuetify.icons.password-show'"
       :type="showPass ? 'text' : 'password'"
       height="56"
-      placeholder="Password"
+      label="Set Password"
+      placeholder="********************"
       @input="update('password', $event)"
       @click:append="showPass = !showPass"
     />
@@ -21,11 +22,13 @@
       v-model="formData.confirm"
       v-async-validate
       :async-rules="[$rule.required, $rule.equal(formData.password)]"
-      dense
+      hide-details
       outlined
+      :append-icon="showPass ? '$vuetify.icons.password-hide' : '$vuetify.icons.password-show'"
+      :type="showPass ? 'text' : 'password'"
       height="56"
-      type="password"
-      placeholder="Confirm Password"
+      placeholder="********************"
+      label="Confirm Password"
     />
   </v-form>
 </template>
