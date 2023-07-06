@@ -4,8 +4,8 @@
       <v-row>
         <v-col cols="12" class="border-bottom pt-1 pb-0 hidden-sm-and-down">
           <v-list-item class="px-0">
-            <v-list-item-avatar v-if="school" color="white" size="44">
-              <FxSchoolLogo :value="school.logo" :color="school.color" :size="44" />
+            <v-list-item-avatar v-if="school" size="44" class="overflow-visible">
+              <FxSchoolLogo :value="school.logo" :color="school.color" :size="44" class="overflow-visible" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class="text-p2 neutral--text text--darken-5">
@@ -82,3 +82,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.overflow-visible {
+  overflow: visible;
+}
+</style>

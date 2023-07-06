@@ -24,16 +24,20 @@
       </template>
       <template #portal>
         <v-list-item class="px-0">
-          <v-list-item-action>
+          <v-list-item-action class="full-width-btn d-block mr-0">
             <v-btn
               v-if="school && school.portal"
               depressed
               outlined
-              color="primary"
+              color="neutral darken-3"
               link
               :href="school.portalUrl"
+              class="full-width-btn"
+              height="56"
             >
-              <v-icon>mdi-link-variant</v-icon>
+              <v-icon color="neutral darken-1">
+                $vuetify.icons.link-1
+              </v-icon>
               Sports Portal
             </v-btn>
           </v-list-item-action>
@@ -101,4 +105,6 @@ export default {
 .opponent-mobile.v-card
   border-radius: 0!important
   border: 0!important
+.full-width-btn
+  width: 100%
 </style>

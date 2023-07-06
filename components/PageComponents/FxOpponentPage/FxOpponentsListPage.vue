@@ -11,11 +11,13 @@
         <v-btn
           depressed
           outlined
-          color="primary"
+          color="neutral darken-3"
           link
           :to="{ name: 'directory-custom-add' }"
         >
-          <v-icon>$vuetify.icons.add-all</v-icon>
+          <v-icon color="neutral darken-1">
+            $vuetify.icons.add-all
+          </v-icon>
           Custom Opponent
         </v-btn>
         <v-btn
@@ -37,12 +39,14 @@
           block
           depressed
           outlined
-          color="primary"
+          color="neutral darken-3"
           link
           x-large
           :to="{ name: 'directory-custom-add' }"
         >
-          <v-icon>$vuetify.icons.add-all</v-icon>
+          <v-icon color="neutral darken-1">
+            $vuetify.icons.add-all
+          </v-icon>
           Custom Opponent
         </v-btn>
       </v-col>
@@ -78,8 +82,8 @@
               link
               :to="{ name: 'directory-opponents-opponentId', params: { opponentId: item.id } }"
             >
-              <v-list-item-avatar color="white" size="44">
-                <FxSchoolLogo v-if="item.opponentSchool" :value="item.opponentSchool.logo" :color="item.opponentSchool.color" :size="44" />
+              <v-list-item-avatar size="44" class="overflow-visible">
+                <FxSchoolLogo v-if="item.opponentSchool" :value="item.opponentSchool.logo" :color="item.opponentSchool.color" :size="44" class="overflow-visible" />
                 <FxSchoolLogo v-else :size="44" />
               </v-list-item-avatar>
               <v-list-item-content>
@@ -117,3 +121,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.overflow-visible {
+  overflow:visible!important;
+}
+</style>

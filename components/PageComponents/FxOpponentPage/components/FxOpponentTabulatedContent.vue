@@ -100,7 +100,7 @@ export default {
 }
 
 .mobile-tabs /deep/ .v-tabs-slider {
-  border-radius: 2px 2px 0 0;
+  border-radius: 12px 12px 0 0;
 }
 
 .mobile-tabs /deep/ .v-tab--active:hover::before {
