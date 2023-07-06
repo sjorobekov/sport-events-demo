@@ -10,7 +10,7 @@
       </h1>
     </div>
 
-    <v-card v-else class="pb-8 px-6 pt-6">
+    <v-card v-else class="py-3 px-3 py-md-6 px-md-6">
       <v-card-title class="px-0 text-p3 font-weight-bold pb-1">
         Profile Picture
       </v-card-title>
