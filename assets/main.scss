@@ -389,3 +389,9 @@ b, strong {
   font-family: 'ProximaNova-Semibold';
   font-weight: 400!important;
 }
+.daterangepicker td.in-range {
+  background-color: var(--v-background-base)!important;
+}
+.daterangepicker td.active, .daterangepicker td.active:hover {
+  background-color: var(--v-primary-base)!important;
+}
