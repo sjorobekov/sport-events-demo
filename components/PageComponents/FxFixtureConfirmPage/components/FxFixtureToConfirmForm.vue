@@ -190,7 +190,7 @@
         <v-col>
           <v-checkbox
             :input-value="formData.noNeedTransport"
-            label="This event doesn't need transport information"
+            label="Check this box if transport information is not required for this event."
             class="neutral--text mb-8"
             hide-details
             @change="update('noNeedTransport', $event)"
