@@ -18,7 +18,7 @@
             width="300"
             class="mb-4 mb-md-0"
           >
-            <v-card-title class="text-h4 font-weight-bold">
+            <v-card-title class="text-h5 font-weight-bold plan-name">
               {{ plan.name }}
             </v-card-title>
 
@@ -175,5 +175,8 @@ export default {
 }
 .v-tab:hover {
   color: var(--v-primary-base)!important;
+}
+.plan-name {
+  word-break: break-word;
 }
 </style>
