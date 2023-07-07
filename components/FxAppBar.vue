@@ -3,7 +3,7 @@
     :height="height"
     app
     fixed
-    class="shadow"
+    class="shadow top-bar px-8"
     :color="color"
     :dark="dark"
     :flat="flat"
@@ -244,5 +244,8 @@ export default {
 }
 .theme--light.v-list-item:before, .theme--light.v-list-item:hover:before, .theme--light.v-list-item:focus:before {
   opacity: 0;
+}
+.top-bar .container {
+  max-width: none;
 }
 </style>
