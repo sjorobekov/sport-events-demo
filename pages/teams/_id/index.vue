@@ -161,7 +161,7 @@
         <v-divider class="my-5" />
 
         <h3 class="text-p1 neutral--text text--darken-2 mb-2">
-          Team Coach
+          Lead Staff Member
         </h3>
         <FxUserItem :item="coach" :subtitle="coach.jobRole" />
         <div v-if="coach.phone" class="text-p1 mb-1">

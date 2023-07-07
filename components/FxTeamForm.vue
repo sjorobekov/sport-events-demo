@@ -165,10 +165,10 @@
                 3
               </template>
               <template #title>
-                Team Coach
+                Lead Staff Member
               </template>
               <template #content>
-                Select the member of staff responsible for coaching this team.
+                Select the lead staff member for this team.
               </template>
             </FxInstructionItem>
           </v-col>
@@ -179,8 +179,8 @@
           >
             <v-row>
               <v-col cols="12" md="12" lg="6" class="mt-0 pt-0">
-                <label for="coach">Team Coach</label>
-                <FxUserSelect id="coach" placeholder="Select Coach" :school-id="schoolId" :value="formData.coachId" @input="update('coachId', $event)" />
+                <label for="coach">Lead Staff Member</label>
+                <FxUserSelect id="coach" placeholder="Select Lead Staff Member" :school-id="schoolId" :value="formData.coachId" @input="update('coachId', $event)" />
               </v-col>
             </v-row>
           </v-col>
