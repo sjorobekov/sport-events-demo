@@ -7,15 +7,18 @@
 
     <v-row class="mt-5">
       <v-col cols="12" :md="teams.length > 0 ? 9 : 12">
-        <div class="d-flex justify-space-between mb-2">
-          <h2 class="text-h4s mb-2 neutral--text text--darken-4">
+        <div class="d-flex justify-space-between mb-3">
+          <h2 class="text-h4s neutral--text text--darken-4">
             Today's Events
           </h2>
-          <v-btn color="primary" outlined @click="toggleMyEvents">
-            <v-icon v-if="onlyMyEvents">
-              $vuetify.icons.tick
+          <v-btn color="neutral darken-3" outlined @click="toggleMyEvents">
+            <v-icon color="neutral darken-1" v-if="onlyMyEvents">
+              $vuetify.icons.calendar-small
             </v-icon>
-            My Events
+            <v-icon color="neutral darken-1" v-if="!onlyMyEvents">
+              $vuetify.icons.user-small
+            </v-icon>
+            {{ onlyMyEvents ? 'Show All Events' : 'Show My Events' }}
           </v-btn>
         </div>
         <section v-if="events.length > 0">
