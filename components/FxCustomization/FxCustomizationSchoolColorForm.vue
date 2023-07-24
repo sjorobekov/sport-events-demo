@@ -1,7 +1,7 @@
 <template>
   <v-form ref="form" :disabled="disabled">
     <v-row>
-      <v-col cols="4">
+      <v-col cols="12" sm="4">
         <v-sheet rounded :color="color" height="100%" />
       </v-col>
       <v-col>
@@ -14,7 +14,7 @@
     </v-row>
 
     <v-row class="mt-0">
-      <v-col cols="4" class="pt-0">
+      <v-col cols="12" sm="4" class="pt-0">
         <FxColorPicker
           :value="color"
           @input="$emit('input', $event)"
