@@ -86,11 +86,10 @@ export default {
   display: block
   margin: 0 auto
   border-radius: 50%
-  overflow: hidden
-  background-color: white
+  overflow: visible
   width: 220px
   height: 220px
-  border: 1px solid var(--v-neutral-lighten1)
+  filter: drop-shadow(0px 0px  #FFF)
 
 .school-info
   margin-top: auto

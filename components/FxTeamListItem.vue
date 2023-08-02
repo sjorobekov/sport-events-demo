@@ -1,8 +1,8 @@
 <template>
   <client-only>
     <v-list-item v-bind="$props" :class="itemClass">
-      <v-list-item-avatar class="mx-1">
-        <FxSchoolLogo :value="logo" :alt="name" :color="color" />
+      <v-list-item-avatar class="mx-1 overflow-visible">
+        <FxSchoolLogo :value="logo" :alt="name" :color="color" class="overflow-visible" />
       </v-list-item-avatar>
       <v-list-item-content>
         <v-list-item-title class="text-p2 font-weight-bold px-2 neutral--text text--darken-4">
@@ -94,3 +94,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.overflow-visible {
+  overflow: visible;
+}
+</style>
