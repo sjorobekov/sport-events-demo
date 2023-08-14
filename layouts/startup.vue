@@ -89,7 +89,8 @@ export default {
   overflow: visible
   width: 220px
   height: 220px
-  filter: drop-shadow(0px 0px  #FFF)
+  -webkit-filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)
+  filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)
 
 .school-info
   margin-top: auto

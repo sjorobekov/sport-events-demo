@@ -3,7 +3,7 @@
     :height="height"
     app
     fixed
-    class="shadow top-bar px-8"
+    class="shadow top-bar px-0 px-md-4"
     :color="color"
     :dark="dark"
     :flat="flat"
@@ -11,7 +11,7 @@
     <template v-if="isMobile">
       <v-list-item class="pl-0">
         <v-list-item-avatar size="44" class="overflow-visible">
-          <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" class="overflow-visible" :size="44" />
+          <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" class="overflow-visible mobile-logo" :size="44" />
         </v-list-item-avatar>
         <v-list-item-content class="school-name d-block text-center">
           <client-only>
@@ -250,5 +250,9 @@ export default {
 }
 .top-bar .container {
   max-width: none;
+}
+.mobile-logo {
+  -webkit-filter: drop-shadow(0.5px 0.5px 0 white) drop-shadow(-0.5px 0.5px 0 white) drop-shadow(0.5px -0.5px 0 white) drop-shadow(-0.5px -0.5px 0 white);
+    filter: drop-shadow(0.5px 0.5px 0 white) drop-shadow(-0.5px 0.5px 0 white) drop-shadow(0.5px -0.5px 0 white) drop-shadow(-0.5px -0.5px 0 white);
 }
 </style>

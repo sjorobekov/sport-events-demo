@@ -248,5 +248,6 @@ export default {
   overflow: visible!important
 .logo
   overflow: visible!important
-  filter: drop-shadow(0px 0px  #FFF)
+  -webkit-filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)
+  filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)
 </style>
