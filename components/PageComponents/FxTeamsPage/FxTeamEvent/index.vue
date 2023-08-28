@@ -26,8 +26,8 @@
 
     <template #left>
       <v-list-item class="flex-md-row-reverse px-0">
-        <v-list-item-avatar class="mx-1">
-          <FxSchoolLogo :value="contextSchool.logo" :alt="contextSchool.name" :color="contextSchool.color" />
+        <v-list-item-avatar class="mx-1 overflow-visible">
+          <FxSchoolLogo :value="contextSchool.logo" :alt="contextSchool.name" :color="contextSchool.color" class="overflow-visible" />
         </v-list-item-avatar>
         <v-list-item-content class="text-md-right">
           <v-list-item-title class="text-p2 font-weight-bold  pl-2 pl-md-0 neutral--text text--darken-4">
@@ -42,8 +42,8 @@
 
     <template #right>
       <v-list-item v-if="event.eventType === EventType.FIXTURE" class="px-0">
-        <v-list-item-avatar class="mx-1">
-          <FxSchoolLogo :value="opponentSchool.logo" :alt="opponentName" :color="opponentSchool.color" />
+        <v-list-item-avatar class="mx-1 overflow-visible">
+          <FxSchoolLogo :value="opponentSchool.logo" :alt="opponentName" :color="opponentSchool.color" class="overflow-visible" />
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title class="text-p2 font-weight-bold  pl-2 pl-md-0 neutral--text text--darken-4">
@@ -210,5 +210,8 @@ export default {
 <style scoped>
 .v-chip--label {
   border-radius: 16px!important;
+}
+.overflow-visible {
+  overflow: visible!important;
 }
 </style>
