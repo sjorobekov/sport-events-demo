@@ -10,8 +10,8 @@
   >
     <template v-if="isMobile">
       <v-list-item class="pl-0">
-        <v-list-item-avatar size="44" class="overflow-visible">
-          <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" class="overflow-visible mobile-logo" :size="44" />
+        <v-list-item-avatar size="56" class="overflow-visible">
+          <FxSchoolLogo :value="contextSchool.logo" :color="contextSchool.color" class="overflow-visible mobile-logo" :size="56" />
         </v-list-item-avatar>
         <v-list-item-content class="school-name d-block text-center">
           <client-only>
@@ -252,7 +252,12 @@ export default {
   max-width: none;
 }
 .mobile-logo {
-  -webkit-filter: drop-shadow(0.5px 0.5px 0 white) drop-shadow(-0.5px 0.5px 0 white) drop-shadow(0.5px -0.5px 0 white) drop-shadow(-0.5px -0.5px 0 white);
-    filter: drop-shadow(0.5px 0.5px 0 white) drop-shadow(-0.5px 0.5px 0 white) drop-shadow(0.5px -0.5px 0 white) drop-shadow(-0.5px -0.5px 0 white);
+  -webkit-filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white);
+    filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white);
+}
+/deep/ .v-toolbar__content {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  border-bottom: 2px solid rgba(255,255,255,.3);
 }
 </style>
