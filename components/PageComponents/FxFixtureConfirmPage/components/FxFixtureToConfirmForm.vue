@@ -343,7 +343,12 @@ export default {
     },
 
     selectedLocation () {
-      return !this.canChangeLocation ? `${this.eventLocation} - ${this.event.sportLocation.name}` : ''
+      if (this.event.location === EventLocationType.SPORTS_LOCATIONS) {
+        return `${this.eventLocation} - ${this.event.sportLocation?.name}`
+      } else if (this.event.location === EventLocationType.OTHER) {
+        return this.event.otherLocation
+      }
+      return ''
     },
 
     formData () {
