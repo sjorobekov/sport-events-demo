@@ -17,7 +17,7 @@ export const mutations: MutationTree<RootState> = {
 export const getters: GetterTree<RootState, RootState> = {
   ageLevel () {
     const options = []
-    for (let i = 5; i <= 18; i++) {
+    for (let i = 5; i <= 19; i++) {
       options.push({ text: `Under ${i}`, value: `U${i}` })
     }
     return options

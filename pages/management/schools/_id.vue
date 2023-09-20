@@ -98,6 +98,7 @@ export default {
 
   async asyncData ({ store, route }) {
     await store.dispatch('context/fetchSchool', route.params.id)
+    await store.dispatch('seasons/fetch')
   },
 
   data: () => ({}),
