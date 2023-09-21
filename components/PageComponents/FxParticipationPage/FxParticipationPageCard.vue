@@ -2,7 +2,7 @@
   <v-row :dense="$vuetify.breakpoint.mdAndDown">
     <v-col cols="6" sm="3">
       <v-card class="participation-card">
-        <v-list-item class="px-5 px-lg-8 py-4 d-block d-lg-flex">
+        <v-list-item class="px-4 px-lg-5 py-4 d-block d-lg-flex">
           <v-icon size="56" class="participation-icon mr-4 pa-2">
             $vuetify.icons.participation-sports
           </v-icon>
@@ -19,7 +19,7 @@
     </v-col>
     <v-col cols="6" sm="3">
       <v-card class="participation-card">
-        <v-list-item class="px-5 px-lg-8 py-4 d-block d-lg-flex">
+        <v-list-item class="px-4 px-lg-5 py-4 d-block d-lg-flex">
           <v-icon size="56" class="participation-icon mr-4 pa-2">
             $vuetify.icons.dashboard-today
           </v-icon>
@@ -36,7 +36,7 @@
     </v-col>
     <v-col cols="6" sm="3">
       <v-card class="participation-card">
-        <v-list-item class="px-5 px-lg-8 py-4 d-block d-lg-flex">
+        <v-list-item class="px-4 px-lg-5 py-4 d-block d-lg-flex">
           <v-icon size="56" class="participation-icon mr-4 pa-2">
             $vuetify.icons.participation-students
           </v-icon>
@@ -53,7 +53,7 @@
     </v-col>
     <v-col cols="6" sm="3">
       <v-card class="participation-card">
-        <v-list-item class="px-5 px-lg-8 py-4 d-block d-lg-flex">
+        <v-list-item class="px-4 px-lg-5 py-4 d-block d-lg-flex">
           <v-icon size="56" class="participation-icon mr-4 pa-2">
             $vuetify.icons.dashboard-chart
           </v-icon>

@@ -1,6 +1,5 @@
 <template>
   <v-form ref="form" v-async-form :disabled="disabled">
-    <label class="caption" for="password">New Password</label>
     <v-text-field
       id="password"
       v-async-validate
@@ -16,7 +15,6 @@
       @input="update('password', $event)"
       @click:append="showPass = !showPass"
     />
-    <label class="caption" for="password_confirm">Confirm New Password</label>
     <v-text-field
       id="password_confirm"
       v-model="formData.confirm"

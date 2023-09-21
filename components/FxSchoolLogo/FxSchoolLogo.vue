@@ -4,6 +4,7 @@
     :width="size"
     :src="value"
     :alt="alt"
+    class="overflow-visible"
   >
     <svg v-if="!value" class="icon" viewBox="0 0 144 144" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M144 72C144 111.765 111.765 144 72 144C32.2355 144 0 111.765 0 72C0 32.2355 32.2355 0 72 0C111.765 0 144 32.2355 144 72Z" fill="white" />

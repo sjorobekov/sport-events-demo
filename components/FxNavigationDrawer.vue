@@ -14,7 +14,7 @@
         <FxSchoolLogo class="logo" :value="contextSchool.logo" :color="contextSchool.color" />
       </v-avatar>
 
-      <h1 v-balance-text class="text-p3 font-weight-bold white--text text-center px-2">
+      <h1 v-balance-text class="text-p3 font-weight-bold white--text text-center px-5 school-name">
         {{ contextSchool.name }}
       </h1>
 
@@ -250,4 +250,6 @@ export default {
   overflow: visible!important
   -webkit-filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)
   filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)
+.school-name
+  line-height: 1.2!important
 </style>
