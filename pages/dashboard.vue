@@ -12,10 +12,10 @@
             Today's Events
           </h2>
           <v-btn color="neutral darken-3" outlined @click="toggleMyEvents">
-            <v-icon color="neutral darken-1" v-if="onlyMyEvents">
+            <v-icon v-if="onlyMyEvents" color="neutral darken-1">
               $vuetify.icons.calendar-small
             </v-icon>
-            <v-icon color="neutral darken-1" v-if="!onlyMyEvents">
+            <v-icon v-if="!onlyMyEvents" color="neutral darken-1">
               $vuetify.icons.user-small
             </v-icon>
             {{ onlyMyEvents ? 'Show All Events' : 'Show My Events' }}

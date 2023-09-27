@@ -70,11 +70,11 @@
       </client-only>
     </v-card>
     <v-pagination
-          v-if="meta.total > 20"
-          v-model.lazy="query.page"
-          :length="meta.lastPage"
-          class="my-3"
-        />
+      v-if="meta.total > 20"
+      v-model.lazy="query.page"
+      :length="meta.lastPage"
+      class="my-3"
+    />
   </div>
 </template>
 

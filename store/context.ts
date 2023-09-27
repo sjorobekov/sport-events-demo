@@ -177,7 +177,7 @@ export const actions: ActionTree<RootState, RootState> = {
       password,
     })
 
-    await dispatch('fetchContext')
+    await dispatch('fetchAdminContext')
   },
 
   async signIn ({ dispatch }, { email, password, schoolId }) {
@@ -208,10 +208,16 @@ export const actions: ActionTree<RootState, RootState> = {
     dispatch('cleanup')
   },
 
-  async fetchContext ({ commit }) {
+  async fetchContext ({ commit, dispatch }) {
     const { user, isGuestSignedIn } = await this.$axios.$get('/api/v1/context')
     commit('me', user)
     commit('isGuestSignedIn', isGuestSignedIn)
+    await dispatch('seasons/fetch', {}, { root: true })
+  },
+
+  async fetchAdminContext ({ commit }) {
+    const { user } = await this.$axios.$get('/api/v1/context')
+    commit('me', user)
   },
 
   cleanup ({ commit }) {

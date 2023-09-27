@@ -123,8 +123,8 @@
           <v-list-item class="px-0">
             <v-list-item-content>
               <v-list-item-title>
-                <span class="neutral--text text--darken-4" v-if="item.student">{{ item.student.firstname }} {{ item.student.lastname }}</span>
-                <span class="neutral--text text--darken-4" v-else>{{ item.studentName }}</span>
+                <span v-if="item.student" class="neutral--text text--darken-4">{{ item.student.firstname }} {{ item.student.lastname }}</span>
+                <span v-else class="neutral--text text--darken-4">{{ item.studentName }}</span>
               </v-list-item-title>
               <v-list-item-subtitle v-if="isMobile">
                 {{ item.sportsRecordCategory.name }}

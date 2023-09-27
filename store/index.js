@@ -13,11 +13,6 @@ export const actions = {
         console.log('error', e)
       }
     })
-
-    await dispatch('seasons/fetch').catch((e) => {
-      // eslint-disable-next-line no-console
-      console.log('error', e)
-    })
   },
 
   nuxtClientInit ({ getters, dispatch }) {
