@@ -195,12 +195,13 @@ export const actions: ActionTree<RootState, RootState> = {
     })
   },
 
-  async guestSignIn ({ commit }, { password, schoolId }) {
+  async guestSignIn ({ commit, dispatch }, { password, schoolId }) {
     await this.$axios.$post(`/api/v1/schools/${schoolId}/guestSignIn`, {
       password,
     })
 
     commit('isGuestSignedIn', true)
+    await dispatch('seasons/fetch', {}, { root: true })
   },
 
   async logOut ({ dispatch }) {
