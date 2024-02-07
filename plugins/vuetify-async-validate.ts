@@ -1,13 +1,9 @@
 import Vue from 'vue'
 import { Plugin } from '@nuxt/types'
 import VuetifyAsyncValidation from 'vuetify-async-validation'
-import validator from 'validator'
+import { isMobilePhone, isURL, isEmail, isAlphanumeric } from 'validator'
 import { PUBLIC_DOMAINS } from '~/common'
 import { Primitive } from '~/types'
-import isMobilePhone = validator.isMobilePhone
-import isURL = validator.isURL
-import isEmail = validator.isEmail
-import isAlphanumeric = validator.isAlphanumeric
 
 type ReturnType = boolean | string
 type AsyncReturnType = Promise<ReturnType>

@@ -4,6 +4,8 @@ export default {
     PORTAL_WILDCARD: process.env.PORTAL_WILDCARD,
     PADDLE_SANDBOX: process.env.PADDLE_SANDBOX,
     PADDLE_VENDOR_ID: process.env.PADDLE_VENDOR_ID,
+    MATOMO_HOST: process.env.MATOMO_HOST || 'https://analytics.fixturr.com',
+    MATOMO_SITE_ID: process.env.MATOMO_SITE_ID || '2',
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -192,6 +194,10 @@ export default {
     '~/plugins/wrapped-component.js',
     '~/plugins/device.server.ts',
     '~/plugins/vue-balance-text.js',
+    {
+      src: '~/plugins/vue-matomo.js',
+      ssr: false,
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
