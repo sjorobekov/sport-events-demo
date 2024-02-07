@@ -4,8 +4,8 @@ export default {
     PORTAL_WILDCARD: process.env.PORTAL_WILDCARD,
     PADDLE_SANDBOX: process.env.PADDLE_SANDBOX,
     PADDLE_VENDOR_ID: process.env.PADDLE_VENDOR_ID,
-    MATOMO_HOST: process.env.MATOMO_HOST || 'https://analytics.fixturr.co.uk',
-    MATOMO_SITE_ID: process.env.MATOMO_SITE_ID || '2',
+    MATOMO_HOST: process.env.MATOMO_HOST,
+    MATOMO_SITE_ID: process.env.MATOMO_SITE_ID,
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
