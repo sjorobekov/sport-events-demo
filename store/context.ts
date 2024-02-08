@@ -209,11 +209,10 @@ export const actions: ActionTree<RootState, RootState> = {
     dispatch('cleanup')
   },
 
-  async fetchContext ({ commit, dispatch }) {
+  async fetchContext ({ commit }) {
     const { user, isGuestSignedIn } = await this.$axios.$get('/api/v1/context')
     commit('me', user)
     commit('isGuestSignedIn', isGuestSignedIn)
-    await dispatch('seasons/fetch', {}, { root: true })
   },
 
   async fetchAdminContext ({ commit }) {
